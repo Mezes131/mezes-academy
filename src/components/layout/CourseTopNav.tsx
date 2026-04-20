@@ -46,7 +46,7 @@ export function CourseTopNav() {
       </Link>
 
       <div className="hidden md:flex items-center gap-0.5 ml-4">
-        <NavItem to="/react" icon={<Home size={14} />} label="Aper\u00e7u" exact />
+        <NavItem to="/react" icon={<Home size={14} />} label="Aperçu" exact />
         <NavItem to="/react/progress" icon={<TrendingUp size={14} />} label="Progression" />
         <NavItem to="/react/bookmarks" icon={<Bookmark size={14} />} label="Favoris" />
       </div>
@@ -61,7 +61,7 @@ export function CourseTopNav() {
         <SearchBar
           value={query}
           onChange={setQuery}
-          placeholder="Rechercher\u2026"
+          placeholder="Rechercher…"
           className="w-full"
         />
       </form>

@@ -21,7 +21,9 @@ export default function App() {
   return (
     <ProgressProvider>
       <ThemeApplier>
-        <BrowserRouter>
+        <BrowserRouter
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <ScrollToTop />
           <Routes>
             {/* Landing Mezes Academy */}
