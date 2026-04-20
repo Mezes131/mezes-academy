@@ -49,7 +49,9 @@ export function SearchPage() {
 
       {query.trim().length >= 2 && results.length === 0 && (
         <div className="mt-10 text-center text-fg-2">
-          <div className="text-4xl mb-3">🔍</div>
+          <div className="text-4xl mb-3 text-fg-3">
+            <i className="fa-solid fa-magnifying-glass" />
+          </div>
           Aucun résultat pour « <strong>{query}</strong> ».
         </div>
       )}

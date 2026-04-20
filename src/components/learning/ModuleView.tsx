@@ -42,7 +42,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             to={`/phase/${phase.id}`}
             className={cn("hover:underline", accent.text)}
           >
-            {phase.icon} {phase.label}
+            <i className={`fa-solid ${phase.icon} mr-1.5`} /> {phase.label}
           </Link>
           <span>/</span>
           <span>{module.index}</span>
@@ -99,7 +99,10 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       {/* ─── Quiz ──────────────────────────────────── */}
       {module.quiz && (
         <div className="mt-10">
-          <h2 className="text-lg font-bold mb-1">🎯 Quiz de fin de module</h2>
+          <h2 className="text-lg font-bold mb-1 flex items-center gap-2">
+            <i className="fa-solid fa-bullseye text-accent-2" />
+            Quiz de fin de module
+          </h2>
           <p className="text-sm text-fg-2 mb-2">
             Validation : 70% de bonnes réponses minimum pour marquer ce quiz comme réussi.
           </p>
@@ -110,8 +113,9 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       {/* ─── Exercices ─────────────────────────────── */}
       {module.exercises && module.exercises.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-lg font-bold mb-3">
-            💻 Exercice{module.exercises.length > 1 ? "s" : ""} pratique{module.exercises.length > 1 ? "s" : ""}
+          <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+            <i className="fa-solid fa-laptop-code text-accent-2" />
+            Exercice{module.exercises.length > 1 ? "s" : ""} pratique{module.exercises.length > 1 ? "s" : ""}
           </h2>
           {module.exercises.map((ex) => (
             <CodeExercise key={ex.id} exercise={ex} />

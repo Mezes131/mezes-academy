@@ -47,12 +47,12 @@ export function InfoBox({
     >
       <div
         className={cn(
-          "text-[11px] font-bold tracking-[0.1em] uppercase mb-1.5",
+          "text-[11px] font-bold tracking-[0.1em] uppercase mb-1.5 flex items-center gap-1.5",
+          "[&_i]:text-[13px] [&_i]:leading-none",
           v.title,
         )}
-      >
-        {title}
-      </div>
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
       <p
         className="text-[13px] text-fg-2 leading-relaxed [&_code]:font-mono [&_code]:text-[12px] [&_code]:bg-bg-3 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded"
         dangerouslySetInnerHTML={{ __html: body }}

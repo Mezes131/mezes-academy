@@ -32,9 +32,9 @@ export function ProgressPage() {
     reader.onload = (ev) => {
       try {
         importJson(String(ev.target?.result ?? ""));
-        alert("✅ Progression importée avec succès !");
+        alert("Progression importée avec succès !");
       } catch (err) {
-        alert("❌ Fichier invalide : " + (err as Error).message);
+        alert("Fichier invalide : " + (err as Error).message);
       }
     };
     reader.readAsText(file);
@@ -109,12 +109,13 @@ export function ProgressPage() {
               <div className="flex items-center gap-4">
                 <div
                   className={cn(
-                    "w-11 h-11 rounded-lg border flex items-center justify-center text-xl flex-shrink-0",
+                    "w-11 h-11 rounded-lg border flex items-center justify-center text-lg flex-shrink-0",
                     accent.bg,
                     accent.border,
+                    accent.text,
                   )}
                 >
-                  {phase.icon}
+                  <i className={`fa-solid ${phase.icon}`} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">

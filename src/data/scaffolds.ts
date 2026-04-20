@@ -9,7 +9,7 @@ import type { Phase } from "@/types";
 export const phase4: Phase = {
   id: "phase4",
   color: "ts",
-  icon: "🔷",
+  icon: "fa-gem",
   label: "TypeScript",
   title: "TypeScript avec React",
   summary:
@@ -80,7 +80,7 @@ export const phase4: Phase = {
 export const phase5: Phase = {
   id: "phase5",
   color: "eco",
-  icon: "🚀",
+  icon: "fa-rocket",
   label: "Écosystème",
   title: "Écosystème & Fullstack",
   summary:
@@ -197,7 +197,7 @@ export const phase5: Phase = {
 export const phase6: Phase = {
   id: "phase6",
   color: "expert",
-  icon: "🏆",
+  icon: "fa-trophy",
   label: "Expert",
   title: "Expert & Légendaire",
   summary:

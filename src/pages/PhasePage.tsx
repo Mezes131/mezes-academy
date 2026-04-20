@@ -22,12 +22,13 @@ export function PhasePage() {
       <div className="flex items-start gap-5 pb-8 border-b border-base">
         <div
           className={cn(
-            "w-20 h-20 rounded-2xl border flex items-center justify-center text-4xl flex-shrink-0",
+            "w-20 h-20 rounded-2xl border flex items-center justify-center text-3xl flex-shrink-0",
             accent.bg,
             accent.border,
+            accent.text,
           )}
         >
-          {phase.icon}
+          <i className={`fa-solid ${phase.icon}`} />
         </div>
         <div className="flex-1 min-w-0">
           <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 mb-2">
@@ -120,14 +121,14 @@ export function PhasePage() {
                           : "bg-bg-3 text-fg-2 border-base",
                       )}
                     >
-                      🎯 Quiz
+                      <i className="fa-solid fa-bullseye mr-1" /> Quiz
                       {quizScore &&
                         ` · ${quizScore.correct}/${quizScore.total}`}
                     </span>
                   )}
                   {mod.exercises && mod.exercises.length > 0 && (
                     <span className="text-[11px] px-2 py-0.5 rounded border font-medium bg-violet-500/10 text-violet-300 border-violet-500/20">
-                      💻 {mod.exercises.length} exercice{mod.exercises.length > 1 ? "s" : ""}
+                      <i className="fa-solid fa-laptop-code mr-1" /> {mod.exercises.length} exercice{mod.exercises.length > 1 ? "s" : ""}
                     </span>
                   )}
                 </div>
@@ -143,8 +144,8 @@ export function PhasePage() {
 
       {phase.scaffoldOnly && (
         <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-5">
-          <div className="text-sm font-bold text-amber-400 mb-1">
-            🚧 Contenu en construction
+          <div className="text-sm font-bold text-amber-400 mb-1 flex items-center gap-2">
+            <i className="fa-solid fa-person-digging" /> Contenu en construction
           </div>
           <p className="text-[13px] text-fg-2">
             Cette phase est scaffoldée : la structure et les grandes lignes sont

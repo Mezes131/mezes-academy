@@ -192,7 +192,8 @@ export function Quiz({ quiz }: QuizProps) {
                       : "bg-amber-500/5 border-amber-500/60 text-fg-2",
                   )}
                 >
-                  💡 {q.explanation}
+                  <i className="fa-solid fa-lightbulb mr-1.5" />
+                  {q.explanation}
                 </div>
               )}
             </div>
@@ -213,9 +214,14 @@ export function Quiz({ quiz }: QuizProps) {
                 passed ? "text-emerald-400" : "text-amber-400",
               )}
             >
-              {passed
-                ? `🎉 Bravo ! Tu as ${score.correct}/${score.total}, ce quiz est validé.`
-                : `Il te faut au moins 70% pour valider. Tu as ${score.correct}/${score.total}. Retente quand tu veux.`}
+              {passed ? (
+                <span className="inline-flex items-center gap-2">
+                  <i className="fa-solid fa-award" />
+                  Bravo ! Tu as {score.correct}/{score.total}, ce quiz est validé.
+                </span>
+              ) : (
+                `Il te faut au moins 70% pour valider. Tu as ${score.correct}/${score.total}. Retente quand tu veux.`
+              )}
             </div>
             <Button
               variant="ghost"

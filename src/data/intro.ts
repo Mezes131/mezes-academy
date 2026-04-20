@@ -3,7 +3,7 @@ import type { Phase } from "@/types";
 export const introPhase: Phase = {
   id: "intro",
   color: "intro",
-  icon: "📘",
+  icon: "fa-book-open",
   label: "Introduction",
   title: "C'est quoi React, au juste ?",
   summary:
@@ -31,7 +31,7 @@ export const introPhase: Phase = {
           kind: "info",
           box: {
             variant: "note",
-            title: "🧩 Une analogie pour démarrer",
+            title: "<i class='fa-solid fa-puzzle-piece'></i> Une analogie pour démarrer",
             body: "Imaginez que vous construisez une maison. Sans React, vous fabriquez chaque brique, chaque fenêtre et chaque porte à la main, une par une. Avec React, vous concevez une fois un <strong>modèle de fenêtre</strong>, un <strong>modèle de porte</strong>, et vous les réutilisez autant de fois que nécessaire. Mieux : quand vous changez la peinture, React repeint <em>uniquement</em> les murs concernés.",
           },
         },
@@ -40,10 +40,10 @@ export const introPhase: Phase = {
           kind: "paragraph",
           html: "Avant React, construire une interface interactive avec JavaScript \"vanilla\" ou jQuery était épuisant. À chaque clic, à chaque saisie, il fallait manuellement :",
         },
-        { kind: "highlight", html: "🔍 Retrouver le bon élément HTML dans la page (<code>document.querySelector</code>)" },
-        { kind: "highlight", html: "✏️ Modifier son contenu ou son style à la main" },
-        { kind: "highlight", html: "🔄 Synchroniser toutes les parties de l'UI qui dépendent de ce changement" },
-        { kind: "highlight", html: "🐛 Déboguer pendant des heures quand un état n'était pas à jour quelque part" },
+        { kind: "highlight", html: "<i class='fa-solid fa-magnifying-glass'></i> Retrouver le bon élément HTML dans la page (<code>document.querySelector</code>)" },
+        { kind: "highlight", html: "<i class='fa-solid fa-pen-to-square'></i> Modifier son contenu ou son style à la main" },
+        { kind: "highlight", html: "<i class='fa-solid fa-arrows-rotate'></i> Synchroniser toutes les parties de l'UI qui dépendent de ce changement" },
+        { kind: "highlight", html: "<i class='fa-solid fa-bug'></i> Déboguer pendant des heures quand un état n'était pas à jour quelque part" },
         {
           kind: "paragraph",
           html: "Plus l'application grossissait, plus le code ressemblait à un plat de spaghettis. React propose une idée radicalement différente : <strong>décrivez à quoi doit ressembler l'interface pour un état donné, et laissez React s'occuper de mettre le DOM à jour.</strong> Vous passez d'une logique <em>impérative</em> (\"fais ceci, puis cela\") à une logique <em>déclarative</em> (\"voici ce que je veux voir\").",
@@ -107,7 +107,7 @@ export const introPhase: Phase = {
           kind: "info",
           box: {
             variant: "concept",
-            title: "💡 Conséquence pratique",
+            title: "<i class='fa-solid fa-lightbulb'></i> Conséquence pratique",
             body: "React ne gère <strong>que la vue</strong>. Pour tout le reste (routing, requêtes HTTP, gestion du state global, formulaires complexes, tests…), vous choisissez vous-même les outils complémentaires. C'est à la fois la plus grande force et la plus grande difficulté de React.",
           },
         },
@@ -166,7 +166,7 @@ export const introPhase: Phase = {
           kind: "info",
           box: {
             variant: "tip",
-            title: "✅ La promesse des composants",
+            title: "<i class='fa-solid fa-circle-check'></i> La promesse des composants",
             body: "Vous écrivez un composant <code>Bouton</code> une seule fois, et vous le réutilisez dans 50 endroits. Le jour où vous changez son design, <strong>tous les boutons se mettent à jour automatiquement</strong>. Fin du copier-coller.",
           },
         },
@@ -175,9 +175,9 @@ export const introPhase: Phase = {
           kind: "paragraph",
           html: "Dès qu'il faut réagir à une action : un clic, une saisie, une requête réseau : il faut une <strong>mémoire</strong> pour suivre ce qui change : le <em>state</em>. Quand le state change, React re-dessine automatiquement les parties concernées.",
         },
-        { kind: "highlight", html: "🖱️ L'utilisateur clique sur « Like » → le state <code>likes</code> passe de 3 à 4" },
-        { kind: "highlight", html: "⚡ React détecte le changement → recalcule la partie affectée" },
-        { kind: "highlight", html: "🎨 Le navigateur affiche « 4 likes » : vous n'avez rien eu à faire" },
+        { kind: "highlight", html: "<i class='fa-solid fa-computer-mouse'></i> L'utilisateur clique sur « Like » → le state <code>likes</code> passe de 3 à 4" },
+        { kind: "highlight", html: "<i class='fa-solid fa-bolt'></i> React détecte le changement → recalcule la partie affectée" },
+        { kind: "highlight", html: "<i class='fa-solid fa-palette'></i> Le navigateur affiche « 4 likes » : vous n'avez rien eu à faire" },
         { kind: "title", text: "3 : Le Virtual DOM : la performance par la ruse" },
         {
           kind: "paragraph",
@@ -305,7 +305,7 @@ export default function Compteur() {
           kind: "info",
           box: {
             variant: "tip",
-            title: "🌍 L'écosystème le plus riche",
+            title: "<i class='fa-solid fa-globe'></i> L'écosystème le plus riche",
             body: "Plus de 220 000 packages npm liés à React. Pour quasiment tout problème rencontré, une solution éprouvée existe déjà.",
           },
         },
@@ -313,7 +313,7 @@ export default function Compteur() {
           kind: "info",
           box: {
             variant: "tip",
-            title: "💼 Le marché de l'emploi n°1",
+            title: "<i class='fa-solid fa-briefcase'></i> Le marché de l'emploi n°1",
             body: "React domine les offres front-end. En 2026, c'est encore la compétence la plus demandée en développement web côté client.",
           },
         },
@@ -321,7 +321,7 @@ export default function Compteur() {
           kind: "info",
           box: {
             variant: "tip",
-            title: "🏢 Utilisé par les géants",
+            title: "<i class='fa-solid fa-building'></i> Utilisé par les géants",
             body: "Meta, Netflix, Airbnb, Uber, Shopify, Discord, WhatsApp Web, Instagram, Twitch…",
           },
         },
@@ -329,7 +329,7 @@ export default function Compteur() {
           kind: "info",
           box: {
             variant: "warn",
-            title: "⚠️ Ce que React n'est PAS",
+            title: "<i class='fa-solid fa-triangle-exclamation'></i> Ce que React n'est PAS",
             body: "React n'est pas un langage (c'est du JavaScript), pas une base de données, pas un serveur. Il ne remplace pas une bonne connaissance de HTML, CSS et JavaScript.",
           },
         },
@@ -381,7 +381,7 @@ export default function Compteur() {
           kind: "info",
           box: {
             variant: "concept",
-            title: "💡 La bonne posture d'apprentissage",
+            title: "<i class='fa-solid fa-lightbulb'></i> La bonne posture d'apprentissage",
             body: "React se comprend <strong>en faisant</strong>. Après chaque module, fais les exercices, casse-les, modifie-les. Le passage de « je comprends le code » à « j'écris le code » est le plus grand saut de cette formation.",
           },
         },

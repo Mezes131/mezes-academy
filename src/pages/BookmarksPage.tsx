@@ -27,7 +27,9 @@ export function BookmarksPage() {
 
       {bookmarked.length === 0 ? (
         <div className="rounded-xl border-base bg-bg-2 p-10 text-center">
-          <div className="text-4xl mb-3">🔖</div>
+          <div className="text-4xl mb-3 text-fg-3">
+            <i className="fa-solid fa-bookmark" />
+          </div>
           <div className="text-sm font-semibold mb-1">
             Aucun module en favori
           </div>

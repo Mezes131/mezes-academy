@@ -9,7 +9,7 @@ import type { Phase } from "@/types";
 export const phase3: Phase = {
   id: "phase3",
   color: "core",
-  icon: "⚛️",
+  icon: "fa-atom",
   label: "React Core",
   title: "React Core (JavaScript)",
   summary:
@@ -34,7 +34,7 @@ export const phase3: Phase = {
           kind: "info",
           box: {
             variant: "concept",
-            title: "💡 Concept clé : Virtual DOM",
+            title: "<i class='fa-solid fa-lightbulb'></i> Concept clé — Virtual DOM",
             body: "React maintient une copie légère du DOM en mémoire. Quand l'état change, React compare l'ancien et le nouveau Virtual DOM (diffing), puis applique seulement les changements nécessaires au vrai DOM.",
           },
         },
@@ -76,7 +76,7 @@ export const phase3: Phase = {
   <span class="kw">const</span> prenom = <span class="str">"Ada"</span>
   <span class="kw">return</span> (
     <span class="jsx">&lt;div</span> <span class="prop">className</span>=<span class="str">"card"</span><span class="jsx">&gt;</span>
-      <span class="jsx">&lt;h1&gt;</span>Bonjour, {prenom} ! 👋<span class="jsx">&lt;/h1&gt;</span>
+      <span class="jsx">&lt;h1&gt;</span>Bonjour, {prenom} !<span class="jsx">&lt;/h1&gt;</span>
       <span class="jsx">&lt;p&gt;</span>2 + 2 = {2 + 2}<span class="jsx">&lt;/p&gt;</span>
       {prenom === <span class="str">"Ada"</span> &amp;&amp; <span class="jsx">&lt;span&gt;</span>Légende du code<span class="jsx">&lt;/span&gt;</span>}
     <span class="jsx">&lt;/div&gt;</span>
@@ -88,7 +88,7 @@ export const phase3: Phase = {
           kind: "info",
           box: {
             variant: "tip",
-            title: "✅ Bonne pratique",
+            title: "<i class='fa-solid fa-circle-check'></i> Bonne pratique",
             body: "Installez <strong>React Developer Tools</strong> dans votre navigateur (Chrome/Firefox). C'est l'outil n°1 pour déboguer vos composants, inspecter les props et voir le state en temps réel.",
           },
         },
@@ -368,7 +368,7 @@ export default function App() {
           kind: "info",
           box: {
             variant: "concept",
-            title: "💡 Règle fondamentale : Immutabilité",
+            title: "<i class='fa-solid fa-lightbulb'></i> Règle fondamentale — Immutabilité",
             body: "Ne jamais muter le state directement. <code>state.push(item)</code> est interdit : React ne détectera pas le changement. Toujours créer une nouvelle valeur : <code>setState([...state, item])</code>.",
           },
         },
@@ -518,7 +518,7 @@ export default function App() {
           <li key={t.id}>
             {t.text}
             <button onClick={() => removeTodo(t.id)} style={{ marginLeft: 8 }}>
-              ✕
+              Supprimer
             </button>
           </li>
         ))}
@@ -562,7 +562,7 @@ export default function App() {
           <li key={t.id}>
             {t.text}
             <button onClick={() => removeTodo(t.id)} style={{ marginLeft: 8 }}>
-              ✕
+              Supprimer
             </button>
           </li>
         ))}
@@ -626,7 +626,7 @@ export default function App() {
       .<span class="fn">then</span>(r =&gt; r.<span class="fn">json</span>())
       .<span class="fn">then</span>(data =&gt; { <span class="fn">setUser</span>(data); <span class="fn">setLoading</span>(<span class="kw">false</span>) })
 
-    <span class="cm">// 🧹 Cleanup : annule si le composant se démonte</span>
+    <span class="cm">// Cleanup : annule si le composant se démonte</span>
     <span class="kw">return</span> () =&gt; controller.<span class="fn">abort</span>()
   }, [userId])
 
@@ -639,7 +639,7 @@ export default function App() {
           kind: "info",
           box: {
             variant: "warn",
-            title: "⚠️ Piège classique : Boucle infinie",
+            title: "<i class='fa-solid fa-triangle-exclamation'></i> Piège classique — Boucle infinie",
             body: "Si vous mettez un objet ou un tableau dans le tableau de dépendances et le recréez à chaque render, useEffect boucle à l'infini. Utilisez <code>useMemo</code> ou <code>useCallback</code> pour stabiliser les références.",
           },
         },
@@ -835,7 +835,7 @@ export default function App() {
   return (
     <div style={{ padding: 24, fontFamily: "system-ui" }}>
       <button onClick={toggle}>Basculer</button>
-      {visible && <p style={{ marginTop: 12 }}>✨ Coucou, je suis là !</p>}
+      {visible && <p style={{ marginTop: 12 }}>Coucou, je suis là !</p>}
     </div>
   );
 }
@@ -1045,7 +1045,7 @@ export default function App() {
       </label>
       {/* TODO : message d'erreur mot de passe */}
       <button type="submit" style={{ marginTop: 12 }}>S'inscrire</button>
-      {submitted && <p>✅ Inscrit : {submitted.email}</p>}
+      {submitted && <p style={{ color: "green" }}>Inscrit : {submitted.email}</p>}
     </form>
   );
 }
@@ -1082,7 +1082,7 @@ export default function App() {
       </label>
       {errors.password && <p style={{ color: "crimson" }}>{errors.password}</p>}
       <button type="submit" style={{ marginTop: 12 }}>S'inscrire</button>
-      {submitted && <p>✅ Inscrit : {submitted.email}</p>}
+      {submitted && <p style={{ color: "green" }}>Inscrit : {submitted.email}</p>}
     </form>
   );
 }
@@ -1104,7 +1104,7 @@ export default function App() {
           kind: "info",
           box: {
             variant: "note",
-            title: "📦 CSS Modules",
+            title: "<i class='fa-solid fa-box'></i> CSS Modules",
             body: "Scoping automatique des classes CSS. Zéro conflit de noms. Idéal pour les projets sans framework CSS.",
           },
         },
@@ -1112,7 +1112,7 @@ export default function App() {
           kind: "info",
           box: {
             variant: "note",
-            title: "🌊 Tailwind CSS",
+            title: "<i class='fa-solid fa-water'></i> Tailwind CSS",
             body: "Utility-first CSS. Écrire le style directement dans le JSX avec des classes pré-définies. Énorme productivité.",
           },
         },

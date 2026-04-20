@@ -84,7 +84,7 @@ export function CodeExercise({ exercise }: CodeExerciseProps) {
                 onClick={() => setHintsShown((h) => h + 1)}
                 className="text-[12px] font-semibold text-amber-400 hover:text-amber-300 transition"
               >
-                💡 Voir un indice ({hintsShown + 1}/{exercise.hints.length})
+                <i className="fa-solid fa-lightbulb mr-1" /> Voir un indice ({hintsShown + 1}/{exercise.hints.length})
               </button>
             )}
           </div>
@@ -154,8 +154,8 @@ export function CodeExercise({ exercise }: CodeExerciseProps) {
           </Button>
         )}
         {isCompleted && (
-          <span className="text-[12px] text-emerald-400 font-medium">
-            ✓ Exercice validé
+          <span className="text-[12px] text-emerald-400 font-medium inline-flex items-center gap-1">
+            <i className="fa-solid fa-check" /> Exercice validé
           </span>
         )}
       </div>

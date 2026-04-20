@@ -32,7 +32,7 @@ export function Sidebar() {
                   )
                 }
               >
-                <span>{phase.icon}</span>
+                <i className={`fa-solid ${phase.icon} w-4 text-center`} />
                 <span className="flex-1 truncate">{phase.label}</span>
                 {phase.scaffoldOnly && (
                   <span className="text-[9px] font-mono uppercase bg-bg-4 text-fg-3 px-1.5 py-0.5 rounded">

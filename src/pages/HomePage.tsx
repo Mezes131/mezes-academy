@@ -83,12 +83,13 @@ export function HomePage() {
                 <div className="flex items-start gap-4">
                   <div
                     className={cn(
-                      "w-14 h-14 rounded-xl border flex items-center justify-center text-2xl flex-shrink-0",
+                      "w-14 h-14 rounded-xl border flex items-center justify-center text-xl flex-shrink-0",
                       accent.bg,
                       accent.border,
+                      accent.text,
                     )}
                   >
-                    {phase.icon}
+                    <i className={`fa-solid ${phase.icon}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">

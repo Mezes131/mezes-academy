@@ -35,10 +35,10 @@ export function SearchBar({
       {value.length > 0 && (
         <button
           onClick={() => onChange("")}
-          className="text-fg-3 hover:text-fg text-xs"
+          className="text-fg-3 hover:text-fg text-xs w-5 h-5 flex items-center justify-center"
           aria-label="Effacer la recherche"
         >
-          ✕
+          <i className="fa-solid fa-xmark" />
         </button>
       )}
     </div>
