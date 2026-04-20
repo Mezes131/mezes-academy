@@ -22,7 +22,7 @@ export function Sidebar() {
           return (
             <div key={phase.id}>
               <NavLink
-                to={`/phase/${phase.id}`}
+                to={`/react/phase/${phase.id}`}
                 className={({ isActive }) =>
                   cn(
                     "flex items-center gap-2 px-2 py-1.5 rounded-md text-[13px] font-semibold transition",
@@ -46,7 +46,7 @@ export function Sidebar() {
                   return (
                     <li key={mod.id}>
                       <NavLink
-                        to={`/module/${mod.id}`}
+                        to={`/react/module/${mod.id}`}
                         className={({ isActive }) =>
                           cn(
                             "flex items-center gap-1.5 px-2 py-1 rounded text-[12px] transition",

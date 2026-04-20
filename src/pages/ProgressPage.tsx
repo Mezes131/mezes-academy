@@ -103,7 +103,7 @@ export function ProgressPage() {
           return (
             <Link
               key={phase.id}
-              to={`/phase/${phase.id}`}
+              to={`/react/phase/${phase.id}`}
               className="block rounded-xl border-base bg-bg-2 p-5 hover:border-accent/30 transition"
             >
               <div className="flex items-center gap-4">

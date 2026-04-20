@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProgressProvider } from "@/hooks/useProgress";
-import { Layout } from "@/components/layout/Layout";
+import { LandingLayout } from "@/components/layout/LandingLayout";
+import { CourseLayout } from "@/components/layout/CourseLayout";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
-import { HomePage } from "@/pages/HomePage";
+import { LandingPage } from "@/pages/LandingPage";
+import { ReactCoursePage } from "@/pages/ReactCoursePage";
 import { PhasePage } from "@/pages/PhasePage";
 import { ModulePage } from "@/pages/ModulePage";
 import { ProgressPage } from "@/pages/ProgressPage";
@@ -21,17 +23,45 @@ export default function App() {
       <ThemeApplier>
         <BrowserRouter>
           <ScrollToTop />
-          <Layout>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/phase/:phaseId" element={<PhasePage />} />
-              <Route path="/module/:moduleId" element={<ModulePage />} />
-              <Route path="/progress" element={<ProgressPage />} />
-              <Route path="/bookmarks" element={<BookmarksPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="*" element={<HomePage />} />
-            </Routes>
-          </Layout>
+          <Routes>
+            {/* Landing Mezes Academy */}
+            <Route
+              path="/"
+              element={
+                <LandingLayout>
+                  <LandingPage />
+                </LandingLayout>
+              }
+            />
+
+            {/* Zone d'apprentissage du parcours React */}
+            <Route
+              path="/react/*"
+              element={
+                <CourseLayout>
+                  <Routes>
+                    <Route index element={<ReactCoursePage />} />
+                    <Route path="phase/:phaseId" element={<PhasePage />} />
+                    <Route path="module/:moduleId" element={<ModulePage />} />
+                    <Route path="progress" element={<ProgressPage />} />
+                    <Route path="bookmarks" element={<BookmarksPage />} />
+                    <Route path="search" element={<SearchPage />} />
+                    <Route path="*" element={<ReactCoursePage />} />
+                  </Routes>
+                </CourseLayout>
+              }
+            />
+
+            {/* 404 → landing */}
+            <Route
+              path="*"
+              element={
+                <LandingLayout>
+                  <LandingPage />
+                </LandingLayout>
+              }
+            />
+          </Routes>
         </BrowserRouter>
       </ThemeApplier>
     </ProgressProvider>

@@ -85,7 +85,7 @@ export function PhasePage() {
           return (
             <Link
               key={mod.id}
-              to={`/module/${mod.id}`}
+              to={`/react/module/${mod.id}`}
               className={cn(
                 "group flex items-start gap-4 rounded-xl border-base bg-bg-2 p-5 transition",
                 "hover:border-accent/30 hover:-translate-y-0.5 duration-200",

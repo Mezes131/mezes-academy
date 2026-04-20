@@ -65,7 +65,7 @@ export function SearchPage() {
             {results.map((r) => (
               <Link
                 key={`${r.moduleId}-${r.matchedIn}`}
-                to={`/module/${r.moduleId}`}
+                to={`/react/module/${r.moduleId}`}
                 className="block rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition group"
               >
                 <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1">

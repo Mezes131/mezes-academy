@@ -39,7 +39,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       <div className="mb-8">
         <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-2">
           <Link
-            to={`/phase/${phase.id}`}
+            to={`/react/phase/${phase.id}`}
             className={cn("hover:underline", accent.text)}
           >
             <i className={`fa-solid ${phase.icon} mr-1.5`} /> {phase.label}

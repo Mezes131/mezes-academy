@@ -57,7 +57,7 @@ export function BookmarksPage() {
                   {module.index}
                 </div>
                 <Link
-                  to={`/module/${module.id}`}
+                  to={`/react/module/${module.id}`}
                   className="flex-1 min-w-0 group"
                 >
                   <div className={cn("text-[11px] font-mono uppercase tracking-wider", accent.text)}>
@@ -79,7 +79,7 @@ export function BookmarksPage() {
                     <Bookmark size={16} />
                   </button>
                   <Link
-                    to={`/module/${module.id}`}
+                    to={`/react/module/${module.id}`}
                     className="p-2 rounded-lg hover:bg-bg-3 text-fg-2 hover:text-fg transition"
                   >
                     <ArrowRight size={16} />

@@ -28,7 +28,7 @@ export function ModulePage() {
       <div className="mt-10 pt-6 border-t border-base flex items-stretch gap-3">
         {prev ? (
           <Link
-            to={`/module/${prev.moduleId}`}
+            to={`/react/module/${prev.moduleId}`}
             className={cn(
               "flex-1 group rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition",
               "flex items-center gap-3 text-left",
@@ -50,7 +50,7 @@ export function ModulePage() {
         )}
         {next ? (
           <Link
-            to={`/module/${next.moduleId}`}
+            to={`/react/module/${next.moduleId}`}
             className={cn(
               "flex-1 group rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition",
               "flex items-center gap-3 text-right justify-end",
