@@ -1,71 +1,65 @@
 import { cn } from "@/lib/utils";
+import faviconUrl from "@/assets/images/favicon.png";
+import mezesDarkUrl from "@/assets/images/mezes-dark.png";
+import mezesLightUrl from "@/assets/images/mezes-light.png";
 
 interface MezesLogoProps {
+  /** Hauteur du logo en pixels. Pilote aussi la taille de la typo. */
   size?: number;
   className?: string;
+  /** Afficher la typographie "mezes." à côté du mark (true = logo complet). */
   showText?: boolean;
+  /** Alt accessible pour le lien/l'image. */
+  title?: string;
 }
 
 /**
- * Logo Mezes Academy — un M stylisé formé par deux obliques qui évoquent
- * à la fois une montagne (l'ascension, la progression) et un chevron
- * (une flèche qui pointe vers l'avant). Le tout dans un carré arrondi.
- *
- * Utilisable partout : nav, footer, hero, favicons.
+ * Logo Mezes Academy.
+ * - Mark : l'image `favicon.png` (M rouge/bleu marine sur fond circulaire).
+ * - Typographie : `mezes-dark.png` (pour th\u00e8me sombre) ou `mezes-light.png`
+ *   (pour th\u00e8me clair) \u2014 bascule g\u00e9r\u00e9e par Tailwind gr\u00e2ce \u00e0 la classe
+ *   `dark` / `light` appliqu\u00e9e sur <html>.
  */
 export function MezesLogo({
   size = 32,
   className,
   showText = false,
+  title = "Mezes Academy",
 }: MezesLogoProps) {
   return (
-    <div className={cn("inline-flex items-center gap-2.5", className)}>
-      <svg
+    <div
+      className={cn("inline-flex items-center gap-2.5", className)}
+      aria-label={title}
+    >
+      <img
+        src={faviconUrl}
+        alt=""
         width={size}
         height={size}
-        viewBox="0 0 40 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="mezes-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#6c63ff" />
-            <stop offset="1" stopColor="#4da3ff" />
-          </linearGradient>
-          <linearGradient id="mezes-glow" x1="8" y1="10" x2="32" y2="30" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#ffffff" stopOpacity="0.95" />
-            <stop offset="1" stopColor="#ffffff" stopOpacity="0.75" />
-          </linearGradient>
-        </defs>
-
-        {/* Fond carré arrondi */}
-        <rect x="0" y="0" width="40" height="40" rx="10" fill="url(#mezes-bg)" />
-
-        {/* Le "M" : deux obliques reliées en haut par un point médian bas,
-            dessinées en un seul chemin. Le trait principal évoque une
-            crête de montagne et trois sommets (m) */}
-        <path
-          d="M8.5 28.5 L13.5 12 L20 23 L26.5 12 L31.5 28.5"
-          stroke="url(#mezes-glow)"
-          strokeWidth="3.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-
-        {/* Petit point signature sous le M */}
-        <circle cx="20" cy="31.5" r="1.6" fill="#ffffff" fillOpacity="0.9" />
-      </svg>
+        className="select-none flex-shrink-0"
+        draggable={false}
+        style={{ height: size, width: size }}
+      />
 
       {showText && (
-        <span className="flex flex-col leading-none">
-          <span className="font-extrabold tracking-tight text-[15px] text-fg">
-            Mezes
-          </span>
-          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-fg-3 mt-0.5">
-            Academy
-          </span>
+        <span
+          className="relative inline-block flex-shrink-0"
+          style={{ height: Math.round(size * 0.72) }}
+        >
+          {/* Logo typo pour th\u00e8me sombre (texte blanc) \u2014 visible quand <html> a .dark */}
+          <img
+            src={mezesDarkUrl}
+            alt={title}
+            className="hidden dark:block h-full w-auto select-none"
+            draggable={false}
+          />
+          {/* Logo typo pour th\u00e8me clair (texte fonc\u00e9) \u2014 visible par d\u00e9faut / avec .light */}
+          <img
+            src={mezesLightUrl}
+            alt={title}
+            className="block dark:hidden h-full w-auto select-none"
+            draggable={false}
+          />
         </span>
       )}
     </div>
