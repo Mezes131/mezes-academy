@@ -1,19 +1,31 @@
 import { useSearchParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { SearchBar } from "@/components/ui/SearchBar";
-import { useSearch } from "@/hooks/useSearch";
+import { useSearch, type SearchMatchKind } from "@/hooks/useSearch";
 import { Search as SearchIcon, FileText, BookOpen } from "lucide-react";
 
-const MATCH_LABELS: Record<string, string> = {
+const MATCH_LABELS: Record<SearchMatchKind, string> = {
   title: "Titre du module",
   subtitle: "Sous-titre",
   lesson: "Leçon",
   paragraph: "Contenu",
+  heading: "Section",
+  callout: "Encadré",
+  highlight: "À retenir",
+  code: "Exemple de code",
+  quiz: "Quiz",
+  exercise: "Exercice",
 };
 
 export function SearchPage() {
   const [params, setParams] = useSearchParams();
-  const [query, setQuery] = useState(params.get("q") ?? "");
+  const qFromUrl = params.get("q") ?? "";
+  const [query, setQuery] = useState(() => qFromUrl);
+
+  useEffect(() => {
+    if (qFromUrl) setQuery(qFromUrl);
+  }, [qFromUrl]);
+
   const results = useSearch(query);
 
   useEffect(() => {
@@ -69,7 +81,7 @@ export function SearchPage() {
                 className="block rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition group"
               >
                 <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1">
-                  {r.matchedIn === "lesson" ? (
+                  {r.matchedIn === "lesson" || r.matchedIn === "exercise" ? (
                     <FileText size={12} />
                   ) : (
                     <BookOpen size={12} />

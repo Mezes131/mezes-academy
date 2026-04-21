@@ -1,5 +1,19 @@
 import { useMemo } from "react";
+import type { ContentBlock } from "@/types";
 import { phases } from "@/data/phases";
+
+/** Where in the module the query matched (for labels in the UI). */
+export type SearchMatchKind =
+  | "title"
+  | "subtitle"
+  | "lesson"
+  | "paragraph"
+  | "heading"
+  | "callout"
+  | "highlight"
+  | "code"
+  | "quiz"
+  | "exercise";
 
 export interface SearchResult {
   phaseId: string;
@@ -7,7 +21,7 @@ export interface SearchResult {
   moduleId: string;
   moduleTitle: string;
   moduleSubtitle: string;
-  matchedIn: "title" | "subtitle" | "lesson" | "paragraph";
+  matchedIn: SearchMatchKind;
   snippet?: string;
 }
 
@@ -22,9 +36,73 @@ function normalize(s: string) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+function previewText(raw: string, maxLen = 140): string {
+  const t = stripHtml(raw).replace(/\s+/g, " ").trim();
+  if (t.length <= maxLen) return t;
+  return `${t.slice(0, maxLen - 1).trimEnd()}…`;
+}
+
+function matchBlock(
+  block: ContentBlock,
+  q: string,
+): { kind: SearchMatchKind; snippet?: string } | null {
+  switch (block.kind) {
+    case "title":
+      if (normalize(block.text).includes(q)) {
+        return { kind: "heading", snippet: block.text };
+      }
+      return null;
+    case "paragraph": {
+      const text = stripHtml(block.html);
+      if (normalize(text).includes(q)) {
+        return { kind: "paragraph", snippet: previewText(block.html) };
+      }
+      return null;
+    }
+    case "info": {
+      const text = stripHtml(`${block.box.title} ${block.box.body}`);
+      if (normalize(text).includes(q)) {
+        return { kind: "callout", snippet: previewText(text) };
+      }
+      return null;
+    }
+    case "highlight": {
+      const text = stripHtml(block.html);
+      if (normalize(text).includes(q)) {
+        return { kind: "highlight", snippet: previewText(block.html) };
+      }
+      return null;
+    }
+    case "lessons": {
+      for (const lesson of block.items) {
+        const tags = lesson.tags?.join(" ") ?? "";
+        const haystack = normalize(
+          `${lesson.title} ${stripHtml(lesson.desc)} ${tags}`,
+        );
+        if (haystack.includes(q)) {
+          return { kind: "lesson", snippet: lesson.title };
+        }
+      }
+      return null;
+    }
+    case "code": {
+      const text = `${block.sample.label} ${stripHtml(block.sample.html)}`;
+      if (normalize(text).includes(q)) {
+        return {
+          kind: "code",
+          snippet: block.sample.label || previewText(block.sample.html, 80),
+        };
+      }
+      return null;
+    }
+    default:
+      return null;
+  }
+}
+
 /**
- * Lightweight full-text search over module content.
- * Scans titles, subtitles, lessons, and paragraphs.
+ * Full-text search over module titles, subtitles, all content blocks,
+ * quiz wording, and exercise titles/instructions.
  */
 export function useSearch(query: string): SearchResult[] {
   return useMemo(() => {
@@ -50,35 +128,48 @@ export function useSearch(query: string): SearchResult[] {
           results.push({ ...base, matchedIn: "subtitle" });
           continue;
         }
-        let matched = false;
+
+        let matched: SearchResult | null = null;
         for (const block of mod.content) {
-          if (matched) break;
-          if (block.kind === "lessons") {
-            for (const lesson of block.items) {
-              const haystack = normalize(lesson.title + " " + stripHtml(lesson.desc));
-              if (haystack.includes(q)) {
-                results.push({
-                  ...base,
-                  matchedIn: "lesson",
-                  snippet: lesson.title,
-                });
-                matched = true;
-                break;
-              }
-            }
-          } else if (block.kind === "paragraph") {
-            const text = stripHtml(block.html);
-            if (normalize(text).includes(q)) {
-              const idx = normalize(text).indexOf(q);
-              const snippet = text.slice(
-                Math.max(0, idx - 30),
-                Math.min(text.length, idx + q.length + 60),
-              );
-              results.push({ ...base, matchedIn: "paragraph", snippet });
-              matched = true;
+          const hit = matchBlock(block, q);
+          if (hit) {
+            matched = { ...base, matchedIn: hit.kind, snippet: hit.snippet };
+            break;
+          }
+        }
+
+        if (!matched && mod.quiz) {
+          for (const question of mod.quiz.questions) {
+            const pool = [
+              question.question,
+              ...question.options.map((o) => o.label),
+            ].join(" ");
+            if (normalize(pool).includes(q)) {
+              matched = {
+                ...base,
+                matchedIn: "quiz",
+                snippet: previewText(question.question, 120),
+              };
+              break;
             }
           }
         }
+
+        if (!matched && mod.exercises) {
+          for (const ex of mod.exercises) {
+            const pool = `${ex.title} ${stripHtml(ex.instructions)}`;
+            if (normalize(pool).includes(q)) {
+              matched = {
+                ...base,
+                matchedIn: "exercise",
+                snippet: ex.title,
+              };
+              break;
+            }
+          }
+        }
+
+        if (matched) results.push(matched);
       }
     }
     return results.slice(0, 20);
