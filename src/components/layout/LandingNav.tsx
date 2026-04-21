@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
 /**
- * Nav de la landing Mezes Academy.
- * Sobre, centrée autour de la marque — distincte de la TopNav du parcours.
+ * Mezes Academy landing navigation.
+ * Clean and brand-centered, distinct from the course TopNav.
  */
 export function LandingNav() {
   return (

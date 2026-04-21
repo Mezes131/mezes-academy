@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── THÈME SOMBRE (par défaut) ─── */
+/* ─── DARK THEME (default) ─── */
 :root {
   --bg: 10 10 15;
   --bg2: 17 17 24;
@@ -22,8 +22,8 @@
   color-scheme: dark;
 }
 
-/* Dans Tailwind, on gère le mode via la classe `dark` sur <html>,
-   ici on applique les valeurs par défaut explicitement pour le mode sombre */
+/* In Tailwind, theme mode is controlled via the `dark` class on <html>.
+   Here we explicitly apply default values for dark mode. */
 html.dark {
   --bg: 10 10 15;
   --bg2: 17 17 24;
@@ -37,7 +37,7 @@ html.dark {
   color-scheme: dark;
 }
 
-/* ─── THÈME CLAIR ─── */
+/* ─── LIGHT THEME ─── */
 html.light {
   --bg: 253 253 255;
   --bg2: 245 245 250;
@@ -54,7 +54,7 @@ html.light {
   color-scheme: light;
 }
 
-/* Opacité des bordures selon le thème */
+/* Border opacity by theme */
 html.dark {
   --border-alpha: 0.07;
   --border-strong-alpha: 0.12;
@@ -93,7 +93,7 @@ body {
   }
 }
 
-/* ─── Scrollbars discrètes ─── */
+/* ─── Subtle scrollbars ─── */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -109,7 +109,7 @@ body {
   background: rgb(var(--fg3) / 0.5);
 }
 
-/* ─── Coloration syntaxique partagée (pour les exemples statiques) ─── */
+/* ─── Shared syntax highlighting (for static examples) ─── */
 .kw { color: #cba6f7; }
 .fn { color: #89b4fa; }
 .str { color: #a6e3a1; }
@@ -128,7 +128,7 @@ html.light .num { color: #fe640b; }
 html.light .jsx { color: #d20f39; }
 html.light .prop { color: #4c4f69; }
 
-/* Sélection */
+/* Text selection */
 ::selection {
   background: rgb(var(--accent) / 0.35);
   color: rgb(var(--fg));

@@ -94,7 +94,7 @@ export function ProgressPage() {
         </div>
       </div>
 
-      {/* ─── Par phase ───────────────────────────── */}
+      {/* ─── By phase ───────────────────────────── */}
       <h2 className="text-lg font-bold mt-10 mb-4">Par phase</h2>
       <div className="space-y-3">
         {phases.map((phase, i) => {

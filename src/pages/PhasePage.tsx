@@ -76,7 +76,7 @@ export function PhasePage() {
         </div>
       </div>
 
-      {/* ─── Liste des modules ───────────────────── */}
+      {/* ─── Module list ───────────────────── */}
       <div className="mt-10 space-y-3">
         <h2 className="text-lg font-bold mb-4">Modules</h2>
         {phase.modules.map((mod) => {

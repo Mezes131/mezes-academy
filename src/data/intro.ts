@@ -187,10 +187,10 @@ export const introPhase: Phase = {
           kind: "code",
           sample: {
             label: "Un composant React minimal",
-            html: `<span class="cm">// Voici le plus simple des composants React.</span>
+            html: `<span class="cm">// This is the simplest React component.</span>
 
 <span class="kw">function</span> <span class="fn">Compteur</span>() {
-  <span class="kw">const</span> [count, setCount] = <span class="fn">useState</span>(<span class="num">0</span>)  <span class="cm">// ← le state</span>
+  <span class="kw">const</span> [count, setCount] = <span class="fn">useState</span>(<span class="num">0</span>)  <span class="cm">// ← state</span>
 
   <span class="kw">return</span> (
     <span class="jsx">&lt;div&gt;</span>
@@ -258,8 +258,8 @@ export const introPhase: Phase = {
             "/App.js": `import { useState } from "react";
 
 export default function Compteur() {
-  // TODO : déclare un state \`count\` initialisé à 0
-  // TODO : complète le bouton pour incrémenter le compteur
+  // TODO: declare a \`count\` state initialized to 0
+  // TODO: complete the button to increment the counter
 
   return (
     <div style={{ padding: 24, fontFamily: "system-ui" }}>

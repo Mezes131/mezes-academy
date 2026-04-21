@@ -3,14 +3,14 @@ import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BackToTopButtonProps {
-  /** Distance de scroll (en px) à partir de laquelle le bouton apparaît. */
+  /** Scroll distance (px) after which the button appears. */
   threshold?: number;
 }
 
 /**
- * Bouton flottant qui remonte en haut de la page.
- * N'apparaît qu'une fois que l'utilisateur a scrollé en dessous du seuil,
- * avec une animation d'entrée et un focus ring accessible.
+ * Floating button that scrolls back to the top.
+ * Appears only after the user has scrolled beyond the threshold,
+ * with an entrance animation and accessible focus ring.
  */
 export function BackToTopButton({ threshold = 320 }: BackToTopButtonProps) {
   const [visible, setVisible] = useState(false);

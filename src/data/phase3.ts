@@ -161,7 +161,7 @@ export const phase3: Phase = {
   return (
     <div style={{ padding: 24, fontFamily: "system-ui" }}>
       <h2>Mes fruits préférés</h2>
-      {/* TODO : affiche une <ul> contenant un <li> par fruit */}
+      {/* TODO: render a <ul> with one <li> per fruit */}
     </div>
   );
 }
@@ -229,7 +229,7 @@ export const phase3: Phase = {
           kind: "code",
           sample: {
             label: "Props & Children",
-            html: `<span class="cm">// Composant Card réutilisable avec children</span>
+            html: `<span class="cm">// Reusable Card component with children</span>
 <span class="kw">const</span> <span class="fn">Card</span> = ({ <span class="prop">title</span>, <span class="prop">badge</span>, <span class="prop">children</span>, <span class="prop">onClick</span> }) => (
   <span class="jsx">&lt;div</span> <span class="prop">className</span>=<span class="str">"card"</span> <span class="prop">onClick</span>={onClick}<span class="jsx">&gt;</span>
     <span class="jsx">&lt;div</span> <span class="prop">className</span>=<span class="str">"card-header"</span><span class="jsx">&gt;</span>
@@ -307,13 +307,13 @@ export const phase3: Phase = {
           ],
           template: "react",
           starterFiles: {
-            "/App.js": `// TODO : définis le composant Button
-// Il doit accepter { label, variant, onClick }
+            "/App.js": `// TODO: define the Button component
+// It should accept { label, variant, onClick }
 
 export default function App() {
   return (
     <div style={{ padding: 24, fontFamily: "system-ui", display: "flex", gap: 12 }}>
-      {/* TODO : utilise ton Button avec variant="primary" et variant="ghost" */}
+      {/* TODO: use your Button with variant="primary" and variant="ghost" */}
     </div>
   );
 }
@@ -493,12 +493,12 @@ export default function App() {
   const [input, setInput] = useState("");
 
   function addTodo() {
-    // TODO : ajoute un nouveau todo { id, text } à la liste
-    // et vide l'input
+    // TODO: add a new todo { id, text } to the list
+    // and clear the input
   }
 
   function removeTodo(id) {
-    // TODO : retire le todo ayant cet id
+    // TODO: remove the todo with this id
   }
 
   return (
@@ -626,7 +626,7 @@ export default function App() {
       .<span class="fn">then</span>(r =&gt; r.<span class="fn">json</span>())
       .<span class="fn">then</span>(data =&gt; { <span class="fn">setUser</span>(data); <span class="fn">setLoading</span>(<span class="kw">false</span>) })
 
-    <span class="cm">// Cleanup : annule si le composant se démonte</span>
+    <span class="cm">// Cleanup: cancel if the component unmounts</span>
     <span class="kw">return</span> () =&gt; controller.<span class="fn">abort</span>()
   }, [userId])
 
@@ -807,15 +807,15 @@ export default function App() {
           starterFiles: {
             "/App.js": `import { useState } from "react";
 
-// TODO : crée un hook useToggle(initial = false)
-// qui retourne [value, toggle]
+// TODO: create a useToggle(initial = false) hook
+// that returns [value, toggle]
 
 export default function App() {
-  // TODO : utilise useToggle ici
+  // TODO: use useToggle here
   return (
     <div style={{ padding: 24, fontFamily: "system-ui" }}>
       <button>Basculer</button>
-      {/* afficher un message si value est vrai */}
+      {/* show a message when value is true */}
     </div>
   );
 }
@@ -1029,7 +1029,7 @@ export default function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // TODO : valide les champs et soit remplis 'errors', soit soumet (setSubmitted({email, password}))
+    // TODO: validate fields and either fill 'errors' or submit (setSubmitted({email, password}))
   }
 
   return (
@@ -1038,12 +1038,12 @@ export default function App() {
         Email
         <input value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: "100%" }} />
       </label>
-      {/* TODO : message d'erreur email */}
+      {/* TODO: email error message */}
       <label style={{ display: "block", marginTop: 12 }}>
         Mot de passe
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: "100%" }} />
       </label>
-      {/* TODO : message d'erreur mot de passe */}
+      {/* TODO: password error message */}
       <button type="submit" style={{ marginTop: 12 }}>S'inscrire</button>
       {submitted && <p style={{ color: "green" }}>Inscrit : {submitted.email}</p>}
     </form>

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 
 /**
- * Footer global de la landing Mezes Academy.
- * Quatre colonnes : marque, parcours, ressources, légal.
+ * Global footer for Mezes Academy landing.
+ * Four columns: brand, tracks, resources, legal.
  */
 export function Footer() {
   const year = new Date().getFullYear();
@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-base bg-bg-2/30">
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
-          {/* ─── Marque ───────────────────────────── */}
+          {/* ─── Brand ───────────────────────────── */}
           <div>
             <MezesLogo size={34} showText />
             <p className="mt-4 text-[13px] text-fg-2 leading-relaxed max-w-xs">
@@ -26,16 +26,16 @@ export function Footer() {
             </div>
           </div>
 
-          {/* ─── Parcours ─────────────────────────── */}
+          {/* ─── Tracks ─────────────────────────── */}
           <FooterCol title="Parcours">
-            <FooterLink to="/react">React — de zéro à expert</FooterLink>
+            <FooterLink to="/react">React de zéro à expert</FooterLink>
             <span className="text-[13px] text-fg-3">TypeScript · Bientôt</span>
             <span className="text-[13px] text-fg-3">Next.js · Bientôt</span>
             <span className="text-[13px] text-fg-3">Node.js · Bientôt</span>
             <span className="text-[13px] text-fg-3">DevOps · Prévu</span>
           </FooterCol>
 
-          {/* ─── Ressources ───────────────────────── */}
+          {/* ─── Resources ───────────────────────── */}
           <FooterCol title="Ressources">
             <FooterLink to="/#how-it-works">Comment ça marche</FooterLink>
             <FooterLink to="/react/progress">Ma progression</FooterLink>
@@ -43,7 +43,7 @@ export function Footer() {
             <FooterLink to="/react/search">Recherche</FooterLink>
           </FooterCol>
 
-          {/* ─── Légal ────────────────────────────── */}
+          {/* ─── Legal ────────────────────────────── */}
           <FooterCol title="Académie">
             <FooterLink to="#">À propos</FooterLink>
             <FooterLink to="#">Contact</FooterLink>
@@ -54,7 +54,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-base flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="text-[12px] text-fg-3 font-mono">
-            © {year} Mezes Academy — Tous droits réservés.
+            © {year} Mezes Academy Tous droits réservés.
           </div>
           <div className="text-[12px] text-fg-3">
             Fait avec <i className="fa-solid fa-heart text-red-400" /> et un peu

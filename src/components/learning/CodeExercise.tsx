@@ -27,8 +27,8 @@ export function CodeExercise({ exercise }: CodeExerciseProps) {
 
   const files = showSolution ? exercise.solutionFiles : exercise.starterFiles;
 
-  // Sandpack prend un objet `files` qui accepte soit un string, soit un objet
-  // { code, active, hidden }. On laisse faire le défaut.
+  // Sandpack accepts a `files` object where values can be a string
+  // or an object { code, active, hidden }. Keep defaults here.
   const sandpackFiles = Object.fromEntries(
     Object.entries(files).map(([name, code]) => [name, code]),
   );
@@ -164,8 +164,8 @@ export function CodeExercise({ exercise }: CodeExerciseProps) {
 }
 
 /**
- * La console Sandpack est cachée par défaut : pour l'instant on la laisse
- * invisible, elle sera utile plus tard pour des exercices basés sur console.log.
+ * The Sandpack console is hidden by default.
+ * It can be useful later for console.log-based exercises.
  */
 function ConsoleWrapper() {
   const [show, setShow] = useState(false);
@@ -187,8 +187,8 @@ function ConsoleWrapper() {
 }
 
 /**
- * Variante plus compacte : Sandpack "tout-en-un" : utilisé si on veut juste
- * montrer un exemple sans instructions ni tracking.
+ * Compact variant: all-in-one Sandpack.
+ * Useful when we only want an example without instructions or tracking.
  */
 export function LiveSandpack({
   files,

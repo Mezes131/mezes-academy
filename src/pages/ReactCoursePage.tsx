@@ -17,14 +17,14 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 
 /**
- * Dashboard du parcours React (anciennement HomePage).
- * Vrai écran "cours" d'un LMS : reprise rapide, prochaine étape, progression
- * par phase, raccourcis vers les pages transverses.
+ * React track dashboard (formerly HomePage).
+ * True LMS "course" screen: quick resume, next step, progress
+ * by phase, and shortcuts to cross-cutting pages.
  */
 export function ReactCoursePage() {
   const { progress, stats, phaseStats } = useProgress();
 
-  // ─── Calcul du "prochain module à faire" ──────────────────────
+  // ─── Compute the "next module to do" ──────────────────────
   const nextModule = (() => {
     for (const phase of phases) {
       for (const mod of phase.modules) {
@@ -44,14 +44,14 @@ export function ReactCoursePage() {
     return null;
   })();
 
-  // ─── "Où tu t'es arrêté" (dernier quiz/module touché) ────────
+  // ─── "Where you left off" (latest touched quiz/module) ────────
   const lastActivity = (() => {
     const allScores = Object.entries(progress.quizScores)
       .map(([quizId, score]) => ({ quizId, ...score }))
       .sort((a, b) => b.updatedAt - a.updatedAt);
     if (allScores.length === 0) return null;
     const latest = allScores[0];
-    // Retrouver le module qui porte ce quiz
+    // Find the module that owns this quiz
     for (const phase of phases) {
       for (const mod of phase.modules) {
         if (mod.quiz?.id === latest.quizId) {
@@ -66,7 +66,7 @@ export function ReactCoursePage() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
-      {/* ─── Hero parcours ────────────────────────── */}
+      {/* ─── Course hero ────────────────────────── */}
       <section className="relative mb-10">
         <div
           className="absolute -top-12 -left-20 right-0 h-72 pointer-events-none opacity-60"
@@ -95,7 +95,7 @@ export function ReactCoursePage() {
         </div>
       </section>
 
-      {/* ─── Rangée : Reprise + stats ─────────────── */}
+      {/* ─── Row: Resume + stats ─────────────── */}
       <section className="grid lg:grid-cols-3 gap-4 mb-10">
         {/* Card reprise (2/3) */}
         <ContinueCard nextModule={nextModule} hasStarted={hasStarted} />
@@ -121,7 +121,7 @@ export function ReactCoursePage() {
         </div>
       </section>
 
-      {/* ─── Dernière activité ────────────────────── */}
+      {/* ─── Last activity ────────────────────── */}
       {lastActivity && (
         <section className="mb-10">
           <SectionTitle icon="fa-clock-rotate-left" text="Dernière activité" />
@@ -129,7 +129,7 @@ export function ReactCoursePage() {
         </section>
       )}
 
-      {/* ─── Parcours en 5 phases ─────────────────── */}
+      {/* ─── 5-phase track ─────────────────── */}
       <section className="mb-10">
         <div className="flex items-center justify-between mb-4">
           <SectionTitle icon="fa-layer-group" text="Le parcours en 5 phases" noMargin />
@@ -196,7 +196,7 @@ export function ReactCoursePage() {
         </div>
       </section>
 
-      {/* ─── Raccourcis ───────────────────────────── */}
+      {/* ─── Shortcuts ───────────────────────────── */}
       <section>
         <SectionTitle icon="fa-bolt" text="Raccourcis" />
         <div className="grid sm:grid-cols-3 gap-3">
@@ -224,7 +224,7 @@ export function ReactCoursePage() {
   );
 }
 
-/* ─── Composants de la page ─────────────────────────────────── */
+/* ─── Page subcomponents ─────────────────────────────────── */
 
 function SectionTitle({
   icon,
@@ -311,7 +311,7 @@ function ContinueCard({
       to={`/react/module/${nextModule.module.id}`}
       className="lg:col-span-2 group relative rounded-2xl border-base bg-gradient-to-br from-bg-2 via-bg-2 to-bg-3 p-6 md:p-7 transition hover:border-accent/40 duration-200 overflow-hidden"
     >
-      {/* Halo coloré */}
+      {/* Colored halo */}
       <div
         className="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-40 pointer-events-none"
         style={{

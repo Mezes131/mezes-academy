@@ -10,9 +10,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 /**
- * Nav de la zone parcours (/react/*).
- * Affiche le "fil d'Ariane" Mezes \u203A React, les liens scoping-course,
- * la progression globale et le th\u00e8me.
+ * Navigation for the course area (/react/*).
+ * Displays the Mezes \u203A React breadcrumb, course-scoped links,
+ * plus global progress and theme controls.
  */
 export function CourseTopNav() {
   const { stats } = useProgress();

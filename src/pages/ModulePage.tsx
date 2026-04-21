@@ -12,7 +12,7 @@ export function ModulePage() {
 
   const { phase, module } = found;
 
-  // Trouver module précédent et suivant à travers toutes les phases
+  // Find previous and next modules across all phases
   const flatModules = phases.flatMap((p) =>
     p.modules.map((m) => ({ phaseId: p.id, moduleId: m.id, title: m.title })),
   );
@@ -24,7 +24,7 @@ export function ModulePage() {
     <div className="max-w-3xl mx-auto px-6 lg:px-10 py-10">
       <ModuleView phase={phase} module={module} />
 
-      {/* ─── Navigation précédent / suivant ──────── */}
+      {/* ─── Previous / next navigation ──────── */}
       <div className="mt-10 pt-6 border-t border-base flex items-stretch gap-3">
         {prev ? (
           <Link

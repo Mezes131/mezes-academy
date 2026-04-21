@@ -1,14 +1,14 @@
 import { clsx, type ClassValue } from "clsx";
 import type { PhaseColor } from "@/types";
 
-/** Helper concise pour combiner classes conditionnelles. */
+/** Concise helper to combine conditional classes. */
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
 /**
- * Retourne les classes Tailwind pour chaque accent de phase.
- * Cela concentre toute la logique de couleur en un seul endroit.
+ * Returns Tailwind classes for each phase accent.
+ * This centralizes all color logic in one place.
  */
 export function phaseAccent(color: PhaseColor) {
   switch (color) {

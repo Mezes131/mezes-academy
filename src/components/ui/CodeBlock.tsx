@@ -4,9 +4,9 @@ interface CodeBlockProps {
 }
 
 /**
- * Affiche un bloc de code stylisé avec coloration syntaxique via classes CSS.
- * Le HTML est pré-formaté dans les fichiers de contenu (classes kw/fn/str/…)
- * et rendu en direct via dangerouslySetInnerHTML.
+ * Renders a styled code block with syntax highlighting via CSS classes.
+ * HTML is preformatted in content files (kw/fn/str/... classes)
+ * and rendered directly via dangerouslySetInnerHTML.
  */
 export function CodeBlock({ label, html }: CodeBlockProps) {
   return (

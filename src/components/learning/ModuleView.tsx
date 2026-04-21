@@ -35,7 +35,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
 
   return (
     <article className="animate-fade-in">
-      {/* ─── En-tête du module ─────────────────────── */}
+      {/* ─── Module header ─────────────────────── */}
       <div className="mb-8">
         <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-2">
           <Link

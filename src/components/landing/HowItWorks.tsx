@@ -2,9 +2,9 @@ import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Section "Comment \u00e7a marche" de la landing.
- * Pr\u00e9sente la m\u00e9thode de l'acad\u00e9mie en 3 \u00e9tapes num\u00e9rot\u00e9es,
- * suivies de 4 "promesses" structurantes.
+ * Landing "How it works" section.
+ * Presents the academy method in 3 numbered steps,
+ * followed by 4 core promises.
  */
 export function HowItWorks() {
   return (
@@ -27,7 +27,7 @@ export function HowItWorks() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 relative">
-          {/* Ligne de liaison horizontale (desktop) */}
+          {/* Horizontal connector line (desktop) */}
           <div className="hidden md:block absolute top-8 left-16 right-16 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
           {STEPS.map((step, i) => (
@@ -35,7 +35,7 @@ export function HowItWorks() {
           ))}
         </div>
 
-        {/* Promesses */}
+        {/* Promises */}
         <div className="mt-16 grid md:grid-cols-2 gap-4">
           {PROMISES.map((promise) => (
             <Promise key={promise.title} promise={promise} />
@@ -46,7 +46,7 @@ export function HowItWorks() {
   );
 }
 
-/* ─── Données internes ───────────────────────────────────────── */
+/* ─── Internal data ───────────────────────────────────────── */
 
 interface StepData {
   icon: string;
@@ -108,7 +108,7 @@ const PROMISES: PromiseData[] = [
   },
 ];
 
-/* ─── Sous-composants privés ─────────────────────────────────── */
+/* ─── Private subcomponents ─────────────────────────────────── */
 
 function Step({ step, index }: { step: StepData; index: number }) {
   return (

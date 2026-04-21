@@ -18,14 +18,14 @@ export function findModule(moduleId: string) {
 }
 
 /**
- * Total de "items" pour calculer une progression globale.
- * On compte : chaque module lu + chaque quiz réussi (>= 70%) + chaque exercice complété.
+ * Total number of "items" used to compute global progress.
+ * Counts: each read module + each passed quiz (>= 70%) + each completed exercise.
  */
 export function totalProgressItems() {
   let total = 0;
   for (const phase of phases) {
     for (const mod of phase.modules) {
-      total += 1; // module lu
+      total += 1; // read module
       if (mod.quiz) total += 1;
       if (mod.exercises) total += mod.exercises.length;
     }

@@ -20,16 +20,16 @@ export interface InfoBox {
 export interface CodeSample {
   label: string;
   /**
-   * HTML enrichi avec les classes de coloration syntaxique existantes
-   * (kw, fn, str, cm, jsx, prop, num, ty, op) : rendu via dangerouslySetInnerHTML
-   * dans un composant dédié.
+   * HTML enriched with existing syntax highlighting classes
+   * (kw, fn, str, cm, jsx, prop, num, ty, op), rendered via dangerouslySetInnerHTML
+   * in a dedicated component.
    */
   html: string;
 }
 
 /**
- * Bloc de contenu textuel d'un module. On modélise une liste de blocs
- * pour garder l'ordre de présentation flexible.
+ * Textual content block for a module. Modeled as a list of blocks
+ * to keep presentation order flexible.
  */
 export type ContentBlock =
   | { kind: "title"; text: string }
@@ -43,7 +43,7 @@ export interface QuizQuestion {
   id: string;
   question: string;
   options: { id: string; label: string }[];
-  /** ids des options correctes (supporte QCM à choix unique ou multiple) */
+  /** ids of correct options (supports single- or multi-select MCQ) */
   correct: string[];
   explanation?: string;
 }
@@ -55,11 +55,11 @@ export interface Quiz {
 }
 
 /**
- * Exercice de code interactif, affiché via Sandpack.
- * - `starterFiles` est le code initial fourni à l'apprenant
- * - `solution` est la correction à révéler
- * - `hints` est une liste d'indices progressifs
- * - `checks` décrit ce que l'apprenant doit produire (instructions)
+ * Interactive code exercise rendered via Sandpack.
+ * - `starterFiles` is the initial code provided to the learner
+ * - `solution` is the revealable correction
+ * - `hints` is a list of progressive hints
+ * - `checks` describes what the learner should produce (instructions)
  */
 export interface CodeExercise {
   id: string;
@@ -95,7 +95,7 @@ export interface Phase {
   scaffoldOnly?: boolean;
 }
 
-/* ─── Progression utilisateur ─── */
+/* ─── User progress ─── */
 
 export interface LessonProgress {
   readModules: string[];

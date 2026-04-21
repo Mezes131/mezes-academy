@@ -1,6 +1,6 @@
 /**
- * Catalogue des parcours Mezes Academy.
- * Un seul est actif pour l'instant (React). Les autres sont en préparation.
+ * Mezes Academy track catalog.
+ * Only one track is active for now (React). Others are in preparation.
  */
 
 export interface CatalogCourse {
@@ -8,9 +8,9 @@ export interface CatalogCourse {
   title: string;
   tagline: string;
   description: string;
-  icon: string; // Classe FontAwesome (sans le "fa-solid" / "fa-brands")
+  icon: string; // FontAwesome class (without "fa-solid" / "fa-brands")
   iconFamily?: "fa-solid" | "fa-brands";
-  /** Couleur d'accent Tailwind pour ce parcours (utilis\u00e9e en bordure/fond). */
+  /** Tailwind accent colors for this track (used for border/background). */
   accent: {
     text: string;
     bg: string;
@@ -22,7 +22,7 @@ export interface CatalogCourse {
   modules: number;
   status: "active" | "soon" | "planned";
   href?: string;
-  /** Date pr\u00e9vue (optionnelle) pour afficher "Disponible en \u2026". */
+  /** Optional ETA used to display "Available in ...". */
   eta?: string;
 }
 
@@ -63,7 +63,7 @@ export const catalog: CatalogCourse[] = [
     duration: "\u22486 semaines",
     modules: 12,
     status: "soon",
-    eta: "Printemps 2026",
+    eta: "",
   },
   {
     slug: "nextjs",
@@ -82,7 +82,7 @@ export const catalog: CatalogCourse[] = [
     duration: "\u22488 semaines",
     modules: 16,
     status: "soon",
-    eta: "\u00c9t\u00e9 2026",
+    eta: "",
   },
   {
     slug: "node",
@@ -101,7 +101,7 @@ export const catalog: CatalogCourse[] = [
     duration: "\u22488 semaines",
     modules: 14,
     status: "soon",
-    eta: "Automne 2026",
+    eta: "",
   },
   {
     slug: "devops",
@@ -120,11 +120,11 @@ export const catalog: CatalogCourse[] = [
     duration: "\u22484 semaines",
     modules: 8,
     status: "planned",
-    eta: "Fin 2026",
+    eta: "Bientôt disponible",
   },
 ];
 
-/** Statistiques globales affich\u00e9es sur la landing. */
+/** Global stats displayed on the landing page. */
 export const academyStats = {
   coursesActive: catalog.filter((c) => c.status === "active").length,
   coursesPlanned: catalog.filter((c) => c.status !== "active").length,

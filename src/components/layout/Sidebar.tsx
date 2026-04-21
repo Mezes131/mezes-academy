@@ -5,8 +5,8 @@ import { cn, phaseAccent } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
 
 /**
- * Sidebar navigation : affiche les phases et leurs modules avec état
- * de progression (lu / non lu).
+ * Sidebar navigation: displays phases and modules with
+ * progress status (read / unread).
  */
 export function Sidebar() {
   const { progress } = useProgress();

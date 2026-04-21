@@ -4,9 +4,9 @@ import { Sidebar } from "./Sidebar";
 import { BackToTopButton } from "./BackToTopButton";
 
 /**
- * Layout de la zone d'apprentissage (parcours React).
- * Combine la nav scoping-course, la sidebar des phases/modules
- * et un bouton de retour en haut.
+ * Layout for the learning area (React track).
+ * Combines the course-scoped nav, the phase/module sidebar,
+ * and a back-to-top button.
  */
 export function CourseLayout({ children }: { children: ReactNode }) {
   return (

@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/Button";
 import { academyStats } from "@/data/catalog";
 
 /**
- * Section "Stats & CTA final" de la landing.
- * Affiche 4 chiffres cl\u00e9s de l'acad\u00e9mie puis un bloc de rappel vers le
- * parcours actif.
+ * Landing "Stats & final CTA" section.
+ * Shows 4 key academy metrics, then a reminder block
+ * pointing to the active track.
  */
 export function Stats() {
   return (
@@ -43,7 +43,7 @@ export function Stats() {
   );
 }
 
-/* ─── Sous-composants privés ─────────────────────────────────── */
+/* ─── Private subcomponents ─────────────────────────────────── */
 
 function StatCard({
   icon,

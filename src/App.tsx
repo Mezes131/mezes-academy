@@ -36,7 +36,7 @@ export default function App() {
               }
             />
 
-            {/* Zone d'apprentissage du parcours React */}
+            {/* React course learning area */}
             <Route
               path="/react/*"
               element={

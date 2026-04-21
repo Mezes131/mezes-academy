@@ -4,23 +4,22 @@ import mezesDarkUrl from "@/assets/images/mezes-dark.png";
 import mezesLightUrl from "@/assets/images/mezes-light.png";
 
 interface MezesLogoProps {
-  /** Hauteur du logo en pixels. Pilote aussi la taille de la typo. */
+  /** Logo height in pixels. Also drives wordmark sizing. */
   size?: number;
   className?: string;
-  /** Afficher l'icône circulaire (mark). */
+  /** Show the circular mark icon. */
   showMark?: boolean;
-  /** Afficher la typographie "mezes." à côté du mark (true = logo complet). */
+  /** Show the "mezes." wordmark next to the mark (true = full logo). */
   showText?: boolean;
-  /** Alt accessible pour le lien/l'image. */
+  /** Accessible alt text for the link/image. */
   title?: string;
 }
 
 /**
- * Logo Mezes Academy.
- * - Mark : l'image `favicon.png` (M rouge/bleu marine sur fond circulaire).
- * - Typographie : `mezes-dark.png` (pour th\u00e8me sombre) ou `mezes-light.png`
- *   (pour th\u00e8me clair) \u2014 bascule g\u00e9r\u00e9e par Tailwind gr\u00e2ce \u00e0 la classe
- *   `dark` / `light` appliqu\u00e9e sur <html>.
+ * Mezes Academy logo.
+ * - Mark: `favicon.png` (red/navy M on a circular background).
+ * - Wordmark: `mezes-dark.png` (dark theme) or `mezes-light.png` (light theme).
+ *   Theme switching is handled by Tailwind via `dark` / `light` on <html>.
  */
 export function MezesLogo({
   size = 32,
@@ -51,14 +50,14 @@ export function MezesLogo({
           className="relative inline-block flex-shrink-0"
           style={{ height: Math.round(size * 0.72) }}
         >
-          {/* Logo typo pour thème sombre (texte blanc) l'ui visible quand <html> a .dark */}
+          {/* Dark-theme wordmark (white text), visible when <html> has .dark */}
           <img
             src={mezesDarkUrl}
             alt={title}
             className="hidden dark:block h-full w-auto select-none"
             draggable={false}
           />
-          {/* Logo typo pour thème clair (texte foncé) l'ui visible par défaut / avec .light */}
+          {/* Light-theme wordmark (dark text), visible by default / with .light */}
           <img
             src={mezesLightUrl}
             alt={title}

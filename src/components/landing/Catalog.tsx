@@ -4,9 +4,9 @@ import { catalog, type CatalogCourse } from "@/data/catalog";
 import { cn } from "@/lib/utils";
 
 /**
- * Section catalogue de la landing.
- * Affiche tous les parcours disponibles (actifs et \u00e0 venir) sous forme
- * d'une grille de <CourseCard />.
+ * Landing catalog section.
+ * Displays all available tracks (active and upcoming)
+ * in a <CourseCard /> grid.
  */
 export function Catalog() {
   return (
@@ -36,7 +36,7 @@ export function Catalog() {
   );
 }
 
-/* ─── Sous-composants privés ─────────────────────────────────── */
+/* ─── Private subcomponents ─────────────────────────────────── */
 
 function CourseCard({ course }: { course: CatalogCourse }) {
   const isActive = course.status === "active";

@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useProgress } from "./useProgress";
 
 /**
- * Applique la classe `dark` ou `light` au <html> dès que le thème change,
- * pour que Tailwind et les variables CSS suivent.
+ * Applies the `dark` or `light` class to <html> whenever theme changes,
+ * so Tailwind and CSS variables stay in sync.
  */
 export function useThemeEffect() {
   const { progress, setTheme } = useProgress();

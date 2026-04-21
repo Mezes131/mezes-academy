@@ -8,8 +8,8 @@ interface HeroProps {
 }
 
 /**
- * Section hero de la landing Mezes Academy.
- * Fond : video en autoplay / muet / boucle + overlays pour contraste.
+ * Mezes Academy landing hero section.
+ * Background: autoplay / muted / loop video with contrast overlays.
  */
 export function Hero({ hasProgress }: HeroProps) {
   return (
@@ -61,7 +61,7 @@ export function Hero({ hasProgress }: HeroProps) {
   );
 }
 
-/* ─── Sous-composants privés ─────────────────────────────────── */
+/* ─── Private subcomponents ─────────────────────────────────── */
 
 function QuickPoint({ icon, text }: { icon: string; text: string }) {
   return (
@@ -75,11 +75,11 @@ function QuickPoint({ icon, text }: { icon: string; text: string }) {
 }
 
 /**
- * Fond animé du hero.
- * - Vidéo autoplay muet en `cover`, désactivée pour les utilisateurs qui
- *   ont activé la réduction des animations (respect de prefers-reduced-motion).
- * - Dégradé sombre pour assurer le contraste du texte.
- * - Gradient d'accent + grille de code pour ne pas perdre l'identité visuelle.
+ * Animated hero background.
+ * - Autoplay muted video in `cover`, disabled for users who
+ *   enabled reduced motion (respects prefers-reduced-motion).
+ * - Dark/light gradient overlay to ensure text contrast.
+ * - Accent gradient + code grid to preserve visual identity.
  */
 function HeroBackdrop() {
   return (
@@ -87,7 +87,7 @@ function HeroBackdrop() {
       className="absolute inset-0 pointer-events-none select-none overflow-hidden"
       aria-hidden
     >
-      {/* Vidéo de fond */}
+      {/* Background video */}
       <video
         src={heroVideoUrl}
         autoPlay
@@ -98,7 +98,7 @@ function HeroBackdrop() {
         className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
       />
 
-      {/* Voile adaptatif : clair en light, sombre en dark, pour garder un bon contraste */}
+      {/* Adaptive overlay: light in light mode, dark in dark mode for contrast */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/65 via-white/50 to-white/82 dark:from-bg/70 dark:via-bg/55 dark:to-bg/95" />
 
       {/* Gradient radial accent violet */}
@@ -110,7 +110,7 @@ function HeroBackdrop() {
         }}
       />
 
-      {/* Grille de code en pointillés (discrète) */}
+      {/* Dotted code grid (subtle) */}
       <div
         className="absolute inset-0 opacity-[0.05] dark:hidden"
         style={{

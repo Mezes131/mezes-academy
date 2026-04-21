@@ -23,8 +23,8 @@ function normalize(s: string) {
 }
 
 /**
- * Recherche plein-texte légère sur le contenu des modules.
- * On parcourt titres, sous-titres, leçons et paragraphes.
+ * Lightweight full-text search over module content.
+ * Scans titles, subtitles, lessons, and paragraphs.
  */
 export function useSearch(query: string): SearchResult[] {
   return useMemo(() => {

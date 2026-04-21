@@ -4,8 +4,8 @@ import { Footer } from "./Footer";
 import { BackToTopButton } from "./BackToTopButton";
 
 /**
- * Layout de la landing Mezes Academy : nav + contenu + footer.
- * Pas de sidebar (on est hors zone d'apprentissage).
+ * Mezes Academy landing layout: nav + content + footer.
+ * No sidebar (outside the learning area).
  */
 export function LandingLayout({ children }: { children: ReactNode }) {
   return (

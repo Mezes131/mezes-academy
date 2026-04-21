@@ -1,9 +1,9 @@
 import type { Phase } from "@/types";
 
 /**
- * Scaffolds des phases 4, 5 et 6.
- * Contenu minimal (titres, résumés, listes de leçons) : les quiz et exercices
- * interactifs seront ajoutés dans une itération ultérieure.
+ * Scaffolds for phases 4, 5, and 6.
+ * Minimal content (titles, summaries, lesson lists):
+ * interactive quizzes and exercises will be added in a later iteration.
  */
 
 export const phase4: Phase = {
