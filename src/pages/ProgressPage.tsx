@@ -54,7 +54,7 @@ export function ProgressPage() {
   const totalQuizzesTaken = Object.keys(progress.quizScores).length;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-accent-2 mb-3">
         <TrendingUp size={14} /> Ma progression
       </div>

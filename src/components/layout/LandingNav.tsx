@@ -13,8 +13,8 @@ export function LandingNav() {
   return (
     <nav className="sticky top-0 z-50 h-16 bg-bg/80 backdrop-blur-xl border-b border-base">
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center gap-6">
-        <Link to="/" aria-label="Mezes Academy">
-          <MezesLogo size={34} showText showMark={false} />
+        <Link to="/" aria-label="Mezes Academy" className="flex items-center gap-2 flex-shrink-0">
+          <MezesLogo size={28} showText showMark={false} />
         </Link>
 
         <div className="hidden md:flex items-center gap-1 ml-6">

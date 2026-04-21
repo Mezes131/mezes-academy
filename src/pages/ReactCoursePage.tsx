@@ -80,7 +80,7 @@ export function ReactCoursePage() {
           <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-brand-core mb-3">
             <i className="fa-solid fa-atom" />
             Parcours React
-            <span className="text-fg-3">— Mezes Academy</span>
+            <span className="text-fg-2"> Mezes Academy</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[0.98]">
             Ton parcours <em className="not-italic bg-gradient-to-r from-brand-core to-brand-intro bg-clip-text text-transparent">React</em>,
@@ -89,7 +89,7 @@ export function ReactCoursePage() {
           </h1>
           <p className="mt-5 text-[16px] text-fg-2 font-serif leading-relaxed max-w-2xl">
             5 phases progressives, 27 modules, des dizaines d'exercices live.
-            Ta progression est sauvegardée automatiquement — reprends à tout
+            Ta progression est sauvegardée automatiquement, reprends à tout
             moment là où tu t'es arrêté.
           </p>
         </div>

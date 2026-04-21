@@ -21,7 +21,7 @@ export function ModulePage() {
   const next = idx < flatModules.length - 1 ? flatModules[idx + 1] : undefined;
 
   return (
-    <div className="max-w-3xl mx-auto px-6 lg:px-10 py-10">
+    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10">
       <ModuleView phase={phase} module={module} />
 
       {/* ─── Previous / next navigation ──────── */}

@@ -26,7 +26,7 @@ export function SearchPage() {
   }, [query]);
 
   return (
-    <div className="max-w-3xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-accent-2 mb-3">
         <SearchIcon size={14} /> Recherche
       </div>

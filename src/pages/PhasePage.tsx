@@ -17,9 +17,9 @@ export function PhasePage() {
   const st = phaseStats.find((p) => p.id === phase.id)!;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       {/* ─── Header ─────────────────────────────── */}
-      <div className="flex items-start gap-5 pb-8 border-b border-base">
+      <div className="flex items-start gap-5 p-4 border-b border-base">
         <div
           className={cn(
             "w-20 h-20 rounded-2xl border flex items-center justify-center text-3xl flex-shrink-0",
