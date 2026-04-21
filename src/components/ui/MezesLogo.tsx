@@ -7,6 +7,8 @@ interface MezesLogoProps {
   /** Hauteur du logo en pixels. Pilote aussi la taille de la typo. */
   size?: number;
   className?: string;
+  /** Afficher l'icône circulaire (mark). */
+  showMark?: boolean;
   /** Afficher la typographie "mezes." à côté du mark (true = logo complet). */
   showText?: boolean;
   /** Alt accessible pour le lien/l'image. */
@@ -23,6 +25,7 @@ interface MezesLogoProps {
 export function MezesLogo({
   size = 32,
   className,
+  showMark = true,
   showText = false,
   title = "Mezes Academy",
 }: MezesLogoProps) {
@@ -31,29 +34,31 @@ export function MezesLogo({
       className={cn("inline-flex items-center gap-2.5", className)}
       aria-label={title}
     >
-      <img
-        src={faviconUrl}
-        alt=""
-        width={size}
-        height={size}
-        className="select-none flex-shrink-0"
-        draggable={false}
-        style={{ height: size, width: size }}
-      />
+      {showMark && (
+        <img
+          src={faviconUrl}
+          alt=""
+          width={size}
+          height={size}
+          className="select-none flex-shrink-0"
+          draggable={false}
+          style={{ height: size, width: size }}
+        />
+      )}
 
       {showText && (
         <span
           className="relative inline-block flex-shrink-0"
           style={{ height: Math.round(size * 0.72) }}
         >
-          {/* Logo typo pour th\u00e8me sombre (texte blanc) \u2014 visible quand <html> a .dark */}
+          {/* Logo typo pour thème sombre (texte blanc) l'ui visible quand <html> a .dark */}
           <img
             src={mezesDarkUrl}
             alt={title}
             className="hidden dark:block h-full w-auto select-none"
             draggable={false}
           />
-          {/* Logo typo pour th\u00e8me clair (texte fonc\u00e9) \u2014 visible par d\u00e9faut / avec .light */}
+          {/* Logo typo pour thème clair (texte foncé) l'ui visible par défaut / avec .light */}
           <img
             src={mezesLightUrl}
             alt={title}
