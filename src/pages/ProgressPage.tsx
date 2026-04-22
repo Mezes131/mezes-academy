@@ -52,6 +52,11 @@ export function ProgressPage() {
   }
 
   const totalQuizzesTaken = Object.keys(progress.quizScores).length;
+  const exercisesSolved = stats.exercisesSolved;
+  const exercisesRevealed = stats.exercisesRevealed;
+  const challengeValidated = Object.values(progress.challengeScores).filter(
+    (s) => s.total > 0 && s.passedIds.length === s.total,
+  ).length;
 
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
@@ -63,7 +68,7 @@ export function ProgressPage() {
       </h1>
 
       {/* ─── Stats globales ──────────────────────── */}
-      <div className="grid sm:grid-cols-4 gap-3 mt-8">
+      <div className="grid sm:grid-cols-5 gap-3 mt-8">
         <StatCard
           label="Progression"
           value={`${stats.percent}%`}
@@ -78,8 +83,18 @@ export function ProgressPage() {
           value={`${stats.quizPassed}/${totalQuizzesTaken || 0}`}
         />
         <StatCard
-          label="Exercices faits"
-          value={String(progress.completedExercises.length)}
+          label="Exos résolus"
+          value={String(exercisesSolved)}
+          accent="text-emerald-400"
+        />
+        <StatCard
+          label="Exos vus (solution)"
+          value={String(exercisesRevealed)}
+          accent="text-sky-300"
+        />
+        <StatCard
+          label="Challenges validés"
+          value={String(challengeValidated)}
         />
       </div>
 

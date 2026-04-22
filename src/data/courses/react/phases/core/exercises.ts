@@ -40,6 +40,36 @@ export const coreExercises = {
 }
 `,
     },
+    tests: {
+      "/App.test.js": `import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("un <ul> est présent", () => {
+  const { container } = render(<App />);
+  expect(container.querySelector("ul")).not.toBeNull();
+});
+
+test("il y a exactement 3 <li>", () => {
+  const { container } = render(<App />);
+  expect(container.querySelectorAll("li").length).toBe(3);
+});
+
+test("chaque fruit est visible", () => {
+  render(<App />);
+  expect(screen.getByText("Mangue")).toBeTruthy();
+  expect(screen.getByText("Papaye")).toBeTruthy();
+  expect(screen.getByText("Avocat")).toBeTruthy();
+});
+`,
+    },
+    validator: `const code = files["/App.js"] ?? "";
+const checks = [
+  { name: "présence d'une liste <ul>", pass: /<ul>/i.test(code) },
+  { name: "itération avec map", pass: /\\.map\\s*\\(/.test(code) },
+  { name: "key sur les <li>", pass: /<li[^>]*key\\s*=/.test(code) },
+];
+const failures = checks.filter((c) => !c.pass).map((c) => c.name);
+return { passed: checks.length - failures.length, total: checks.length, failures };`,
   },
 
   m12_1: {
@@ -99,6 +129,7 @@ export default function App() {
   m13_1: {
     id: "react-core-ex-m13-1",
     title: "Todo list minimaliste",
+    attemptsBeforeSolution: 5,
     instructions:
       "Complète la todo list : l'utilisateur doit pouvoir taper un texte, cliquer sur « Ajouter » pour l'ajouter à la liste, et voir tous les items affichés. Chaque item doit avoir un bouton « Supprimer » qui le retire.",
     hints: [
@@ -194,6 +225,37 @@ export default function App() {
 }
 `,
     },
+    tests: {
+      "/App.test.js": `import { render, screen, fireEvent } from "@testing-library/react";
+import App from "./App";
+
+test("ajoute une todo", () => {
+  render(<App />);
+  const input = screen.getByPlaceholderText(/nouvelle tâche/i);
+  fireEvent.change(input, { target: { value: "Apprendre React" } });
+  fireEvent.click(screen.getByRole("button", { name: /ajouter/i }));
+  expect(screen.getByText("Apprendre React")).toBeTruthy();
+});
+
+test("supprime une todo", () => {
+  render(<App />);
+  const input = screen.getByPlaceholderText(/nouvelle tâche/i);
+  fireEvent.change(input, { target: { value: "Apprendre React" } });
+  fireEvent.click(screen.getByRole("button", { name: /ajouter/i }));
+  fireEvent.click(screen.getByRole("button", { name: /supprimer/i }));
+  expect(screen.queryByText("Apprendre React")).toBeNull();
+});
+`,
+    },
+    validator: `const code = files["/App.js"] ?? "";
+const checks = [
+  { name: "state todos déclaré", pass: /const\\s*\\[\\s*todos\\s*,\\s*setTodos\\s*\\]\\s*=\\s*useState\\s*\\(/.test(code) },
+  { name: "addTodo utilise setTodos", pass: /function\\s+addTodo[\\s\\S]*setTodos\\s*\\(/.test(code) },
+  { name: "removeTodo utilise filter", pass: /function\\s+removeTodo[\\s\\S]*\\.filter\\s*\\(/.test(code) },
+  { name: "bouton Supprimer présent", pass: /Supprimer/.test(code) },
+];
+const failures = checks.filter((c) => !c.pass).map((c) => c.name);
+return { passed: checks.length - failures.length, total: checks.length, failures };`,
   },
 
   m15_1: {

@@ -4,7 +4,7 @@ import type { PhaseId } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { cn, phaseAccent } from "@/lib/utils";
-import { Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { Clock, CheckCircle2, ArrowRight, Trophy } from "lucide-react";
 
 export function PhasePage() {
   const { phaseId } = useParams<{ phaseId: string }>();
@@ -15,6 +15,7 @@ export function PhasePage() {
 
   const accent = phaseAccent(phase.color);
   const st = phaseStats.find((p) => p.id === phase.id)!;
+  const challengeScore = progress.challengeScores[phase.id];
 
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
@@ -75,6 +76,37 @@ export function PhasePage() {
           {st.done} / {st.total} étapes
         </div>
       </div>
+
+      {/* ─── Final challenge entry point ─────────────────── */}
+      <Link
+        to={`/react/phase/${phase.id}/challenge`}
+        className="mt-4 block rounded-xl border-base bg-bg-2 p-4 hover:border-accent/30 transition"
+      >
+        <div className="flex items-center gap-3">
+          <div
+            className={cn(
+              "w-9 h-9 rounded-lg border flex items-center justify-center",
+              accent.bg,
+              accent.border,
+              accent.text,
+            )}
+          >
+            <Trophy size={16} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-semibold">Challenge final de phase</div>
+            <div className="text-[12px] text-fg-3 font-mono">
+              3 exercices aléatoires · sans solution · hints autorisés
+              {challengeScore && (
+                <span className="ml-2 text-emerald-400">
+                  (meilleur: {challengeScore.passedIds.length}/{challengeScore.total})
+                </span>
+              )}
+            </div>
+          </div>
+          <ArrowRight size={16} className="text-fg-3" />
+        </div>
+      </Link>
 
       {/* ─── Module list ───────────────────── */}
       <div className="mt-10 space-y-3">

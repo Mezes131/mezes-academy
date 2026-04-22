@@ -7,31 +7,35 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { LessonProgress } from "@/types";
+import type {
+  ChallengeScore,
+  ExerciseProgress,
+  ExerciseStatus,
+  LessonProgress,
+} from "@/types";
 import { phases, totalProgressItems } from "@/data/phases";
 
 const STORAGE_KEY_V1 = "react-learn:progress:v1";
-const STORAGE_KEY = "react-learn:progress:v2";
+const STORAGE_KEY_V2 = "react-learn:progress:v2";
+const STORAGE_KEY = "react-learn:progress:v3";
 
 const DEFAULT_PROGRESS: LessonProgress = {
   readModules: [],
   quizScores: {},
   completedExercises: [],
+  exerciseProgress: {},
+  challengeScores: {},
   bookmarks: [],
   theme: "dark",
 };
 
-/**
- * ID renaming applied when migrating v1 → v2:
- * flat ids ("m11", "quiz-m11", "ex-m11-1", "intro-01"…) are rewritten
- * into their prefixed form ("react-core-m11", "react-core-quiz-m11", …).
- */
-function migrateId(oldId: string): string {
-  // Already prefixed (e.g. "react-core-m11") — nothing to do
+/* ──────────────────────────────────────────────────────────────────
+   ID migration (v1 → v2): flat ids ("m11", "quiz-m11"…) become
+   their prefixed form ("react-core-m11", "react-core-quiz-m11"…).
+   ────────────────────────────────────────────────────────────────── */
+function migrateIdToV2(oldId: string): string {
   if (oldId.startsWith("react-")) return oldId;
 
-  // Intro phase: "intro-01" → "react-intro-m01", "quiz-intro-01" → "react-intro-quiz-m01",
-  //              "ex-intro-03" → "react-intro-ex-m03"
   const introQuiz = /^quiz-intro-(\d+)$/.exec(oldId);
   if (introQuiz) return `react-intro-quiz-m${introQuiz[1]}`;
   const introEx = /^ex-intro-(\d+)$/.exec(oldId);
@@ -39,8 +43,6 @@ function migrateId(oldId: string): string {
   const introMod = /^intro-(\d+)$/.exec(oldId);
   if (introMod) return `react-intro-m${introMod[1]}`;
 
-  // Core phase: "m11" → "react-core-m11", "quiz-m11" → "react-core-quiz-m11",
-  //             "ex-m11-1" → "react-core-ex-m11-1"
   const coreQuiz = /^quiz-(m\d+)$/.exec(oldId);
   if (coreQuiz) return `react-core-quiz-${coreQuiz[1]}`;
   const coreEx = /^ex-(m\d+)-(\d+)$/.exec(oldId);
@@ -48,43 +50,83 @@ function migrateId(oldId: string): string {
   const coreMod = /^m\d+$/.exec(oldId);
   if (coreMod) return `react-core-${oldId}`;
 
-  // Unknown shape — leave untouched so no data is lost
   return oldId;
 }
 
-function migrateProgress(raw: Partial<LessonProgress>): LessonProgress {
+function migrateV1ToV2(raw: Partial<LessonProgress>): Partial<LessonProgress> {
   const quizScores: LessonProgress["quizScores"] = {};
   for (const [id, score] of Object.entries(raw.quizScores ?? {})) {
-    quizScores[migrateId(id)] = score;
+    quizScores[migrateIdToV2(id)] = score;
+  }
+  return {
+    ...raw,
+    readModules: (raw.readModules ?? []).map(migrateIdToV2),
+    completedExercises: (raw.completedExercises ?? []).map(migrateIdToV2),
+    bookmarks: (raw.bookmarks ?? []).map(migrateIdToV2),
+    quizScores,
+  };
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   v2 → v3: introduce exerciseProgress + challengeScores. We backfill
+   `exerciseProgress` from the legacy `completedExercises` array so no
+   progress is lost — each legacy completion is recorded as "revealed"
+   (conservative) since we cannot retroactively know if tests passed.
+   ────────────────────────────────────────────────────────────────── */
+function migrateV2ToV3(raw: Partial<LessonProgress>): LessonProgress {
+  const exerciseProgress: Record<string, ExerciseProgress> = {
+    ...(raw.exerciseProgress ?? {}),
+  };
+  for (const exId of raw.completedExercises ?? []) {
+    if (!exerciseProgress[exId]) {
+      exerciseProgress[exId] = {
+        status: "revealed",
+        attempts: 0,
+        hintsUsed: 0,
+        revealedSolution: true,
+        updatedAt: Date.now(),
+      };
+    }
   }
   return {
     ...DEFAULT_PROGRESS,
     ...raw,
-    readModules: (raw.readModules ?? []).map(migrateId),
-    completedExercises: (raw.completedExercises ?? []).map(migrateId),
-    bookmarks: (raw.bookmarks ?? []).map(migrateId),
-    quizScores,
+    exerciseProgress,
+    challengeScores: raw.challengeScores ?? {},
+    completedExercises: Object.entries(exerciseProgress)
+      .filter(([, ep]) => ep.status === "solved" || ep.status === "revealed")
+      .map(([id]) => id),
   };
 }
 
 function load(): LessonProgress {
   if (typeof window === "undefined") return DEFAULT_PROGRESS;
   try {
-    const rawV2 = window.localStorage.getItem(STORAGE_KEY);
-    if (rawV2) {
-      const parsed = JSON.parse(rawV2) as Partial<LessonProgress>;
+    const rawV3 = window.localStorage.getItem(STORAGE_KEY);
+    if (rawV3) {
+      const parsed = JSON.parse(rawV3) as Partial<LessonProgress>;
       return { ...DEFAULT_PROGRESS, ...parsed };
     }
 
-    // One-shot migration from v1 — transparent to the user, happens once.
-    const rawV1 = window.localStorage.getItem(STORAGE_KEY_V1);
-    if (rawV1) {
-      const migrated = migrateProgress(
-        JSON.parse(rawV1) as Partial<LessonProgress>,
+    // v2 → v3: preserve user data transparently.
+    const rawV2 = window.localStorage.getItem(STORAGE_KEY_V2);
+    if (rawV2) {
+      const migrated = migrateV2ToV3(
+        JSON.parse(rawV2) as Partial<LessonProgress>,
       );
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
-      window.localStorage.removeItem(STORAGE_KEY_V1);
+      window.localStorage.removeItem(STORAGE_KEY_V2);
       return migrated;
+    }
+
+    // v1 → v3 (user that never saw v2): chain both migrations.
+    const rawV1 = window.localStorage.getItem(STORAGE_KEY_V1);
+    if (rawV1) {
+      const v2 = migrateV1ToV2(JSON.parse(rawV1) as Partial<LessonProgress>);
+      const v3 = migrateV2ToV3(v2);
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(v3));
+      window.localStorage.removeItem(STORAGE_KEY_V1);
+      return v3;
     }
 
     return DEFAULT_PROGRESS;
@@ -101,6 +143,48 @@ function save(progress: LessonProgress) {
   }
 }
 
+/* ──────────────────────────────────────────────────────────────────
+   Helpers to keep `completedExercises` and `exerciseProgress` in sync.
+   Any mutation of a single exercise flows through here.
+   ────────────────────────────────────────────────────────────────── */
+function syncCompletedExercises(
+  progress: LessonProgress,
+  exerciseId: string,
+  next: ExerciseProgress,
+): LessonProgress {
+  const done = next.status === "solved" || next.status === "revealed";
+  const already = progress.completedExercises.includes(exerciseId);
+  const completedExercises = done
+    ? already
+      ? progress.completedExercises
+      : [...progress.completedExercises, exerciseId]
+    : progress.completedExercises.filter((id) => id !== exerciseId);
+  return {
+    ...progress,
+    exerciseProgress: {
+      ...progress.exerciseProgress,
+      [exerciseId]: next,
+    },
+    completedExercises,
+  };
+}
+
+function touch(prev: ExerciseProgress | undefined): ExerciseProgress {
+  return (
+    prev ?? {
+      status: "not-started",
+      attempts: 0,
+      hintsUsed: 0,
+      revealedSolution: false,
+      updatedAt: Date.now(),
+    }
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Context shape
+   ══════════════════════════════════════════════════════════════════ */
+
 interface ProgressContextValue {
   progress: LessonProgress;
   stats: {
@@ -108,6 +192,8 @@ interface ProgressContextValue {
     done: number;
     percent: number;
     quizPassed: number;
+    exercisesSolved: number;
+    exercisesRevealed: number;
   };
   phaseStats: Array<{
     id: string;
@@ -117,8 +203,10 @@ interface ProgressContextValue {
     done: number;
     percent: number;
   }>;
+
   markModuleRead: (moduleId: string) => void;
   canMarkModuleRead: (moduleId: string) => boolean;
+
   saveQuizScore: (
     quizId: string,
     correct: number,
@@ -126,7 +214,24 @@ interface ProgressContextValue {
     answers: Record<string, string[]>,
   ) => void;
   clearQuizScore: (quizId: string) => void;
+
+  /** Legacy entry point: marks as "revealed" (conservative). */
   markExerciseComplete: (exerciseId: string) => void;
+  /** Called each time the learner hits "Run" on the sandbox. */
+  trackExerciseAttempt: (exerciseId: string) => void;
+  /** Called when the test suite passes. Idempotent. */
+  markExerciseSolved: (exerciseId: string) => void;
+  /** Called when the learner clicks "Reveal solution". */
+  revealExerciseSolution: (exerciseId: string) => void;
+  /** Called each time an additional hint is unveiled. */
+  useExerciseHint: (exerciseId: string, hintIndex: number) => void;
+  /** Resets a single exercise's progress (debug / restart). */
+  resetExercise: (exerciseId: string) => void;
+  /** Query helper: returns current status and attempts. */
+  getExerciseStatus: (exerciseId: string) => ExerciseProgress;
+
+  saveChallengeScore: (score: ChallengeScore) => void;
+
   toggleBookmark: (lessonId: string) => void;
   setTheme: (theme: "dark" | "light") => void;
   reset: () => void;
@@ -157,6 +262,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
+  /* ─── Reading gating ────────────────────────────────────────── */
+
   const canMarkModuleRead = useCallback(
     (moduleId: string) => {
       const found = phases
@@ -169,14 +276,19 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     [progress.quizScores],
   );
 
-  const markModuleRead = useCallback((moduleId: string) => {
-    if (!canMarkModuleRead(moduleId)) return;
-    setProgress((p) =>
-      p.readModules.includes(moduleId)
-        ? p
-        : { ...p, readModules: [...p.readModules, moduleId] },
-    );
-  }, [canMarkModuleRead]);
+  const markModuleRead = useCallback(
+    (moduleId: string) => {
+      if (!canMarkModuleRead(moduleId)) return;
+      setProgress((p) =>
+        p.readModules.includes(moduleId)
+          ? p
+          : { ...p, readModules: [...p.readModules, moduleId] },
+      );
+    },
+    [canMarkModuleRead],
+  );
+
+  /* ─── Quizzes ──────────────────────────────────────────────── */
 
   const saveQuizScore = useCallback(
     (
@@ -201,9 +313,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       if (!(quizId in p.quizScores)) return p;
       const nextScores = { ...p.quizScores };
       delete nextScores[quizId];
-      // A quiz that is no longer validated must no longer gate its module
-      // as "read": we also remove the module from readModules if its quiz
-      // was the one being reset, so progress stays coherent.
       const owningModule = phases
         .flatMap((phase) => phase.modules)
         .find((mod) => mod.quiz?.id === quizId);
@@ -215,13 +324,143 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  /* ─── Exercises ────────────────────────────────────────────── */
+
   const markExerciseComplete = useCallback((exerciseId: string) => {
-    setProgress((p) =>
-      p.completedExercises.includes(exerciseId)
-        ? p
-        : { ...p, completedExercises: [...p.completedExercises, exerciseId] },
-    );
+    setProgress((p) => {
+      const prev = touch(p.exerciseProgress[exerciseId]);
+      // Conservative mapping: a bare "I'm done" is recorded as revealed
+      // (= progress counts, but not as a pure solve).
+      const next: ExerciseProgress = {
+        ...prev,
+        status: prev.status === "solved" ? "solved" : "revealed",
+        revealedSolution: true,
+        updatedAt: Date.now(),
+      };
+      return syncCompletedExercises(p, exerciseId, next);
+    });
   }, []);
+
+  const trackExerciseAttempt = useCallback((exerciseId: string) => {
+    setProgress((p) => {
+      const prev = touch(p.exerciseProgress[exerciseId]);
+      const nextStatus: ExerciseStatus =
+        prev.status === "solved" || prev.status === "revealed"
+          ? prev.status
+          : "attempted";
+      const next: ExerciseProgress = {
+        ...prev,
+        attempts: prev.attempts + 1,
+        status: nextStatus,
+        updatedAt: Date.now(),
+      };
+      return syncCompletedExercises(p, exerciseId, next);
+    });
+  }, []);
+
+  const markExerciseSolved = useCallback((exerciseId: string) => {
+    setProgress((p) => {
+      const prev = touch(p.exerciseProgress[exerciseId]);
+      // Keep "revealed" if the user had already revealed the solution:
+      // we don't upgrade a revealed run to "solved".
+      if (prev.status === "solved") return p;
+      if (prev.revealedSolution) {
+        const next: ExerciseProgress = {
+          ...prev,
+          status: "revealed",
+          updatedAt: Date.now(),
+        };
+        return syncCompletedExercises(p, exerciseId, next);
+      }
+      const next: ExerciseProgress = {
+        ...prev,
+        status: "solved",
+        solvedAt: Date.now(),
+        updatedAt: Date.now(),
+      };
+      return syncCompletedExercises(p, exerciseId, next);
+    });
+  }, []);
+
+  const revealExerciseSolution = useCallback((exerciseId: string) => {
+    setProgress((p) => {
+      const prev = touch(p.exerciseProgress[exerciseId]);
+      const nextStatus: ExerciseStatus =
+        prev.status === "solved" ? "solved" : "revealed";
+      const next: ExerciseProgress = {
+        ...prev,
+        status: nextStatus,
+        revealedSolution: true,
+        updatedAt: Date.now(),
+      };
+      return syncCompletedExercises(p, exerciseId, next);
+    });
+  }, []);
+
+  const useExerciseHint = useCallback(
+    (exerciseId: string, hintIndex: number) => {
+      setProgress((p) => {
+        const prev = touch(p.exerciseProgress[exerciseId]);
+        const hintsUsed = Math.max(prev.hintsUsed, hintIndex + 1);
+        if (hintsUsed === prev.hintsUsed) return p;
+        const next: ExerciseProgress = {
+          ...prev,
+          hintsUsed,
+          updatedAt: Date.now(),
+        };
+        return syncCompletedExercises(p, exerciseId, next);
+      });
+    },
+    [],
+  );
+
+  const resetExercise = useCallback((exerciseId: string) => {
+    setProgress((p) => {
+      if (!p.exerciseProgress[exerciseId]) return p;
+      const nextEP = { ...p.exerciseProgress };
+      delete nextEP[exerciseId];
+      return {
+        ...p,
+        exerciseProgress: nextEP,
+        completedExercises: p.completedExercises.filter((id) => id !== exerciseId),
+      };
+    });
+  }, []);
+
+  const getExerciseStatus = useCallback(
+    (exerciseId: string): ExerciseProgress =>
+      progress.exerciseProgress[exerciseId] ?? {
+        status: "not-started",
+        attempts: 0,
+        hintsUsed: 0,
+        revealedSolution: false,
+        updatedAt: 0,
+      },
+    [progress.exerciseProgress],
+  );
+
+  /* ─── Challenge mode ───────────────────────────────────────── */
+
+  const saveChallengeScore = useCallback((score: ChallengeScore) => {
+    setProgress((p) => {
+      const existing = p.challengeScores[score.phaseId];
+      // Keep the best attempt (more passed, then most recent).
+      const keepExisting =
+        existing &&
+        (existing.passedIds.length > score.passedIds.length ||
+          (existing.passedIds.length === score.passedIds.length &&
+            existing.at > score.at));
+      return {
+        ...p,
+        challengeScores: {
+          ...p.challengeScores,
+          [score.phaseId]: keepExisting ? existing : score,
+        },
+      };
+    });
+  }, []);
+
+  /* ─── Misc ────────────────────────────────────────────────── */
 
   const toggleBookmark = useCallback((lessonId: string) => {
     setProgress((p) => {
@@ -253,11 +492,16 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     setProgress({ ...DEFAULT_PROGRESS, ...parsed });
   }, []);
 
+  /* ─── Stats ──────────────────────────────────────────────── */
+
   const stats = useMemo(() => {
     const total = totalProgressItems();
     const quizPassed = Object.values(progress.quizScores).filter(
       (s) => s.total > 0 && s.correct / s.total >= 0.7,
     ).length;
+    const eps = Object.values(progress.exerciseProgress);
+    const exercisesSolved = eps.filter((e) => e.status === "solved").length;
+    const exercisesRevealed = eps.filter((e) => e.status === "revealed").length;
     const done =
       progress.readModules.length +
       quizPassed +
@@ -267,6 +511,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       done,
       percent: total === 0 ? 0 : Math.min(100, Math.round((done / total) * 100)),
       quizPassed,
+      exercisesSolved,
+      exercisesRevealed,
     };
   }, [progress]);
 
@@ -313,6 +559,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       saveQuizScore,
       clearQuizScore,
       markExerciseComplete,
+      trackExerciseAttempt,
+      markExerciseSolved,
+      revealExerciseSolution,
+      useExerciseHint,
+      resetExercise,
+      getExerciseStatus,
+      saveChallengeScore,
       toggleBookmark,
       setTheme,
       reset,
@@ -328,6 +581,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       saveQuizScore,
       clearQuizScore,
       markExerciseComplete,
+      trackExerciseAttempt,
+      markExerciseSolved,
+      revealExerciseSolution,
+      useExerciseHint,
+      resetExercise,
+      getExerciseStatus,
+      saveChallengeScore,
       toggleBookmark,
       setTheme,
       reset,

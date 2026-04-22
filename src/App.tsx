@@ -6,6 +6,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { LandingPage } from "@/pages/LandingPage";
 import { ReactCoursePage } from "@/pages/ReactCoursePage";
 import { PhasePage } from "@/pages/PhasePage";
+import { PhaseChallengePage } from "@/pages/PhaseChallengePage";
 import { ModulePage } from "@/pages/ModulePage";
 import { ProgressPage } from "@/pages/ProgressPage";
 import { BookmarksPage } from "@/pages/BookmarksPage";
@@ -44,6 +45,10 @@ export default function App() {
                   <Routes>
                     <Route index element={<ReactCoursePage />} />
                     <Route path="phase/:phaseId" element={<PhasePage />} />
+                    <Route
+                      path="phase/:phaseId/challenge"
+                      element={<PhaseChallengePage />}
+                    />
                     <Route path="module/:moduleId" element={<ModulePage />} />
                     <Route path="progress" element={<ProgressPage />} />
                     <Route path="bookmarks" element={<BookmarksPage />} />

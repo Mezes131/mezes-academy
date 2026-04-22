@@ -81,6 +81,17 @@ export interface Quiz {
  * - `starterFiles` is the initial code provided to the learner
  * - `solutionFiles` is the revealable correction
  * - `hints` is a list of progressive hints
+ * - `tests` are optional Sandpack-executable test files (keys like
+ *   "/App.test.tsx"). When provided, the exercise can be auto-validated
+ *   via the "Run" button: passing the whole suite marks the exo as solved.
+ * - `validator` is an optional local (offline) JS snippet executed when
+ *   clicking Run. It receives `files` (current sandbox code map) and must
+ *   `return { passed, total, failures? }`. This avoids depending on remote
+ *   test infra and works even with restricted networks.
+ * - `attemptsBeforeSolution` gates the "Reveal solution" button until
+ *   the learner has actually tried (default: 5 runs).
+ * - `challengeEligible` flags the exercise as reusable in the end-of-phase
+ *   challenge (default: true).
  */
 export interface CodeExercise {
   id: string;
@@ -89,7 +100,11 @@ export interface CodeExercise {
   hints?: string[];
   starterFiles: Record<string, string>;
   solutionFiles: Record<string, string>;
+  tests?: Record<string, string>;
+  validator?: string;
   template?: "react" | "react-ts" | "vanilla";
+  attemptsBeforeSolution?: number;
+  challengeEligible?: boolean;
 }
 
 export interface Module {
@@ -149,6 +164,33 @@ export interface Course {
 
 /* ─── User progress ─── */
 
+export type ExerciseStatus =
+  /** Never opened or no activity tracked. */
+  | "not-started"
+  /** At least one Run has happened, not solved yet, solution not revealed. */
+  | "attempted"
+  /** Test suite passed without revealing the solution. */
+  | "solved"
+  /** Learner clicked "Reveal solution" before solving. */
+  | "revealed";
+
+export interface ExerciseProgress {
+  status: ExerciseStatus;
+  attempts: number;
+  hintsUsed: number;
+  revealedSolution: boolean;
+  solvedAt?: number;
+  updatedAt: number;
+}
+
+export interface ChallengeScore {
+  phaseId: string;
+  exerciseIds: string[];
+  passedIds: string[];
+  total: number;
+  at: number;
+}
+
 export interface LessonProgress {
   readModules: string[];
   quizScores: Record<
@@ -160,7 +202,16 @@ export interface LessonProgress {
       updatedAt: number;
     }
   >;
+  /**
+   * Legacy flat list: ids of exercises considered "done". Kept as a derived
+   * mirror of `exerciseProgress` (status === "solved" || "revealed") for
+   * backwards-compatible code paths.
+   */
   completedExercises: string[];
+  /** Per-exercise rich tracking (status, attempts, hints, reveal). */
+  exerciseProgress: Record<string, ExerciseProgress>;
+  /** Per-phase challenge results (exam mode, no "Reveal solution"). */
+  challengeScores: Record<string, ChallengeScore>;
   bookmarks: string[];
   theme: "dark" | "light";
 }

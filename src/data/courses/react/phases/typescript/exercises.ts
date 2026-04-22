@@ -210,5 +210,38 @@ export default function App() {
 }
 `,
     },
+    tests: {
+      "/App.test.tsx": `import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("affiche les deux sections", () => {
+  render(<App />);
+  expect(screen.getByText("Fruits")).toBeTruthy();
+  expect(screen.getByText("Users")).toBeTruthy();
+});
+
+test("affiche les 3 fruits", () => {
+  render(<App />);
+  expect(screen.getByText("Mangue")).toBeTruthy();
+  expect(screen.getByText("Papaye")).toBeTruthy();
+  expect(screen.getByText("Avocat")).toBeTruthy();
+});
+
+test("affiche les users", () => {
+  render(<App />);
+  expect(screen.getByText("Ada")).toBeTruthy();
+  expect(screen.getByText("Linus")).toBeTruthy();
+});
+`,
+    },
+    validator: `const code = files["/App.tsx"] ?? "";
+const checks = [
+  { name: "composant générique List<T>", pass: /function\\s+List\\s*<\\s*T\\s*>/.test(code) },
+  { name: "prop items typée en T[]", pass: /items\\s*:\\s*T\\[\\]/.test(code) },
+  { name: "prop renderItem typée", pass: /renderItem\\s*:\\s*\\(item\\s*:\\s*T\\)\\s*=>/.test(code) },
+  { name: "utilisation de map sur items", pass: /items\\.map\\s*\\(/.test(code) },
+];
+const failures = checks.filter((c) => !c.pass).map((c) => c.name);
+return { passed: checks.length - failures.length, total: checks.length, failures };`,
   },
 } satisfies Record<string, CodeExercise>;
