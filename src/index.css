@@ -6,16 +6,16 @@
 
 /* ─── DARK THEME (default) ─── */
 :root {
-  --bg: 10 10 15;
-  --bg2: 17 17 24;
-  --bg3: 22 22 31;
-  --bg4: 28 28 40;
+  --bg: 12 12 18;
+  --bg2: 20 20 30;
+  --bg3: 28 28 40;
+  --bg4: 38 38 54;
   --fg: 232 232 240;
-  --fg2: 144 144 168;
-  --fg3: 90 90 114;
-  --accent: 108 99 255;
-  --accent2: 155 143 255;
-  --accent3: 196 190 255;
+  --fg2: 176 176 198;
+  --fg3: 132 132 158;
+  --accent: 140 130 255;
+  --accent2: 175 165 255;
+  --accent3: 210 205 255;
   --border: 255 255 255;
   --border-strong: 255 255 255;
 
@@ -25,13 +25,16 @@
 /* In Tailwind, theme mode is controlled via the `dark` class on <html>.
    Here we explicitly apply default values for dark mode. */
 html.dark {
-  --bg: 10 10 15;
-  --bg2: 17 17 24;
-  --bg3: 22 22 31;
-  --bg4: 28 28 40;
+  --bg: 12 12 18;
+  --bg2: 20 20 30;
+  --bg3: 28 28 40;
+  --bg4: 38 38 54;
   --fg: 232 232 240;
-  --fg2: 144 144 168;
-  --fg3: 90 90 114;
+  --fg2: 176 176 198;
+  --fg3: 132 132 158;
+  --accent: 140 130 255;
+  --accent2: 175 165 255;
+  --accent3: 210 205 255;
   --border: 255 255 255;
   --border-strong: 255 255 255;
   color-scheme: dark;
@@ -39,16 +42,16 @@ html.dark {
 
 /* ─── LIGHT THEME ─── */
 html.light {
-  --bg: 253 253 255;
+  --bg: 252 252 254;
   --bg2: 245 245 250;
-  --bg3: 238 238 245;
-  --bg4: 228 228 238;
+  --bg3: 232 232 242;
+  --bg4: 218 218 232;
   --fg: 24 24 32;
   --fg2: 82 82 104;
-  --fg3: 130 130 152;
-  --accent: 94 85 230;
-  --accent2: 124 114 245;
-  --accent3: 80 70 220;
+  --fg3: 108 108 130;
+  --accent: 78 68 215;
+  --accent2: 110 100 235;
+  --accent3: 64 54 200;
   --border: 0 0 0;
   --border-strong: 0 0 0;
   color-scheme: light;
@@ -56,12 +59,32 @@ html.light {
 
 /* Border opacity by theme */
 html.dark {
-  --border-alpha: 0.07;
-  --border-strong-alpha: 0.12;
+  --border-alpha: 0.10;
+  --border-strong-alpha: 0.18;
 }
 html.light {
-  --border-alpha: 0.08;
-  --border-strong-alpha: 0.14;
+  --border-alpha: 0.12;
+  --border-strong-alpha: 0.20;
+}
+
+/* ─── High-contrast preference (system-level opt-in) ─── */
+@media (prefers-contrast: more) {
+  html.dark {
+    --fg: 245 245 252;
+    --fg2: 210 210 228;
+    --fg3: 170 170 192;
+    --accent: 165 155 255;
+    --border-alpha: 0.22;
+    --border-strong-alpha: 0.35;
+  }
+  html.light {
+    --fg: 8 8 14;
+    --fg2: 52 52 72;
+    --fg3: 82 82 104;
+    --accent: 58 48 190;
+    --border-alpha: 0.25;
+    --border-strong-alpha: 0.38;
+  }
 }
 
 * {
@@ -113,7 +136,7 @@ body {
 .kw { color: #cba6f7; }
 .fn { color: #89b4fa; }
 .str { color: #a6e3a1; }
-.cm { color: #6c7086; font-style: italic; }
+.cm { color: #8b8fa3; font-style: italic; }
 .num { color: #fab387; }
 .ty { color: #f9e2af; }
 .op { color: #89dceb; }
@@ -130,6 +153,10 @@ html.light .prop { color: #4c4f69; }
 
 /* Text selection */
 ::selection {
-  background: rgb(var(--accent) / 0.35);
+  background: rgb(var(--accent) / 0.45);
+  color: rgb(var(--bg));
+}
+html.dark ::selection {
+  background: rgb(var(--accent) / 0.5);
   color: rgb(var(--fg));
 }
