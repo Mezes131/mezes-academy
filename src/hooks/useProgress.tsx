@@ -99,20 +99,48 @@ function migrateV2ToV3(raw: Partial<LessonProgress>): LessonProgress {
   };
 }
 
+function deriveCompletedExercises(
+  exerciseProgress: Record<string, ExerciseProgress> | undefined,
+): string[] {
+  if (!exerciseProgress) return [];
+  return Object.entries(exerciseProgress)
+    .filter(([, ep]) => ep.status === "solved" || ep.status === "revealed")
+    .map(([id]) => id);
+}
+
+function normalizeProgress(raw: Partial<LessonProgress>): LessonProgress {
+  const exerciseProgress = raw.exerciseProgress ?? {};
+  const completedExercises = Array.from(
+    new Set([
+      ...(raw.completedExercises ?? []),
+      ...deriveCompletedExercises(exerciseProgress),
+    ]),
+  );
+  return {
+    ...DEFAULT_PROGRESS,
+    ...raw,
+    exerciseProgress,
+    completedExercises,
+    challengeScores: raw.challengeScores ?? {},
+  };
+}
+
 function load(): LessonProgress {
   if (typeof window === "undefined") return DEFAULT_PROGRESS;
   try {
     const rawV3 = window.localStorage.getItem(STORAGE_KEY);
     if (rawV3) {
       const parsed = JSON.parse(rawV3) as Partial<LessonProgress>;
-      return { ...DEFAULT_PROGRESS, ...parsed };
+      return normalizeProgress(parsed);
     }
 
     // v2 → v3: preserve user data transparently.
     const rawV2 = window.localStorage.getItem(STORAGE_KEY_V2);
     if (rawV2) {
-      const migrated = migrateV2ToV3(
+      const migrated = normalizeProgress(
+        migrateV2ToV3(
         JSON.parse(rawV2) as Partial<LessonProgress>,
+        ),
       );
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
       window.localStorage.removeItem(STORAGE_KEY_V2);
@@ -123,7 +151,7 @@ function load(): LessonProgress {
     const rawV1 = window.localStorage.getItem(STORAGE_KEY_V1);
     if (rawV1) {
       const v2 = migrateV1ToV2(JSON.parse(rawV1) as Partial<LessonProgress>);
-      const v3 = migrateV2ToV3(v2);
+      const v3 = normalizeProgress(migrateV2ToV3(v2));
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(v3));
       window.localStorage.removeItem(STORAGE_KEY_V1);
       return v3;
@@ -269,11 +297,27 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const found = phases
         .flatMap((phase) => phase.modules)
         .find((module) => module.id === moduleId);
-      if (!found?.quiz) return true;
-      const score = progress.quizScores[found.quiz.id];
-      return Boolean(score && score.total > 0 && score.correct / score.total >= 0.7);
+      if (!found) return true;
+
+      const quizValidated = !found.quiz
+        ? true
+        : (() => {
+            const score = progress.quizScores[found.quiz.id];
+            return Boolean(
+              score && score.total > 0 && score.correct / score.total >= 0.7,
+            );
+          })();
+
+      const exercisesValidated =
+        !found.exercises || found.exercises.length === 0
+          ? true
+          : found.exercises.every(
+              (exercise) => progress.exerciseProgress[exercise.id]?.status === "solved",
+            );
+
+      return quizValidated && exercisesValidated;
     },
-    [progress.quizScores],
+    [progress.quizScores, progress.exerciseProgress],
   );
 
   const markModuleRead = useCallback(
@@ -489,7 +533,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const importJson = useCallback((raw: string) => {
     const parsed = JSON.parse(raw) as Partial<LessonProgress>;
-    setProgress({ ...DEFAULT_PROGRESS, ...parsed });
+    setProgress(normalizeProgress(parsed));
   }, []);
 
   /* ─── Stats ──────────────────────────────────────────────── */

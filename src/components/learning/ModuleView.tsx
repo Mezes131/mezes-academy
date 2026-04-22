@@ -29,10 +29,12 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       ? quizScore.correct / quizScore.total >= 0.7
       : false;
   const canMarkRead = canMarkModuleRead(module.id);
-
-  const completedExercises = (module.exercises ?? []).filter((ex) =>
-    progress.completedExercises.includes(ex.id),
+  const solvedExercises = (module.exercises ?? []).filter(
+    (ex) => progress.exerciseProgress[ex.id]?.status === "solved",
   ).length;
+  const totalExercises = module.exercises?.length ?? 0;
+  const exercisesValidated =
+    totalExercises === 0 ? true : solvedExercises === totalExercises;
 
   return (
     <article className="animate-fade-in">
@@ -83,8 +85,8 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             </Badge>
           )}
           {module.exercises && module.exercises.length > 0 && (
-            <Badge variant={completedExercises === module.exercises.length ? "success" : "default"}>
-              Exercices : {completedExercises}/{module.exercises.length}
+            <Badge variant={exercisesValidated ? "success" : "default"}>
+              Exercices validés : {solvedExercises}/{module.exercises.length}
             </Badge>
           )}
         </div>
@@ -137,7 +139,16 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
         )}
         {!isRead && module.quiz && !canMarkRead && (
           <p className="text-sm text-amber-400">
-            Valide d'abord le quiz (70% minimum) pour marquer ce module comme lu.
+            {!quizPassed && !exercisesValidated
+              ? "Valide d'abord le quiz (70% minimum) et termine l'exercice pour marquer ce module comme lu."
+              : !quizPassed
+                ? "Valide d'abord le quiz (70% minimum) pour marquer ce module comme lu."
+                : "Termine d'abord l'exercice pour marquer ce module comme lu."}
+          </p>
+        )}
+        {!isRead && !module.quiz && !canMarkRead && (
+          <p className="text-sm text-amber-400">
+            Termine d'abord l'exercice pour marquer ce module comme lu.
           </p>
         )}
       </div>

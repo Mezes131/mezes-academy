@@ -72,10 +72,19 @@ test("le compteur continue d'incrémenter", () => {
 `,
     },
     validator: `const code = files["/App.js"] ?? "";
+const hasInitialState = /useState\\s*\\(\\s*0\\s*\\)/.test(code);
+const showsCount = /\\{\\s*count\\s*\\}/.test(code);
+
+// Rejects immediate calls like onClick={setCount(count + 1)} which cause
+// an infinite render loop, and expects a real click handler function.
+const directSetCountInOnClick = /onClick\\s*=\\s*\\{\\s*setCount\\s*\\(/.test(code);
+const inlineArrowHandler = /onClick\\s*=\\s*\\{\\s*(?:\\([^)]*\\)|[A-Za-z_$][\\w$]*)\\s*=>[\\s\\S]*?setCount\\s*\\(/.test(code);
+const safeClickHandler = inlineArrowHandler && !directSetCountInOnClick;
+
 const checks = [
-  { name: "useState initialisé à 0", pass: /useState\\s*\\(\\s*0\\s*\\)/.test(code) },
-  { name: "setCount appelé dans le bouton", pass: /onClick\\s*=\\s*\\{\\s*\\(?.*setCount\\s*\\(/s.test(code) },
-  { name: "count affiché dans le JSX", pass: /\\{\\s*count\\s*\\}/.test(code) },
+  { name: "useState initialisé à 0", pass: hasInitialState },
+  { name: "setCount appelé dans un vrai handler onClick", pass: safeClickHandler },
+  { name: "count affiché dans le JSX", pass: showsCount },
 ];
 const failures = checks.filter((c) => !c.pass).map((c) => c.name);
 return { passed: checks.length - failures.length, total: checks.length, failures };`,
