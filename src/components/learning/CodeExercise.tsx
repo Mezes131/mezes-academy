@@ -72,10 +72,10 @@ export function CodeExercise({
   }, [status.hintsUsed]);
 
   /* ─── File composition for Sandpack ─────────────────────────── */
-  const files = useMemo<Record<string, string>>(() => {
-    const base = showSolution ? exercise.solutionFiles : exercise.starterFiles;
-    return { ...base };
-  }, [showSolution, exercise]);
+  const files = useMemo<Record<string, string>>(
+    () => ({ ...exercise.starterFiles }),
+    [exercise.starterFiles],
+  );
 
   /* ─── Reveal solution gating ────────────────────────────────── */
   const canRevealSolution =
@@ -104,12 +104,10 @@ export function CodeExercise({
     if (!canRevealSolution) return;
     revealExerciseSolution(exercise.id);
     setShowSolution(true);
-    setResetKey((k) => k + 1);
   }
 
   function onHideSolution() {
     setShowSolution(false);
-    setResetKey((k) => k + 1);
   }
 
   function onReset() {
@@ -227,8 +225,8 @@ export function CodeExercise({
             autoReload: false,
             recompileMode: "delayed",
             recompileDelay: 800,
-            visibleFiles: getVisibleFiles(files, exercise, showSolution),
-            activeFile: getActiveFile(files, showSolution),
+            visibleFiles: getVisibleFiles(files, exercise),
+            activeFile: getActiveFile(files),
           }}
         >
           <SandpackLayout>
@@ -237,7 +235,6 @@ export function CodeExercise({
               showTabs
               closableTabs={false}
               style={{ height: 380 }}
-              readOnly={showSolution}
             />
             <SandpackPreview
               showOpenInCodeSandbox={false}
@@ -248,23 +245,26 @@ export function CodeExercise({
 
           {/* Disable paste on the starter editor to raise the bar
               for blind copy-paste of the solution. */}
-          {!showSolution && <EditorPasteBlocker rootRef={sandboxRootRef} />}
+          <EditorPasteBlocker rootRef={sandboxRootRef} />
 
-          {!showSolution && (
-            <RunPanel
-              validator={exercise.validator}
-              onValidationCompleted={onValidationCompleted}
-              onAttemptOnly={() => trackExerciseAttempt(exercise.id)}
-              locked={status.status === "solved" && !challengeMode}
-            />
-          )}
-
-          {/* Solution viewer anti-copy guard (applies when solution is shown). */}
-          {showSolution && <SolutionCopyGuard rootRef={sandboxRootRef} />}
+          <RunPanel
+            validator={exercise.validator}
+            onValidationCompleted={onValidationCompleted}
+            onAttemptOnly={() => trackExerciseAttempt(exercise.id)}
+            locked={status.status === "solved" && !challengeMode}
+          />
 
           <ConsoleWrapper />
         </SandpackProvider>
       </div>
+
+      {showSolution && (
+        <SolutionPanel
+          files={exercise.solutionFiles}
+          onHide={onHideSolution}
+          hiddenByChallenge={challengeMode}
+        />
+      )}
 
       {/* ─── Actions ──────────────────────────────────────── */}
       <div className="p-4 border-t border-base flex items-center gap-2 flex-wrap">
@@ -293,17 +293,6 @@ export function CodeExercise({
             {canRevealSolution
               ? "Voir la solution"
               : `Solution verrouillée (${attemptsLeftBeforeReveal} tentative${attemptsLeftBeforeReveal > 1 ? "s" : ""})`}
-          </Button>
-        )}
-
-        {!challengeMode && showSolution && (
-          <Button
-            size="sm"
-            variant="ghost"
-            leftIcon={<EyeOff size={13} />}
-            onClick={onHideSolution}
-          >
-            Masquer la solution
           </Button>
         )}
 
@@ -541,45 +530,73 @@ function EditorPasteBlocker({
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   SolutionCopyGuard — disables text selection + copy on the visible
-   solution editor. Applies only while `showSolution === true`.
-   ══════════════════════════════════════════════════════════════════ */
-
-function SolutionCopyGuard({
-  rootRef,
+function SolutionPanel({
+  files,
+  onHide,
+  hiddenByChallenge,
 }: {
-  rootRef: React.RefObject<HTMLElement | null>;
+  files: Record<string, string>;
+  onHide: () => void;
+  hiddenByChallenge: boolean;
 }) {
+  const paths = Object.keys(files);
+  const [activePath, setActivePath] = useState(paths[0] ?? "");
+  const code = files[activePath] ?? "";
+
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const editors = Array.from(root.querySelectorAll<HTMLElement>(".sp-code-editor"));
+    if (!paths.includes(activePath)) setActivePath(paths[0] ?? "");
+  }, [paths, activePath]);
 
-    function onCopy(e: ClipboardEvent) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  if (hiddenByChallenge) return null;
 
-    const prevStyles: Array<[HTMLElement, string]> = [];
-    for (const el of editors) {
-      prevStyles.push([el, el.style.userSelect]);
-      el.style.userSelect = "none";
-      (el.style as CSSStyleDeclaration & { webkitUserSelect?: string }).webkitUserSelect =
-        "none";
-      el.addEventListener("copy", onCopy, { capture: true });
-    }
-    return () => {
-      for (const [el, prev] of prevStyles) {
-        el.style.userSelect = prev;
-        (el.style as CSSStyleDeclaration & { webkitUserSelect?: string }).webkitUserSelect =
-          prev;
-        el.removeEventListener("copy", onCopy, { capture: true });
-      }
-    };
-  }, [rootRef]);
+  return (
+    <div className="border-t border-base bg-bg-3">
+      <div className="px-4 py-2 border-b border-base flex items-center gap-2">
+        <span className="text-[11px] font-mono uppercase tracking-wider text-sky-300 inline-flex items-center gap-1">
+          <Eye size={12} />
+          Solution (lecture seule)
+        </span>
+        <div className="flex-1" />
+        <Button
+          size="sm"
+          variant="ghost"
+          leftIcon={<EyeOff size={13} />}
+          onClick={onHide}
+        >
+          Masquer la solution
+        </Button>
+      </div>
 
-  return null;
+      {paths.length > 1 && (
+        <div className="px-3 pt-2 flex flex-wrap gap-1">
+          {paths.map((p) => (
+            <button
+              key={p}
+              onClick={() => setActivePath(p)}
+              className={cn(
+                "text-[11px] font-mono px-2 py-1 rounded border",
+                p === activePath
+                  ? "bg-sky-500/15 text-sky-200 border-sky-500/40"
+                  : "bg-bg-2 text-fg-3 border-base hover:text-fg-2",
+              )}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div
+        className="px-4 py-3"
+        onCopy={(e) => e.preventDefault()}
+        onCut={(e) => e.preventDefault()}
+      >
+        <pre className="max-h-[360px] overflow-auto text-[12px] leading-relaxed font-mono select-none bg-[#0b0b12] border border-base rounded-lg p-3 text-sky-50 whitespace-pre-wrap break-words">
+          {code}
+        </pre>
+      </div>
+    </div>
+  );
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -589,18 +606,13 @@ function SolutionCopyGuard({
 function getVisibleFiles(
   files: Record<string, string>,
   exercise: CodeExerciseType,
-  showSolution: boolean,
 ): string[] {
   // Hide test files from the tab bar unless user wants to see them.
   const testKeys = exercise.tests ? Object.keys(exercise.tests) : [];
-  return Object.keys(files).filter((k) => showSolution || !testKeys.includes(k));
+  return Object.keys(files).filter((k) => !testKeys.includes(k));
 }
 
-function getActiveFile(
-  files: Record<string, string>,
-  showSolution: boolean,
-): string | undefined {
-  if (showSolution) return Object.keys(files)[0];
+function getActiveFile(files: Record<string, string>): string | undefined {
   // Prefer the first non-test file for the initial cursor.
   const nonTest = Object.keys(files).find((k) => !k.includes(".test."));
   return nonTest ?? Object.keys(files)[0];
