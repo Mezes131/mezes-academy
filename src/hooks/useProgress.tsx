@@ -57,12 +57,14 @@ interface ProgressContextValue {
     percent: number;
   }>;
   markModuleRead: (moduleId: string) => void;
+  canMarkModuleRead: (moduleId: string) => boolean;
   saveQuizScore: (
     quizId: string,
     correct: number,
     total: number,
     answers: Record<string, string[]>,
   ) => void;
+  clearQuizScore: (quizId: string) => void;
   markExerciseComplete: (exerciseId: string) => void;
   toggleBookmark: (lessonId: string) => void;
   setTheme: (theme: "dark" | "light") => void;
@@ -94,13 +96,26 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
+  const canMarkModuleRead = useCallback(
+    (moduleId: string) => {
+      const found = phases
+        .flatMap((phase) => phase.modules)
+        .find((module) => module.id === moduleId);
+      if (!found?.quiz) return true;
+      const score = progress.quizScores[found.quiz.id];
+      return Boolean(score && score.total > 0 && score.correct / score.total >= 0.7);
+    },
+    [progress.quizScores],
+  );
+
   const markModuleRead = useCallback((moduleId: string) => {
+    if (!canMarkModuleRead(moduleId)) return;
     setProgress((p) =>
       p.readModules.includes(moduleId)
         ? p
         : { ...p, readModules: [...p.readModules, moduleId] },
     );
-  }, []);
+  }, [canMarkModuleRead]);
 
   const saveQuizScore = useCallback(
     (
@@ -119,6 +134,25 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     },
     [],
   );
+
+  const clearQuizScore = useCallback((quizId: string) => {
+    setProgress((p) => {
+      if (!(quizId in p.quizScores)) return p;
+      const nextScores = { ...p.quizScores };
+      delete nextScores[quizId];
+      // A quiz that is no longer validated must no longer gate its module
+      // as "read": we also remove the module from readModules if its quiz
+      // was the one being reset, so progress stays coherent.
+      const owningModule = phases
+        .flatMap((phase) => phase.modules)
+        .find((mod) => mod.quiz?.id === quizId);
+      const nextReadModules =
+        owningModule && p.readModules.includes(owningModule.id)
+          ? p.readModules.filter((id) => id !== owningModule.id)
+          : p.readModules;
+      return { ...p, quizScores: nextScores, readModules: nextReadModules };
+    });
+  }, []);
 
   const markExerciseComplete = useCallback((exerciseId: string) => {
     setProgress((p) =>
@@ -214,7 +248,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       stats,
       phaseStats,
       markModuleRead,
+      canMarkModuleRead,
       saveQuizScore,
+      clearQuizScore,
       markExerciseComplete,
       toggleBookmark,
       setTheme,
@@ -227,7 +263,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       stats,
       phaseStats,
       markModuleRead,
+      canMarkModuleRead,
       saveQuizScore,
+      clearQuizScore,
       markExerciseComplete,
       toggleBookmark,
       setTheme,

@@ -16,7 +16,7 @@ interface ModuleViewProps {
 }
 
 export function ModuleView({ phase, module }: ModuleViewProps) {
-  const { progress, markModuleRead, toggleBookmark } = useProgress();
+  const { progress, markModuleRead, canMarkModuleRead, toggleBookmark } = useProgress();
   const accent = phaseAccent(phase.color);
   const isRead = progress.readModules.includes(module.id);
   const isBookmarked = progress.bookmarks.includes(module.id);
@@ -28,6 +28,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
     quizScore && quizScore.total > 0
       ? quizScore.correct / quizScore.total >= 0.7
       : false;
+  const canMarkRead = canMarkModuleRead(module.id);
 
   const completedExercises = (module.exercises ?? []).filter((ex) =>
     progress.completedExercises.includes(ex.id),
@@ -130,9 +131,14 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             <CheckCircle2 size={16} /> Module marqué comme lu
           </div>
         ) : (
-          <Button onClick={() => markModuleRead(module.id)}>
+          <Button onClick={() => markModuleRead(module.id)} disabled={!canMarkRead}>
             J'ai lu ce module
           </Button>
+        )}
+        {!isRead && module.quiz && !canMarkRead && (
+          <p className="text-sm text-amber-400">
+            Valide d'abord le quiz (70% minimum) pour marquer ce module comme lu.
+          </p>
         )}
       </div>
     </article>

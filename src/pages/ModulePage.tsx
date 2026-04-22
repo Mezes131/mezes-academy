@@ -22,7 +22,11 @@ export function ModulePage() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10">
-      <ModuleView phase={phase} module={module} />
+      {/* `key` forces a full remount of ModuleView (and its stateful
+          children like <Quiz />) when navigating between modules. Without
+          it, React reuses the previous instance and internal state
+          (submitted quiz, selected answers, …) leaks across modules. */}
+      <ModuleView key={module.id} phase={phase} module={module} />
 
       {/* ─── Previous / next navigation ──────── */}
       <div className="mt-10 pt-6 border-t border-base flex items-stretch gap-3">

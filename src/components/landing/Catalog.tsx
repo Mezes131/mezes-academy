@@ -97,7 +97,7 @@ function CourseCard({ course }: { course: CatalogCourse }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-5 mt-6 pt-4 border-t border-base text-[12px] font-mono text-fg-3">
+      <div className="flex items-center gap-5 mt-6 p-2 border-t border-base text-[12px] font-mono text-fg-3">
         <span className="flex items-center gap-1.5">
           <i className="fa-solid fa-signal text-fg-2" /> {course.level}
         </span>

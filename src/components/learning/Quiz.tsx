@@ -10,7 +10,7 @@ interface QuizProps {
 }
 
 export function Quiz({ quiz }: QuizProps) {
-  const { progress, saveQuizScore } = useProgress();
+  const { progress, saveQuizScore, clearQuizScore } = useProgress();
   const saved = progress.quizScores[quiz.id];
 
   const [answers, setAnswers] = useState<Record<string, string[]>>(
@@ -64,6 +64,7 @@ export function Quiz({ quiz }: QuizProps) {
   function retake() {
     setAnswers({});
     setSubmitted(false);
+    clearQuizScore(quiz.id);
   }
 
   const allAnswered = quiz.questions.every(
