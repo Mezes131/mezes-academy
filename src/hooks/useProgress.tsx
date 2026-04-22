@@ -10,7 +10,8 @@ import {
 import type { LessonProgress } from "@/types";
 import { phases, totalProgressItems } from "@/data/phases";
 
-const STORAGE_KEY = "react-learn:progress:v1";
+const STORAGE_KEY_V1 = "react-learn:progress:v1";
+const STORAGE_KEY = "react-learn:progress:v2";
 
 const DEFAULT_PROGRESS: LessonProgress = {
   readModules: [],
@@ -20,13 +21,73 @@ const DEFAULT_PROGRESS: LessonProgress = {
   theme: "dark",
 };
 
+/**
+ * ID renaming applied when migrating v1 → v2:
+ * flat ids ("m11", "quiz-m11", "ex-m11-1", "intro-01"…) are rewritten
+ * into their prefixed form ("react-core-m11", "react-core-quiz-m11", …).
+ */
+function migrateId(oldId: string): string {
+  // Already prefixed (e.g. "react-core-m11") — nothing to do
+  if (oldId.startsWith("react-")) return oldId;
+
+  // Intro phase: "intro-01" → "react-intro-m01", "quiz-intro-01" → "react-intro-quiz-m01",
+  //              "ex-intro-03" → "react-intro-ex-m03"
+  const introQuiz = /^quiz-intro-(\d+)$/.exec(oldId);
+  if (introQuiz) return `react-intro-quiz-m${introQuiz[1]}`;
+  const introEx = /^ex-intro-(\d+)$/.exec(oldId);
+  if (introEx) return `react-intro-ex-m${introEx[1]}`;
+  const introMod = /^intro-(\d+)$/.exec(oldId);
+  if (introMod) return `react-intro-m${introMod[1]}`;
+
+  // Core phase: "m11" → "react-core-m11", "quiz-m11" → "react-core-quiz-m11",
+  //             "ex-m11-1" → "react-core-ex-m11-1"
+  const coreQuiz = /^quiz-(m\d+)$/.exec(oldId);
+  if (coreQuiz) return `react-core-quiz-${coreQuiz[1]}`;
+  const coreEx = /^ex-(m\d+)-(\d+)$/.exec(oldId);
+  if (coreEx) return `react-core-ex-${coreEx[1]}-${coreEx[2]}`;
+  const coreMod = /^m\d+$/.exec(oldId);
+  if (coreMod) return `react-core-${oldId}`;
+
+  // Unknown shape — leave untouched so no data is lost
+  return oldId;
+}
+
+function migrateProgress(raw: Partial<LessonProgress>): LessonProgress {
+  const quizScores: LessonProgress["quizScores"] = {};
+  for (const [id, score] of Object.entries(raw.quizScores ?? {})) {
+    quizScores[migrateId(id)] = score;
+  }
+  return {
+    ...DEFAULT_PROGRESS,
+    ...raw,
+    readModules: (raw.readModules ?? []).map(migrateId),
+    completedExercises: (raw.completedExercises ?? []).map(migrateId),
+    bookmarks: (raw.bookmarks ?? []).map(migrateId),
+    quizScores,
+  };
+}
+
 function load(): LessonProgress {
   if (typeof window === "undefined") return DEFAULT_PROGRESS;
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_PROGRESS;
-    const parsed = JSON.parse(raw) as Partial<LessonProgress>;
-    return { ...DEFAULT_PROGRESS, ...parsed };
+    const rawV2 = window.localStorage.getItem(STORAGE_KEY);
+    if (rawV2) {
+      const parsed = JSON.parse(rawV2) as Partial<LessonProgress>;
+      return { ...DEFAULT_PROGRESS, ...parsed };
+    }
+
+    // One-shot migration from v1 — transparent to the user, happens once.
+    const rawV1 = window.localStorage.getItem(STORAGE_KEY_V1);
+    if (rawV1) {
+      const migrated = migrateProgress(
+        JSON.parse(rawV1) as Partial<LessonProgress>,
+      );
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      window.localStorage.removeItem(STORAGE_KEY_V1);
+      return migrated;
+    }
+
+    return DEFAULT_PROGRESS;
   } catch {
     return DEFAULT_PROGRESS;
   }

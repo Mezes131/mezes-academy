@@ -1,34 +1,33 @@
-import type { Phase, PhaseId } from "@/types";
-import { introPhase } from "./intro";
-import { phase3 } from "./phase3";
-import { phase4, phase5, phase6 } from "./scaffolds";
+/* ═══════════════════════════════════════════════════════════════════
+   LEGACY COMPAT LAYER
+   Older code imports `phases`, `getPhase`, `findModule`,
+   `totalProgressItems` from this file. They now proxy to the new
+   course registry under `@/data/courses/`.
 
-export const phases: Phase[] = [introPhase, phase3, phase4, phase5, phase6];
+   Prefer importing from `@/data` in new code.
+   ═══════════════════════════════════════════════════════════════════ */
 
-export function getPhase(id: PhaseId): Phase | undefined {
+import type { Phase } from "@/types";
+import {
+  allPhases,
+  findModule as findModuleImpl,
+  totalProgressItems as totalProgressItemsImpl,
+} from "./index";
+
+/** Flat list of all phases across all courses. */
+export const phases: Phase[] = allPhases;
+
+export function getPhase(id: string): Phase | undefined {
   return phases.find((p) => p.id === id);
 }
 
+/** Legacy shape: `{ phase, module }` (course field dropped). */
 export function findModule(moduleId: string) {
-  for (const phase of phases) {
-    const mod = phase.modules.find((m) => m.id === moduleId);
-    if (mod) return { phase, module: mod };
-  }
-  return undefined;
+  const found = findModuleImpl(moduleId);
+  if (!found) return undefined;
+  return { phase: found.phase, module: found.module };
 }
 
-/**
- * Total number of "items" used to compute global progress.
- * Counts: each read module + each passed quiz (>= 70%) + each completed exercise.
- */
 export function totalProgressItems() {
-  let total = 0;
-  for (const phase of phases) {
-    for (const mod of phase.modules) {
-      total += 1; // read module
-      if (mod.quiz) total += 1;
-      if (mod.exercises) total += mod.exercises.length;
-    }
-  }
-  return total;
+  return totalProgressItemsImpl();
 }

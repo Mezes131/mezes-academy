@@ -1,6 +1,28 @@
-export type PhaseId = "intro" | "phase3" | "phase4" | "phase5" | "phase6";
+/* ═══════════════════════════════════════════════════════════════════
+   DOMAIN TYPES
+   Open, course-agnostic types. New courses (TypeScript, Next.js, …)
+   can be added without changing these definitions.
+   ═══════════════════════════════════════════════════════════════════ */
 
-export type PhaseColor = "intro" | "core" | "ts" | "eco" | "expert";
+/** Course identifier, e.g. "react", "typescript". Used as URL slug. */
+export type CourseId = string;
+
+/** Phase slug inside a course, e.g. "intro", "core", "typescript". */
+export type PhaseSlug = string;
+
+/**
+ * Legacy phase id kept for backwards-compatible imports. New code should
+ * prefer the prefixed form "<courseId>-<phaseSlug>".
+ */
+export type PhaseId = string;
+
+export type PhaseColor =
+  | "intro"
+  | "core"
+  | "ts"
+  | "eco"
+  | "expert"
+  | (string & {});
 
 export interface Lesson {
   id: string;
@@ -57,9 +79,8 @@ export interface Quiz {
 /**
  * Interactive code exercise rendered via Sandpack.
  * - `starterFiles` is the initial code provided to the learner
- * - `solution` is the revealable correction
+ * - `solutionFiles` is the revealable correction
  * - `hints` is a list of progressive hints
- * - `checks` describes what the learner should produce (instructions)
  */
 export interface CodeExercise {
   id: string;
@@ -84,7 +105,12 @@ export interface Module {
 }
 
 export interface Phase {
-  id: PhaseId;
+  /** Prefixed id, e.g. "react-core". Guaranteed unique across all courses. */
+  id: string;
+  /** Short slug, e.g. "core". Unique inside its course only. */
+  slug?: PhaseSlug;
+  /** Parent course id, e.g. "react". Optional for legacy Phase objects. */
+  courseId?: CourseId;
   color: PhaseColor;
   icon: string;
   label: string;
@@ -95,11 +121,45 @@ export interface Phase {
   scaffoldOnly?: boolean;
 }
 
+/* ─── Course (top-level) ──────────────────────────────────────── */
+
+export interface CourseMeta {
+  /** Display title shown in the catalog and inside the course. */
+  title: string;
+  tagline: string;
+  description: string;
+  icon: string;
+  iconFamily?: "fa-solid" | "fa-brands";
+  /** Tailwind accent classes used by the catalog card. */
+  accent: { text: string; bg: string; border: string };
+  tags: string[];
+  level: "Débutant" | "Intermédiaire" | "Avancé" | "Tous niveaux";
+  duration: string;
+  status: "active" | "soon" | "planned";
+  eta?: string;
+}
+
+export interface Course {
+  id: CourseId;
+  /** URL slug (usually equal to `id`). */
+  slug: string;
+  meta: CourseMeta;
+  phases: Phase[];
+}
+
 /* ─── User progress ─── */
 
 export interface LessonProgress {
   readModules: string[];
-  quizScores: Record<string, { correct: number; total: number; answers: Record<string, string[]>; updatedAt: number }>;
+  quizScores: Record<
+    string,
+    {
+      correct: number;
+      total: number;
+      answers: Record<string, string[]>;
+      updatedAt: number;
+    }
+  >;
   completedExercises: string[];
   bookmarks: string[];
   theme: "dark" | "light";

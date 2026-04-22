@@ -52,5 +52,15 @@ export function phaseAccent(color: PhaseColor) {
         ring: "ring-brand-expert/40",
         dot: "bg-brand-expert",
       };
+    default:
+      // Fallback so new courses can define a custom color string
+      // without making every consumer handle `undefined`.
+      return {
+        text: "text-fg",
+        bg: "bg-bg-3",
+        border: "border-base",
+        ring: "ring-base",
+        dot: "bg-fg-3",
+      };
   }
 }

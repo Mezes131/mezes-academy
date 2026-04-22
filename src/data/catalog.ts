@@ -1,57 +1,39 @@
-/**
- * Mezes Academy track catalog.
- * Only one track is active for now (React). Others are in preparation.
- */
+/* ═══════════════════════════════════════════════════════════════════
+   LANDING CATALOG
+   Auto-derived from the course registry (`@/data/courses/`) so the
+   landing stays in sync with the actual content — no more duplicate
+   source of truth.
 
-export interface CatalogCourse {
+   Courses that are not yet registered (TypeScript, Next.js, Node.js,
+   DevOps…) are listed here as placeholders until their data folder
+   is implemented.
+   ═══════════════════════════════════════════════════════════════════ */
+
+import type { CourseMeta } from "@/types";
+import { courses } from "./courses";
+
+export interface CatalogCourse extends CourseMeta {
   slug: string;
-  title: string;
-  tagline: string;
-  description: string;
-  icon: string; // FontAwesome class (without "fa-solid" / "fa-brands")
-  iconFamily?: "fa-solid" | "fa-brands";
-  /** Tailwind accent colors for this track (used for border/background). */
-  accent: {
-    text: string;
-    bg: string;
-    border: string;
-  };
-  tags: string[];
-  level: "D\u00e9butant" | "Interm\u00e9diaire" | "Avanc\u00e9" | "Tous niveaux";
-  duration: string;
   modules: number;
-  status: "active" | "soon" | "planned";
   href?: string;
-  /** Optional ETA used to display "Available in ...". */
-  eta?: string;
 }
 
-export const catalog: CatalogCourse[] = [
-  {
-    slug: "react",
-    title: "React : de z\u00e9ro \u00e0 expert",
-    tagline: "Le parcours front-end complet",
-    description:
-      "Apprends React \u00e0 fond en 5 phases progressives : JSX, hooks, routing, TypeScript, Next.js, architecture et bien plus. Quiz valid\u00e9s et exercices live dans le navigateur.",
-    icon: "fa-atom",
-    accent: {
-      text: "text-brand-core",
-      bg: "bg-brand-core/10",
-      border: "border-brand-core/30",
-    },
-    tags: ["React 18", "TypeScript", "Next.js", "Tests", "Architecture"],
-    level: "Tous niveaux",
-    duration: "\u224810 mois",
-    modules: 27,
-    status: "active",
-    href: "/react",
-  },
+/** Courses that are fully implemented in `@/data/courses/`. */
+const activeCatalog: CatalogCourse[] = courses.map((course) => ({
+  slug: course.slug,
+  ...course.meta,
+  modules: course.phases.reduce((acc, phase) => acc + phase.modules.length, 0),
+  href: course.meta.status === "active" ? `/${course.slug}` : undefined,
+}));
+
+/** Courses that are announced but not yet implemented. */
+const upcomingCatalog: CatalogCourse[] = [
   {
     slug: "typescript",
     title: "TypeScript en profondeur",
-    tagline: "Le typage qui \u00e9l\u00e8ve ton code",
+    tagline: "Le typage qui élève ton code",
     description:
-      "Types primitifs, g\u00e9n\u00e9riques, utility types, conditional types et patterns avanc\u00e9s. De l'initiation \u00e0 la programmation au niveau des types.",
+      "Types primitifs, génériques, utility types, conditional types et patterns avancés. De l'initiation à la programmation au niveau des types.",
     icon: "fa-gem",
     accent: {
       text: "text-brand-ts",
@@ -59,8 +41,8 @@ export const catalog: CatalogCourse[] = [
       border: "border-brand-ts/30",
     },
     tags: ["TypeScript 5", "Generics", "Type-level programming"],
-    level: "Interm\u00e9diaire",
-    duration: "\u22486 semaines",
+    level: "Intermédiaire",
+    duration: "≈6 semaines",
     modules: 12,
     status: "soon",
     eta: "",
@@ -70,7 +52,7 @@ export const catalog: CatalogCourse[] = [
     title: "Next.js 14 & Fullstack",
     tagline: "Du front au back, sans couture",
     description:
-      "App Router, Server Components, Server Actions, authentification, bases de donn\u00e9es, d\u00e9ploiement. Construis et expose de vraies applications fullstack.",
+      "App Router, Server Components, Server Actions, authentification, bases de données, déploiement. Construis et expose de vraies applications fullstack.",
     icon: "fa-bolt",
     accent: {
       text: "text-brand-eco",
@@ -78,8 +60,8 @@ export const catalog: CatalogCourse[] = [
       border: "border-brand-eco/30",
     },
     tags: ["Next.js", "Server Components", "Prisma", "Auth"],
-    level: "Interm\u00e9diaire",
-    duration: "\u22488 semaines",
+    level: "Intermédiaire",
+    duration: "≈8 semaines",
     modules: 16,
     status: "soon",
     eta: "",
@@ -89,7 +71,7 @@ export const catalog: CatalogCourse[] = [
     title: "Node.js & APIs robustes",
     tagline: "Construire des back-ends production-ready",
     description:
-      "Express, Fastify, bases de donn\u00e9es relationnelles, tests, s\u00e9curit\u00e9, d\u00e9ploiement. Tout ce qu'il faut pour poser des API solides en production.",
+      "Express, Fastify, bases de données relationnelles, tests, sécurité, déploiement. Tout ce qu'il faut pour poser des API solides en production.",
     icon: "fa-server",
     accent: {
       text: "text-emerald-400",
@@ -97,18 +79,18 @@ export const catalog: CatalogCourse[] = [
       border: "border-emerald-500/30",
     },
     tags: ["Node.js", "Express", "PostgreSQL", "Tests"],
-    level: "Interm\u00e9diaire",
-    duration: "\u22488 semaines",
+    level: "Intermédiaire",
+    duration: "≈8 semaines",
     modules: 14,
     status: "soon",
     eta: "",
   },
   {
     slug: "devops",
-    title: "DevOps pour d\u00e9veloppeurs",
-    tagline: "Git, CI/CD, Docker, d\u00e9ploiement",
+    title: "DevOps pour développeurs",
+    tagline: "Git, CI/CD, Docker, déploiement",
     description:
-      "Les comp\u00e9tences ops d'un d\u00e9veloppeur moderne : GitHub Actions, Docker, monitoring, logs, d\u00e9ploiements Vercel & auto-h\u00e9berg\u00e9. Sans devenir SRE.",
+      "Les compétences ops d'un développeur moderne : GitHub Actions, Docker, monitoring, logs, déploiements Vercel & auto-hébergé. Sans devenir SRE.",
     icon: "fa-gears",
     accent: {
       text: "text-pink-400",
@@ -117,18 +99,43 @@ export const catalog: CatalogCourse[] = [
     },
     tags: ["Git", "GitHub Actions", "Docker", "Vercel"],
     level: "Tous niveaux",
-    duration: "\u22484 semaines",
+    duration: "≈4 semaines",
     modules: 8,
     status: "planned",
     eta: "Bientôt disponible",
   },
 ];
 
-/** Global stats displayed on the landing page. */
+export const catalog: CatalogCourse[] = [...activeCatalog, ...upcomingCatalog];
+
+/** Global stats displayed on the landing page, computed from actual data. */
 export const academyStats = {
   coursesActive: catalog.filter((c) => c.status === "active").length,
   coursesPlanned: catalog.filter((c) => c.status !== "active").length,
-  lessonsCount: 160,
-  exercisesCount: 45,
-  quizzesCount: 32,
+  lessonsCount: courses.reduce(
+    (total, course) =>
+      total +
+      course.phases.reduce((acc, p) => acc + p.modules.length, 0),
+    0,
+  ),
+  exercisesCount: courses.reduce(
+    (total, course) =>
+      total +
+      course.phases.reduce(
+        (acc, phase) =>
+          acc +
+          phase.modules.reduce((a, m) => a + (m.exercises?.length ?? 0), 0),
+        0,
+      ),
+    0,
+  ),
+  quizzesCount: courses.reduce(
+    (total, course) =>
+      total +
+      course.phases.reduce(
+        (acc, phase) => acc + phase.modules.filter((m) => m.quiz).length,
+        0,
+      ),
+    0,
+  ),
 };
