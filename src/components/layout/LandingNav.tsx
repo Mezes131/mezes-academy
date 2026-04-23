@@ -43,7 +43,7 @@ export function LandingNav() {
             <>
               <Link to="/react" className="hidden sm:inline-flex">
                 <Button size="sm">
-                  Continuer le parcours
+                  Continuer
                   <ArrowRight size={14} />
                 </Button>
               </Link>

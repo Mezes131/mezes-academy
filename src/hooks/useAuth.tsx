@@ -11,11 +11,32 @@ import {
 import type { Session, User } from "@supabase/supabase-js";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
-interface UserProfile {
+export interface ProfileLinks {
+  github?: string;
+  linkedin?: string;
+  website?: string;
+  twitter?: string;
+}
+
+export interface UserProfile {
   id: string;
   fullName: string | null;
-  role: string | null;
+  username: string | null;
+  role: "student" | "admin";
+  bio: string | null;
+  avatarUrl: string | null;
+  links: ProfileLinks;
+  isPublic: boolean;
 }
+
+export type UserProfileUpdate = Partial<{
+  fullName: string | null;
+  username: string | null;
+  bio: string | null;
+  avatarUrl: string | null;
+  links: ProfileLinks;
+  isPublic: boolean;
+}>;
 
 interface AuthContextValue {
   session: Session | null;
@@ -31,6 +52,12 @@ interface AuthContextValue {
     fullName: string;
   }) => Promise<void>;
   signOut: () => Promise<void>;
+  /** Update the current user's profile row. Returns the persisted profile. */
+  updateProfile: (patch: UserProfileUpdate) => Promise<UserProfile>;
+  /** Update the current user's Supabase password. */
+  updatePassword: (newPassword: string) => Promise<void>;
+  /** Re-fetch the profile from backend (e.g. after elevation). */
+  refreshProfile: () => Promise<void>;
 }
 
 /**
@@ -53,14 +80,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    * Fetch the profile row for the current user, creating it if missing.
    * Runs in the background — never blocks the auth `loading` state.
    */
-  const fetchProfile = useCallback(async (user: User) => {
+  const fetchProfile = useCallback(async (user: User, force = false) => {
     if (!supabase) return;
-    if (profileFetchedForRef.current === user.id) return;
+    if (!force && profileFetchedForRef.current === user.id) return;
 
     try {
       const { data, error } = await supabase
         .from("profiles")
-        .select("id, full_name, role")
+        .select("id, full_name, username, role, bio, avatar_url, links, is_public")
         .eq("id", user.id)
         .maybeSingle();
 
@@ -88,17 +115,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfile({
           id: user.id,
           fullName: fallbackName,
+          username: null,
           role: "student",
+          bio: null,
+          avatarUrl: null,
+          links: {},
+          isPublic: false,
         });
         return;
       }
 
       profileFetchedForRef.current = user.id;
-      setProfile({
-        id: data.id as string,
-        fullName: (data.full_name as string | null) ?? null,
-        role: (data.role as string | null) ?? "student",
-      });
+      setProfile(rowToProfile(data));
     } catch (error) {
       console.warn(
         "[auth] Impossible de charger le profil:",
@@ -243,9 +271,88 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     if (!supabase) return;
     profileFetchedForRef.current = null;
+    setProfile(null);
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   }, []);
+
+  const updateProfile = useCallback(
+    async (patch: UserProfileUpdate): Promise<UserProfile> => {
+      if (!supabase) {
+        throw new Error("Supabase n'est pas configuré.");
+      }
+      const currentUser = session?.user;
+      if (!currentUser) {
+        throw new Error("Aucune session active.");
+      }
+
+      const payload: Record<string, unknown> = { id: currentUser.id };
+      if (patch.fullName !== undefined) {
+        payload.full_name = patch.fullName?.toString().trim() || null;
+      }
+      if (patch.username !== undefined) {
+        const normalized = patch.username?.toString().trim().toLowerCase();
+        if (normalized && !/^[a-z0-9_]{3,30}$/.test(normalized)) {
+          throw new Error(
+            "Le pseudo doit contenir 3 à 30 caractères (lettres, chiffres, _).",
+          );
+        }
+        payload.username = normalized || null;
+      }
+      if (patch.bio !== undefined) {
+        const nextBio = patch.bio?.toString().trim() || null;
+        if (nextBio && nextBio.length > 240) {
+          throw new Error("La bio ne doit pas dépasser 240 caractères.");
+        }
+        payload.bio = nextBio;
+      }
+      if (patch.avatarUrl !== undefined) {
+        payload.avatar_url = patch.avatarUrl || null;
+      }
+      if (patch.links !== undefined) {
+        payload.links = patch.links ?? {};
+      }
+      if (patch.isPublic !== undefined) {
+        payload.is_public = Boolean(patch.isPublic);
+      }
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .upsert(payload, { onConflict: "id" })
+        .select("id, full_name, username, role, bio, avatar_url, links, is_public")
+        .single();
+
+      if (error) {
+        // Postgres unique violation → friendlier message.
+        if (error.code === "23505") {
+          throw new Error("Ce pseudo est déjà pris. Essaie une variante.");
+        }
+        throw error;
+      }
+
+      const next = rowToProfile(data);
+      setProfile(next);
+      return next;
+    },
+    [session],
+  );
+
+  const updatePassword = useCallback(async (newPassword: string) => {
+    if (!supabase) {
+      throw new Error("Supabase n'est pas configuré.");
+    }
+    if (newPassword.length < 6) {
+      throw new Error("Le mot de passe doit contenir au moins 6 caractères.");
+    }
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) throw error;
+  }, []);
+
+  const refreshProfile = useCallback(async () => {
+    const currentUser = session?.user;
+    if (!currentUser) return;
+    await fetchProfile(currentUser, true);
+  }, [fetchProfile, session]);
 
   const value = useMemo<AuthContextValue>(
     () => ({
@@ -257,8 +364,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signIn,
       signUp,
       signOut,
+      updateProfile,
+      updatePassword,
+      refreshProfile,
     }),
-    [session, profile, loading, signIn, signUp, signOut],
+    [
+      session,
+      profile,
+      loading,
+      signIn,
+      signUp,
+      signOut,
+      updateProfile,
+      updatePassword,
+      refreshProfile,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -270,4 +390,26 @@ export function useAuth() {
     throw new Error("useAuth doit être appelé à l'intérieur d'un <AuthProvider>");
   }
   return ctx;
+}
+
+/* ─── Helpers ────────────────────────────────────────────────── */
+
+function rowToProfile(data: Record<string, unknown>): UserProfile {
+  const rawLinks = data.links;
+  const links: ProfileLinks =
+    rawLinks && typeof rawLinks === "object" && !Array.isArray(rawLinks)
+      ? (rawLinks as ProfileLinks)
+      : {};
+  const rawRole = (data.role as string | null) ?? "student";
+  const role: "student" | "admin" = rawRole === "admin" ? "admin" : "student";
+  return {
+    id: data.id as string,
+    fullName: (data.full_name as string | null) ?? null,
+    username: (data.username as string | null) ?? null,
+    role,
+    bio: (data.bio as string | null) ?? null,
+    avatarUrl: (data.avatar_url as string | null) ?? null,
+    links,
+    isPublic: Boolean(data.is_public),
+  };
 }

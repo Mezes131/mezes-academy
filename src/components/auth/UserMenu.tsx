@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import {
   BookMarked,
   ChevronDown,
-  LayoutDashboard,
   LogOut,
   TrendingUp,
   UserCircle,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { getDisplayName, getInitials } from "@/lib/identity";
 import { cn } from "@/lib/utils";
 
 interface UserMenuProps {
@@ -59,12 +59,10 @@ export function UserMenu({
 
   if (!user) return null;
 
-  const displayName =
-    profile?.fullName?.trim() ||
-    user.email?.split("@")[0] ||
-    "Mon compte";
   const email = user.email ?? "";
+  const displayName = getDisplayName(profile?.fullName, email);
   const initials = getInitials(displayName, email);
+  const avatarUrl = profile?.avatarUrl ?? null;
   const isAdmin = profile?.role === "admin";
 
   async function handleSignOut() {
@@ -89,7 +87,12 @@ export function UserMenu({
           open && "bg-bg-3",
         )}
       >
-        <Avatar initials={initials} size={size} />
+        <Avatar initials={initials} size={size} src={avatarUrl} />
+        {showName && (
+          <span className="hidden md:inline text-[13px] font-semibold text-fg max-w-[140px] truncate">
+            {displayName}
+          </span>
+        )}
         <ChevronDown
           size={14}
           className={cn(
@@ -108,7 +111,7 @@ export function UserMenu({
           )}
         >
           <div className="p-3 flex items-center gap-3 border-b border-base">
-            <Avatar initials={initials} size={40} />
+            <Avatar initials={initials} size={40} src={avatarUrl} />
             <div className="min-w-0">
               <div className="text-[13px] font-semibold truncate">
                 {displayName}
@@ -141,15 +144,6 @@ export function UserMenu({
               label="Mes favoris"
               onClick={() => setOpen(false)}
             />
-            {isAdmin && (
-              <MenuItem
-                to="/admin"
-                icon={<LayoutDashboard size={14} />}
-                label="Dashboard admin"
-                onClick={() => setOpen(false)}
-                accent
-              />
-            )}
           </div>
 
           <div className="border-t border-base py-1.5">
@@ -174,11 +168,34 @@ export function UserMenu({
 function Avatar({
   initials,
   size,
+  src,
 }: {
   initials: string;
   size: number;
+  src?: string | null;
 }) {
   const fontSize = Math.max(10, Math.round(size * 0.4));
+
+  if (src) {
+    return (
+      <span
+        className={cn(
+          "inline-block rounded-full flex-shrink-0 overflow-hidden",
+          "shadow-soft border border-white/10",
+        )}
+        style={{ width: size, height: size }}
+        aria-hidden
+      >
+        <img
+          src={src}
+          alt=""
+          draggable={false}
+          className="w-full h-full object-cover"
+        />
+      </span>
+    );
+  }
+
   return (
     <span
       className={cn(
@@ -225,19 +242,3 @@ function MenuItem({
   );
 }
 
-/* ─── Helpers ────────────────────────────────────────────────── */
-
-function getInitials(name: string, email: string): string {
-  const source = name.trim() || email;
-  if (!source) return "?";
-
-  const parts = source
-    .replace(/@.*/, "")
-    .split(/[\s._-]+/)
-    .filter(Boolean);
-
-  if (parts.length === 0) return source.slice(0, 1).toUpperCase();
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-}

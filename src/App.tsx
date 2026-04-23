@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { RequireAuth } from "@/components/auth/RequireAuth";
 import { LandingPage } from "@/pages/LandingPage";
 import { AuthPage } from "@/pages/AuthPage";
+import { AccountPage } from "@/pages/account/AccountPage";
 import { ReactCoursePage } from "@/pages/ReactCoursePage";
 import { PhasePage } from "@/pages/PhasePage";
 import { PhaseChallengePage } from "@/pages/PhaseChallengePage";
@@ -47,6 +48,17 @@ export default function App() {
                   <LandingLayout>
                     <AuthPage />
                   </LandingLayout>
+                }
+              />
+
+              <Route
+                path="/account"
+                element={
+                  <RequireAuth>
+                    <LandingLayout>
+                      <AccountPage />
+                    </LandingLayout>
+                  </RequireAuth>
                 }
               />
 

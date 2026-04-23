@@ -87,7 +87,7 @@ function SlowHint() {
         />
         <div className="flex-1">
           <div className="text-[13px] font-semibold text-amber-200">
-            Ça prend un peu plus de temps que d&apos;habitude
+            Ça prend un peu plus de temps que d'habitude
           </div>
           <p className="mt-1 text-[12px] text-fg-2 leading-relaxed">
             Vérifie ta connexion, puis recharge la page. Si le problème persiste,
@@ -116,7 +116,7 @@ function NotConfigured() {
       <div className="max-w-xl rounded-2xl border-base bg-bg-2 p-6">
         <h1 className="text-xl font-bold mb-2">Service temporairement indisponible</h1>
         <p className="text-sm text-fg-2 leading-relaxed">
-          L&apos;authentification n&apos;est pas encore disponible. L&apos;administrateur doit
+          L'authentification n'est pas encore disponible. L'administrateur doit
           terminer la configuration du backend. Réessaie dans quelques minutes.
         </p>
       </div>
