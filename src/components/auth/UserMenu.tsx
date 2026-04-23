@@ -10,6 +10,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { getDisplayName, getInitials } from "@/lib/identity";
 import { cn } from "@/lib/utils";
+import { ConfirmDialog } from "@/components/ui/Modal";
 
 interface UserMenuProps {
   /** Extra classes applied to the trigger button wrapper. */
@@ -35,6 +36,7 @@ export function UserMenu({
 }: UserMenuProps) {
   const { user, profile, signOut } = useAuth();
   const [open, setOpen] = useState(false);
+  const [confirmingSignOut, setConfirmingSignOut] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -65,13 +67,13 @@ export function UserMenu({
   const avatarUrl = profile?.avatarUrl ?? null;
   const isAdmin = profile?.role === "admin";
 
-  async function handleSignOut() {
+  function onRequestSignOut() {
     setOpen(false);
-    try {
-      await signOut();
-    } catch (error) {
-      alert((error as Error).message);
-    }
+    setConfirmingSignOut(true);
+  }
+
+  async function onConfirmSignOut() {
+    await signOut();
   }
 
   return (
@@ -88,6 +90,11 @@ export function UserMenu({
         )}
       >
         <Avatar initials={initials} size={size} src={avatarUrl} />
+        {showName && (
+          <span className="hidden md:inline text-[13px] font-semibold text-fg max-w-[140px] truncate">
+            {displayName}
+          </span>
+        )}
         <ChevronDown
           size={14}
           className={cn(
@@ -144,7 +151,7 @@ export function UserMenu({
           <div className="border-t border-base py-1.5">
             <button
               type="button"
-              onClick={() => void handleSignOut()}
+              onClick={onRequestSignOut}
               className="w-full flex items-center gap-2.5 px-3 h-9 text-[13px] text-fg-2 hover:text-red-300 hover:bg-red-500/10 transition"
               role="menuitem"
             >
@@ -154,6 +161,18 @@ export function UserMenu({
           </div>
         </div>
       )}
+
+      <ConfirmDialog
+        open={confirmingSignOut}
+        onClose={() => setConfirmingSignOut(false)}
+        onConfirm={onConfirmSignOut}
+        variant="warning"
+        icon={<LogOut size={18} />}
+        title="Se déconnecter ?"
+        description={`Tu devras te reconnecter avec ${email} pour reprendre ton parcours.`}
+        confirmLabel="Se déconnecter"
+        cancelLabel="Rester connecté"
+      />
     </div>
   );
 }
