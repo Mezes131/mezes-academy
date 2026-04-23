@@ -88,11 +88,6 @@ export function UserMenu({
         )}
       >
         <Avatar initials={initials} size={size} src={avatarUrl} />
-        {showName && (
-          <span className="hidden md:inline text-[13px] font-semibold text-fg max-w-[140px] truncate">
-            {displayName}
-          </span>
-        )}
         <ChevronDown
           size={14}
           className={cn(
