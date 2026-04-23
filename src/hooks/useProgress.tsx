@@ -311,7 +311,7 @@ interface ProgressContextValue {
   /** Called when the learner clicks "Reveal solution". */
   revealExerciseSolution: (exerciseId: string) => void;
   /** Called each time an additional hint is unveiled. */
-  useExerciseHint: (exerciseId: string, hintIndex: number) => void;
+  recordExerciseHint: (exerciseId: string, hintIndex: number) => void;
   /** Resets a single exercise's progress (debug / restart). */
   resetExercise: (exerciseId: string) => void;
   /** Query helper: returns current status and attempts. */
@@ -677,7 +677,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const useExerciseHint = useCallback(
+  const recordExerciseHint = useCallback(
     (exerciseId: string, hintIndex: number) => {
       setProgress((p) => {
         const prev = touch(p.exerciseProgress[exerciseId]);
@@ -842,7 +842,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
-      useExerciseHint,
+      recordExerciseHint,
       resetExercise,
       getExerciseStatus,
       saveChallengeScore,
@@ -866,7 +866,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
-      useExerciseHint,
+      recordExerciseHint,
       resetExercise,
       getExerciseStatus,
       saveChallengeScore,

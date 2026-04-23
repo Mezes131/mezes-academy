@@ -17,20 +17,23 @@ export function PhaseChallengePage() {
   const [resultMap, setResultMap] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
 
-  if (!phase) return <Navigate to="/" replace />;
-  const phaseIdSafe = phase.id;
+  const phaseIdSafe = phase?.id ?? "";
 
-  const accent = phaseAccent(phase.color);
-  const pool = phase.modules
-    .flatMap((m) => m.exercises ?? [])
-    .filter((ex) => ex.challengeEligible !== false);
+  const pool = useMemo(() => {
+    if (!phase) return [];
+    return phase.modules
+      .flatMap((m) => m.exercises ?? [])
+      .filter((ex) => ex.challengeEligible !== false);
+  }, [phase]);
 
   const selected = useMemo(
     () => pickRandom(pool, CHALLENGE_SIZE),
-    // Re-pick only when phase changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [phaseIdSafe],
+    [pool],
   );
+
+  if (!phase) return <Navigate to="/" replace />;
+
+  const accent = phaseAccent(phase.color);
 
   const passedIds = selected
     .filter((ex) => resultMap[ex.id])

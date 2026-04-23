@@ -52,7 +52,7 @@ export function CodeExercise({
     trackExerciseAttempt,
     markExerciseSolved,
     revealExerciseSolution,
-    useExerciseHint,
+    recordExerciseHint,
     getExerciseStatus,
     resetExercise,
   } = useProgress();
@@ -96,7 +96,7 @@ export function CodeExercise({
   function onRevealNextHint() {
     const next = hintsShown + 1;
     setHintsShown(next);
-    useExerciseHint(exercise.id, next - 1);
+    recordExerciseHint(exercise.id, next - 1);
   }
 
   /* ─── Solution reveal ───────────────────────────────────────── */
