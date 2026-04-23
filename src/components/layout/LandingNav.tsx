@@ -29,12 +29,12 @@ export function LandingNav() {
           <NavLink to="/" end className={navLinkClass}>
             Accueil
           </NavLink>
-          <a href="#catalog" className={staticLinkClass}>
+          <Link to="/#catalog" className={staticLinkClass}>
             Catalogue
-          </a>
-          <a href="#how-it-works" className={staticLinkClass}>
+          </Link>
+          <Link to="/#how-it-works" className={staticLinkClass}>
             Comment ça marche
-          </a>
+          </Link>
         </div>
 
         <div className="flex items-center gap-2 ml-auto">
@@ -70,6 +70,6 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   );
 
 const staticLinkClass = cn(
-  "px-3 h-9 flex items-center rounded-lg text-[13px] font-medium transition",
+  "px-3 h-9 inline-flex items-center rounded-lg text-[13px] font-medium transition",
   "text-fg-2 hover:text-fg hover:bg-bg-3/60",
 );

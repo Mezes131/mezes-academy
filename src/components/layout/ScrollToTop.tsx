@@ -2,19 +2,34 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 /**
- * Automatically scrolls to the top on every route change.
- * Mount this once inside <BrowserRouter>.
+ * Automatically scrolls on every route change:
+ * - If the URL carries a hash (`#foo`), smooth-scroll to that element once
+ *   the destination page has rendered. React Router doesn't do this by
+ *   default on client-side navigations (the browser only handles it on
+ *   initial page load).
+ * - Otherwise, scroll to the top of the page.
  *
- * Skip scrolling when a hash anchor is present in the URL (`#hash`):
- * the browser already targets the corresponding element.
+ * Mount this once inside <BrowserRouter>.
  */
 export function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (hash) return;
-    // `instant` avoids a visible animation during real navigation; we want
-    // the new page to open at the top, not with a scrolling effect.
+    if (hash) {
+      // Wait a frame so the target page has had the chance to mount its DOM.
+      const raf = window.requestAnimationFrame(() => {
+        const id = hash.startsWith("#") ? hash.slice(1) : hash;
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          // Fallback: ensure we don't keep an unrelated scroll position.
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        }
+      });
+      return () => window.cancelAnimationFrame(raf);
+    }
+
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname, hash]);
 

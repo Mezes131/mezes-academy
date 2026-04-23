@@ -3,10 +3,10 @@ import { AtSign, FileText, UserCircle } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
 import { getInitials } from "@/lib/identity";
-import { AvatarUploader } from "../../components/account/AvatarUploader";
-import { InlineText } from "../../components/account/InlineText";
-import { LinksEditor } from "../../components/account/LinksEditor";
-import { SidePanel } from "../../components/account/SidePanel";
+import { AvatarUploader } from "./AvatarUploader";
+import { InlineText } from "./InlineText";
+import { LinksEditor } from "./LinksEditor";
+import { SidePanel } from "./SidePanel";
 
 export interface ProfileHeaderProps {
   email: string;

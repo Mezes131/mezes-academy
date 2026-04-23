@@ -13,6 +13,6 @@ export const reactMeta: CourseMeta = {
   },
   tags: ["React 18", "TypeScript", "Next.js", "Tests", "Architecture"],
   level: "Tous niveaux",
-  duration: "≈10 mois",
+  duration: "≈10 semaines",
   status: "active",
 };

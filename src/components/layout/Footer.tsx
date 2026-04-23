@@ -52,13 +52,9 @@ export function Footer() {
           </FooterCol>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-base flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <div className="mt-12 p-4 border-t border-base flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="text-[12px] text-fg-3 font-mono">
-            © {year} Mezes Academy Tous droits réservés.
-          </div>
-          <div className="text-[12px] text-fg-3">
-            Fait avec <i className="fa-solid fa-heart text-red-400" /> et un peu
-            de JSX.
+            © {year} Mezes Corporation Tous droits réservés.
           </div>
         </div>
       </div>

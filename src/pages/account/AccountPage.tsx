@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
-import { ProfileHeader } from "./ProfileHeader";
+import { ProfileHeader } from "../../components/account/ProfileHeader";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { PreferencesTab } from "./tabs/PreferencesTab";
 import { SecurityTab } from "./tabs/SecurityTab";
