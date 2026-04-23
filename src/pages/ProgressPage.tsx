@@ -1,13 +1,16 @@
 import { useRef } from "react";
 import { useProgress } from "@/hooks/useProgress";
+import { useAuth } from "@/hooks/useAuth";
 import { phases } from "@/data/phases";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
+import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Download, Upload, RefreshCw, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function ProgressPage() {
+  const { user } = useAuth();
   const { progress, stats, phaseStats, reset, exportJson, importJson } =
     useProgress();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -161,11 +164,14 @@ export function ProgressPage() {
 
       {/* ─── Sauvegarde / restauration ───────────── */}
       <h2 className="text-lg font-bold mt-10 mb-3">Sauvegarde</h2>
+
+      {user && <SyncStatusBadge variant="card" className="mb-3" />}
+
       <div className="rounded-xl border-base bg-bg-2 p-5">
         <p className="text-[13px] text-fg-2 mb-4 leading-relaxed">
-          Ta progression est sauvegardée dans le navigateur. Exporte-la en JSON
-          pour en faire une copie de sécurité ou la restaurer sur un autre
-          appareil.
+          {user
+            ? "Ta progression est sauvegardée sur ton compte et synchronisée automatiquement. Tu peux aussi exporter un JSON comme sauvegarde locale."
+            : "Ta progression est sauvegardée dans le navigateur. Exporte-la en JSON pour en faire une copie de sécurité ou la restaurer sur un autre appareil."}
         </p>
         <div className="flex flex-wrap gap-2">
           <Button

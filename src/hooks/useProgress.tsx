@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -14,10 +15,13 @@ import type {
   LessonProgress,
 } from "@/types";
 import { phases, totalProgressItems } from "@/data/phases";
+import { useAuth } from "@/hooks/useAuth";
+import { loadRemoteProgress, saveRemoteProgress } from "@/lib/progressRemote";
 
 const STORAGE_KEY_V1 = "react-learn:progress:v1";
 const STORAGE_KEY_V2 = "react-learn:progress:v2";
 const STORAGE_KEY = "react-learn:progress:v3";
+const REMOTE_SYNC_DEBOUNCE_MS = 700;
 
 const DEFAULT_PROGRESS: LessonProgress = {
   readModules: [],
@@ -125,6 +129,25 @@ function normalizeProgress(raw: Partial<LessonProgress>): LessonProgress {
   };
 }
 
+/**
+ * Counts meaningful progress entries to decide whether a one-shot migration
+ * from localStorage to backend is needed the first time a user signs in.
+ */
+function countProgressItems(p: LessonProgress): number {
+  return (
+    p.readModules.length +
+    Object.keys(p.quizScores).length +
+    p.completedExercises.length +
+    Object.keys(p.exerciseProgress).length +
+    Object.keys(p.challengeScores).length +
+    p.bookmarks.length
+  );
+}
+
+function hasLocalProgress(p: LessonProgress): boolean {
+  return countProgressItems(p) > 0;
+}
+
 function load(): LessonProgress {
   if (typeof window === "undefined") return DEFAULT_PROGRESS;
   try {
@@ -210,6 +233,42 @@ function touch(prev: ExerciseProgress | undefined): ExerciseProgress {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   Sync status (local ↔ backend)
+   ══════════════════════════════════════════════════════════════════ */
+
+export type SyncStatus =
+  /** No authenticated user → progression stored locally only. */
+  | "local-only"
+  /** Loading existing progression from backend on sign-in. */
+  | "hydrating"
+  /** Pushing local progression to backend for the first time. */
+  | "migrating"
+  /** Saving latest changes to backend. */
+  | "syncing"
+  /** Local and backend are in sync. */
+  | "synced"
+  /** Sync disabled because backend is unreachable or table missing. */
+  | "offline"
+  /** Last sync attempt failed. */
+  | "error";
+
+export interface SyncState {
+  status: SyncStatus;
+  lastSyncedAt: number | null;
+  /** If a one-shot migration happened on sign-in, number of items uploaded. */
+  migratedItems: number;
+  /** Error message from the latest failure, if any. */
+  errorMessage: string | null;
+}
+
+const INITIAL_SYNC_STATE: SyncState = {
+  status: "local-only",
+  lastSyncedAt: null,
+  migratedItems: 0,
+  errorMessage: null,
+};
+
+/* ══════════════════════════════════════════════════════════════════
    Context shape
    ══════════════════════════════════════════════════════════════════ */
 
@@ -265,22 +324,199 @@ interface ProgressContextValue {
   reset: () => void;
   exportJson: () => string;
   importJson: (raw: string) => void;
+
+  /** Current sync state between local and backend. */
+  sync: SyncState;
+  /** Force an immediate save to backend. No-op if backend is unreachable. */
+  forceSync: () => Promise<void>;
 }
 
 const ProgressContext = createContext<ProgressContextValue | null>(null);
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [progress, setProgress] = useState<LessonProgress>(load);
+  const [sync, setSync] = useState<SyncState>(INITIAL_SYNC_STATE);
+  const progressRef = useRef(progress);
+  const remoteHydratedRef = useRef(false);
+  const remoteSyncEnabledRef = useRef(false);
+  const lastRemotePayloadRef = useRef("");
+
+  useEffect(() => {
+    progressRef.current = progress;
+  }, [progress]);
 
   useEffect(() => {
     save(progress);
   }, [progress]);
 
+  /* ─── Backend hydration + one-shot migration ──────────────── */
+  useEffect(() => {
+    if (!user) {
+      remoteHydratedRef.current = false;
+      remoteSyncEnabledRef.current = false;
+      lastRemotePayloadRef.current = "";
+      setSync(INITIAL_SYNC_STATE);
+      return;
+    }
+    const userId = user.id;
+
+    let cancelled = false;
+    remoteHydratedRef.current = false;
+    remoteSyncEnabledRef.current = true;
+
+    setSync({
+      status: "hydrating",
+      lastSyncedAt: null,
+      migratedItems: 0,
+      errorMessage: null,
+    });
+
+    async function hydrateFromRemote() {
+      try {
+        const remote = await loadRemoteProgress(userId);
+        if (cancelled) return;
+
+        if (remote) {
+          const normalized = normalizeProgress(remote);
+          lastRemotePayloadRef.current = JSON.stringify(normalized);
+          remoteHydratedRef.current = true;
+          setProgress(normalized);
+          save(normalized);
+          setSync({
+            status: "synced",
+            lastSyncedAt: Date.now(),
+            migratedItems: 0,
+            errorMessage: null,
+          });
+          return;
+        }
+
+        // Backend is empty: migrate local progress (if any) once.
+        const local = progressRef.current;
+        const localItems = countProgressItems(local);
+        const willMigrate = hasLocalProgress(local);
+
+        if (willMigrate) {
+          setSync((prev) => ({
+            ...prev,
+            status: "migrating",
+            migratedItems: localItems,
+          }));
+        }
+
+        await saveRemoteProgress(userId, local);
+        if (cancelled) return;
+
+        lastRemotePayloadRef.current = JSON.stringify(local);
+        remoteHydratedRef.current = true;
+        setSync({
+          status: "synced",
+          lastSyncedAt: Date.now(),
+          migratedItems: willMigrate ? localItems : 0,
+          errorMessage: null,
+        });
+      } catch (error) {
+        if (cancelled) return;
+        remoteSyncEnabledRef.current = false;
+        remoteHydratedRef.current = true;
+        const message = (error as Error).message;
+        console.warn("[progress] Sync backend désactivée:", message);
+        setSync({
+          status: "offline",
+          lastSyncedAt: null,
+          migratedItems: 0,
+          errorMessage: message,
+        });
+      }
+    }
+
+    void hydrateFromRemote();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id]);
+
+  /* ─── Debounced autosave to backend ───────────────────────── */
+  useEffect(() => {
+    if (!user) return;
+    const userId = user.id;
+    if (!remoteHydratedRef.current || !remoteSyncEnabledRef.current) return;
+
+    const payload = JSON.stringify(progress);
+    if (payload === lastRemotePayloadRef.current) return;
+
+    setSync((prev) =>
+      prev.status === "syncing" ? prev : { ...prev, status: "syncing" },
+    );
+
+    const timer = window.setTimeout(() => {
+      void (async () => {
+        try {
+          await saveRemoteProgress(userId, progressRef.current);
+          lastRemotePayloadRef.current = JSON.stringify(progressRef.current);
+          setSync({
+            status: "synced",
+            lastSyncedAt: Date.now(),
+            migratedItems: 0,
+            errorMessage: null,
+          });
+        } catch (error) {
+          remoteSyncEnabledRef.current = false;
+          const message = (error as Error).message;
+          console.warn("[progress] Erreur de sauvegarde backend:", message);
+          setSync({
+            status: "error",
+            lastSyncedAt: null,
+            migratedItems: 0,
+            errorMessage: message,
+          });
+        }
+      })();
+    }, REMOTE_SYNC_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [progress, user?.id]);
+
+  const forceSync = useCallback(async () => {
+    if (!user) return;
+    if (!remoteSyncEnabledRef.current) {
+      setSync({
+        status: "offline",
+        lastSyncedAt: null,
+        migratedItems: 0,
+        errorMessage:
+          "La synchronisation backend est désactivée pour cette session.",
+      });
+      return;
+    }
+    setSync((prev) => ({ ...prev, status: "syncing", errorMessage: null }));
+    try {
+      await saveRemoteProgress(user.id, progressRef.current);
+      lastRemotePayloadRef.current = JSON.stringify(progressRef.current);
+      setSync({
+        status: "synced",
+        lastSyncedAt: Date.now(),
+        migratedItems: 0,
+        errorMessage: null,
+      });
+    } catch (error) {
+      const message = (error as Error).message;
+      setSync({
+        status: "error",
+        lastSyncedAt: null,
+        migratedItems: 0,
+        errorMessage: message,
+      });
+    }
+  }, [user]);
+
   useEffect(() => {
     function onStorage(e: StorageEvent) {
       if (e.key === STORAGE_KEY && e.newValue) {
         try {
-          setProgress(JSON.parse(e.newValue));
+          setProgress(normalizeProgress(JSON.parse(e.newValue)));
         } catch {
           /* noop */
         }
@@ -615,6 +851,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       reset,
       exportJson,
       importJson,
+      sync,
+      forceSync,
     }),
     [
       progress,
@@ -637,6 +875,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       reset,
       exportJson,
       importJson,
+      sync,
+      forceSync,
     ],
   );
 

@@ -14,6 +14,7 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.19.9",
     "@fortawesome/fontawesome-free": "^7.2.0",
+    "@supabase/supabase-js": "^2.104.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
     "react": "^18.3.1",

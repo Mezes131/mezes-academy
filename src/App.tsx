@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProgressProvider } from "@/hooks/useProgress";
+import { AuthProvider } from "@/hooks/useAuth";
 import { LandingLayout } from "@/components/layout/LandingLayout";
 import { CourseLayout } from "@/components/layout/CourseLayout";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { RequireAuth } from "@/components/auth/RequireAuth";
 import { LandingPage } from "@/pages/LandingPage";
+import { AuthPage } from "@/pages/AuthPage";
 import { ReactCoursePage } from "@/pages/ReactCoursePage";
 import { PhasePage } from "@/pages/PhasePage";
 import { PhaseChallengePage } from "@/pages/PhaseChallengePage";
@@ -20,57 +23,70 @@ function ThemeApplier({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <ProgressProvider>
-      <ThemeApplier>
-        <BrowserRouter
-          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-        >
-          <ScrollToTop />
-          <Routes>
-            {/* Landing Mezes Academy */}
-            <Route
-              path="/"
-              element={
-                <LandingLayout>
-                  <LandingPage />
-                </LandingLayout>
-              }
-            />
+    <AuthProvider>
+      <ProgressProvider>
+        <ThemeApplier>
+          <BrowserRouter
+            future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+          >
+            <ScrollToTop />
+            <Routes>
+              {/* Landing Mezes Academy */}
+              <Route
+                path="/"
+                element={
+                  <LandingLayout>
+                    <LandingPage />
+                  </LandingLayout>
+                }
+              />
 
-            {/* React course learning area */}
-            <Route
-              path="/react/*"
-              element={
-                <CourseLayout>
-                  <Routes>
-                    <Route index element={<ReactCoursePage />} />
-                    <Route path="phase/:phaseId" element={<PhasePage />} />
-                    <Route
-                      path="phase/:phaseId/challenge"
-                      element={<PhaseChallengePage />}
-                    />
-                    <Route path="module/:moduleId" element={<ModulePage />} />
-                    <Route path="progress" element={<ProgressPage />} />
-                    <Route path="bookmarks" element={<BookmarksPage />} />
-                    <Route path="search" element={<SearchPage />} />
-                    <Route path="*" element={<ReactCoursePage />} />
-                  </Routes>
-                </CourseLayout>
-              }
-            />
+              <Route
+                path="/auth"
+                element={
+                  <LandingLayout>
+                    <AuthPage />
+                  </LandingLayout>
+                }
+              />
 
-            {/* 404 → landing */}
-            <Route
-              path="*"
-              element={
-                <LandingLayout>
-                  <LandingPage />
-                </LandingLayout>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </ThemeApplier>
-    </ProgressProvider>
+              {/* React course learning area */}
+              <Route
+                path="/react/*"
+                element={
+                  <RequireAuth>
+                    <CourseLayout>
+                      <Routes>
+                        <Route index element={<ReactCoursePage />} />
+                        <Route path="phase/:phaseId" element={<PhasePage />} />
+                        <Route
+                          path="phase/:phaseId/challenge"
+                          element={<PhaseChallengePage />}
+                        />
+                        <Route path="module/:moduleId" element={<ModulePage />} />
+                        <Route path="progress" element={<ProgressPage />} />
+                        <Route path="bookmarks" element={<BookmarksPage />} />
+                        <Route path="search" element={<SearchPage />} />
+                        <Route path="*" element={<ReactCoursePage />} />
+                      </Routes>
+                    </CourseLayout>
+                  </RequireAuth>
+                }
+              />
+
+              {/* 404 → landing */}
+              <Route
+                path="*"
+                element={
+                  <LandingLayout>
+                    <LandingPage />
+                  </LandingLayout>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </ThemeApplier>
+      </ProgressProvider>
+    </AuthProvider>
   );
 }

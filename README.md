@@ -19,6 +19,7 @@ Application React interactive pour apprendre React. Inspirée du cours statique 
 - **Favoris** pour marquer les modules à revoir
 - **Recherche plein-texte** dans les modules et leçons
 - **Export / Import JSON** de la progression (portable entre navigateurs)
+- **Auth Supabase (Sprint 1)** : inscription/connexion et synchronisation de progression côté backend
 
 ---
 
@@ -33,6 +34,12 @@ npm run dev
 ```
 
 L'application s'ouvre sur [http://localhost:5173](http://localhost:5173).
+
+### Setup Supabase (Sprint 1)
+
+1. Duplique `.env.example` vers `.env` et renseigne les variables Supabase.
+2. Exécute le SQL `supabase/schema.sql` dans l'éditeur SQL Supabase.
+3. Redémarre le serveur `npm run dev`.
 
 ### Scripts
 

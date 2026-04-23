@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
+import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
@@ -10,6 +11,21 @@ import { ArrowRight } from "lucide-react";
  * Clean and brand-centered, distinct from the course TopNav.
  */
 export function LandingNav() {
+  const { user, profile, signOut } = useAuth();
+
+  const label =
+    profile?.fullName?.trim() ||
+    user?.email?.split("@")[0] ||
+    "Mon compte";
+
+  async function onSignOut() {
+    try {
+      await signOut();
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  }
+
   return (
     <nav className="sticky top-0 z-50 h-16 bg-bg/80 backdrop-blur-xl border-b border-base">
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center gap-6">
@@ -31,12 +47,36 @@ export function LandingNav() {
 
         <div className="flex items-center gap-2 ml-auto">
           <ThemeToggle />
-          <Link to="/react">
-            <Button size="sm">
-              Accéder au parcours
-              <ArrowRight size={14} />
-            </Button>
-          </Link>
+          {user ? (
+            <>
+              <span className="hidden sm:inline text-xs text-fg-3 font-mono">
+                {label}
+              </span>
+              <Link to="/react">
+                <Button size="sm">
+                  Continuer le parcours
+                  <ArrowRight size={14} />
+                </Button>
+              </Link>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => void onSignOut()}
+                title="Se déconnecter"
+              >
+                Déconnexion
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to="/auth">
+                <Button size="sm">
+                  Connexion
+                  <ArrowRight size={14} />
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
