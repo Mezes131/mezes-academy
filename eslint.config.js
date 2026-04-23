@@ -20,7 +20,11 @@ export default tseslint.config(
     rules: {
       "react-refresh/only-export-components": [
         "warn",
-        { allowConstantExport: true },
+        {
+          allowConstantExport: true,
+          // Provider modules legitimately export a hook next to the provider.
+          allowExportNames: ["useAuth", "useProgress"],
+        },
       ],
     },
   },

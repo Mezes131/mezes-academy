@@ -436,7 +436,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [user?.id]);
+  }, [user]);
 
   /* ─── Debounced autosave to backend ───────────────────────── */
   useEffect(() => {
@@ -477,7 +477,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     }, REMOTE_SYNC_DEBOUNCE_MS);
 
     return () => window.clearTimeout(timer);
-  }, [progress, user?.id]);
+  }, [progress, user]);
 
   const forceSync = useCallback(async () => {
     if (!user) return;
