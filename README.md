@@ -10,6 +10,69 @@ earns a platform certificate.
 
 ---
 
+## 🗺️ Architecture at a glance
+
+### System topology
+
+```mermaid
+flowchart LR
+    subgraph Client["🌐 Client · Browser"]
+        UI["React UI<br/>Vite + Tailwind"]
+        Sandpack["Sandpack<br/>live editor + offline validator"]
+        Local[("localStorage<br/>offline fallback")]
+        UI --> Sandpack
+        UI --> Local
+    end
+
+    subgraph Supa["🔐 Supabase (BaaS)"]
+        Auth["Auth<br/>email + password"]
+        DB[("Postgres<br/>profiles · user_progress")]
+        Store[("Storage<br/>avatars bucket")]
+    end
+
+    UI -- "Login / session" --> Auth
+    UI -- "Read / write progress<br/>(RLS scoped to auth.uid)" --> DB
+    UI -- "Upload / delete avatar" --> Store
+    Auth -. "auth.uid()" .-> DB
+    Auth -. "auth.uid()" .-> Store
+
+    classDef client fill:#1e293b,stroke:#334155,color:#e2e8f0;
+    classDef backend fill:#312e81,stroke:#4338ca,color:#ede9fe;
+    class UI,Sandpack,Local client;
+    class Auth,DB,Store backend;
+```
+
+### Learner journey
+
+```mermaid
+flowchart TD
+    A["Sign up / Sign in<br/>(Supabase Auth)"] --> B["Pick a track"]
+    B --> C{"Phase modules<br/>(Intro → Core → TS → Ecosystem → Expert)"}
+    C --> D["Read lesson"]
+    D --> E["Quiz ≥ 70%"]
+    E --> F["Solve exercises<br/>(hints · anti-cheat · local validator)"]
+    F --> G{"Module validated<br/>(quiz + all exos solved)"}
+    G -- "Next module" --> C
+    G -- "Phase complete" --> H["Phase challenge<br/>3 random exercises, no solution"]
+    H --> I{"All phases done?"}
+    I -- "No" --> C
+    I -- "Yes" --> J["Pro-tools transition<br/>VS Code · Git · GitHub · Vercel"]
+    J --> K["Capstone project<br/>4–5 templates + branding"]
+    K --> L["Submission<br/>(repo + live URL)"]
+    L --> M{"Admin review"}
+    M -- "Changes requested" --> K
+    M -- "Approved" --> N["🎓 Certificate<br/>+ opt-in public gallery"]
+
+    classDef active fill:#0f766e,stroke:#14b8a6,color:#ccfbf1;
+    classDef roadmap fill:#3f3f46,stroke:#71717a,color:#e4e4e7,stroke-dasharray: 4 4;
+    class A,B,C,D,E,F,G,H,I active;
+    class J,K,L,M,N roadmap;
+```
+
+> Plain nodes = shipped · Dashed nodes = on the roadmap (tutorial phase, capstone, admin review, certificate, public gallery).
+
+---
+
 ## 🎯 Product vision
 
 - **Learn for real**, not just watch content. Every module validates through
