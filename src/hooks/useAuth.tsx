@@ -38,6 +38,9 @@ export type UserProfileUpdate = Partial<{
   isPublic: boolean;
 }>;
 
+/** Supported third-party identity providers for OAuth sign-in. */
+export type OAuthProvider = "google" | "github";
+
 interface AuthContextValue {
   session: Session | null;
   user: User | null;
@@ -51,6 +54,11 @@ interface AuthContextValue {
     password: string;
     fullName: string;
   }) => Promise<void>;
+  /** Start an OAuth redirect flow (Google, GitHub, …). */
+  signInWithProvider: (
+    provider: OAuthProvider,
+    options?: { redirectTo?: string },
+  ) => Promise<void>;
   signOut: () => Promise<void>;
   /** Update the current user's profile row. Returns the persisted profile. */
   updateProfile: (patch: UserProfileUpdate) => Promise<UserProfile>;
@@ -268,6 +276,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const signInWithProvider = useCallback(
+    async (provider: OAuthProvider, options?: { redirectTo?: string }) => {
+      if (!supabase) {
+        throw new Error(
+          "Supabase n'est pas configuré. Vérifie VITE_SUPABASE_URL et VITE_SUPABASE_PUBLISHABLE_KEY.",
+        );
+      }
+      const redirectTo =
+        options?.redirectTo ??
+        (typeof window !== "undefined"
+          ? `${window.location.origin}/auth`
+          : undefined);
+
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo,
+        },
+      });
+      if (error) throw error;
+      // On success, the browser is redirected to the provider. Any code after
+      // this line typically won't execute — we still await to surface errors.
+    },
+    [],
+  );
+
   const signOut = useCallback(async () => {
     if (!supabase) return;
     profileFetchedForRef.current = null;
@@ -363,6 +397,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       configured: isSupabaseConfigured,
       signIn,
       signUp,
+      signInWithProvider,
       signOut,
       updateProfile,
       updatePassword,
@@ -374,6 +409,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       loading,
       signIn,
       signUp,
+      signInWithProvider,
       signOut,
       updateProfile,
       updatePassword,
