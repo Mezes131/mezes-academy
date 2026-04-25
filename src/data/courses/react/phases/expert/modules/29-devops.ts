@@ -3,7 +3,7 @@ import { expertQuizzes } from "../quizzes";
 
 export const module29: Module = {
   id: "react-expert-m29",
-  index: "M29",
+  index: "02",
   title: "DevOps & CI/CD",
   subtitle: "GitHub Actions, Docker, déploiements",
   duration: "1.5 semaines",

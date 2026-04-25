@@ -2,7 +2,7 @@ import type { Module, Phase } from "@/types";
 
 const module33: Module = {
   id: "react-tooling-m33",
-  index: "M33",
+    index: "01",
   title: "VS Code setup pro",
   subtitle: "Configurer ton environnement pour coder vite et proprement",
   duration: "30 min",
@@ -33,7 +33,7 @@ const module33: Module = {
 
 const module34: Module = {
   id: "react-tooling-m34",
-  index: "M34",
+    index: "02",
   title: "Git & GitHub workflow",
   subtitle: "Commit messages clairs, branches propres et PR lisibles",
   duration: "40 min",
@@ -59,7 +59,7 @@ const module34: Module = {
 
 const module35: Module = {
   id: "react-tooling-m35",
-  index: "M35",
+    index: "03",
   title: "Deploy & handoff",
   subtitle: "Publier une demo et preparer une soumission propre",
   duration: "35 min",

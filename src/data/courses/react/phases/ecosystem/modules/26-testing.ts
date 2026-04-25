@@ -4,7 +4,7 @@ import { ecosystemExercises } from "../exercises";
 
 export const module26: Module = {
   id: "react-ecosystem-m26",
-  index: "M26",
+  index: "05",
   title: "Tests : Vitest, Testing Library, Playwright",
   subtitle: "Tests unitaires, d'intégration et e2e",
   duration: "1 semaine",

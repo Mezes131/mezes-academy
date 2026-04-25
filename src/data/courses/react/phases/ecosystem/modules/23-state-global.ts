@@ -4,7 +4,7 @@ import { ecosystemExercises } from "../exercises";
 
 export const module23: Module = {
   id: "react-ecosystem-m23",
-  index: "M23",
+  index: "02",
   title: "State global : Zustand, Redux, Jotai",
   subtitle: "Partager du state entre composants lointains",
   duration: "1 semaine",

@@ -3,7 +3,7 @@ import { ecosystemQuizzes } from "../quizzes";
 
 export const module25: Module = {
   id: "react-ecosystem-m25",
-  index: "M25",
+  index: "04",
   title: "Bases de données & ORM",
   subtitle: "Prisma, Drizzle, PostgreSQL",
   duration: "1.5 semaines",

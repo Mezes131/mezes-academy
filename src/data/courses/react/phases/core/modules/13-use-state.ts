@@ -4,7 +4,7 @@ import { coreExercises } from "../exercises";
 
 export const module13: Module = {
   id: "react-core-m13",
-  index: "M13",
+  index: "03",
   title: "useState & Gestion du state",
   subtitle: "Rendre vos composants interactifs et dynamiques",
   duration: "1 semaine",

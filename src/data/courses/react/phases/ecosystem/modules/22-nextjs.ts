@@ -3,7 +3,7 @@ import { ecosystemQuizzes } from "../quizzes";
 
 export const module22: Module = {
   id: "react-ecosystem-m22",
-  index: "M22",
+  index: "01",
   title: "Next.js 14 (App Router)",
   subtitle: "Server Components, Server Actions, routing par fichiers",
   duration: "2 semaines",

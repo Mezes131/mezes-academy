@@ -4,7 +4,7 @@ import { coreExercises } from "../exercises";
 
 export const module15: Module = {
   id: "react-core-m15",
-  index: "M15",
+  index: "05",
   title: "Hooks avancés & Custom Hooks",
   subtitle: "useContext, useReducer, useRef, useMemo, useCallback et créer ses propres hooks",
   duration: "1.5 semaines",

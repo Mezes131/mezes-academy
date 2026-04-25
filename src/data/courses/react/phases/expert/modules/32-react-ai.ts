@@ -4,7 +4,7 @@ import { expertExercises } from "../exercises";
 
 export const module32: Module = {
   id: "react-expert-m32",
-  index: "M32",
+  index: "05",
   title: "React & IA",
   subtitle: "Intégrer LLM, RAG et fonctionnalités IA dans une app React",
   duration: "2 semaines",

@@ -4,7 +4,7 @@ import { typescriptExercises } from "../exercises";
 
 export const module20: Module = {
   id: "react-typescript-m20",
-  index: "M20",
+  index: "02",
   title: "TypeScript avancé",
   subtitle: "Utility types, type guards, conditional types",
   duration: "1 semaine",

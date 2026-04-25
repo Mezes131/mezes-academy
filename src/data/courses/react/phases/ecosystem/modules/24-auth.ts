@@ -3,7 +3,7 @@ import { ecosystemQuizzes } from "../quizzes";
 
 export const module24: Module = {
   id: "react-ecosystem-m24",
-  index: "M24",
+  index: "03",
   title: "Authentification",
   subtitle: "NextAuth / Auth.js, sessions, JWT, OAuth",
   duration: "1 semaine",

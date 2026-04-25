@@ -4,7 +4,7 @@ import { coreExercises } from "../exercises";
 
 export const module12: Module = {
   id: "react-core-m12",
-  index: "M12",
+  index: "02",
   title: "Composants & Props",
   subtitle: "L'art de décomposer une UI en pièces réutilisables et de les faire communiquer",
   duration: "1 semaine",

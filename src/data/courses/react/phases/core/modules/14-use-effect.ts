@@ -3,7 +3,7 @@ import { coreQuizzes } from "../quizzes";
 
 export const module14: Module = {
   id: "react-core-m14",
-  index: "M14",
+  index: "04",
   title: "useEffect & Cycle de vie",
   subtitle: "Synchroniser votre composant avec le monde extérieur",
   duration: "1 semaine",

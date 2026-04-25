@@ -3,7 +3,7 @@ import { coreQuizzes } from "../quizzes";
 
 export const module18: Module = {
   id: "react-core-m18",
-  index: "M18",
+  index: "08",
   title: "Styling en React",
   subtitle: "CSS Modules, Tailwind CSS, styled-components et animations Framer Motion",
   duration: "1 semaine",

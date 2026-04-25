@@ -3,7 +3,7 @@ import { expertQuizzes } from "../quizzes";
 
 export const module28: Module = {
   id: "react-expert-m28",
-  index: "M28",
+  index: "01",
   title: "Architecture avancée",
   subtitle: "Monorepos, DDD, Clean Architecture en React",
   duration: "1.5 semaines",

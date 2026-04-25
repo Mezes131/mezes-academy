@@ -4,7 +4,7 @@ import { coreExercises } from "../exercises";
 
 export const module17: Module = {
   id: "react-core-m17",
-  index: "M17",
+  index: "07",
   title: "Gestion des formulaires",
   subtitle: "React Hook Form + validation Zod pour des formulaires robustes",
   duration: "0.5 semaine",

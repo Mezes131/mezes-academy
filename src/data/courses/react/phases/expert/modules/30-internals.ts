@@ -4,7 +4,7 @@ import { expertExercises } from "../exercises";
 
 export const module30: Module = {
   id: "react-expert-m30",
-  index: "M30",
+  index: "03",
   title: "React Internals",
   subtitle: "Reconciliation, Fiber, concurrent features",
   duration: "1 semaine",
