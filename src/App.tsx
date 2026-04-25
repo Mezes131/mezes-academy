@@ -15,6 +15,7 @@ import { ModulePage } from "@/pages/ModulePage";
 import { ProgressPage } from "@/pages/ProgressPage";
 import { BookmarksPage } from "@/pages/BookmarksPage";
 import { SearchPage } from "@/pages/SearchPage";
+import { CapstoneGatePage } from "@/pages/capstone/CapstoneGatePage";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
 
 function ThemeApplier({ children }: { children: React.ReactNode }) {
@@ -77,6 +78,10 @@ export default function App() {
                         />
                         <Route path="module/:moduleId" element={<ModulePage />} />
                         <Route path="progress" element={<ProgressPage />} />
+                        <Route
+                          path="final-project"
+                          element={<CapstoneGatePage />}
+                        />
                         <Route path="bookmarks" element={<BookmarksPage />} />
                         <Route path="search" element={<SearchPage />} />
                         <Route path="*" element={<ReactCoursePage />} />

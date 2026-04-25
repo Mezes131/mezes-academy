@@ -7,7 +7,7 @@ export default {
       fontFamily: {
         sans: [ "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
-        serif: ["Lora", "serif"],
+        serif: ["Arial", "Helvetica", "sans-serif"],
       },
       colors: {
         bg: {

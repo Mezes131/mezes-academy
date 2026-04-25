@@ -93,7 +93,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       </div>
 
       {/* ─── Contenu ───────────────────────────────── */}
-      <div className="space-y-2">
+      <div className="space-y-8">
         {module.content.map((block, i) => (
           <ContentRenderer key={i} block={block} />
         ))}

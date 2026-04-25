@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   Code2,
   Target,
+  Trophy,
 } from "lucide-react";
 import { phases, findModule } from "@/data/phases";
 import { useProgress } from "@/hooks/useProgress";
@@ -23,6 +24,8 @@ import { Button } from "@/components/ui/Button";
  */
 export function ReactCoursePage() {
   const { progress, stats, phaseStats } = useProgress();
+  const phaseCount = phases.length;
+  const moduleCount = phases.reduce((sum, phase) => sum + phase.modules.length, 0);
 
   // ─── Compute the "next module to do" ──────────────────────
   const nextModule = (() => {
@@ -88,7 +91,8 @@ export function ReactCoursePage() {
             du premier JSX à l'architecture expert.
           </h1>
           <p className="mt-5 text-[16px] text-fg-2 font-serif leading-relaxed max-w-2xl">
-            5 phases progressives, 27 modules, des dizaines d'exercices live.
+            {phaseCount} phases progressives, {moduleCount} modules, des dizaines
+            d'exercices live.
             Ta progression est sauvegardée automatiquement, reprends à tout
             moment là où tu t'es arrêté.
           </p>
@@ -129,10 +133,14 @@ export function ReactCoursePage() {
         </section>
       )}
 
-      {/* ─── 5-phase track ─────────────────── */}
+      {/* ─── Phase track ─────────────────── */}
       <section className="mb-10">
         <div className="flex items-center justify-between mb-4">
-          <SectionTitle icon="fa-layer-group" text="Le parcours en 5 phases" noMargin />
+          <SectionTitle
+            icon="fa-layer-group"
+            text={`Le parcours en ${phaseCount} phases`}
+            noMargin
+          />
           <Link to="/react/progress" className="text-[13px] text-accent-2 hover:underline inline-flex items-center gap-1">
             Voir tous les détails
             <ArrowRight size={13} />
@@ -199,7 +207,7 @@ export function ReactCoursePage() {
       {/* ─── Shortcuts ───────────────────────────── */}
       <section>
         <SectionTitle icon="fa-bolt" text="Raccourcis" />
-        <div className="grid sm:grid-cols-3 gap-3">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <ShortcutCard
             to="/react/progress"
             icon={<TrendingUp size={16} />}
@@ -217,6 +225,12 @@ export function ReactCoursePage() {
             icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
             title="Recherche"
             desc="Trouve un concept précis"
+          />
+          <ShortcutCard
+            to="/react/final-project"
+            icon={<Trophy size={16} />}
+            title="Projet final"
+            desc="Gate capstone + phase tutorielle"
           />
         </div>
       </section>
@@ -297,8 +311,8 @@ function ContinueCard({
             Bravo, tu as complété tous les modules disponibles !
           </div>
           <p className="text-[13px] text-fg-2 mt-1">
-            De nouveaux contenus arrivent régulièrement. Reviens bientôt pour
-            les phases 4, 5 et 6.
+            Le capstone React Pro Path est maintenant disponible : ouvre le gate
+            du projet final pour passer en mode production.
           </p>
         </div>
       </div>

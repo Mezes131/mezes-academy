@@ -4,6 +4,7 @@ import {
   Bookmark,
   PanelLeft,
   PanelLeftClose,
+  Trophy,
   TrendingUp,
 } from "lucide-react";
 import { SearchBar } from "@/components/ui/SearchBar";
@@ -100,6 +101,19 @@ export function CourseBar({
             title="Favoris"
           >
             <Bookmark size={16} />
+          </NavLink>
+
+          <NavLink
+            to="/react/final-project"
+            className={({ isActive }) =>
+              cn(
+                "w-9 h-9 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
+                isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
+              )
+            }
+            title="Projet final"
+          >
+            <Trophy size={16} />
           </NavLink>
         </div>
       </div>
