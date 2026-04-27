@@ -1,4 +1,4 @@
-import type { Course, Phase, Module } from "@/types";
+import type { Course, CourseProgram, Phase, Module } from "@/types";
 import { courses } from "./courses";
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -9,6 +9,11 @@ import { courses } from "./courses";
    ═══════════════════════════════════════════════════════════════════ */
 
 export { courses };
+
+/** Back-office ready syllabi, when a course exposes one. */
+export const allPrograms: CourseProgram[] = courses
+  .map((course) => course.program)
+  .filter((program): program is CourseProgram => Boolean(program));
 
 /** All phases of all courses, flattened — used by the router. */
 export const allPhases: Phase[] = courses.flatMap((c) => c.phases);
@@ -23,6 +28,10 @@ export const allModules: Array<{ course: Course; phase: Phase; module: Module }>
 
 export function findCourse(courseId: string): Course | undefined {
   return courses.find((c) => c.id === courseId);
+}
+
+export function findCourseProgram(courseId: string): CourseProgram | undefined {
+  return findCourse(courseId)?.program;
 }
 
 export function findPhase(phaseId: string): { course: Course; phase: Phase } | undefined {

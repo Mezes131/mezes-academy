@@ -24,11 +24,51 @@ export type PhaseColor =
   | "expert"
   | (string & {});
 
+export type PublicationStatus = "draft" | "review" | "published" | "archived";
+
+export type DifficultyLevel =
+  | "intro"
+  | "beginner"
+  | "intermediate"
+  | "advanced"
+  | "expert";
+
+export interface LessonOutline {
+  context: string;
+  concepts: string[];
+  pitfalls?: string[];
+  guidedExample?: string;
+  recap?: string;
+}
+
+export interface QuizBlueprint {
+  questionCount: number;
+  focus: string[];
+}
+
+export interface ExerciseBlueprint {
+  title: string;
+  kind: "guided" | "synthesis" | "project" | "audit" | "reflection";
+  brief: string;
+}
+
+export interface ProjectBrief {
+  title: string;
+  deliverable: string;
+  assessment: string[];
+  options?: string[];
+}
+
 export interface Lesson {
   id: string;
   title: string;
   desc: string;
   tags?: string[];
+  duration?: string;
+  objectives?: string[];
+  outline?: LessonOutline;
+  quiz?: QuizBlueprint;
+  exercises?: ExerciseBlueprint[];
 }
 
 export type InfoBoxVariant = "tip" | "warn" | "note" | "concept";
@@ -114,9 +154,17 @@ export interface Module {
   subtitle: string;
   duration: string;
   openByDefault?: boolean;
+  objectives?: string[];
+  prerequisites?: string[];
+  difficulty?: DifficultyLevel;
+  status?: PublicationStatus;
   content: ContentBlock[];
   quiz?: Quiz;
   exercises?: CodeExercise[];
+  assessment?: {
+    quiz?: QuizBlueprint;
+    exercises?: ExerciseBlueprint[];
+  };
 }
 
 export interface Phase {
@@ -132,7 +180,10 @@ export interface Phase {
   title: string;
   summary: string;
   metaTags: string[];
+  objectives?: string[];
+  prerequisites?: string[];
   modules: Module[];
+  project?: ProjectBrief;
   scaffoldOnly?: boolean;
 }
 
@@ -160,6 +211,60 @@ export interface Course {
   slug: string;
   meta: CourseMeta;
   phases: Phase[];
+  program?: CourseProgram;
+}
+
+/* ─── Back-office ready syllabus ──────────────────────────────── */
+
+export interface ProgramLesson {
+  id: string;
+  title: string;
+  objective: string;
+  courseOutline: LessonOutline;
+  quiz: QuizBlueprint;
+  exercises: ExerciseBlueprint[];
+  tags?: string[];
+  duration?: string;
+}
+
+export interface ProgramModule {
+  id: string;
+  moduleId?: string;
+  index: string;
+  title: string;
+  subtitle: string;
+  duration: string;
+  difficulty: DifficultyLevel;
+  objectives: string[];
+  lessons: ProgramLesson[];
+  assessment: {
+    quiz: QuizBlueprint;
+    exercises: ExerciseBlueprint[];
+  };
+}
+
+export interface ProgramPhase {
+  id: string;
+  phaseId?: string;
+  slug: PhaseSlug;
+  title: string;
+  objective: string;
+  modules: ProgramModule[];
+  project?: ProjectBrief;
+}
+
+export interface AuthoringPriority {
+  order: number;
+  target: string;
+  rationale: string;
+}
+
+export interface CourseProgram {
+  courseId: CourseId;
+  version: string;
+  reusableStructure: string[];
+  phases: ProgramPhase[];
+  authoringPriorities: AuthoringPriority[];
 }
 
 /* ─── User progress ─── */

@@ -4,7 +4,7 @@ export const reactMeta: CourseMeta = {
   title: "React : de zéro à expert",
   tagline: "Le parcours front-end complet",
   description:
-    "Apprends React à fond en 6 phases progressives, avec une phase tutorielle de transition vers les vrais outils avant le projet final.",
+    "Apprends React à fond en 6 phases progressives, des fondations JavaScript au capstone React/Next.js prêt pour portfolio.",
   icon: "fa-atom",
   accent: {
     text: "text-brand-core",
@@ -13,6 +13,6 @@ export const reactMeta: CourseMeta = {
   },
   tags: ["React 18", "TypeScript", "Next.js", "Tests", "Architecture"],
   level: "Tous niveaux",
-  duration: "≈10 semaines",
+  duration: "≈30 semaines",
   status: "active",
 };

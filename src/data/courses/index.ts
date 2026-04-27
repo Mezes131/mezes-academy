@@ -7,6 +7,7 @@ import { reactCourse } from "./react";
  * To add a new course (e.g. TypeScript, Next.js), create
  * `src/data/courses/<courseId>/` mirroring the React structure:
  *   - `meta.ts` — catalog entry (title, tagline, status…)
+ *   - `program.ts` — back-office ready syllabus and authoring priorities
  *   - `phases/<phaseSlug>/` — one folder per phase
  *   - `index.ts` — exports a `Course` object
  *
