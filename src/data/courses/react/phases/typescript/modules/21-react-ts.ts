@@ -4,7 +4,7 @@ import { typescriptExercises } from "../exercises";
 
 export const module21: Module = {
   id: "react-typescript-m21",
-  index: "03",
+  index: "21",
   title: "React + TypeScript",
   subtitle: "Typer les composants, props, state, events, hooks et contexts",
   duration: "2 semaines",

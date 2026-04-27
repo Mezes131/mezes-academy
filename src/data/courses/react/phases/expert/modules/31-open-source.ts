@@ -3,7 +3,7 @@ import { expertQuizzes } from "../quizzes";
 
 export const module31: Module = {
   id: "react-expert-m31",
-  index: "04",
+  index: "31",
   title: "Contribution Open Source",
   subtitle: "Publier une librairie npm, trouver sa première contribution",
   duration: "1 semaine",

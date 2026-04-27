@@ -3,8 +3,8 @@ import { coreQuizzes } from "../quizzes";
 import { coreExercises } from "../exercises";
 
 export const module17: Module = {
-  id: "react-core-m17",
-  index: "07",
+  id: "react-core-m12",
+  index: "12",
   title: "Gestion des formulaires",
   subtitle: "React Hook Form + validation Zod pour des formulaires robustes",
   duration: "0.5 semaine",

@@ -4,7 +4,7 @@ import { typescriptExercises } from "../exercises";
 
 export const module19: Module = {
   id: "react-typescript-m19",
-  index: "01",
+  index: "19",
   title: "Bases de TypeScript",
   subtitle: "Types primitifs, interfaces, génériques et unions",
   duration: "1 semaine",

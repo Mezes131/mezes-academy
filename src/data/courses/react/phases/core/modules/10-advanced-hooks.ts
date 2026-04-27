@@ -3,8 +3,8 @@ import { coreQuizzes } from "../quizzes";
 import { coreExercises } from "../exercises";
 
 export const module15: Module = {
-  id: "react-core-m15",
-  index: "05",
+  id: "react-core-m10",
+  index: "10",
   title: "Hooks avancés & Custom Hooks",
   subtitle: "useContext, useReducer, useRef, useMemo, useCallback et créer ses propres hooks",
   duration: "1.5 semaines",

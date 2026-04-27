@@ -2,8 +2,8 @@ import type { Module } from "@/types";
 import { coreQuizzes } from "../quizzes";
 
 export const module16: Module = {
-  id: "react-core-m16",
-  index: "06",
+  id: "react-core-m11",
+  index: "11",
   title: "React Router v6",
   subtitle: "Navigation multi-pages, routes dynamiques et routes protégées",
   duration: "1 semaine",

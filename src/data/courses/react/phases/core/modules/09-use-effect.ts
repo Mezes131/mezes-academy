@@ -2,8 +2,8 @@ import type { Module } from "@/types";
 import { coreQuizzes } from "../quizzes";
 
 export const module14: Module = {
-  id: "react-core-m14",
-  index: "04",
+  id: "react-core-m09",
+  index: "09",
   title: "useEffect & Cycle de vie",
   subtitle: "Synchroniser votre composant avec le monde extérieur",
   duration: "1 semaine",

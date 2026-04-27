@@ -3,7 +3,7 @@ import { ecosystemQuizzes } from "../quizzes";
 
 export const module27: Module = {
   id: "react-ecosystem-m27",
-  index: "06",
+  index: "27",
   title: "Performance & SEO",
   subtitle: "Core Web Vitals, images, lazy loading, metadata",
   duration: "1 semaine",

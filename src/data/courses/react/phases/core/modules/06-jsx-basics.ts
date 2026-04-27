@@ -3,8 +3,8 @@ import { coreQuizzes } from "../quizzes";
 import { coreExercises } from "../exercises";
 
 export const module11: Module = {
-  id: "react-core-m11",
-  index: "01",
+  id: "react-core-m06",
+  index: "06",
   title: "Introduction à React & JSX",
   subtitle: "Comprendre pourquoi React existe et écrire ses premiers composants",
   duration: "1 semaine",

@@ -583,11 +583,12 @@ function SyllabusPhaseCard({
 }
 
 function SyllabusModuleCard({ module }: { module: ProgramModule }) {
-  const liveModule = module.moduleId ? findModule(module.moduleId) : undefined;
+  const found = module.moduleId ? findModule(module.moduleId) : undefined;
+  const moduleNumber = syllabusModuleNumber(module);
   const content = (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-1">
-        <span className="text-[11px] font-mono text-fg-3">{module.index}</span>
+        <span className="text-[11px] font-mono text-fg-3">Module {moduleNumber}</span>
         <h4 className="font-bold group-hover:text-accent-2 transition">
           {module.title}
         </h4>
@@ -607,10 +608,10 @@ function SyllabusModuleCard({ module }: { module: ProgramModule }) {
             Leçons
           </div>
           <div className="grid sm:grid-cols-2 gap-2">
-            {module.lessons.map((lesson) => (
+            {module.lessons.map((lesson, lessonIndex) => (
               <div key={lesson.id} className="rounded-lg bg-bg-3 p-3">
                 <div className="text-[12px] font-bold">
-                  {lesson.id} · {lesson.title}
+                  Leçon {lessonIndex + 1} · {lesson.title}
                 </div>
                 <p className="mt-1 text-[11.5px] text-fg-2 leading-relaxed">
                   {lesson.objective}
@@ -650,7 +651,7 @@ function SyllabusModuleCard({ module }: { module: ProgramModule }) {
     </>
   );
 
-  if (!liveModule) {
+  if (!found) {
     return <div className="rounded-xl bg-bg-1 p-4">{content}</div>;
   }
 
@@ -662,6 +663,16 @@ function SyllabusModuleCard({ module }: { module: ProgramModule }) {
       {content}
     </Link>
   );
+}
+
+function syllabusModuleNumber(programModule: ProgramModule) {
+  if (programModule.moduleId) {
+    const m = /-m(\d+)$/.exec(programModule.moduleId);
+    if (m) return m[1];
+  }
+  const fromId = /-m(\d+)$/.exec(programModule.id);
+  if (fromId) return fromId[1];
+  return programModule.index;
 }
 
 function ShortcutCard({

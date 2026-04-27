@@ -1,12 +1,12 @@
 import type { Phase } from "@/types";
-import { module11 } from "./modules/11-jsx-basics";
-import { module12 } from "./modules/12-components-props";
-import { module13 } from "./modules/13-use-state";
-import { module14 } from "./modules/14-use-effect";
-import { module15 } from "./modules/15-advanced-hooks";
-import { module16 } from "./modules/16-react-router";
-import { module17 } from "./modules/17-forms";
-import { module18 } from "./modules/18-styling";
+import { module11 } from "./modules/06-jsx-basics";
+import { module12 } from "./modules/07-components-props";
+import { module13 } from "./modules/08-use-state";
+import { module14 } from "./modules/09-use-effect";
+import { module15 } from "./modules/10-advanced-hooks";
+import { module16 } from "./modules/11-react-router";
+import { module17 } from "./modules/12-forms";
+import { module18 } from "./modules/13-styling";
 
 export const corePhase: Phase = {
   id: "react-core",

@@ -3,8 +3,8 @@ import { coreQuizzes } from "../quizzes";
 import { coreExercises } from "../exercises";
 
 export const module13: Module = {
-  id: "react-core-m13",
-  index: "03",
+  id: "react-core-m08",
+  index: "08",
   title: "useState & Gestion du state",
   subtitle: "Rendre vos composants interactifs et dynamiques",
   duration: "1 semaine",
