@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { AppRouter } from "@/router/AppRouter";
 import { ProgressProvider } from "@/hooks/useProgress";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LandingLayout } from "@/components/layout/LandingLayout";
@@ -28,9 +29,7 @@ export default function App() {
     <AuthProvider>
       <ProgressProvider>
         <ThemeApplier>
-          <BrowserRouter
-            future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-          >
+          <AppRouter>
             <ScrollToTop />
             <Routes>
               {/* Landing Mezes Academy */}
@@ -101,7 +100,7 @@ export default function App() {
                 }
               />
             </Routes>
-          </BrowserRouter>
+          </AppRouter>
         </ThemeApplier>
       </ProgressProvider>
     </AuthProvider>
