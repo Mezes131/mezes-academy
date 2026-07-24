@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_DB: strapi
       POSTGRES_USER: strapi
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
     volumes:
       - strapi-db:/var/lib/postgresql/data
     healthcheck:
@@ -12,6 +12,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - internal
 
   strapi:
     build: ./strapi
@@ -21,15 +23,18 @@ services:
       DATABASE_PORT: "5432"
       DATABASE_NAME: strapi
       DATABASE_USERNAME: strapi
-      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
-      APP_KEYS: ${STRAPI_APP_KEYS:-placeholder_key_1,placeholder_key_2}
-      API_TOKEN_SALT: ${STRAPI_API_TOKEN:-placeholder_salt}
-      JWT_SECRET: ${STRAPI_JWT_SECRET:-placeholder_jwt}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      APP_KEYS: ${STRAPI_APP_KEYS:?STRAPI_APP_KEYS is required}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT:?STRAPI_API_TOKEN_SALT is required}
+      JWT_SECRET: ${STRAPI_JWT_SECRET:?STRAPI_JWT_SECRET is required}
     ports:
       - "1337:1337"
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - internal
+      - public
 
   web:
     build:
@@ -49,15 +54,23 @@ services:
     depends_on:
       strapi:
         condition: service_started
+    networks:
+      - public
 
   worker:
     build: ./worker
     environment:
       STRAPI_URL: http://strapi:1337
-      STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:-placeholder}
+      STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:?STRAPI_API_TOKEN is required}
     depends_on:
       strapi:
         condition: service_started
+    networks:
+      - public
 
 volumes:
   strapi-db:
+
+networks:
+  internal:
+  public:

@@ -31,5 +31,4 @@ lerna-debug.log*
 # Strapi local media uploads
 strapi/public/uploads/
 
-# Docker local data
-strapi-db/
+# Docker local data (named volumes are managed by Docker, not the filesystem)
