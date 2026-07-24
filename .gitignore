@@ -24,3 +24,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .claude/settings.local.json
+
+# Scratch workspace (agent plans, SDDs, reports)
+.superpowers/
+
+# Strapi local media uploads
+strapi/public/uploads/
+
+# Docker local data
+strapi-db/

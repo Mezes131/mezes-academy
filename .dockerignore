@@ -1,0 +1,25 @@
+node_modules
+dist
+dist-ssr
+.git
+.gitignore
+.env
+*.local
+
+# Dev tooling not needed in the image
+.vscode
+.idea
+.DS_Store
+docs
+design-system
+supabase
+.superpowers
+.claude
+
+# Docker meta-files (not needed inside the image)
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Logs
+*.log

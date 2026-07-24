@@ -1,0 +1,63 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - strapi-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi -d strapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  strapi:
+    build: ./strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      APP_KEYS: ${STRAPI_APP_KEYS:-placeholder_key_1,placeholder_key_2}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN:-placeholder_salt}
+      JWT_SECRET: ${STRAPI_JWT_SECRET:-placeholder_jwt}
+    ports:
+      - "1337:1337"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_STRAPI_URL: ${VITE_STRAPI_URL:-}
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-}
+    ports:
+      - "5173:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/ > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      strapi:
+        condition: service_started
+
+  worker:
+    build: ./worker
+    environment:
+      STRAPI_URL: http://strapi:1337
+      STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:-placeholder}
+    depends_on:
+      strapi:
+        condition: service_started
+
+volumes:
+  strapi-db:
