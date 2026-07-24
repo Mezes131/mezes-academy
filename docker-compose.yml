@@ -73,4 +73,5 @@ volumes:
 
 networks:
   internal:
+    internal: true
   public:
