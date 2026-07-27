@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-07-27T09:46:47.128Z",
+  "exportedAt": "2026-07-27T10:41:30.117Z",
   "course": {
     "legacyId": "svc",
     "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
@@ -20,16 +20,19 @@
         "slug": "bases",
         "title": "Bases web (optionnelle)",
         "label": "Phase 0",
-        "summary": "Donner aux product builders (no-code → code) le vocabulaire et les réflexes web nécessaires pour suivre le tronc commun. Skip libre si bases OK.",
+        "summary": "Pour les product builders qui viennent du no-code : le vocabulaire et les réflexes web nécessaires pour suivre le tronc commun. Skip libre si tes bases sont là.",
         "order": 0,
         "color": "intro",
         "icon": "fa-globe",
         "metaTags": [
-          "3 modules"
+          "optionnelle",
+          "lecture ~1h45",
+          "aucun prérequis",
+          "hors chemin critique"
         ],
         "objectives": [],
         "prerequisites": [],
-        "scaffoldOnly": true,
+        "scaffoldOnly": false,
         "projectTitle": "Projet P0 — Page connectée à une API",
         "projectDeliverable": "Une page qui appelle une API publique et affiche correctement loading / erreur / succès.",
         "projectAssessment": [
@@ -53,118 +56,100 @@
               "Comprendre fetch et async en JavaScript moderne"
             ],
             "prerequisites": [],
-            "openByDefault": false,
+            "openByDefault": true,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-bases-m01-l1",
-                    "title": "Requête / réponse HTTP",
-                    "desc": "Comprendre le cycle requête/réponse et les codes de statut.",
-                    "objectives": [
-                      "Comprendre le cycle requête/réponse et les codes de statut."
-                    ],
-                    "outline": {
-                      "context": "Comprendre le cycle requête/réponse et les codes de statut.",
-                      "concepts": [
-                        "méthodes HTTP",
-                        "codes de statut",
-                        "headers"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Requête / réponse HTTP.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "méthodes HTTP",
-                        "codes de statut",
-                        "headers"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-bases-m01-l2",
-                    "title": "HTML sémantique minimal",
-                    "desc": "Identifier les balises structurantes et leur rôle.",
-                    "objectives": [
-                      "Identifier les balises structurantes et leur rôle."
-                    ],
-                    "outline": {
-                      "context": "Identifier les balises structurantes et leur rôle.",
-                      "concepts": [
-                        "balises sémantiques",
-                        "structure de page",
-                        "formulaires"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : HTML sémantique minimal.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "balises sémantiques",
-                        "structure de page",
-                        "formulaires"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-bases-m01-l3",
-                    "title": "JS moderne utile",
-                    "desc": "Lire du JS asynchrone : fetch, async/await, JSON.",
-                    "objectives": [
-                      "Lire du JS asynchrone : fetch, async/await, JSON."
-                    ],
-                    "outline": {
-                      "context": "Lire du JS asynchrone : fetch, async/await, JSON.",
-                      "concepts": [
-                        "fetch",
-                        "async/await",
-                        "JSON"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : JS moderne utile.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "fetch",
-                        "async/await",
-                        "JSON"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Pourquoi ce module existe"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front : il te donne les trois lectures indispensables — le dialogue HTTP, la structure HTML, et le JavaScript asynchrone — pour comprendre ce que l'IA produit et repérer quand elle se trompe."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-forward'></i> Tu connais déjà tout ça ?",
+                  "body": "Cette phase 0 est <strong>optionnelle</strong>. Si les mots requête HTTP, balise sémantique et <code>async/await</code> te sont familiers, passe directement à la phase 1 : rien du tronc commun n'en dépend."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "HTTP : le cycle requête → réponse"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Tout le web repose sur un dialogue simple. Ton navigateur (le <em>client</em>) envoie une <strong>requête</strong> : une méthode (<code>GET</code>, <code>POST</code>…), une URL, des <em>headers</em> (métadonnées) et parfois un corps. Le <em>serveur</em> renvoie une <strong>réponse</strong> : un <strong>code de statut</strong>, des headers et un corps (HTML, JSON, image…). C'est tout. Chaque page chargée, chaque clic sur « Payer », chaque like est une variation de cet échange."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Un échange HTTP, à plat",
+                  "html": "<span class=\"cm\">// Requête envoyée par le navigateur</span>\n<span class=\"kw\">GET</span> /api/products/42 <span class=\"ty\">HTTP/1.1</span>\n<span class=\"prop\">Host:</span> boutique.example\n<span class=\"prop\">Accept:</span> application/json\n\n<span class=\"cm\">// Réponse du serveur</span>\n<span class=\"ty\">HTTP/1.1</span> <span class=\"num\">200</span> <span class=\"fn\">OK</span>\n<span class=\"prop\">Content-Type:</span> application/json\n\n{ <span class=\"str\">\"id\"</span>: <span class=\"num\">42</span>, <span class=\"str\">\"name\"</span>: <span class=\"str\">\"Clavier mécanique\"</span>, <span class=\"str\">\"price\"</span>: <span class=\"num\">89</span> }"
+                }
+              },
+              {
+                "kind": "paragraph",
+                "html": "Les codes de statut se lisent par famille : <strong>2xx</strong> = succès, <strong>3xx</strong> = redirection, <strong>4xx</strong> = erreur côté client (<code>404</code> introuvable, <code>401</code> non authentifié, <code>403</code> interdit), <strong>5xx</strong> = erreur côté serveur. Ce réflexe de lecture te servira à chaque audit : une API qui renvoie <code>200</code> avec un message d'erreur dans le corps, c'est déjà un défaut à signaler."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-magnifying-glass'></i> <strong>Réflexe DevTools</strong> : onglet Réseau (F12) ouvert, recharge une page et observe chaque requête : méthode, statut, headers, corps. C'est ta radiographie du web."
+              },
+              {
+                "kind": "title",
+                "text": "HTML sémantique : la structure qui a du sens"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Le HTML décrit la <em>nature</em> du contenu, pas son apparence. Un titre est un <code>&lt;h1&gt;</code>, une navigation un <code>&lt;nav&gt;</code>, une action un <code>&lt;button&gt;</code>. Les IA génèrent parfois des pages entières en <code>&lt;div&gt;</code> cliquables : ça <em>ressemble</em> à une interface, mais c'est invisible pour un clavier ou un lecteur d'écran, et pénalisé par les moteurs de recherche."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Le squelette sémantique minimal",
+                  "html": "<span class=\"jsx\">&lt;<span class=\"ty\">header</span>&gt;</span>\n  <span class=\"jsx\">&lt;<span class=\"ty\">nav</span>&gt;</span>…liens principaux…<span class=\"jsx\">&lt;/<span class=\"ty\">nav</span>&gt;</span>\n<span class=\"jsx\">&lt;/<span class=\"ty\">header</span>&gt;</span>\n<span class=\"jsx\">&lt;<span class=\"ty\">main</span>&gt;</span>\n  <span class=\"jsx\">&lt;<span class=\"ty\">h1</span>&gt;</span>Un seul h1 par page<span class=\"jsx\">&lt;/<span class=\"ty\">h1</span>&gt;</span>\n  <span class=\"jsx\">&lt;<span class=\"ty\">form</span>&gt;</span>\n    <span class=\"jsx\">&lt;<span class=\"ty\">label</span> <span class=\"prop\">for</span>=<span class=\"str\">\"email\"</span>&gt;</span>Email<span class=\"jsx\">&lt;/<span class=\"ty\">label</span>&gt;</span>\n    <span class=\"jsx\">&lt;<span class=\"ty\">input</span> <span class=\"prop\">id</span>=<span class=\"str\">\"email\"</span> <span class=\"prop\">type</span>=<span class=\"str\">\"email\"</span> /&gt;</span>\n    <span class=\"jsx\">&lt;<span class=\"ty\">button</span>&gt;</span>Envoyer<span class=\"jsx\">&lt;/<span class=\"ty\">button</span>&gt;</span>\n  <span class=\"jsx\">&lt;/<span class=\"ty\">form</span>&gt;</span>\n<span class=\"jsx\">&lt;/<span class=\"ty\">main</span>&gt;</span>\n<span class=\"jsx\">&lt;<span class=\"ty\">footer</span>&gt;</span>…mentions…<span class=\"jsx\">&lt;/<span class=\"ty\">footer</span>&gt;</span>"
+                }
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Le piège classique du code généré",
+                  "body": "<code>&lt;div onclick=...&gt;</code> au lieu de <code>&lt;button&gt;</code>, des inputs sans <code>&lt;label&gt;</code>, cinq <code>&lt;h1&gt;</code> par page. Dès la phase Audit, tu apprendras à repérer et corriger ces défauts systématiquement."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Le JavaScript utile : fetch et l'asynchrone"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Le JavaScript moderne que tu croiseras le plus dans du code généré tient en trois notions : <code>fetch</code> pour appeler une API, les <strong>promesses</strong> pour représenter « un résultat qui arrivera plus tard », et <code>async/await</code> pour écrire ce code asynchrone comme s'il était linéaire."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Appeler une API, la version correcte",
+                  "html": "<span class=\"kw\">async function</span> <span class=\"fn\">loadProduct</span>() {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(<span class=\"str\">\"/api/products/42\"</span>);\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// fetch ne rejette PAS sur un 404/500 : à vérifier soi-même</span>\n    <span class=\"kw\">throw new</span> <span class=\"fn\">Error</span>(<span class=\"str\">`HTTP ${response.status}`</span>);\n  }\n  <span class=\"kw\">const</span> product = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>();\n  <span class=\"kw\">return</span> product;\n}"
+                }
+              },
+              {
+                "kind": "paragraph",
+                "html": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code> — tu viens d'apprendre ta première vérification d'audit."
+              },
+              {
+                "kind": "title",
+                "text": "À toi de jouer : autopsie d'un flux réseau"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Exercice pratique (hors éditeur) : ouvre les DevTools (F12) → onglet <strong>Réseau</strong> sur un site que tu utilises. Recharge la page, choisis une requête vers une API (type <code>fetch/XHR</code>) et note : la méthode, l'URL, le code de statut, deux headers de la réponse et la forme du corps. Puis explique en trois phrases ce que cette requête accomplit pour l'utilisateur. Cette autopsie guidée est exactement le geste que tu referas en audit de sécurité, phase 8."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "méthodes HTTP",
-                  "codes de statut",
-                  "headers",
-                  "balises sémantiques",
-                  "structure de page",
-                  "formulaires",
-                  "fetch",
-                  "async/await"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Inspecter un flux réseau",
-                  "kind": "guided",
-                  "brief": "Ouvrir les DevTools sur une page réelle, inspecter un flux réseau et expliquer chaque étape (requête, statut, réponse)."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-bases-m01-lesson",
               "title": "HTTP, HTML, JS utiles",
@@ -174,11 +159,259 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Requête / réponse HTTP</strong> — Comprendre le cycle requête/réponse et les codes de statut.</li><li><strong>HTML sémantique minimal</strong> — Identifier les balises structurantes et leur rôle.</li><li><strong>JS moderne utile</strong> — Lire du JS asynchrone : fetch, async/await, JSON.</li></ul>"
+                  "body": "<h2>Pourquoi ce module existe</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front : il te donne les trois lectures indispensables — le dialogue HTTP, la structure HTML, et le JavaScript asynchrone — pour comprendre ce que l'IA produit et repérer quand elle se trompe."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-forward'></i> Tu connais déjà tout ça ?",
+                  "body": "Cette phase 0 est <strong>optionnelle</strong>. Si les mots requête HTTP, balise sémantique et <code>async/await</code> te sont familiers, passe directement à la phase 1 : rien du tronc commun n'en dépend."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>HTTP : le cycle requête → réponse</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Tout le web repose sur un dialogue simple. Ton navigateur (le <em>client</em>) envoie une <strong>requête</strong> : une méthode (<code>GET</code>, <code>POST</code>…), une URL, des <em>headers</em> (métadonnées) et parfois un corps. Le <em>serveur</em> renvoie une <strong>réponse</strong> : un <strong>code de statut</strong>, des headers et un corps (HTML, JSON, image…). C'est tout. Chaque page chargée, chaque clic sur « Payer », chaque like est une variation de cet échange."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Un échange HTTP, à plat",
+                  "language": "tsx",
+                  "code": "<span class=\"cm\">// Requête envoyée par le navigateur</span>\n<span class=\"kw\">GET</span> /api/products/42 <span class=\"ty\">HTTP/1.1</span>\n<span class=\"prop\">Host:</span> boutique.example\n<span class=\"prop\">Accept:</span> application/json\n\n<span class=\"cm\">// Réponse du serveur</span>\n<span class=\"ty\">HTTP/1.1</span> <span class=\"num\">200</span> <span class=\"fn\">OK</span>\n<span class=\"prop\">Content-Type:</span> application/json\n\n{ <span class=\"str\">\"id\"</span>: <span class=\"num\">42</span>, <span class=\"str\">\"name\"</span>: <span class=\"str\">\"Clavier mécanique\"</span>, <span class=\"str\">\"price\"</span>: <span class=\"num\">89</span> }"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Les codes de statut se lisent par famille : <strong>2xx</strong> = succès, <strong>3xx</strong> = redirection, <strong>4xx</strong> = erreur côté client (<code>404</code> introuvable, <code>401</code> non authentifié, <code>403</code> interdit), <strong>5xx</strong> = erreur côté serveur. Ce réflexe de lecture te servira à chaque audit : une API qui renvoie <code>200</code> avec un message d'erreur dans le corps, c'est déjà un défaut à signaler."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-magnifying-glass'></i> <strong>Réflexe DevTools</strong> : onglet Réseau (F12) ouvert, recharge une page et observe chaque requête : méthode, statut, headers, corps. C'est ta radiographie du web.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>HTML sémantique : la structure qui a du sens</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Le HTML décrit la <em>nature</em> du contenu, pas son apparence. Un titre est un <code>&lt;h1&gt;</code>, une navigation un <code>&lt;nav&gt;</code>, une action un <code>&lt;button&gt;</code>. Les IA génèrent parfois des pages entières en <code>&lt;div&gt;</code> cliquables : ça <em>ressemble</em> à une interface, mais c'est invisible pour un clavier ou un lecteur d'écran, et pénalisé par les moteurs de recherche."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Le squelette sémantique minimal",
+                  "language": "tsx",
+                  "code": "<span class=\"jsx\">&lt;<span class=\"ty\">header</span>&gt;</span>\n  <span class=\"jsx\">&lt;<span class=\"ty\">nav</span>&gt;</span>…liens principaux…<span class=\"jsx\">&lt;/<span class=\"ty\">nav</span>&gt;</span>\n<span class=\"jsx\">&lt;/<span class=\"ty\">header</span>&gt;</span>\n<span class=\"jsx\">&lt;<span class=\"ty\">main</span>&gt;</span>\n  <span class=\"jsx\">&lt;<span class=\"ty\">h1</span>&gt;</span>Un seul h1 par page<span class=\"jsx\">&lt;/<span class=\"ty\">h1</span>&gt;</span>\n  <span class=\"jsx\">&lt;<span class=\"ty\">form</span>&gt;</span>\n    <span class=\"jsx\">&lt;<span class=\"ty\">label</span> <span class=\"prop\">for</span>=<span class=\"str\">\"email\"</span>&gt;</span>Email<span class=\"jsx\">&lt;/<span class=\"ty\">label</span>&gt;</span>\n    <span class=\"jsx\">&lt;<span class=\"ty\">input</span> <span class=\"prop\">id</span>=<span class=\"str\">\"email\"</span> <span class=\"prop\">type</span>=<span class=\"str\">\"email\"</span> /&gt;</span>\n    <span class=\"jsx\">&lt;<span class=\"ty\">button</span>&gt;</span>Envoyer<span class=\"jsx\">&lt;/<span class=\"ty\">button</span>&gt;</span>\n  <span class=\"jsx\">&lt;/<span class=\"ty\">form</span>&gt;</span>\n<span class=\"jsx\">&lt;/<span class=\"ty\">main</span>&gt;</span>\n<span class=\"jsx\">&lt;<span class=\"ty\">footer</span>&gt;</span>…mentions…<span class=\"jsx\">&lt;/<span class=\"ty\">footer</span>&gt;</span>"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Le piège classique du code généré",
+                  "body": "<code>&lt;div onclick=...&gt;</code> au lieu de <code>&lt;button&gt;</code>, des inputs sans <code>&lt;label&gt;</code>, cinq <code>&lt;h1&gt;</code> par page. Dès la phase Audit, tu apprendras à repérer et corriger ces défauts systématiquement."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Le JavaScript utile : fetch et l'asynchrone</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Le JavaScript moderne que tu croiseras le plus dans du code généré tient en trois notions : <code>fetch</code> pour appeler une API, les <strong>promesses</strong> pour représenter « un résultat qui arrivera plus tard », et <code>async/await</code> pour écrire ce code asynchrone comme s'il était linéaire."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Appeler une API, la version correcte",
+                  "language": "tsx",
+                  "code": "<span class=\"kw\">async function</span> <span class=\"fn\">loadProduct</span>() {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(<span class=\"str\">\"/api/products/42\"</span>);\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// fetch ne rejette PAS sur un 404/500 : à vérifier soi-même</span>\n    <span class=\"kw\">throw new</span> <span class=\"fn\">Error</span>(<span class=\"str\">`HTTP ${response.status}`</span>);\n  }\n  <span class=\"kw\">const</span> product = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>();\n  <span class=\"kw\">return</span> product;\n}"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code> — tu viens d'apprendre ta première vérification d'audit."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>À toi de jouer : autopsie d'un flux réseau</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Exercice pratique (hors éditeur) : ouvre les DevTools (F12) → onglet <strong>Réseau</strong> sur un site que tu utilises. Recharge la page, choisis une requête vers une API (type <code>fetch/XHR</code>) et note : la méthode, l'URL, le code de statut, deux headers de la réponse et la forme du corps. Puis explique en trois phrases ce que cette requête accomplit pour l'utilisateur. Cette autopsie guidée est exactement le geste que tu referas en audit de sécurité, phase 8."
                 }
               ]
             },
-            "quiz": null,
+            "quiz": {
+              "legacyId": "svc-bases-quiz-m01",
+              "title": "HTTP, HTML, JS : valide tes bases",
+              "questions": [
+                {
+                  "legacyId": "svc-bases-quiz-m01-q1",
+                  "prompt": "Que se passe-t-il quand ton navigateur charge une page web ?",
+                  "type": "single",
+                  "explanation": "Le web fonctionne en cycle requête → réponse : le navigateur demande une ressource, le serveur répond avec un statut, des headers et un corps (HTML, JSON, image…).",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q1-a",
+                      "label": "Il télécharge tout le serveur en local",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q1-b",
+                      "label": "Il envoie une requête HTTP et reçoit une réponse (statut + headers + corps)",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q1-c",
+                      "label": "Il ouvre une connexion permanente qui ne se ferme jamais",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q1-d",
+                      "label": "Il exécute le code du serveur dans la page",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m01-q2",
+                  "prompt": "Un serveur répond « 404 ». Qu'est-ce que ça signifie ?",
+                  "type": "single",
+                  "explanation": "4xx = erreur côté client. 404 précisément : l'URL demandée ne correspond à aucune ressource. Un plantage serveur serait un 5xx, un accès refusé un 401/403.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q2-a",
+                      "label": "Le serveur a planté",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q2-b",
+                      "label": "La requête a réussi",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q2-c",
+                      "label": "La ressource demandée n'existe pas",
+                      "isCorrect": true,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q2-d",
+                      "label": "Il faut se connecter d'abord",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m01-q3",
+                  "prompt": "Quelle méthode HTTP utilise-t-on par convention pour créer une ressource ?",
+                  "type": "single",
+                  "explanation": "GET lit, POST crée, PATCH/PUT modifient, DELETE supprime. Ces conventions permettent de comprendre une API sans lire sa doc ligne par ligne.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q3-a",
+                      "label": "GET",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q3-b",
+                      "label": "POST",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q3-c",
+                      "label": "DELETE",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q3-d",
+                      "label": "PATCH",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m01-q4",
+                  "prompt": "Pourquoi préférer <code>&lt;button&gt;</code> à un <code>&lt;div onclick&gt;</code> ?",
+                  "type": "single",
+                  "explanation": "Le HTML sémantique donne gratuitement l'accessibilité : focus clavier, rôle annoncé, comportement natif. Un div cliquable doit tout réimplémenter à la main.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q4-a",
+                      "label": "C'est plus rapide à exécuter",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q4-b",
+                      "label": "Le bouton est accessible au clavier et annoncé correctement aux lecteurs d'écran",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q4-c",
+                      "label": "Les div ne peuvent pas recevoir de clic",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q4-d",
+                      "label": "Aucune différence, c'est une question de style",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m01-q5",
+                  "prompt": "Que renvoie <code>fetch(url)</code> en JavaScript ?",
+                  "type": "single",
+                  "explanation": "fetch est asynchrone : il renvoie une promesse de Response. Il faut ensuite appeler response.json() (autre promesse) pour obtenir les données.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q5-a",
+                      "label": "Directement les données JSON",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q5-b",
+                      "label": "Une promesse qui se résout en objet Response",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q5-c",
+                      "label": "Le HTML de la page courante",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m01-q5-d",
+                      "label": "Rien, fetch est synchrone",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
             "exercises": []
           },
           {
@@ -200,118 +433,72 @@
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-bases-m02-l1",
-                    "title": "Repo, commits, branches",
-                    "desc": "Maîtriser le cycle de base de Git sur un projet solo.",
-                    "objectives": [
-                      "Maîtriser le cycle de base de Git sur un projet solo."
-                    ],
-                    "outline": {
-                      "context": "Maîtriser le cycle de base de Git sur un projet solo.",
-                      "concepts": [
-                        "init/clone",
-                        "commit",
-                        "branches"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Repo, commits, branches.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "init/clone",
-                        "commit",
-                        "branches"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-bases-m02-l2",
-                    "title": ".env vs code",
-                    "desc": "Comprendre pourquoi les secrets ne vont jamais dans le repo.",
-                    "objectives": [
-                      "Comprendre pourquoi les secrets ne vont jamais dans le repo."
-                    ],
-                    "outline": {
-                      "context": "Comprendre pourquoi les secrets ne vont jamais dans le repo.",
-                      "concepts": [
-                        "variables d'environnement",
-                        ".gitignore",
-                        ".env.example"
-                      ],
-                      "pitfalls": [
-                        "committer un .env",
-                        "secrets en dur dans le code"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : .env vs code.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "variables d'environnement",
-                        ".gitignore",
-                        ".env.example"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-bases-m02-l3",
-                    "title": "Scripts npm",
-                    "desc": "Lire package.json et lancer dev/build/test.",
-                    "objectives": [
-                      "Lire package.json et lancer dev/build/test."
-                    ],
-                    "outline": {
-                      "context": "Lire package.json et lancer dev/build/test.",
-                      "concepts": [
-                        "package.json",
-                        "scripts npm",
-                        "node_modules"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Scripts npm.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "package.json",
-                        "scripts npm",
-                        "node_modules"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Git : ton filet de sécurité"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Quand une IA modifie dix fichiers d'un coup, une seule chose te permet de dire « qu'est-ce qui a changé, exactement ? » et « reviens en arrière » : <strong>Git</strong>. Un <em>repo</em> (dépôt) est l'historique complet de ton projet. Un <strong>commit</strong> est un instantané nommé : l'état du projet à un moment donné, avec un message qui explique le <em>pourquoi</em>. Une <strong>branche</strong> est une ligne de travail parallèle, qu'on fusionne quand elle est prête."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Le cycle Git de base",
+                  "html": "<span class=\"cm\"># créer le dépôt (une fois)</span>\n<span class=\"fn\">git</span> init\n\n<span class=\"cm\"># voir ce qui a changé — TON outil de contrôle du code généré</span>\n<span class=\"fn\">git</span> status\n<span class=\"fn\">git</span> diff\n\n<span class=\"cm\"># enregistrer un instantané</span>\n<span class=\"fn\">git</span> add .\n<span class=\"fn\">git</span> commit -m <span class=\"str\">\"feat: formulaire de contact avec validation\"</span>\n\n<span class=\"cm\"># travailler sur une branche, puis fusionner</span>\n<span class=\"fn\">git</span> switch -c feature/paiement\n<span class=\"fn\">git</span> switch main\n<span class=\"fn\">git</span> merge feature/paiement"
+                }
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-robot'></i> Règle d'or du vibe coding",
+                  "body": "<strong>Un commit avant chaque génération, un commit après chaque itération validée.</strong> Si l'IA part dans le décor, <code>git diff</code> te montre les dégâts et <code>git restore</code> les annule. Sans Git, tu ne fais pas du vibe coding, tu joues à la roulette."
+                }
+              },
+              {
+                "kind": "title",
+                "text": ".env : les secrets hors du code"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite — et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Le trio .env / .env.example / .gitignore",
+                  "html": "<span class=\"cm\"># .env — les VRAIES valeurs, jamais commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">sk_live_…vraie clé…</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:motdepasse@host/db</span>\n\n<span class=\"cm\"># .env.example — la DOC des variables, commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">changeme</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:password@localhost/db</span>\n\n<span class=\"cm\"># .gitignore — ce que Git doit ignorer</span>\nnode_modules/\n.env"
+                }
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
+                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés — la phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "npm : les scripts du projet"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> — voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "package.json — la section scripts",
+                  "html": "{\n  <span class=\"str\">\"scripts\"</span>: {\n    <span class=\"str\">\"dev\"</span>: <span class=\"str\">\"vite\"</span>,            <span class=\"cm\">// serveur de développement</span>\n    <span class=\"str\">\"build\"</span>: <span class=\"str\">\"vite build\"</span>,    <span class=\"cm\">// version optimisée pour la prod</span>\n    <span class=\"str\">\"lint\"</span>: <span class=\"str\">\"eslint .\"</span>,        <span class=\"cm\">// vérification du code</span>\n    <span class=\"str\">\"test\"</span>: <span class=\"str\">\"vitest run\"</span>      <span class=\"cm\">// tests automatisés</span>\n  }\n}"
+                }
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-list-check'></i> <strong>Checklist projet propre</strong> : <code>git init</code> fait · <code>.gitignore</code> couvre <code>node_modules/</code> et <code>.env</code> · <code>.env.example</code> documente les variables · premier commit lisible. C'est l'objet de l'exercice ci-dessous."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "init/clone",
-                  "commit",
-                  "branches",
-                  "variables d'environnement",
-                  ".gitignore",
-                  ".env.example",
-                  "package.json",
-                  "scripts npm"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Initialiser un projet propre",
-                  "kind": "guided",
-                  "brief": "Initialiser un projet avec .gitignore et .env.example corrects, premier commit lisible."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-bases-m02-lesson",
               "title": "Git & projet local",
@@ -321,12 +508,265 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Repo, commits, branches</strong> — Maîtriser le cycle de base de Git sur un projet solo.</li><li><strong>.env vs code</strong> — Comprendre pourquoi les secrets ne vont jamais dans le repo.</li><li><strong>Scripts npm</strong> — Lire package.json et lancer dev/build/test.</li></ul>"
+                  "body": "<h2>Git : ton filet de sécurité</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Quand une IA modifie dix fichiers d'un coup, une seule chose te permet de dire « qu'est-ce qui a changé, exactement ? » et « reviens en arrière » : <strong>Git</strong>. Un <em>repo</em> (dépôt) est l'historique complet de ton projet. Un <strong>commit</strong> est un instantané nommé : l'état du projet à un moment donné, avec un message qui explique le <em>pourquoi</em>. Une <strong>branche</strong> est une ligne de travail parallèle, qu'on fusionne quand elle est prête."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Le cycle Git de base",
+                  "language": "tsx",
+                  "code": "<span class=\"cm\"># créer le dépôt (une fois)</span>\n<span class=\"fn\">git</span> init\n\n<span class=\"cm\"># voir ce qui a changé — TON outil de contrôle du code généré</span>\n<span class=\"fn\">git</span> status\n<span class=\"fn\">git</span> diff\n\n<span class=\"cm\"># enregistrer un instantané</span>\n<span class=\"fn\">git</span> add .\n<span class=\"fn\">git</span> commit -m <span class=\"str\">\"feat: formulaire de contact avec validation\"</span>\n\n<span class=\"cm\"># travailler sur une branche, puis fusionner</span>\n<span class=\"fn\">git</span> switch -c feature/paiement\n<span class=\"fn\">git</span> switch main\n<span class=\"fn\">git</span> merge feature/paiement"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-robot'></i> Règle d'or du vibe coding",
+                  "body": "<strong>Un commit avant chaque génération, un commit après chaque itération validée.</strong> Si l'IA part dans le décor, <code>git diff</code> te montre les dégâts et <code>git restore</code> les annule. Sans Git, tu ne fais pas du vibe coding, tu joues à la roulette."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>.env : les secrets hors du code</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite — et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Le trio .env / .env.example / .gitignore",
+                  "language": "tsx",
+                  "code": "<span class=\"cm\"># .env — les VRAIES valeurs, jamais commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">sk_live_…vraie clé…</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:motdepasse@host/db</span>\n\n<span class=\"cm\"># .env.example — la DOC des variables, commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">changeme</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:password@localhost/db</span>\n\n<span class=\"cm\"># .gitignore — ce que Git doit ignorer</span>\nnode_modules/\n.env"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
+                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés — la phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>npm : les scripts du projet</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> — voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "package.json — la section scripts",
+                  "language": "tsx",
+                  "code": "{\n  <span class=\"str\">\"scripts\"</span>: {\n    <span class=\"str\">\"dev\"</span>: <span class=\"str\">\"vite\"</span>,            <span class=\"cm\">// serveur de développement</span>\n    <span class=\"str\">\"build\"</span>: <span class=\"str\">\"vite build\"</span>,    <span class=\"cm\">// version optimisée pour la prod</span>\n    <span class=\"str\">\"lint\"</span>: <span class=\"str\">\"eslint .\"</span>,        <span class=\"cm\">// vérification du code</span>\n    <span class=\"str\">\"test\"</span>: <span class=\"str\">\"vitest run\"</span>      <span class=\"cm\">// tests automatisés</span>\n  }\n}"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-list-check'></i> <strong>Checklist projet propre</strong> : <code>git init</code> fait · <code>.gitignore</code> couvre <code>node_modules/</code> et <code>.env</code> · <code>.env.example</code> documente les variables · premier commit lisible. C'est l'objet de l'exercice ci-dessous.</em></p>"
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-bases-quiz-m02",
+              "title": "Git & projet local : valide tes bases",
+              "questions": [
+                {
+                  "legacyId": "svc-bases-quiz-m02-q1",
+                  "prompt": "À quoi sert un commit Git ?",
+                  "type": "single",
+                  "explanation": "Un commit est un point de sauvegarde de l'état du projet avec un message. L'historique des commits permet de comprendre et d'annuler des changements.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q1-a",
+                      "label": "À envoyer le code en production",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q1-b",
+                      "label": "À enregistrer un instantané nommé du projet, auquel on peut revenir",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q1-c",
+                      "label": "À compresser les fichiers du projet",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q1-d",
+                      "label": "À supprimer l'historique précédent",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m02-q2",
+                  "prompt": "Pourquoi le fichier <code>.env</code> ne doit-il JAMAIS être commité ?",
+                  "type": "single",
+                  "explanation": "Un secret commité reste dans l'historique Git même après suppression du fichier. C'est l'une des fuites les plus fréquentes — surtout avec du code généré par IA.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q2-a",
+                      "label": "Il est trop volumineux",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q2-b",
+                      "label": "Il contient des secrets (clés API, mots de passe) qui seraient exposés dans l'historique",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q2-c",
+                      "label": "Git ne supporte pas ce format",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q2-d",
+                      "label": "Il change trop souvent",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m02-q3",
+                  "prompt": "Quel est le rôle du fichier <code>.env.example</code> ?",
+                  "type": "single",
+                  "explanation": "Le .env.example liste les clés nécessaires (avec des valeurs factices) pour qu'un nouveau développeur sache quoi configurer. Les vraies valeurs restent hors du repo.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q3-a",
+                      "label": "C'est une sauvegarde du vrai .env",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q3-b",
+                      "label": "Il documente les variables attendues, sans leurs valeurs réelles, et lui se commit",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q3-c",
+                      "label": "Il est utilisé en production à la place du .env",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q3-d",
+                      "label": "Il désactive les variables d'environnement",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m02-q4",
+                  "prompt": "Que doit contenir au minimum le <code>.gitignore</code> d'un projet Node ?",
+                  "type": "single",
+                  "explanation": "node_modules se réinstalle avec npm install (inutile et énorme dans le repo) ; .env contient les secrets. package.json et src/ sont au contraire le cœur du projet versionné.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q4-a",
+                      "label": "node_modules et .env",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q4-b",
+                      "label": "package.json et src/",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q4-c",
+                      "label": "Tous les fichiers .js",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q4-d",
+                      "label": "Le README",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m02-q5",
+                  "prompt": "Que fait <code>npm run dev</code> ?",
+                  "type": "single",
+                  "explanation": "npm run <nom> exécute le script correspondant du package.json. « dev » lance en général le serveur de développement, mais c'est le projet qui le définit.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q5-a",
+                      "label": "C'est une commande magique identique dans tous les projets",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q5-b",
+                      "label": "Il exécute le script « dev » défini dans la section scripts du package.json",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q5-c",
+                      "label": "Il déploie le projet",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m02-q5-d",
+                      "label": "Il installe les dépendances",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-bases-ex-m02-1",
+                "title": "Initialiser un projet propre",
+                "instructions": "Ce projet fuit : une clé d'API est en dur dans <code>index.js</code> et rien n'est ignoré par Git. Complète le <code>.gitignore</code> (ignorer <code>node_modules</code> et <code>.env</code>), documente la variable dans <code>.env.example</code> (sans vraie valeur), et retire la clé du code.",
+                "kind": "code",
+                "order": 0,
+                "hints": [
+                  "Dans .gitignore, une ligne par motif : node_modules/ puis .env",
+                  ".env.example liste les clés attendues avec une valeur factice : API_KEY=changeme",
+                  "Dans index.js, la clé ne doit plus apparaître : lis-la depuis la config (ici, le placeholder CONFIG.API_KEY)."
+                ],
+                "starterFiles": {
+                  "/index.js": "// Démo : appel d'API avec une clé… collée en dur (mauvaise idée).\nconst API_KEY = \"sk_live_51JxF2eKm9zPqR7Ab\";\n\ndocument.getElementById(\"app\").innerHTML = `\n  <h2>Config du projet</h2>\n  <p>Clé utilisée : ${API_KEY ? \"définie\" : \"manquante\"}</p>\n`;\n",
+                  "/.gitignore": "# TODO: ignorer les dépendances installées\n# TODO: ignorer le fichier de secrets\n",
+                  "/.env.example": "# TODO: documenter ici les variables attendues (sans vraie valeur)\n"
+                },
+                "solutionFiles": {
+                  "/index.js": "// La clé vient de la configuration d'environnement, jamais du code.\n// (Dans un vrai projet : process.env / import.meta.env chargé depuis .env)\nconst CONFIG = { API_KEY: \"\" }; // injecté au runtime, vide en démo\nconst API_KEY = CONFIG.API_KEY;\n\ndocument.getElementById(\"app\").innerHTML = `\n  <h2>Config du projet</h2>\n  <p>Clé utilisée : ${API_KEY ? \"définie\" : \"manquante\"}</p>\n`;\n",
+                  "/.gitignore": "node_modules/\n.env\n",
+                  "/.env.example": "# Clé d'API du service de paiement (test) — vraie valeur dans .env, jamais commitée\nAPI_KEY=changeme\n"
+                },
+                "tests": null,
+                "validator": "const gitignore = files[\"/.gitignore\"] ?? \"\";\nconst envExample = files[\"/.env.example\"] ?? \"\";\nconst code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \".gitignore ignore node_modules\", pass: /node_modules/.test(gitignore) },\n  { name: \".gitignore ignore .env\", pass: /^\\.env\\s*$/m.test(gitignore) },\n  { name: \".env.example documente API_KEY sans vraie valeur\", pass: /API_KEY\\s*=/.test(envExample) && !/sk_live_/.test(envExample) },\n  { name: \"plus de clé en dur dans index.js\", pass: !/sk_live_/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
+                "template": "vanilla",
+                "attemptsBeforeSolution": 3,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-bases-m03",
@@ -347,112 +787,77 @@
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-bases-m03-l1",
-                    "title": "JSON et erreurs HTTP",
-                    "desc": "Lire une réponse JSON et réagir aux codes d'erreur.",
-                    "objectives": [
-                      "Lire une réponse JSON et réagir aux codes d'erreur."
-                    ],
-                    "outline": {
-                      "context": "Lire une réponse JSON et réagir aux codes d'erreur.",
-                      "concepts": [
-                        "JSON",
-                        "4xx vs 5xx",
-                        "gestion d'erreurs"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : JSON et erreurs HTTP.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "JSON",
-                        "4xx vs 5xx",
-                        "gestion d'erreurs"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-bases-m03-l2",
-                    "title": "CORS basique",
-                    "desc": "Comprendre pourquoi le navigateur bloque certaines requêtes.",
-                    "objectives": [
-                      "Comprendre pourquoi le navigateur bloque certaines requêtes."
-                    ],
-                    "outline": {
-                      "context": "Comprendre pourquoi le navigateur bloque certaines requêtes.",
-                      "concepts": [
-                        "same-origin",
-                        "CORS",
-                        "preflight"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : CORS basique.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "same-origin",
-                        "CORS",
-                        "preflight"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-bases-m03-l3",
-                    "title": "États loading / error / success",
-                    "desc": "Structurer une UI autour des trois états d'une requête.",
-                    "objectives": [
-                      "Structurer une UI autour des trois états d'une requête."
-                    ],
-                    "outline": {
-                      "context": "Structurer une UI autour des trois états d'une requête.",
-                      "concepts": [
-                        "états de requête",
-                        "feedback utilisateur"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : États loading / error / success.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "états de requête",
-                        "feedback utilisateur"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "JSON : la langue commune"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> — c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Une réponse d'API typique",
+                  "html": "{\n  <span class=\"str\">\"id\"</span>: <span class=\"num\">17</span>,\n  <span class=\"str\">\"name\"</span>: <span class=\"str\">\"Awa Diop\"</span>,\n  <span class=\"str\">\"email\"</span>: <span class=\"str\">\"awa@example.com\"</span>,\n  <span class=\"str\">\"plan\"</span>: <span class=\"str\">\"pro\"</span>,\n  <span class=\"str\">\"tags\"</span>: [<span class=\"str\">\"beta\"</span>, <span class=\"str\">\"newsletter\"</span>],\n  <span class=\"str\">\"deletedAt\"</span>: <span class=\"kw\">null</span>\n}"
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Les erreurs HTTP, côté front"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois — un code généré à la va-vite n'en couvre souvent aucune."
+              },
+              {
+                "kind": "code",
+                "sample": {
+                  "label": "Les trois familles d'échec",
+                  "html": "<span class=\"kw\">try</span> {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// ① le serveur a répondu, mais en erreur (404, 500…)</span>\n    <span class=\"fn\">showError</span>(<span class=\"str\">`Erreur ${response.status}`</span>);\n    <span class=\"kw\">return</span>;\n  }\n\n  <span class=\"kw\">const</span> data = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>(); <span class=\"cm\">// ③ peut lever si corps invalide</span>\n  <span class=\"fn\">showData</span>(data);\n} <span class=\"kw\">catch</span> (error) {\n  <span class=\"cm\">// ② panne réseau — ou JSON invalide (③)</span>\n  <span class=\"fn\">showError</span>(<span class=\"str\">\"Impossible de joindre le serveur.\"</span>);\n}"
+                }
+              },
+              {
+                "kind": "title",
+                "text": "CORS : pourquoi le navigateur bloque"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles) — jamais en bricolant la requête côté front."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "concept",
+                  "title": "<i class='fa-solid fa-shield-halved'></i> CORS n'est pas ton ennemi",
+                  "body": "Quand l'IA propose de « désactiver CORS » avec <code>Access-Control-Allow-Origin: *</code> sur une API privée, c'est un signal d'alerte : elle ouvre ton API au monde entier pour faire disparaître une erreur. La bonne réponse est de lister explicitement les origines autorisées."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Loading / erreur / succès : le contrat de toute UI"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré — qui suppose toujours que tout marche du premier coup."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-spinner'></i> <strong>Loading</strong> : visible dès le départ de la requête, jamais un écran blanc."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-circle-xmark'></i> <strong>Erreur</strong> : un message compréhensible + un moyen de réessayer."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données — et un état « vide » prévu si la liste ne contient rien."
+              },
+              {
+                "kind": "paragraph",
+                "html": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras — généré puis audité — dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "JSON",
-                  "4xx vs 5xx",
-                  "gestion d'erreurs",
-                  "same-origin",
-                  "CORS",
-                  "preflight",
-                  "états de requête",
-                  "feedback utilisateur"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Consommer une API publique",
-                  "kind": "guided",
-                  "brief": "Appeler une API publique avec gestion d'erreurs et affichage des trois états."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-bases-m03-lesson",
               "title": "Front ↔ API",
@@ -462,12 +867,269 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>JSON et erreurs HTTP</strong> — Lire une réponse JSON et réagir aux codes d'erreur.</li><li><strong>CORS basique</strong> — Comprendre pourquoi le navigateur bloque certaines requêtes.</li><li><strong>États loading / error / success</strong> — Structurer une UI autour des trois états d'une requête.</li></ul>"
+                  "body": "<h2>JSON : la langue commune</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> — c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Une réponse d'API typique",
+                  "language": "tsx",
+                  "code": "{\n  <span class=\"str\">\"id\"</span>: <span class=\"num\">17</span>,\n  <span class=\"str\">\"name\"</span>: <span class=\"str\">\"Awa Diop\"</span>,\n  <span class=\"str\">\"email\"</span>: <span class=\"str\">\"awa@example.com\"</span>,\n  <span class=\"str\">\"plan\"</span>: <span class=\"str\">\"pro\"</span>,\n  <span class=\"str\">\"tags\"</span>: [<span class=\"str\">\"beta\"</span>, <span class=\"str\">\"newsletter\"</span>],\n  <span class=\"str\">\"deletedAt\"</span>: <span class=\"kw\">null</span>\n}"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Les erreurs HTTP, côté front</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois — un code généré à la va-vite n'en couvre souvent aucune."
+                },
+                {
+                  "__component": "lesson.code-block",
+                  "label": "Les trois familles d'échec",
+                  "language": "tsx",
+                  "code": "<span class=\"kw\">try</span> {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// ① le serveur a répondu, mais en erreur (404, 500…)</span>\n    <span class=\"fn\">showError</span>(<span class=\"str\">`Erreur ${response.status}`</span>);\n    <span class=\"kw\">return</span>;\n  }\n\n  <span class=\"kw\">const</span> data = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>(); <span class=\"cm\">// ③ peut lever si corps invalide</span>\n  <span class=\"fn\">showData</span>(data);\n} <span class=\"kw\">catch</span> (error) {\n  <span class=\"cm\">// ② panne réseau — ou JSON invalide (③)</span>\n  <span class=\"fn\">showError</span>(<span class=\"str\">\"Impossible de joindre le serveur.\"</span>);\n}"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>CORS : pourquoi le navigateur bloque</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles) — jamais en bricolant la requête côté front."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "concept",
+                  "title": "<i class='fa-solid fa-shield-halved'></i> CORS n'est pas ton ennemi",
+                  "body": "Quand l'IA propose de « désactiver CORS » avec <code>Access-Control-Allow-Origin: *</code> sur une API privée, c'est un signal d'alerte : elle ouvre ton API au monde entier pour faire disparaître une erreur. La bonne réponse est de lister explicitement les origines autorisées."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Loading / erreur / succès : le contrat de toute UI</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré — qui suppose toujours que tout marche du premier coup."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-spinner'></i> <strong>Loading</strong> : visible dès le départ de la requête, jamais un écran blanc.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-circle-xmark'></i> <strong>Erreur</strong> : un message compréhensible + un moyen de réessayer.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données — et un état « vide » prévu si la liste ne contient rien.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras — généré puis audité — dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-bases-quiz-m03",
+              "title": "Front ↔ API : valide tes bases",
+              "questions": [
+                {
+                  "legacyId": "svc-bases-quiz-m03-q1",
+                  "prompt": "Une API répond en JSON. Qu'est-ce que le JSON ?",
+                  "type": "single",
+                  "explanation": "JSON (JavaScript Object Notation) est un format d'échange : du texte structuré que n'importe quel langage sait produire et lire.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q1-a",
+                      "label": "Un langage de programmation",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q1-b",
+                      "label": "Un format texte structuré (objets, tableaux, valeurs) pour échanger des données",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q1-c",
+                      "label": "Un protocole réseau concurrent de HTTP",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q1-d",
+                      "label": "Une base de données",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m03-q2",
+                  "prompt": "<code>fetch</code> ne rejette PAS sa promesse sur un statut 500. Comment détecter l'erreur ?",
+                  "type": "single",
+                  "explanation": "Piège classique : fetch ne rejette que sur erreur réseau. Un 404 ou un 500 « réussit » techniquement — il faut tester response.ok soi-même.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q2-a",
+                      "label": "C'est impossible, il faut utiliser une autre bibliothèque",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q2-b",
+                      "label": "En vérifiant response.ok (ou response.status) avant de lire le corps",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q2-c",
+                      "label": "En attendant 5 secondes",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q2-d",
+                      "label": "fetch rejette toujours sur une erreur serveur",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m03-q3",
+                  "prompt": "Ton front sur localhost:5173 appelle une API sur un autre domaine et le navigateur bloque avec une erreur CORS. Qui doit autoriser l'accès ?",
+                  "type": "single",
+                  "explanation": "CORS est une permission accordée par le serveur : c'est lui qui déclare quelles origines peuvent l'appeler. Aucun header côté front ne peut contourner ça (heureusement).",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q3-a",
+                      "label": "Le serveur de l'API, via les headers Access-Control-Allow-*",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q3-b",
+                      "label": "Le front, en ajoutant un header spécial à la requête",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q3-c",
+                      "label": "Le navigateur, dans ses réglages",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q3-d",
+                      "label": "Personne, il faut changer de domaine",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m03-q4",
+                  "prompt": "Quels sont les trois états qu'une UI doit gérer pour tout appel réseau ?",
+                  "type": "single",
+                  "explanation": "Chaque requête passe par « en cours » puis « réussie » ou « échouée ». Une UI qui n'affiche pas ces trois états paraît cassée dès que le réseau ralentit.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q4-a",
+                      "label": "Ouvert, fermé, en pause",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q4-b",
+                      "label": "Loading, erreur, succès",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q4-c",
+                      "label": "GET, POST, DELETE",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q4-d",
+                      "label": "Rapide, moyen, lent",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-bases-quiz-m03-q5",
+                  "prompt": "Pourquoi entourer <code>await response.json()</code> d'une gestion d'erreur ?",
+                  "type": "single",
+                  "explanation": "Un serveur en erreur renvoie souvent du HTML ou un corps vide : response.json() lève alors une exception qu'il faut attraper pour afficher un message propre.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q5-a",
+                      "label": "Par superstition, ça ne peut pas échouer",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q5-b",
+                      "label": "Le corps peut ne pas être du JSON valide (page d'erreur HTML, réponse vide…)",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q5-c",
+                      "label": "json() est synchrone donc dangereux",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-bases-quiz-m03-q5-d",
+                      "label": "Pour accélérer le parsing",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-bases-ex-m03-1",
+                "title": "Consommer une API avec les trois états",
+                "instructions": "Complète <code>loadUser()</code> pour appeler l'API et gérer les trois états : afficher « Chargement… » pendant la requête, un message d'erreur si <code>response.ok</code> est faux ou si le réseau échoue, et le nom de l'utilisateur en cas de succès.",
+                "kind": "code",
+                "order": 0,
+                "hints": [
+                  "Affiche l'état loading AVANT le await fetch(...).",
+                  "fetch ne rejette pas sur un 404/500 : teste response.ok toi-même.",
+                  "Entoure l'appel d'un try/catch pour les erreurs réseau et le JSON invalide."
+                ],
+                "starterFiles": {
+                  "/index.js": "const API_URL = \"https://jsonplaceholder.typicode.com/users/1\";\nconst app = document.getElementById(\"app\");\n\nasync function loadUser() {\n  // TODO 1 : afficher l'état \"Chargement…\"\n  // TODO 2 : appeler fetch(API_URL) et vérifier response.ok\n  // TODO 3 : afficher le nom (data.name) en cas de succès\n  // TODO 4 : afficher un message d'erreur sinon (statut ou panne réseau)\n}\n\nloadUser();\n"
+                },
+                "solutionFiles": {
+                  "/index.js": "const API_URL = \"https://jsonplaceholder.typicode.com/users/1\";\nconst app = document.getElementById(\"app\");\n\nasync function loadUser() {\n  app.innerHTML = \"<p>Chargement…</p>\";\n  try {\n    const response = await fetch(API_URL);\n    if (!response.ok) {\n      app.innerHTML = `<p>Erreur ${response.status} : impossible de charger l'utilisateur.</p>`;\n      return;\n    }\n    const data = await response.json();\n    app.innerHTML = `<h2>${data.name}</h2><p>${data.email}</p>`;\n  } catch {\n    app.innerHTML = \"<p>Panne réseau ou réponse invalide. Réessaie.</p>\";\n  }\n}\n\nloadUser();\n"
+                },
+                "tests": null,
+                "validator": "const code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \"état loading affiché avant l'appel\", pass: /Chargement/i.test(code) },\n  { name: \"appel fetch(API_URL) avec await\", pass: /await\\s+fetch\\s*\\(\\s*API_URL\\s*\\)/.test(code) },\n  { name: \"vérification de response.ok (ou response.status)\", pass: /response\\.(ok|status)/.test(code) },\n  { name: \"erreurs réseau attrapées (try/catch ou .catch)\", pass: /try\\s*\\{[\\s\\S]*catch|\\.catch\\s*\\(/.test(code) },\n  { name: \"données affichées en cas de succès\", pass: /data\\.name|data\\.email/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
+                "template": "vanilla",
+                "attemptsBeforeSolution": 3,
+                "challengeEligible": true,
+                "validationMode": "local"
+              }
+            ]
           }
         ]
       },
