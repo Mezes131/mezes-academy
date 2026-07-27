@@ -12,7 +12,11 @@
   "attributes": {
     "name": {
       "type": "enumeration",
-      "enum": ["prompt", "audit", "ship"],
+      "enum": [
+        "prompt",
+        "audit",
+        "ship"
+      ],
       "required": true
     },
     "title": {
@@ -28,7 +32,11 @@
     },
     "completionRule": {
       "type": "enumeration",
-      "enum": ["submitted", "reviewed", "approved"],
+      "enum": [
+        "submitted",
+        "reviewed",
+        "approved"
+      ],
       "default": "submitted"
     },
     "projectBrief": {

@@ -1,13 +1,16 @@
 /**
  * Export a course from the registry into a JSON payload for the Strapi
  * seed importer.
- * Run: npx tsx scripts/export-course-seed.ts [courseId]   (default: react)
- * Output: strapi/src/seed/data/<courseId>-course.json
+ * Run: npx tsx scripts/export-course-seed.ts [courseId] [--locale fr|en]
+ * Output: strapi/src/seed/data/<courseId>-course.<locale>.json
+ *         and <courseId>-course.json for fr (compat).
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { courses } from "../src/data/courses";
+import { getCourses } from "../src/data/courses";
+import type { Locale } from "../src/i18n/types";
+import { isLocale } from "../src/i18n/types";
 import type {
   ContentBlock,
   Course,
@@ -197,9 +200,10 @@ function mapPhase(phase: Phase, order: number) {
   };
 }
 
-function buildPayload(course: Course) {
+function buildPayload(course: Course, locale: Locale) {
   return {
     exportedAt: new Date().toISOString(),
+    locale,
     course: {
       legacyId: course.id,
       title: course.meta.title,
@@ -219,16 +223,31 @@ function buildPayload(course: Course) {
   };
 }
 
-const courseId = process.argv[2] ?? "react";
-const course = courses.find((c) => c.id === courseId);
+const args = process.argv.slice(2).filter((a) => a !== "--");
+const localeArgIdx = args.findIndex((a) => a === "--locale");
+const localeRaw = localeArgIdx >= 0 ? args[localeArgIdx + 1] : "fr";
+const locale: Locale = isLocale(localeRaw) ? localeRaw : "fr";
+const courseId =
+  args.find((a, i) => i !== localeArgIdx && i !== localeArgIdx + 1) ?? "react";
+
+const course = getCourses(locale).find((c) => c.id === courseId);
 if (!course) {
   console.error(
-    `Unknown course "${courseId}". Available: ${courses.map((c) => c.id).join(", ")}`,
+    `Unknown course "${courseId}". Available: ${getCourses(locale)
+      .map((c) => c.id)
+      .join(", ")}`,
   );
   process.exit(1);
 }
 
-const out = resolve(__dirname, `../strapi/src/seed/data/${courseId}-course.json`);
-mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, JSON.stringify(buildPayload(course), null, 2), "utf8");
-console.log(`Wrote ${out}`);
+const payload = buildPayload(course, locale);
+const dataDir = resolve(__dirname, "../strapi/src/seed/data");
+mkdirSync(dataDir, { recursive: true });
+const localizedOut = resolve(dataDir, `${courseId}-course.${locale}.json`);
+writeFileSync(localizedOut, JSON.stringify(payload, null, 2), "utf8");
+console.log(`Wrote ${localizedOut}`);
+if (locale === "fr") {
+  const compatOut = resolve(dataDir, `${courseId}-course.json`);
+  writeFileSync(compatOut, JSON.stringify(payload, null, 2), "utf8");
+  console.log(`Wrote ${compatOut} (compat)`);
+}

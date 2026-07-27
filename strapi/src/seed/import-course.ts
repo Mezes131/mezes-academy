@@ -131,25 +131,35 @@ async function upsertByLegacyId(
   uid: UID.ContentType,
   legacyId: string,
   data: Record<string, unknown>,
+  locale = "fr",
 ): Promise<Doc> {
   const docs = strapi.documents(uid);
   const existing =
-    (await docs.findFirst({ filters: { legacyId } })) ??
-    (await docs.findFirst({ filters: { legacyId }, status: "published" }));
+    (await docs.findFirst({ filters: { legacyId }, locale })) ??
+    (await docs.findFirst({
+      filters: { legacyId },
+      locale,
+      status: "published",
+    }));
   if (existing) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const updated = await docs.update({ documentId: existing.documentId, data: data as any });
+    const updated = await docs.update({
+      documentId: existing.documentId,
+      locale,
+      data: data as any,
+    });
     if (!updated) throw new Error(`Update failed for ${uid} legacyId=${legacyId}`);
     return updated;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return docs.create({ data: data as any });
+  return docs.create({ data: data as any, locale });
 }
 
 async function importQuiz(
   strapi: Core.Strapi,
   quiz: QuizPayload,
   links: { moduleDocumentId?: string; lessonDocumentId?: string },
+  locale: string,
 ) {
   const quizData: Record<string, unknown> = {
     legacyId: quiz.legacyId,
@@ -161,7 +171,13 @@ async function importQuiz(
   if (links.moduleDocumentId) quizData.module = links.moduleDocumentId;
   else if (links.lessonDocumentId) quizData.lesson = links.lessonDocumentId;
 
-  const quizDoc = await upsertByLegacyId(strapi, "api::quiz.quiz", quiz.legacyId, quizData);
+  const quizDoc = await upsertByLegacyId(
+    strapi,
+    "api::quiz.quiz",
+    quiz.legacyId,
+    quizData,
+    locale,
+  );
 
   for (const question of quiz.questions) {
     const questionDoc = await upsertByLegacyId(
@@ -176,94 +192,132 @@ async function importQuiz(
         order: question.order,
         quiz: docId(quizDoc),
       },
+      locale,
     );
 
     for (const answer of question.answers) {
-      await upsertByLegacyId(strapi, "api::quiz-answer.quiz-answer", answer.legacyId, {
-        legacyId: answer.legacyId,
-        label: answer.label,
-        isCorrect: answer.isCorrect,
-        order: answer.order,
-        question: docId(questionDoc),
-      });
+      await upsertByLegacyId(
+        strapi,
+        "api::quiz-answer.quiz-answer",
+        answer.legacyId,
+        {
+          legacyId: answer.legacyId,
+          label: answer.label,
+          isCorrect: answer.isCorrect,
+          order: answer.order,
+          question: docId(questionDoc),
+        },
+        locale,
+      );
     }
   }
 
   return quizDoc;
 }
 
-export async function importCourse(strapi: Core.Strapi, courseId = "react") {
-  const fileName = `${courseId}-course.json`;
+export async function importCourse(
+  strapi: Core.Strapi,
+  courseId = "react",
+  locale = "fr",
+) {
+  const fileName =
+    locale === "fr"
+      ? `${courseId}-course.json`
+      : `${courseId}-course.${locale}.json`;
+  const altName = `${courseId}-course.${locale}.json`;
   const candidates = [
+    path.join(__dirname, "data", altName),
     path.join(__dirname, "data", fileName),
+    path.join(process.cwd(), "src", "seed", "data", altName),
     path.join(process.cwd(), "src", "seed", "data", fileName),
   ];
   const file = candidates.find((p) => fs.existsSync(p));
   if (!file) {
     throw new Error(
-      `Missing ${fileName} (looked in: ${candidates.join(", ")}). ` +
-        `Run: npm run export:strapi-seed -- ${courseId}`,
+      `Missing seed for ${courseId} locale=${locale} (looked in: ${candidates.join(", ")}). ` +
+        `Run: npm run export:strapi-seed -- ${courseId} --locale ${locale}`,
     );
   }
 
-  const { course } = JSON.parse(fs.readFileSync(file, "utf8")) as {
+  const parsed = JSON.parse(fs.readFileSync(file, "utf8")) as {
+    locale?: string;
     course: CoursePayload;
   };
+  const course = parsed.course;
+  const effectiveLocale = parsed.locale ?? locale;
 
-  const courseDoc = await upsertByLegacyId(strapi, "api::course.course", course.legacyId, {
-    legacyId: course.legacyId,
-    title: course.title,
-    slug: course.slug,
-    tagline: course.tagline,
-    description: course.description,
-    icon: course.icon,
-    iconFamily: course.iconFamily,
-    level: course.level,
-    duration: course.duration,
-    accentText: course.accentText,
-    accentBg: course.accentBg,
-    accentBorder: course.accentBorder,
-    workflowStatus: course.workflowStatus,
-  });
+  const courseDoc = await upsertByLegacyId(
+    strapi,
+    "api::course.course",
+    course.legacyId,
+    {
+      legacyId: course.legacyId,
+      title: course.title,
+      slug: course.slug,
+      tagline: course.tagline,
+      description: course.description,
+      icon: course.icon,
+      iconFamily: course.iconFamily,
+      level: course.level,
+      duration: course.duration,
+      accentText: course.accentText,
+      accentBg: course.accentBg,
+      accentBorder: course.accentBorder,
+      workflowStatus: course.workflowStatus,
+    },
+    effectiveLocale,
+  );
 
   for (const phase of course.phases) {
-    const phaseDoc = await upsertByLegacyId(strapi, "api::phase.phase", phase.legacyId, {
-      legacyId: phase.legacyId,
-      slug: phase.slug,
-      title: phase.title,
-      label: phase.label,
-      summary: phase.summary,
-      order: phase.order,
-      color: phase.color,
-      icon: phase.icon,
-      metaTags: phase.metaTags,
-      objectives: phase.objectives,
-      prerequisites: phase.prerequisites,
-      scaffoldOnly: phase.scaffoldOnly,
-      projectTitle: phase.projectTitle,
-      projectDeliverable: phase.projectDeliverable,
-      projectAssessment: phase.projectAssessment,
-      course: docId(courseDoc),
-    });
+    const phaseDoc = await upsertByLegacyId(
+      strapi,
+      "api::phase.phase",
+      phase.legacyId,
+      {
+        legacyId: phase.legacyId,
+        slug: phase.slug,
+        title: phase.title,
+        label: phase.label,
+        summary: phase.summary,
+        order: phase.order,
+        color: phase.color,
+        icon: phase.icon,
+        metaTags: phase.metaTags,
+        objectives: phase.objectives,
+        prerequisites: phase.prerequisites,
+        scaffoldOnly: phase.scaffoldOnly,
+        projectTitle: phase.projectTitle,
+        projectDeliverable: phase.projectDeliverable,
+        projectAssessment: phase.projectAssessment,
+        course: docId(courseDoc),
+      },
+      effectiveLocale,
+    );
 
     for (const mod of phase.modules) {
-      const moduleDoc = await upsertByLegacyId(strapi, "api::module.module", mod.legacyId, {
-        legacyId: mod.legacyId,
-        moduleId: mod.moduleId,
-        index: mod.index,
-        title: mod.title,
-        subtitle: mod.subtitle,
-        duration: mod.duration,
-        order: mod.order,
-        difficulty: mod.difficulty,
-        objectives: mod.objectives,
-        prerequisites: mod.prerequisites,
-        openByDefault: mod.openByDefault,
-        workflowStatus: mod.workflowStatus,
-        contentBlocks: mod.contentBlocks,
-        assessment: mod.assessment,
-        phase: docId(phaseDoc),
-      });
+      const moduleDoc = await upsertByLegacyId(
+        strapi,
+        "api::module.module",
+        mod.legacyId,
+        {
+          legacyId: mod.legacyId,
+          moduleId: mod.moduleId,
+          index: mod.index,
+          title: mod.title,
+          subtitle: mod.subtitle,
+          duration: mod.duration,
+          order: mod.order,
+          difficulty: mod.difficulty,
+          objectives: mod.objectives,
+          prerequisites: mod.prerequisites,
+          openByDefault: mod.openByDefault,
+          workflowStatus: mod.workflowStatus,
+          contentBlocks: mod.contentBlocks,
+          assessment: mod.assessment,
+          phase: docId(phaseDoc),
+        },
+        effectiveLocale,
+      );
 
       const lessonDoc = await upsertByLegacyId(
         strapi,
@@ -278,36 +332,50 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
           content: mod.lesson.content,
           module: docId(moduleDoc),
         },
+        effectiveLocale,
       );
 
       if (mod.quiz) {
-        await importQuiz(strapi, mod.quiz, { moduleDocumentId: docId(moduleDoc) });
+        await importQuiz(
+          strapi,
+          mod.quiz,
+          { moduleDocumentId: docId(moduleDoc) },
+          effectiveLocale,
+        );
       }
 
       for (const ex of mod.exercises) {
-        await upsertByLegacyId(strapi, "api::exercise.exercise", ex.legacyId, {
-          legacyId: ex.legacyId,
-          title: ex.title,
-          instructions: ex.instructions,
-          kind: ex.kind,
-          order: ex.order,
-          hints: ex.hints,
-          starterFiles: ex.starterFiles,
-          solutionFiles: ex.solutionFiles,
-          tests: ex.tests,
-          validator: ex.validator,
-          template: ex.template,
-          attemptsBeforeSolution: ex.attemptsBeforeSolution,
-          challengeEligible: ex.challengeEligible,
-          validationMode: ex.validationMode,
-          lesson: docId(lessonDoc),
-          module: docId(moduleDoc),
-        });
+        await upsertByLegacyId(
+          strapi,
+          "api::exercise.exercise",
+          ex.legacyId,
+          {
+            legacyId: ex.legacyId,
+            title: ex.title,
+            instructions: ex.instructions,
+            kind: ex.kind,
+            order: ex.order,
+            hints: ex.hints,
+            starterFiles: ex.starterFiles,
+            solutionFiles: ex.solutionFiles,
+            tests: ex.tests,
+            validator: ex.validator,
+            template: ex.template,
+            attemptsBeforeSolution: ex.attemptsBeforeSolution,
+            challengeEligible: ex.challengeEligible,
+            validationMode: ex.validationMode,
+            lesson: docId(lessonDoc),
+            module: docId(moduleDoc),
+          },
+          effectiveLocale,
+        );
       }
     }
   }
 
-  strapi.log.info(`Imported course draft (legacyId=${course.legacyId})`);
+  strapi.log.info(
+    `Imported course draft (legacyId=${course.legacyId}, locale=${effectiveLocale})`,
+  );
   return courseDoc;
 }
 

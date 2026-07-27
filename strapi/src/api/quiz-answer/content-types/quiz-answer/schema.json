@@ -12,11 +12,21 @@
   "attributes": {
     "legacyId": {
       "type": "string",
-      "unique": true
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "label": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "isCorrect": {
       "type": "boolean",
@@ -24,7 +34,12 @@
       "private": true
     },
     "feedback": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "order": {
       "type": "integer",
@@ -35,6 +50,11 @@
       "relation": "manyToOne",
       "target": "api::quiz-question.quiz-question",
       "inversedBy": "answers"
+    }
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
     }
   }
 }

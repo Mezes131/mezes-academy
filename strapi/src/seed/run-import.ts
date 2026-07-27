@@ -4,18 +4,20 @@
  *
  * Run (from the strapi app root, compiled):
  *   node dist/src/seed/run-import.js react svc
+ *   node dist/src/seed/run-import.js svc:en
  */
 import { createStrapi } from "@strapi/strapi";
 import { importCourse } from "./import-course";
 
 async function main() {
-  const courseIds = process.argv.slice(2);
-  if (courseIds.length === 0) courseIds.push("react");
+  const specs = process.argv.slice(2);
+  if (specs.length === 0) specs.push("react");
 
   const app = await createStrapi({ distDir: "dist" }).load();
   try {
-    for (const courseId of courseIds) {
-      await importCourse(app, courseId);
+    for (const spec of specs) {
+      const [courseId, locale = "fr"] = spec.split(":");
+      await importCourse(app, courseId, locale);
     }
   } finally {
     await app.destroy();

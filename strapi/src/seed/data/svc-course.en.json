@@ -1,6 +1,6 @@
 {
-  "exportedAt": "2026-07-27T12:19:05.721Z",
-  "locale": "fr",
+  "exportedAt": "2026-07-27T12:19:07.470Z",
+  "locale": "en",
   "course": {
     "legacyId": "svc",
     "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
@@ -19,42 +19,42 @@
       {
         "legacyId": "svc-bases",
         "slug": "bases",
-        "title": "Bases web (optionnelle)",
+        "title": "Web basics (optional)",
         "label": "Phase 0",
-        "summary": "Pour les product builders qui viennent du no-code : le vocabulaire et les réflexes web nécessaires pour suivre le tronc commun. Skip libre si tes bases sont là.",
+        "summary": "For product builders coming from no-code: the web vocabulary and habits you need to follow the core path. Skip freely if your basics are already solid.",
         "order": 0,
         "color": "intro",
         "icon": "fa-globe",
         "metaTags": [
-          "optionnelle",
-          "lecture ~1h45",
-          "aucun prérequis",
-          "hors chemin critique"
+          "optional",
+          "reading ~1h45",
+          "no prerequisites",
+          "off critical path"
         ],
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": false,
-        "projectTitle": "Projet P0 : Page connectée à une API",
-        "projectDeliverable": "Une page qui appelle une API publique et affiche correctement loading / erreur / succès.",
+        "projectTitle": "Project P0: Page connected to an API",
+        "projectDeliverable": "A page that calls a public API and correctly shows loading / error / success states.",
         "projectAssessment": [
-          "Les trois états sont visibles et corrects",
-          "Les erreurs HTTP sont gérées explicitement",
-          "Le projet est versionné proprement (.gitignore, .env.example)"
+          "All three states are visible and correct",
+          "HTTP errors are handled explicitly",
+          "The project is versioned cleanly (.gitignore, .env.example)"
         ],
         "modules": [
           {
             "legacyId": "svc-bases-m01",
             "moduleId": "svc-bases-m01",
             "index": "01",
-            "title": "HTTP, HTML, JS utiles",
-            "subtitle": "Le strict nécessaire pour comprendre ce que l'IA génère",
+            "title": "HTTP, HTML, useful JS",
+            "subtitle": "The bare minimum to understand what AI generates",
             "duration": "30 min",
             "order": 0,
             "difficulty": "intro",
             "objectives": [
-              "Lire un échange requête/réponse HTTP",
-              "Reconnaître un HTML sémantique minimal",
-              "Comprendre fetch et async en JavaScript moderne"
+              "Read an HTTP request/response exchange",
+              "Recognize minimal semantic HTML",
+              "Understand fetch and async in modern JavaScript"
             ],
             "prerequisites": [],
             "openByDefault": true,
@@ -62,27 +62,27 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Pourquoi ce module existe"
+                "text": "Why this module exists"
               },
               {
                 "kind": "paragraph",
-                "html": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front. Il te donne trois lectures indispensables (le dialogue HTTP, la structure HTML et le JavaScript asynchrone) pour comprendre ce que l'IA produit et repérer quand elle se trompe."
+                "html": "In this course you will <strong>have AI generate code, then verify it</strong>. You cannot verify what you cannot read. This module does not turn you into a front-end developer. It gives you three essential readings (the HTTP dialogue, HTML structure, and async JavaScript) so you understand what AI produces and spot when it gets things wrong."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "note",
-                  "title": "<i class='fa-solid fa-forward'></i> Tu connais déjà tout ça ?",
-                  "body": "Cette phase 0 est <strong>optionnelle</strong>. Si les mots requête HTTP, balise sémantique et <code>async/await</code> te sont familiers, passe directement à la phase 1 : rien du tronc commun n'en dépend."
+                  "title": "<i class='fa-solid fa-forward'></i> Already know all this?",
+                  "body": "Phase 0 is <strong>optional</strong>. If HTTP requests, semantic tags, and <code>async/await</code> are familiar, jump straight to phase 1: nothing on the core path depends on this."
                 }
               },
               {
                 "kind": "title",
-                "text": "HTTP : le cycle requête → réponse"
+                "text": "HTTP: the request → response cycle"
               },
               {
                 "kind": "paragraph",
-                "html": "Tout le web repose sur un dialogue simple. Ton navigateur (le <em>client</em>) envoie une <strong>requête</strong> : une méthode (<code>GET</code>, <code>POST</code>…), une URL, des <em>headers</em> (métadonnées) et parfois un corps. Le <em>serveur</em> renvoie une <strong>réponse</strong> : un <strong>code de statut</strong>, des headers et un corps (HTML, JSON, image…). C'est tout. Chaque page chargée, chaque clic sur « Payer », chaque like est une variation de cet échange."
+                "html": "The whole web rests on a simple dialogue. Your browser (the <em>client</em>) sends a <strong>request</strong>: a method (<code>GET</code>, <code>POST</code>…), a URL, <em>headers</em> (metadata), and sometimes a body. The <em>server</em> sends back a <strong>response</strong>: a <strong>status code</strong>, headers, and a body (HTML, JSON, image…). That is it. Every page load, every « Pay » click, every like is a variation of this exchange."
               },
               {
                 "kind": "code",
@@ -93,19 +93,19 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Les codes de statut se lisent par famille : <strong>2xx</strong> = succès, <strong>3xx</strong> = redirection, <strong>4xx</strong> = erreur côté client (<code>404</code> introuvable, <code>401</code> non authentifié, <code>403</code> interdit), <strong>5xx</strong> = erreur côté serveur. Ce réflexe de lecture te servira à chaque audit : une API qui renvoie <code>200</code> avec un message d'erreur dans le corps, c'est déjà un défaut à signaler."
+                "html": "Status codes group by family: <strong>2xx</strong> = success, <strong>3xx</strong> = redirect, <strong>4xx</strong> = client-side error (<code>404</code> not found, <code>401</code> not signed in, <code>403</code> forbidden), <strong>5xx</strong> = server-side error. This reading habit will serve you on every audit: an API that returns <code>200</code> with an error message in the body is already a defect to flag."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-magnifying-glass'></i> <strong>Réflexe DevTools</strong> : onglet Réseau (F12) ouvert, recharge une page et observe chaque requête : méthode, statut, headers, corps. C'est ta radiographie du web."
+                "html": "<i class='fa-solid fa-magnifying-glass'></i> <strong>DevTools habit</strong>: open the Network tab (F12), reload a page, and inspect each request: method, status, headers, body. That is your X-ray of the web."
               },
               {
                 "kind": "title",
-                "text": "HTML sémantique : la structure qui a du sens"
+                "text": "Semantic HTML: structure that means something"
               },
               {
                 "kind": "paragraph",
-                "html": "Le HTML décrit la <em>nature</em> du contenu, pas son apparence. Un titre est un <code>&lt;h1&gt;</code>, une navigation un <code>&lt;nav&gt;</code>, une action un <code>&lt;button&gt;</code>. Les IA génèrent parfois des pages entières en <code>&lt;div&gt;</code> cliquables : ça <em>ressemble</em> à une interface, mais c'est invisible pour un clavier ou un lecteur d'écran, et pénalisé par les moteurs de recherche."
+                "html": "HTML describes the <em>nature</em> of content, not its appearance. A title is an <code>&lt;h1&gt;</code>, navigation is a <code>&lt;nav&gt;</code>, an action is a <code>&lt;button&gt;</code>. AI sometimes generates whole pages of clickable <code>&lt;div&gt;</code> elements: it <em>looks</em> like an interface, but it is invisible to keyboard users and screen readers, and search engines penalize it."
               },
               {
                 "kind": "code",
@@ -118,17 +118,17 @@
                 "kind": "info",
                 "box": {
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Le piège classique du code généré",
-                  "body": "<code>&lt;div onclick=...&gt;</code> au lieu de <code>&lt;button&gt;</code>, des inputs sans <code>&lt;label&gt;</code>, cinq <code>&lt;h1&gt;</code> par page. Dès la phase Audit, tu apprendras à repérer et corriger ces défauts systématiquement."
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> The classic generated-code trap",
+                  "body": "<code>&lt;div onclick=...&gt;</code> instead of <code>&lt;button&gt;</code>, inputs without <code>&lt;label&gt;</code>, five <code>&lt;h1&gt;</code> tags per page. From the Audit phase onward, you will learn to spot and fix these defects systematically."
                 }
               },
               {
                 "kind": "title",
-                "text": "Le JavaScript utile : fetch et l'asynchrone"
+                "text": "Useful JavaScript: fetch and async"
               },
               {
                 "kind": "paragraph",
-                "html": "Le JavaScript moderne que tu croiseras le plus dans du code généré tient en trois notions : <code>fetch</code> pour appeler une API, les <strong>promesses</strong> pour représenter « un résultat qui arrivera plus tard », et <code>async/await</code> pour écrire ce code asynchrone comme s'il était linéaire."
+                "html": "The modern JavaScript you will see most in generated code comes down to three ideas: <code>fetch</code> to call an API, <strong>promises</strong> to represent « a result that will arrive later », and <code>async/await</code> to write async code as if it were linear."
               },
               {
                 "kind": "code",
@@ -139,46 +139,46 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code>. Tu viens d'apprendre ta première vérification d'audit."
+                "html": "Remember the main trap: <strong><code>fetch</code> only rejects its promise on a network failure</strong>. A server that responds with <code>500</code> is, from <code>fetch</code>'s point of view, a « successful » request. AI-generated code very often forgets the <code>response.ok</code> check. You just learned your first audit check."
               },
               {
                 "kind": "title",
-                "text": "À toi de jouer : autopsie d'un flux réseau"
+                "text": "Your turn: dissect a network flow"
               },
               {
                 "kind": "paragraph",
-                "html": "Exercice pratique (hors éditeur) : ouvre les DevTools (F12) → onglet <strong>Réseau</strong> sur un site que tu utilises. Recharge la page, choisis une requête vers une API (type <code>fetch/XHR</code>) et note : la méthode, l'URL, le code de statut, deux headers de la réponse et la forme du corps. Puis explique en trois phrases ce que cette requête accomplit pour l'utilisateur. Cette autopsie guidée est exactement le geste que tu referas en audit de sécurité, phase 8."
+                "html": "Hands-on exercise (outside the editor): open DevTools (F12) → <strong>Network</strong> tab on a site you use. Reload the page, pick a request to an API (type <code>fetch/XHR</code>), and note: the method, the URL, the status code, two response headers, and the shape of the body. Then explain in three sentences what this request does for the user. This guided dissection is exactly the move you will repeat in the security audit, phase 8."
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-bases-m01-lesson",
-              "title": "HTTP, HTML, JS utiles",
-              "desc": "Le strict nécessaire pour comprendre ce que l'IA génère",
+              "title": "HTTP, HTML, useful JS",
+              "desc": "The bare minimum to understand what AI generates",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Pourquoi ce module existe</h2>"
+                  "body": "<h2>Why this module exists</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front. Il te donne trois lectures indispensables (le dialogue HTTP, la structure HTML et le JavaScript asynchrone) pour comprendre ce que l'IA produit et repérer quand elle se trompe."
+                  "body": "In this course you will <strong>have AI generate code, then verify it</strong>. You cannot verify what you cannot read. This module does not turn you into a front-end developer. It gives you three essential readings (the HTTP dialogue, HTML structure, and async JavaScript) so you understand what AI produces and spot when it gets things wrong."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "note",
-                  "title": "<i class='fa-solid fa-forward'></i> Tu connais déjà tout ça ?",
-                  "body": "Cette phase 0 est <strong>optionnelle</strong>. Si les mots requête HTTP, balise sémantique et <code>async/await</code> te sont familiers, passe directement à la phase 1 : rien du tronc commun n'en dépend."
+                  "title": "<i class='fa-solid fa-forward'></i> Already know all this?",
+                  "body": "Phase 0 is <strong>optional</strong>. If HTTP requests, semantic tags, and <code>async/await</code> are familiar, jump straight to phase 1: nothing on the core path depends on this."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>HTTP : le cycle requête → réponse</h2>"
+                  "body": "<h2>HTTP: the request → response cycle</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Tout le web repose sur un dialogue simple. Ton navigateur (le <em>client</em>) envoie une <strong>requête</strong> : une méthode (<code>GET</code>, <code>POST</code>…), une URL, des <em>headers</em> (métadonnées) et parfois un corps. Le <em>serveur</em> renvoie une <strong>réponse</strong> : un <strong>code de statut</strong>, des headers et un corps (HTML, JSON, image…). C'est tout. Chaque page chargée, chaque clic sur « Payer », chaque like est une variation de cet échange."
+                  "body": "The whole web rests on a simple dialogue. Your browser (the <em>client</em>) sends a <strong>request</strong>: a method (<code>GET</code>, <code>POST</code>…), a URL, <em>headers</em> (metadata), and sometimes a body. The <em>server</em> sends back a <strong>response</strong>: a <strong>status code</strong>, headers, and a body (HTML, JSON, image…). That is it. Every page load, every « Pay » click, every like is a variation of this exchange."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -188,19 +188,19 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Les codes de statut se lisent par famille : <strong>2xx</strong> = succès, <strong>3xx</strong> = redirection, <strong>4xx</strong> = erreur côté client (<code>404</code> introuvable, <code>401</code> non authentifié, <code>403</code> interdit), <strong>5xx</strong> = erreur côté serveur. Ce réflexe de lecture te servira à chaque audit : une API qui renvoie <code>200</code> avec un message d'erreur dans le corps, c'est déjà un défaut à signaler."
+                  "body": "Status codes group by family: <strong>2xx</strong> = success, <strong>3xx</strong> = redirect, <strong>4xx</strong> = client-side error (<code>404</code> not found, <code>401</code> not signed in, <code>403</code> forbidden), <strong>5xx</strong> = server-side error. This reading habit will serve you on every audit: an API that returns <code>200</code> with an error message in the body is already a defect to flag."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-magnifying-glass'></i> <strong>Réflexe DevTools</strong> : onglet Réseau (F12) ouvert, recharge une page et observe chaque requête : méthode, statut, headers, corps. C'est ta radiographie du web.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-magnifying-glass'></i> <strong>DevTools habit</strong>: open the Network tab (F12), reload a page, and inspect each request: method, status, headers, body. That is your X-ray of the web.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>HTML sémantique : la structure qui a du sens</h2>"
+                  "body": "<h2>Semantic HTML: structure that means something</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Le HTML décrit la <em>nature</em> du contenu, pas son apparence. Un titre est un <code>&lt;h1&gt;</code>, une navigation un <code>&lt;nav&gt;</code>, une action un <code>&lt;button&gt;</code>. Les IA génèrent parfois des pages entières en <code>&lt;div&gt;</code> cliquables : ça <em>ressemble</em> à une interface, mais c'est invisible pour un clavier ou un lecteur d'écran, et pénalisé par les moteurs de recherche."
+                  "body": "HTML describes the <em>nature</em> of content, not its appearance. A title is an <code>&lt;h1&gt;</code>, navigation is a <code>&lt;nav&gt;</code>, an action is a <code>&lt;button&gt;</code>. AI sometimes generates whole pages of clickable <code>&lt;div&gt;</code> elements: it <em>looks</em> like an interface, but it is invisible to keyboard users and screen readers, and search engines penalize it."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -211,16 +211,16 @@
                 {
                   "__component": "lesson.callout-block",
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Le piège classique du code généré",
-                  "body": "<code>&lt;div onclick=...&gt;</code> au lieu de <code>&lt;button&gt;</code>, des inputs sans <code>&lt;label&gt;</code>, cinq <code>&lt;h1&gt;</code> par page. Dès la phase Audit, tu apprendras à repérer et corriger ces défauts systématiquement."
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> The classic generated-code trap",
+                  "body": "<code>&lt;div onclick=...&gt;</code> instead of <code>&lt;button&gt;</code>, inputs without <code>&lt;label&gt;</code>, five <code>&lt;h1&gt;</code> tags per page. From the Audit phase onward, you will learn to spot and fix these defects systematically."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Le JavaScript utile : fetch et l'asynchrone</h2>"
+                  "body": "<h2>Useful JavaScript: fetch and async</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Le JavaScript moderne que tu croiseras le plus dans du code généré tient en trois notions : <code>fetch</code> pour appeler une API, les <strong>promesses</strong> pour représenter « un résultat qui arrivera plus tard », et <code>async/await</code> pour écrire ce code asynchrone comme s'il était linéaire."
+                  "body": "The modern JavaScript you will see most in generated code comes down to three ideas: <code>fetch</code> to call an API, <strong>promises</strong> to represent « a result that will arrive later », and <code>async/await</code> to write async code as if it were linear."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -230,50 +230,50 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code>. Tu viens d'apprendre ta première vérification d'audit."
+                  "body": "Remember the main trap: <strong><code>fetch</code> only rejects its promise on a network failure</strong>. A server that responds with <code>500</code> is, from <code>fetch</code>'s point of view, a « successful » request. AI-generated code very often forgets the <code>response.ok</code> check. You just learned your first audit check."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>À toi de jouer : autopsie d'un flux réseau</h2>"
+                  "body": "<h2>Your turn: dissect a network flow</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Exercice pratique (hors éditeur) : ouvre les DevTools (F12) → onglet <strong>Réseau</strong> sur un site que tu utilises. Recharge la page, choisis une requête vers une API (type <code>fetch/XHR</code>) et note : la méthode, l'URL, le code de statut, deux headers de la réponse et la forme du corps. Puis explique en trois phrases ce que cette requête accomplit pour l'utilisateur. Cette autopsie guidée est exactement le geste que tu referas en audit de sécurité, phase 8."
+                  "body": "Hands-on exercise (outside the editor): open DevTools (F12) → <strong>Network</strong> tab on a site you use. Reload the page, pick a request to an API (type <code>fetch/XHR</code>), and note: the method, the URL, the status code, two response headers, and the shape of the body. Then explain in three sentences what this request does for the user. This guided dissection is exactly the move you will repeat in the security audit, phase 8."
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-bases-quiz-m01",
-              "title": "HTTP, HTML, JS : valide tes bases",
+              "title": "HTTP, HTML, JS: check your basics",
               "questions": [
                 {
                   "legacyId": "svc-bases-quiz-m01-q1",
-                  "prompt": "Que se passe-t-il quand ton navigateur charge une page web ?",
+                  "prompt": "What happens when your browser loads a web page?",
                   "type": "single",
-                  "explanation": "Le web fonctionne en cycle requête → réponse : le navigateur demande une ressource, le serveur répond avec un statut, des headers et un corps (HTML, JSON, image…).",
+                  "explanation": "The web works in a request → response cycle: the browser asks for a resource, the server answers with a status, headers, and a body (HTML, JSON, image…).",
                   "order": 0,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m01-q1-a",
-                      "label": "Il télécharge tout le serveur en local",
+                      "label": "It downloads the entire server locally",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q1-b",
-                      "label": "Il envoie une requête HTTP et reçoit une réponse (statut + headers + corps)",
+                      "label": "It sends an HTTP request and receives a response (status + headers + body)",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q1-c",
-                      "label": "Il ouvre une connexion permanente qui ne se ferme jamais",
+                      "label": "It opens a permanent connection that never closes",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q1-d",
-                      "label": "Il exécute le code du serveur dans la page",
+                      "label": "It runs the server's code inside the page",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -281,32 +281,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m01-q2",
-                  "prompt": "Un serveur répond « 404 ». Qu'est-ce que ça signifie ?",
+                  "prompt": "A server responds with « 404 ». What does that mean?",
                   "type": "single",
-                  "explanation": "4xx = erreur côté client. 404 précisément : l'URL demandée ne correspond à aucune ressource. Un plantage serveur serait un 5xx, un accès refusé un 401/403.",
+                  "explanation": "4xx = client-side error. 404 specifically: the requested URL matches no resource. A server crash would be 5xx; denied access would be 401/403.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m01-q2-a",
-                      "label": "Le serveur a planté",
+                      "label": "The server crashed",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q2-b",
-                      "label": "La requête a réussi",
+                      "label": "The request succeeded",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q2-c",
-                      "label": "La ressource demandée n'existe pas",
+                      "label": "The requested resource does not exist",
                       "isCorrect": true,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q2-d",
-                      "label": "Il faut se connecter d'abord",
+                      "label": "You must sign in first",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -314,9 +314,9 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m01-q3",
-                  "prompt": "Quelle méthode HTTP utilise-t-on par convention pour créer une ressource ?",
+                  "prompt": "Which HTTP method is conventionally used to create a resource?",
                   "type": "single",
-                  "explanation": "GET lit, POST crée, PATCH/PUT modifient, DELETE supprime. Ces conventions permettent de comprendre une API sans lire sa doc ligne par ligne.",
+                  "explanation": "GET reads, POST creates, PATCH/PUT updates, DELETE removes. These conventions let you understand an API without reading its docs line by line.",
                   "order": 2,
                   "answers": [
                     {
@@ -347,32 +347,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m01-q4",
-                  "prompt": "Pourquoi préférer <code>&lt;button&gt;</code> à un <code>&lt;div onclick&gt;</code> ?",
+                  "prompt": "Why prefer <code>&lt;button&gt;</code> over a <code>&lt;div onclick&gt;</code>?",
                   "type": "single",
-                  "explanation": "Le HTML sémantique donne gratuitement l'accessibilité : focus clavier, rôle annoncé, comportement natif. Un div cliquable doit tout réimplémenter à la main.",
+                  "explanation": "Semantic HTML gives you accessibility for free: keyboard focus, announced role, native behavior. A clickable div must reimplement all of that by hand.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m01-q4-a",
-                      "label": "C'est plus rapide à exécuter",
+                      "label": "It runs faster",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q4-b",
-                      "label": "Le bouton est accessible au clavier et annoncé correctement aux lecteurs d'écran",
+                      "label": "The button is keyboard accessible and announced correctly to screen readers",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q4-c",
-                      "label": "Les div ne peuvent pas recevoir de clic",
+                      "label": "Divs cannot receive clicks",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q4-d",
-                      "label": "Aucune différence, c'est une question de style",
+                      "label": "No difference, it is only a style choice",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -380,32 +380,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m01-q5",
-                  "prompt": "Que renvoie <code>fetch(url)</code> en JavaScript ?",
+                  "prompt": "What does <code>fetch(url)</code> return in JavaScript?",
                   "type": "single",
-                  "explanation": "fetch est asynchrone : il renvoie une promesse de Response. Il faut ensuite appeler response.json() (autre promesse) pour obtenir les données.",
+                  "explanation": "fetch is async: it returns a promise of Response. You then call response.json() (another promise) to get the data.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m01-q5-a",
-                      "label": "Directement les données JSON",
+                      "label": "The JSON data directly",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q5-b",
-                      "label": "Une promesse qui se résout en objet Response",
+                      "label": "A promise that resolves to a Response object",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q5-c",
-                      "label": "Le HTML de la page courante",
+                      "label": "The HTML of the current page",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m01-q5-d",
-                      "label": "Rien, fetch est synchrone",
+                      "label": "Nothing, fetch is synchronous",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -419,15 +419,15 @@
             "legacyId": "svc-bases-m02",
             "moduleId": "svc-bases-m02",
             "index": "02",
-            "title": "Git & projet local",
-            "subtitle": "Versionner proprement dès le premier commit",
+            "title": "Git & local project",
+            "subtitle": "Version cleanly from your first save to Git history",
             "duration": "35 min",
             "order": 1,
             "difficulty": "intro",
             "objectives": [
-              "Utiliser repo, commits et branches au quotidien",
-              "Séparer `.env` du code versionné",
-              "Lancer les scripts npm d'un projet"
+              "Use repo, commits, and branches day to day",
+              "Keep `.env` separate from versioned code",
+              "Run a project's npm scripts"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -435,11 +435,11 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Git : ton filet de sécurité"
+                "text": "Git: your safety net"
               },
               {
                 "kind": "paragraph",
-                "html": "Quand une IA modifie dix fichiers d'un coup, une seule chose te permet de dire « qu'est-ce qui a changé, exactement ? » et « reviens en arrière » : <strong>Git</strong>. Un <em>repo</em> (dépôt) est l'historique complet de ton projet. Un <strong>commit</strong> est un instantané nommé : l'état du projet à un moment donné, avec un message qui explique le <em>pourquoi</em>. Une <strong>branche</strong> est une ligne de travail parallèle, qu'on fusionne quand elle est prête."
+                "html": "When AI changes ten files at once, only one thing lets you ask « what changed, exactly? » and « go back »: <strong>Git</strong>. A <em>repo</em> (repository) is the full history of your project. A <strong>commit</strong> is a named snapshot: the state of the project at a moment in time, with a message that explains <em>why</em>. A <strong>branch</strong> is a parallel line of work that you combine when it is ready."
               },
               {
                 "kind": "code",
@@ -452,17 +452,17 @@
                 "kind": "info",
                 "box": {
                   "variant": "tip",
-                  "title": "<i class='fa-solid fa-robot'></i> Règle d'or du vibe coding",
-                  "body": "<strong>Un commit avant chaque génération, un commit après chaque itération validée.</strong> Si l'IA part dans le décor, <code>git diff</code> te montre les dégâts et <code>git restore</code> les annule. Sans Git, tu ne fais pas du vibe coding, tu joues à la roulette."
+                  "title": "<i class='fa-solid fa-robot'></i> Golden rule of vibe coding",
+                  "body": "<strong>One commit before each generation, one commit after each validated iteration.</strong> If AI goes off the rails, reviewing the change preview shows the damage and <code>git restore</code> undoes it. Without Git, you are not doing vibe coding, you are playing roulette."
                 }
               },
               {
                 "kind": "title",
-                "text": ".env : les secrets hors du code"
+                "text": ".env: secrets outside the code"
               },
               {
                 "kind": "paragraph",
-                "html": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite, et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
+                "html": "Every real project has <strong>secrets</strong>: API keys, database passwords, payment tokens. The rule is absolute: <strong>a secret never goes in code, and never in Git</strong>. It lives in a local <code>.env</code> file that <code>.gitignore</code> excludes from the repo. Why « never »? Because a committed secret stays in <em>history</em> even if you delete the file later, and bots that scan GitHub find an exposed key within minutes."
               },
               {
                 "kind": "code",
@@ -475,17 +475,17 @@
                 "kind": "info",
                 "box": {
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
-                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés. La phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
+                  "title": "<i class='fa-solid fa-key'></i> AI hard-codes keys",
+                  "body": "Documentation examples that AI learned often contain <code>const apiKey = \"sk_live_...\"</code>. It reproduces that pattern as-is. That is the #1 leak in vibe-coded projects. Phase 8 (Security Audit) dedicates a full module to it, with an automatic scanner."
                 }
               },
               {
                 "kind": "title",
-                "text": "npm : les scripts du projet"
+                "text": "npm: project scripts"
               },
               {
                 "kind": "paragraph",
-                "html": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> ; voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
+                "html": "The <code>package.json</code> file is a JavaScript project's ID card: its <strong>dependencies</strong> (installed in <code>node_modules/</code> via <code>npm install</code>; that is why we do not version it, it can be rebuilt) and its <strong>scripts</strong>. <code>npm run dev</code> is not magic: it runs the command defined under <code>\"dev\"</code>. Always open the <code>package.json</code> of an unknown project: its scripts tell you how to start it, test it, and build it."
               },
               {
                 "kind": "code",
@@ -496,24 +496,24 @@
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-list-check'></i> <strong>Checklist projet propre</strong> : <code>git init</code> fait · <code>.gitignore</code> couvre <code>node_modules/</code> et <code>.env</code> · <code>.env.example</code> documente les variables · premier commit lisible. C'est l'objet de l'exercice ci-dessous."
+                "html": "<i class='fa-solid fa-list-check'></i> <strong>Clean project checklist</strong>: <code>git init</code> done · <code>.gitignore</code> covers <code>node_modules/</code> and <code>.env</code> · <code>.env.example</code> documents variables · first commit is readable. That is the goal of the exercise below."
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-bases-m02-lesson",
-              "title": "Git & projet local",
-              "desc": "Versionner proprement dès le premier commit",
+              "title": "Git & local project",
+              "desc": "Version cleanly from your first save to Git history",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Git : ton filet de sécurité</h2>"
+                  "body": "<h2>Git: your safety net</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Quand une IA modifie dix fichiers d'un coup, une seule chose te permet de dire « qu'est-ce qui a changé, exactement ? » et « reviens en arrière » : <strong>Git</strong>. Un <em>repo</em> (dépôt) est l'historique complet de ton projet. Un <strong>commit</strong> est un instantané nommé : l'état du projet à un moment donné, avec un message qui explique le <em>pourquoi</em>. Une <strong>branche</strong> est une ligne de travail parallèle, qu'on fusionne quand elle est prête."
+                  "body": "When AI changes ten files at once, only one thing lets you ask « what changed, exactly? » and « go back »: <strong>Git</strong>. A <em>repo</em> (repository) is the full history of your project. A <strong>commit</strong> is a named snapshot: the state of the project at a moment in time, with a message that explains <em>why</em>. A <strong>branch</strong> is a parallel line of work that you combine when it is ready."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -524,16 +524,16 @@
                 {
                   "__component": "lesson.callout-block",
                   "variant": "tip",
-                  "title": "<i class='fa-solid fa-robot'></i> Règle d'or du vibe coding",
-                  "body": "<strong>Un commit avant chaque génération, un commit après chaque itération validée.</strong> Si l'IA part dans le décor, <code>git diff</code> te montre les dégâts et <code>git restore</code> les annule. Sans Git, tu ne fais pas du vibe coding, tu joues à la roulette."
+                  "title": "<i class='fa-solid fa-robot'></i> Golden rule of vibe coding",
+                  "body": "<strong>One commit before each generation, one commit after each validated iteration.</strong> If AI goes off the rails, reviewing the change preview shows the damage and <code>git restore</code> undoes it. Without Git, you are not doing vibe coding, you are playing roulette."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>.env : les secrets hors du code</h2>"
+                  "body": "<h2>.env: secrets outside the code</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite, et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
+                  "body": "Every real project has <strong>secrets</strong>: API keys, database passwords, payment tokens. The rule is absolute: <strong>a secret never goes in code, and never in Git</strong>. It lives in a local <code>.env</code> file that <code>.gitignore</code> excludes from the repo. Why « never »? Because a committed secret stays in <em>history</em> even if you delete the file later, and bots that scan GitHub find an exposed key within minutes."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -544,16 +544,16 @@
                 {
                   "__component": "lesson.callout-block",
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
-                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés. La phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
+                  "title": "<i class='fa-solid fa-key'></i> AI hard-codes keys",
+                  "body": "Documentation examples that AI learned often contain <code>const apiKey = \"sk_live_...\"</code>. It reproduces that pattern as-is. That is the #1 leak in vibe-coded projects. Phase 8 (Security Audit) dedicates a full module to it, with an automatic scanner."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>npm : les scripts du projet</h2>"
+                  "body": "<h2>npm: project scripts</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> ; voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
+                  "body": "The <code>package.json</code> file is a JavaScript project's ID card: its <strong>dependencies</strong> (installed in <code>node_modules/</code> via <code>npm install</code>; that is why we do not version it, it can be rebuilt) and its <strong>scripts</strong>. <code>npm run dev</code> is not magic: it runs the command defined under <code>\"dev\"</code>. Always open the <code>package.json</code> of an unknown project: its scripts tell you how to start it, test it, and build it."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -563,42 +563,42 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-list-check'></i> <strong>Checklist projet propre</strong> : <code>git init</code> fait · <code>.gitignore</code> couvre <code>node_modules/</code> et <code>.env</code> · <code>.env.example</code> documente les variables · premier commit lisible. C'est l'objet de l'exercice ci-dessous.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-list-check'></i> <strong>Clean project checklist</strong>: <code>git init</code> done · <code>.gitignore</code> covers <code>node_modules/</code> and <code>.env</code> · <code>.env.example</code> documents variables · first commit is readable. That is the goal of the exercise below.</em></p>"
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-bases-quiz-m02",
-              "title": "Git & projet local : valide tes bases",
+              "title": "Git & local project: check your basics",
               "questions": [
                 {
                   "legacyId": "svc-bases-quiz-m02-q1",
-                  "prompt": "À quoi sert un commit Git ?",
+                  "prompt": "What is a Git commit for?",
                   "type": "single",
-                  "explanation": "Un commit est un point de sauvegarde de l'état du projet avec un message. L'historique des commits permet de comprendre et d'annuler des changements.",
+                  "explanation": "A commit is a save point of the project state with a message. Commit history lets you understand and undo changes.",
                   "order": 0,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m02-q1-a",
-                      "label": "À envoyer le code en production",
+                      "label": "Sending code to production",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q1-b",
-                      "label": "À enregistrer un instantané nommé du projet, auquel on peut revenir",
+                      "label": "Saving a named snapshot of the project you can return to",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q1-c",
-                      "label": "À compresser les fichiers du projet",
+                      "label": "Compressing project files",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q1-d",
-                      "label": "À supprimer l'historique précédent",
+                      "label": "Deleting previous history",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -606,32 +606,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m02-q2",
-                  "prompt": "Pourquoi le fichier <code>.env</code> ne doit-il JAMAIS être commité ?",
+                  "prompt": "Why should the <code>.env</code> file NEVER be committed?",
                   "type": "single",
-                  "explanation": "Un secret commité reste dans l'historique Git même après suppression du fichier. C'est l'une des fuites les plus fréquentes, surtout avec du code généré par IA.",
+                  "explanation": "A committed secret stays in Git history even after you delete the file. It is one of the most common leaks, especially with AI-generated code.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m02-q2-a",
-                      "label": "Il est trop volumineux",
+                      "label": "It is too large",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q2-b",
-                      "label": "Il contient des secrets (clés API, mots de passe) qui seraient exposés dans l'historique",
+                      "label": "It contains secrets (API keys, passwords) that would be exposed in history",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q2-c",
-                      "label": "Git ne supporte pas ce format",
+                      "label": "Git does not support this format",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q2-d",
-                      "label": "Il change trop souvent",
+                      "label": "It changes too often",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -639,32 +639,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m02-q3",
-                  "prompt": "Quel est le rôle du fichier <code>.env.example</code> ?",
+                  "prompt": "What is the role of the <code>.env.example</code> file?",
                   "type": "single",
-                  "explanation": "Le .env.example liste les clés nécessaires (avec des valeurs factices) pour qu'un nouveau développeur sache quoi configurer. Les vraies valeurs restent hors du repo.",
+                  "explanation": ".env.example lists the keys needed (with fake values) so a new developer knows what to configure. Real values stay outside the repo.",
                   "order": 2,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m02-q3-a",
-                      "label": "C'est une sauvegarde du vrai .env",
+                      "label": "It is a backup of the real .env",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q3-b",
-                      "label": "Il documente les variables attendues, sans leurs valeurs réelles, et lui se commit",
+                      "label": "It documents expected variables without real values, and it is committed",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q3-c",
-                      "label": "Il est utilisé en production à la place du .env",
+                      "label": "It is used in production instead of .env",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q3-d",
-                      "label": "Il désactive les variables d'environnement",
+                      "label": "It disables environment variables",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -672,32 +672,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m02-q4",
-                  "prompt": "Que doit contenir au minimum le <code>.gitignore</code> d'un projet Node ?",
+                  "prompt": "What must a Node project <code>.gitignore</code> contain at minimum?",
                   "type": "single",
-                  "explanation": "node_modules se réinstalle avec npm install (inutile et énorme dans le repo) ; .env contient les secrets. package.json et src/ sont au contraire le cœur du projet versionné.",
+                  "explanation": "node_modules reinstalls with npm install (useless and huge in the repo); .env holds secrets. package.json and src/ are instead the heart of the versioned project.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m02-q4-a",
-                      "label": "node_modules et .env",
+                      "label": "node_modules and .env",
                       "isCorrect": true,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q4-b",
-                      "label": "package.json et src/",
+                      "label": "package.json and src/",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q4-c",
-                      "label": "Tous les fichiers .js",
+                      "label": "All .js files",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q4-d",
-                      "label": "Le README",
+                      "label": "The README",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -705,32 +705,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m02-q5",
-                  "prompt": "Que fait <code>npm run dev</code> ?",
+                  "prompt": "What does <code>npm run dev</code> do?",
                   "type": "single",
-                  "explanation": "npm run <nom> exécute le script correspondant du package.json. « dev » lance en général le serveur de développement, mais c'est le projet qui le définit.",
+                  "explanation": "npm run <name> runs the matching script from package.json. « dev » usually starts the development server, but the project defines that.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m02-q5-a",
-                      "label": "C'est une commande magique identique dans tous les projets",
+                      "label": "It is a magic command identical in every project",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q5-b",
-                      "label": "Il exécute le script « dev » défini dans la section scripts du package.json",
+                      "label": "It runs the « dev » script defined in the scripts section of package.json",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q5-c",
-                      "label": "Il déploie le projet",
+                      "label": "It deploys the project",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m02-q5-d",
-                      "label": "Il installe les dépendances",
+                      "label": "It installs dependencies",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -741,14 +741,14 @@
             "exercises": [
               {
                 "legacyId": "svc-bases-ex-m02-1",
-                "title": "Initialiser un projet propre",
-                "instructions": "Ce projet fuit : une clé d'API est en dur dans <code>index.js</code> et rien n'est ignoré par Git. Complète le <code>.gitignore</code> (ignorer <code>node_modules</code> et <code>.env</code>), documente la variable dans <code>.env.example</code> (sans vraie valeur), et retire la clé du code.",
+                "title": "Set up a clean project",
+                "instructions": "This project leaks: an API key is hard-coded in <code>index.js</code> and nothing is ignored by Git. Complete <code>.gitignore</code> (ignore <code>node_modules</code> and <code>.env</code>), document the variable in <code>.env.example</code> (no real value), and remove the key from the code.",
                 "kind": "code",
                 "order": 0,
                 "hints": [
-                  "Dans .gitignore, une ligne par motif : node_modules/ puis .env",
-                  ".env.example liste les clés attendues avec une valeur factice : API_KEY=changeme",
-                  "Dans index.js, la clé ne doit plus apparaître : lis-la depuis la config (ici, le placeholder CONFIG.API_KEY)."
+                  "In .gitignore, one pattern per line: node_modules/ then .env",
+                  ".env.example lists expected keys with a fake value: API_KEY=changeme",
+                  "In index.js, the key must no longer appear: read it from config (here, the placeholder CONFIG.API_KEY)."
                 ],
                 "starterFiles": {
                   "/index.js": "// Démo : appel d'API avec une clé… collée en dur (mauvaise idée).\nconst API_KEY = \"sk_live_51JxF2eKm9zPqR7Ab\";\n\ndocument.getElementById(\"app\").innerHTML = `\n  <h2>Config du projet</h2>\n  <p>Clé utilisée : ${API_KEY ? \"définie\" : \"manquante\"}</p>\n`;\n",
@@ -761,7 +761,7 @@
                   "/.env.example": "# Clé d'API du service de paiement (test) : vraie valeur dans .env, jamais commitée\nAPI_KEY=changeme\n"
                 },
                 "tests": null,
-                "validator": "const gitignore = files[\"/.gitignore\"] ?? \"\";\nconst envExample = files[\"/.env.example\"] ?? \"\";\nconst code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \".gitignore ignore node_modules\", pass: /node_modules/.test(gitignore) },\n  { name: \".gitignore ignore .env\", pass: /^\\.env\\s*$/m.test(gitignore) },\n  { name: \".env.example documente API_KEY sans vraie valeur\", pass: /API_KEY\\s*=/.test(envExample) && !/sk_live_/.test(envExample) },\n  { name: \"plus de clé en dur dans index.js\", pass: !/sk_live_/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
+                "validator": "const gitignore = files[\"/.gitignore\"] ?? \"\";\nconst envExample = files[\"/.env.example\"] ?? \"\";\nconst code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \".gitignore ignores node_modules\", pass: /node_modules/.test(gitignore) },\n  { name: \".gitignore ignores .env\", pass: /^\\.env\\s*$/m.test(gitignore) },\n  { name: \".env.example documents API_KEY without a real value\", pass: /API_KEY\\s*=/.test(envExample) && !/sk_live_/.test(envExample) },\n  { name: \"no hard-coded key left in index.js\", pass: !/sk_live_/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
                 "template": "vanilla",
                 "attemptsBeforeSolution": 3,
                 "challengeEligible": false,
@@ -774,14 +774,14 @@
             "moduleId": "svc-bases-m03",
             "index": "03",
             "title": "Front ↔ API",
-            "subtitle": "Comprendre le dialogue entre interface et serveur",
+            "subtitle": "Understand the dialogue between interface and server",
             "duration": "40 min",
             "order": 2,
             "difficulty": "beginner",
             "objectives": [
-              "Consommer une API JSON depuis le front",
-              "Gérer les erreurs HTTP et le CORS basique",
-              "Modéliser les états loading / error / success"
+              "Consume a JSON API from the front end",
+              "Handle HTTP errors and basic CORS",
+              "Model loading / error / success states"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -789,11 +789,11 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "JSON : la langue commune"
+                "text": "JSON: the common language"
               },
               {
                 "kind": "paragraph",
-                "html": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> : c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
+                "html": "The front end and the server share neither language nor memory: they exchange <strong>structured text</strong>, almost always <strong>JSON</strong>. Objects in braces, arrays in brackets, strings, numbers, booleans, <code>null</code>: that is the whole vocabulary. In JavaScript, <code>response.json()</code> turns that text into a usable object, and <code>JSON.stringify()</code> does the reverse to send data."
               },
               {
                 "kind": "code",
@@ -804,11 +804,11 @@
               },
               {
                 "kind": "title",
-                "text": "Les erreurs HTTP, côté front"
+                "text": "HTTP errors on the front end"
               },
               {
                 "kind": "paragraph",
-                "html": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois. Un code généré à la va-vite n'en couvre souvent aucune."
+                "html": "An API call can fail in <strong>three different ways</strong>, and each is detected differently. 1) The server returns an error (<code>4xx</code>/<code>5xx</code>): <code>fetch</code> still « succeeds », you must test <code>response.ok</code>. 2) The network drops (no connection, DNS, timeout): then the promise <em>rejects</em>, hence <code>try/catch</code>. 3) The body is not the expected JSON: <code>response.json()</code> throws. Robust code covers all three. Rushed generated code often covers none."
               },
               {
                 "kind": "code",
@@ -819,60 +819,60 @@
               },
               {
                 "kind": "title",
-                "text": "CORS : pourquoi le navigateur bloque"
+                "text": "CORS: why the browser blocks"
               },
               {
                 "kind": "paragraph",
-                "html": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles), jamais en bricolant la requête côté front."
+                "html": "Your front end runs on <code>localhost:5173</code>, the API on another domain. By default, the browser <strong>forbids</strong> a page from reading a response from another <em>origin</em> (domain + port + protocol): that is the <em>same-origin policy</em>, a fundamental protection. <strong>CORS</strong> is the mechanism by which the <em>server</em> declares « these origins may call me », via <code>Access-Control-Allow-*</code> headers. Remember the essentials: a CORS error is fixed <strong>on the server side</strong> (or via a proxy you control), never by hacking the request on the front end."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "concept",
-                  "title": "<i class='fa-solid fa-shield-halved'></i> CORS n'est pas ton ennemi",
-                  "body": "Quand l'IA propose de « désactiver CORS » avec <code>Access-Control-Allow-Origin: *</code> sur une API privée, c'est un signal d'alerte : elle ouvre ton API au monde entier pour faire disparaître une erreur. La bonne réponse est de lister explicitement les origines autorisées."
+                  "title": "<i class='fa-solid fa-shield-halved'></i> CORS is not your enemy",
+                  "body": "When AI suggests « disabling CORS » with <code>Access-Control-Allow-Origin: *</code> on a private API, that is a red flag: it opens your API to the whole world to make an error disappear. The right answer is to list allowed origins explicitly."
                 }
               },
               {
                 "kind": "title",
-                "text": "Loading / erreur / succès : le contrat de toute UI"
+                "text": "Loading / error / success: the contract for every UI"
               },
               {
                 "kind": "paragraph",
-                "html": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré, qui suppose toujours que tout marche du premier coup."
+                "html": "Between the click and the response, time passes. An honest interface shows that time: <strong>loading</strong> (« working on it »), then <strong>success</strong> (the data) or <strong>error</strong> (an actionable message, not a frozen screen). These three states are not cosmetic detail: they are the first criterion on the Design checklist you will apply in phase 9, and the most common omission in generated code, which always assumes everything works on the first try."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-spinner'></i> <strong>Loading</strong> : visible dès le départ de la requête, jamais un écran blanc."
+                "html": "<i class='fa-solid fa-spinner'></i> <strong>Loading</strong>: visible as soon as the request starts, never a blank screen."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-circle-xmark'></i> <strong>Erreur</strong> : un message compréhensible + un moyen de réessayer."
+                "html": "<i class='fa-solid fa-circle-xmark'></i> <strong>Error</strong>: a clear message + a way to try again."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données, et un état « vide » prévu si la liste ne contient rien."
+                "html": "<i class='fa-solid fa-circle-check'></i> <strong>Success</strong>: the data, and an « empty » state planned when the list has nothing."
               },
               {
                 "kind": "paragraph",
-                "html": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras (généré puis audité) dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
+                "html": "The exercise below has you implement this full contract against a real public API. It is exactly the skeleton you will find (generated then audited) in every network feature of the product you build from phase 4 onward."
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-bases-m03-lesson",
               "title": "Front ↔ API",
-              "desc": "Comprendre le dialogue entre interface et serveur",
+              "desc": "Understand the dialogue between interface and server",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>JSON : la langue commune</h2>"
+                  "body": "<h2>JSON: the common language</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> : c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
+                  "body": "The front end and the server share neither language nor memory: they exchange <strong>structured text</strong>, almost always <strong>JSON</strong>. Objects in braces, arrays in brackets, strings, numbers, booleans, <code>null</code>: that is the whole vocabulary. In JavaScript, <code>response.json()</code> turns that text into a usable object, and <code>JSON.stringify()</code> does the reverse to send data."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -882,11 +882,11 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Les erreurs HTTP, côté front</h2>"
+                  "body": "<h2>HTTP errors on the front end</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois. Un code généré à la va-vite n'en couvre souvent aucune."
+                  "body": "An API call can fail in <strong>three different ways</strong>, and each is detected differently. 1) The server returns an error (<code>4xx</code>/<code>5xx</code>): <code>fetch</code> still « succeeds », you must test <code>response.ok</code>. 2) The network drops (no connection, DNS, timeout): then the promise <em>rejects</em>, hence <code>try/catch</code>. 3) The body is not the expected JSON: <code>response.json()</code> throws. Robust code covers all three. Rushed generated code often covers none."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -896,76 +896,76 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>CORS : pourquoi le navigateur bloque</h2>"
+                  "body": "<h2>CORS: why the browser blocks</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles), jamais en bricolant la requête côté front."
+                  "body": "Your front end runs on <code>localhost:5173</code>, the API on another domain. By default, the browser <strong>forbids</strong> a page from reading a response from another <em>origin</em> (domain + port + protocol): that is the <em>same-origin policy</em>, a fundamental protection. <strong>CORS</strong> is the mechanism by which the <em>server</em> declares « these origins may call me », via <code>Access-Control-Allow-*</code> headers. Remember the essentials: a CORS error is fixed <strong>on the server side</strong> (or via a proxy you control), never by hacking the request on the front end."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "concept",
-                  "title": "<i class='fa-solid fa-shield-halved'></i> CORS n'est pas ton ennemi",
-                  "body": "Quand l'IA propose de « désactiver CORS » avec <code>Access-Control-Allow-Origin: *</code> sur une API privée, c'est un signal d'alerte : elle ouvre ton API au monde entier pour faire disparaître une erreur. La bonne réponse est de lister explicitement les origines autorisées."
+                  "title": "<i class='fa-solid fa-shield-halved'></i> CORS is not your enemy",
+                  "body": "When AI suggests « disabling CORS » with <code>Access-Control-Allow-Origin: *</code> on a private API, that is a red flag: it opens your API to the whole world to make an error disappear. The right answer is to list allowed origins explicitly."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Loading / erreur / succès : le contrat de toute UI</h2>"
+                  "body": "<h2>Loading / error / success: the contract for every UI</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré, qui suppose toujours que tout marche du premier coup."
+                  "body": "Between the click and the response, time passes. An honest interface shows that time: <strong>loading</strong> (« working on it »), then <strong>success</strong> (the data) or <strong>error</strong> (an actionable message, not a frozen screen). These three states are not cosmetic detail: they are the first criterion on the Design checklist you will apply in phase 9, and the most common omission in generated code, which always assumes everything works on the first try."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-spinner'></i> <strong>Loading</strong> : visible dès le départ de la requête, jamais un écran blanc.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-spinner'></i> <strong>Loading</strong>: visible as soon as the request starts, never a blank screen.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-circle-xmark'></i> <strong>Erreur</strong> : un message compréhensible + un moyen de réessayer.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-circle-xmark'></i> <strong>Error</strong>: a clear message + a way to try again.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données, et un état « vide » prévu si la liste ne contient rien.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-circle-check'></i> <strong>Success</strong>: the data, and an « empty » state planned when the list has nothing.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras (généré puis audité) dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
+                  "body": "The exercise below has you implement this full contract against a real public API. It is exactly the skeleton you will find (generated then audited) in every network feature of the product you build from phase 4 onward."
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-bases-quiz-m03",
-              "title": "Front ↔ API : valide tes bases",
+              "title": "Front ↔ API: check your basics",
               "questions": [
                 {
                   "legacyId": "svc-bases-quiz-m03-q1",
-                  "prompt": "Une API répond en JSON. Qu'est-ce que le JSON ?",
+                  "prompt": "An API responds in JSON. What is JSON?",
                   "type": "single",
-                  "explanation": "JSON (JavaScript Object Notation) est un format d'échange : du texte structuré que n'importe quel langage sait produire et lire.",
+                  "explanation": "JSON (JavaScript Object Notation) is an exchange format: structured text that any language can produce and read.",
                   "order": 0,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m03-q1-a",
-                      "label": "Un langage de programmation",
+                      "label": "A programming language",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q1-b",
-                      "label": "Un format texte structuré (objets, tableaux, valeurs) pour échanger des données",
+                      "label": "A structured text format (objects, arrays, values) for exchanging data",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q1-c",
-                      "label": "Un protocole réseau concurrent de HTTP",
+                      "label": "A network protocol competing with HTTP",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q1-d",
-                      "label": "Une base de données",
+                      "label": "A database",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -973,32 +973,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m03-q2",
-                  "prompt": "<code>fetch</code> ne rejette PAS sa promesse sur un statut 500. Comment détecter l'erreur ?",
+                  "prompt": "<code>fetch</code> does NOT reject its promise on a 500 status. How do you detect the error?",
                   "type": "single",
-                  "explanation": "Piège classique : fetch ne rejette que sur erreur réseau. Un 404 ou un 500 « réussit » techniquement ; il faut tester response.ok soi-même.",
+                  "explanation": "Classic trap: fetch only rejects on network error. A 404 or 500 « succeeds » technically; you must test response.ok yourself.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m03-q2-a",
-                      "label": "C'est impossible, il faut utiliser une autre bibliothèque",
+                      "label": "It is impossible, you must use another library",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q2-b",
-                      "label": "En vérifiant response.ok (ou response.status) avant de lire le corps",
+                      "label": "By checking response.ok (or response.status) before reading the body",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q2-c",
-                      "label": "En attendant 5 secondes",
+                      "label": "By waiting 5 seconds",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q2-d",
-                      "label": "fetch rejette toujours sur une erreur serveur",
+                      "label": "fetch always rejects on a server error",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1006,32 +1006,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m03-q3",
-                  "prompt": "Ton front sur localhost:5173 appelle une API sur un autre domaine et le navigateur bloque avec une erreur CORS. Qui doit autoriser l'accès ?",
+                  "prompt": "Your front end on localhost:5173 calls an API on another domain and the browser blocks with a CORS error. Who must allow access?",
                   "type": "single",
-                  "explanation": "CORS est une permission accordée par le serveur : c'est lui qui déclare quelles origines peuvent l'appeler. Aucun header côté front ne peut contourner ça (heureusement).",
+                  "explanation": "CORS is permission granted by the server: it declares which origins may call it. No front-end header can bypass that (fortunately).",
                   "order": 2,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m03-q3-a",
-                      "label": "Le serveur de l'API, via les headers Access-Control-Allow-*",
+                      "label": "The API server, via Access-Control-Allow-* headers",
                       "isCorrect": true,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q3-b",
-                      "label": "Le front, en ajoutant un header spécial à la requête",
+                      "label": "The front end, by adding a special header to the request",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q3-c",
-                      "label": "Le navigateur, dans ses réglages",
+                      "label": "The browser, in its settings",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q3-d",
-                      "label": "Personne, il faut changer de domaine",
+                      "label": "Nobody, you must change domain",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1039,20 +1039,20 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m03-q4",
-                  "prompt": "Quels sont les trois états qu'une UI doit gérer pour tout appel réseau ?",
+                  "prompt": "What are the three states a UI must handle for every network call?",
                   "type": "single",
-                  "explanation": "Chaque requête passe par « en cours » puis « réussie » ou « échouée ». Une UI qui n'affiche pas ces trois états paraît cassée dès que le réseau ralentit.",
+                  "explanation": "Every request goes through « in progress » then « succeeded » or « failed ». A UI that does not show these three states looks broken as soon as the network slows down.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m03-q4-a",
-                      "label": "Ouvert, fermé, en pause",
+                      "label": "Open, closed, paused",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q4-b",
-                      "label": "Loading, erreur, succès",
+                      "label": "Loading, error, success",
                       "isCorrect": true,
                       "order": 1
                     },
@@ -1064,7 +1064,7 @@
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q4-d",
-                      "label": "Rapide, moyen, lent",
+                      "label": "Fast, medium, slow",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1072,32 +1072,32 @@
                 },
                 {
                   "legacyId": "svc-bases-quiz-m03-q5",
-                  "prompt": "Pourquoi entourer <code>await response.json()</code> d'une gestion d'erreur ?",
+                  "prompt": "Why wrap <code>await response.json()</code> in error handling?",
                   "type": "single",
-                  "explanation": "Un serveur en erreur renvoie souvent du HTML ou un corps vide : response.json() lève alors une exception qu'il faut attraper pour afficher un message propre.",
+                  "explanation": "An erroring server often returns HTML or an empty body: response.json() then throws an exception you must catch to show a clean message.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-bases-quiz-m03-q5-a",
-                      "label": "Par superstition, ça ne peut pas échouer",
+                      "label": "Superstition, it cannot fail",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q5-b",
-                      "label": "Le corps peut ne pas être du JSON valide (page d'erreur HTML, réponse vide…)",
+                      "label": "The body may not be valid JSON (HTML error page, empty response…)",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q5-c",
-                      "label": "json() est synchrone donc dangereux",
+                      "label": "json() is synchronous so it is dangerous",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-bases-quiz-m03-q5-d",
-                      "label": "Pour accélérer le parsing",
+                      "label": "To speed up parsing",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1108,14 +1108,14 @@
             "exercises": [
               {
                 "legacyId": "svc-bases-ex-m03-1",
-                "title": "Consommer une API avec les trois états",
-                "instructions": "Complète <code>loadUser()</code> pour appeler l'API et gérer les trois états : afficher « Chargement… » pendant la requête, un message d'erreur si <code>response.ok</code> est faux ou si le réseau échoue, et le nom de l'utilisateur en cas de succès.",
+                "title": "Consume an API with all three states",
+                "instructions": "Complete <code>loadUser()</code> to call the API and handle all three states: show « Chargement… » while the request runs, an error message if <code>response.ok</code> is false or the network fails, and the user's name on success.",
                 "kind": "code",
                 "order": 0,
                 "hints": [
-                  "Affiche l'état loading AVANT le await fetch(...).",
-                  "fetch ne rejette pas sur un 404/500 : teste response.ok toi-même.",
-                  "Entoure l'appel d'un try/catch pour les erreurs réseau et le JSON invalide."
+                  "Show the loading state BEFORE await fetch(...).",
+                  "fetch does not reject on 404/500: test response.ok yourself.",
+                  "Wrap the call in try/catch for network errors and invalid JSON."
                 ],
                 "starterFiles": {
                   "/index.js": "const API_URL = \"https://jsonplaceholder.typicode.com/users/1\";\nconst app = document.getElementById(\"app\");\n\nasync function loadUser() {\n  // TODO 1 : afficher l'état \"Chargement…\"\n  // TODO 2 : appeler fetch(API_URL) et vérifier response.ok\n  // TODO 3 : afficher le nom (data.name) en cas de succès\n  // TODO 4 : afficher un message d'erreur sinon (statut ou panne réseau)\n}\n\nloadUser();\n"
@@ -1124,7 +1124,7 @@
                   "/index.js": "const API_URL = \"https://jsonplaceholder.typicode.com/users/1\";\nconst app = document.getElementById(\"app\");\n\nasync function loadUser() {\n  app.innerHTML = \"<p>Chargement…</p>\";\n  try {\n    const response = await fetch(API_URL);\n    if (!response.ok) {\n      app.innerHTML = `<p>Erreur ${response.status} : impossible de charger l'utilisateur.</p>`;\n      return;\n    }\n    const data = await response.json();\n    app.innerHTML = `<h2>${data.name}</h2><p>${data.email}</p>`;\n  } catch {\n    app.innerHTML = \"<p>Panne réseau ou réponse invalide. Réessaie.</p>\";\n  }\n}\n\nloadUser();\n"
                 },
                 "tests": null,
-                "validator": "const code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \"état loading affiché avant l'appel\", pass: /Chargement/i.test(code) },\n  { name: \"appel fetch(API_URL) avec await\", pass: /await\\s+fetch\\s*\\(\\s*API_URL\\s*\\)/.test(code) },\n  { name: \"vérification de response.ok (ou response.status)\", pass: /response\\.(ok|status)/.test(code) },\n  { name: \"erreurs réseau attrapées (try/catch ou .catch)\", pass: /try\\s*\\{[\\s\\S]*catch|\\.catch\\s*\\(/.test(code) },\n  { name: \"données affichées en cas de succès\", pass: /data\\.name|data\\.email/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
+                "validator": "const code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \"loading state shown before the call\", pass: /Chargement/i.test(code) },\n  { name: \"fetch(API_URL) called with await\", pass: /await\\s+fetch\\s*\\(\\s*API_URL\\s*\\)/.test(code) },\n  { name: \"response.ok (or response.status) checked\", pass: /response\\.(ok|status)/.test(code) },\n  { name: \"network errors caught (try/catch or .catch)\", pass: /try\\s*\\{[\\s\\S]*catch|\\.catch\\s*\\(/.test(code) },\n  { name: \"data shown on success\", pass: /data\\.name|data\\.email/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
                 "template": "vanilla",
                 "attemptsBeforeSolution": 3,
                 "challengeEligible": true,
@@ -1137,42 +1137,42 @@
       {
         "legacyId": "svc-fondations",
         "slug": "fondations",
-        "title": "Fondations vibe coding",
+        "title": "Vibe coding foundations",
         "label": "Phase 1",
-        "summary": "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Ship qui le rend fiable.",
+        "summary": "Understand vibe coding, its real risks, and the Prompt (specify and generate) → Audit (verify with proof) → Ship (deliver with evidence) cycle that makes it reliable.",
         "order": 1,
         "color": "intro",
         "icon": "fa-wand-magic-sparkles",
         "metaTags": [
-          "tronc commun",
-          "lecture ~1h30",
-          "audits interactifs",
-          "cycle PAS"
+          "core path",
+          "reading ~1h30",
+          "interactive audits",
+          "PAS cycle"
         ],
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": false,
-        "projectTitle": "Projet P1 : Audit d'un dépôt généré par IA",
-        "projectDeliverable": "Un rapport d'audit : constats, gravité, recommandations priorisées (exercice « Projet P1 » du module 03).",
+        "projectTitle": "Project P1: Audit of an AI-generated repository",
+        "projectDeliverable": "An audit report: findings, severity, prioritized recommendations (see the « Project P1 » exercise in module 03).",
         "projectAssessment": [
-          "Constats factuels avec preuves (fichier, ligne)",
-          "Gravité justifiée et cohérente",
-          "Recommandations actionnables et priorisées"
+          "Factual findings with evidence (file, line)",
+          "Severity justified and consistent",
+          "Actionable, prioritized recommendations"
         ],
         "modules": [
           {
             "legacyId": "svc-fondations-m01",
             "moduleId": "svc-fondations-m01",
             "index": "01",
-            "title": "Le vibe coding : promesses et pièges",
-            "subtitle": "Ce que l'IA fait bien, ce qu'elle rate, et qui est responsable",
+            "title": "Vibe coding: promises and traps",
+            "subtitle": "What AI does well, what it misses, and who is responsible",
             "duration": "25 min",
             "order": 0,
             "difficulty": "intro",
             "objectives": [
-              "Situer les outils : de la suggestion d'une ligne jusqu'à l'agent autonome",
-              "Repérer les échecs typiques du code généré",
-              "Assumer la responsabilité finale : c'est toi qui signes"
+              "Place tools on a spectrum from line suggestion to autonomous agent",
+              "Spot typical failures in generated code",
+              "Own final responsibility: you sign what ships"
             ],
             "prerequisites": [],
             "openByDefault": true,
@@ -1180,131 +1180,131 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Du plus guidé au plus autonome"
+                "text": "From most guided to most autonomous"
               },
               {
                 "kind": "paragraph",
-                "html": "« Vibe coding », ici, ce n'est pas « laisser l'IA coder à ta place ». C'est <strong>générer vite, puis vérifier comme un professionnel</strong>. Les outils vont du plus simple au plus autonome : suggestion d'une ligne pendant que tu tapes, chat pour poser une question, assistant dans l'éditeur (plusieurs fichiers), jusqu'aux <em>agents</em> qui lisent, écrivent et lancent des commandes avec peu de supervision."
+                "html": "« Vibe coding », here, is not « let AI code for you ». It is <strong>generate fast, then verify like a professional</strong>. Tools range from simplest to most autonomous: a line suggestion while you type, chat for a question, an in-editor assistant (several files), up to <em>agents</em> that read, write, and run commands with little supervision."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "note",
-                  "title": "<i class='fa-solid fa-gauge-high'></i> Plus l'outil agit seul, plus tu dois vérifier",
-                  "body": "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Ship (cadrer, vérifier, livrer)."
+                  "title": "<i class='fa-solid fa-gauge-high'></i> The more the tool acts alone, the more you must verify",
+                  "body": "A bad suggestion costs one line. A poorly scoped agent can rewrite your sign-in flow, save a secret to Git history, and propose thousands of lines at once. Hence the Prompt (specify and generate) → Audit (verify with proof) → Ship (deliver with evidence) cycle."
                 }
               },
               {
                 "kind": "title",
-                "text": "Forces et angles morts"
+                "text": "Strengths and blind spots"
               },
               {
                 "kind": "paragraph",
-                "html": "L'IA est forte pour le <strong>code de départ répétitif</strong>, les API courantes, les réécritures mécaniques, les explications. Elle rate souvent : les règles métier non écrites, les failles subtiles (connexion, CORS, secrets), la sur-ingénierie inutile, et le code <strong>plausible mais faux</strong> qui survit à un regard rapide."
+                "html": "AI is strong at <strong>repetitive starter code</strong>, common APIs, mechanical rewrites, explanations. It often misses: unwritten business rules, subtle flaws (sign-in, CORS, secrets), unnecessary over-engineering, and code that is <strong>plausible but wrong</strong> and survives a quick glance."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-eye'></i> <strong>Réflexe</strong> : si tu n'as pas lu l'aperçu des changements, tu n'as pas livré. Tu as espéré."
+                "html": "<i class='fa-solid fa-eye'></i> <strong>Habit</strong>: if you have not read the change preview, you have not shipped. You hoped."
               },
               {
                 "kind": "title",
-                "text": "Le développeur signe"
+                "text": "The developer signs"
               },
               {
                 "kind": "paragraph",
-                "html": "En production, le fournisseur du modèle ne porte pas ton incident Stripe. <strong>Toi (ou ton équipe) signes l'intégration, le déploiement, la promesse client.</strong> Les échecs du vibe coding sans filet se ressemblent : confiance aveugle, demande floue, revue zappée. Cette formation existe pour casser ce schéma."
+                "html": "In production, the model provider does not carry your Stripe incident. <strong>You (or your team) sign the integration, the deployment, the promise to the customer.</strong> Vibe coding failures without a safety net look alike: blind trust, vague request, skipped review. This course exists to break that pattern."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Pièges à nommer tout de suite",
-                  "body": "Confiance aveugle · code non lu · demande floue. Tu les retrouveras dans l'exercice d'autopsie ci-dessous."
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Traps to name right away",
+                  "body": "Blind trust · unread code · vague request. You will see them again in the autopsy exercise below."
                 }
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m01-lesson",
-              "title": "Le vibe coding : promesses et pièges",
-              "desc": "Ce que l'IA fait bien, ce qu'elle rate, et qui est responsable",
+              "title": "Vibe coding: promises and traps",
+              "desc": "What AI does well, what it misses, and who is responsible",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Du plus guidé au plus autonome</h2>"
+                  "body": "<h2>From most guided to most autonomous</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "« Vibe coding », ici, ce n'est pas « laisser l'IA coder à ta place ». C'est <strong>générer vite, puis vérifier comme un professionnel</strong>. Les outils vont du plus simple au plus autonome : suggestion d'une ligne pendant que tu tapes, chat pour poser une question, assistant dans l'éditeur (plusieurs fichiers), jusqu'aux <em>agents</em> qui lisent, écrivent et lancent des commandes avec peu de supervision."
+                  "body": "« Vibe coding », here, is not « let AI code for you ». It is <strong>generate fast, then verify like a professional</strong>. Tools range from simplest to most autonomous: a line suggestion while you type, chat for a question, an in-editor assistant (several files), up to <em>agents</em> that read, write, and run commands with little supervision."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "note",
-                  "title": "<i class='fa-solid fa-gauge-high'></i> Plus l'outil agit seul, plus tu dois vérifier",
-                  "body": "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Ship (cadrer, vérifier, livrer)."
+                  "title": "<i class='fa-solid fa-gauge-high'></i> The more the tool acts alone, the more you must verify",
+                  "body": "A bad suggestion costs one line. A poorly scoped agent can rewrite your sign-in flow, save a secret to Git history, and propose thousands of lines at once. Hence the Prompt (specify and generate) → Audit (verify with proof) → Ship (deliver with evidence) cycle."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Forces et angles morts</h2>"
+                  "body": "<h2>Strengths and blind spots</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "L'IA est forte pour le <strong>code de départ répétitif</strong>, les API courantes, les réécritures mécaniques, les explications. Elle rate souvent : les règles métier non écrites, les failles subtiles (connexion, CORS, secrets), la sur-ingénierie inutile, et le code <strong>plausible mais faux</strong> qui survit à un regard rapide."
+                  "body": "AI is strong at <strong>repetitive starter code</strong>, common APIs, mechanical rewrites, explanations. It often misses: unwritten business rules, subtle flaws (sign-in, CORS, secrets), unnecessary over-engineering, and code that is <strong>plausible but wrong</strong> and survives a quick glance."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-eye'></i> <strong>Réflexe</strong> : si tu n'as pas lu l'aperçu des changements, tu n'as pas livré. Tu as espéré.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-eye'></i> <strong>Habit</strong>: if you have not read the change preview, you have not shipped. You hoped.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Le développeur signe</h2>"
+                  "body": "<h2>The developer signs</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "En production, le fournisseur du modèle ne porte pas ton incident Stripe. <strong>Toi (ou ton équipe) signes l'intégration, le déploiement, la promesse client.</strong> Les échecs du vibe coding sans filet se ressemblent : confiance aveugle, demande floue, revue zappée. Cette formation existe pour casser ce schéma."
+                  "body": "In production, the model provider does not carry your Stripe incident. <strong>You (or your team) sign the integration, the deployment, the promise to the customer.</strong> Vibe coding failures without a safety net look alike: blind trust, vague request, skipped review. This course exists to break that pattern."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Pièges à nommer tout de suite",
-                  "body": "Confiance aveugle · code non lu · demande floue. Tu les retrouveras dans l'exercice d'autopsie ci-dessous."
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Traps to name right away",
+                  "body": "Blind trust · unread code · vague request. You will see them again in the autopsy exercise below."
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-fondations-quiz-m01",
-              "title": "Vibe coding : valide ta lecture",
+              "title": "Vibe coding: check your reading",
               "questions": [
                 {
                   "legacyId": "svc-fondations-quiz-m01-q1",
-                  "prompt": "Sur le spectre des outils IA, qu'est-ce qu'un agent ?",
+                  "prompt": "On the AI tools spectrum, what is an agent?",
                   "type": "single",
-                  "explanation": "L'agent agit : il peut modifier plusieurs fichiers, lancer des commandes, itérer. D'où un besoin d'audit plus strict qu'avec un autocomplete.",
+                  "explanation": "An agent acts: it can change several files, run commands, iterate. That requires stricter audit than autocomplete.",
                   "order": 0,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m01-q1-a",
-                      "label": "Une simple suggestion de mot dans l'éditeur",
+                      "label": "A simple word suggestion in the editor",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q1-b",
-                      "label": "Un système qui enchaîne des actions (lire, écrire, exécuter) avec peu de supervision",
+                      "label": "A system that chains actions (read, write, run) with little supervision",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q1-c",
-                      "label": "Un framework React concurrent",
+                      "label": "A competing React framework",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q1-d",
-                      "label": "Un serveur de base de données",
+                      "label": "A database server",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1312,32 +1312,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m01-q2",
-                  "prompt": "Quel échec est typique du code généré par IA ?",
+                  "prompt": "Which failure is typical of AI-generated code?",
                   "type": "single",
-                  "explanation": "Le danger n'est pas le code illisible : c'est le code qui a l'air correct. D'où l'audit systématique.",
+                  "explanation": "The danger is not unreadable code: it is code that looks correct. Hence systematic audit.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m01-q2-a",
-                      "label": "Il ne compile jamais",
+                      "label": "It never compiles",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q2-b",
-                      "label": "Il est plausible, passe un coup d'œil rapide, mais cache des failles ou des absurdités",
+                      "label": "It is plausible, passes a quick glance, but hides flaws or nonsense",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q2-c",
-                      "label": "Il refuse d'utiliser TypeScript",
+                      "label": "It refuses to use TypeScript",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q2-d",
-                      "label": "Il ne produit que du HTML",
+                      "label": "It only produces HTML",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1345,32 +1345,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m01-q3",
-                  "prompt": "Qui porte la responsabilité finale du code livré ?",
+                  "prompt": "Who carries final responsibility for shipped code?",
                   "type": "single",
-                  "explanation": "L'IA propose. Toi tu livres. En prod, c'est ta signature qui compte.",
+                  "explanation": "AI proposes. You ship. In production, your signature is what counts.",
                   "order": 2,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m01-q3-a",
-                      "label": "Le fournisseur du modèle IA",
+                      "label": "The AI model provider",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q3-b",
-                      "label": "Le développeur (ou l'équipe) qui signe et déploie",
+                      "label": "The developer (or team) who signs and deploys",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q3-c",
-                      "label": "Personne, c'est expérimental",
+                      "label": "Nobody, it is experimental",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q3-d",
-                      "label": "Le client uniquement",
+                      "label": "The customer only",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1378,32 +1378,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m01-q4",
-                  "prompt": "Quel piège évite-t-on en lisant réellement l'aperçu des changements générés ?",
+                  "prompt": "Which trap do you avoid by actually reading the generated change preview?",
                   "type": "single",
-                  "explanation": "Accepter sans lire, c'est déléguer la responsabilité à une boîte noire. L'aperçu des changements est ton premier filet.",
+                  "explanation": "Accepting without reading means delegating responsibility to a black box. The change preview is your first safety net.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m01-q4-a",
-                      "label": "La confiance aveugle",
+                      "label": "Blind trust",
                       "isCorrect": true,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q4-b",
-                      "label": "Les timeouts réseau",
+                      "label": "Network timeouts",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q4-c",
-                      "label": "Le CSS cassé uniquement",
+                      "label": "Broken CSS only",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q4-d",
-                      "label": "Les conflits Git",
+                      "label": "Git conflicts",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1411,32 +1411,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m01-q5",
-                  "prompt": "Pourquoi une demande floue (prompt vague) est-elle dangereuse ?",
+                  "prompt": "Why is a vague request (vague prompt) dangerous?",
                   "type": "single",
-                  "explanation": "Un brief flou produit du code flou. Spécifier (Prompt) avant de générer réduit l'espace d'erreur.",
+                  "explanation": "A vague brief produces vague code. Specifying (Prompt) before generating shrinks the error space.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m01-q5-a",
-                      "label": "L'IA refuse de répondre",
+                      "label": "AI refuses to answer",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q5-b",
-                      "label": "Elle invente des contraintes, sur-ingénierie ou oublie des exigences critiques",
+                      "label": "It invents constraints, over-engineers, or drops critical requirements",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q5-c",
-                      "label": "Elle ne sait générer que du Python",
+                      "label": "It can only generate Python",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m01-q5-d",
-                      "label": "Elle désactive Git",
+                      "label": "It disables Git",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1447,49 +1447,49 @@
             "exercises": [
               {
                 "legacyId": "svc-fondations-ex-m01-1",
-                "title": "Autopsie d'un incident IA",
-                "instructions": "Lis le scénario. Coche uniquement les constats qui tiennent. Attribue une gravité cohérente. Soumets ton rapport.",
+                "title": "Autopsy of an AI incident",
+                "instructions": "Read the scenario. Check only findings that hold up. Assign consistent severity. Submit your report.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "Une clé secrète écrite en dur dans le dépôt est presque toujours critique ou haute.",
-                  "Un commentaire TODO n'est pas une faille de sécurité à elle seule."
+                  "A secret key hard-coded in the repo is almost always critical or high severity.",
+                  "A TODO comment is not a security flaw on its own."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p>Une startup a laissé un agent IA « finir » la connexion utilisateur. Deux jours après la mise en ligne, un bot parcourt le dépôt public miroir et trouve une clé Stripe <code>sk_live_…</code> enregistrée dans l'historique Git, dans <code>src/lib/payments.ts</code>. Des paiements frauduleux apparaissent. Personne n'avait lu l'aperçu des 1800 lignes de changements.</p>\n<p>Identifie les causes racines et signaux manqués (pas les symptômes marketing).</p>",
+                  "scenario": "<p>A startup let an AI agent « finish » user sign-in. Two days after go-live, a bot crawls the public mirror repo and finds a Stripe key <code>sk_live_…</code> saved in Git history in <code>src/lib/payments.ts</code>. Fraudulent charges appear. Nobody had read the 1800-line change preview.</p>\n<p>Identify root causes and missed signals (not marketing symptoms).</p>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Secret de production enregistré dans le code source",
+                      "label": "Production secret saved in source code",
                       "correct": true,
                       "minSeverity": "critical"
                     },
                     {
                       "id": "f2",
-                      "label": "Gros lot de changements accepté sans revue humaine ligne à ligne",
+                      "label": "Large batch of changes accepted with no human line-by-line review",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f3",
-                      "label": "Pas de scan automatique de secrets avant d'intégrer le code",
+                      "label": "No automatic secret scan before integrating code",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f4",
-                      "label": "Le framework React est obsolète",
+                      "label": "The React framework is outdated",
                       "correct": false
                     },
                     {
                       "id": "f5",
-                      "label": "Le README utilise trop d'emojis",
+                      "label": "The README uses too many emojis",
                       "correct": false
                     },
                     {
                       "id": "f6",
-                      "label": "Responsabilité déléguée à l'agent (« l'IA a généré, donc ce n'est pas nous »)",
+                      "label": "Responsibility delegated to the agent (« AI generated it, so it is not on us »)",
                       "correct": true,
                       "minSeverity": "medium"
                     }
@@ -1498,7 +1498,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>Constats attendus : secret en dur (critique), changements non relus (haute), pas de scan secrets avant intégration (haute), déni de responsabilité (moyenne). Les distracteurs UI/README ne sont pas des causes de cet incident.</p>"
+                  "__solution": "<p>Expected findings: hard-coded secret (critical), unread changes (high), no secret scan before integration (high), denial of responsibility (medium). UI/README distractors are not causes of this incident.</p>"
                 },
                 "tests": null,
                 "validator": null,
@@ -1513,15 +1513,15 @@
             "legacyId": "svc-fondations-m02",
             "moduleId": "svc-fondations-m02",
             "index": "02",
-            "title": "Le cycle Prompt → Audit → Ship",
-            "subtitle": "Le fil rouge de toute la formation",
+            "title": "The Prompt → Audit → Ship cycle",
+            "subtitle": "The thread running through the whole course",
             "duration": "30 min",
             "order": 1,
             "difficulty": "intro",
             "objectives": [
-              "Expliquer pourquoi trois temps distincts",
-              "Décrire ce que tu produis à chaque temps",
-              "Préférer les petites boucles au grand tunnel"
+              "Explain why three distinct phases",
+              "Describe what you produce at each phase",
+              "Prefer small loops over one big tunnel"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -1529,133 +1529,133 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Pourquoi trois temps"
+                "text": "Why three phases"
               },
               {
                 "kind": "paragraph",
-                "html": "Mélanger spécification, génération, vérification et mise en ligne dans un seul élan, c'est le tunnel. On sépare volontairement :"
+                "html": "Mixing specification, generation, verification, and go-live in one rush is the tunnel. We deliberately separate:"
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-pen'></i> <strong>Prompt</strong> : écrire clairement le besoin, puis générer une proposition limitée."
+                "html": "<i class='fa-solid fa-pen'></i> <strong>Prompt</strong> (specify and generate): write the need clearly, then generate a limited proposal."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-shield-halved'></i> <strong>Audit</strong> : vérifier avec listes de contrôle et preuves (pas « ça a l'air ok »)."
+                "html": "<i class='fa-solid fa-shield-halved'></i> <strong>Audit</strong> (verify with proof): check with checklists and evidence (not « looks ok »)."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer une version (aperçu ou production) en emportant ces preuves."
+                "html": "<i class='fa-solid fa-rocket'></i> <strong>Ship</strong> (deliver with evidence): release a version (preview or production) carrying that proof."
               },
               {
                 "kind": "paragraph",
-                "html": "Chaque phase du cours (connexion, paiements, hébergement…) rejoue ce rythme. Tu n'apprends pas seulement des briques techniques : tu apprends une <strong>discipline de livraison</strong>."
+                "html": "Every course phase (sign-in, payments, hosting…) replays this rhythm. You learn not only technical building blocks: you learn a <strong>delivery discipline</strong>."
               },
               {
                 "kind": "title",
-                "text": "Petite boucle vs tunnel"
+                "text": "Small loop vs tunnel"
               },
               {
                 "kind": "paragraph",
-                "html": "Une petite boucle : une micro-fonctionnalité, un aperçu des changements lisible, un audit, une livraison partielle. Un tunnel : 95 fichiers d'un coup, « on vérifiera lundi ». Le tunnel rend la vérification humaine impossible et multiplie les secrets oubliés."
+                "html": "A small loop: one micro-feature, a readable change preview, an audit, a partial release. A tunnel: 95 files at once, « we will verify Monday ». The tunnel makes human verification impossible and multiplies forgotten secrets."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "tip",
-                  "title": "<i class='fa-solid fa-rotate'></i> Règle pratique",
-                  "body": "Si tu ne peux pas résumer les changements en trois phrases, le lot est trop gros. Re-découpe avant d'auditer."
+                  "title": "<i class='fa-solid fa-rotate'></i> Practical rule",
+                  "body": "If you cannot summarize the changes in three sentences, the batch is too big. Split it again before auditing."
                 }
               },
               {
                 "kind": "paragraph",
-                "html": "L'exercice ci-dessous te fait distinguer les étapes saines d'un formulaire de contact des réflexes tunnel. Plus loin (phases 8 a 12), les preuves d'audit deviennent plus formelles (outils automatiques, scores, procédures)."
+                "html": "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later (phases 8 to 12), audit evidence becomes more formal (automatic tools, scores, procedures)."
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m02-lesson",
-              "title": "Le cycle Prompt → Audit → Ship",
-              "desc": "Le fil rouge de toute la formation",
+              "title": "The Prompt → Audit → Ship cycle",
+              "desc": "The thread running through the whole course",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Pourquoi trois temps</h2>"
+                  "body": "<h2>Why three phases</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Mélanger spécification, génération, vérification et mise en ligne dans un seul élan, c'est le tunnel. On sépare volontairement :"
+                  "body": "Mixing specification, generation, verification, and go-live in one rush is the tunnel. We deliberately separate:"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-pen'></i> <strong>Prompt</strong> : écrire clairement le besoin, puis générer une proposition limitée.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-pen'></i> <strong>Prompt</strong> (specify and generate): write the need clearly, then generate a limited proposal.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-shield-halved'></i> <strong>Audit</strong> : vérifier avec listes de contrôle et preuves (pas « ça a l'air ok »).</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-shield-halved'></i> <strong>Audit</strong> (verify with proof): check with checklists and evidence (not « looks ok »).</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer une version (aperçu ou production) en emportant ces preuves.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-rocket'></i> <strong>Ship</strong> (deliver with evidence): release a version (preview or production) carrying that proof.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Chaque phase du cours (connexion, paiements, hébergement…) rejoue ce rythme. Tu n'apprends pas seulement des briques techniques : tu apprends une <strong>discipline de livraison</strong>."
+                  "body": "Every course phase (sign-in, payments, hosting…) replays this rhythm. You learn not only technical building blocks: you learn a <strong>delivery discipline</strong>."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Petite boucle vs tunnel</h2>"
+                  "body": "<h2>Small loop vs tunnel</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Une petite boucle : une micro-fonctionnalité, un aperçu des changements lisible, un audit, une livraison partielle. Un tunnel : 95 fichiers d'un coup, « on vérifiera lundi ». Le tunnel rend la vérification humaine impossible et multiplie les secrets oubliés."
+                  "body": "A small loop: one micro-feature, a readable change preview, an audit, a partial release. A tunnel: 95 files at once, « we will verify Monday ». The tunnel makes human verification impossible and multiplies forgotten secrets."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "tip",
-                  "title": "<i class='fa-solid fa-rotate'></i> Règle pratique",
-                  "body": "Si tu ne peux pas résumer les changements en trois phrases, le lot est trop gros. Re-découpe avant d'auditer."
+                  "title": "<i class='fa-solid fa-rotate'></i> Practical rule",
+                  "body": "If you cannot summarize the changes in three sentences, the batch is too big. Split it again before auditing."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "L'exercice ci-dessous te fait distinguer les étapes saines d'un formulaire de contact des réflexes tunnel. Plus loin (phases 8 a 12), les preuves d'audit deviennent plus formelles (outils automatiques, scores, procédures)."
+                  "body": "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later (phases 8 to 12), audit evidence becomes more formal (automatic tools, scores, procedures)."
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-fondations-quiz-m02",
-              "title": "Prompt → Audit → Ship : valide ta lecture",
+              "title": "Prompt → Audit → Ship: check your reading",
               "questions": [
                 {
                   "legacyId": "svc-fondations-quiz-m02-q1",
-                  "prompt": "À quoi sert le temps « Prompt » dans le cycle ?",
+                  "prompt": "What is the « Prompt » phase for in the cycle?",
                   "type": "single",
-                  "explanation": "Prompt = cadrer + obtenir une proposition. Sans spec, l'audit n'a pas de référentiel.",
+                  "explanation": "Prompt = scope + get a proposal. Without a spec, audit has no reference.",
                   "order": 0,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m02-q1-a",
-                      "label": "Déployer en production",
+                      "label": "Deploying to production",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q1-b",
-                      "label": "Spécifier le besoin et générer une proposition",
+                      "label": "Specifying the need and generating a proposal",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q1-c",
-                      "label": "Mesurer le Lighthouse uniquement",
+                      "label": "Running Lighthouse only",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q1-d",
-                      "label": "Configurer le DNS",
+                      "label": "Configuring DNS",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1663,32 +1663,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m02-q2",
-                  "prompt": "Que produit un bon Audit ?",
+                  "prompt": "What does a good Audit produce?",
                   "type": "single",
-                  "explanation": "Audit = vérifier avec des preuves, pas « ça a l'air ok ».",
+                  "explanation": "Audit = verify with evidence, not « looks ok ».",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m02-q2-a",
-                      "label": "Plus de lignes de code",
+                      "label": "More lines of code",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q2-b",
-                      "label": "Des preuves (checklists, scans, tests) que le livrable est acceptable",
+                      "label": "Evidence (checklists, scans, tests) that the deliverable is acceptable",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q2-c",
-                      "label": "Un nouveau modèle de fondation",
+                      "label": "A new foundation model",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q2-d",
-                      "label": "Une page marketing",
+                      "label": "A marketing page",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1696,32 +1696,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m02-q3",
-                  "prompt": "Que signifie « Ship » ici ?",
+                  "prompt": "What does « Ship » mean here?",
                   "type": "single",
-                  "explanation": "Ship = mise à disposition contrôlée (preview/prod) avec un dossier de preuves.",
+                  "explanation": "Ship = controlled release (preview/production) with a folder of evidence.",
                   "order": 2,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m02-q3-a",
-                      "label": "Livrer avec les preuves d'audit, pas seulement pousser du code",
+                      "label": "Deliver with audit evidence, not just push code",
                       "isCorrect": true,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q3-b",
-                      "label": "Supprimer le dépôt",
+                      "label": "Delete the repository",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q3-c",
-                      "label": "Changer de framework",
+                      "label": "Change framework",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q3-d",
-                      "label": "Écrire un tweet",
+                      "label": "Write a tweet",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1729,32 +1729,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m02-q4",
-                  "prompt": "Pourquoi préférer des boucles courtes au « tunnel » ?",
+                  "prompt": "Why prefer short loops over the « tunnel »?",
                   "type": "single",
-                  "explanation": "Petite feature → audit → ship partiel. Puis on recommence. C'est le rythme de toute la formation.",
+                  "explanation": "Small feature → audit → partial ship. Then repeat. That is the rhythm of the whole course.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m02-q4-a",
-                      "label": "Parce que Git n'accepte que de petits enregistrements",
+                      "label": "Because Git only accepts small saves",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q4-b",
-                      "label": "On détecte tôt les dérives ; un tunnel de 2000 lignes est presque impossible à vérifier",
+                      "label": "You catch drift early; a 2000-line tunnel is almost impossible to verify",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q4-c",
-                      "label": "L'IA facture moins",
+                      "label": "AI charges less",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q4-d",
-                      "label": "Les navigateurs limitent la taille des fichiers",
+                      "label": "Browsers limit file size",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1762,32 +1762,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m02-q5",
-                  "prompt": "Quel anti-pattern du tunnel faut-il éviter ?",
+                  "prompt": "Which tunnel anti-pattern should you avoid?",
                   "type": "single",
-                  "explanation": "Auditer trop tard coûte cher. Le cycle impose un audit à chaque incrément.",
+                  "explanation": "Auditing too late is expensive. The cycle requires audit at every increment.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m02-q5-a",
-                      "label": "Générer une grosse livraison d'un coup, auditer seulement à la fin",
+                      "label": "Generate one big delivery at once, audit only at the end",
                       "isCorrect": true,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q5-b",
-                      "label": "Lire l'aperçu des changements après chaque génération",
+                      "label": "Read the change preview after each generation",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q5-c",
-                      "label": "Écrire un brief avant de générer",
+                      "label": "Write a brief before generating",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m02-q5-d",
-                      "label": "Lancer un scan de secrets",
+                      "label": "Run a secret scan",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1798,50 +1798,50 @@
             "exercises": [
               {
                 "legacyId": "svc-fondations-ex-m02-1",
-                "title": "Cycle Prompt → Audit → Ship sur un formulaire contact",
-                "instructions": "Tu dois livrer un formulaire de contact. Coche les étapes réellement présentes dans une boucle saine. Ignore ce qui relève du tunnel.",
+                "title": "Prompt → Audit → Ship cycle on a contact form",
+                "instructions": "You must deliver a contact form. Check steps that are actually present in a healthy loop. Ignore what belongs to the tunnel.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "Livrer sans preuve d'audit, ce n'est pas « Ship » dans ce cours.",
-                  "Générer 2000 lignes d'un coup avant toute liste de contrôle = tunnel."
+                  "Delivering with no audit evidence is not « Ship » in this course.",
+                  "Generating 2000 lines at once before any checklist = tunnel."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p>Brief : page contact avec nom, email, message, envoi vers une API <code>POST /api/contact</code>, états chargement / erreur / succès, pas de spam ouvert.</p>\n<p>Un junior a demandé à l'IA : « fais-moi tout le site ». Elle a produit 12 fichiers d'un coup, publié un aperçu en ligne, puis « on verra l'audit plus tard ».</p>",
+                  "scenario": "<p>Brief: contact page with name, email, message, send to API address <code>POST /api/contact</code>, loading / error / success screen states, no open spam.</p>\n<p>A junior asked AI: « build my whole site ». It produced 12 files at once, published an online preview, then « we will audit later ».</p>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Brief écrit (champs, adresse d'API, états d'écran, anti-spam) avant génération",
+                      "label": "Written brief (fields, API address, screen states, anti-spam) before generation",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f2",
-                      "label": "Génération limitée au formulaire (pas tout le site)",
+                      "label": "Generation limited to the form (not the whole site)",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f3",
-                      "label": "Liste d'audit : validation des champs, gestion d'erreur réseau, pas de secret côté navigateur",
+                      "label": "Audit checklist: field validation, network error handling, no secret in the browser",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f4",
-                      "label": "Publier l'aperçu seulement après preuves d'audit sur cet incrément",
+                      "label": "Publish preview only after audit evidence on this increment",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f5",
-                      "label": "Générer tout le produit d'un coup puis auditer à la fin",
+                      "label": "Generate the whole product at once then audit at the end",
                       "correct": false
                     },
                     {
                       "id": "f6",
-                      "label": "Mettre en production sans aucune liste de contrôle",
+                      "label": "Go to production with no checklist at all",
                       "correct": false
                     }
                   ],
@@ -1849,7 +1849,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>La boucle saine : brief → génération ciblée → liste avec preuves → aperçu publié. Le tunnel « tout générer puis voir » et la mise en ligne sans audit sont des anti-patterns.</p>"
+                  "__solution": "<p>Healthy loop: brief → targeted generation → checklist with evidence → published preview. The tunnel « generate everything then see » and go-live without audit are anti-patterns.</p>"
                 },
                 "tests": null,
                 "validator": null,
@@ -1864,15 +1864,15 @@
             "legacyId": "svc-fondations-m03",
             "moduleId": "svc-fondations-m03",
             "index": "03",
-            "title": "La boîte à outils du vibe coder",
-            "subtitle": "Assistants, règles projet et contrôles automatiques",
+            "title": "The vibe coder's toolkit",
+            "subtitle": "Assistants, project rules, and automatic checks",
             "duration": "35 min",
             "order": 2,
             "difficulty": "beginner",
             "objectives": [
-              "Choisir le bon outil IA selon la tâche",
-              "Configurer des règles projet et des contrôles automatiques",
-              "Savoir quand NE PAS utiliser l'IA"
+              "Pick the right AI tool for the task",
+              "Configure project rules and automatic checks",
+              "Know when NOT to use AI"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -1880,117 +1880,117 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Assistants, agents, revue assistée"
+                "text": "Assistants, agents, assisted review"
               },
               {
                 "kind": "paragraph",
-                "html": "Pour une ligne : suggestion pendant que tu tapes. Pour une fonctionnalité cadrée : assistant dans l'éditeur avec règles projet. Pour un chantier multi-fichiers : agent, mais sous brief strict et avec revue obligatoire. La « revue assistée » (l'IA commente tes changements) aide ; elle ne remplace pas ton jugement sur la sécurité et le métier."
+                "html": "For one line: suggestion while you type. For a scoped feature: in-editor assistant with project rules. For multi-file work: an agent, but under a strict brief and with mandatory review. « Assisted review » (AI comments on your changes) helps; it does not replace your judgment on security and business logic."
               },
               {
                 "kind": "title",
-                "text": "Règles projet et contrôles automatiques"
+                "text": "Project rules and automatic checks"
               },
               {
                 "kind": "paragraph",
-                "html": "Les <strong>règles projet</strong> disent à l'assistant quelle stack tu utilises, quels motifs sont interdits, où vivent les secrets. Les <strong>contrôles automatiques</strong> (qualité du code, scan de secrets, revue des dépendances, Lighthouse) produisent des preuves reproductibles. Ensemble, ils forment le filet de la phase Audit, avant même les listes métier des phases 8 et 9."
+                "html": "<strong>Project rules</strong> tell the assistant which stack you use, which patterns are forbidden, where secrets live. <strong>Automatic checks</strong> (code quality, secret scanning, dependency review, Lighthouse) produce repeatable evidence. Together they form the Audit phase safety net, even before the business checklists of phases 8 and 9."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "concept",
-                  "title": "<i class='fa-solid fa-robot'></i> IA + contrôle automatique",
-                  "body": "L'IA propose vite. L'outil automatique tranche sans opinion. Toi tu arbitres les fausses alertes et le risque métier."
+                  "title": "<i class='fa-solid fa-robot'></i> AI + automatic check",
+                  "body": "AI proposes fast. The automatic tool decides without opinion. You arbitrate false alarms and business risk."
                 }
               },
               {
                 "kind": "title",
-                "text": "Quand ne pas utiliser l'IA"
+                "text": "When not to use AI"
               },
               {
                 "kind": "paragraph",
-                "html": "Évite (ou surveille très fort) : crypto / sécurité fine maison, logique métier critique mal spécifiée, clauses légales, tout ce qui touche directement à l'argent ou aux données personnelles sans spec écrite. Dans ces zones, un vibe solo est un pari, pas une méthode."
+                "html": "Avoid (or watch very closely): home-grown crypto / fine-grained security, critical business logic poorly specified, legal clauses, anything that touches money or personal data directly without a written spec. In those zones, solo vibe coding is a bet, not a method."
               },
               {
                 "kind": "paragraph",
-                "html": "Deux exercices clôturent ce module : l'outillage jour 1, puis le <strong>projet P1</strong> (rapport d'audit d'un dépôt généré). C'est le même geste que tu répéteras en phase Audit Sécurité."
+                "html": "Two exercises close this module: day-1 tooling, then <strong>Project P1</strong> (audit report of a generated repo). It is the same move you will repeat in the Security Audit phase."
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m03-lesson",
-              "title": "La boîte à outils du vibe coder",
-              "desc": "Assistants, règles projet et contrôles automatiques",
+              "title": "The vibe coder's toolkit",
+              "desc": "Assistants, project rules, and automatic checks",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Assistants, agents, revue assistée</h2>"
+                  "body": "<h2>Assistants, agents, assisted review</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Pour une ligne : suggestion pendant que tu tapes. Pour une fonctionnalité cadrée : assistant dans l'éditeur avec règles projet. Pour un chantier multi-fichiers : agent, mais sous brief strict et avec revue obligatoire. La « revue assistée » (l'IA commente tes changements) aide ; elle ne remplace pas ton jugement sur la sécurité et le métier."
+                  "body": "For one line: suggestion while you type. For a scoped feature: in-editor assistant with project rules. For multi-file work: an agent, but under a strict brief and with mandatory review. « Assisted review » (AI comments on your changes) helps; it does not replace your judgment on security and business logic."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Règles projet et contrôles automatiques</h2>"
+                  "body": "<h2>Project rules and automatic checks</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Les <strong>règles projet</strong> disent à l'assistant quelle stack tu utilises, quels motifs sont interdits, où vivent les secrets. Les <strong>contrôles automatiques</strong> (qualité du code, scan de secrets, revue des dépendances, Lighthouse) produisent des preuves reproductibles. Ensemble, ils forment le filet de la phase Audit, avant même les listes métier des phases 8 et 9."
+                  "body": "<strong>Project rules</strong> tell the assistant which stack you use, which patterns are forbidden, where secrets live. <strong>Automatic checks</strong> (code quality, secret scanning, dependency review, Lighthouse) produce repeatable evidence. Together they form the Audit phase safety net, even before the business checklists of phases 8 and 9."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "concept",
-                  "title": "<i class='fa-solid fa-robot'></i> IA + contrôle automatique",
-                  "body": "L'IA propose vite. L'outil automatique tranche sans opinion. Toi tu arbitres les fausses alertes et le risque métier."
+                  "title": "<i class='fa-solid fa-robot'></i> AI + automatic check",
+                  "body": "AI proposes fast. The automatic tool decides without opinion. You arbitrate false alarms and business risk."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Quand ne pas utiliser l'IA</h2>"
+                  "body": "<h2>When not to use AI</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Évite (ou surveille très fort) : crypto / sécurité fine maison, logique métier critique mal spécifiée, clauses légales, tout ce qui touche directement à l'argent ou aux données personnelles sans spec écrite. Dans ces zones, un vibe solo est un pari, pas une méthode."
+                  "body": "Avoid (or watch very closely): home-grown crypto / fine-grained security, critical business logic poorly specified, legal clauses, anything that touches money or personal data directly without a written spec. In those zones, solo vibe coding is a bet, not a method."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Deux exercices clôturent ce module : l'outillage jour 1, puis le <strong>projet P1</strong> (rapport d'audit d'un dépôt généré). C'est le même geste que tu répéteras en phase Audit Sécurité."
+                  "body": "Two exercises close this module: day-1 tooling, then <strong>Project P1</strong> (audit report of a generated repo). It is the same move you will repeat in the Security Audit phase."
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-fondations-quiz-m03",
-              "title": "Boîte à outils : valide ta lecture",
+              "title": "Toolkit: check your reading",
               "questions": [
                 {
                   "legacyId": "svc-fondations-quiz-m03-q1",
-                  "prompt": "À quoi servent les « règles projet » pour un assistant IA ?",
+                  "prompt": "What are « project rules » for an AI assistant?",
                   "type": "single",
-                  "explanation": "Les règles projet (ex. fichiers d'instructions dans l'éditeur) réduisent les erreurs de stack et de style.",
+                  "explanation": "Project rules (e.g. instruction files in the editor) reduce stack and style mistakes.",
                   "order": 0,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m03-q1-a",
-                      "label": "À décorer le README",
+                      "label": "Decorating the README",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q1-b",
-                      "label": "À encadrer la génération (stack, conventions, interdits) avant qu'elle parte dans le décor",
+                      "label": "Scoping generation (stack, conventions, forbidden patterns) before it goes off track",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q1-c",
-                      "label": "À remplacer les contrôles automatiques de qualité",
+                      "label": "Replacing automated quality checks",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q1-d",
-                      "label": "À désactiver Git",
+                      "label": "Disabling Git",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -1998,32 +1998,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m03-q2",
-                  "prompt": "Quel contrôle est déterministe (pas une opinion d'IA) ?",
+                  "prompt": "Which check is deterministic (not an AI opinion)?",
                   "type": "single",
-                  "explanation": "Les contrôles automatiques donnent des preuves reproductibles. Ils complètent (et ne remplacent pas) la revue humaine.",
+                  "explanation": "Automatic checks give repeatable evidence. They complement (and do not replace) human review.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m03-q2-a",
-                      "label": "Un résumé ChatGPT du dépôt",
+                      "label": "A ChatGPT summary of the repo",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q2-b",
-                      "label": "Un scan de secrets / contrôle qualité / revue des dépendances",
+                      "label": "A secret scan / quality check / dependency review",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q2-c",
-                      "label": "Un like sur un enregistrement Git",
+                      "label": "A like on a Git save",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q2-d",
-                      "label": "Une capture d'écran",
+                      "label": "A screenshot",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -2031,32 +2031,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m03-q3",
-                  "prompt": "Dans quel cas vaut-il mieux NE PAS laisser l'IA générer ?",
+                  "prompt": "When is it better NOT to let AI generate?",
                   "type": "single",
-                  "explanation": "Les zones à fort risque (sécurité fine, argent, données personnelles) exigent spec humaine + revue serrée, pas de vibe solo.",
+                  "explanation": "High-risk zones (fine security, money, personal data) need human spec + tight review, not solo vibe coding.",
                   "order": 2,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m03-q3-a",
-                      "label": "Un composant d'interface banal",
+                      "label": "A plain UI component",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q3-b",
-                      "label": "Crypto, connexion maison fragile, logique métier critique non spécifiée",
+                      "label": "Crypto, fragile home-grown sign-in, critical business logic with no spec",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q3-c",
-                      "label": "Un fichier README",
+                      "label": "A README file",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q3-d",
-                      "label": "Du CSS de mise en page",
+                      "label": "Layout CSS",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -2064,32 +2064,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m03-q4",
-                  "prompt": "Pourquoi combiner assistant dans l'éditeur et contrôles automatiques ?",
+                  "prompt": "Why combine an in-editor assistant and automatic checks?",
                   "type": "single",
-                  "explanation": "Vitesse (IA) + filet automatique (qualité, secrets, dépendances) + revue humaine = cycle Prompt → Audit → Ship.",
+                  "explanation": "Speed (AI) + automatic safety net (quality, secrets, dependencies) + human review = Prompt → Audit → Ship cycle.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m03-q4-a",
-                      "label": "Parce que l'un écrit vite et l'autre vérifie sans opinion",
+                      "label": "Because one writes fast and the other verifies without opinion",
                       "isCorrect": true,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q4-b",
-                      "label": "Parce que les contrôles génèrent le code",
+                      "label": "Because checks generate the code",
                       "isCorrect": false,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q4-c",
-                      "label": "Ce n'est jamais utile",
+                      "label": "It is never useful",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q4-d",
-                      "label": "Pour remplacer les tests",
+                      "label": "To replace tests",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -2097,32 +2097,32 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m03-q5",
-                  "prompt": "Que doit contenir un rapport d'audit minimal d'un dépôt généré ?",
+                  "prompt": "What must a minimal audit report of a generated repo contain?",
                   "type": "single",
-                  "explanation": "C'est exactement le livrable du projet P1 et le réflexe des phases Audit plus loin.",
+                  "explanation": "That is exactly the Project P1 deliverable and the habit of later Audit phases.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-fondations-quiz-m03-q5-a",
-                      "label": "Uniquement « ça marche sur ma machine »",
+                      "label": "Only « works on my machine »",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q5-b",
-                      "label": "Constats avec preuves, gravité, recommandations priorisées",
+                      "label": "Findings with evidence, severity, prioritized recommendations",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q5-c",
-                      "label": "La liste des emojis du README",
+                      "label": "The README emoji list",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-fondations-quiz-m03-q5-d",
-                      "label": "Le prix du modèle IA",
+                      "label": "The AI model price",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -2133,50 +2133,50 @@
             "exercises": [
               {
                 "legacyId": "svc-fondations-ex-m03-1",
-                "title": "Outillage minimal d'un projet vibe",
-                "instructions": "Pour un dépôt starter destiné au vibe coding, coche ce qui doit être en place dès le jour 1.",
+                "title": "Minimal tooling for a vibe project",
+                "instructions": "For a starter repo meant for vibe coding, check what must be in place from day 1.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "Les règles projet guident l'IA ; les contrôles automatiques vérifient sans opinion.",
-                  "Une connexion utilisateur « maison » bricolée n'est pas un outillage recommandé ici."
+                  "Project rules guide AI; automatic checks verify without opinion.",
+                  "A home-grown « quick » sign-in is not recommended tooling here."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p>Tu initialises le dépôt qui servira de fil rouge jusqu'au projet final. L'équipe utilisera un assistant dans l'éditeur au quotidien.</p>",
+                  "scenario": "<p>You initialize the repo that will be the thread through to the final project. The team will use an in-editor assistant daily.</p>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Fichier de règles projet (stack, conventions, interdits) lisible par l'assistant",
+                      "label": "Project rules file (stack, conventions, forbidden patterns) readable by the assistant",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f2",
-                      "label": "Contrôle automatique de qualité du code, lançable en local et sur le serveur d'intégration",
+                      "label": "Automated code quality check, runnable locally and on the integration server",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f3",
-                      "label": "Scan de secrets (avant chaque enregistrement Git ou sur le serveur d'intégration)",
+                      "label": "Secret scan (before each Git save or on the integration server)",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f4",
-                      "label": "Connexion maison avec mots de passe en SHA1 « pour aller vite »",
+                      "label": "Home-grown sign-in with SHA1 passwords « to go fast »",
                       "correct": false
                     },
                     {
                       "id": "f5",
-                      "label": ".gitignore couvrant node_modules et .env",
+                      "label": ".gitignore covering node_modules and .env",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f6",
-                      "label": "Ouvrir CORS avec * sur une API privée « pour que ça marche »",
+                      "label": "Open CORS with * on a private API « so it works »",
                       "correct": false
                     }
                   ],
@@ -2184,7 +2184,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>Jour 1 : règles projet, contrôle qualité, scan secrets, gitignore propre. Pas de connexion maison fragile ni de CORS * sur du privé.</p>"
+                  "__solution": "<p>Day 1: project rules, quality check, secret scan, clean gitignore. No fragile home-grown sign-in nor CORS * on private APIs.</p>"
                 },
                 "tests": null,
                 "validator": null,
@@ -2195,51 +2195,51 @@
               },
               {
                 "legacyId": "svc-fondations-ex-m03-projet",
-                "title": "Projet P1 : rapport d'audit d'un dépôt généré par IA",
-                "instructions": "À partir du dépôt fictif décrit ci-dessous, produis un rapport : coche les constats réels, fixe une gravité minimale crédible, et ajoute une preuve courte (fichier ou motif).",
+                "title": "Project P1: audit report of an AI-generated repo",
+                "instructions": "From the fictional repo described below, produce a report: check real findings, set a credible minimum severity, and add short evidence (file or pattern).",
                 "kind": "audit",
                 "order": 1,
                 "hints": [
-                  "Chaque constat correct exige une preuve (chemin ou motif).",
-                  "Priorise sécurité et secrets avant le polish d'interface."
+                  "Each correct finding requires evidence (path or pattern).",
+                  "Prioritize security and secrets before UI polish."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p><strong>Dépôt « vibe-crm-starter »</strong> (généré par agent, une seule proposition de 95 fichiers) :</p>\n<ul>\n<li><code>src/server/db.ts</code> contient <code>DATABASE_URL=postgres://admin:admin@prod/db</code></li>\n<li><code>src/pages/Login.tsx</code> compare le mot de passe en clair côté navigateur</li>\n<li><code>package.json</code> n'a ni script de contrôle qualité ni de tests</li>\n<li><code>.gitignore</code> ignore <code>node_modules</code> mais pas <code>.env</code></li>\n<li>Le README promet « prêt pour la production » sans liste de contrôle</li>\n<li>Les couleurs du thème sont incohérentes (cosmétique)</li>\n</ul>",
+                  "scenario": "<p><strong>Repo « vibe-crm-starter »</strong> (generated by agent, single 95-file proposal):</p>\n<ul>\n<li><code>src/server/db.ts</code> contains <code>DATABASE_URL=postgres://admin:admin@prod/db</code></li>\n<li><code>src/pages/Login.tsx</code> compares the password in plain text in the browser</li>\n<li><code>package.json</code> has neither a quality check script nor tests</li>\n<li><code>.gitignore</code> ignores <code>node_modules</code> but not <code>.env</code></li>\n<li>The README promises « production ready » with no checklist</li>\n<li>Theme colors are inconsistent (cosmetic)</li>\n</ul>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Identifiants de base de données (ou URL complète) en dur dans le code",
+                      "label": "Database credentials (or full URL) hard-coded in code",
                       "correct": true,
                       "minSeverity": "critical"
                     },
                     {
                       "id": "f2",
-                      "label": "Vérification de mot de passe côté navigateur / en clair",
+                      "label": "Password check in the browser / in plain text",
                       "correct": true,
                       "minSeverity": "critical"
                     },
                     {
                       "id": "f3",
-                      "label": "Pas de contrôle qualité ni de tests dans les scripts npm",
+                      "label": "No quality check or tests in npm scripts",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f4",
-                      "label": ".env non ignoré par Git",
+                      "label": ".env not ignored by Git",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f5",
-                      "label": "Promesse « prêt pour la production » sans preuves d'audit",
+                      "label": "« Production ready » promise with no audit evidence",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f6",
-                      "label": "Incohérence cosmétique du thème de couleurs",
+                      "label": "Cosmetic theme color inconsistency",
                       "correct": false
                     }
                   ],
@@ -2247,7 +2247,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>Priorité : secrets base de données (critique), connexion côté navigateur (critique), .env non ignoré (haute), absence de contrôles/tests et promesse prod sans preuves (moyenne). Le thème incohérent n'est pas un constat de sécurité pour ce projet.</p>"
+                  "__solution": "<p>Priority: database secrets (critical), browser-side sign-in (critical), .env not ignored (high), missing checks/tests and prod promise without evidence (medium). Inconsistent theme is not a security finding for this project.</p>"
                 },
                 "tests": null,
                 "validator": null,

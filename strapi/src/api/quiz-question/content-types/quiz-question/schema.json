@@ -12,19 +12,42 @@
   "attributes": {
     "legacyId": {
       "type": "string",
-      "unique": true
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "prompt": {
       "type": "text",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "type": {
       "type": "enumeration",
-      "enum": ["single", "multi"],
-      "default": "single"
+      "enum": [
+        "single",
+        "multi"
+      ],
+      "default": "single",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "explanation": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "order": {
       "type": "integer",
@@ -41,6 +64,11 @@
       "relation": "oneToMany",
       "target": "api::quiz-answer.quiz-answer",
       "mappedBy": "question"
+    }
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
     }
   }
 }

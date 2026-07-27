@@ -24,20 +24,33 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["pdf", "code", "checklist", "template", "link"],
+      "enum": [
+        "pdf",
+        "code",
+        "checklist",
+        "template",
+        "link"
+      ],
       "required": true
     },
     "file": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["files", "images"]
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
     },
     "externalUrl": {
       "type": "string"
     },
     "access": {
       "type": "enumeration",
-      "enum": ["public", "enrolled", "instructor"],
+      "enum": [
+        "public",
+        "enrolled",
+        "instructor"
+      ],
       "default": "public",
       "required": true
     },

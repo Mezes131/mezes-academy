@@ -23,6 +23,13 @@ const deniedExecutableTypes = [
 ];
 
 const config = (): Core.Config.Plugin => ({
+  i18n: {
+    enabled: true,
+    config: {
+      defaultLocale: "fr",
+      locales: ["fr", "en"],
+    },
+  },
   'users-permissions': {
     config: {
       jwtManagement: 'refresh',

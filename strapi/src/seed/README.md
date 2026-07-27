@@ -3,40 +3,36 @@
 ## Export (from repo root)
 
 ```bash
-npm run export:strapi-seed            # React course (default)
-npm run export:strapi-seed -- svc     # Secure Vibe Coding
+npm run export:strapi-seed                         # React FR (default)
+npm run export:strapi-seed -- svc                  # SVC FR
+npm run export:strapi-seed -- svc --locale en      # SVC EN
 ```
 
-Writes `strapi/src/seed/data/<courseId>-course.json` from the live TypeScript
-course registry (`src/data/courses/`).
+Writes:
+
+- `strapi/src/seed/data/<courseId>-course.<locale>.json`
+- `strapi/src/seed/data/<courseId>-course.json` for `fr` (compat)
+
+Payload includes a top-level `locale` field for the importer.
 
 ## Import (Strapi running against Postgres)
 
-The importer uses the Strapi v5 **Documents API**, so dynamic zones (lesson
-content blocks) are populated. One-shot CLI (loads Strapi without starting
-the HTTP server, safe next to the live container):
+Locales `fr` (default) and `en` must exist in Strapi i18n (Settings → Internationalization). Content-types for course / phase / module / lesson / exercise / quiz are localized.
 
 ```bash
+# FR (default file)
 docker compose --env-file .env exec strapi node dist/src/seed/run-import.js react svc
+
+# EN (pass locale as 3rd arg pattern: course:locale)
+docker compose --env-file .env exec strapi node dist/src/seed/run-import.js svc:en
 ```
 
-Also available from `strapi console`:
+From `strapi console`:
 
 ```js
 const { importCourse } = require("./dist/src/seed/import-course");
-await importCourse(strapi, "svc");
+await importCourse(strapi, "svc", "fr");
+await importCourse(strapi, "svc", "en");
 ```
 
-If the compiled files or JSON are missing inside the container
-(`dist/src/seed/`), compile locally (`npx tsc -p tsconfig.json` in `strapi/`)
-and copy them in:
-
-```bash
-docker compose cp strapi/dist/src/seed/run-import.js strapi:/app/dist/src/seed/
-docker compose cp strapi/dist/src/seed/import-course.js strapi:/app/dist/src/seed/
-docker compose cp strapi/dist/src/seed/data/svc-course.json strapi:/app/dist/src/seed/data/
-```
-
-All records are created/updated as **drafts** keyed by `legacyId`. Publish in
-the admin UI after review. Re-running the importer updates matching `legacyId`
-documents instead of duplicating.
+All records are created/updated as **drafts** keyed by `legacyId` **per locale**. Publish in the admin UI after review.

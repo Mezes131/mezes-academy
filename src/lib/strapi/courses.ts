@@ -2,6 +2,7 @@ import { strapiFetch } from "./client";
 import { mapCourse, mapModule } from "./mapper";
 import type { StrapiCourseAttrs, StrapiListResponse, StrapiModuleAttrs } from "./types";
 import type { Course, Lesson, Module } from "@/types";
+import { readStoredLocale } from "@/i18n/storage";
 
 const COURSE_POPULATE =
   "populate[phases][populate][modules][populate][0]=quiz" +
@@ -10,9 +11,13 @@ const COURSE_POPULATE =
   "&populate[phases][populate][modules][populate][lessons][populate][1]=exercises" +
   "&populate[phases][populate][modules][populate][quiz][populate][questions][populate]=answers";
 
+function localeQuery(): string {
+  return `locale=${encodeURIComponent(readStoredLocale())}`;
+}
+
 export async function fetchCourseBySlug(slug: string): Promise<Course | null> {
   const res = await strapiFetch<StrapiListResponse<StrapiCourseAttrs>>(
-    `/api/courses?filters[slug][$eq]=${encodeURIComponent(slug)}&${COURSE_POPULATE}`,
+    `/api/courses?filters[slug][$eq]=${encodeURIComponent(slug)}&${COURSE_POPULATE}&${localeQuery()}`,
   );
   const first = res.data?.[0];
   if (!first) return null;
@@ -24,7 +29,8 @@ export async function fetchModuleByLegacyId(legacyId: string): Promise<Module | 
     `/api/modules?filters[legacyId][$eq]=${encodeURIComponent(legacyId)}` +
       `&populate[quiz][populate][questions][populate]=answers` +
       `&populate[exercises]=true` +
-      `&populate[lessons][populate][0]=quiz&populate[lessons][populate][1]=exercises`,
+      `&populate[lessons][populate][0]=quiz&populate[lessons][populate][1]=exercises` +
+      `&${localeQuery()}`,
   );
   const first = res.data?.[0];
   if (!first) return null;
@@ -37,7 +43,7 @@ export async function searchLessons(query: string): Promise<Lesson[]> {
   const res = await strapiFetch<StrapiListResponse<{ legacyId: string; title: string; desc?: string; tags?: string[] }>>(
     `/api/lessons?filters[$or][0][title][$containsi]=${encodeURIComponent(q)}` +
       `&filters[$or][1][desc][$containsi]=${encodeURIComponent(q)}` +
-      `&pagination[pageSize]=20`,
+      `&pagination[pageSize]=20&${localeQuery()}`,
   );
   return (res.data ?? []).map((raw) => {
     const lesson = raw as { legacyId?: string; title?: string; desc?: string; tags?: string[]; attributes?: { legacyId: string; title: string; desc?: string; tags?: string[] } };

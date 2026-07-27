@@ -13,11 +13,21 @@
     "legacyId": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "passingScore": {
       "type": "integer",
@@ -44,6 +54,11 @@
       "relation": "oneToMany",
       "target": "api::quiz-question.quiz-question",
       "mappedBy": "quiz"
+    }
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
     }
   }
 }

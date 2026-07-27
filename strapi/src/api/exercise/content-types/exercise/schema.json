@@ -13,44 +13,105 @@
     "legacyId": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "instructions": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "kind": {
       "type": "enumeration",
-      "enum": ["guided", "synthesis", "project", "audit", "reflection", "code"]
+      "enum": [
+        "guided",
+        "synthesis",
+        "project",
+        "audit",
+        "reflection",
+        "code"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "order": {
       "type": "integer",
       "default": 0
     },
     "hints": {
-      "type": "json"
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "starterFiles": {
-      "type": "json"
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "solutionFiles": {
       "type": "json",
-      "private": true
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "tests": {
       "type": "json",
-      "private": true
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "validator": {
       "type": "text",
-      "private": true
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "template": {
       "type": "enumeration",
-      "enum": ["react", "react-ts", "vanilla"]
+      "enum": [
+        "react",
+        "react-ts",
+        "vanilla"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "attemptsBeforeSolution": {
       "type": "integer",
@@ -62,8 +123,17 @@
     },
     "validationMode": {
       "type": "enumeration",
-      "enum": ["local", "instructor", "automated"],
-      "default": "local"
+      "enum": [
+        "local",
+        "instructor",
+        "automated"
+      ],
+      "default": "local",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "lesson": {
       "type": "relation",
@@ -76,6 +146,11 @@
       "relation": "manyToOne",
       "target": "api::module.module",
       "inversedBy": "exercises"
+    }
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
     }
   }
 }

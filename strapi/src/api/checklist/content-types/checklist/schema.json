@@ -24,7 +24,12 @@
     },
     "domain": {
       "type": "enumeration",
-      "enum": ["security", "performance", "design", "accessibility"],
+      "enum": [
+        "security",
+        "performance",
+        "design",
+        "accessibility"
+      ],
       "required": true
     },
     "version": {
@@ -34,7 +39,12 @@
     },
     "workflowStatus": {
       "type": "enumeration",
-      "enum": ["draft", "review", "published", "archived"],
+      "enum": [
+        "draft",
+        "review",
+        "published",
+        "archived"
+      ],
       "default": "draft"
     },
     "items": {

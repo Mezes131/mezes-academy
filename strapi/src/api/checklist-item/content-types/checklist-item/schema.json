@@ -27,12 +27,22 @@
     },
     "severity": {
       "type": "enumeration",
-      "enum": ["info", "low", "medium", "high", "critical"],
+      "enum": [
+        "info",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
       "default": "medium"
     },
     "verification": {
       "type": "enumeration",
-      "enum": ["manual", "automated", "mixed"],
+      "enum": [
+        "manual",
+        "automated",
+        "mixed"
+      ],
       "default": "manual"
     },
     "evidenceRequired": {
