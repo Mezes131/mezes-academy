@@ -2,6 +2,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { useSearch, type SearchMatchKind } from "@/hooks/useSearch";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { Search as SearchIcon, FileText, BookOpen } from "lucide-react";
 
 const MATCH_LABELS: Record<SearchMatchKind, string> = {
@@ -18,6 +19,7 @@ const MATCH_LABELS: Record<SearchMatchKind, string> = {
 };
 
 export function SearchPage() {
+  const { basePath, phases } = useCourseArea();
   const [params, setParams] = useSearchParams();
   const qFromUrl = params.get("q") ?? "";
   const [query, setQuery] = useState(() => qFromUrl);
@@ -26,7 +28,7 @@ export function SearchPage() {
     if (qFromUrl) setQuery(qFromUrl);
   }, [qFromUrl]);
 
-  const results = useSearch(query);
+  const results = useSearch(query, phases);
 
   useEffect(() => {
     if (query.trim().length >= 2) {
@@ -49,7 +51,7 @@ export function SearchPage() {
       <SearchBar
         value={query}
         onChange={setQuery}
-        placeholder="Ex : useState, Virtual DOM, JSX…"
+        placeholder="Ex : prompt, audit, secrets…"
         autoFocus
       />
 
@@ -77,7 +79,7 @@ export function SearchPage() {
             {results.map((r) => (
               <Link
                 key={`${r.moduleId}-${r.matchedIn}`}
-                to={`/react/module/${r.moduleId}`}
+                to={`${basePath}/module/${r.moduleId}`}
                 className="block rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition group"
               >
                 <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1">

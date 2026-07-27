@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Bookmark,
   PanelLeft,
@@ -10,6 +10,7 @@ import {
 import { SearchBar } from "@/components/ui/SearchBar";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useProgress } from "@/hooks/useProgress";
+import { computeCourseStats } from "@/lib/courseProgress";
 import { useCourseArea } from "./courseArea";
 import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
@@ -27,8 +28,12 @@ export function CourseBar({
   isSidebarOpen,
   onToggleSidebar,
 }: CourseBarProps) {
-  const { stats } = useProgress();
-  const { basePath, learnerTools } = useCourseArea();
+  const { progress } = useProgress();
+  const { basePath, learnerTools, phases, showFinalProject } = useCourseArea();
+  const stats = useMemo(
+    () => computeCourseStats(phases, progress),
+    [phases, progress],
+  );
   const location = useLocation();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -110,18 +115,20 @@ export function CourseBar({
               <Bookmark size={16} />
             </NavLink>
 
-            <NavLink
-              to={`${basePath}/final-project`}
-              className={({ isActive }) =>
-                cn(
-                  "w-9 h-9 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
-                  isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
-                )
-              }
-              title="Projet final"
-            >
-              <Trophy size={16} />
-            </NavLink>
+            {showFinalProject !== false && (
+              <NavLink
+                to={`${basePath}/final-project`}
+                className={({ isActive }) =>
+                  cn(
+                    "w-9 h-9 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
+                    isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
+                  )
+                }
+                title="Projet final"
+              >
+                <Trophy size={16} />
+              </NavLink>
+            )}
           </div>
         ) : (
           <div />

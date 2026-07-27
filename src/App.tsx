@@ -81,6 +81,18 @@ export default function App() {
                         path="module/:moduleId"
                         element={<RequireAuth><ModulePage /></RequireAuth>}
                       />
+                      <Route
+                        path="progress"
+                        element={<RequireAuth><ProgressPage /></RequireAuth>}
+                      />
+                      <Route
+                        path="bookmarks"
+                        element={<RequireAuth><BookmarksPage /></RequireAuth>}
+                      />
+                      <Route
+                        path="search"
+                        element={<RequireAuth><SearchPage /></RequireAuth>}
+                      />
                       <Route path="*" element={<SvcCoursePage />} />
                     </Routes>
                   </CourseLayout>

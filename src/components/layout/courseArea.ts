@@ -17,10 +17,11 @@ export interface CourseArea {
   phases: Phase[];
   /**
    * Whether the cross-cutting learner tools (search, progress, bookmarks,
-   * final project) are wired for this course. ponytail: SVC will get them
-   * once its dedicated pages exist; until then the CourseBar hides them.
+   * final project) are wired for this course.
    */
   learnerTools: boolean;
+  /** Capstone / final-project shortcut in CourseBar (React only for now). */
+  showFinalProject?: boolean;
 }
 
 /** Branding + route without locale-resolved phases. */
@@ -36,6 +37,7 @@ export const reactCourseArea: CourseAreaBase = {
     chip: "bg-brand-core/10 text-brand-core border-brand-core/20",
   },
   learnerTools: true,
+  showFinalProject: true,
 };
 
 export const svcCourseArea: CourseAreaBase = {
@@ -47,7 +49,8 @@ export const svcCourseArea: CourseAreaBase = {
     text: "text-violet-400",
     chip: "bg-violet-500/10 text-violet-400 border-violet-500/20",
   },
-  learnerTools: false,
+  learnerTools: true,
+  showFinalProject: false,
 };
 
 export function resolveCourseArea(

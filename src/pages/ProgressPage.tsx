@@ -1,7 +1,12 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
-import { phases } from "@/data/phases";
+import { useCourseArea } from "@/components/layout/courseArea";
+import {
+  computeCourseStats,
+  computePhaseStats,
+  courseModuleIds,
+} from "@/lib/courseProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
@@ -11,9 +16,29 @@ import { Link } from "react-router-dom";
 
 export function ProgressPage() {
   const { user } = useAuth();
-  const { progress, stats, phaseStats, reset, exportJson, importJson } =
-    useProgress();
+  const { basePath, phases } = useCourseArea();
+  const { progress, reset, exportJson, importJson } = useProgress();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const stats = useMemo(
+    () => computeCourseStats(phases, progress),
+    [phases, progress],
+  );
+  const phaseStats = useMemo(
+    () => computePhaseStats(phases, progress),
+    [phases, progress],
+  );
+  const moduleIds = useMemo(() => courseModuleIds(phases), [phases]);
+
+  const exerciseIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const phase of phases) {
+      for (const mod of phase.modules) {
+        for (const ex of mod.exercises ?? []) ids.add(ex.id);
+      }
+    }
+    return ids;
+  }, [phases]);
 
   function handleExport() {
     const json = exportJson();
@@ -21,7 +46,7 @@ export function ProgressPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `react-learn-progression-${new Date()
+    a.download = `mezes-progression-${new Date()
       .toISOString()
       .slice(0, 10)}.json`;
     a.click();
@@ -54,11 +79,32 @@ export function ProgressPage() {
     }
   }
 
-  const totalQuizzesTaken = Object.keys(progress.quizScores).length;
-  const exercisesSolved = stats.exercisesSolved;
-  const exercisesRevealed = stats.exercisesRevealed;
+  const courseQuizIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const phase of phases) {
+      for (const mod of phase.modules) {
+        if (mod.quiz) ids.add(mod.quiz.id);
+      }
+    }
+    return ids;
+  }, [phases]);
+
+  const totalQuizzesTaken = Object.keys(progress.quizScores).filter((id) =>
+    courseQuizIds.has(id),
+  ).length;
+
+  const exercisesSolved = Object.entries(progress.exerciseProgress).filter(
+    ([id, e]) => exerciseIds.has(id) && e.status === "solved",
+  ).length;
+  const exercisesRevealed = Object.entries(progress.exerciseProgress).filter(
+    ([id, e]) => exerciseIds.has(id) && e.status === "revealed",
+  ).length;
   const challengeValidated = Object.values(progress.challengeScores).filter(
     (s) => s.total > 0 && s.passedIds.length === s.total,
+  ).length;
+
+  const readInCourse = progress.readModules.filter((id) =>
+    moduleIds.has(id),
   ).length;
 
   return (
@@ -70,17 +116,13 @@ export function ProgressPage() {
         Où en es-tu ?
       </h1>
 
-      {/* ─── Stats globales ──────────────────────── */}
       <div className="grid sm:grid-cols-5 gap-3 mt-8">
         <StatCard
           label="Progression"
           value={`${stats.percent}%`}
           accent="text-accent-2"
         />
-        <StatCard
-          label="Modules lus"
-          value={String(progress.readModules.length)}
-        />
+        <StatCard label="Modules lus" value={String(readInCourse)} />
         <StatCard
           label="Quiz validés"
           value={`${stats.quizPassed}/${totalQuizzesTaken || 0}`}
@@ -112,7 +154,6 @@ export function ProgressPage() {
         </div>
       </div>
 
-      {/* ─── By phase ───────────────────────────── */}
       <h2 className="text-lg font-bold mt-10 mb-4">Par phase</h2>
       <div className="space-y-3">
         {phases.map((phase, i) => {
@@ -121,7 +162,7 @@ export function ProgressPage() {
           return (
             <Link
               key={phase.id}
-              to={`/react/phase/${phase.id}`}
+              to={`${basePath}/phase/${phase.id}`}
               className="block rounded-xl border-base bg-bg-2 p-5 hover:border-accent/30 transition"
             >
               <div className="flex items-center gap-4">
@@ -162,7 +203,6 @@ export function ProgressPage() {
         })}
       </div>
 
-      {/* ─── Sauvegarde / restauration ───────────── */}
       <h2 className="text-lg font-bold mt-10 mb-3">Sauvegarde</h2>
 
       {user && <SyncStatusBadge variant="card" className="mb-3" />}

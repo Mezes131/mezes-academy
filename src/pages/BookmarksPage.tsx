@@ -1,17 +1,26 @@
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 import { useProgress } from "@/hooks/useProgress";
-import { findModule } from "@/data/phases";
+import { useCourseArea } from "@/components/layout/courseArea";
+import { courseModuleIds } from "@/lib/courseProgress";
 import { phaseAccent, cn } from "@/lib/utils";
 import { BookmarkCheck, Bookmark, ArrowRight } from "lucide-react";
 
 export function BookmarksPage() {
   const { progress, toggleBookmark } = useProgress();
+  const { basePath, phases } = useCourseArea();
+  const moduleIds = useMemo(() => courseModuleIds(phases), [phases]);
 
   const bookmarked = progress.bookmarks
-    .map((id) => findModule(id))
-    .filter((x): x is NonNullable<ReturnType<typeof findModule>> =>
-      Boolean(x),
-    );
+    .filter((id) => moduleIds.has(id))
+    .map((id) => {
+      for (const phase of phases) {
+        const module = phase.modules.find((m) => m.id === id);
+        if (module) return { phase, module };
+      }
+      return null;
+    })
+    .filter((x): x is NonNullable<typeof x> => Boolean(x));
 
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
@@ -34,7 +43,7 @@ export function BookmarksPage() {
             Aucun module en favori
           </div>
           <p className="text-[13px] text-fg-2">
-            Clique sur l'icône de signet en haut d'un module pour l'ajouter ici.
+            Clique sur l&apos;icône de signet en haut d&apos;un module pour l&apos;ajouter ici.
           </p>
         </div>
       ) : (
@@ -57,7 +66,7 @@ export function BookmarksPage() {
                   {module.index}
                 </div>
                 <Link
-                  to={`/react/module/${module.id}`}
+                  to={`${basePath}/module/${module.id}`}
                   className="flex-1 min-w-0 group"
                 >
                   <div className={cn("text-[11px] font-mono uppercase tracking-wider", accent.text)}>
@@ -72,6 +81,7 @@ export function BookmarksPage() {
                 </Link>
                 <div className="flex items-center gap-2">
                   <button
+                    type="button"
                     onClick={() => toggleBookmark(module.id)}
                     className="p-2 rounded-lg hover:bg-bg-3 text-fg-2 transition"
                     aria-label="Retirer des favoris"
@@ -79,7 +89,7 @@ export function BookmarksPage() {
                     <Bookmark size={16} />
                   </button>
                   <Link
-                    to={`/react/module/${module.id}`}
+                    to={`${basePath}/module/${module.id}`}
                     className="p-2 rounded-lg hover:bg-bg-3 text-fg-2 hover:text-fg transition"
                   >
                     <ArrowRight size={16} />
