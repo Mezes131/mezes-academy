@@ -539,11 +539,11 @@ export const opsPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P12 : Ship commercial ──────────────────────────────────────── */
+/* ── P12 : Livraison commerciale ────────────────────────────────── */
 
 export const shipPhase: ProgramPhase = phase({
   slug: "ship",
-  title: "Ship commercial",
+  title: "Livraison commerciale",
   objective: "Transformer un déploiement en offre commercialisable.",
   modules: [
     module({
@@ -605,7 +605,7 @@ export const shipPhase: ProgramPhase = phase({
     module({
       id: "svc-ship-m03",
       index: "03",
-      title: "Preuves de Ship",
+      title: "Preuves de livraison",
       subtitle: "Changelog, smoke tests, dossier de release",
       duration: "35 min",
       difficulty: "intermediate",
@@ -618,24 +618,24 @@ export const shipPhase: ProgramPhase = phase({
         lesson({
           id: "svc-ship-m03-l1",
           title: "Livrer avec preuves",
-          objective: "Produire les artefacts qui prouvent que le produit est shippé.",
+          objective: "Produire les artefacts qui prouvent que le produit est livré.",
           concepts: ["changelog", "smoke tests", "dossier de release"],
         }),
       ],
       exercises: [
         {
-          title: "Assembler le dossier Ship",
+          title: "Assembler le dossier de livraison",
           kind: "synthesis",
           brief:
-            "Assembler le dossier Ship du produit : URL, plans, preuves d'audit, runbook.",
+            "Assembler le dossier de livraison du produit : URL, plans, preuves d'audit, runbook.",
         },
       ],
     }),
   ],
   project: {
-    title: "Projet P12 : Dossier Ship",
+    title: "Projet P12 : Dossier de livraison",
     deliverable:
-      "Le dossier Ship complet : URL publique, plans et pricing, preuves d'audit, runbook.",
+      "Le dossier de livraison complet : URL publique, plans et pricing, preuves d'audit, runbook.",
     assessment: [
       "Dossier complet et vérifiable",
       "Pricing page en ligne avec CTA",

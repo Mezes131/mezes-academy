@@ -26,7 +26,7 @@ export const fondationsModule01: Module = {
       box: {
         variant: "note",
         title: "<i class='fa-solid fa-gauge-high'></i> Plus l'outil agit seul, plus tu dois vérifier",
-        body: "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Ship (cadrer, vérifier, livrer).",
+        body: "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Livraison (cadrer, vérifier, livrer).",
       },
     },
 

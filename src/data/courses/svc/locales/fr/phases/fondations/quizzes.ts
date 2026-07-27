@@ -75,7 +75,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
 
   m02: {
     id: "svc-fondations-quiz-m02",
-    title: "Prompt → Audit → Ship : valide ta lecture",
+    title: "Prompt → Audit → Livraison : valide ta lecture",
     questions: [
       {
         id: "q1",
@@ -105,7 +105,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q3",
-        question: "Que signifie « Ship » ici ?",
+        question: "Que signifie « Livraison » ici ?",
         options: [
           { id: "a", label: "Livrer avec les preuves d'audit, pas seulement pousser du code" },
           { id: "b", label: "Supprimer le dépôt" },
@@ -114,7 +114,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["a"],
         explanation:
-          "Ship = mise à disposition contrôlée (preview/prod) avec un dossier de preuves.",
+          "Livraison = mise à disposition contrôlée (aperçu / production) avec un dossier de preuves.",
       },
       {
         id: "q4",
@@ -127,7 +127,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["b"],
         explanation:
-          "Petite feature → audit → ship partiel. Puis on recommence. C'est le rythme de toute la formation.",
+          "Petite fonctionnalité → audit → livraison partielle. Puis on recommence. C'est le rythme de toute la formation.",
       },
       {
         id: "q5",
@@ -199,7 +199,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["a"],
         explanation:
-          "Vitesse (IA) + filet automatique (qualité, secrets, dépendances) + revue humaine = cycle Prompt → Audit → Ship.",
+          "Vitesse (IA) + filet automatique (qualité, secrets, dépendances) + revue humaine = cycle Prompt → Audit → Livraison.",
       },
       {
         id: "q5",

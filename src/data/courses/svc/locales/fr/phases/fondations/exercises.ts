@@ -62,11 +62,11 @@ export const fondationsExercises: Record<
   m02_1: {
     id: "svc-fondations-ex-m02-1",
     format: "audit",
-    title: "Cycle Prompt → Audit → Ship sur un formulaire contact",
+    title: "Cycle Prompt → Audit → Livraison sur un formulaire contact",
     instructions:
       "Tu dois livrer un formulaire de contact. Coche les étapes réellement présentes dans une boucle saine. Ignore ce qui relève du tunnel.",
     hints: [
-      "Livrer sans preuve d'audit, ce n'est pas « Ship » dans ce cours.",
+      "Livrer sans preuve d'audit, ce n'est pas une « Livraison » dans ce cours.",
       "Générer 2000 lignes d'un coup avant toute liste de contrôle = tunnel.",
     ],
     scenario: `<p>Brief : page contact avec nom, email, message, envoi vers une API <code>POST /api/contact</code>, états chargement / erreur / succès, pas de spam ouvert.</p>

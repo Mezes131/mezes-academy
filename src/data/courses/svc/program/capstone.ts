@@ -9,7 +9,7 @@ export const capstonePhase: ProgramPhase = phase({
   slug: "capstone",
   title: "Capstone + certificat",
   objective:
-    "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Ship, validé par la rubrique de certification.",
+    "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Livraison, validé par la rubrique de certification.",
   modules: [
     module({
       id: "svc-capstone-m01",
@@ -21,7 +21,7 @@ export const capstonePhase: ProgramPhase = phase({
       objectives: [
         "Choisir un brief parmi les trois proposés",
         "Comprendre chaque critère de la rubrique et les échecs automatiques",
-        "Planifier les jalons Prompt → Audit → Ship",
+        "Planifier les jalons Prompt → Audit → Livraison",
       ],
       lessons: [
         lesson({
@@ -43,7 +43,7 @@ export const capstonePhase: ProgramPhase = phase({
           concepts: [
             "Prompt : brief + journal de prompts + architecture",
             "Audit : Security + Qualité avec preuves",
-            "Ship : prod publique + dossier de release",
+            "Livraison : prod publique + dossier de release",
           ],
           pitfalls: [
             "Secrets en clair dans le repo ou les logs (échec automatique)",
@@ -66,7 +66,7 @@ export const capstonePhase: ProgramPhase = phase({
   project: {
     title: "Capstone : Produit commercialisable en prod",
     deliverable:
-      "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier Ship. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
+      "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier de livraison. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
     options: [
       "svc-capstone-saas : SaaS B2B : auth + abonnement + dashboard",
       "svc-capstone-commerce : E-commerce léger : catalogue + paiement + notifs commande",
@@ -80,7 +80,7 @@ export const capstonePhase: ProgramPhase = phase({
       "Checklists Perf / Design / A11y : pass selon seuils publiés",
       "Webhooks + idempotence si le brief inclut le paiement (obligatoire)",
       "Déploiement documenté : CI ou procédure (obligatoire)",
-      "Dossier Ship complet (obligatoire)",
+      "Dossier de livraison complet (obligatoire)",
       "Échecs automatiques : secrets en clair, checkout redirect-only, prod sans HTTPS, autorisation client-only",
     ],
   },

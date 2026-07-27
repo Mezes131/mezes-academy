@@ -152,7 +152,7 @@ export const fondationsPhase: ProgramPhase = phase({
   slug: "fondations",
   title: "Fondations vibe coding",
   objective:
-    "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Ship qui le rend fiable.",
+    "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Livraison qui le rend fiable.",
   modules: [
     module({
       id: "svc-fondations-m01",
@@ -199,7 +199,7 @@ export const fondationsPhase: ProgramPhase = phase({
     module({
       id: "svc-fondations-m02",
       index: "02",
-      title: "Le cycle Prompt → Audit → Ship",
+      title: "Le cycle Prompt → Audit → Livraison",
       subtitle: "Le fil rouge de toute la formation",
       duration: "30 min",
       difficulty: "intro",
@@ -213,7 +213,7 @@ export const fondationsPhase: ProgramPhase = phase({
           id: "svc-fondations-m02-l1",
           title: "Pourquoi trois temps",
           objective: "Comprendre la séparation spécifier / vérifier / livrer.",
-          concepts: ["Prompt = spécifier + générer", "Audit = checklists + preuves", "Ship = livrer avec preuves"],
+          concepts: ["Prompt = spécifier + générer", "Audit = checklists + preuves", "Livraison = livrer avec preuves"],
         }),
         lesson({
           id: "svc-fondations-m02-l2",
@@ -228,7 +228,7 @@ export const fondationsPhase: ProgramPhase = phase({
           title: "Cycle complet sur une micro-feature",
           kind: "guided",
           brief:
-            "Dérouler Prompt → Audit → Ship sur un formulaire de contact : brief, génération, checklist, livraison.",
+            "Dérouler Prompt → Audit → Livraison sur un formulaire de contact : brief, génération, checklist, livraison.",
         },
       ],
     }),

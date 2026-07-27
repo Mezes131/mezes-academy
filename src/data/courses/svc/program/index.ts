@@ -30,7 +30,7 @@ export const svcProgram: CourseProgram = {
   courseId: "svc",
   version: "2026-07-27",
   reusableStructure: [
-    "Cycle Prompt → Audit → Ship appliqué à chaque phase",
+    "Cycle Prompt → Audit → Livraison appliqué à chaque phase",
     "Checklists Strapi : security-baseline (P8), performance-baseline / design-baseline / accessibility-baseline (P9), toutes au capstone",
     "Quiz de module : 5 questions ; quick-check de leçon : 3 questions",
     "Projet de phase = incrément du produit capstone à partir de P4",

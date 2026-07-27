@@ -5,7 +5,7 @@ import { fondationsExercises } from "../exercises";
 export const fondationsModule02: Module = {
   id: "svc-fondations-m02",
   index: "02",
-  title: "Le cycle Prompt → Audit → Ship",
+  title: "Le cycle Prompt → Audit → Livraison",
   subtitle: "Le fil rouge de toute la formation",
   duration: "30 min",
   difficulty: "intro",
@@ -30,7 +30,7 @@ export const fondationsModule02: Module = {
     },
     {
       kind: "highlight",
-      html: "<i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer une version (aperçu ou production) en emportant ces preuves.",
+      html: "<i class='fa-solid fa-rocket'></i> <strong>Livraison</strong> : mettre une version à disposition (aperçu ou production) en emportant ces preuves.",
     },
     {
       kind: "paragraph",

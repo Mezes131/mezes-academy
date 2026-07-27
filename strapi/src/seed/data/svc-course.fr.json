@@ -1,12 +1,12 @@
 {
-  "exportedAt": "2026-07-27T14:54:20.107Z",
+  "exportedAt": "2026-07-27T14:59:18.254Z",
   "locale": "fr",
   "course": {
     "legacyId": "svc",
     "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
     "slug": "secure-vibe-coding",
     "tagline": "Du prompt au produit en production, sans dette ni failles oubliées",
-    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Ship : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
+    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
     "icon": "fa-shield-halved",
     "iconFamily": "fa-solid",
     "level": "intermediate",
@@ -1139,7 +1139,7 @@
         "slug": "fondations",
         "title": "Fondations vibe coding",
         "label": "Phase 1",
-        "summary": "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Ship qui le rend fiable.",
+        "summary": "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Livraison qui le rend fiable.",
         "order": 1,
         "color": "intro",
         "icon": "fa-wand-magic-sparkles",
@@ -1191,7 +1191,7 @@
                 "box": {
                   "variant": "note",
                   "title": "<i class='fa-solid fa-gauge-high'></i> Plus l'outil agit seul, plus tu dois vérifier",
-                  "body": "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Ship (cadrer, vérifier, livrer)."
+                  "body": "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Livraison (cadrer, vérifier, livrer)."
                 }
               },
               {
@@ -1243,7 +1243,7 @@
                   "__component": "lesson.callout-block",
                   "variant": "note",
                   "title": "<i class='fa-solid fa-gauge-high'></i> Plus l'outil agit seul, plus tu dois vérifier",
-                  "body": "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Ship (cadrer, vérifier, livrer)."
+                  "body": "Une mauvaise suggestion coûte une ligne. Un agent mal cadré peut réécrire ta connexion utilisateur, enregistrer un secret dans l'historique Git, et proposer des milliers de lignes d'un coup. D'où le cycle Prompt → Audit → Livraison (cadrer, vérifier, livrer)."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -1513,7 +1513,7 @@
             "legacyId": "svc-fondations-m02",
             "moduleId": "svc-fondations-m02",
             "index": "02",
-            "title": "Le cycle Prompt → Audit → Ship",
+            "title": "Le cycle Prompt → Audit → Livraison",
             "subtitle": "Le fil rouge de toute la formation",
             "duration": "30 min",
             "order": 1,
@@ -1545,7 +1545,7 @@
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer une version (aperçu ou production) en emportant ces preuves."
+                "html": "<i class='fa-solid fa-rocket'></i> <strong>Livraison</strong> : mettre une version à disposition (aperçu ou production) en emportant ces preuves."
               },
               {
                 "kind": "paragraph",
@@ -1575,7 +1575,7 @@
             "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m02-lesson",
-              "title": "Le cycle Prompt → Audit → Ship",
+              "title": "Le cycle Prompt → Audit → Livraison",
               "desc": "Le fil rouge de toute la formation",
               "order": 0,
               "isRequired": true,
@@ -1598,7 +1598,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer une version (aperçu ou production) en emportant ces preuves.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-rocket'></i> <strong>Livraison</strong> : mettre une version à disposition (aperçu ou production) en emportant ces preuves.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
@@ -1626,7 +1626,7 @@
             },
             "quiz": {
               "legacyId": "svc-fondations-quiz-m02",
-              "title": "Prompt → Audit → Ship : valide ta lecture",
+              "title": "Prompt → Audit → Livraison : valide ta lecture",
               "questions": [
                 {
                   "legacyId": "svc-fondations-quiz-m02-q1",
@@ -1696,9 +1696,9 @@
                 },
                 {
                   "legacyId": "svc-fondations-quiz-m02-q3",
-                  "prompt": "Que signifie « Ship » ici ?",
+                  "prompt": "Que signifie « Livraison » ici ?",
                   "type": "single",
-                  "explanation": "Ship = mise à disposition contrôlée (preview/prod) avec un dossier de preuves.",
+                  "explanation": "Livraison = mise à disposition contrôlée (aperçu / production) avec un dossier de preuves.",
                   "order": 2,
                   "answers": [
                     {
@@ -1731,7 +1731,7 @@
                   "legacyId": "svc-fondations-quiz-m02-q4",
                   "prompt": "Pourquoi préférer des boucles courtes au « tunnel » ?",
                   "type": "single",
-                  "explanation": "Petite feature → audit → ship partiel. Puis on recommence. C'est le rythme de toute la formation.",
+                  "explanation": "Petite fonctionnalité → audit → livraison partielle. Puis on recommence. C'est le rythme de toute la formation.",
                   "order": 3,
                   "answers": [
                     {
@@ -1798,12 +1798,12 @@
             "exercises": [
               {
                 "legacyId": "svc-fondations-ex-m02-1",
-                "title": "Cycle Prompt → Audit → Ship sur un formulaire contact",
+                "title": "Cycle Prompt → Audit → Livraison sur un formulaire contact",
                 "instructions": "Tu dois livrer un formulaire de contact. Coche les étapes réellement présentes dans une boucle saine. Ignore ce qui relève du tunnel.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "Livrer sans preuve d'audit, ce n'est pas « Ship » dans ce cours.",
+                  "Livrer sans preuve d'audit, ce n'est pas une « Livraison » dans ce cours.",
                   "Générer 2000 lignes d'un coup avant toute liste de contrôle = tunnel."
                 ],
                 "starterFiles": {
@@ -2066,7 +2066,7 @@
                   "legacyId": "svc-fondations-quiz-m03-q4",
                   "prompt": "Pourquoi combiner assistant dans l'éditeur et contrôles automatiques ?",
                   "type": "single",
-                  "explanation": "Vitesse (IA) + filet automatique (qualité, secrets, dépendances) + revue humaine = cycle Prompt → Audit → Ship.",
+                  "explanation": "Vitesse (IA) + filet automatique (qualité, secrets, dépendances) + revue humaine = cycle Prompt → Audit → Livraison.",
                   "order": 3,
                   "answers": [
                     {
@@ -7162,7 +7162,7 @@
       {
         "legacyId": "svc-ship",
         "slug": "ship",
-        "title": "Ship commercial",
+        "title": "Livraison commerciale",
         "label": "Phase 12",
         "summary": "Transformer un déploiement en offre commercialisable.",
         "order": 12,
@@ -7174,8 +7174,8 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P12 : Dossier Ship",
-        "projectDeliverable": "Le dossier Ship complet : URL publique, plans et pricing, preuves d'audit, runbook.",
+        "projectTitle": "Projet P12 : Dossier de livraison",
+        "projectDeliverable": "Le dossier de livraison complet : URL publique, plans et pricing, preuves d'audit, runbook.",
         "projectAssessment": [
           "Dossier complet et vérifiable",
           "Pricing page en ligne avec CTA",
@@ -7352,7 +7352,7 @@
             "legacyId": "svc-ship-m03",
             "moduleId": "svc-ship-m03",
             "index": "03",
-            "title": "Preuves de Ship",
+            "title": "Preuves de livraison",
             "subtitle": "Changelog, smoke tests, dossier de release",
             "duration": "35 min",
             "order": 2,
@@ -7372,12 +7372,12 @@
                   {
                     "id": "svc-ship-m03-l1",
                     "title": "Livrer avec preuves",
-                    "desc": "Produire les artefacts qui prouvent que le produit est shippé.",
+                    "desc": "Produire les artefacts qui prouvent que le produit est livré.",
                     "objectives": [
-                      "Produire les artefacts qui prouvent que le produit est shippé."
+                      "Produire les artefacts qui prouvent que le produit est livré."
                     ],
                     "outline": {
-                      "context": "Produire les artefacts qui prouvent que le produit est shippé.",
+                      "context": "Produire les artefacts qui prouvent que le produit est livré.",
                       "concepts": [
                         "changelog",
                         "smoke tests",
@@ -7410,22 +7410,22 @@
               },
               "exercises": [
                 {
-                  "title": "Assembler le dossier Ship",
+                  "title": "Assembler le dossier de livraison",
                   "kind": "synthesis",
-                  "brief": "Assembler le dossier Ship du produit : URL, plans, preuves d'audit, runbook."
+                  "brief": "Assembler le dossier de livraison du produit : URL, plans, preuves d'audit, runbook."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ship-m03-lesson",
-              "title": "Preuves de Ship",
+              "title": "Preuves de livraison",
               "desc": "Changelog, smoke tests, dossier de release",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Livrer avec preuves</strong> : Produire les artefacts qui prouvent que le produit est shippé.</li></ul>"
+                  "body": "<ul><li><strong>Livrer avec preuves</strong> : Produire les artefacts qui prouvent que le produit est livré.</li></ul>"
                 }
               ]
             },
@@ -7439,7 +7439,7 @@
         "slug": "capstone",
         "title": "Capstone + certificat",
         "label": "Capstone",
-        "summary": "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Ship, validé par la rubrique de certification.",
+        "summary": "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Livraison, validé par la rubrique de certification.",
         "order": 13,
         "color": "expert",
         "icon": "fa-award",
@@ -7450,7 +7450,7 @@
         "prerequisites": [],
         "scaffoldOnly": true,
         "projectTitle": "Capstone : Produit commercialisable en prod",
-        "projectDeliverable": "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier Ship. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
+        "projectDeliverable": "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier de livraison. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
         "projectAssessment": [
           "Produit déployé accessible en HTTPS (obligatoire)",
           "Auth via provider : pas d'auth maison fragile (obligatoire)",
@@ -7459,7 +7459,7 @@
           "Checklists Perf / Design / A11y : pass selon seuils publiés",
           "Webhooks + idempotence si le brief inclut le paiement (obligatoire)",
           "Déploiement documenté : CI ou procédure (obligatoire)",
-          "Dossier Ship complet (obligatoire)",
+          "Dossier de livraison complet (obligatoire)",
           "Échecs automatiques : secrets en clair, checkout redirect-only, prod sans HTTPS, autorisation client-only"
         ],
         "modules": [
@@ -7475,7 +7475,7 @@
             "objectives": [
               "Choisir un brief parmi les trois proposés",
               "Comprendre chaque critère de la rubrique et les échecs automatiques",
-              "Planifier les jalons Prompt → Audit → Ship"
+              "Planifier les jalons Prompt → Audit → Livraison"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7523,7 +7523,7 @@
                       "concepts": [
                         "Prompt : brief + journal de prompts + architecture",
                         "Audit : Security + Qualité avec preuves",
-                        "Ship : prod publique + dossier de release"
+                        "Livraison : prod publique + dossier de release"
                       ],
                       "pitfalls": [
                         "Secrets en clair dans le repo ou les logs (échec automatique)",
@@ -7539,7 +7539,7 @@
                       "focus": [
                         "Prompt : brief + journal de prompts + architecture",
                         "Audit : Security + Qualité avec preuves",
-                        "Ship : prod publique + dossier de release"
+                        "Livraison : prod publique + dossier de release"
                       ]
                     },
                     "exercises": []
@@ -7556,7 +7556,7 @@
                   "svc-capstone-service : booking/lead + paiement + emails transactionnels",
                   "Prompt : brief + journal de prompts + architecture",
                   "Audit : Security + Qualité avec preuves",
-                  "Ship : prod publique + dossier de release"
+                  "Livraison : prod publique + dossier de release"
                 ]
               },
               "exercises": [

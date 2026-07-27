@@ -13,7 +13,7 @@ export const fondationsPhase: Phase = {
   label: "Phase 1",
   title: "Fondations vibe coding",
   summary:
-    "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Ship qui le rend fiable.",
+    "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Livraison qui le rend fiable.",
   metaTags: ["tronc commun", "lecture ~1h30", "audits interactifs", "cycle PAS"],
   modules: [fondationsModule01, fondationsModule02, fondationsModule03],
   project: {
