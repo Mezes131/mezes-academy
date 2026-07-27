@@ -5,7 +5,7 @@ import type { LessonProgress, Phase } from "@/types";
 const progress: LessonProgress = {
   readModules: ["m1"],
   quizScores: {
-    q1: { correct: 4, total: 5, updatedAt: 1 },
+    q1: { correct: 4, total: 5, answers: {}, updatedAt: 1 },
   },
   completedExercises: ["e1"],
   exerciseProgress: {},
