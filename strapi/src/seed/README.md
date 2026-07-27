@@ -1,25 +1,36 @@
-# React course seed
+# Course seeds
 
 ## Export (from repo root)
 
 ```bash
-npx tsx scripts/export-react-course-seed.ts
+npm run export:strapi-seed            # React course (default)
+npm run export:strapi-seed -- svc     # Secure Vibe Coding
 ```
 
-Writes `strapi/src/seed/data/react-course.json` from the live `reactCourse` TypeScript source.
+Writes `strapi/src/seed/data/<courseId>-course.json` from the live TypeScript
+course registry (`src/data/courses/`).
 
 ## Import (Strapi running against Postgres)
 
+With docker compose (the running container already uses port 1337, so start
+the console on another port):
+
 ```bash
-cd strapi
-npx strapi console
+docker compose --env-file .env exec -e PORT=1338 strapi npm run strapi -- console
 ```
 
 ```js
-const { importReactCourse } = require("./src/seed/import-react-course");
-await importReactCourse(strapi);
+const { importCourse } = require("./dist/src/seed/import-course");
+await importCourse(strapi, "react");
+await importCourse(strapi, "svc");
 ```
 
-All records are created/updated as **drafts** keyed by `legacyId`. Publish the first module in the admin UI after review.
+If the JSON is missing inside the container (`dist/src/seed/data/`), copy it in:
 
-Re-running the importer updates matching `legacyId` rows instead of duplicating.
+```bash
+docker compose cp strapi/src/seed/data/svc-course.json strapi:/app/dist/src/seed/data/
+```
+
+All records are created/updated as **drafts** keyed by `legacyId`. Publish in
+the admin UI after review. Re-running the importer updates matching `legacyId`
+rows instead of duplicating.

@@ -1,14 +1,31 @@
 /**
- * Export reactCourse into a JSON payload for the Strapi seed importer.
- * Run: npx tsx scripts/export-react-course-seed.ts
+ * Export a course from the registry into a JSON payload for the Strapi
+ * seed importer.
+ * Run: npx tsx scripts/export-course-seed.ts [courseId]   (default: react)
+ * Output: strapi/src/seed/data/<courseId>-course.json
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { reactCourse } from "../src/data/courses/react";
-import type { ContentBlock, Module, Phase, Quiz, CodeExercise } from "../src/types";
+import { courses } from "../src/data/courses";
+import type {
+  ContentBlock,
+  Course,
+  CourseMeta,
+  Module,
+  Phase,
+  Quiz,
+  CodeExercise,
+} from "../src/types";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const LEVEL_MAP: Record<CourseMeta["level"], string> = {
+  Débutant: "beginner",
+  Intermédiaire: "intermediate",
+  Avancé: "advanced",
+  "Tous niveaux": "beginner",
+};
 
 function mapContentBlocks(blocks: ContentBlock[]) {
   return blocks.map((block) => {
@@ -134,27 +151,38 @@ function mapPhase(phase: Phase, order: number) {
   };
 }
 
-const payload = {
-  exportedAt: new Date().toISOString(),
-  course: {
-    legacyId: reactCourse.id,
-    title: reactCourse.meta.title,
-    slug: reactCourse.slug,
-    tagline: reactCourse.meta.tagline,
-    description: reactCourse.meta.description,
-    icon: reactCourse.meta.icon,
-    iconFamily: reactCourse.meta.iconFamily ?? "fa-solid",
-    level: "beginner",
-    duration: reactCourse.meta.duration,
-    accentText: reactCourse.meta.accent.text,
-    accentBg: reactCourse.meta.accent.bg,
-    accentBorder: reactCourse.meta.accent.border,
-    workflowStatus: "draft",
-    phases: reactCourse.phases.map(mapPhase),
-  },
-};
+function buildPayload(course: Course) {
+  return {
+    exportedAt: new Date().toISOString(),
+    course: {
+      legacyId: course.id,
+      title: course.meta.title,
+      slug: course.slug,
+      tagline: course.meta.tagline,
+      description: course.meta.description,
+      icon: course.meta.icon,
+      iconFamily: course.meta.iconFamily ?? "fa-solid",
+      level: LEVEL_MAP[course.meta.level],
+      duration: course.meta.duration,
+      accentText: course.meta.accent.text,
+      accentBg: course.meta.accent.bg,
+      accentBorder: course.meta.accent.border,
+      workflowStatus: "draft",
+      phases: course.phases.map(mapPhase),
+    },
+  };
+}
 
-const out = resolve(__dirname, "../strapi/src/seed/data/react-course.json");
+const courseId = process.argv[2] ?? "react";
+const course = courses.find((c) => c.id === courseId);
+if (!course) {
+  console.error(
+    `Unknown course "${courseId}". Available: ${courses.map((c) => c.id).join(", ")}`,
+  );
+  process.exit(1);
+}
+
+const out = resolve(__dirname, `../strapi/src/seed/data/${courseId}-course.json`);
 mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, JSON.stringify(payload, null, 2), "utf8");
+writeFileSync(out, JSON.stringify(buildPayload(course), null, 2), "utf8");
 console.log(`Wrote ${out}`);
