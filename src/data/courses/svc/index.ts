@@ -1,9 +1,12 @@
-import type { Course } from "@/types";
+import type { Course, Phase } from "@/types";
+import type { Locale } from "@/i18n/types";
 import { programToScaffoldPhases, type PhasePresentation } from "../programScaffold";
 import { svcMeta } from "./meta";
 import { svcProgram } from "./program";
-import { basesPhase } from "./phases/bases";
-import { fondationsPhase } from "./phases/fondations";
+import { basesPhase as basesPhaseFr } from "./locales/fr/phases/bases";
+import { fondationsPhase as fondationsPhaseFr } from "./locales/fr/phases/fondations";
+import { basesPhase as basesPhaseEn } from "./locales/en/phases/bases";
+import { fondationsPhase as fondationsPhaseEn } from "./locales/en/phases/fondations";
 
 const phasePresentation: Record<string, PhasePresentation> = {
   bases: { color: "intro", icon: "fa-globe", label: "Phase 0" },
@@ -22,23 +25,34 @@ const phasePresentation: Record<string, PhasePresentation> = {
   capstone: { color: "expert", icon: "fa-award", label: "Capstone" },
 };
 
-/** Phases with authored content replace their program-derived scaffold. */
-const authoredPhases: Record<string, typeof basesPhase> = {
-  [basesPhase.id]: basesPhase,
-  [fondationsPhase.id]: fondationsPhase,
+const authoredFr: Record<string, Phase> = {
+  [basesPhaseFr.id]: basesPhaseFr,
+  [fondationsPhaseFr.id]: fondationsPhaseFr,
+};
+
+/** EN-authored phases (same phase ids as FR). */
+const authoredEn: Record<string, Phase> = {
+  [basesPhaseEn.id]: basesPhaseEn,
+  [fondationsPhaseEn.id]: fondationsPhaseEn,
 };
 
 /**
- * Secure Vibe Coding. The syllabus lives in `program/`; phases are derived
- * from it as scaffolds, then swapped for authored versions as lesson
- * content gets written (P0–P1 done, P2+ to come).
+ * Secure Vibe Coding. Syllabus in `program/`; authored phases under
+ * `locales/{fr,en}/phases/`. Missing EN phases fall back to FR.
  */
-export const svcCourse: Course = {
-  id: "svc",
-  slug: "secure-vibe-coding",
-  meta: svcMeta,
-  program: svcProgram,
-  phases: programToScaffoldPhases(svcProgram, phasePresentation).map(
-    (phase) => authoredPhases[phase.id] ?? phase,
-  ),
-};
+export function buildSvcCourse(locale: Locale = "fr"): Course {
+  const authored =
+    locale === "en" ? { ...authoredFr, ...authoredEn } : authoredFr;
+  return {
+    id: "svc",
+    slug: "secure-vibe-coding",
+    meta: svcMeta,
+    program: svcProgram,
+    phases: programToScaffoldPhases(svcProgram, phasePresentation).map(
+      (phase) => authored[phase.id] ?? phase,
+    ),
+  };
+}
+
+/** Default FR catalog (tests + static imports). */
+export const svcCourse: Course = buildSvcCourse("fr");

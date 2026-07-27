@@ -1,9 +1,14 @@
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { CourseTopNav } from "./CourseTopNav";
 import { CourseBar } from "./CourseBar";
 import { Sidebar } from "./Sidebar";
 import { BackToTopButton } from "./BackToTopButton";
-import { CourseAreaContext, type CourseArea } from "./courseArea";
+import {
+  CourseAreaContext,
+  resolveCourseArea,
+  type CourseAreaBase,
+} from "./courseArea";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 /**
  * Layout for a course learning area (React, SVC…).
@@ -14,13 +19,18 @@ export function CourseLayout({
   area,
   children,
 }: {
-  area: CourseArea;
+  area: CourseAreaBase;
   children: ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const { locale } = useLocale();
+  const resolved = useMemo(
+    () => resolveCourseArea(area, locale),
+    [area, locale],
+  );
 
   return (
-    <CourseAreaContext.Provider value={area}>
+    <CourseAreaContext.Provider value={resolved}>
     <div className="min-h-screen flex flex-col">
       <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-base">
         <CourseTopNav />

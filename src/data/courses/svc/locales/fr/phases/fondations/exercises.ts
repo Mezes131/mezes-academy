@@ -11,27 +11,27 @@ export const fondationsExercises: Record<
     instructions:
       "Lis le scénario. Coche uniquement les constats qui tiennent. Attribue une gravité cohérente. Soumets ton rapport.",
     hints: [
-      "Une clé en dur dans le dépôt est presque toujours critique ou haute.",
+      "Une clé secrète écrite en dur dans le dépôt est presque toujours critique ou haute.",
       "Un commentaire TODO n'est pas une faille de sécurité à elle seule.",
     ],
-    scenario: `<p>Une startup a laissé un agent IA « finir » l'auth. Deux jours après le go-live, un bot scrape le dépôt public miroir et trouve une clé Stripe <code>sk_live_…</code> commitée dans <code>src/lib/payments.ts</code>. Des charges frauduleuses apparaissent. Personne n'avait lu le diff de 1800 lignes.</p>
+    scenario: `<p>Une startup a laissé un agent IA « finir » la connexion utilisateur. Deux jours après la mise en ligne, un bot parcourt le dépôt public miroir et trouve une clé Stripe <code>sk_live_…</code> enregistrée dans l'historique Git, dans <code>src/lib/payments.ts</code>. Des paiements frauduleux apparaissent. Personne n'avait lu l'aperçu des 1800 lignes de changements.</p>
 <p>Identifie les causes racines et signaux manqués (pas les symptômes marketing).</p>`,
     findings: [
       {
         id: "f1",
-        label: "Secret de production commitée dans le code source",
+        label: "Secret de production enregistré dans le code source",
         correct: true,
         minSeverity: "critical",
       },
       {
         id: "f2",
-        label: "Diff massif accepté sans revue humaine ligne à ligne",
+        label: "Gros lot de changements accepté sans revue humaine ligne à ligne",
         correct: true,
         minSeverity: "high",
       },
       {
         id: "f3",
-        label: "Absence de scan de secrets dans la CI avant merge",
+        label: "Pas de scan automatique de secrets avant d'intégrer le code",
         correct: true,
         minSeverity: "high",
       },
@@ -56,7 +56,7 @@ export const fondationsExercises: Record<
     passingScore: 0.7,
     attemptsBeforeSolution: 2,
     challengeEligible: false,
-    solution: `<p>Constats attendus : secret en dur (critique), diff non relu (haute), pas de scan secrets CI (haute), déni de responsabilité (moyenne). Les distracteurs UI/README ne sont pas des causes de cet incident.</p>`,
+    solution: `<p>Constats attendus : secret en dur (critique), changements non relus (haute), pas de scan secrets avant intégration (haute), déni de responsabilité (moyenne). Les distracteurs UI/README ne sont pas des causes de cet incident.</p>`,
   },
 
   m02_1: {
@@ -66,33 +66,33 @@ export const fondationsExercises: Record<
     instructions:
       "Tu dois livrer un formulaire de contact. Coche les étapes réellement présentes dans une boucle saine. Ignore ce qui relève du tunnel.",
     hints: [
-      "Ship sans preuve d'audit, ce n'est pas Ship dans ce cours.",
-      "Générer 2000 lignes d'un coup avant toute checklist = tunnel.",
+      "Livrer sans preuve d'audit, ce n'est pas « Ship » dans ce cours.",
+      "Générer 2000 lignes d'un coup avant toute liste de contrôle = tunnel.",
     ],
-    scenario: `<p>Brief : page contact avec nom, email, message, envoi vers une API <code>POST /api/contact</code>, états loading / erreur / succès, pas de spam ouvert.</p>
-<p>Un junior a demandé à l'IA : « fais-moi tout le site ». Elle a produit 12 fichiers d'un coup, déployé sur un preview, puis « on verra l'audit plus tard ».</p>`,
+    scenario: `<p>Brief : page contact avec nom, email, message, envoi vers une API <code>POST /api/contact</code>, états chargement / erreur / succès, pas de spam ouvert.</p>
+<p>Un junior a demandé à l'IA : « fais-moi tout le site ». Elle a produit 12 fichiers d'un coup, publié un aperçu en ligne, puis « on verra l'audit plus tard ».</p>`,
     findings: [
       {
         id: "f1",
-        label: "Brief écrit (champs, endpoint, états UI, contraintes anti-spam) avant génération",
+        label: "Brief écrit (champs, adresse d'API, états d'écran, anti-spam) avant génération",
         correct: true,
         minSeverity: "medium",
       },
       {
         id: "f2",
-        label: "Génération limitée à la micro-feature formulaire (pas tout le site)",
+        label: "Génération limitée au formulaire (pas tout le site)",
         correct: true,
         minSeverity: "medium",
       },
       {
         id: "f3",
-        label: "Checklist audit : validation input, gestion d'erreur HTTP, pas de secret en front",
+        label: "Liste d'audit : validation des champs, gestion d'erreur réseau, pas de secret côté navigateur",
         correct: true,
         minSeverity: "high",
       },
       {
         id: "f4",
-        label: "Ship preview seulement après preuves d'audit sur cet incrément",
+        label: "Publier l'aperçu seulement après preuves d'audit sur cet incrément",
         correct: true,
         minSeverity: "medium",
       },
@@ -103,7 +103,7 @@ export const fondationsExercises: Record<
       },
       {
         id: "f6",
-        label: "Déployer en prod sans aucune checklist",
+        label: "Mettre en production sans aucune liste de contrôle",
         correct: false,
       },
     ],
@@ -111,7 +111,7 @@ export const fondationsExercises: Record<
     passingScore: 0.7,
     attemptsBeforeSolution: 2,
     challengeEligible: false,
-    solution: `<p>La boucle saine : brief → génération ciblée → checklist avec preuves → ship preview. Le tunnel « tout générer puis voir » et le deploy sans audit sont des anti-patterns.</p>`,
+    solution: `<p>La boucle saine : brief → génération ciblée → liste avec preuves → aperçu publié. Le tunnel « tout générer puis voir » et la mise en ligne sans audit sont des anti-patterns.</p>`,
   },
 
   m03_1: {
@@ -119,12 +119,12 @@ export const fondationsExercises: Record<
     format: "audit",
     title: "Outillage minimal d'un projet vibe",
     instructions:
-      "Pour un dépôt starter destinée au vibe coding, coche ce qui doit être en place dès le jour 1.",
+      "Pour un dépôt starter destiné au vibe coding, coche ce qui doit être en place dès le jour 1.",
     hints: [
-      "Les règles projet guident l'IA ; les scanners vérifient sans opinion.",
-      "Une auth maison « rapide » n'est pas un outillage recommandé ici.",
+      "Les règles projet guident l'IA ; les contrôles automatiques vérifient sans opinion.",
+      "Une connexion utilisateur « maison » bricolée n'est pas un outillage recommandé ici.",
     ],
-    scenario: `<p>Tu initialises le dépôt qui servira de fil rouge jusqu'au capstone. L'équipe utilisera un assistant IDE au quotidien.</p>`,
+    scenario: `<p>Tu initialises le dépôt qui servira de fil rouge jusqu'au projet final. L'équipe utilisera un assistant dans l'éditeur au quotidien.</p>`,
     findings: [
       {
         id: "f1",
@@ -134,19 +134,19 @@ export const fondationsExercises: Record<
       },
       {
         id: "f2",
-        label: "Lint configuré et exécutable en local / CI",
+        label: "Contrôle automatique de qualité du code, lançable en local et sur le serveur d'intégration",
         correct: true,
         minSeverity: "medium",
       },
       {
         id: "f3",
-        label: "Scan de secrets (pre-commit ou CI)",
+        label: "Scan de secrets (avant chaque enregistrement Git ou sur le serveur d'intégration)",
         correct: true,
         minSeverity: "high",
       },
       {
         id: "f4",
-        label: "Auth maison avec mots de passe en SHA1 « pour aller vite »",
+        label: "Connexion maison avec mots de passe en SHA1 « pour aller vite »",
         correct: false,
       },
       {
@@ -157,7 +157,7 @@ export const fondationsExercises: Record<
       },
       {
         id: "f6",
-        label: "Désactiver CORS avec * sur une API privée « pour que ça marche »",
+        label: "Ouvrir CORS avec * sur une API privée « pour que ça marche »",
         correct: false,
       },
     ],
@@ -165,7 +165,7 @@ export const fondationsExercises: Record<
     passingScore: 0.7,
     attemptsBeforeSolution: 2,
     challengeEligible: false,
-    solution: `<p>Jour 1 : règles projet, lint, scan secrets, gitignore propre. Pas d'auth maison fragile ni de CORS * sur du privé.</p>`,
+    solution: `<p>Jour 1 : règles projet, contrôle qualité, scan secrets, gitignore propre. Pas de connexion maison fragile ni de CORS * sur du privé.</p>`,
   },
 
   m03_projet: {
@@ -176,15 +176,15 @@ export const fondationsExercises: Record<
       "À partir du dépôt fictif décrit ci-dessous, produis un rapport : coche les constats réels, fixe une gravité minimale crédible, et ajoute une preuve courte (fichier ou motif).",
     hints: [
       "Chaque constat correct exige une preuve (chemin ou motif).",
-      "Priorise sécurité et secrets avant le polish UI.",
+      "Priorise sécurité et secrets avant le polish d'interface.",
     ],
-    scenario: `<p><strong>Dépôt « vibe-crm-starter »</strong> (généré par agent, PR unique de 95 fichiers) :</p>
+    scenario: `<p><strong>Dépôt « vibe-crm-starter »</strong> (généré par agent, une seule proposition de 95 fichiers) :</p>
 <ul>
 <li><code>src/server/db.ts</code> contient <code>DATABASE_URL=postgres://admin:admin@prod/db</code></li>
-<li><code>src/pages/Login.tsx</code> compare le mot de passe en clair côté client</li>
-<li><code>package.json</code> n'a ni script <code>lint</code> ni <code>test</code></li>
+<li><code>src/pages/Login.tsx</code> compare le mot de passe en clair côté navigateur</li>
+<li><code>package.json</code> n'a ni script de contrôle qualité ni de tests</li>
 <li><code>.gitignore</code> ignore <code>node_modules</code> mais pas <code>.env</code></li>
-<li>Le README promet « production-ready » sans checklist</li>
+<li>Le README promet « prêt pour la production » sans liste de contrôle</li>
 <li>Les couleurs du thème sont incohérentes (cosmétique)</li>
 </ul>`,
     findings: [
@@ -196,13 +196,13 @@ export const fondationsExercises: Record<
       },
       {
         id: "f2",
-        label: "Vérification de mot de passe côté client / en clair",
+        label: "Vérification de mot de passe côté navigateur / en clair",
         correct: true,
         minSeverity: "critical",
       },
       {
         id: "f3",
-        label: "Pas de lint ni tests dans les scripts npm",
+        label: "Pas de contrôle qualité ni de tests dans les scripts npm",
         correct: true,
         minSeverity: "medium",
       },
@@ -214,7 +214,7 @@ export const fondationsExercises: Record<
       },
       {
         id: "f5",
-        label: "Promesse « production-ready » sans preuves d'audit",
+        label: "Promesse « prêt pour la production » sans preuves d'audit",
         correct: true,
         minSeverity: "medium",
       },
@@ -228,6 +228,6 @@ export const fondationsExercises: Record<
     passingScore: 0.7,
     attemptsBeforeSolution: 3,
     challengeEligible: false,
-    solution: `<p>Priorité : secrets DB (critique), auth client (critique), .env non ignoré (haute), absence lint/tests et claim prod sans preuves (moyenne). Le thème incohérent n'est pas un constat de sécurité pour ce projet.</p>`,
+    solution: `<p>Priorité : secrets base de données (critique), connexion côté navigateur (critique), .env non ignoré (haute), absence de contrôles/tests et promesse prod sans preuves (moyenne). Le thème incohérent n'est pas un constat de sécurité pour ce projet.</p>`,
   },
 };

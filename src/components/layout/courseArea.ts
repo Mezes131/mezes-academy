@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import type { Phase } from "@/types";
+import type { Locale } from "@/i18n/types";
 import { findCourse } from "@/data";
 
 /**
@@ -22,7 +23,10 @@ export interface CourseArea {
   learnerTools: boolean;
 }
 
-export const reactCourseArea: CourseArea = {
+/** Branding + route without locale-resolved phases. */
+export type CourseAreaBase = Omit<CourseArea, "phases">;
+
+export const reactCourseArea: CourseAreaBase = {
   courseId: "react",
   basePath: "/react",
   navTitle: "React de zéro à expert",
@@ -31,11 +35,10 @@ export const reactCourseArea: CourseArea = {
     text: "text-brand-core",
     chip: "bg-brand-core/10 text-brand-core border-brand-core/20",
   },
-  phases: findCourse("react")?.phases ?? [],
   learnerTools: true,
 };
 
-export const svcCourseArea: CourseArea = {
+export const svcCourseArea: CourseAreaBase = {
   courseId: "svc",
   basePath: "/secure-vibe-coding",
   navTitle: "Secure Vibe Coding",
@@ -44,9 +47,18 @@ export const svcCourseArea: CourseArea = {
     text: "text-violet-400",
     chip: "bg-violet-500/10 text-violet-400 border-violet-500/20",
   },
-  phases: findCourse("svc")?.phases ?? [],
   learnerTools: false,
 };
+
+export function resolveCourseArea(
+  base: CourseAreaBase,
+  locale: Locale,
+): CourseArea {
+  return {
+    ...base,
+    phases: findCourse(base.courseId, locale)?.phases ?? [],
+  };
+}
 
 export const CourseAreaContext = createContext<CourseArea | null>(null);
 

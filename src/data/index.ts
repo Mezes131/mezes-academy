@@ -1,5 +1,6 @@
 import type { Course, CourseProgram, Phase, Module } from "@/types";
-import { courses } from "./courses";
+import type { Locale } from "@/i18n/types";
+import { courses, getCourses } from "./courses";
 
 /* ═══════════════════════════════════════════════════════════════════
    DATA-LAYER HELPERS
@@ -8,7 +9,7 @@ import { courses } from "./courses";
    legacy `phases` array) rather than touching course files directly.
    ═══════════════════════════════════════════════════════════════════ */
 
-export { courses };
+export { courses, getCourses };
 export { createCourseRepository } from "@/lib/courseRepository";
 export type { CourseRepository } from "@/lib/courseRepository";
 
@@ -28,8 +29,11 @@ export const allModules: Array<{ course: Course; phase: Phase; module: Module }>
     ),
   );
 
-export function findCourse(courseId: string): Course | undefined {
-  return courses.find((c) => c.id === courseId);
+export function findCourse(
+  courseId: string,
+  locale: Locale = "fr",
+): Course | undefined {
+  return getCourses(locale).find((c) => c.id === courseId);
 }
 
 export function findCourseProgram(courseId: string): CourseProgram | undefined {

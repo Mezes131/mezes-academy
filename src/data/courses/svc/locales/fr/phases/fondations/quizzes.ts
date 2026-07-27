@@ -46,7 +46,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q4",
-        question: "Quel piège évite-t-on en lisant réellement le diff généré ?",
+        question: "Quel piège évite-t-on en lisant réellement l'aperçu des changements générés ?",
         options: [
           { id: "a", label: "La confiance aveugle" },
           { id: "b", label: "Les timeouts réseau" },
@@ -55,11 +55,11 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["a"],
         explanation:
-          "Accepter sans lire, c'est déléguer la responsabilité à une boîte noire. Le diff est ton premier filet.",
+          "Accepter sans lire, c'est déléguer la responsabilité à une boîte noire. L'aperçu des changements est ton premier filet.",
       },
       {
         id: "q5",
-        question: "Pourquoi un prompt vague est-il dangereux ?",
+        question: "Pourquoi une demande floue (prompt vague) est-elle dangereuse ?",
         options: [
           { id: "a", label: "L'IA refuse de répondre" },
           { id: "b", label: "Elle invente des contraintes, sur-ingénierie ou oublie des exigences critiques" },
@@ -120,8 +120,8 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         id: "q4",
         question: "Pourquoi préférer des boucles courtes au « tunnel » ?",
         options: [
-          { id: "a", label: "Parce que Git n'accepte que de petits commits" },
-          { id: "b", label: "On détecte tôt les dérives ; un tunnel de 2000 lignes est presque inauditable" },
+          { id: "a", label: "Parce que Git n'accepte que de petits enregistrements" },
+          { id: "b", label: "On détecte tôt les dérives ; un tunnel de 2000 lignes est presque impossible à vérifier" },
           { id: "c", label: "L'IA facture moins" },
           { id: "d", label: "Les navigateurs limitent la taille des fichiers" },
         ],
@@ -134,7 +134,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         question: "Quel anti-pattern du tunnel faut-il éviter ?",
         options: [
           { id: "a", label: "Générer une grosse livraison d'un coup, auditer seulement à la fin" },
-          { id: "b", label: "Lire le diff après chaque génération" },
+          { id: "b", label: "Lire l'aperçu des changements après chaque génération" },
           { id: "c", label: "Écrire un brief avant de générer" },
           { id: "d", label: "Lancer un scan de secrets" },
         ],
@@ -155,32 +155,32 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         options: [
           { id: "a", label: "À décorer le README" },
           { id: "b", label: "À encadrer la génération (stack, conventions, interdits) avant qu'elle parte dans le décor" },
-          { id: "c", label: "À remplacer le lint" },
+          { id: "c", label: "À remplacer les contrôles automatiques de qualité" },
           { id: "d", label: "À désactiver Git" },
         ],
         correct: ["b"],
         explanation:
-          "Les règles projet (ex. fichiers d'instructions IDE) réduisent les hallucinations de stack et de style.",
+          "Les règles projet (ex. fichiers d'instructions dans l'éditeur) réduisent les erreurs de stack et de style.",
       },
       {
         id: "q2",
-        question: "Quel scanner est déterministe (pas une opinion d'IA) ?",
+        question: "Quel contrôle est déterministe (pas une opinion d'IA) ?",
         options: [
           { id: "a", label: "Un résumé ChatGPT du dépôt" },
-          { id: "b", label: "Un scan de secrets / lint / audit de dépendances" },
-          { id: "c", label: "Un like sur un commit" },
+          { id: "b", label: "Un scan de secrets / contrôle qualité / revue des dépendances" },
+          { id: "c", label: "Un like sur un enregistrement Git" },
           { id: "d", label: "Une capture d'écran" },
         ],
         correct: ["b"],
         explanation:
-          "Les scanners déterministes donnent des preuves reproductibles. Ils complètent (et ne remplacent pas) la revue humaine.",
+          "Les contrôles automatiques donnent des preuves reproductibles. Ils complètent (et ne remplacent pas) la revue humaine.",
       },
       {
         id: "q3",
         question: "Dans quel cas vaut-il mieux NE PAS laisser l'IA générer ?",
         options: [
-          { id: "a", label: "Un composant UI banal" },
-          { id: "b", label: "Crypto, auth maison fragile, logique métier critique non spécifiée" },
+          { id: "a", label: "Un composant d'interface banal" },
+          { id: "b", label: "Crypto, connexion maison fragile, logique métier critique non spécifiée" },
           { id: "c", label: "Un fichier README" },
           { id: "d", label: "Du CSS de mise en page" },
         ],
@@ -190,16 +190,16 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q4",
-        question: "Pourquoi combiner assistant IDE et scanners ?",
+        question: "Pourquoi combiner assistant dans l'éditeur et contrôles automatiques ?",
         options: [
           { id: "a", label: "Parce que l'un écrit vite et l'autre vérifie sans opinion" },
-          { id: "b", label: "Parce que les scanners génèrent le code" },
+          { id: "b", label: "Parce que les contrôles génèrent le code" },
           { id: "c", label: "Ce n'est jamais utile" },
           { id: "d", label: "Pour remplacer les tests" },
         ],
         correct: ["a"],
         explanation:
-          "Vitesse (IA) + filet déterministe (lint, secrets, deps) + revue humaine = cycle Prompt → Audit → Ship.",
+          "Vitesse (IA) + filet automatique (qualité, secrets, dépendances) + revue humaine = cycle Prompt → Audit → Ship.",
       },
       {
         id: "q5",

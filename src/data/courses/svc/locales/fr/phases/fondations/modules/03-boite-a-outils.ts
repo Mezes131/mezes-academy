@@ -6,32 +6,32 @@ export const fondationsModule03: Module = {
   id: "svc-fondations-m03",
   index: "03",
   title: "La boîte à outils du vibe coder",
-  subtitle: "Assistants, règles projet et scanners déterministes",
+  subtitle: "Assistants, règles projet et contrôles automatiques",
   duration: "35 min",
   difficulty: "beginner",
   objectives: [
     "Choisir le bon outil IA selon la tâche",
-    "Configurer des règles projet et des scanners",
+    "Configurer des règles projet et des contrôles automatiques",
     "Savoir quand NE PAS utiliser l'IA",
   ],
   content: [
     { kind: "title", text: "Assistants, agents, revue assistée" },
     {
       kind: "paragraph",
-      html: "Pour une ligne : autocomplete. Pour une feature cadrée : assistant IDE avec règles projet. Pour un chantier multi-fichiers : agent, mais sous brief strict et avec revue obligatoire. La « revue assistée » (l'IA commente ton diff) aide ; elle ne remplace pas ton jugement sur la sécu et le métier.",
+      html: "Pour une ligne : suggestion pendant que tu tapes. Pour une fonctionnalité cadrée : assistant dans l'éditeur avec règles projet. Pour un chantier multi-fichiers : agent, mais sous brief strict et avec revue obligatoire. La « revue assistée » (l'IA commente tes changements) aide ; elle ne remplace pas ton jugement sur la sécurité et le métier.",
     },
 
-    { kind: "title", text: "Règles projet et scanners" },
+    { kind: "title", text: "Règles projet et contrôles automatiques" },
     {
       kind: "paragraph",
-      html: "Les <strong>règles projet</strong> disent à l'assistant quelle stack tu utilises, quels patterns sont interdits, où vivent les secrets. Les <strong>scanners déterministes</strong> (lint, scan de secrets, audit de dépendances, Lighthouse) produisent des preuves reproductibles. Ensemble, ils forment le filet de la phase Audit, avant même les checklists métier des phases 8 et 9.",
+      html: "Les <strong>règles projet</strong> disent à l'assistant quelle stack tu utilises, quels motifs sont interdits, où vivent les secrets. Les <strong>contrôles automatiques</strong> (qualité du code, scan de secrets, revue des dépendances, Lighthouse) produisent des preuves reproductibles. Ensemble, ils forment le filet de la phase Audit, avant même les listes métier des phases 8 et 9.",
     },
     {
       kind: "info",
       box: {
         variant: "concept",
-        title: "<i class='fa-solid fa-robot'></i> IA + déterministe",
-        body: "L'IA propose vite. Le scanner tranche sans opinion. Toi tu arbitres les faux positifs et le risque métier.",
+        title: "<i class='fa-solid fa-robot'></i> IA + contrôle automatique",
+        body: "L'IA propose vite. L'outil automatique tranche sans opinion. Toi tu arbitres les fausses alertes et le risque métier.",
       },
     },
 

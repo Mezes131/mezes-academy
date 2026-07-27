@@ -22,6 +22,10 @@ export const messagesFr = {
   translation: {
     inProgress: "Traduction en cours",
   },
-} as const;
+};
 
-export type MessageTree = typeof messagesFr;
+type DeepString<T> = {
+  [K in keyof T]: T[K] extends string ? string : DeepString<T[K]>;
+};
+
+export type MessageTree = DeepString<typeof messagesFr>;

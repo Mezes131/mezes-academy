@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { svcCourse } from "@/data/courses/svc";
+import { buildSvcCourse } from "@/data/courses/svc";
 import { CourseSyllabus } from "@/components/course/CourseSyllabus";
 import { Button } from "@/components/ui/Button";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 /**
  * Secure Vibe Coding course page: presents the full program (syllabus,
@@ -10,7 +11,8 @@ import { Button } from "@/components/ui/Button";
  * learning area; lesson routes are auth-gated.
  */
 export function SvcCoursePage() {
-  const { meta, program, phases } = svcCourse;
+  const { locale } = useLocale();
+  const { meta, program, phases } = buildSvcCourse(locale);
   const moduleCount = phases.reduce((sum, phase) => sum + phase.modules.length, 0);
 
   return (

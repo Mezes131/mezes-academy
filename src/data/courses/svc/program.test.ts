@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { svcCourse } from "./index";
+import { svcCourse, buildSvcCourse } from "./index";
 import { svcProgram } from "./program";
 
 describe("svcProgram", () => {
@@ -84,6 +84,19 @@ describe("svcCourse phases", () => {
         expect(exercise.format).toBe("audit");
         expect(exercise.id.startsWith("svc-fondations-ex-")).toBe(true);
       }
+    }
+  });
+
+  it("EN authored phases share the same ids as FR", () => {
+    const fr = buildSvcCourse("fr");
+    const en = buildSvcCourse("en");
+    for (const id of ["svc-bases", "svc-fondations"]) {
+      const frPhase = fr.phases.find((p) => p.id === id)!;
+      const enPhase = en.phases.find((p) => p.id === id)!;
+      expect(enPhase.title).not.toBe(frPhase.title);
+      expect(enPhase.modules.map((m) => m.id)).toEqual(
+        frPhase.modules.map((m) => m.id),
+      );
     }
   });
 });
