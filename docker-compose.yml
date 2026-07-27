@@ -27,8 +27,13 @@ services:
       APP_KEYS: ${STRAPI_APP_KEYS:?STRAPI_APP_KEYS is required}
       API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT:?STRAPI_API_TOKEN_SALT is required}
       JWT_SECRET: ${STRAPI_JWT_SECRET:?STRAPI_JWT_SECRET is required}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET:?STRAPI_ADMIN_JWT_SECRET is required}
+      TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT:?STRAPI_TRANSFER_TOKEN_SALT is required}
+      ENCRYPTION_KEY: ${STRAPI_ENCRYPTION_KEY:?STRAPI_ENCRYPTION_KEY is required}
     ports:
       - "1337:1337"
+    # Image may lack public/uploads (.dockerignore); create it before start — no rebuild needed
+    command: ["sh", "-c", "mkdir -p /app/public/uploads && npm run start"]
     depends_on:
       postgres:
         condition: service_healthy
@@ -62,11 +67,17 @@ services:
     environment:
       STRAPI_URL: http://strapi:1337
       STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:?STRAPI_API_TOKEN is required}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      PORT: "8090"
+    ports:
+      - "8090:8090"
     depends_on:
       strapi:
         condition: service_started
     networks:
       - public
+    # Worker must not join the internal postgres network
 
 volumes:
   strapi-db:

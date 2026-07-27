@@ -1,0 +1,8 @@
+node_modules
+dist
+.cache
+.tmp
+.env*
+*.db
+database/migrations/*.js
+public/uploads

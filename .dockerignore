@@ -6,6 +6,10 @@ dist-ssr
 .env*
 *.local
 
+# Nested services — web image must not ship these (were ~200MB+ of context)
+strapi
+worker
+
 # Dev tooling not needed in the image
 .vscode
 .idea
@@ -15,11 +19,11 @@ design-system
 supabase
 .superpowers
 .claude
+scripts
+*.log
+build-strapi.log
 
 # Docker meta-files (not needed inside the image)
 docker-compose.yml
 Dockerfile
 .dockerignore
-
-# Logs
-*.log

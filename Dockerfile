@@ -3,7 +3,10 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+# ponytail: retries/timeouts because the Sandpack deps are large and the registry
+# connection resets mid-download; upgrade path is a local registry mirror.
+RUN npm ci --fetch-retries=8 --fetch-retry-mintimeout=20000 \
+      --fetch-retry-maxtimeout=180000 --fetch-timeout=900000
 
 COPY . .
 
