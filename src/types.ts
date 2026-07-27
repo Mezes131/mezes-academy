@@ -340,6 +340,18 @@ export interface ExerciseProgress {
   revealedSolution: boolean;
   solvedAt?: number;
   updatedAt: number;
+  /** Persisted audit checklist answers (like quiz.answers). */
+  auditSubmission?: {
+    selectedIds: string[];
+    severities: Record<string, AuditSeverity | undefined>;
+    evidence: Record<string, string | undefined>;
+    score: number;
+    passed: boolean;
+    tp: number;
+    fp: number;
+    fn: number;
+    failures: string[];
+  };
 }
 
 export interface ChallengeScore {

@@ -316,6 +316,11 @@ interface ProgressContextValue {
   markExerciseSolved: (exerciseId: string) => void;
   /** Called when the learner clicks "Reveal solution". */
   revealExerciseSolution: (exerciseId: string) => void;
+  /** Persist audit checklist answers (quiz-like restore). */
+  saveAuditSubmission: (
+    exerciseId: string,
+    submission: NonNullable<ExerciseProgress["auditSubmission"]>,
+  ) => void;
   /** Called each time an additional hint is unveiled. */
   recordExerciseHint: (exerciseId: string, hintIndex: number) => void;
   /** Resets a single exercise's progress (debug / restart). */
@@ -685,6 +690,24 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const saveAuditSubmission = useCallback(
+    (
+      exerciseId: string,
+      submission: NonNullable<ExerciseProgress["auditSubmission"]>,
+    ) => {
+      setProgress((p) => {
+        const prev = touch(p.exerciseProgress[exerciseId]);
+        const next: ExerciseProgress = {
+          ...prev,
+          auditSubmission: submission,
+          updatedAt: Date.now(),
+        };
+        return syncCompletedExercises(p, exerciseId, next);
+      });
+    },
+    [],
+  );
+
   const recordExerciseHint = useCallback(
     (exerciseId: string, hintIndex: number) => {
       setProgress((p) => {
@@ -850,6 +873,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
+      saveAuditSubmission,
       recordExerciseHint,
       resetExercise,
       getExerciseStatus,
@@ -874,6 +898,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
+      saveAuditSubmission,
       recordExerciseHint,
       resetExercise,
       getExerciseStatus,
