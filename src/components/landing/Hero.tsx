@@ -45,6 +45,16 @@ export function Hero({ hasProgress }: HeroProps) {
               <ArrowRight size={16} />
             </Button>
           </Link>
+          <Link to="/secure-vibe-coding">
+            <Button
+              variant="ghost"
+              size="md"
+              className="border border-violet-500/40 text-slate-50 dark:text-fg hover:text-slate-950 dark:hover:text-fg3"
+            >
+              <i className="fa-solid fa-shield-halved text-violet-400" />
+              Découvrir Secure Vibe Coding
+            </Button>
+          </Link>
           <a href="#catalog">
             <Button variant="ghost" className="border border-slate dark:border-base text-slate-50 dark:text-fg hover:text-slate-950 dark:hover:text-fg3">Voir le catalogue</Button>
           </a>

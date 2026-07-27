@@ -14,6 +14,5 @@ export const svcMeta: CourseMeta = {
   tags: ["Prompt → Audit → Ship", "Sécurité", "Paiements", "Déploiement"],
   level: "Intermédiaire",
   duration: "≈16–20 semaines",
-  status: "soon",
-  eta: "",
+  status: "active",
 };

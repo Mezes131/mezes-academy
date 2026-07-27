@@ -85,15 +85,22 @@ function FinalCta() {
           Prêt à commencer ?
         </h3>
         <p className="mt-3 text-fg-2 max-w-xl mx-auto">
-          Le parcours React est disponible dès maintenant. Aucune inscription,
-          ta progression est conservée dans ton navigateur.
+          Les parcours React et Secure Vibe Coding sont disponibles dès
+          maintenant. Aucune inscription, ta progression est conservée dans ton
+          navigateur.
         </p>
-        <div className="mt-7 inline-flex items-center gap-2">
+        <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
           <Link to="/react">
             <Button>
               <i className="fa-solid fa-atom" />
               Ouvrir le parcours React
               <ArrowRight size={14} />
+            </Button>
+          </Link>
+          <Link to="/secure-vibe-coding">
+            <Button variant="ghost" className="border border-violet-500/40">
+              <i className="fa-solid fa-shield-halved text-violet-400" />
+              Découvrir Secure Vibe Coding
             </Button>
           </Link>
         </div>

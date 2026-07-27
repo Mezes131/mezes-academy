@@ -10,6 +10,7 @@ import { LandingPage } from "@/pages/LandingPage";
 import { AuthPage } from "@/pages/AuthPage";
 import { AccountPage } from "@/pages/account/AccountPage";
 import { ReactCoursePage } from "@/pages/ReactCoursePage";
+import { SvcCoursePage } from "@/pages/SvcCoursePage";
 import { PhasePage } from "@/pages/PhasePage";
 import { PhaseChallengePage } from "@/pages/PhaseChallengePage";
 import { ModulePage } from "@/pages/ModulePage";
@@ -59,6 +60,16 @@ export default function App() {
                       <AccountPage />
                     </LandingLayout>
                   </RequireAuth>
+                }
+              />
+
+              {/* Secure Vibe Coding course overview (public syllabus) */}
+              <Route
+                path="/secure-vibe-coding"
+                element={
+                  <LandingLayout>
+                    <SvcCoursePage />
+                  </LandingLayout>
                 }
               />
 

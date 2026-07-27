@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { catalog, type CatalogCourse } from "@/data/catalog";
+import { academyStats, catalog, type CatalogCourse } from "@/data/catalog";
 import { cn } from "@/lib/utils";
 
 /**
@@ -17,7 +17,7 @@ export function Catalog() {
             <i className="fa-solid fa-layer-group mr-1.5" /> Catalogue
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            Un parcours actif,{" "}
+            {academyStats.coursesActive} parcours actifs,{" "}
             <span className="text-fg-2">plusieurs en préparation.</span>
           </h2>
           <p className="mt-3 text-fg-2 max-w-xl">
