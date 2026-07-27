@@ -52,7 +52,7 @@ export const fondationsModule02: Module = {
     },
     {
       kind: "paragraph",
-      html: "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later (phases 8 to 12), audit evidence becomes more formal (automatic tools, scores, procedures).",
+      html: "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later, audit evidence becomes more formal (automatic tools, scores, procedures).",
     },
   ],
   quiz: fondationsQuizzes.m02,

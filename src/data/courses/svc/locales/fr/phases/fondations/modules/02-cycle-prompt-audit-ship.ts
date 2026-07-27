@@ -52,7 +52,7 @@ export const fondationsModule02: Module = {
     },
     {
       kind: "paragraph",
-      html: "L'exercice ci-dessous te fait distinguer les étapes saines d'un formulaire de contact des réflexes tunnel. Plus loin (phases 8 a 12), les preuves d'audit deviennent plus formelles (outils automatiques, scores, procédures).",
+      html: "L'exercice ci-dessous te fait distinguer les étapes saines d'un formulaire de contact des réflexes tunnel. Plus loin, les preuves d'audit deviennent plus formelles (outils automatiques, scores, procédures).",
     },
   ],
   quiz: fondationsQuizzes.m02,
