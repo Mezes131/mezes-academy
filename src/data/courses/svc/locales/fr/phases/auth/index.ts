@@ -1,0 +1,30 @@
+import type { Phase } from "@/types";
+import { authModule01 } from "./modules/01-modeles-auth";
+import { authModule02 } from "./modules/02-brancher-provider";
+import { authModule03 } from "./modules/03-autorisation";
+import { authModule04 } from "./modules/04-parcours-sensibles";
+
+/** Phase 4 : authored content (replaces the program-derived scaffold). */
+export const authPhase: Phase = {
+  id: "svc-auth",
+  slug: "auth",
+  courseId: "svc",
+  color: "eco",
+  icon: "fa-user-lock",
+  label: "Phase 4",
+  title: "Auth & identité",
+  summary:
+    "Brancher un vrai provider de connexion : ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
+  metaTags: ["produit", "lecture ~3h", "audits interactifs", "auth"],
+  modules: [authModule01, authModule02, authModule03, authModule04],
+  project: {
+    title: "Projet P4 : Auth tiers + zone admin",
+    deliverable:
+      "Checklist auth + zone admin validée (exercice Projet P4 du module 04) : provider tiers, protections serveur, politique d'accès. L'intégration réelle se fait sur le dépôt capstone.",
+    assessment: [
+      "Provider de connexion de bout en bout (hors plateforme : sur ton dépôt)",
+      "Zone admin réellement protégée côté serveur",
+      "Politique d'accès écrite et cohérente",
+    ],
+  },
+};

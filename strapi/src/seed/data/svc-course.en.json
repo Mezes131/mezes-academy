@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-07-27T15:20:24.052Z",
+  "exportedAt": "2026-07-27T15:39:36.191Z",
   "locale": "en",
   "course": {
     "legacyId": "svc",
@@ -4390,489 +4390,1310 @@
       {
         "legacyId": "svc-auth",
         "slug": "auth",
-        "title": "Auth & identité",
+        "title": "Auth & identity",
         "label": "Phase 4",
-        "summary": "Brancher un vrai provider d'authentification : ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
+        "summary": "Wire a real sign-in provider: never reinvent auth. From here, phase projects feed the capstone product.",
         "order": 4,
         "color": "eco",
         "icon": "fa-user-lock",
         "metaTags": [
-          "4 modules"
+          "product",
+          "~3h read",
+          "interactive audits",
+          "auth"
         ],
         "objectives": [],
         "prerequisites": [],
-        "scaffoldOnly": true,
-        "projectTitle": "Projet P4 : Auth tiers + zone admin",
-        "projectDeliverable": "Le produit capstone avec auth via provider tiers, zone admin protégée et politique d'accès documentée.",
+        "scaffoldOnly": false,
+        "projectTitle": "P4 project: Third-party auth + admin zone",
+        "projectDeliverable": "Auth checklist + validated admin zone (P4 project exercise in module 04): third-party provider, server protections, access policy. Real integration happens on the capstone repo.",
         "projectAssessment": [
-          "Auth provider fonctionnelle de bout en bout",
-          "Zone admin réellement protégée côté serveur",
-          "Politique d'accès écrite et cohérente avec le code"
+          "End-to-end sign-in provider (off-platform: on your repo)",
+          "Admin zone protected on the server",
+          "Written, consistent access policy"
         ],
         "modules": [
           {
             "legacyId": "svc-auth-m01",
             "moduleId": "svc-auth-m01",
             "index": "01",
-            "title": "Modèles d'auth modernes",
-            "subtitle": "Sessions, JWT, magic link, OAuth : choisir en connaissance",
+            "title": "Modern authentication models",
+            "subtitle": "Sessions, JWT, magic link, OAuth: choose with intent",
             "duration": "35 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Comparer sessions, JWT, magic link et OAuth",
-              "Choisir un modèle selon le cas produit",
-              "Repérer les erreurs classiques du code d'auth généré"
+              "Compare sessions, JWT, magic link, and OAuth",
+              "Pick a model that fits the product case",
+              "Spot classic mistakes in generated auth code"
             ],
             "prerequisites": [],
-            "openByDefault": false,
+            "openByDefault": true,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-auth-m01-l1",
-                    "title": "Panorama des modèles",
-                    "desc": "Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs.",
-                    "objectives": [
-                      "Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs."
-                    ],
-                    "outline": {
-                      "context": "Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs.",
-                      "concepts": [
-                        "sessions",
-                        "JWT",
-                        "magic link",
-                        "OAuth"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Panorama des modèles.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "sessions",
-                        "JWT",
-                        "magic link",
-                        "OAuth"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-auth-m01-l2",
-                    "title": "Erreurs du code généré",
-                    "desc": "Identifier les failles typiques de l'auth écrite par l'IA.",
-                    "objectives": [
-                      "Identifier les failles typiques de l'auth écrite par l'IA."
-                    ],
-                    "outline": {
-                      "context": "Identifier les failles typiques de l'auth écrite par l'IA.",
-                      "concepts": [
-                        "stockage de tokens",
-                        "expiration",
-                        "auth maison fragile"
-                      ],
-                      "pitfalls": [
-                        "JWT en localStorage sans réflexion",
-                        "auth maison au lieu d'un provider"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Erreurs du code généré.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "stockage de tokens",
-                        "expiration",
-                        "auth maison fragile"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Model overview"
+              },
+              {
+                "kind": "paragraph",
+                "html": "<strong>Authentication</strong> (auth) = proving who you are. Four common families: <strong>session</strong> (the server remembers you), <strong>JWT</strong> (JSON Web Token: a signed token, often sent with each request), <strong>magic link</strong> (sign-in by email), <strong>OAuth</strong> (sign-in via an existing account: Google, Microsoft…)."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-scale-balanced'></i> No single winner",
+                  "body": "B2B SaaS → often enterprise OAuth. Consumer app → low friction (magic link / provider). Internal tool → lean on the directory you already have. The product drives the choice."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Generated code mistakes"
+              },
+              {
+                "kind": "paragraph",
+                "html": "AI often proposes quick <strong>homegrown auth</strong>: poorly hashed passwords, a <strong>JWT</strong> stuck in <strong>browser storage (localStorage)</strong> with no clear expiration, fragile reset flows. In production, prefer a proven <strong>third-party provider</strong>, then audit the integration."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-ban'></i> <strong>Phase rule</strong>: never reinvent auth. Wire a provider, frame it, verify it, Ship."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "sessions",
-                  "JWT",
-                  "magic link",
-                  "OAuth",
-                  "stockage de tokens",
-                  "expiration",
-                  "auth maison fragile"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Choisir un modèle pour trois cas",
-                  "kind": "synthesis",
-                  "brief": "Choisir et justifier un modèle d'auth pour trois cas produit différents (SaaS B2B, app grand public, outil interne)."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-auth-m01-lesson",
-              "title": "Modèles d'auth modernes",
-              "desc": "Sessions, JWT, magic link, OAuth : choisir en connaissance",
+              "title": "Modern authentication models",
+              "desc": "Sessions, JWT, magic link, OAuth: choose with intent",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Panorama des modèles</strong> : Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs.</li><li><strong>Erreurs du code généré</strong> : Identifier les failles typiques de l'auth écrite par l'IA.</li></ul>"
+                  "body": "<h2>Model overview</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<strong>Authentication</strong> (auth) = proving who you are. Four common families: <strong>session</strong> (the server remembers you), <strong>JWT</strong> (JSON Web Token: a signed token, often sent with each request), <strong>magic link</strong> (sign-in by email), <strong>OAuth</strong> (sign-in via an existing account: Google, Microsoft…)."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-scale-balanced'></i> No single winner",
+                  "body": "B2B SaaS → often enterprise OAuth. Consumer app → low friction (magic link / provider). Internal tool → lean on the directory you already have. The product drives the choice."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Generated code mistakes</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "AI often proposes quick <strong>homegrown auth</strong>: poorly hashed passwords, a <strong>JWT</strong> stuck in <strong>browser storage (localStorage)</strong> with no clear expiration, fragile reset flows. In production, prefer a proven <strong>third-party provider</strong>, then audit the integration."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-ban'></i> <strong>Phase rule</strong>: never reinvent auth. Wire a provider, frame it, verify it, Ship.</em></p>"
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-auth-quiz-m01",
+              "title": "Auth models: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-auth-quiz-m01-q1",
+                  "prompt": "Why avoid rolling your own authentication in production?",
+                  "type": "single",
+                  "explanation": "AI often generates auth that looks plausible but is fragile. A mature third-party service plus your audit is safer.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q1-a",
+                      "label": "Because it is illegal everywhere",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q1-b",
+                      "label": "Details (hashing, sessions, reset…) are easy to get wrong; a proven provider lowers risk",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q1-c",
+                      "label": "Because React forbids it",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q1-d",
+                      "label": "Because Git refuses passwords",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m01-q2",
+                  "prompt": "A JWT is mainly…",
+                  "type": "single",
+                  "explanation": "The danger is not JWT itself: it is putting it anywhere with no expiration and no thought.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q2-a",
+                      "label": "A signed token you can verify; where you store it and when it expires matter a lot",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q2-b",
+                      "label": "A CSS file",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q2-c",
+                      "label": "A database",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q2-d",
+                      "label": "A hosting provider",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m01-q3",
+                  "prompt": "A magic link is…",
+                  "type": "single",
+                  "explanation": "Useful to reduce friction. The link should be single-use or tightly limited and short-lived.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q3-a",
+                      "label": "Signing in via a link sent by email, often with no password",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q3-b",
+                      "label": "A CSS spell",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q3-c",
+                      "label": "A Stripe key",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q3-d",
+                      "label": "A Git commit",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m01-q4",
+                  "prompt": "OAuth / sign-in with an existing account is mainly for…",
+                  "type": "single",
+                  "explanation": "Common in B2B (work accounts) and consumer apps.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q4-a",
+                      "label": "Letting users sign in with Google, Microsoft, and similar providers",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q4-b",
+                      "label": "Replacing HTTPS",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q4-c",
+                      "label": "Removing the database",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q4-d",
+                      "label": "Disabling tests",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m01-q5",
+                  "prompt": "What is a classic trap in AI-generated auth code?",
+                  "type": "single",
+                  "explanation": "AI often picks the shortest path, not the safest one.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q5-a",
+                      "label": "JWT in localStorage with no thought, or fragile homegrown auth",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q5-b",
+                      "label": "Using HTTPS",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q5-c",
+                      "label": "Checking the session on the server",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m01-q5-d",
+                      "label": "Choosing a third-party provider",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-auth-ex-m01-1",
+                "title": "Pick a model for three cases",
+                "instructions": "Check only fair statements. Ignore dangerous shortcuts the AI might suggest.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "An internal team tool does not need the same model as a consumer app.",
+                  "Homegrown auth is almost always a trap."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p><strong>Case A:</strong> B2B SaaS: many accounts per org, often Google Workspace.</p>\n<p><strong>Case B:</strong> Consumer mobile-first app: fast sign-up, low friction.</p>\n<p><strong>Case C:</strong> Internal tool for a 20-person SME already on Microsoft 365.</p>\n<p>An AI prompt suggests for all three: « Homegrown auth with JWT in localStorage is simpler. »</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Case A: OAuth / sign-in with an existing account (Google, etc.) + org roles is a good fit",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Case B: magic link (email) or a third-party provider can reduce friction",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Case C: lean on the identity provider already in use (e.g. Microsoft) instead of homegrown auth",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Homegrown auth + JWT in browser storage for all three cases = anti-pattern",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Putting JWT in localStorage without thought is always best",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Reinventing password hashing « to learn » in production is fine",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Match the model to the case (OAuth for B2B, magic link / provider for consumer, existing IdP internally). Homegrown + browser JWT for everything = no.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-auth-m02",
             "moduleId": "svc-auth-m02",
             "index": "02",
-            "title": "Brancher un provider",
-            "subtitle": "Clerk / Auth.js / Supabase Auth : un parcours guidé + variantes",
+            "title": "Wire a provider",
+            "subtitle": "Clerk / Auth.js / Supabase Auth: guided flow and variants",
             "duration": "50 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Intégrer un provider d'auth de bout en bout",
-              "Comprendre le flow sign-up → session",
-              "Distinguer intégration SDK et vérification serveur"
+              "Understand an end-to-end provider flow",
+              "Follow sign-up → session",
+              "Separate the client SDK from server verification"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-auth-m02-l1",
-                    "title": "Parcours guidé provider",
-                    "desc": "Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js).",
-                    "objectives": [
-                      "Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js)."
-                    ],
-                    "outline": {
-                      "context": "Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js).",
-                      "concepts": [
-                        "provider d'auth",
-                        "sign-up",
-                        "session"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Parcours guidé provider.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "provider d'auth",
-                        "sign-up",
-                        "session"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-auth-m02-l2",
-                    "title": "SDK vs serveur",
-                    "desc": "Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur.",
-                    "objectives": [
-                      "Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur."
-                    ],
-                    "outline": {
-                      "context": "Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur.",
-                      "concepts": [
-                        "SDK client",
-                        "vérification serveur",
-                        "tokens"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : SDK vs serveur.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "SDK client",
-                        "vérification serveur",
-                        "tokens"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Guided flow"
+              },
+              {
+                "kind": "paragraph",
+                "html": "A <strong>provider</strong> (e.g. Supabase Auth, Clerk, Auth.js) handles sign-up, sign-in, and sessions. You configure the project with them, wire the <strong>SDK</strong> (library) into your app, and test the flow: create an account → sign in → stay recognized."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-route'></i> On this platform",
+                  "body": "You do not install the provider here. You learn the mental model and validate reflexes through audits. Real integration happens on your capstone repo."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "SDK vs server"
+              },
+              {
+                "kind": "paragraph",
+                "html": "The client SDK helps the interface (forms, « signed in » state). For any sensitive action (data, admin, payment), the <strong>server</strong> must verify the session or token. Hiding a button is not protection."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-server'></i> <strong>Reflex</strong>: provider secrets stay out of the browser; every sensitive API re-validates identity."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "provider d'auth",
-                  "sign-up",
-                  "session",
-                  "SDK client",
-                  "vérification serveur",
-                  "tokens"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Flow sign-up → session",
-                  "kind": "guided",
-                  "brief": "Implémenter le flow complet sign-up → login → session sur une app starter avec un provider tiers."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-auth-m02-lesson",
-              "title": "Brancher un provider",
-              "desc": "Clerk / Auth.js / Supabase Auth : un parcours guidé + variantes",
+              "title": "Wire a provider",
+              "desc": "Clerk / Auth.js / Supabase Auth: guided flow and variants",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Parcours guidé provider</strong> : Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js).</li><li><strong>SDK vs serveur</strong> : Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur.</li></ul>"
+                  "body": "<h2>Guided flow</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "A <strong>provider</strong> (e.g. Supabase Auth, Clerk, Auth.js) handles sign-up, sign-in, and sessions. You configure the project with them, wire the <strong>SDK</strong> (library) into your app, and test the flow: create an account → sign in → stay recognized."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-route'></i> On this platform",
+                  "body": "You do not install the provider here. You learn the mental model and validate reflexes through audits. Real integration happens on your capstone repo."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>SDK vs server</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "The client SDK helps the interface (forms, « signed in » state). For any sensitive action (data, admin, payment), the <strong>server</strong> must verify the session or token. Hiding a button is not protection."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-server'></i> <strong>Reflex</strong>: provider secrets stay out of the browser; every sensitive API re-validates identity.</em></p>"
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-auth-quiz-m02",
+              "title": "Wire a provider: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-auth-quiz-m02-q1",
+                  "prompt": "In sign-up → session, who has the final say on « is this user signed in? » for a sensitive action?",
+                  "type": "single",
+                  "explanation": "The client displays. The server authorizes.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q1-a",
+                      "label": "The server (session / token verification)",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q1-b",
+                      "label": "CSS alone",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q1-c",
+                      "label": "localStorage alone",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q1-d",
+                      "label": "The README",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m02-q2",
+                  "prompt": "What is the client SDK from a provider mainly for?",
+                  "type": "single",
+                  "explanation": "UI comfort. Secrets and rights stay on the server.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q2-a",
+                      "label": "Forms and sign-in UI state",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q2-b",
+                      "label": "Replacing all server verification",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q2-c",
+                      "label": "Storing secret keys in the browser",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q2-d",
+                      "label": "Disabling HTTPS",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m02-q3",
+                  "prompt": "Hiding the Admin menu when !user…",
+                  "type": "single",
+                  "explanation": "The UI is not a trust boundary.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q3-a",
+                      "label": "Is enough to protect /api/admin",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q3-b",
+                      "label": "Does not stop calling the API directly if it is not protected",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q3-c",
+                      "label": "Replaces roles",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q3-d",
+                      "label": "Is forbidden in React",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m02-q4",
+                  "prompt": "Where do provider secret keys belong?",
+                  "type": "single",
+                  "explanation": "Same as the architecture phase: nothing secret in the browser bundle.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q4-a",
+                      "label": "Server-side / host environment variables",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q4-b",
+                      "label": "In CSS",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q4-c",
+                      "label": "Hard-coded in a public React component",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q4-d",
+                      "label": "In the site URL",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m02-q5",
+                  "prompt": "Clerk, Auth.js, Supabase Auth…",
+                  "type": "single",
+                  "explanation": "Pick a provider, frame the integration, audit it.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q5-a",
+                      "label": "Are examples of third-party auth providers / stacks to prefer over homegrown auth",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q5-b",
+                      "label": "Are SQL databases",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q5-c",
+                      "label": "Replace the need for an audit",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m02-q5-d",
+                      "label": "Forbid roles",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-auth-ex-m02-1",
+                "title": "Client SDK vs server checks",
+                "instructions": "You are wiring a sign-in provider. Check what is true for a healthy integration.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "The browser can lie. The server decides who is signed in for sensitive actions.",
+                  "The client SDK helps the UI; it does not replace server checks."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Flow: sign-up → sign-in → session. Provider: Supabase Auth (Clerk / Auth.js variants are similar).</p>\n<p>A junior shipped: « if (user) showAdmin » only in React, with no check on <code>GET /api/admin/users</code>.</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "The client SDK may handle forms and display state",
+                      "correct": true,
+                      "minSeverity": "low"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Every sensitive API route must verify the session / token on the server",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Hiding an admin button in the UI does not protect the API",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Provider secrets stay out of the browser package",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "If the SDK says the user is signed in, the API can trust that without checking",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Paste the provider secret key into the front « to go faster »",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>SDK = UI comfort. Server = truth for rights. Secrets out of the browser. Hiding a button ≠ securing a route.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-auth-m03",
             "moduleId": "svc-auth-m03",
             "index": "03",
-            "title": "Autorisation réelle",
-            "subtitle": "Rôles, RLS, IDOR : protéger côté serveur",
+            "title": "Real authorization",
+            "subtitle": "Roles, database rules, IDOR: protect on the server",
             "duration": "50 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Modéliser rôles et permissions",
-              "Écrire des policies RLS",
-              "Détecter et corriger un IDOR"
+              "Model roles and permissions",
+              "Understand database access rules (RLS / policies)",
+              "Detect and fix an IDOR"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-auth-m03-l1",
-                    "title": "Rôles et policies",
-                    "desc": "Structurer l'autorisation avec rôles et RLS/policies.",
-                    "objectives": [
-                      "Structurer l'autorisation avec rôles et RLS/policies."
-                    ],
-                    "outline": {
-                      "context": "Structurer l'autorisation avec rôles et RLS/policies.",
-                      "concepts": [
-                        "rôles",
-                        "RLS",
-                        "policies"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Rôles et policies.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "rôles",
-                        "RLS",
-                        "policies"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-auth-m03-l2",
-                    "title": "IDOR et protection serveur",
-                    "desc": "Comprendre l'IDOR et pourquoi le client ne suffit jamais.",
-                    "objectives": [
-                      "Comprendre l'IDOR et pourquoi le client ne suffit jamais."
-                    ],
-                    "outline": {
-                      "context": "Comprendre l'IDOR et pourquoi le client ne suffit jamais.",
-                      "concepts": [
-                        "IDOR",
-                        "contrôle d'accès serveur"
-                      ],
-                      "pitfalls": [
-                        "masquer un bouton au lieu de protéger la route",
-                        "id devinables sans contrôle"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : IDOR et protection serveur.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "IDOR",
-                        "contrôle d'accès serveur"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Roles and policies"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Being signed in ≠ being allowed to do everything. <strong>Authorization</strong> defines who can read / write what. You often model <strong>roles</strong> (member, admin…). <strong>Database access rules</strong> (<strong>RLS</strong>: row level security, or equivalent policies) limit which rows a user can see."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-user-shield'></i> Layers",
+                  "body": "API that checks the right + database rules = double safety net. AI often forgets one of the two."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "IDOR"
+              },
+              {
+                "kind": "paragraph",
+                "html": "An <strong>IDOR</strong> (insecure direct object reference) is reaching someone else's resource by changing the id in the URL or API (<code>/notes/101</code> → <code>/notes/102</code>) without the server checking ownership. Common, serious, and often present in generated code that « works »."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-bug'></i> <strong>Fix</strong>: server-side access control (and policies). Hiding a link or making an id « hard to guess » is not enough."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "rôles",
-                  "RLS",
-                  "policies",
-                  "IDOR",
-                  "contrôle d'accès serveur"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Casser puis réparer un IDOR",
-                  "kind": "audit",
-                  "brief": "Exploiter un IDOR sur une app volontairement vulnérable, puis le corriger côté serveur avec preuve."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-auth-m03-lesson",
-              "title": "Autorisation réelle",
-              "desc": "Rôles, RLS, IDOR : protéger côté serveur",
+              "title": "Real authorization",
+              "desc": "Roles, database rules, IDOR: protect on the server",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Rôles et policies</strong> : Structurer l'autorisation avec rôles et RLS/policies.</li><li><strong>IDOR et protection serveur</strong> : Comprendre l'IDOR et pourquoi le client ne suffit jamais.</li></ul>"
+                  "body": "<h2>Roles and policies</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Being signed in ≠ being allowed to do everything. <strong>Authorization</strong> defines who can read / write what. You often model <strong>roles</strong> (member, admin…). <strong>Database access rules</strong> (<strong>RLS</strong>: row level security, or equivalent policies) limit which rows a user can see."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-user-shield'></i> Layers",
+                  "body": "API that checks the right + database rules = double safety net. AI often forgets one of the two."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>IDOR</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "An <strong>IDOR</strong> (insecure direct object reference) is reaching someone else's resource by changing the id in the URL or API (<code>/notes/101</code> → <code>/notes/102</code>) without the server checking ownership. Common, serious, and often present in generated code that « works »."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-bug'></i> <strong>Fix</strong>: server-side access control (and policies). Hiding a link or making an id « hard to guess » is not enough.</em></p>"
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-auth-quiz-m03",
+              "title": "Authorization: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-auth-quiz-m03-q1",
+                  "prompt": "Authentication vs authorization?",
+                  "type": "single",
+                  "explanation": "Being signed in does not grant every right.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q1-a",
+                      "label": "Who are you? vs what are you allowed to do / see?",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q1-b",
+                      "label": "CSS vs HTML",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q1-c",
+                      "label": "Build vs preview",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q1-d",
+                      "label": "Git vs npm",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m03-q2",
+                  "prompt": "An IDOR (insecure direct object reference) is…",
+                  "type": "single",
+                  "explanation": "Classic as soon as numeric or predictable ids exist with no ownership check.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q2-a",
+                      "label": "Reaching someone else's resource by changing the id (URL / API) with no access check",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q2-b",
+                      "label": "A font family",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q2-c",
+                      "label": "A hosting provider",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q2-d",
+                      "label": "A unit test",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m03-q3",
+                  "prompt": "Database access rules (RLS / policies) are for…",
+                  "type": "single",
+                  "explanation": "RLS (row level security) is a useful safety net on top of API checks.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q3-a",
+                      "label": "Limiting which rows a role / user can read or write",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q3-b",
+                      "label": "Choosing theme colors",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q3-c",
+                      "label": "Replacing HTTPS",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q3-d",
+                      "label": "Generating magic JWTs",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m03-q4",
+                  "prompt": "Why is client-side access control never enough?",
+                  "type": "single",
+                  "explanation": "The trust boundary is the server (and database).",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q4-a",
+                      "label": "Because the client can be changed or bypassed",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q4-b",
+                      "label": "Because TypeScript forbids it",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q4-c",
+                      "label": "Because Git forces the server",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q4-d",
+                      "label": "Because providers refuse it",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m03-q5",
+                  "prompt": "« Hard to guess » ids with no access control…",
+                  "type": "single",
+                  "explanation": "Always verify the right to access that object.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q5-a",
+                      "label": "Replace real authorization",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q5-b",
+                      "label": "Are not enough: security through obscurity",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q5-c",
+                      "label": "Are required by OAuth",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m03-q5-d",
+                      "label": "Fix IDOR automatically",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-auth-ex-m03-1",
+                "title": "Break then fix an IDOR",
+                "instructions": "Read the scenario. Check fair findings about the flaw and the fixes.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "IDOR: by changing the id in the URL / API, you reach someone else's resource.",
+                  "The fix is server-side (and maybe database rules), not UI-only."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Notes app. Signed in as Alice. <code>GET /api/notes/101</code> returns note 101. Alice tries <code>GET /api/notes/102</code> (Bob's note): the server returns Bob's note without checking ownership.</p>\n<p>The UI hides the link to 102, but the API still answers.</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "This is an IDOR: access to someone else's resource via a manipulated id",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "The server must verify the signed-in user is allowed to access that note",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Hiding the link in the UI is not enough",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Database access rules (RLS / policies) or an equivalent check help block the leak",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "The issue is only a font size that is too small",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "If ids are « hard to guess », you can skip access control",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>IDOR = missing object-level authorization. Fix on the server (and policies if needed). UI and obscure ids do not protect you.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-auth-m04",
             "moduleId": "svc-auth-m04",
             "index": "04",
-            "title": "Parcours sensibles",
-            "subtitle": "Reset password, vérification email, sessions multi-device",
+            "title": "Sensitive flows",
+            "subtitle": "Reset, email verification, multi-device sessions, production checklist",
             "duration": "40 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Sécuriser reset password et vérification email",
-              "Gérer sessions multi-device et révocation",
-              "Construire une checklist auth prod"
+              "Secure reset and email verification",
+              "Handle multi-device sessions and revocation",
+              "Validate an auth checklist before production"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-auth-m04-l1",
-                    "title": "Reset et vérification email",
-                    "desc": "Implémenter des parcours sensibles sans failles classiques.",
-                    "objectives": [
-                      "Implémenter des parcours sensibles sans failles classiques."
-                    ],
-                    "outline": {
-                      "context": "Implémenter des parcours sensibles sans failles classiques.",
-                      "concepts": [
-                        "reset password",
-                        "vérification email",
-                        "tokens à usage unique"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Reset et vérification email.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "reset password",
-                        "vérification email",
-                        "tokens à usage unique"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-auth-m04-l2",
-                    "title": "Sessions et révocation",
-                    "desc": "Gérer multi-device, déconnexion et révocation de session.",
-                    "objectives": [
-                      "Gérer multi-device, déconnexion et révocation de session."
-                    ],
-                    "outline": {
-                      "context": "Gérer multi-device, déconnexion et révocation de session.",
-                      "concepts": [
-                        "multi-device",
-                        "révocation",
-                        "expiration"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Sessions et révocation.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "multi-device",
-                        "révocation",
-                        "expiration"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Reset and email verification"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Password reset and email verification use <strong>single-use tokens</strong> (or very limited use) with a <strong>short lifetime</strong>. A link valid for weeks is an open door. Let the provider handle these flows when you can; otherwise audit every detail."
+              },
+              {
+                "kind": "title",
+                "text": "Sessions and revocation"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Multi-device: phone, laptop, tablet. You must be able to <strong>sign out</strong> and <strong>revoke</strong> a session (lost device, suspected breach). Without that, a stolen token survives too long."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Admin zone",
+                  "body": "It is not a hidden page. It is server-protected routes and data, with a written access policy (who can do what)."
+                }
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-clipboard-check'></i> <strong>P4 project</strong>: the checklist below is your safety net before shipping the auth increment on the capstone."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "reset password",
-                  "vérification email",
-                  "tokens à usage unique",
-                  "multi-device",
-                  "révocation",
-                  "expiration"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Checklist auth prod",
-                  "kind": "synthesis",
-                  "brief": "Rédiger la checklist auth production du produit en cours et la vérifier point par point."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-auth-m04-lesson",
-              "title": "Parcours sensibles",
-              "desc": "Reset password, vérification email, sessions multi-device",
+              "title": "Sensitive flows",
+              "desc": "Reset, email verification, multi-device sessions, production checklist",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Reset et vérification email</strong> : Implémenter des parcours sensibles sans failles classiques.</li><li><strong>Sessions et révocation</strong> : Gérer multi-device, déconnexion et révocation de session.</li></ul>"
+                  "body": "<h2>Reset and email verification</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Password reset and email verification use <strong>single-use tokens</strong> (or very limited use) with a <strong>short lifetime</strong>. A link valid for weeks is an open door. Let the provider handle these flows when you can; otherwise audit every detail."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Sessions and revocation</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Multi-device: phone, laptop, tablet. You must be able to <strong>sign out</strong> and <strong>revoke</strong> a session (lost device, suspected breach). Without that, a stolen token survives too long."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Admin zone",
+                  "body": "It is not a hidden page. It is server-protected routes and data, with a written access policy (who can do what)."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-clipboard-check'></i> <strong>P4 project</strong>: the checklist below is your safety net before shipping the auth increment on the capstone.</em></p>"
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-auth-quiz-m04",
+              "title": "Sensitive flows: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-auth-quiz-m04-q1",
+                  "prompt": "A password reset token should be…",
+                  "type": "single",
+                  "explanation": "Otherwise someone who intercepts the link keeps durable access.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q1-a",
+                      "label": "Single-use (or very limited) and short-lived",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q1-b",
+                      "label": "Reusable for weeks",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q1-c",
+                      "label": "Published in the README",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q1-d",
+                      "label": "Stored in plain text in the front end",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m04-q2",
+                  "prompt": "Email verification is mainly for…",
+                  "type": "single",
+                  "explanation": "Reduces fake accounts and some account takeover paths.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q2-a",
+                      "label": "Confirming the inbox exists / belongs to the user before sensitive actions",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q2-b",
+                      "label": "Replacing passwords forever",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q2-c",
+                      "label": "Disabling HTTPS",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q2-d",
+                      "label": "Coloring the logo",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m04-q3",
+                  "prompt": "Multi-device session revocation is…",
+                  "type": "single",
+                  "explanation": "Without revocation, a stolen session lives too long.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q3-a",
+                      "label": "Being able to sign out one device / all sessions (e.g. lost phone)",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q3-b",
+                      "label": "Deleting the database",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q3-c",
+                      "label": "Changing the theme",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q3-d",
+                      "label": "Disabling tests",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m04-q4",
+                  "prompt": "A production auth checklist should include…",
+                  "type": "single",
+                  "explanation": "This is the safety net before Ship.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q4-a",
+                      "label": "Provider, server protections, sensitive flows, access policy",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q4-b",
+                      "label": "Font choice only",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q4-c",
+                      "label": "Animations only",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q4-d",
+                      "label": "CORS * only",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-auth-quiz-m04-q5",
+                  "prompt": "Trusting localStorage.role === 'admin'…",
+                  "type": "single",
+                  "explanation": "Anyone can edit localStorage. The server decides.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q5-a",
+                      "label": "Is solid server protection",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q5-b",
+                      "label": "Is bypassable: it is not real authorization",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q5-c",
+                      "label": "Is required by all providers",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-auth-quiz-m04-q5-d",
+                      "label": "Replaces RLS",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-auth-ex-m04-projet",
+                "title": "P4 project: auth checklist + admin zone",
+                "instructions": "Before calling auth « production-ready » on the capstone product, check what must be true.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Third-party provider > fragile homegrown auth.",
+                  "Admin zone = server-protected routes and data, not just a hidden page."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>P4 project goal: auth via a third-party provider, protected admin zone, written access policy.</p>\n<p>An agent « finished »: /admin shows if <code>localStorage.role === 'admin'</code>, password reset with the same link reusable for 30 days, no session revocation.</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Sign-in via a third-party provider (not fragile homegrown auth)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Admin zone protected on the server (session / role checked on APIs)",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Reset / email verification: single-use (or tightly limited) short-lived tokens",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Sessions: sign-out and revocation possible (multi-device)",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Written access policy (who can do what) aligned with the code",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Trusting localStorage.role for admin is enough",
+                      "correct": false
+                    },
+                    {
+                      "id": "f7",
+                      "label": "A reset link reusable for weeks is a good idea",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Checklist: third-party provider, server-side admin, short-lived single-use sensitive tokens, session revocation, written policy. localStorage.role and long-lived reset links = no.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 3,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           }
         ]
       },

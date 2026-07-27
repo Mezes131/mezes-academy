@@ -52,6 +52,7 @@ const AUTHORED_PHASE_IDS = [
   "svc-fondations",
   "svc-prompt",
   "svc-architecture",
+  "svc-auth",
 ];
 
 describe("svcCourse phases", () => {
@@ -139,6 +140,29 @@ describe("svcCourse phases", () => {
     }
   });
 
+  it("authored auth phase uses four audit exercises and 5-question quizzes", () => {
+    const auth = svcCourse.phases.find((phase) => phase.id === "svc-auth");
+    expect(auth).toBeDefined();
+    expect(auth!.scaffoldOnly).toBeFalsy();
+    expect(auth!.modules).toHaveLength(4);
+    const exerciseIds = auth!.modules.flatMap(
+      (m) => m.exercises?.map((e) => e.id) ?? [],
+    );
+    expect(exerciseIds).toEqual([
+      "svc-auth-ex-m01-1",
+      "svc-auth-ex-m02-1",
+      "svc-auth-ex-m03-1",
+      "svc-auth-ex-m04-projet",
+    ]);
+    for (const mod of auth!.modules) {
+      expect(mod.content.length).toBeGreaterThan(0);
+      expect(mod.quiz?.questions).toHaveLength(5);
+      for (const exercise of mod.exercises ?? []) {
+        expect(exercise.format).toBe("audit");
+      }
+    }
+  });
+
   it("EN authored phases share the same ids as FR", () => {
     const fr = buildSvcCourse("fr");
     const en = buildSvcCourse("en");
@@ -147,6 +171,7 @@ describe("svcCourse phases", () => {
       "svc-fondations",
       "svc-prompt",
       "svc-architecture",
+      "svc-auth",
     ]) {
       const frPhase = fr.phases.find((p) => p.id === id)!;
       const enPhase = en.phases.find((p) => p.id === id)!;
