@@ -13,17 +13,17 @@ export const promptPhase: Phase = {
   label: "Phase 2",
   title: "Prompt & product framing",
   summary:
-    "Get good code more often: frame a commercializable MVP before generating, with auditable briefs and prompts.",
-  metaTags: ["core track", "~2h read", "interactive audits", "prompts"],
+    "Get good code more often: frame a sellable first deliverable before generating, with verifiable briefs and AI requests.",
+  metaTags: ["core track", "~2h read", "interactive audits", "AI requests"],
   modules: [promptModule01, promptModule02, promptModule03],
   project: {
-    title: "P2 project: CRUD feature via documented prompts",
+    title: "P2 project: CRUD via documented requests",
     deliverable:
-      "An enriched CRUD brief / prompt (auth, business, envs) validated via the module 03 « P2 project » audit.",
+      "An enriched CRUD brief / request (sign-in, business, environments) validated via the module 03 « P2 project » audit.",
     assessment: [
-      "Complete product-ready checklist (not a bare CRUD)",
+      "Complete product-ready list (not a bare CRUD)",
       "Explicit business constraints and secrets out of code",
-      "Bounded, auditable scope",
+      "Limited, verifiable scope",
     ],
   },
 };

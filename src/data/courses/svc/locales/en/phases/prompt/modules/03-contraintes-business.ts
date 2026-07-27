@@ -5,45 +5,45 @@ import { promptExercises } from "../exercises";
 export const promptModule03: Module = {
   id: "svc-prompt-m03",
   index: "03",
-  title: "Business constraints in the prompt",
-  subtitle: "Anticipate auth, payments, notifications, and hosting in the brief",
+  title: "Business constraints from the request",
+  subtitle: "Plan sign-in, payments, notifications, and hosting in the brief",
   duration: "40 min",
   difficulty: "intermediate",
   objectives: [
-    "Fold third-party services into framing early",
-    "Use a product-ready checklist",
+    "Fold external services into framing early",
+    "Use a product-ready list",
     "Avoid throwaway prototypes",
   ],
   content: [
-    { kind: "title", text: "Anticipate third-party services" },
+    { kind: "title", text: "Plan external services" },
     {
       kind: "paragraph",
-      html: "Auth, payments, notifications, hosting: this is not polish. It changes trust boundaries, secrets, and often the data model. A CRUD generated without these lines becomes a throwaway prototype.",
+      html: "Sign-in, payments, notifications, hosting: this is not decoration. It changes where you check rights, where secrets live, and often the data shape. A CRUD (create / list / update / delete) generated without these lines becomes a throwaway prototype.",
     },
     {
       kind: "info",
       box: {
         variant: "tip",
         title: "<i class='fa-solid fa-puzzle-piece'></i> In the brief",
-        body: "Even an explicit « later » helps: « Payments out of MVP, but user accounts from v1 ». The AI stops inventing a phantom cart.",
+        body: "Even a written « later » helps: « Payments out of the first deliverable, but user accounts from v1 ». The AI stops inventing a phantom cart.",
       },
     },
 
-    { kind: "title", text: "Product-ready checklist" },
+    { kind: "title", text: "Product-ready list" },
     {
       kind: "paragraph",
-      html: "Before a big CRUD prompt, check: who is signed in? which roles? which envs (local, preview, prod)? where do secrets live? server-side validation? notifications needed for the journey?",
+      html: "Before a big CRUD request, check: who is signed in? which roles? which environments (local, online preview, production)? where do secrets live? server-side checks? notifications needed for the journey?",
     },
     {
       kind: "highlight",
-      html: "<i class='fa-solid fa-store'></i> <strong>Product-ready</strong>: the brief covers what makes the product sellable and operable, not only a local demo.",
+      html: "<i class='fa-solid fa-store'></i> <strong>Product-ready</strong>: the brief covers what makes the product sellable and operable, not only a demo on your laptop.",
     },
     {
       kind: "info",
       box: {
         variant: "warn",
         title: "<i class='fa-solid fa-trash'></i> Throwaway prototype",
-        body: "Demo with no path to prod (no auth, hard-coded secrets, single env): you will rebuild. Better to enrich the prompt now.",
+        body: "Demo with no path to production (no sign-in, hard-coded secrets, single environment): you will rebuild. Better to enrich the request now.",
       },
     },
   ],

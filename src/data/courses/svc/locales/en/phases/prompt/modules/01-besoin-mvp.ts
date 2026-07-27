@@ -5,39 +5,39 @@ import { promptExercises } from "../exercises";
 export const promptModule01: Module = {
   id: "svc-prompt-m01",
   index: "01",
-  title: "From need to shippable MVP",
-  subtitle: "User stories, acceptance criteria, non-goals",
+  title: "From need to first deliverable",
+  subtitle: "User stories, success rules, out of scope",
   duration: "40 min",
   difficulty: "beginner",
   openByDefault: true,
   objectives: [
-    "Write user stories and acceptance criteria",
-    "Spell out non-functional constraints",
-    "Slice work into auditable tasks",
+    "Write user stories and success rules",
+    "Write quality constraints (security, speed, accessibility)",
+    "Slice work into small verifiable tasks",
   ],
   content: [
-    { kind: "title", text: "User story and acceptance criteria" },
+    { kind: "title", text: "User story and success rules" },
     {
       kind: "paragraph",
-      html: "Before any prompt, turn a vague wish into a <strong>testable need</strong>. A user story states who, what, why. An acceptance criterion states how you know it is done (yes / no, not « cool »).",
+      html: "Before any AI request, turn a vague wish into a <strong>verifiable need</strong>. A user story states who, what, why. A success rule (sometimes called an acceptance criterion) states how you know it is done (yes / no, not « cool »).",
     },
     {
       kind: "info",
       box: {
         variant: "tip",
         title: "<i class='fa-solid fa-list-check'></i> Mini template",
-        body: "As a… I want… so that… Criteria: given X, when Y, then Z. If you cannot write Z, you are not ready to generate.",
+        body: "As a… I want… so that… Rules: given X, when Y, then Z. If you cannot write Z, you are not ready to generate.",
       },
     },
     {
       kind: "paragraph",
-      html: "<strong>Non-goals</strong> (out of scope) matter as much as goals. « No public sharing in the MVP » stops the AI from inventing a social network around your notes.",
+      html: "<strong>Out of scope</strong> (what you will not do now) matters as much as what you will do. « No public sharing in the first deliverable » stops the AI from inventing a social network around your notes.",
     },
 
-    { kind: "title", text: "Non-functional constraints" },
+    { kind: "title", text: "Quality constraints" },
     {
       kind: "paragraph",
-      html: "Security, performance, accessibility: if you do not write them, the AI often skips them. Concrete examples: no secrets in the browser, acceptable load time, keyboard-usable forms.",
+      html: "Security, speed, accessibility: if you do not write them, the AI often skips them. Concrete examples: no secrets in the browser, acceptable load time, keyboard-usable forms.",
     },
     {
       kind: "info",
@@ -48,14 +48,14 @@ export const promptModule01: Module = {
       },
     },
 
-    { kind: "title", text: "Slice into auditable tasks" },
+    { kind: "title", text: "Slice into verifiable tasks" },
     {
       kind: "paragraph",
-      html: "An auditable task has human size: you can read the change preview and tick a done criterion. « Build the whole app » is not a task. « Create-note form + title validation » is.",
+      html: "A verifiable task has human size: you can read the change preview and tick a done rule. « Build the whole app » is not a task. « Create-note form + title check » is.",
     },
     {
       kind: "highlight",
-      html: "<i class='fa-solid fa-scissors'></i> <strong>Rule</strong>: if you cannot audit the task alone, re-slice before prompting.",
+      html: "<i class='fa-solid fa-scissors'></i> <strong>Rule</strong>: if you cannot verify the task alone, re-slice before asking the AI.",
     },
   ],
   quiz: promptQuizzes.m01,

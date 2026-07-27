@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-07-27T14:48:24.493Z",
+  "exportedAt": "2026-07-27T14:54:21.563Z",
   "locale": "en",
   "course": {
     "legacyId": "svc",
@@ -1569,7 +1569,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later (phases 8 to 12), audit evidence becomes more formal (automatic tools, scores, procedures)."
+                "html": "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later, audit evidence becomes more formal (automatic tools, scores, procedures)."
               }
             ],
             "assessment": null,
@@ -1620,7 +1620,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later (phases 8 to 12), audit evidence becomes more formal (automatic tools, scores, procedures)."
+                  "body": "The exercise below has you tell healthy steps for a contact form apart from tunnel habits. Later, audit evidence becomes more formal (automatic tools, scores, procedures)."
                 }
               ]
             },
@@ -2265,7 +2265,7 @@
         "slug": "prompt",
         "title": "Prompt & product framing",
         "label": "Phase 2",
-        "summary": "Get good code more often: frame a commercializable MVP before generating, with auditable briefs and prompts.",
+        "summary": "Get good code more often: frame a sellable first deliverable before generating, with verifiable briefs and AI requests.",
         "order": 2,
         "color": "core",
         "icon": "fa-pen-to-square",
@@ -2273,32 +2273,32 @@
           "core track",
           "~2h read",
           "interactive audits",
-          "prompts"
+          "AI requests"
         ],
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": false,
-        "projectTitle": "P2 project: CRUD feature via documented prompts",
-        "projectDeliverable": "An enriched CRUD brief / prompt (auth, business, envs) validated via the module 03 « P2 project » audit.",
+        "projectTitle": "P2 project: CRUD via documented requests",
+        "projectDeliverable": "An enriched CRUD brief / request (sign-in, business, environments) validated via the module 03 « P2 project » audit.",
         "projectAssessment": [
-          "Complete product-ready checklist (not a bare CRUD)",
+          "Complete product-ready list (not a bare CRUD)",
           "Explicit business constraints and secrets out of code",
-          "Bounded, auditable scope"
+          "Limited, verifiable scope"
         ],
         "modules": [
           {
             "legacyId": "svc-prompt-m01",
             "moduleId": "svc-prompt-m01",
             "index": "01",
-            "title": "From need to shippable MVP",
-            "subtitle": "User stories, acceptance criteria, non-goals",
+            "title": "From need to first deliverable",
+            "subtitle": "User stories, success rules, out of scope",
             "duration": "40 min",
             "order": 0,
             "difficulty": "beginner",
             "objectives": [
-              "Write user stories and acceptance criteria",
-              "Spell out non-functional constraints",
-              "Slice work into auditable tasks"
+              "Write user stories and success rules",
+              "Write quality constraints (security, speed, accessibility)",
+              "Slice work into small verifiable tasks"
             ],
             "prerequisites": [],
             "openByDefault": true,
@@ -2306,31 +2306,31 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "User story and acceptance criteria"
+                "text": "User story and success rules"
               },
               {
                 "kind": "paragraph",
-                "html": "Before any prompt, turn a vague wish into a <strong>testable need</strong>. A user story states who, what, why. An acceptance criterion states how you know it is done (yes / no, not « cool »)."
+                "html": "Before any AI request, turn a vague wish into a <strong>verifiable need</strong>. A user story states who, what, why. A success rule (sometimes called an acceptance criterion) states how you know it is done (yes / no, not « cool »)."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "tip",
                   "title": "<i class='fa-solid fa-list-check'></i> Mini template",
-                  "body": "As a… I want… so that… Criteria: given X, when Y, then Z. If you cannot write Z, you are not ready to generate."
+                  "body": "As a… I want… so that… Rules: given X, when Y, then Z. If you cannot write Z, you are not ready to generate."
                 }
               },
               {
                 "kind": "paragraph",
-                "html": "<strong>Non-goals</strong> (out of scope) matter as much as goals. « No public sharing in the MVP » stops the AI from inventing a social network around your notes."
+                "html": "<strong>Out of scope</strong> (what you will not do now) matters as much as what you will do. « No public sharing in the first deliverable » stops the AI from inventing a social network around your notes."
               },
               {
                 "kind": "title",
-                "text": "Non-functional constraints"
+                "text": "Quality constraints"
               },
               {
                 "kind": "paragraph",
-                "html": "Security, performance, accessibility: if you do not write them, the AI often skips them. Concrete examples: no secrets in the browser, acceptable load time, keyboard-usable forms."
+                "html": "Security, speed, accessibility: if you do not write them, the AI often skips them. Concrete examples: no secrets in the browser, acceptable load time, keyboard-usable forms."
               },
               {
                 "kind": "info",
@@ -2342,50 +2342,50 @@
               },
               {
                 "kind": "title",
-                "text": "Slice into auditable tasks"
+                "text": "Slice into verifiable tasks"
               },
               {
                 "kind": "paragraph",
-                "html": "An auditable task has human size: you can read the change preview and tick a done criterion. « Build the whole app » is not a task. « Create-note form + title validation » is."
+                "html": "A verifiable task has human size: you can read the change preview and tick a done rule. « Build the whole app » is not a task. « Create-note form + title check » is."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-scissors'></i> <strong>Rule</strong>: if you cannot audit the task alone, re-slice before prompting."
+                "html": "<i class='fa-solid fa-scissors'></i> <strong>Rule</strong>: if you cannot verify the task alone, re-slice before asking the AI."
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-prompt-m01-lesson",
-              "title": "From need to shippable MVP",
-              "desc": "User stories, acceptance criteria, non-goals",
+              "title": "From need to first deliverable",
+              "desc": "User stories, success rules, out of scope",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>User story and acceptance criteria</h2>"
+                  "body": "<h2>User story and success rules</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Before any prompt, turn a vague wish into a <strong>testable need</strong>. A user story states who, what, why. An acceptance criterion states how you know it is done (yes / no, not « cool »)."
+                  "body": "Before any AI request, turn a vague wish into a <strong>verifiable need</strong>. A user story states who, what, why. A success rule (sometimes called an acceptance criterion) states how you know it is done (yes / no, not « cool »)."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "tip",
                   "title": "<i class='fa-solid fa-list-check'></i> Mini template",
-                  "body": "As a… I want… so that… Criteria: given X, when Y, then Z. If you cannot write Z, you are not ready to generate."
+                  "body": "As a… I want… so that… Rules: given X, when Y, then Z. If you cannot write Z, you are not ready to generate."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<strong>Non-goals</strong> (out of scope) matter as much as goals. « No public sharing in the MVP » stops the AI from inventing a social network around your notes."
+                  "body": "<strong>Out of scope</strong> (what you will not do now) matters as much as what you will do. « No public sharing in the first deliverable » stops the AI from inventing a social network around your notes."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Non-functional constraints</h2>"
+                  "body": "<h2>Quality constraints</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Security, performance, accessibility: if you do not write them, the AI often skips them. Concrete examples: no secrets in the browser, acceptable load time, keyboard-usable forms."
+                  "body": "Security, speed, accessibility: if you do not write them, the AI often skips them. Concrete examples: no secrets in the browser, acceptable load time, keyboard-usable forms."
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -2395,27 +2395,27 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Slice into auditable tasks</h2>"
+                  "body": "<h2>Slice into verifiable tasks</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "An auditable task has human size: you can read the change preview and tick a done criterion. « Build the whole app » is not a task. « Create-note form + title validation » is."
+                  "body": "A verifiable task has human size: you can read the change preview and tick a done rule. « Build the whole app » is not a task. « Create-note form + title check » is."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-scissors'></i> <strong>Rule</strong>: if you cannot audit the task alone, re-slice before prompting.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-scissors'></i> <strong>Rule</strong>: if you cannot verify the task alone, re-slice before asking the AI.</em></p>"
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-prompt-quiz-m01",
-              "title": "Need to MVP: check your reading",
+              "title": "Need to first deliverable: check your reading",
               "questions": [
                 {
                   "legacyId": "svc-prompt-quiz-m01-q1",
-                  "prompt": "What is an acceptance criterion for?",
+                  "prompt": "What is a success rule (acceptance criterion) for?",
                   "type": "single",
-                  "explanation": "An acceptance criterion is an observable condition: yes or no. Without it, the AI (and you) invent the finish line.",
+                  "explanation": "A success rule is an observable condition: yes or no. Without it, the AI (and you) invent the finish line.",
                   "order": 0,
                   "answers": [
                     {
@@ -2426,7 +2426,7 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m01-q1-b",
-                      "label": "Stating clearly when the need is met (testable)",
+                      "label": "Stating clearly when the need is met (you can say yes or no)",
                       "isCorrect": true,
                       "order": 1
                     },
@@ -2438,7 +2438,7 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m01-q1-d",
-                      "label": "Listing npm dependencies",
+                      "label": "Listing npm packages",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -2446,14 +2446,14 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m01-q2",
-                  "prompt": "What is a non-goal in an MVP brief?",
+                  "prompt": "What is out of scope in a first deliverable?",
                   "type": "single",
-                  "explanation": "Non-goals protect scope: you explicitly say what you will not build now.",
+                  "explanation": "Out of scope protects the project: you explicitly say what you will not build now.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m01-q2-a",
-                      "label": "A feature out of scope for this version",
+                      "label": "A feature you will not build in this version",
                       "isCorrect": true,
                       "order": 0
                     },
@@ -2479,9 +2479,9 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m01-q3",
-                  "prompt": "Why write non-functional constraints before generating?",
+                  "prompt": "Why write security, speed, and accessibility before generating?",
                   "type": "single",
-                  "explanation": "The AI optimizes what you ask for. If you do not ask for security or a11y, it often skips them.",
+                  "explanation": "The AI optimizes what you ask for. If you do not ask for security or accessibility, it often skips them.",
                   "order": 2,
                   "answers": [
                     {
@@ -2492,7 +2492,7 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m01-q3-b",
-                      "label": "So security, perf, and accessibility are not skipped by the AI",
+                      "label": "So the AI does not skip them",
                       "isCorrect": true,
                       "order": 1
                     },
@@ -2512,14 +2512,14 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m01-q4",
-                  "prompt": "What does an « auditable task » mean?",
+                  "prompt": "What does a « verifiable task » mean?",
                   "type": "single",
-                  "explanation": "Small increment + done proof = you can audit. A 50-file monolith, no.",
+                  "explanation": "Small increment + done proof = you can verify. A 50-file monolith, no.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m01-q4-a",
-                      "label": "A task you can verify alone, with a done criterion",
+                      "label": "A task you can check alone, with a clear done rule",
                       "isCorrect": true,
                       "order": 0
                     },
@@ -2545,14 +2545,14 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m01-q5",
-                  "prompt": "Which brief is most dangerous before a prompt?",
+                  "prompt": "Which brief is most dangerous before an AI request?",
                   "type": "single",
-                  "explanation": "Vague + « fast » = invention, over-scope, critical gaps. The other options frame the work.",
+                  "explanation": "Vague + « fast » = invention, too many features, critical gaps. The other options frame the work.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m01-q5-a",
-                      "label": "« Notes app: create / list / archive, team accounts, no public sharing in MVP »",
+                      "label": "« Notes app: create / list / archive, team accounts, no public sharing in the first deliverable »",
                       "isCorrect": false,
                       "order": 0
                     },
@@ -2564,13 +2564,13 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m01-q5-c",
-                      "label": "Written stories + criteria + non-goals",
+                      "label": "Written user stories + success rules + out of scope",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m01-q5-d",
-                      "label": "Task list with a done criterion each",
+                      "label": "Task list with a done rule each",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -2581,17 +2581,17 @@
             "exercises": [
               {
                 "legacyId": "svc-prompt-ex-m01-1",
-                "title": "Prompt-ready brief",
-                "instructions": "Read the client request. Check only what is missing for a usable brief before generating code. Ignore useless polish.",
+                "title": "Brief ready for the AI",
+                "instructions": "Read the client request. Check only what is missing for a usable brief before generating code. Ignore useless decoration details.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "A prompt-ready brief states who, what, success criteria, and what you will not build.",
-                  "« Make something cool » is not an acceptance criterion."
+                  "A brief ready for the AI states who, what, how you know it is done, and what you will not build.",
+                  "« Make something cool » is not a success rule."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p>Client: « We want a notes app for my team, make something cool and modern with AI in it. Ship fast. »</p>\n<p>No detail on who writes notes, who reads them, where they are stored, or what is out of scope.</p>",
+                  "scenario": "<p>Client: « We want a notes app for my team, make something cool and modern with AI in it. Ship fast. »</p>\n<p>No detail on who writes notes, who reads them, where they are stored, or what is out of the first deliverable.</p>",
                   "findings": [
                     {
                       "id": "f1",
@@ -2601,25 +2601,25 @@
                     },
                     {
                       "id": "f2",
-                      "label": "Missing testable acceptance criteria",
+                      "label": "Missing success rules (you can clearly say yes or no)",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f3",
-                      "label": "Missing non-goals (what the MVP will not build)",
+                      "label": "Missing out-of-scope list (what the first version will not build)",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f4",
-                      "label": "Missing non-functional constraints (security, perf, accessibility)",
+                      "label": "Missing quality constraints (security, speed, accessibility)",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f5",
-                      "label": "Missing breakdown into auditable tasks",
+                      "label": "Missing breakdown into small verifiable tasks",
                       "correct": true,
                       "minSeverity": "medium"
                     },
@@ -2638,7 +2638,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>Before generating: stories, testable criteria, non-goals, constraints (security / perf / a11y), sliced tasks. Logo colors and marketing fonts do not block an MVP brief.</p>"
+                  "__solution": "<p>Before generating: user stories, clear success rules, out of scope, constraints (security / speed / accessibility), sliced tasks. Logo colors and marketing fonts do not block a first deliverable.</p>"
                 },
                 "tests": null,
                 "validator": null,
@@ -2653,15 +2653,15 @@
             "legacyId": "svc-prompt-m02",
             "moduleId": "svc-prompt-m02",
             "index": "02",
-            "title": "Prompt techniques for product code",
-            "subtitle": "Minimal sufficient context, constrained output, iteration",
+            "title": "Request techniques for product code",
+            "subtitle": "Just enough context, framed output, targeted fixes",
             "duration": "45 min",
             "order": 1,
             "difficulty": "beginner",
             "objectives": [
-              "Provide minimal sufficient context",
-              "Constrain the output (stack, style, tests)",
-              "Iterate without drifting and have the AI critique the code"
+              "Give just enough context",
+              "Frame the output (tools, style, tests)",
+              "Fix without starting over and have the AI critique the code"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -2669,11 +2669,11 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Minimal sufficient context"
+                "text": "Just enough context"
               },
               {
                 "kind": "paragraph",
-                "html": "Give the AI what it needs to anchor the answer: target file, data contracts, stack. Not the whole repo. Not zero. Noise (off-topic files, marketing fluff) causes drift."
+                "html": "Give the AI what it needs to anchor the answer: target file, data shape, project tools. Not the whole repo. Not zero. Noise (off-topic files, marketing fluff) causes drift."
               },
               {
                 "kind": "info",
@@ -2685,19 +2685,19 @@
               },
               {
                 "kind": "title",
-                "text": "Constrain the output"
+                "text": "Frame the output"
               },
               {
                 "kind": "paragraph",
-                "html": "Impose stack, conventions, tests, and file bounds. Example: « React + TypeScript, one file only, add a test for the Add button ». Without that, you get a whole « beautiful » uncontrollable app."
+                "html": "Impose tools, conventions, tests, and file bounds. Example: « React + TypeScript, one file only, add a test for the Add button ». Without that, you get a whole « beautiful » uncontrollable app."
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-lock'></i> <strong>Constrained output</strong> = aligned + verifiable proposal, not a creative surprise."
+                "html": "<i class='fa-solid fa-lock'></i> <strong>Framed output</strong> = aligned + verifiable proposal, not a creative surprise."
               },
               {
                 "kind": "title",
-                "text": "Iterate and request critique"
+                "text": "Fix and request critique"
               },
               {
                 "kind": "paragraph",
@@ -2707,26 +2707,26 @@
                 "kind": "info",
                 "box": {
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-ban'></i> Anti-patterns",
-                  "body": "Full reprompt on every error · accept without reading · prompts that ask to skip validation or paste secrets."
+                  "title": "<i class='fa-solid fa-ban'></i> Avoid",
+                  "body": "Starting over on every error · accept without reading · requests that skip checks or paste secrets."
                 }
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-prompt-m02-lesson",
-              "title": "Prompt techniques for product code",
-              "desc": "Minimal sufficient context, constrained output, iteration",
+              "title": "Request techniques for product code",
+              "desc": "Just enough context, framed output, targeted fixes",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Minimal sufficient context</h2>"
+                  "body": "<h2>Just enough context</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Give the AI what it needs to anchor the answer: target file, data contracts, stack. Not the whole repo. Not zero. Noise (off-topic files, marketing fluff) causes drift."
+                  "body": "Give the AI what it needs to anchor the answer: target file, data shape, project tools. Not the whole repo. Not zero. Noise (off-topic files, marketing fluff) causes drift."
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -2736,19 +2736,19 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Constrain the output</h2>"
+                  "body": "<h2>Frame the output</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Impose stack, conventions, tests, and file bounds. Example: « React + TypeScript, one file only, add a test for the Add button ». Without that, you get a whole « beautiful » uncontrollable app."
+                  "body": "Impose tools, conventions, tests, and file bounds. Example: « React + TypeScript, one file only, add a test for the Add button ». Without that, you get a whole « beautiful » uncontrollable app."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-lock'></i> <strong>Constrained output</strong> = aligned + verifiable proposal, not a creative surprise.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-lock'></i> <strong>Framed output</strong> = aligned + verifiable proposal, not a creative surprise.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Iterate and request critique</h2>"
+                  "body": "<h2>Fix and request critique</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
@@ -2757,18 +2757,18 @@
                 {
                   "__component": "lesson.callout-block",
                   "variant": "warn",
-                  "title": "<i class='fa-solid fa-ban'></i> Anti-patterns",
-                  "body": "Full reprompt on every error · accept without reading · prompts that ask to skip validation or paste secrets."
+                  "title": "<i class='fa-solid fa-ban'></i> Avoid",
+                  "body": "Starting over on every error · accept without reading · requests that skip checks or paste secrets."
                 }
               ]
             },
             "quiz": {
               "legacyId": "svc-prompt-quiz-m02",
-              "title": "Prompt techniques: check your reading",
+              "title": "AI request techniques: check your reading",
               "questions": [
                 {
                   "legacyId": "svc-prompt-quiz-m02-q1",
-                  "prompt": "What is « minimal sufficient context »?",
+                  "prompt": "What is « just enough context »?",
                   "type": "single",
                   "explanation": "Too little: the AI invents. Too much: it gets lost. Aim for the minimum that anchors the answer.",
                   "order": 0,
@@ -2781,13 +2781,13 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m02-q1-b",
-                      "label": "Give enough useful info (files, contracts), without noise",
+                      "label": "Give enough useful info (files, rules), without noise",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m02-q1-c",
-                      "label": "Never mention the stack",
+                      "label": "Never mention the project tools",
                       "isCorrect": false,
                       "order": 2
                     },
@@ -2801,9 +2801,9 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m02-q2",
-                  "prompt": "Why constrain the output (stack, conventions, tests)?",
+                  "prompt": "Why frame the output (tools, conventions, tests)?",
                   "type": "single",
-                  "explanation": "Without constraints you get « something ». With constraints you get something auditable.",
+                  "explanation": "Without rules you get « something ». With rules you get something verifiable.",
                   "order": 1,
                   "answers": [
                     {
@@ -2834,14 +2834,14 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m02-q3",
-                  "prompt": "Which iteration is healthy after a mistake?",
+                  "prompt": "Which fix is healthy after a mistake?",
                   "type": "single",
-                  "explanation": "Targeted iteration + AI self-review on the diff. Full reprompts drift scope.",
+                  "explanation": "Targeted fix + AI critique on the change preview. Starting over leaves the intended scope.",
                   "order": 2,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m02-q3-a",
-                      "label": "Full reprompt « redo the whole project »",
+                      "label": "Relaunch « redo the whole project »",
                       "isCorrect": false,
                       "order": 0
                     },
@@ -2867,26 +2867,26 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m02-q4",
-                  "prompt": "Which sign points to a vulnerable prompt?",
+                  "prompt": "Which sign points to a dangerous request?",
                   "type": "single",
-                  "explanation": "If the prompt pushes dangerous shortcuts, the code will follow. Fix the prompt first.",
+                  "explanation": "If the request pushes dangerous shortcuts, the code will follow. Fix the request first.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m02-q4-a",
-                      "label": "It asks for validation, env secrets, tests",
+                      "label": "It asks for checks, secrets in environment variables, tests",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m02-q4-b",
-                      "label": "It asks to skip validation or paste secrets",
+                      "label": "It asks to skip checks or paste secrets",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m02-q4-c",
-                      "label": "It bounds touched files",
+                      "label": "It limits touched files",
                       "isCorrect": false,
                       "order": 2
                     },
@@ -2936,50 +2936,50 @@
             "exercises": [
               {
                 "legacyId": "svc-prompt-ex-m02-1",
-                "title": "Same feature, three prompts",
-                "instructions": "Three prompts aim at the same micro-feature (todo list with add). Check only fair judgments about quality and risk.",
+                "title": "Same feature, three requests",
+                "instructions": "Three AI requests aim at the same small feature (todo list with add). Check only fair judgments about quality and risk.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "Longer ≠ better. Useful context + constraints + requested tests = better.",
-                  "A prompt that asks for « the whole product » drifts scope."
+                  "Longer is not always better. Useful context + rules + requested tests = better.",
+                  "A request that asks for « the whole product » leaves the intended scope."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p><strong>Prompt A:</strong> « Build me a full, beautiful todo app with AI. »</p>\n<p><strong>Prompt B:</strong> « React TaskList component: show titles, Add button that pushes a local task. TypeScript. No API. »</p>\n<p><strong>Prompt C:</strong> « In <code>src/components/TaskList.tsx</code>, controlled list: state <code>tasks: {id, title}[]</code>, input + Add button, no empty titles. Stack: React + TS. Add a simple test for Add. Do not touch other files. »</p>",
+                  "scenario": "<p><strong>Request A:</strong> « Build me a full, beautiful todo app with AI. »</p>\n<p><strong>Request B:</strong> « React TaskList component: show titles, Add button that adds a local task. TypeScript. No API. »</p>\n<p><strong>Request C:</strong> « In <code>src/components/TaskList.tsx</code>, state-managed list: <code>tasks: {id, title}[]</code>, input + Add button, no empty titles. Stack: React + TypeScript. Add a simple test for Add. Do not touch other files. »</p>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Prompt C is the healthiest (file, contracts, constraints, test, bounded scope)",
+                      "label": "Request C is the healthiest (file, rules, test, limited scope)",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f2",
-                      "label": "Prompt A risks over-engineering and missing critical requirements",
+                      "label": "Request A risks doing too much and missing the essentials",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f3",
-                      "label": "Prompt B beats A but still skips tests and file bounds",
+                      "label": "Request B beats A but still skips tests and file limits",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f4",
-                      "label": "Prompt A is best because it lets the AI innovate freely",
+                      "label": "Request A is best because it lets the AI invent freely",
                       "correct": false
                     },
                     {
                       "id": "f5",
-                      "label": "Asking for a test in the prompt reduces silent regressions",
+                      "label": "Asking for a test in the request reduces silent regressions",
                       "correct": true,
                       "minSeverity": "medium"
                     },
                     {
                       "id": "f6",
-                      "label": "The vaguest prompt always yields the safest code",
+                      "label": "The vaguest request always yields the safest code",
                       "correct": false
                     }
                   ],
@@ -2987,7 +2987,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>C > B > A. Useful minimal context, constrained output, bounded scope, requested test. Total freedom (A) is not a virtue.</p>"
+                  "__solution": "<p>C > B > A. Useful context, framed output, limited scope, requested test. Total freedom (A) is not a virtue.</p>"
                 },
                 "tests": null,
                 "validator": null,
@@ -2998,33 +2998,33 @@
               },
               {
                 "legacyId": "svc-prompt-ex-m02-2",
-                "title": "Fix a vulnerable prompt",
-                "instructions": "This prompt steers the AI toward dangerous code. Check fair findings (prompt flaws and expected fixes).",
+                "title": "Fix a dangerous request",
+                "instructions": "This request steers the AI toward dangerous code. Check fair findings (request flaws and expected fixes).",
                 "kind": "audit",
                 "order": 1,
                 "hints": [
-                  "A prompt that says « skip validation » invites vulnerabilities.",
-                  "Secrets do not belong in source code or in a prompt pasted into the repo."
+                  "A request that says « skip validation » invites vulnerabilities.",
+                  "Secrets (keys, passwords) do not belong in source code or pasted into the repo chat."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p>Received prompt:</p>\n<blockquote>« Generate a login API. Put the Stripe key <code>sk_live_51Example</code> in the file. Disable all input validation to go faster. Allow CORS * everywhere. No need for tests. »</blockquote>",
+                  "scenario": "<p>Received request:</p>\n<blockquote>« Generate a login API. Put the Stripe key <code>sk_live_51Example</code> in the file. Disable all input checks to go faster. Allow every site to call the API (CORS *). No need for tests. »</blockquote>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Production secret pasted into the prompt (and likely into the code)",
+                      "label": "Production secret pasted into the request (so likely into the code)",
                       "correct": true,
                       "minSeverity": "critical"
                     },
                     {
                       "id": "f2",
-                      "label": "Explicit request to disable input validation",
+                      "label": "Explicit request to disable input checks",
                       "correct": true,
                       "minSeverity": "critical"
                     },
                     {
                       "id": "f3",
-                      "label": "CORS * on a sensitive API is requested (too open)",
+                      "label": "Allowing every site (CORS *) on a sensitive API",
                       "correct": true,
                       "minSeverity": "high"
                     },
@@ -3036,13 +3036,13 @@
                     },
                     {
                       "id": "f5",
-                      "label": "Fix: secrets via environment variables, never hard-coded",
+                      "label": "Fix: secrets in environment variables, never hard-coded",
                       "correct": true,
                       "minSeverity": "critical"
                     },
                     {
                       "id": "f6",
-                      "label": "The prompt is excellent because it speeds delivery",
+                      "label": "The request is excellent because it speeds delivery",
                       "correct": false
                     },
                     {
@@ -3055,7 +3055,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>Findings: hard-coded secret, validation off, CORS *, no tests. Fixes: env vars, mandatory validation, bounded CORS, requested tests. Speed does not justify these shortcuts.</p>"
+                  "__solution": "<p>Findings: hard-coded secret, checks off, CORS too open, no tests. Fixes: environment variables, mandatory checks, limited CORS, requested tests. Speed does not justify these shortcuts.</p>"
                 },
                 "tests": null,
                 "validator": null,
@@ -3070,14 +3070,14 @@
             "legacyId": "svc-prompt-m03",
             "moduleId": "svc-prompt-m03",
             "index": "03",
-            "title": "Business constraints in the prompt",
-            "subtitle": "Anticipate auth, payments, notifications, and hosting in the brief",
+            "title": "Business constraints from the request",
+            "subtitle": "Plan sign-in, payments, notifications, and hosting in the brief",
             "duration": "40 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Fold third-party services into framing early",
-              "Use a product-ready checklist",
+              "Fold external services into framing early",
+              "Use a product-ready list",
               "Avoid throwaway prototypes"
             ],
             "prerequisites": [],
@@ -3086,80 +3086,80 @@
             "contentBlocks": [
               {
                 "kind": "title",
-                "text": "Anticipate third-party services"
+                "text": "Plan external services"
               },
               {
                 "kind": "paragraph",
-                "html": "Auth, payments, notifications, hosting: this is not polish. It changes trust boundaries, secrets, and often the data model. A CRUD generated without these lines becomes a throwaway prototype."
+                "html": "Sign-in, payments, notifications, hosting: this is not decoration. It changes where you check rights, where secrets live, and often the data shape. A CRUD (create / list / update / delete) generated without these lines becomes a throwaway prototype."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "tip",
                   "title": "<i class='fa-solid fa-puzzle-piece'></i> In the brief",
-                  "body": "Even an explicit « later » helps: « Payments out of MVP, but user accounts from v1 ». The AI stops inventing a phantom cart."
+                  "body": "Even a written « later » helps: « Payments out of the first deliverable, but user accounts from v1 ». The AI stops inventing a phantom cart."
                 }
               },
               {
                 "kind": "title",
-                "text": "Product-ready checklist"
+                "text": "Product-ready list"
               },
               {
                 "kind": "paragraph",
-                "html": "Before a big CRUD prompt, check: who is signed in? which roles? which envs (local, preview, prod)? where do secrets live? server-side validation? notifications needed for the journey?"
+                "html": "Before a big CRUD request, check: who is signed in? which roles? which environments (local, online preview, production)? where do secrets live? server-side checks? notifications needed for the journey?"
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-store'></i> <strong>Product-ready</strong>: the brief covers what makes the product sellable and operable, not only a local demo."
+                "html": "<i class='fa-solid fa-store'></i> <strong>Product-ready</strong>: the brief covers what makes the product sellable and operable, not only a demo on your laptop."
               },
               {
                 "kind": "info",
                 "box": {
                   "variant": "warn",
                   "title": "<i class='fa-solid fa-trash'></i> Throwaway prototype",
-                  "body": "Demo with no path to prod (no auth, hard-coded secrets, single env): you will rebuild. Better to enrich the prompt now."
+                  "body": "Demo with no path to production (no sign-in, hard-coded secrets, single environment): you will rebuild. Better to enrich the request now."
                 }
               }
             ],
             "assessment": null,
             "lesson": {
               "legacyId": "svc-prompt-m03-lesson",
-              "title": "Business constraints in the prompt",
-              "desc": "Anticipate auth, payments, notifications, and hosting in the brief",
+              "title": "Business constraints from the request",
+              "desc": "Plan sign-in, payments, notifications, and hosting in the brief",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Anticipate third-party services</h2>"
+                  "body": "<h2>Plan external services</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Auth, payments, notifications, hosting: this is not polish. It changes trust boundaries, secrets, and often the data model. A CRUD generated without these lines becomes a throwaway prototype."
+                  "body": "Sign-in, payments, notifications, hosting: this is not decoration. It changes where you check rights, where secrets live, and often the data shape. A CRUD (create / list / update / delete) generated without these lines becomes a throwaway prototype."
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "tip",
                   "title": "<i class='fa-solid fa-puzzle-piece'></i> In the brief",
-                  "body": "Even an explicit « later » helps: « Payments out of MVP, but user accounts from v1 ». The AI stops inventing a phantom cart."
+                  "body": "Even a written « later » helps: « Payments out of the first deliverable, but user accounts from v1 ». The AI stops inventing a phantom cart."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<h2>Product-ready checklist</h2>"
+                  "body": "<h2>Product-ready list</h2>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Before a big CRUD prompt, check: who is signed in? which roles? which envs (local, preview, prod)? where do secrets live? server-side validation? notifications needed for the journey?"
+                  "body": "Before a big CRUD request, check: who is signed in? which roles? which environments (local, online preview, production)? where do secrets live? server-side checks? notifications needed for the journey?"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-store'></i> <strong>Product-ready</strong>: the brief covers what makes the product sellable and operable, not only a local demo.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-store'></i> <strong>Product-ready</strong>: the brief covers what makes the product sellable and operable, not only a demo on your laptop.</em></p>"
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "warn",
                   "title": "<i class='fa-solid fa-trash'></i> Throwaway prototype",
-                  "body": "Demo with no path to prod (no auth, hard-coded secrets, single env): you will rebuild. Better to enrich the prompt now."
+                  "body": "Demo with no path to production (no sign-in, hard-coded secrets, single environment): you will rebuild. Better to enrich the request now."
                 }
               ]
             },
@@ -3169,9 +3169,9 @@
               "questions": [
                 {
                   "legacyId": "svc-prompt-quiz-m03-q1",
-                  "prompt": "Why anticipate auth / payments / notifications in the brief?",
+                  "prompt": "Why plan sign-in / payments / notifications in the brief early?",
                   "type": "single",
-                  "explanation": "Third-party services change architecture. Bolting them on later is expensive.",
+                  "explanation": "These services change architecture. Bolting them on later is expensive.",
                   "order": 0,
                   "answers": [
                     {
@@ -3202,14 +3202,14 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m03-q2",
-                  "prompt": "What does a « product-ready » checklist verify?",
+                  "prompt": "What does a « product-ready » list verify?",
                   "type": "single",
-                  "explanation": "Product-ready means auth, envs, secrets, critical journeys, not just a demo CRUD.",
+                  "explanation": "Product-ready means sign-in, environments, secrets, critical journeys, not just a demo CRUD.",
                   "order": 1,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m03-q2-a",
-                      "label": "That the brief covers what makes the product commercializable",
+                      "label": "That the brief covers what makes the product sellable",
                       "isCorrect": true,
                       "order": 0
                     },
@@ -3235,9 +3235,9 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m03-q3",
-                  "prompt": "Which anti-pattern is « demo with no path to prod »?",
+                  "prompt": "Which anti-pattern is « demo with no path to production »?",
                   "type": "single",
-                  "explanation": "A local demo without envs, auth, or clean secrets does not magically become production.",
+                  "explanation": "A local demo without sign-in, clean secrets, or environments does not magically become production.",
                   "order": 2,
                   "answers": [
                     {
@@ -3248,7 +3248,7 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m03-q3-b",
-                      "label": "Well-bounded MVP",
+                      "label": "Well-limited first deliverable",
                       "isCorrect": false,
                       "order": 1
                     },
@@ -3260,7 +3260,7 @@
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m03-q3-d",
-                      "label": "Minimal sufficient context",
+                      "label": "Just enough context",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -3268,20 +3268,20 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m03-q4",
-                  "prompt": "Where should secrets (API keys, database URLs) live?",
+                  "prompt": "Where should secrets (API keys, database addresses) live?",
                   "type": "single",
-                  "explanation": "Local / preview / prod each have their secrets. Never hard-code them in code or chat pasted into the repo.",
+                  "explanation": "Local / online preview / prod each have their secrets. Never hard-code them in code or chat pasted into the repo.",
                   "order": 3,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m03-q4-a",
-                      "label": "In the prompt and the Git repo",
+                      "label": "In the AI request and the Git repo",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m03-q4-b",
-                      "label": "In environment variables per environment",
+                      "label": "In environment variables, one set per environment",
                       "isCorrect": true,
                       "order": 1
                     },
@@ -3301,32 +3301,32 @@
                 },
                 {
                   "legacyId": "svc-prompt-quiz-m03-q5",
-                  "prompt": "Enriching a bare CRUD prompt mostly means…",
+                  "prompt": "Enriching a bare CRUD request mostly means…",
                   "type": "single",
                   "explanation": "Bare CRUD ships a shell. A product brief adds what makes the shell sellable and safe.",
                   "order": 4,
                   "answers": [
                     {
                       "legacyId": "svc-prompt-quiz-m03-q5-a",
-                      "label": "Adding animations before auth",
+                      "label": "Adding animations before sign-in",
                       "isCorrect": false,
                       "order": 0
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m03-q5-b",
-                      "label": "Adding auth, trust boundaries, envs, and missing business journeys",
+                      "label": "Adding sign-in, boundaries, environments, and missing business journeys",
                       "isCorrect": true,
                       "order": 1
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m03-q5-c",
-                      "label": "Removing all validation",
+                      "label": "Removing all checks",
                       "isCorrect": false,
                       "order": 2
                     },
                     {
                       "legacyId": "svc-prompt-quiz-m03-q5-d",
-                      "label": "Asking for CORS *",
+                      "label": "Asking for CORS * (every site)",
                       "isCorrect": false,
                       "order": 3
                     }
@@ -3337,27 +3337,27 @@
             "exercises": [
               {
                 "legacyId": "svc-prompt-ex-m03-projet",
-                "title": "P2 project: enrich a CRUD prompt",
-                "instructions": "The CRUD prompt is too bare for a sellable product. Check what must enter the brief / prompt for a path to production.",
+                "title": "P2 project: enrich a CRUD request",
+                "instructions": "The CRUD request (create, list, update, delete) is too bare for a sellable product. Check what must enter the brief / request for a path to production.",
                 "kind": "audit",
                 "order": 0,
                 "hints": [
-                  "Auth, environments, and server-side secrets are part of « product-ready ».",
-                  "A local demo with no path to preview/prod stays a throwaway prototype."
+                  "Sign-in, environments, and server-side secrets are part of « ready to sell ».",
+                  "A demo on your laptop with no path to online preview / prod stays a throwaway prototype."
                 ],
                 "starterFiles": {
                   "__format": "audit",
-                  "scenario": "<p>Initial prompt: « Generate an articles CRUD (create, list, update, delete) with a React UI and an API. »</p>\n<p>Nothing about who is signed in, optional payments, notifications, or local / preview / prod.</p>",
+                  "scenario": "<p>Initial request: « Generate an articles CRUD (create, list, update, delete) with a React UI and an API. »</p>\n<p>Nothing about who is signed in, optional payments, notifications, or local / online preview / production.</p>",
                   "findings": [
                     {
                       "id": "f1",
-                      "label": "Auth and roles (who can create / edit / delete)",
+                      "label": "Sign-in and roles (who can create / edit / delete)",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f2",
-                      "label": "Payment or monetization if the product depends on it (even an explicit « later »)",
+                      "label": "Payment or monetization if the product depends on it (even a written « later »)",
                       "correct": true,
                       "minSeverity": "medium"
                     },
@@ -3369,24 +3369,24 @@
                     },
                     {
                       "id": "f4",
-                      "label": "Environments: local, preview, prod + secrets out of code",
+                      "label": "Environments: local, online preview, prod + secrets out of code",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f5",
-                      "label": "Server-side validation and authorization at trust boundaries",
+                      "label": "Server-side checks and access rights at trust boundaries",
                       "correct": true,
                       "minSeverity": "high"
                     },
                     {
                       "id": "f6",
-                      "label": "Pick a Google Font before any auth",
+                      "label": "Pick a Google Font before any sign-in",
                       "correct": false
                     },
                     {
                       "id": "f7",
-                      "label": "Add 12 framer-motion animations in the first prompt",
+                      "label": "Add 12 animations in the first request",
                       "correct": false
                     }
                   ],
@@ -3394,7 +3394,7 @@
                   "passingScore": 0.7
                 },
                 "solutionFiles": {
-                  "__solution": "<p>Product-ready brief: auth/roles, payment if relevant, notifications if needed, environments + secrets, server validation. Fonts and animations do not replace those constraints.</p>"
+                  "__solution": "<p>Product-ready brief: sign-in/roles, payment if needed, notifications if needed, environments + secrets, server checks. Fonts and animations do not replace those constraints.</p>"
                 },
                 "tests": null,
                 "validator": null,

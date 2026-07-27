@@ -13,17 +13,17 @@ export const promptPhase: Phase = {
   label: "Phase 2",
   title: "Prompt & cadrage produit",
   summary:
-    "Obtenir du bon code plus souvent : cadrer un MVP commercialisable avant de générer, avec briefs et prompts auditables.",
-  metaTags: ["tronc commun", "lecture ~2h", "audits interactifs", "prompts"],
+    "Obtenir du bon code plus souvent : cadrer un premier livrable vendable avant de générer, avec cahiers des charges et demandes à l'IA vérifiables.",
+  metaTags: ["tronc commun", "lecture ~2h", "audits interactifs", "demandes à l'IA"],
   modules: [promptModule01, promptModule02, promptModule03],
   project: {
-    title: "Projet P2 : Feature CRUD générée par prompts documentés",
+    title: "Projet P2 : CRUD via demandes documentées",
     deliverable:
-      "Un brief / prompt CRUD enrichi (auth, business, envs) validé via l'audit « Projet P2 » du module 03.",
+      "Un cahier des charges / demande CRUD enrichi (connexion, business, environnements) validé via l'audit « Projet P2 » du module 03.",
     assessment: [
-      "Checklist prêt produit complète (pas un CRUD nu)",
+      "Liste prêt produit complète (pas un CRUD nu)",
       "Contraintes business et secrets hors code explicites",
-      "Scope borné et auditable",
+      "Périmètre limité et vérifiable",
     ],
   },
 };
