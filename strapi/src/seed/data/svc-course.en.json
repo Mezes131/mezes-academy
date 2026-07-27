@@ -1,12 +1,12 @@
 {
-  "exportedAt": "2026-07-27T14:54:21.563Z",
+  "exportedAt": "2026-07-27T15:20:24.052Z",
   "locale": "en",
   "course": {
     "legacyId": "svc",
     "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
     "slug": "secure-vibe-coding",
     "tagline": "Du prompt au produit en production, sans dette ni failles oubliées",
-    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Ship : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
+    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
     "icon": "fa-shield-halved",
     "iconFamily": "fa-solid",
     "level": "intermediate",
@@ -3410,408 +3410,980 @@
       {
         "legacyId": "svc-architecture",
         "slug": "architecture",
-        "title": "Architecture d'un produit vibe",
+        "title": "Architecture of a vibe product",
         "label": "Phase 3",
-        "summary": "Découper un système shippable avant de générer quoi que ce soit.",
+        "summary": "Split a shippable system before generating: building blocks, trust boundaries, secrets per environment, contracts and webhooks.",
         "order": 3,
         "color": "core",
         "icon": "fa-diagram-project",
         "metaTags": [
-          "3 modules"
+          "core track",
+          "~2h read",
+          "interactive audits",
+          "architecture"
         ],
         "objectives": [],
         "prerequisites": [],
-        "scaffoldOnly": true,
-        "projectTitle": "Projet P3 : Architecture cible du capstone",
-        "projectDeliverable": "Le dossier d'architecture du futur capstone : diagramme, décisions, risques identifiés.",
+        "scaffoldOnly": false,
+        "projectTitle": "P3 project: Capstone target architecture",
+        "projectDeliverable": "An architecture folder for the future capstone: block diagram, decisions, risks (offline for now; m02/m03 audits train the key reflexes).",
         "projectAssessment": [
-          "Diagramme lisible avec frontières de confiance",
-          "Décisions justifiées (trade-offs explicites)",
-          "Risques identifiés avec mitigation"
+          "Readable diagram with trust boundaries",
+          "Justified decisions (explicit trade-offs)",
+          "Identified risks with mitigation ideas"
         ],
         "modules": [
           {
             "legacyId": "svc-architecture-m01",
             "moduleId": "svc-architecture-m01",
             "index": "01",
-            "title": "Découper le système",
-            "subtitle": "Front, API, DB, jobs, services tiers et frontières de confiance",
+            "title": "Split the system",
+            "subtitle": "UI, API, database, background jobs, external services, and trust boundaries",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Identifier les briques d'un produit web complet",
-              "Tracer les frontières de confiance",
-              "Décider ce que l'IA ne doit pas inventer seule"
+              "Name the building blocks of a full web product",
+              "Spot trust boundaries (where you verify)",
+              "Decide what the AI must not invent alone"
             ],
             "prerequisites": [],
-            "openByDefault": false,
+            "openByDefault": true,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-architecture-m01-l1",
-                    "title": "Les briques du système",
-                    "desc": "Cartographier front, API, DB, jobs et services tiers.",
-                    "objectives": [
-                      "Cartographier front, API, DB, jobs et services tiers."
-                    ],
-                    "outline": {
-                      "context": "Cartographier front, API, DB, jobs et services tiers.",
-                      "concepts": [
-                        "front",
-                        "API",
-                        "base de données",
-                        "jobs",
-                        "services tiers"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Les briques du système.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "front",
-                        "API",
-                        "base de données",
-                        "jobs",
-                        "services tiers"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m01-l2",
-                    "title": "Frontières de confiance",
-                    "desc": "Savoir où la validation et l'autorisation sont obligatoires.",
-                    "objectives": [
-                      "Savoir où la validation et l'autorisation sont obligatoires."
-                    ],
-                    "outline": {
-                      "context": "Savoir où la validation et l'autorisation sont obligatoires.",
-                      "concepts": [
-                        "trust boundaries",
-                        "validation aux frontières"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Frontières de confiance.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "trust boundaries",
-                        "validation aux frontières"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m01-l3",
-                    "title": "Ce que l'IA n'invente pas seule",
-                    "desc": "Garder architecture et contrats sous contrôle humain.",
-                    "objectives": [
-                      "Garder architecture et contrats sous contrôle humain."
-                    ],
-                    "outline": {
-                      "context": "Garder architecture et contrats sous contrôle humain.",
-                      "concepts": [
-                        "décisions d'architecture",
-                        "contrats d'API",
-                        "schéma de données"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Ce que l'IA n'invente pas seule.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "décisions d'architecture",
-                        "contrats d'API",
-                        "schéma de données"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "System building blocks"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Before generating, draw the map. A typical web product has: a <strong>UI</strong> (browser), an <strong>API</strong> (server that applies rules), a <strong>database</strong>, sometimes <strong>background jobs</strong> (emails, imports), and <strong>external services</strong> (sign-in, payments, email delivery)."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-map'></i> Mini map",
+                  "body": "UI → API → database. External services mostly attach to the API. Background jobs leave the API when work is too long for one request."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Trust boundaries"
+              },
+              {
+                "kind": "paragraph",
+                "html": "A <strong>trust boundary</strong> is the line between your system and the outside world (browser, webhook, other API). Whenever data crosses that line, you <strong>verify</strong> inputs and rights. The browser is never trusted: it can be modified."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-shield-halved'></i> <strong>Reflex</strong>: validation and authorization on the server, at the boundaries, not only in the UI."
+              },
+              {
+                "kind": "title",
+                "text": "What the AI does not invent alone"
+              },
+              {
+                "kind": "paragraph",
+                "html": "You keep under human control: how blocks are split, <strong>API contracts</strong> (inputs / outputs / errors), and the critical <strong>data shape</strong>. The AI can propose code inside that frame. Not rewrite the frame in silence."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Trap",
+                  "body": "« Generate the whole SaaS » with no map = fuzzy boundaries, misplaced secrets, invented contracts. Frame first, generate next, then audit and Ship."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "front",
-                  "API",
-                  "base de données",
-                  "jobs",
-                  "services tiers",
-                  "trust boundaries",
-                  "validation aux frontières",
-                  "décisions d'architecture"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Schéma d'architecture d'un SaaS minimal",
-                  "kind": "synthesis",
-                  "brief": "Produire le schéma d'architecture d'un SaaS minimal : briques, flux, frontières de confiance."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-architecture-m01-lesson",
-              "title": "Découper le système",
-              "desc": "Front, API, DB, jobs, services tiers et frontières de confiance",
+              "title": "Split the system",
+              "desc": "UI, API, database, background jobs, external services, and trust boundaries",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Les briques du système</strong> : Cartographier front, API, DB, jobs et services tiers.</li><li><strong>Frontières de confiance</strong> : Savoir où la validation et l'autorisation sont obligatoires.</li><li><strong>Ce que l'IA n'invente pas seule</strong> : Garder architecture et contrats sous contrôle humain.</li></ul>"
+                  "body": "<h2>System building blocks</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Before generating, draw the map. A typical web product has: a <strong>UI</strong> (browser), an <strong>API</strong> (server that applies rules), a <strong>database</strong>, sometimes <strong>background jobs</strong> (emails, imports), and <strong>external services</strong> (sign-in, payments, email delivery)."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-map'></i> Mini map",
+                  "body": "UI → API → database. External services mostly attach to the API. Background jobs leave the API when work is too long for one request."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Trust boundaries</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "A <strong>trust boundary</strong> is the line between your system and the outside world (browser, webhook, other API). Whenever data crosses that line, you <strong>verify</strong> inputs and rights. The browser is never trusted: it can be modified."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-shield-halved'></i> <strong>Reflex</strong>: validation and authorization on the server, at the boundaries, not only in the UI.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>What the AI does not invent alone</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "You keep under human control: how blocks are split, <strong>API contracts</strong> (inputs / outputs / errors), and the critical <strong>data shape</strong>. The AI can propose code inside that frame. Not rewrite the frame in silence."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Trap",
+                  "body": "« Generate the whole SaaS » with no map = fuzzy boundaries, misplaced secrets, invented contracts. Frame first, generate next, then audit and Ship."
                 }
               ]
             },
-            "quiz": null,
+            "quiz": {
+              "legacyId": "svc-architecture-quiz-m01",
+              "title": "Split the system: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q1",
+                  "prompt": "In a typical web product, what does the API mostly do?",
+                  "type": "single",
+                  "explanation": "The UI talks to the API. The API applies rules and talks to the database / external services.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-a",
+                      "label": "Render buttons and CSS",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-b",
+                      "label": "Expose server-side operations (data, rights, business rules)",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-c",
+                      "label": "Replace the database",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-d",
+                      "label": "Generate Stripe keys",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q2",
+                  "prompt": "What is a trust boundary?",
+                  "type": "single",
+                  "explanation": "Whenever data crosses a boundary, you check inputs and rights. The browser is never trusted.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-a",
+                      "label": "The line between your code and the outside (browser, webhook…): where you must verify",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-b",
+                      "label": "A CSS file",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-c",
+                      "label": "The Git repo name",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-d",
+                      "label": "A dark theme",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q3",
+                  "prompt": "What are background jobs?",
+                  "type": "single",
+                  "explanation": "Jobs keep users from waiting on long-running work.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-a",
+                      "label": "Work done in the background (emails, imports) outside the immediate user request",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-b",
+                      "label": "Disabled buttons",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-c",
+                      "label": "Git commits",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-d",
+                      "label": "Web fonts",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q4",
+                  "prompt": "What must the AI not invent alone?",
+                  "type": "single",
+                  "explanation": "You own structural decisions. The AI proposes code inside that frame.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-a",
+                      "label": "A secondary button color",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-b",
+                      "label": "Architecture, API contracts, and critical data shape",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-c",
+                      "label": "A TODO comment",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-d",
+                      "label": "Help text on a field",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q5",
+                  "prompt": "Why draw the building blocks before generating?",
+                  "type": "single",
+                  "explanation": "Without a map, the AI invents fuzzy boundaries. With a map, you audit and Ship cleanly.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-a",
+                      "label": "Only to pad the README",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-b",
+                      "label": "To know where to validate, where secrets live, and what the AI may touch",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-c",
+                      "label": "Because TypeScript requires it",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-d",
+                      "label": "To block Git",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
             "exercises": []
           },
           {
             "legacyId": "svc-architecture-m02",
             "moduleId": "svc-architecture-m02",
             "index": "02",
-            "title": "Secrets & config par environnement",
-            "subtitle": "Local, preview, prod : qui voit quoi",
+            "title": "Secrets and config per environment",
+            "subtitle": "Local, online preview, production: who sees what",
             "duration": "35 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Distinguer variables runtime et build-time",
-              "Organiser la config local / preview / prod",
-              "Prévenir les fuites via Docker et CI"
+              "Distinguish build-time vs runtime variables",
+              "Organize local / online preview / production",
+              "Avoid leaks via Docker images and CI logs"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-architecture-m02-l1",
-                    "title": "Runtime vs build-time",
-                    "desc": "Comprendre quand une variable est figée dans le build.",
-                    "objectives": [
-                      "Comprendre quand une variable est figée dans le build."
-                    ],
-                    "outline": {
-                      "context": "Comprendre quand une variable est figée dans le build.",
-                      "concepts": [
-                        "variables build-time",
-                        "variables runtime",
-                        "Vite/env"
-                      ],
-                      "pitfalls": [
-                        "secret exposé dans le bundle front"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Runtime vs build-time.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "variables build-time",
-                        "variables runtime",
-                        "Vite/env"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m02-l2",
-                    "title": "Environnements et fuites",
-                    "desc": "Structurer local/preview/prod et bloquer les fuites Docker/CI.",
-                    "objectives": [
-                      "Structurer local/preview/prod et bloquer les fuites Docker/CI."
-                    ],
-                    "outline": {
-                      "context": "Structurer local/preview/prod et bloquer les fuites Docker/CI.",
-                      "concepts": [
-                        "environnements",
-                        "fuites Docker",
-                        "fuites CI"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Environnements et fuites.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "environnements",
-                        "fuites Docker",
-                        "fuites CI"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Build-time vs runtime"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Some values are <strong>baked into the package at build time</strong> (often visible later, especially in the browser). Others are <strong>read when the server starts</strong> from the environment. Secrets belong to the second family."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-eye'></i> Vite / front trap",
+                  "body": "A key stuck in a front build variable often ends up in the browser package. Anyone who opens developer tools can read it."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Environments and leaks"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Three sets minimum: <strong>local</strong> (your machine), <strong>online preview</strong> (temporary demo), <strong>production</strong>. Each has its variables. You do not recycle the live prod key onto every laptop."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-key'></i> <strong>Rule</strong>: secrets injected at runtime, never baked into a Docker image or printed in CI logs."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-table'></i> Matrix",
+                  "body": "For each secret: which environment? server-side or public? Who may read it? The exercise below trains that reflex."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "variables build-time",
-                  "variables runtime",
-                  "Vite/env",
-                  "environnements",
-                  "fuites Docker",
-                  "fuites CI"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Matrice d'env vars",
-                  "kind": "synthesis",
-                  "brief": "Construire la matrice d'environnements (local/preview/prod) pour un produit avec auth + paiement."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-architecture-m02-lesson",
-              "title": "Secrets & config par environnement",
-              "desc": "Local, preview, prod : qui voit quoi",
+              "title": "Secrets and config per environment",
+              "desc": "Local, online preview, production: who sees what",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Runtime vs build-time</strong> : Comprendre quand une variable est figée dans le build.</li><li><strong>Environnements et fuites</strong> : Structurer local/preview/prod et bloquer les fuites Docker/CI.</li></ul>"
+                  "body": "<h2>Build-time vs runtime</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Some values are <strong>baked into the package at build time</strong> (often visible later, especially in the browser). Others are <strong>read when the server starts</strong> from the environment. Secrets belong to the second family."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-eye'></i> Vite / front trap",
+                  "body": "A key stuck in a front build variable often ends up in the browser package. Anyone who opens developer tools can read it."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Environments and leaks</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Three sets minimum: <strong>local</strong> (your machine), <strong>online preview</strong> (temporary demo), <strong>production</strong>. Each has its variables. You do not recycle the live prod key onto every laptop."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-key'></i> <strong>Rule</strong>: secrets injected at runtime, never baked into a Docker image or printed in CI logs.</em></p>"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-table'></i> Matrix",
+                  "body": "For each secret: which environment? server-side or public? Who may read it? The exercise below trains that reflex."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-architecture-quiz-m02",
+              "title": "Secrets and environments: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q1",
+                  "prompt": "A « build-time » variable is…",
+                  "type": "single",
+                  "explanation": "If you put a secret in a front build variable, it often ends up in the browser. Disaster.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-a",
+                      "label": "A value baked into the package at build time, often readable later",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-b",
+                      "label": "A value that changes on every click",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-c",
+                      "label": "A secret that cannot be stolen",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-d",
+                      "label": "A .gitignore file",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q2",
+                  "prompt": "Where should production secrets live?",
+                  "type": "single",
+                  "explanation": "Local, online preview, and production each have their own secrets. Never hard-code them.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-a",
+                      "label": "In the Git repo",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-b",
+                      "label": "In server / host environment variables, per environment",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-c",
+                      "label": "In CSS",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-d",
+                      "label": "In a README comment",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q3",
+                  "prompt": "Why separate local / online preview / production?",
+                  "type": "single",
+                  "explanation": "You experiment locally and in preview. Production stays protected.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-a",
+                      "label": "To multiply licenses",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-b",
+                      "label": "To test without burning prod and limit who sees which secrets",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-c",
+                      "label": "Because React requires it",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-d",
+                      "label": "Only for SEO",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q4",
+                  "prompt": "Which Docker / CI trap should you avoid?",
+                  "type": "single",
+                  "explanation": "An image or log that contains a secret is a lasting leak. Inject secrets at runtime.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-a",
+                      "label": "Logging or baking secrets into images and build logs",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-b",
+                      "label": "Using an untracked local .env file",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-c",
+                      "label": "Reading secrets from the host at startup",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-d",
+                      "label": "Having three named environments",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q5",
+                  "prompt": "Putting a live Stripe key in the Vite front…",
+                  "type": "single",
+                  "explanation": "Everything in the browser package is public. Secret keys stay on the server.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-a",
+                      "label": "Is a good speed practice",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-b",
+                      "label": "Exposes the secret to anyone who opens browser tools",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-c",
+                      "label": "Is required by Stripe",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-d",
+                      "label": "Automatically protects production",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-architecture-ex-m02-1",
+                "title": "Environment matrix",
+                "instructions": "Product with sign-in and payments. Check only healthy rules for local, online preview, and production. Ignore dangerous shortcuts.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Anything shipped to the browser can be read by anyone. Production secrets do not belong there.",
+                  "Local, online preview, and production use different secret sets."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>You are preparing config for a small product: user accounts + Stripe payments. Three environments: local (your machine), online preview (temporary demo), production.</p>\n<p>A teammate suggests: « Put the live Stripe key in the Vite front so it works everywhere. »</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Production secrets only in server-side environment variables (never in code)",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Distinct sets for local / online preview / production (not the same key everywhere)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "No payment secret key in the package sent to the browser",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Build-time variables: only what can be public (e.g. public API URL)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Put the live Stripe key in the front « so it works everywhere »",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Reuse production secrets on every developer laptop",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Healthy rules: server secrets in environment variables, separate sets per environment, nothing secret in the browser, build limited to public values. Live keys in the front and prod secrets on every laptop are anti-patterns.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-architecture-m03",
             "moduleId": "svc-architecture-m03",
             "index": "03",
-            "title": "Contrats & frontières",
-            "subtitle": "Webhooks, idempotence, timeouts, retries",
+            "title": "Contracts and boundaries",
+            "subtitle": "Webhooks, process-once, timeouts and retries",
             "duration": "40 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Spécifier des contrats d'API stables",
-              "Concevoir des webhooks idempotents",
-              "Gérer timeouts et retries"
+              "Write stable API contracts",
+              "Design a webhook that does not double-apply effects",
+              "Bound timeouts and retries"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-architecture-m03-l1",
-                    "title": "Contrats d'API stables",
-                    "desc": "Définir des contrats que les deux côtés peuvent respecter.",
-                    "objectives": [
-                      "Définir des contrats que les deux côtés peuvent respecter."
-                    ],
-                    "outline": {
-                      "context": "Définir des contrats que les deux côtés peuvent respecter.",
-                      "concepts": [
-                        "contrat d'API",
-                        "versionnement",
-                        "compatibilité"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Contrats d'API stables.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "contrat d'API",
-                        "versionnement",
-                        "compatibilité"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m03-l2",
-                    "title": "Webhooks et idempotence",
-                    "desc": "Traiter un webhook dupliqué sans effet de bord.",
-                    "objectives": [
-                      "Traiter un webhook dupliqué sans effet de bord."
-                    ],
-                    "outline": {
-                      "context": "Traiter un webhook dupliqué sans effet de bord.",
-                      "concepts": [
-                        "webhooks",
-                        "idempotence",
-                        "timeouts",
-                        "retries"
-                      ],
-                      "pitfalls": [
-                        "traiter deux fois le même événement",
-                        "trust du payload sans signature"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Webhooks et idempotence.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "webhooks",
-                        "idempotence",
-                        "timeouts",
-                        "retries"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Stable API contracts"
+              },
+              {
+                "kind": "paragraph",
+                "html": "A <strong>contract</strong> is the agreement: which inputs, which outputs, which errors, which version. Both sides (UI and server, or you and a provider) can evolve without breaking each other if the contract is clear."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-file-signature'></i> Stable ≠ frozen forever",
+                  "body": "You can version (v1, v2). You avoid silently changing a field's meaning. The AI must honor the contract you wrote, not invent another."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Webhooks and « once only »"
+              },
+              {
+                "kind": "paragraph",
+                "html": "A <strong>webhook</strong> is an HTTP notification from an external service (e.g. payment succeeded). You verify the <strong>signature</strong> (proof of origin). You process each event <strong>at most once</strong> (idempotency): a duplicate must not double-credit."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-rotate'></i> <strong>Timeouts and retries</strong>: bound waits and retries, or an incident becomes a flood of calls."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-ban'></i> Anti-pattern",
+                  "body": "Accept JSON as-is with no signature, or credit on every receipt of the same event. The webhook exercise below attacks both mistakes."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "contrat d'API",
-                  "versionnement",
-                  "compatibilité",
-                  "webhooks",
-                  "idempotence",
-                  "timeouts",
-                  "retries"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Spécifier un webhook de paiement",
-                  "kind": "synthesis",
-                  "brief": "Spécifier un webhook de paiement : signature, idempotence, états, erreurs et retries."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-architecture-m03-lesson",
-              "title": "Contrats & frontières",
-              "desc": "Webhooks, idempotence, timeouts, retries",
+              "title": "Contracts and boundaries",
+              "desc": "Webhooks, process-once, timeouts and retries",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Contrats d'API stables</strong> : Définir des contrats que les deux côtés peuvent respecter.</li><li><strong>Webhooks et idempotence</strong> : Traiter un webhook dupliqué sans effet de bord.</li></ul>"
+                  "body": "<h2>Stable API contracts</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "A <strong>contract</strong> is the agreement: which inputs, which outputs, which errors, which version. Both sides (UI and server, or you and a provider) can evolve without breaking each other if the contract is clear."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-file-signature'></i> Stable ≠ frozen forever",
+                  "body": "You can version (v1, v2). You avoid silently changing a field's meaning. The AI must honor the contract you wrote, not invent another."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Webhooks and « once only »</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "A <strong>webhook</strong> is an HTTP notification from an external service (e.g. payment succeeded). You verify the <strong>signature</strong> (proof of origin). You process each event <strong>at most once</strong> (idempotency): a duplicate must not double-credit."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-rotate'></i> <strong>Timeouts and retries</strong>: bound waits and retries, or an incident becomes a flood of calls.</em></p>"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-ban'></i> Anti-pattern",
+                  "body": "Accept JSON as-is with no signature, or credit on every receipt of the same event. The webhook exercise below attacks both mistakes."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-architecture-quiz-m03",
+              "title": "Contracts and webhooks: check your reading",
+              "questions": [
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q1",
+                  "prompt": "An API contract is mainly…",
+                  "type": "single",
+                  "explanation": "Without a stable contract, the AI (and teams) break the other side on every change.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-a",
+                      "label": "A clear agreement on inputs, outputs, errors, and versions both sides honor",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-b",
+                      "label": "A shared CSS file",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-c",
+                      "label": "A release tweet",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-d",
+                      "label": "A dark theme",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q2",
+                  "prompt": "Why verify a webhook signature?",
+                  "type": "single",
+                  "explanation": "Without a signature, anyone can announce a fake « payment succeeded ».",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-a",
+                      "label": "To decorate logs",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-b",
+                      "label": "To ensure the message really comes from the provider, not an impostor",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-c",
+                      "label": "Because JSON requires it",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-d",
+                      "label": "To speed up payment",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q3",
+                  "prompt": "« Do not process the same event twice » means…",
+                  "type": "single",
+                  "explanation": "Networks sometimes resend the same webhook. Your system must stay correct.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-a",
+                      "label": "Idempotency: a duplicate must not double-credit or double-send",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-b",
+                      "label": "Delete the database",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-c",
+                      "label": "Disable HTTPS",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-d",
+                      "label": "Ignore all errors",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q4",
+                  "prompt": "Why bound timeouts and retries?",
+                  "type": "single",
+                  "explanation": "Without bounds, an incident becomes a flood of calls.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-a",
+                      "label": "To avoid loops hammering a service that is already down",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-b",
+                      "label": "To pad the README",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-c",
+                      "label": "Because Git requires it",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-d",
+                      "label": "Only for CSS",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q5",
+                  "prompt": "Trusting a webhook JSON body without a signature…",
+                  "type": "single",
+                  "explanation": "The body is easy to forge. The signature (or equivalent) proves origin.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-a",
+                      "label": "Is fine in production",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-b",
+                      "label": "Is a dangerous anti-pattern",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-c",
+                      "label": "Is required by all providers",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-d",
+                      "label": "Replaces tests",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-architecture-ex-m03-1",
+                "title": "Payment webhook",
+                "instructions": "You are specifying how to handle a payment webhook (notification from the provider). Check what must appear in a safe contract.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Without signature checks, anyone can invent a « payment succeeded » event.",
+                  "The same event can arrive twice: your system must not credit twice."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Payment provider: sends an HTTP notification when a payment changes state. Your API must receive it, verify it, update the order, then respond.</p>\n<p>An AI prompt suggested: « Accept the JSON body as-is and mark the order paid. No need for a signature. »</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Verify the signature (or authenticity proof) before trusting the message",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Do not apply the same event twice (idempotency key / event id)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Define expected states (e.g. pending, paid, failed) and returned errors",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Bound retries and timeouts to avoid runaway loops",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Trust the JSON body without verifying the signature",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Ignore duplicates and credit on every receipt",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Safe contract: signature, no double processing, clear states and errors, bounded retries / timeouts. Blindly accepting JSON or crediting every duplicate = incident.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           }
         ]
       },
@@ -7162,7 +7734,7 @@
       {
         "legacyId": "svc-ship",
         "slug": "ship",
-        "title": "Ship commercial",
+        "title": "Livraison commerciale",
         "label": "Phase 12",
         "summary": "Transformer un déploiement en offre commercialisable.",
         "order": 12,
@@ -7174,8 +7746,8 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P12 : Dossier Ship",
-        "projectDeliverable": "Le dossier Ship complet : URL publique, plans et pricing, preuves d'audit, runbook.",
+        "projectTitle": "Projet P12 : Dossier de livraison",
+        "projectDeliverable": "Le dossier de livraison complet : URL publique, plans et pricing, preuves d'audit, runbook.",
         "projectAssessment": [
           "Dossier complet et vérifiable",
           "Pricing page en ligne avec CTA",
@@ -7352,7 +7924,7 @@
             "legacyId": "svc-ship-m03",
             "moduleId": "svc-ship-m03",
             "index": "03",
-            "title": "Preuves de Ship",
+            "title": "Preuves de livraison",
             "subtitle": "Changelog, smoke tests, dossier de release",
             "duration": "35 min",
             "order": 2,
@@ -7372,12 +7944,12 @@
                   {
                     "id": "svc-ship-m03-l1",
                     "title": "Livrer avec preuves",
-                    "desc": "Produire les artefacts qui prouvent que le produit est shippé.",
+                    "desc": "Produire les artefacts qui prouvent que le produit est livré.",
                     "objectives": [
-                      "Produire les artefacts qui prouvent que le produit est shippé."
+                      "Produire les artefacts qui prouvent que le produit est livré."
                     ],
                     "outline": {
-                      "context": "Produire les artefacts qui prouvent que le produit est shippé.",
+                      "context": "Produire les artefacts qui prouvent que le produit est livré.",
                       "concepts": [
                         "changelog",
                         "smoke tests",
@@ -7410,22 +7982,22 @@
               },
               "exercises": [
                 {
-                  "title": "Assembler le dossier Ship",
+                  "title": "Assembler le dossier de livraison",
                   "kind": "synthesis",
-                  "brief": "Assembler le dossier Ship du produit : URL, plans, preuves d'audit, runbook."
+                  "brief": "Assembler le dossier de livraison du produit : URL, plans, preuves d'audit, runbook."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ship-m03-lesson",
-              "title": "Preuves de Ship",
+              "title": "Preuves de livraison",
               "desc": "Changelog, smoke tests, dossier de release",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Livrer avec preuves</strong> : Produire les artefacts qui prouvent que le produit est shippé.</li></ul>"
+                  "body": "<ul><li><strong>Livrer avec preuves</strong> : Produire les artefacts qui prouvent que le produit est livré.</li></ul>"
                 }
               ]
             },
@@ -7439,7 +8011,7 @@
         "slug": "capstone",
         "title": "Capstone + certificat",
         "label": "Capstone",
-        "summary": "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Ship, validé par la rubrique de certification.",
+        "summary": "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Livraison, validé par la rubrique de certification.",
         "order": 13,
         "color": "expert",
         "icon": "fa-award",
@@ -7450,7 +8022,7 @@
         "prerequisites": [],
         "scaffoldOnly": true,
         "projectTitle": "Capstone : Produit commercialisable en prod",
-        "projectDeliverable": "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier Ship. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
+        "projectDeliverable": "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier de livraison. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
         "projectAssessment": [
           "Produit déployé accessible en HTTPS (obligatoire)",
           "Auth via provider : pas d'auth maison fragile (obligatoire)",
@@ -7459,7 +8031,7 @@
           "Checklists Perf / Design / A11y : pass selon seuils publiés",
           "Webhooks + idempotence si le brief inclut le paiement (obligatoire)",
           "Déploiement documenté : CI ou procédure (obligatoire)",
-          "Dossier Ship complet (obligatoire)",
+          "Dossier de livraison complet (obligatoire)",
           "Échecs automatiques : secrets en clair, checkout redirect-only, prod sans HTTPS, autorisation client-only"
         ],
         "modules": [
@@ -7475,7 +8047,7 @@
             "objectives": [
               "Choisir un brief parmi les trois proposés",
               "Comprendre chaque critère de la rubrique et les échecs automatiques",
-              "Planifier les jalons Prompt → Audit → Ship"
+              "Planifier les jalons Prompt → Audit → Livraison"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7523,7 +8095,7 @@
                       "concepts": [
                         "Prompt : brief + journal de prompts + architecture",
                         "Audit : Security + Qualité avec preuves",
-                        "Ship : prod publique + dossier de release"
+                        "Livraison : prod publique + dossier de release"
                       ],
                       "pitfalls": [
                         "Secrets en clair dans le repo ou les logs (échec automatique)",
@@ -7539,7 +8111,7 @@
                       "focus": [
                         "Prompt : brief + journal de prompts + architecture",
                         "Audit : Security + Qualité avec preuves",
-                        "Ship : prod publique + dossier de release"
+                        "Livraison : prod publique + dossier de release"
                       ]
                     },
                     "exercises": []
@@ -7556,7 +8128,7 @@
                   "svc-capstone-service : booking/lead + paiement + emails transactionnels",
                   "Prompt : brief + journal de prompts + architecture",
                   "Audit : Security + Qualité avec preuves",
-                  "Ship : prod publique + dossier de release"
+                  "Livraison : prod publique + dossier de release"
                 ]
               },
               "exercises": [

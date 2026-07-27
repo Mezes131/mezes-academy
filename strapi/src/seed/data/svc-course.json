@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-07-27T14:59:18.254Z",
+  "exportedAt": "2026-07-27T15:20:22.013Z",
   "locale": "fr",
   "course": {
     "legacyId": "svc",
@@ -3412,22 +3412,25 @@
         "slug": "architecture",
         "title": "Architecture d'un produit vibe",
         "label": "Phase 3",
-        "summary": "Découper un système shippable avant de générer quoi que ce soit.",
+        "summary": "Découper un système livrable avant de générer : briques, frontières de confiance, secrets par environnement, contrats et webhooks.",
         "order": 3,
         "color": "core",
         "icon": "fa-diagram-project",
         "metaTags": [
-          "3 modules"
+          "tronc commun",
+          "lecture ~2h",
+          "audits interactifs",
+          "architecture"
         ],
         "objectives": [],
         "prerequisites": [],
-        "scaffoldOnly": true,
+        "scaffoldOnly": false,
         "projectTitle": "Projet P3 : Architecture cible du capstone",
-        "projectDeliverable": "Le dossier d'architecture du futur capstone : diagramme, décisions, risques identifiés.",
+        "projectDeliverable": "Un dossier d'architecture pour le futur capstone : schéma des briques, décisions, risques (travail hors plateforme pour l'instant ; les audits m02/m03 entraînent les réflexes clés).",
         "projectAssessment": [
-          "Diagramme lisible avec frontières de confiance",
-          "Décisions justifiées (trade-offs explicites)",
-          "Risques identifiés avec mitigation"
+          "Schéma lisible avec frontières de confiance",
+          "Décisions justifiées (compromis explicites)",
+          "Risques identifiés avec pistes de mitigation"
         ],
         "modules": [
           {
@@ -3435,383 +3438,952 @@
             "moduleId": "svc-architecture-m01",
             "index": "01",
             "title": "Découper le système",
-            "subtitle": "Front, API, DB, jobs, services tiers et frontières de confiance",
+            "subtitle": "Interface, API, base, tâches différées, services externes et frontières de confiance",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Identifier les briques d'un produit web complet",
-              "Tracer les frontières de confiance",
+              "Nommer les briques d'un produit web complet",
+              "Repérer les frontières de confiance (où on vérifie)",
               "Décider ce que l'IA ne doit pas inventer seule"
             ],
             "prerequisites": [],
-            "openByDefault": false,
+            "openByDefault": true,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-architecture-m01-l1",
-                    "title": "Les briques du système",
-                    "desc": "Cartographier front, API, DB, jobs et services tiers.",
-                    "objectives": [
-                      "Cartographier front, API, DB, jobs et services tiers."
-                    ],
-                    "outline": {
-                      "context": "Cartographier front, API, DB, jobs et services tiers.",
-                      "concepts": [
-                        "front",
-                        "API",
-                        "base de données",
-                        "jobs",
-                        "services tiers"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Les briques du système.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "front",
-                        "API",
-                        "base de données",
-                        "jobs",
-                        "services tiers"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m01-l2",
-                    "title": "Frontières de confiance",
-                    "desc": "Savoir où la validation et l'autorisation sont obligatoires.",
-                    "objectives": [
-                      "Savoir où la validation et l'autorisation sont obligatoires."
-                    ],
-                    "outline": {
-                      "context": "Savoir où la validation et l'autorisation sont obligatoires.",
-                      "concepts": [
-                        "trust boundaries",
-                        "validation aux frontières"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Frontières de confiance.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "trust boundaries",
-                        "validation aux frontières"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m01-l3",
-                    "title": "Ce que l'IA n'invente pas seule",
-                    "desc": "Garder architecture et contrats sous contrôle humain.",
-                    "objectives": [
-                      "Garder architecture et contrats sous contrôle humain."
-                    ],
-                    "outline": {
-                      "context": "Garder architecture et contrats sous contrôle humain.",
-                      "concepts": [
-                        "décisions d'architecture",
-                        "contrats d'API",
-                        "schéma de données"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Ce que l'IA n'invente pas seule.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "décisions d'architecture",
-                        "contrats d'API",
-                        "schéma de données"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Les briques du système"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Avant de générer, tu dessines la carte. Un produit web typique a : une <strong>interface</strong> (navigateur), une <strong>API</strong> (serveur qui applique les règles), une <strong>base de données</strong>, parfois des <strong>tâches différées</strong> (emails, imports), et des <strong>services externes</strong> (connexion, paiement, envoi d'emails)."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-map'></i> Mini-carte",
+                  "body": "Interface → API → base. Les services externes s'accrochent surtout à l'API. Les tâches différées partent de l'API quand le travail est trop long pour une requête."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Frontières de confiance"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Une <strong>frontière de confiance</strong>, c'est la ligne entre ton système et le monde extérieur (navigateur, webhook, autre API). Dès qu'une donnée traverse cette ligne, tu <strong>vérifies</strong> les saisies et les droits. Le navigateur n'est jamais de confiance : il peut être modifié."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-shield-halved'></i> <strong>Réflexe</strong> : validation et autorisation côté serveur, aux frontières, pas seulement dans l'interface."
+              },
+              {
+                "kind": "title",
+                "text": "Ce que l'IA n'invente pas seule"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Tu gardes sous contrôle humain : le découpage des briques, les <strong>contrats d'API</strong> (entrées / sorties / erreurs), le <strong>schéma de données</strong> critique. L'IA peut proposer du code à l'intérieur de ce cadre. Pas réécrire le cadre en silence."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Piège",
+                  "body": "« Génère tout le SaaS » sans carte = frontières floues, secrets mal placés, contrats inventés. Cadre d'abord, génère ensuite, puis audit et Livraison."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "front",
-                  "API",
-                  "base de données",
-                  "jobs",
-                  "services tiers",
-                  "trust boundaries",
-                  "validation aux frontières",
-                  "décisions d'architecture"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Schéma d'architecture d'un SaaS minimal",
-                  "kind": "synthesis",
-                  "brief": "Produire le schéma d'architecture d'un SaaS minimal : briques, flux, frontières de confiance."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-architecture-m01-lesson",
               "title": "Découper le système",
-              "desc": "Front, API, DB, jobs, services tiers et frontières de confiance",
+              "desc": "Interface, API, base, tâches différées, services externes et frontières de confiance",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Les briques du système</strong> : Cartographier front, API, DB, jobs et services tiers.</li><li><strong>Frontières de confiance</strong> : Savoir où la validation et l'autorisation sont obligatoires.</li><li><strong>Ce que l'IA n'invente pas seule</strong> : Garder architecture et contrats sous contrôle humain.</li></ul>"
+                  "body": "<h2>Les briques du système</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Avant de générer, tu dessines la carte. Un produit web typique a : une <strong>interface</strong> (navigateur), une <strong>API</strong> (serveur qui applique les règles), une <strong>base de données</strong>, parfois des <strong>tâches différées</strong> (emails, imports), et des <strong>services externes</strong> (connexion, paiement, envoi d'emails)."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-map'></i> Mini-carte",
+                  "body": "Interface → API → base. Les services externes s'accrochent surtout à l'API. Les tâches différées partent de l'API quand le travail est trop long pour une requête."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Frontières de confiance</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Une <strong>frontière de confiance</strong>, c'est la ligne entre ton système et le monde extérieur (navigateur, webhook, autre API). Dès qu'une donnée traverse cette ligne, tu <strong>vérifies</strong> les saisies et les droits. Le navigateur n'est jamais de confiance : il peut être modifié."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-shield-halved'></i> <strong>Réflexe</strong> : validation et autorisation côté serveur, aux frontières, pas seulement dans l'interface.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Ce que l'IA n'invente pas seule</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Tu gardes sous contrôle humain : le découpage des briques, les <strong>contrats d'API</strong> (entrées / sorties / erreurs), le <strong>schéma de données</strong> critique. L'IA peut proposer du code à l'intérieur de ce cadre. Pas réécrire le cadre en silence."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Piège",
+                  "body": "« Génère tout le SaaS » sans carte = frontières floues, secrets mal placés, contrats inventés. Cadre d'abord, génère ensuite, puis audit et Livraison."
                 }
               ]
             },
-            "quiz": null,
+            "quiz": {
+              "legacyId": "svc-architecture-quiz-m01",
+              "title": "Découper le système : valide ta lecture",
+              "questions": [
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q1",
+                  "prompt": "Dans un produit web typique, que fait surtout l'API ?",
+                  "type": "single",
+                  "explanation": "L'interface parle à l'API. L'API applique les règles et parle à la base / aux services externes.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-a",
+                      "label": "Afficher les boutons et le CSS",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-b",
+                      "label": "Exposer des opérations côté serveur (données, droits, règles métier)",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-c",
+                      "label": "Remplacer la base de données",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q1-d",
+                      "label": "Générer les clés Stripe",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q2",
+                  "prompt": "Qu'est-ce qu'une frontière de confiance ?",
+                  "type": "single",
+                  "explanation": "Dès qu'une donnée traverse une frontière, tu vérifies saisies et droits. Le navigateur n'est jamais « de confiance ».",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-a",
+                      "label": "La ligne entre ton code et ce qui vient de l'extérieur (navigateur, webhook…) : là où tu dois vérifier",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-b",
+                      "label": "Un fichier CSS",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-c",
+                      "label": "Le nom du dépôt Git",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q2-d",
+                      "label": "Un thème sombre",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q3",
+                  "prompt": "Que sont les tâches différées (jobs) ?",
+                  "type": "single",
+                  "explanation": "Les jobs évitent de faire attendre l'utilisateur pour des traitements longs.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-a",
+                      "label": "Du travail en arrière-plan (emails, imports) hors de la requête utilisateur immédiate",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-b",
+                      "label": "Des boutons désactivés",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-c",
+                      "label": "Des commits Git",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q3-d",
+                      "label": "Des polices web",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q4",
+                  "prompt": "Que l'IA ne doit pas inventer seule ?",
+                  "type": "single",
+                  "explanation": "Tu cadres les décisions structurantes. L'IA propose du code à l'intérieur de ce cadre.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-a",
+                      "label": "La couleur d'un bouton secondaire",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-b",
+                      "label": "L'architecture, les contrats d'API et le schéma de données critiques",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-c",
+                      "label": "Un commentaire TODO",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q4-d",
+                      "label": "Le texte d'aide d'un champ",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m01-q5",
+                  "prompt": "Pourquoi dessiner les briques avant de générer ?",
+                  "type": "single",
+                  "explanation": "Sans carte, l'IA invente des frontières floues. Avec carte, tu audites et tu livres (Livraison) proprement.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-a",
+                      "label": "Pour remplir le README uniquement",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-b",
+                      "label": "Pour savoir où valider, où mettre les secrets, et ce que l'IA peut toucher",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-c",
+                      "label": "Parce que TypeScript l'exige",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m01-q5-d",
+                      "label": "Pour bloquer Git",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
             "exercises": []
           },
           {
             "legacyId": "svc-architecture-m02",
             "moduleId": "svc-architecture-m02",
             "index": "02",
-            "title": "Secrets & config par environnement",
-            "subtitle": "Local, preview, prod : qui voit quoi",
+            "title": "Secrets et config par environnement",
+            "subtitle": "Local, aperçu en ligne, production : qui voit quoi",
             "duration": "35 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Distinguer variables runtime et build-time",
-              "Organiser la config local / preview / prod",
-              "Prévenir les fuites via Docker et CI"
+              "Distinguer variables figées au build et variables lues à l'exécution",
+              "Organiser local / aperçu en ligne / production",
+              "Éviter les fuites via images Docker et journaux de CI"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-architecture-m02-l1",
-                    "title": "Runtime vs build-time",
-                    "desc": "Comprendre quand une variable est figée dans le build.",
-                    "objectives": [
-                      "Comprendre quand une variable est figée dans le build."
-                    ],
-                    "outline": {
-                      "context": "Comprendre quand une variable est figée dans le build.",
-                      "concepts": [
-                        "variables build-time",
-                        "variables runtime",
-                        "Vite/env"
-                      ],
-                      "pitfalls": [
-                        "secret exposé dans le bundle front"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Runtime vs build-time.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "variables build-time",
-                        "variables runtime",
-                        "Vite/env"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m02-l2",
-                    "title": "Environnements et fuites",
-                    "desc": "Structurer local/preview/prod et bloquer les fuites Docker/CI.",
-                    "objectives": [
-                      "Structurer local/preview/prod et bloquer les fuites Docker/CI."
-                    ],
-                    "outline": {
-                      "context": "Structurer local/preview/prod et bloquer les fuites Docker/CI.",
-                      "concepts": [
-                        "environnements",
-                        "fuites Docker",
-                        "fuites CI"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Environnements et fuites.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "environnements",
-                        "fuites Docker",
-                        "fuites CI"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Figé au build vs lu à l'exécution"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Certaines valeurs sont <strong>collées dans le paquet au moment du build</strong> (souvent visibles ensuite, surtout côté navigateur). D'autres sont <strong>lues au démarrage du serveur</strong> depuis l'environnement. Les secrets appartiennent à la deuxième famille."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-eye'></i> Piège Vite / front",
+                  "body": "Une clé collée dans une variable de build front finit souvent dans le paquet navigateur. Quiconque ouvre les outils de développement peut la lire."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Environnements et fuites"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Trois jeux minimum : <strong>local</strong> (ton ordinateur), <strong>aperçu en ligne</strong> (démo temporaire), <strong>production</strong>. Chacun a ses variables. Tu ne recycles pas la clé live de prod sur chaque laptop."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-key'></i> <strong>Règle</strong> : secrets injectés à l'exécution, jamais gravés dans l'image Docker ni imprimés dans les journaux de CI."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-table'></i> Matrice",
+                  "body": "Pour chaque secret : dans quel environnement ? côté serveur ou public ? Qui a le droit de le lire ? L'exercice ci-dessous t'entraîne."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "variables build-time",
-                  "variables runtime",
-                  "Vite/env",
-                  "environnements",
-                  "fuites Docker",
-                  "fuites CI"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Matrice d'env vars",
-                  "kind": "synthesis",
-                  "brief": "Construire la matrice d'environnements (local/preview/prod) pour un produit avec auth + paiement."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-architecture-m02-lesson",
-              "title": "Secrets & config par environnement",
-              "desc": "Local, preview, prod : qui voit quoi",
+              "title": "Secrets et config par environnement",
+              "desc": "Local, aperçu en ligne, production : qui voit quoi",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Runtime vs build-time</strong> : Comprendre quand une variable est figée dans le build.</li><li><strong>Environnements et fuites</strong> : Structurer local/preview/prod et bloquer les fuites Docker/CI.</li></ul>"
+                  "body": "<h2>Figé au build vs lu à l'exécution</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Certaines valeurs sont <strong>collées dans le paquet au moment du build</strong> (souvent visibles ensuite, surtout côté navigateur). D'autres sont <strong>lues au démarrage du serveur</strong> depuis l'environnement. Les secrets appartiennent à la deuxième famille."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-eye'></i> Piège Vite / front",
+                  "body": "Une clé collée dans une variable de build front finit souvent dans le paquet navigateur. Quiconque ouvre les outils de développement peut la lire."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Environnements et fuites</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Trois jeux minimum : <strong>local</strong> (ton ordinateur), <strong>aperçu en ligne</strong> (démo temporaire), <strong>production</strong>. Chacun a ses variables. Tu ne recycles pas la clé live de prod sur chaque laptop."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-key'></i> <strong>Règle</strong> : secrets injectés à l'exécution, jamais gravés dans l'image Docker ni imprimés dans les journaux de CI.</em></p>"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-table'></i> Matrice",
+                  "body": "Pour chaque secret : dans quel environnement ? côté serveur ou public ? Qui a le droit de le lire ? L'exercice ci-dessous t'entraîne."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-architecture-quiz-m02",
+              "title": "Secrets et environnements : valide ta lecture",
+              "questions": [
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q1",
+                  "prompt": "Une variable « figée au build », c'est…",
+                  "type": "single",
+                  "explanation": "Si tu mets un secret dans une variable de build front, il part souvent dans le navigateur. Catastrophe.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-a",
+                      "label": "Une valeur collée dans le paquet au moment de la construction, souvent lisible ensuite",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-b",
+                      "label": "Une valeur qui change à chaque clic",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-c",
+                      "label": "Un secret impossible à voler",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q1-d",
+                      "label": "Un fichier .gitignore",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q2",
+                  "prompt": "Où doivent vivre les secrets de production ?",
+                  "type": "single",
+                  "explanation": "Local, aperçu en ligne et production ont leurs propres secrets. Jamais en dur dans le code.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-a",
+                      "label": "Dans le dépôt Git",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-b",
+                      "label": "Dans des variables d'environnement côté serveur / hébergeur, par environnement",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-c",
+                      "label": "Dans le CSS",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q2-d",
+                      "label": "Dans un commentaire du README",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q3",
+                  "prompt": "Pourquoi séparer local / aperçu en ligne / production ?",
+                  "type": "single",
+                  "explanation": "Tu expérimentes en local et en aperçu. La prod reste protégée.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-a",
+                      "label": "Pour multiplier les licences",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-b",
+                      "label": "Pour tester sans brûler la prod et limiter qui voit quels secrets",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-c",
+                      "label": "Parce que React l'impose",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q3-d",
+                      "label": "Uniquement pour le SEO",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q4",
+                  "prompt": "Quel piège Docker / CI faut-il éviter ?",
+                  "type": "single",
+                  "explanation": "Une image ou un log qui contient un secret = fuite durable. Les secrets s'injectent au runtime.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-a",
+                      "label": "Logger ou graver des secrets dans les images et les journaux de build",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-b",
+                      "label": "Utiliser un fichier .env local non versionné",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-c",
+                      "label": "Lire les secrets depuis l'hébergeur au démarrage",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q4-d",
+                      "label": "Avoir trois environnements nommés",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m02-q5",
+                  "prompt": "Mettre une clé Stripe live dans le front Vite…",
+                  "type": "single",
+                  "explanation": "Tout ce qui est dans le paquet navigateur est public. Les clés secrètes restent serveur.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-a",
+                      "label": "Est une bonne pratique de rapidité",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-b",
+                      "label": "Expose le secret à quiconque ouvre les outils du navigateur",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-c",
+                      "label": "Est exigé par Stripe",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m02-q5-d",
+                      "label": "Protège automatiquement la prod",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-architecture-ex-m02-1",
+                "title": "Matrice d'environnements",
+                "instructions": "Produit avec connexion utilisateur et paiement. Coche uniquement les règles saines pour local, aperçu en ligne et production. Ignore les raccourcis dangereux.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Ce qui part dans le navigateur peut être lu par n'importe qui. Les secrets de production n'y ont pas leur place.",
+                  "Local, aperçu en ligne et production ont des jeux de secrets différents."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Tu prépares la config d'un petit produit : comptes utilisateurs + paiement Stripe. Trois environnements : local (ton ordinateur), aperçu en ligne (démo temporaire), production.</p>\n<p>Un collègue propose : « On met la clé Stripe live dans le front Vite, comme ça ça marche partout. »</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Secrets de production uniquement en variables d'environnement côté serveur (jamais dans le code)",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Jeux distincts local / aperçu en ligne / production (pas la même clé partout)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Aucune clé secrète de paiement dans le paquet envoyé au navigateur",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Variables figées au build : seulement ce qui peut être public (ex. URL publique de l'API)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Mettre la clé Stripe live dans le front « pour que ça marche partout »",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Réutiliser les secrets de production sur la machine de chaque développeur",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Règles saines : secrets serveur en variables d'environnement, jeux séparés par environnement, rien de secret dans le navigateur, build limité au public. La clé live dans le front et les secrets prod sur chaque laptop sont des anti-patterns.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-architecture-m03",
             "moduleId": "svc-architecture-m03",
             "index": "03",
-            "title": "Contrats & frontières",
-            "subtitle": "Webhooks, idempotence, timeouts, retries",
+            "title": "Contrats et frontières",
+            "subtitle": "Webhooks, ne pas traiter deux fois, délais et nouvelles tentatives",
             "duration": "40 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Spécifier des contrats d'API stables",
-              "Concevoir des webhooks idempotents",
-              "Gérer timeouts et retries"
+              "Écrire des contrats d'API stables",
+              "Concevoir un webhook qui ne double pas les effets",
+              "Borner délais (timeouts) et nouvelles tentatives (retries)"
             ],
             "prerequisites": [],
             "openByDefault": false,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-architecture-m03-l1",
-                    "title": "Contrats d'API stables",
-                    "desc": "Définir des contrats que les deux côtés peuvent respecter.",
-                    "objectives": [
-                      "Définir des contrats que les deux côtés peuvent respecter."
-                    ],
-                    "outline": {
-                      "context": "Définir des contrats que les deux côtés peuvent respecter.",
-                      "concepts": [
-                        "contrat d'API",
-                        "versionnement",
-                        "compatibilité"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Contrats d'API stables.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "contrat d'API",
-                        "versionnement",
-                        "compatibilité"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-architecture-m03-l2",
-                    "title": "Webhooks et idempotence",
-                    "desc": "Traiter un webhook dupliqué sans effet de bord.",
-                    "objectives": [
-                      "Traiter un webhook dupliqué sans effet de bord."
-                    ],
-                    "outline": {
-                      "context": "Traiter un webhook dupliqué sans effet de bord.",
-                      "concepts": [
-                        "webhooks",
-                        "idempotence",
-                        "timeouts",
-                        "retries"
-                      ],
-                      "pitfalls": [
-                        "traiter deux fois le même événement",
-                        "trust du payload sans signature"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Webhooks et idempotence.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "webhooks",
-                        "idempotence",
-                        "timeouts",
-                        "retries"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Contrats d'API stables"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Un <strong>contrat</strong>, c'est l'accord : quelles entrées, quelles sorties, quelles erreurs, quelle version. Les deux côtés (interface et serveur, ou toi et un prestataire) peuvent évoluer sans se casser si le contrat est clair."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-file-signature'></i> Stable ≠ figé pour toujours",
+                  "body": "Tu peux versionner (v1, v2). Tu évites de changer le sens d'un champ en silence. L'IA doit respecter le contrat que tu as écrit, pas en inventer un autre."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Webhooks et « une seule fois »"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Un <strong>webhook</strong> est une notification HTTP envoyée par un service externe (ex. paiement réussi). Tu vérifies la <strong>signature</strong> (preuve d'origine). Tu traites chaque événement <strong>au plus une fois</strong> (idempotence) : un doublon ne doit pas double-créditer."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-rotate'></i> <strong>Timeouts et retries</strong> : borner les attentes et les nouvelles tentatives, sinon un incident devient une avalanche d'appels."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-ban'></i> Anti-pattern",
+                  "body": "Accepter le JSON tel quel sans signature, ou créditer à chaque réception du même événement. L'exercice webhook ci-dessous attaque ces deux erreurs."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "contrat d'API",
-                  "versionnement",
-                  "compatibilité",
-                  "webhooks",
-                  "idempotence",
-                  "timeouts",
-                  "retries"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Spécifier un webhook de paiement",
-                  "kind": "synthesis",
-                  "brief": "Spécifier un webhook de paiement : signature, idempotence, états, erreurs et retries."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-architecture-m03-lesson",
-              "title": "Contrats & frontières",
-              "desc": "Webhooks, idempotence, timeouts, retries",
+              "title": "Contrats et frontières",
+              "desc": "Webhooks, ne pas traiter deux fois, délais et nouvelles tentatives",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Contrats d'API stables</strong> : Définir des contrats que les deux côtés peuvent respecter.</li><li><strong>Webhooks et idempotence</strong> : Traiter un webhook dupliqué sans effet de bord.</li></ul>"
+                  "body": "<h2>Contrats d'API stables</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Un <strong>contrat</strong>, c'est l'accord : quelles entrées, quelles sorties, quelles erreurs, quelle version. Les deux côtés (interface et serveur, ou toi et un prestataire) peuvent évoluer sans se casser si le contrat est clair."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-file-signature'></i> Stable ≠ figé pour toujours",
+                  "body": "Tu peux versionner (v1, v2). Tu évites de changer le sens d'un champ en silence. L'IA doit respecter le contrat que tu as écrit, pas en inventer un autre."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Webhooks et « une seule fois »</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Un <strong>webhook</strong> est une notification HTTP envoyée par un service externe (ex. paiement réussi). Tu vérifies la <strong>signature</strong> (preuve d'origine). Tu traites chaque événement <strong>au plus une fois</strong> (idempotence) : un doublon ne doit pas double-créditer."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-rotate'></i> <strong>Timeouts et retries</strong> : borner les attentes et les nouvelles tentatives, sinon un incident devient une avalanche d'appels.</em></p>"
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-ban'></i> Anti-pattern",
+                  "body": "Accepter le JSON tel quel sans signature, ou créditer à chaque réception du même événement. L'exercice webhook ci-dessous attaque ces deux erreurs."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-architecture-quiz-m03",
+              "title": "Contrats et webhooks : valide ta lecture",
+              "questions": [
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q1",
+                  "prompt": "Un contrat d'API, c'est surtout…",
+                  "type": "single",
+                  "explanation": "Sans contrat stable, l'IA (et les équipes) cassent l'autre côté à chaque changement.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-a",
+                      "label": "Un accord clair sur les entrées, sorties, erreurs et versions que les deux côtés respectent",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-b",
+                      "label": "Un fichier CSS partagé",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-c",
+                      "label": "Un tweet de release",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q1-d",
+                      "label": "Un thème sombre",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q2",
+                  "prompt": "Pourquoi vérifier la signature d'un webhook ?",
+                  "type": "single",
+                  "explanation": "Sans signature, n'importe qui peut annoncer un faux « paiement réussi ».",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-a",
+                      "label": "Pour décorer les logs",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-b",
+                      "label": "Pour s'assurer que le message vient bien du prestataire, pas d'un imposteur",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-c",
+                      "label": "Parce que JSON l'exige",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q2-d",
+                      "label": "Pour accélérer le paiement",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q3",
+                  "prompt": "« Ne pas traiter deux fois le même événement », c'est…",
+                  "type": "single",
+                  "explanation": "Les réseaux renvoient parfois le même webhook deux fois. Ton système doit rester correct.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-a",
+                      "label": "L'idempotence : un doublon ne doit pas double-créditer ou double-envoyer",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-b",
+                      "label": "Supprimer la base de données",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-c",
+                      "label": "Désactiver HTTPS",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q3-d",
+                      "label": "Ignorer toutes les erreurs",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q4",
+                  "prompt": "Pourquoi borner timeouts et retries ?",
+                  "type": "single",
+                  "explanation": "Sans borne, un incident devient une avalanche d'appels.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-a",
+                      "label": "Pour éviter des boucles qui martèlent un service déjà en panne",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-b",
+                      "label": "Pour remplir le README",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-c",
+                      "label": "Parce que Git l'impose",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q4-d",
+                      "label": "Uniquement pour le CSS",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-architecture-quiz-m03-q5",
+                  "prompt": "Faire confiance au corps JSON d'un webhook sans signature…",
+                  "type": "single",
+                  "explanation": "Le corps est facile à fabriquer. La signature (ou équivalent) prouve l'origine.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-a",
+                      "label": "Est acceptable en production",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-b",
+                      "label": "Est un anti-pattern dangereux",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-c",
+                      "label": "Est exigé par tous les prestataires",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-architecture-quiz-m03-q5-d",
+                      "label": "Remplace les tests",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-architecture-ex-m03-1",
+                "title": "Webhook de paiement",
+                "instructions": "Tu spécifies le traitement d'un webhook de paiement (notification envoyée par le prestataire). Coche ce qui doit figurer dans un contrat sûr.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Sans vérification de signature, n'importe qui peut inventer un « paiement réussi ».",
+                  "Le même événement peut arriver deux fois : ton système ne doit pas créditer deux fois."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Prestataire de paiement : envoie une notification HTTP quand un paiement change d'état. Ton API doit la recevoir, la vérifier, mettre à jour la commande, puis répondre.</p>\n<p>Un prompt IA a proposé : « Accepte le corps JSON tel quel et marque la commande payée. Pas besoin de signature. »</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Vérifier la signature (ou preuve d'authenticité) avant de faire confiance au message",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Ne pas appliquer deux fois le même événement (clé d'idempotence / id d'événement)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Définir les états attendus (ex. en attente, payé, échoué) et les erreurs renvoyées",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Limiter les nouvelles tentatives (retries) et les délais (timeouts) pour éviter les boucles folles",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Faire confiance au corps JSON sans vérifier la signature",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Ignorer les doublons et créditer à chaque réception",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Contrat sûr : signature, pas de double traitement, états et erreurs clairs, retries / timeouts bornés. Accepter le JSON aveuglément ou créditer à chaque doublon = incident.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           }
         ]
       },

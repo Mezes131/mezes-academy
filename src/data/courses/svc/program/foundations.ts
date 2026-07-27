@@ -437,7 +437,7 @@ export const promptPhase: ProgramPhase = phase({
 export const architecturePhase: ProgramPhase = phase({
   slug: "architecture",
   title: "Architecture d'un produit vibe",
-  objective: "Découper un système shippable avant de générer quoi que ce soit.",
+  objective: "Découper un système livrable avant de générer quoi que ce soit.",
   modules: [
     module({
       id: "svc-architecture-m01",
