@@ -4,7 +4,7 @@ export const svcMeta: CourseMeta = {
   title: "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
   tagline: "Du prompt au produit en production, sans dette ni failles oubliées",
   description:
-    "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
+    "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, connexion via services tiers, données, paiements, notifications, hébergement, déploiement et mise en ligne. Projet final certifiant à la clé.",
   icon: "fa-shield-halved",
   accent: {
     text: "text-violet-400",

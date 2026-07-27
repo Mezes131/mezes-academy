@@ -6,19 +6,19 @@ export const authModule03: Module = {
   id: "svc-auth-m03",
   index: "03",
   title: "Autorisation réelle",
-  subtitle: "Rôles, règles en base, IDOR : protéger côté serveur",
+  subtitle: "Rôles, règles en base, accès illégitime : protéger côté serveur",
   duration: "50 min",
   difficulty: "intermediate",
   objectives: [
     "Modéliser rôles et permissions",
-    "Comprendre les règles d'accès en base (RLS / policies)",
-    "Détecter et corriger un IDOR",
+    "Comprendre les règles d'accès en base",
+    "Détecter et corriger un accès illégitime via un identifiant",
   ],
   content: [
-    { kind: "title", text: "Rôles et policies" },
+    { kind: "title", text: "Rôles et règles" },
     {
       kind: "paragraph",
-      html: "Être connecté ≠ tout pouvoir. L'<strong>autorisation</strong> dit qui peut lire / écrire quoi. On modèle souvent des <strong>rôles</strong> (membre, admin…). Des <strong>règles d'accès en base</strong> (RLS : row level security, ou policies équivalentes) limitent les lignes visibles selon l'utilisateur.",
+      html: "Être connecté ≠ tout pouvoir. L'<strong>autorisation</strong> dit qui peut lire / écrire quoi. On modèle souvent des <strong>rôles</strong> (membre, administrateur…). Des <strong>règles d'accès en base</strong> limitent les lignes visibles selon l'utilisateur.",
     },
     {
       kind: "info",
@@ -29,14 +29,14 @@ export const authModule03: Module = {
       },
     },
 
-    { kind: "title", text: "IDOR" },
+    { kind: "title", text: "Accès illégitime en changeant l'identifiant" },
     {
       kind: "paragraph",
-      html: "Un <strong>IDOR</strong>, c'est accéder à la ressource d'un autre en changeant l'identifiant dans l'URL ou l'API (<code>/notes/101</code> → <code>/notes/102</code>) sans que le serveur vérifie le propriétaire. Classique, grave, souvent présent dans le code généré « qui marche ».",
+      html: "C'est accéder à la ressource d'un autre en changeant le numéro dans l'adresse ou l'API (<code>/notes/101</code> → <code>/notes/102</code>) sans que le serveur vérifie le propriétaire. Classique, grave, souvent présent dans le code généré « qui marche ».",
     },
     {
       kind: "highlight",
-      html: "<i class='fa-solid fa-bug'></i> <strong>Correctif</strong> : contrôle d'accès serveur (et policies). Masquer un lien ou rendre l'id « difficile » ne suffit pas.",
+      html: "<i class='fa-solid fa-bug'></i> <strong>Correctif</strong> : contrôle d'accès serveur (et règles en base). Masquer un lien ou rendre le numéro « difficile » ne suffit pas.",
     },
   ],
   quiz: authQuizzes.m03,

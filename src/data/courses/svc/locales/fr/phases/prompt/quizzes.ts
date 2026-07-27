@@ -177,7 +177,7 @@ export const promptQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q3",
-        question: "Quel anti-pattern décrit « démo sans chemin vers la production » ?",
+        question: "Quelle mauvaise pratique décrit « démo sans chemin vers la production » ?",
         options: [
           { id: "a", label: "Prototype jetable" },
           { id: "b", label: "Premier livrable bien limité" },

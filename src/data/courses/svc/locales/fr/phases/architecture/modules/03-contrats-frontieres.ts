@@ -6,12 +6,12 @@ export const architectureModule03: Module = {
   id: "svc-architecture-m03",
   index: "03",
   title: "Contrats et frontières",
-  subtitle: "Webhooks, ne pas traiter deux fois, délais et nouvelles tentatives",
+  subtitle: "Notifications automatiques, ne pas traiter deux fois, délais et nouvelles tentatives",
   duration: "40 min",
   difficulty: "intermediate",
   objectives: [
     "Écrire des contrats d'API stables",
-    "Concevoir un webhook qui ne double pas les effets",
+    "Concevoir une notification automatique qui ne double pas les effets",
     "Borner délais (timeouts) et nouvelles tentatives (retries)",
   ],
   content: [
@@ -29,21 +29,21 @@ export const architectureModule03: Module = {
       },
     },
 
-    { kind: "title", text: "Webhooks et « une seule fois »" },
+    { kind: "title", text: "Notifications automatiques et « une seule fois »" },
     {
       kind: "paragraph",
-      html: "Un <strong>webhook</strong> est une notification HTTP envoyée par un service externe (ex. paiement réussi). Tu vérifies la <strong>signature</strong> (preuve d'origine). Tu traites chaque événement <strong>au plus une fois</strong> (idempotence) : un doublon ne doit pas double-créditer.",
+      html: "Une <strong>notification automatique</strong> est un message HTTP envoyé par un service externe (ex. paiement réussi). Tu vérifies la <strong>signature</strong> (preuve d'origine). Tu traites chaque événement <strong>au plus une fois</strong> : un doublon ne doit pas double-créditer.",
     },
     {
       kind: "highlight",
-      html: "<i class='fa-solid fa-rotate'></i> <strong>Timeouts et retries</strong> : borner les attentes et les nouvelles tentatives, sinon un incident devient une avalanche d'appels.",
+      html: "<i class='fa-solid fa-rotate'></i> <strong>Délais et nouvelles tentatives</strong> : borner les attentes et les relances, sinon un incident devient une avalanche d'appels.",
     },
     {
       kind: "info",
       box: {
         variant: "warn",
-        title: "<i class='fa-solid fa-ban'></i> Anti-pattern",
-        body: "Accepter le JSON tel quel sans signature, ou créditer à chaque réception du même événement. L'exercice webhook ci-dessous attaque ces deux erreurs.",
+        title: "<i class='fa-solid fa-ban'></i> Mauvaise pratique",
+        body: "Accepter le JSON tel quel sans signature, ou créditer à chaque réception du même événement. L'exercice ci-dessous attaque ces deux erreurs.",
       },
     },
   ],

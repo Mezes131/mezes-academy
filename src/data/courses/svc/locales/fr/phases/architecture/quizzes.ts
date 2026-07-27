@@ -22,7 +22,7 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         id: "q2",
         question: "Qu'est-ce qu'une frontière de confiance ?",
         options: [
-          { id: "a", label: "La ligne entre ton code et ce qui vient de l'extérieur (navigateur, webhook…) : là où tu dois vérifier" },
+          { id: "a", label: "La ligne entre ton code et ce qui vient de l'extérieur (navigateur, notification d'un prestataire…) : là où tu dois vérifier" },
           { id: "b", label: "Un fichier CSS" },
           { id: "c", label: "Le nom du dépôt Git" },
           { id: "d", label: "Un thème sombre" },
@@ -33,7 +33,7 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q3",
-        question: "Que sont les tâches différées (jobs) ?",
+        question: "Que sont les tâches différées ?",
         options: [
           { id: "a", label: "Du travail en arrière-plan (emails, imports) hors de la requête utilisateur immédiate" },
           { id: "b", label: "Des boutons désactivés" },
@@ -42,7 +42,7 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["a"],
         explanation:
-          "Les jobs évitent de faire attendre l'utilisateur pour des traitements longs.",
+          "Les tâches différées évitent de faire attendre l'utilisateur pour des traitements longs.",
       },
       {
         id: "q4",
@@ -127,16 +127,16 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["a"],
         explanation:
-          "Une image ou un log qui contient un secret = fuite durable. Les secrets s'injectent au runtime.",
+          "Une image ou un journal qui contient un secret = fuite durable. Les secrets s'injectent au démarrage / à l'exécution.",
       },
       {
         id: "q5",
-        question: "Mettre une clé Stripe live dans le front Vite…",
+        question: "Mettre une clé Stripe live dans l'interface…",
         options: [
           { id: "a", label: "Est une bonne pratique de rapidité" },
           { id: "b", label: "Expose le secret à quiconque ouvre les outils du navigateur" },
           { id: "c", label: "Est exigé par Stripe" },
-          { id: "d", label: "Protège automatiquement la prod" },
+          { id: "d", label: "Protège automatiquement la production" },
         ],
         correct: ["b"],
         explanation:
@@ -147,7 +147,7 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
 
   m03: {
     id: "svc-architecture-quiz-m03",
-    title: "Contrats et webhooks : valide ta lecture",
+    title: "Contrats et notifications : valide ta lecture",
     questions: [
       {
         id: "q1",
@@ -164,9 +164,9 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q2",
-        question: "Pourquoi vérifier la signature d'un webhook ?",
+        question: "Pourquoi vérifier la signature d'une notification automatique ?",
         options: [
-          { id: "a", label: "Pour décorer les logs" },
+          { id: "a", label: "Pour décorer les journaux" },
           { id: "b", label: "Pour s'assurer que le message vient bien du prestataire, pas d'un imposteur" },
           { id: "c", label: "Parce que JSON l'exige" },
           { id: "d", label: "Pour accélérer le paiement" },
@@ -179,18 +179,18 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         id: "q3",
         question: "« Ne pas traiter deux fois le même événement », c'est…",
         options: [
-          { id: "a", label: "L'idempotence : un doublon ne doit pas double-créditer ou double-envoyer" },
+          { id: "a", label: "Un doublon ne doit pas double-créditer ou double-envoyer" },
           { id: "b", label: "Supprimer la base de données" },
           { id: "c", label: "Désactiver HTTPS" },
           { id: "d", label: "Ignorer toutes les erreurs" },
         ],
         correct: ["a"],
         explanation:
-          "Les réseaux renvoient parfois le même webhook deux fois. Ton système doit rester correct.",
+          "Les réseaux renvoient parfois la même notification deux fois. Ton système doit rester correct.",
       },
       {
         id: "q4",
-        question: "Pourquoi borner timeouts et retries ?",
+        question: "Pourquoi borner délais et nouvelles tentatives ?",
         options: [
           { id: "a", label: "Pour éviter des boucles qui martèlent un service déjà en panne" },
           { id: "b", label: "Pour remplir le README" },
@@ -203,10 +203,10 @@ export const architectureQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q5",
-        question: "Faire confiance au corps JSON d'un webhook sans signature…",
+        question: "Faire confiance au corps JSON d'une notification sans signature…",
         options: [
           { id: "a", label: "Est acceptable en production" },
-          { id: "b", label: "Est un anti-pattern dangereux" },
+          { id: "b", label: "Est une mauvaise pratique dangereuse" },
           { id: "c", label: "Est exigé par tous les prestataires" },
           { id: "d", label: "Remplace les tests" },
         ],

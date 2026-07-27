@@ -1,39 +1,39 @@
 import type { ProgramPhase } from "@/types";
 import { lesson, module, phase } from "./helpers";
 
-/* ── P4 : Auth & identité (services tiers) ──────────────────────── */
+/* ── P4 : Connexion & identité (services tiers) ─────────────────── */
 
 export const authPhase: ProgramPhase = phase({
   slug: "auth",
-  title: "Auth & identité",
+  title: "Connexion & identité",
   objective:
-    "Brancher un vrai provider d'authentification : ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
+    "Brancher un vrai service de connexion : ne jamais réinventer l'authentification. À partir d'ici, les projets de phase alimentent le produit final.",
   modules: [
     module({
       id: "svc-auth-m01",
       index: "01",
-      title: "Modèles d'auth modernes",
-      subtitle: "Sessions, JWT, magic link, OAuth : choisir en connaissance",
+      title: "Modèles de connexion modernes",
+      subtitle: "Sessions, jetons signés, lien magique, compte existant",
       duration: "35 min",
       difficulty: "intermediate",
       objectives: [
-        "Comparer sessions, JWT, magic link et OAuth",
+        "Comparer sessions, jetons signés, lien magique et compte existant",
         "Choisir un modèle selon le cas produit",
-        "Repérer les erreurs classiques du code d'auth généré",
+        "Repérer les erreurs classiques du code de connexion généré",
       ],
       lessons: [
         lesson({
           id: "svc-auth-m01-l1",
           title: "Panorama des modèles",
-          objective: "Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs.",
-          concepts: ["sessions", "JWT", "magic link", "OAuth"],
+          objective: "Comprendre sessions, jetons signés, lien magique, compte existant et leurs compromis.",
+          concepts: ["sessions", "jeton signé", "lien magique", "compte existant"],
         }),
         lesson({
           id: "svc-auth-m01-l2",
           title: "Erreurs du code généré",
-          objective: "Identifier les failles typiques de l'auth écrite par l'IA.",
-          concepts: ["stockage de tokens", "expiration", "auth maison fragile"],
-          pitfalls: ["JWT en localStorage sans réflexion", "auth maison au lieu d'un provider"],
+          objective: "Identifier les failles typiques de la connexion écrite par l'IA.",
+          concepts: ["stockage de jetons", "expiration", "connexion maison fragile"],
+          pitfalls: ["jeton dans le stockage navigateur sans réflexion", "connexion maison au lieu d'un service tiers"],
         }),
       ],
       exercises: [
@@ -41,42 +41,42 @@ export const authPhase: ProgramPhase = phase({
           title: "Choisir un modèle pour trois cas",
           kind: "synthesis",
           brief:
-            "Choisir et justifier un modèle d'auth pour trois cas produit différents (SaaS B2B, app grand public, outil interne).",
+            "Choisir et justifier un modèle de connexion pour trois cas produit (logiciel entreprises, appli grand public, outil interne).",
         },
       ],
     }),
     module({
       id: "svc-auth-m02",
       index: "02",
-      title: "Brancher un provider",
-      subtitle: "Clerk / Auth.js / Supabase Auth : un parcours guidé + variantes",
+      title: "Brancher un service de connexion",
+      subtitle: "Exemples du marché : parcours guidé + variantes",
       duration: "50 min",
       difficulty: "intermediate",
       objectives: [
-        "Intégrer un provider d'auth de bout en bout",
-        "Comprendre le flow sign-up → session",
-        "Distinguer intégration SDK et vérification serveur",
+        "Intégrer un service de connexion de bout en bout",
+        "Comprendre le parcours inscription → rester reconnu",
+        "Distinguer bibliothèque navigateur et vérification serveur",
       ],
       lessons: [
         lesson({
           id: "svc-auth-m02-l1",
-          title: "Parcours guidé provider",
-          objective: "Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js).",
-          concepts: ["provider d'auth", "sign-up", "session"],
+          title: "Parcours guidé",
+          objective: "Brancher un service de connexion (exemples du marché en guidé).",
+          concepts: ["service de connexion", "inscription", "session"],
         }),
         lesson({
           id: "svc-auth-m02-l2",
-          title: "SDK vs serveur",
-          objective: "Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur.",
-          concepts: ["SDK client", "vérification serveur", "tokens"],
+          title: "Navigateur vs serveur",
+          objective: "Savoir ce qui se vérifie côté navigateur et ce qui DOIT l'être côté serveur.",
+          concepts: ["bibliothèque navigateur", "vérification serveur", "jetons"],
         }),
       ],
       exercises: [
         {
-          title: "Flow sign-up → session",
+          title: "Parcours inscription → connexion",
           kind: "guided",
           brief:
-            "Implémenter le flow complet sign-up → login → session sur une app starter avec un provider tiers.",
+            "Implémenter le parcours complet inscription → connexion → session sur une appli de départ avec un service tiers.",
         },
       ],
     }),
@@ -84,35 +84,35 @@ export const authPhase: ProgramPhase = phase({
       id: "svc-auth-m03",
       index: "03",
       title: "Autorisation réelle",
-      subtitle: "Rôles, RLS, IDOR : protéger côté serveur",
+      subtitle: "Rôles, règles en base, accès illégitime : protéger côté serveur",
       duration: "50 min",
       difficulty: "intermediate",
       objectives: [
         "Modéliser rôles et permissions",
-        "Écrire des policies RLS",
-        "Détecter et corriger un IDOR",
+        "Écrire des règles d'accès en base",
+        "Détecter et corriger un accès illégitime via un identifiant",
       ],
       lessons: [
         lesson({
           id: "svc-auth-m03-l1",
-          title: "Rôles et policies",
-          objective: "Structurer l'autorisation avec rôles et RLS/policies.",
-          concepts: ["rôles", "RLS", "policies"],
+          title: "Rôles et règles",
+          objective: "Structurer l'autorisation avec rôles et règles d'accès en base.",
+          concepts: ["rôles", "règles d'accès en base"],
         }),
         lesson({
           id: "svc-auth-m03-l2",
-          title: "IDOR et protection serveur",
-          objective: "Comprendre l'IDOR et pourquoi le client ne suffit jamais.",
-          concepts: ["IDOR", "contrôle d'accès serveur"],
-          pitfalls: ["masquer un bouton au lieu de protéger la route", "id devinables sans contrôle"],
+          title: "Accès illégitime et protection serveur",
+          objective: "Comprendre l'accès via identifiant manipulé et pourquoi le navigateur ne suffit jamais.",
+          concepts: ["accès illégitime", "contrôle d'accès serveur"],
+          pitfalls: ["masquer un bouton au lieu de protéger la route", "identifiants devinables sans contrôle"],
         }),
       ],
       exercises: [
         {
-          title: "Casser puis réparer un IDOR",
+          title: "Casser puis réparer un accès illégitime",
           kind: "audit",
           brief:
-            "Exploiter un IDOR sur une app volontairement vulnérable, puis le corriger côté serveur avec preuve.",
+            "Exploiter un accès illégitime sur une appli volontairement vulnérable, puis le corriger côté serveur avec preuve.",
         },
       ],
     }),
@@ -120,46 +120,46 @@ export const authPhase: ProgramPhase = phase({
       id: "svc-auth-m04",
       index: "04",
       title: "Parcours sensibles",
-      subtitle: "Reset password, vérification email, sessions multi-device",
+      subtitle: "Réinitialisation, vérification email, plusieurs appareils",
       duration: "40 min",
       difficulty: "intermediate",
       objectives: [
-        "Sécuriser reset password et vérification email",
-        "Gérer sessions multi-device et révocation",
-        "Construire une checklist auth prod",
+        "Sécuriser réinitialisation et vérification email",
+        "Gérer plusieurs appareils et la coupure de connexion",
+        "Construire une liste de contrôle connexion production",
       ],
       lessons: [
         lesson({
           id: "svc-auth-m04-l1",
-          title: "Reset et vérification email",
+          title: "Réinitialisation et vérification email",
           objective: "Implémenter des parcours sensibles sans failles classiques.",
-          concepts: ["reset password", "vérification email", "tokens à usage unique"],
+          concepts: ["réinitialisation mot de passe", "vérification email", "jetons à usage unique"],
         }),
         lesson({
           id: "svc-auth-m04-l2",
-          title: "Sessions et révocation",
-          objective: "Gérer multi-device, déconnexion et révocation de session.",
-          concepts: ["multi-device", "révocation", "expiration"],
+          title: "Sessions et coupure",
+          objective: "Gérer plusieurs appareils, déconnexion et coupure de session.",
+          concepts: ["plusieurs appareils", "coupure", "expiration"],
         }),
       ],
       exercises: [
         {
-          title: "Checklist auth prod",
+          title: "Liste de contrôle connexion production",
           kind: "synthesis",
           brief:
-            "Rédiger la checklist auth production du produit en cours et la vérifier point par point.",
+            "Rédiger la liste de contrôle connexion production du produit en cours et la vérifier point par point.",
         },
       ],
     }),
   ],
   project: {
-    title: "Projet P4 : Auth tiers + zone admin",
+    title: "Projet P4 : Connexion tiers + espace admin",
     deliverable:
-      "Le produit capstone avec auth via provider tiers, zone admin protégée et politique d'accès documentée.",
+      "Le produit final avec connexion via service tiers, espace admin protégé et règles d'accès documentées.",
     assessment: [
-      "Auth provider fonctionnelle de bout en bout",
-      "Zone admin réellement protégée côté serveur",
-      "Politique d'accès écrite et cohérente avec le code",
+      "Service de connexion fonctionnel de bout en bout",
+      "Espace admin réellement protégé côté serveur",
+      "Règles d'accès écrites et cohérentes avec le code",
     ],
   },
 });

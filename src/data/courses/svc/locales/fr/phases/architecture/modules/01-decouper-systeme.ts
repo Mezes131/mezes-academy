@@ -32,7 +32,7 @@ export const architectureModule01: Module = {
     { kind: "title", text: "Frontières de confiance" },
     {
       kind: "paragraph",
-      html: "Une <strong>frontière de confiance</strong>, c'est la ligne entre ton système et le monde extérieur (navigateur, webhook, autre API). Dès qu'une donnée traverse cette ligne, tu <strong>vérifies</strong> les saisies et les droits. Le navigateur n'est jamais de confiance : il peut être modifié.",
+      html: "Une <strong>frontière de confiance</strong>, c'est la ligne entre ton système et le monde extérieur (navigateur, notification automatique d'un prestataire, autre API). Dès qu'une donnée traverse cette ligne, tu <strong>vérifies</strong> les saisies et les droits. Le navigateur n'est jamais de confiance : il peut être modifié.",
     },
     {
       kind: "highlight",

@@ -12,19 +12,19 @@ export const authPhase: Phase = {
   color: "eco",
   icon: "fa-user-lock",
   label: "Phase 4",
-  title: "Auth & identité",
+  title: "Connexion & identité",
   summary:
-    "Brancher un vrai provider de connexion : ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
-  metaTags: ["produit", "lecture ~3h", "audits interactifs", "auth"],
+    "Brancher un vrai service de connexion : ne jamais réinventer l'authentification. À partir d'ici, les projets de phase alimentent le produit final.",
+  metaTags: ["produit", "lecture ~3h", "audits interactifs", "connexion"],
   modules: [authModule01, authModule02, authModule03, authModule04],
   project: {
-    title: "Projet P4 : Auth tiers + zone admin",
+    title: "Projet P4 : Connexion tiers + espace admin",
     deliverable:
-      "Checklist auth + zone admin validée (exercice Projet P4 du module 04) : provider tiers, protections serveur, politique d'accès. L'intégration réelle se fait sur le dépôt capstone.",
+      "Liste de contrôle connexion + espace admin validée (exercice Projet P4 du module 04) : service tiers, protections serveur, règles d'accès. L'intégration réelle se fait sur le dépôt du projet final.",
     assessment: [
-      "Provider de connexion de bout en bout (hors plateforme : sur ton dépôt)",
-      "Zone admin réellement protégée côté serveur",
-      "Politique d'accès écrite et cohérente",
+      "Service de connexion de bout en bout (hors plateforme : sur ton dépôt)",
+      "Espace admin réellement protégé côté serveur",
+      "Règles d'accès écrites et cohérentes",
     ],
   },
 };

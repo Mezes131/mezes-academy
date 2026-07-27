@@ -12,7 +12,7 @@ export const architectureExercises: Record<"m02_1" | "m03_1", AuditExercise> = {
       "Local, aperçu en ligne et production ont des jeux de secrets différents.",
     ],
     scenario: `<p>Tu prépares la config d'un petit produit : comptes utilisateurs + paiement Stripe. Trois environnements : local (ton ordinateur), aperçu en ligne (démo temporaire), production.</p>
-<p>Un collègue propose : « On met la clé Stripe live dans le front Vite, comme ça ça marche partout. »</p>`,
+<p>Un collègue propose : « On met la clé Stripe live dans l'interface, comme ça ça marche partout. »</p>`,
     findings: [
       {
         id: "f1",
@@ -53,15 +53,15 @@ export const architectureExercises: Record<"m02_1" | "m03_1", AuditExercise> = {
     passingScore: 0.7,
     attemptsBeforeSolution: 2,
     challengeEligible: false,
-    solution: `<p>Règles saines : secrets serveur en variables d'environnement, jeux séparés par environnement, rien de secret dans le navigateur, build limité au public. La clé live dans le front et les secrets prod sur chaque laptop sont des anti-patterns.</p>`,
+    solution: `<p>Règles saines : secrets serveur en variables d'environnement, jeux séparés par environnement, rien de secret dans le navigateur, construction limitée au public. La clé live dans l'interface et les secrets de production sur chaque ordinateur portable sont de mauvaises pratiques.</p>`,
   },
 
   m03_1: {
     id: "svc-architecture-ex-m03-1",
     format: "audit",
-    title: "Webhook de paiement",
+    title: "Notification de paiement",
     instructions:
-      "Tu spécifies le traitement d'un webhook de paiement (notification envoyée par le prestataire). Coche ce qui doit figurer dans un contrat sûr.",
+      "Tu spécifies le traitement d'une notification de paiement (message envoyé automatiquement par le prestataire). Coche ce qui doit figurer dans un contrat sûr.",
     hints: [
       "Sans vérification de signature, n'importe qui peut inventer un « paiement réussi ».",
       "Le même événement peut arriver deux fois : ton système ne doit pas créditer deux fois.",
@@ -77,7 +77,7 @@ export const architectureExercises: Record<"m02_1" | "m03_1", AuditExercise> = {
       },
       {
         id: "f2",
-        label: "Ne pas appliquer deux fois le même événement (clé d'idempotence / id d'événement)",
+        label: "Ne pas appliquer deux fois le même événement (identifiant d'événement unique)",
         correct: true,
         minSeverity: "high",
       },

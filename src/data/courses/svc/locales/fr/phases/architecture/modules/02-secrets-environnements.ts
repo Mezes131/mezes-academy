@@ -24,8 +24,8 @@ export const architectureModule02: Module = {
       kind: "info",
       box: {
         variant: "warn",
-        title: "<i class='fa-solid fa-eye'></i> Piège Vite / front",
-        body: "Une clé collée dans une variable de build front finit souvent dans le paquet navigateur. Quiconque ouvre les outils de développement peut la lire.",
+        title: "<i class='fa-solid fa-eye'></i> Piège côté interface",
+        body: "Une clé collée dans une variable de construction de l'interface finit souvent dans le paquet navigateur. Quiconque ouvre les outils de développement peut la lire.",
       },
     },
 

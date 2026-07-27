@@ -111,7 +111,7 @@ export const fondationsExercises: Record<
     passingScore: 0.7,
     attemptsBeforeSolution: 2,
     challengeEligible: false,
-    solution: `<p>La boucle saine : brief → génération ciblée → liste avec preuves → aperçu publié. Le tunnel « tout générer puis voir » et la mise en ligne sans audit sont des anti-patterns.</p>`,
+    solution: `<p>La boucle saine : cahier des charges → génération ciblée → liste avec preuves → aperçu publié. Le tunnel « tout générer puis voir » et la mise en ligne sans audit sont de mauvaises pratiques.</p>`,
   },
 
   m03_1: {

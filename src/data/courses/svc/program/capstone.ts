@@ -74,7 +74,7 @@ export const capstonePhase: ProgramPhase = phase({
     ],
     assessment: [
       "Produit déployé accessible en HTTPS (obligatoire)",
-      "Auth via provider : pas d'auth maison fragile (obligatoire)",
+      "Connexion via un service tiers : pas de connexion maison fragile (obligatoire)",
       "Au moins un service tiers paiement ou notification, idéalement les deux (obligatoire)",
       "Checklist Security baseline : pass, aucune critique ouverte",
       "Checklists Perf / Design / A11y : pass selon seuils publiés",

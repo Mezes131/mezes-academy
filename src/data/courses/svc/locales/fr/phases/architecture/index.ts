@@ -13,13 +13,13 @@ export const architecturePhase: Phase = {
   label: "Phase 3",
   title: "Architecture d'un produit vibe",
   summary:
-    "Découper un système livrable avant de générer : briques, frontières de confiance, secrets par environnement, contrats et webhooks.",
+    "Découper un système livrable avant de générer : briques, frontières de confiance, secrets par environnement, contrats et notifications automatiques.",
   metaTags: ["tronc commun", "lecture ~2h", "audits interactifs", "architecture"],
   modules: [architectureModule01, architectureModule02, architectureModule03],
   project: {
-    title: "Projet P3 : Architecture cible du capstone",
+    title: "Projet P3 : Architecture cible du projet final",
     deliverable:
-      "Un dossier d'architecture pour le futur capstone : schéma des briques, décisions, risques (travail hors plateforme pour l'instant ; les audits m02/m03 entraînent les réflexes clés).",
+      "Un dossier d'architecture pour le futur projet final : schéma des briques, décisions, risques (travail hors plateforme pour l'instant ; les audits m02/m03 entraînent les réflexes clés).",
     assessment: [
       "Schéma lisible avec frontières de confiance",
       "Décisions justifiées (compromis explicites)",

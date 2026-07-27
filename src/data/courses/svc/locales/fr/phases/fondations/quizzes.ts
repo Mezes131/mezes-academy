@@ -131,7 +131,7 @@ export const fondationsQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
       },
       {
         id: "q5",
-        question: "Quel anti-pattern du tunnel faut-il éviter ?",
+        question: "Quelle mauvaise pratique du tunnel faut-il éviter ?",
         options: [
           { id: "a", label: "Générer une grosse livraison d'un coup, auditer seulement à la fin" },
           { id: "b", label: "Lire l'aperçu des changements après chaque génération" },
