@@ -1,7 +1,7 @@
 import type { ProgramPhase } from "@/types";
 import { lesson, module, phase } from "./helpers";
 
-/* ── P0 — Bases web (optionnelle, product builders) ─────────────── */
+/* ── P0 : Bases web (optionnelle, product builders) ─────────────── */
 
 export const basesPhase: ProgramPhase = phase({
   slug: "bases",
@@ -135,7 +135,7 @@ export const basesPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P0 — Page connectée à une API",
+    title: "Projet P0 : Page connectée à une API",
     deliverable:
       "Une page qui appelle une API publique et affiche correctement loading / erreur / succès.",
     assessment: [
@@ -146,7 +146,7 @@ export const basesPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P1 — Fondations vibe coding ─────────────────────────────────── */
+/* ── P1 : Fondations vibe coding ─────────────────────────────────── */
 
 export const fondationsPhase: ProgramPhase = phase({
   slug: "fondations",
@@ -275,7 +275,7 @@ export const fondationsPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P1 — Audit d'un dépôt généré par IA",
+    title: "Projet P1 : Audit d'un dépôt généré par IA",
     deliverable:
       "Un rapport d'audit d'un dépôt généré par IA : constats, gravité, recommandations priorisées.",
     assessment: [
@@ -286,13 +286,13 @@ export const fondationsPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P2 — Prompt & cadrage produit ──────────────────────────────── */
+/* ── P2 : Prompt & cadrage produit ──────────────────────────────── */
 
 export const promptPhase: ProgramPhase = phase({
   slug: "prompt",
   title: "Prompt & cadrage produit",
   objective:
-    "Obtenir du bon code plus souvent — et cadrer un MVP commercialisable avant de générer.",
+    "Obtenir du bon code plus souvent : et cadrer un MVP commercialisable avant de générer.",
   modules: [
     module({
       id: "svc-prompt-m01",
@@ -421,7 +421,7 @@ export const promptPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P2 — Feature CRUD générée par prompts documentés",
+    title: "Projet P2 : Feature CRUD générée par prompts documentés",
     deliverable:
       "Une feature CRUD + UI générée par prompts, avec journal de prompts et justification des itérations.",
     assessment: [
@@ -432,7 +432,7 @@ export const promptPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P3 — Architecture d'un produit vibe ────────────────────────── */
+/* ── P3 : Architecture d'un produit vibe ────────────────────────── */
 
 export const architecturePhase: ProgramPhase = phase({
   slug: "architecture",
@@ -554,7 +554,7 @@ export const architecturePhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P3 — Architecture cible du capstone",
+    title: "Projet P3 : Architecture cible du capstone",
     deliverable:
       "Le dossier d'architecture du futur capstone : diagramme, décisions, risques identifiés.",
     assessment: [

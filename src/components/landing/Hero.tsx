@@ -26,16 +26,15 @@ export function Hero({ hasProgress }: HeroProps) {
         <h1 className="text-[2.6rem] md:text-7xl font-extrabold leading-[0.95] tracking-tight max-w-4xl text-slate-950 dark:text-fg drop-shadow-[0_1px_6px_rgba(255,255,255,0.52)] dark:drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]">
           Apprends à coder,
           <br />
-          <span className="bg-gradient-to-r from-accent-2 via-brand-intro to-brand-eco bg-clip-text text-transparent">
-            sérieusement.
-          </span>
+          <span className="text-accent-2">sérieusement.</span>
         </h1>
 
-        <p className="mt-7 text-[17px] md:text-lg text-slate-50 dark:text-fg font-serif leading-relaxed max-w-2xl drop-shadow-[0_1px_4px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
+        <p className="mt-7 text-[17px] md:text-lg text-slate-50 dark:text-fg-2 leading-relaxed max-w-2xl drop-shadow-[0_1px_4px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
           Mezes Academy propose des parcours en ligne pour développeurs et
-          développeuses qui veulent progresser en autonomie. Des leçons
-          structurées, des exercices qui s'exécutent dans ton navigateur, et un
-          suivi de progression sauvegardé.
+          développeuses qui veulent progresser en autonomie. Chaque concept est
+          expliqué, pratiqué dans le navigateur, puis validé par un quiz avant
+          de passer à la suite. Ta progression est sauvegardée : tu reprends
+          exactement où tu t&apos;étais arrêté.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center text-slate-50 gap-3">

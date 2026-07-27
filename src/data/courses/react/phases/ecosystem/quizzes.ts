@@ -109,7 +109,7 @@ export const ecosystemQuizzes = {
         id: "q2",
         question: "Où stocker un token d'authentification côté navigateur ?",
         options: [
-          { id: "a", label: "localStorage — pratique et partagé par tous les onglets" },
+          { id: "a", label: "localStorage : pratique et partagé par tous les onglets" },
           { id: "b", label: "Cookie `httpOnly` + `Secure` + `SameSite=Lax` : non accessible en JS, donc protégé contre XSS" },
           { id: "c", label: "Dans une variable globale `window.token`" },
         ],
@@ -194,9 +194,9 @@ export const ecosystemQuizzes = {
         id: "q3",
         question: "Dans un test Vitest + RTL, pour attendre qu'un élément apparaisse après un fetch asynchrone, on utilise :",
         options: [
-          { id: "a", label: "getByText — il attend automatiquement" },
-          { id: "b", label: "findByText — version async, retry jusqu'à trouver ou timeout" },
-          { id: "c", label: "queryByText — uniquement pour confirmer une absence" },
+          { id: "a", label: "getByText : il attend automatiquement" },
+          { id: "b", label: "findByText : version async, retry jusqu'à trouver ou timeout" },
+          { id: "c", label: "queryByText : uniquement pour confirmer une absence" },
         ],
         correct: ["b"],
       },

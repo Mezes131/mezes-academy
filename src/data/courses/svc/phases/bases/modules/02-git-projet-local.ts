@@ -27,7 +27,7 @@ export const basesModule02: Module = {
         html: `<span class="cm"># créer le dépôt (une fois)</span>
 <span class="fn">git</span> init
 
-<span class="cm"># voir ce qui a changé — TON outil de contrôle du code généré</span>
+<span class="cm"># voir ce qui a changé : TON outil de contrôle du code généré</span>
 <span class="fn">git</span> status
 <span class="fn">git</span> diff
 
@@ -53,21 +53,21 @@ export const basesModule02: Module = {
     { kind: "title", text: ".env : les secrets hors du code" },
     {
       kind: "paragraph",
-      html: "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite — et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes.",
+      html: "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite, et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes.",
     },
     {
       kind: "code",
       sample: {
         label: "Le trio .env / .env.example / .gitignore",
-        html: `<span class="cm"># .env — les VRAIES valeurs, jamais commité</span>
+        html: `<span class="cm"># .env : les VRAIES valeurs, jamais commité</span>
 <span class="prop">STRIPE_SECRET_KEY</span>=<span class="str">sk_live_…vraie clé…</span>
 <span class="prop">DATABASE_URL</span>=<span class="str">postgres://user:motdepasse@host/db</span>
 
-<span class="cm"># .env.example — la DOC des variables, commité</span>
+<span class="cm"># .env.example : la DOC des variables, commité</span>
 <span class="prop">STRIPE_SECRET_KEY</span>=<span class="str">changeme</span>
 <span class="prop">DATABASE_URL</span>=<span class="str">postgres://user:password@localhost/db</span>
 
-<span class="cm"># .gitignore — ce que Git doit ignorer</span>
+<span class="cm"># .gitignore : ce que Git doit ignorer</span>
 node_modules/
 .env`,
       },
@@ -77,19 +77,19 @@ node_modules/
       box: {
         variant: "warn",
         title: "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
-        body: "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés — la phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique.",
+        body: "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés. La phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique.",
       },
     },
 
     { kind: "title", text: "npm : les scripts du projet" },
     {
       kind: "paragraph",
-      html: "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> — voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire.",
+      html: "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> ; voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire.",
     },
     {
       kind: "code",
       sample: {
-        label: "package.json — la section scripts",
+        label: "package.json : la section scripts",
         html: `{
   <span class="str">"scripts"</span>: {
     <span class="str">"dev"</span>: <span class="str">"vite"</span>,            <span class="cm">// serveur de développement</span>

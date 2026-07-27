@@ -80,7 +80,7 @@ function migrateV1ToV2(raw: Partial<LessonProgress>): Partial<LessonProgress> {
 /* ──────────────────────────────────────────────────────────────────
    v2 → v3: introduce exerciseProgress + challengeScores. We backfill
    `exerciseProgress` from the legacy `completedExercises` array so no
-   progress is lost — each legacy completion is recorded as "revealed"
+   progress is lost : each legacy completion is recorded as "revealed"
    (conservative) since we cannot retroactively know if tests passed.
    ────────────────────────────────────────────────────────────────── */
 function migrateV2ToV3(raw: Partial<LessonProgress>): LessonProgress {

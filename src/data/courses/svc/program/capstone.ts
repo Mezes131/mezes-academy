@@ -64,17 +64,17 @@ export const capstonePhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Capstone — Produit commercialisable en prod",
+    title: "Capstone : Produit commercialisable en prod",
     deliverable:
       "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier Ship. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
     options: [
-      "svc-capstone-saas — SaaS B2B : auth + abonnement + dashboard",
-      "svc-capstone-commerce — E-commerce léger : catalogue + paiement + notifs commande",
-      "svc-capstone-service — Produit service : booking/lead + paiement + emails transactionnels",
+      "svc-capstone-saas : SaaS B2B : auth + abonnement + dashboard",
+      "svc-capstone-commerce : E-commerce léger : catalogue + paiement + notifs commande",
+      "svc-capstone-service : Produit service : booking/lead + paiement + emails transactionnels",
     ],
     assessment: [
       "Produit déployé accessible en HTTPS (obligatoire)",
-      "Auth via provider — pas d'auth maison fragile (obligatoire)",
+      "Auth via provider : pas d'auth maison fragile (obligatoire)",
       "Au moins un service tiers paiement ou notification, idéalement les deux (obligatoire)",
       "Checklist Security baseline : pass, aucune critique ouverte",
       "Checklists Perf / Design / A11y : pass selon seuils publiés",

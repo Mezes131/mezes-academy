@@ -83,7 +83,7 @@ export function PhaseChallengePage() {
           </div>
           <div className="flex-1 min-w-0">
             <h1 className={cn("text-2xl font-extrabold tracking-tight", accent.text)}>
-              Challenge final — {phase.label}
+              Challenge final : {phase.label}
             </h1>
             <p className="text-[13px] text-fg-2 mt-1 leading-relaxed">
               Mode révision finale : pas de bouton solution, uniquement les indices.

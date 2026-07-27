@@ -20,7 +20,7 @@ export interface ProfileHeaderProps {
  * Account page header: assembles avatar, inline identity editors, links and
  * a right-side panel with completeness ring + learning-progress snapshot.
  *
- * This file is intentionally thin — layout + wiring only. Every widget lives
+ * This file is intentionally thin : layout + wiring only. Every widget lives
  * under `./components/` to stay reusable and testable.
  */
 export function ProfileHeader({

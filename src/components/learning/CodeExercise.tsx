@@ -207,7 +207,7 @@ export function CodeExercise({
         {showSolution && !challengeMode && (
           <div className="mt-4 inline-flex items-center gap-2 rounded-md bg-sky-500/10 border border-sky-500/30 px-3 py-2 text-[12px] text-sky-200">
             <Eye size={14} />
-            Solution affichée — l'exercice sera marqué comme « Vu » plutôt que « Résolu ».
+            Solution affichée : l'exercice sera marqué comme « Vu » plutôt que « Résolu ».
             Tu peux masquer la solution et retenter à tout moment.
           </div>
         )}
@@ -334,7 +334,7 @@ export function CodeExercise({
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   RunPanel — manual run + local validator (offline).
+   RunPanel : manual run + local validator (offline).
    No dependency on Sandpack remote test infra.
    ══════════════════════════════════════════════════════════════════ */
 
@@ -460,7 +460,7 @@ function TestResultSummary({
       ) : (
         <>
           <AlertCircle size={14} />
-          {result.passed}/{result.total} — {result.failed} échec
+          {result.passed}/{result.total} : {result.failed} échec
           {result.failed > 1 ? "s" : ""}
         </>
       )}
@@ -469,7 +469,7 @@ function TestResultSummary({
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   EditorPasteBlocker — intercepts the paste event on the sandbox
+   EditorPasteBlocker : intercepts the paste event on the sandbox
    code editor only. This does NOT block paste elsewhere on the page.
    ══════════════════════════════════════════════════════════════════ */
 

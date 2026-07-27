@@ -7,10 +7,10 @@ import { svcCourse } from "./svc";
  *
  * To add a new course (e.g. TypeScript, Next.js), create
  * `src/data/courses/<courseId>/` mirroring the React structure:
- *   - `meta.ts` — catalog entry (title, tagline, status…)
- *   - `program.ts` — back-office ready syllabus and authoring priorities
- *   - `phases/<phaseSlug>/` — one folder per phase
- *   - `index.ts` — exports a `Course` object
+ *   - `meta.ts` : catalog entry (title, tagline, status…)
+ *   - `program.ts` : back-office ready syllabus and authoring priorities
+ *   - `phases/<phaseSlug>/` : one folder per phase
+ *   - `index.ts` : exports a `Course` object
  *
  * Then import it here and append it to the array below.
  */

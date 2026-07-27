@@ -5,7 +5,7 @@ export const module02: Module = {
   id: "react-intro-m02",
   index: "02",
   title: "Bibliothèque ou framework ? La nuance qui change tout",
-  subtitle: "Pourquoi React est volontairement minimaliste : et ce que cela implique",
+  subtitle: "Pourquoi React est volontairement minimaliste, et ce que cela implique",
   duration: "2 min",
   content: [
     {

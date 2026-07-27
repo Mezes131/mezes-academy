@@ -3,7 +3,7 @@ import { basesModule01 } from "./modules/01-http-html-js";
 import { basesModule02 } from "./modules/02-git-projet-local";
 import { basesModule03 } from "./modules/03-front-api";
 
-/** Phase 0 — authored content (replaces the program-derived scaffold). */
+/** Phase 0 : authored content (replaces the program-derived scaffold). */
 export const basesPhase: Phase = {
   id: "svc-bases",
   slug: "bases",
@@ -17,7 +17,7 @@ export const basesPhase: Phase = {
   metaTags: ["optionnelle", "lecture ~1h45", "aucun prérequis", "hors chemin critique"],
   modules: [basesModule01, basesModule02, basesModule03],
   project: {
-    title: "Projet P0 — Page connectée à une API",
+    title: "Projet P0 : Page connectée à une API",
     deliverable:
       "Une page qui appelle une API publique et affiche correctement loading / erreur / succès.",
     assessment: [

@@ -16,7 +16,7 @@ import {
 
 /**
  * Legacy consumers (React learning area, useProgress) expect the React
- * course only — keep them scoped so other courses' scaffold phases
+ * course only : keep them scoped so other courses' scaffold phases
  * don't leak into the sidebar or progress totals.
  */
 export const phases: Phase[] = findCourse("react")?.phases ?? [];

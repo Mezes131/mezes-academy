@@ -40,7 +40,7 @@ export interface ModalProps {
   description?: ReactNode;
   /** Free-form content below the description (forms, lists, …). */
   children?: ReactNode;
-  /** Footer slot — use for action buttons. */
+  /** Footer slot : use for action buttons. */
   footer?: ReactNode;
   /** Visual flavor. Drives the icon + color accents. Default: `"default"`. */
   variant?: ModalVariant;
@@ -230,7 +230,7 @@ export function Modal({
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   ConfirmDialog — common case on top of Modal
+   ConfirmDialog : common case on top of Modal
    ═══════════════════════════════════════════════════════════════════ */
 
 export interface ConfirmDialogProps {

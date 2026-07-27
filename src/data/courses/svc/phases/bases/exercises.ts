@@ -42,7 +42,7 @@ document.getElementById("app").innerHTML = \`
       "/.gitignore": `node_modules/
 .env
 `,
-      "/.env.example": `# Clé d'API du service de paiement (test) — vraie valeur dans .env, jamais commitée
+      "/.env.example": `# Clé d'API du service de paiement (test) : vraie valeur dans .env, jamais commitée
 API_KEY=changeme
 `,
     },

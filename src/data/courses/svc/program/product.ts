@@ -1,13 +1,13 @@
 import type { ProgramPhase } from "@/types";
 import { lesson, module, phase } from "./helpers";
 
-/* ── P4 — Auth & identité (services tiers) ──────────────────────── */
+/* ── P4 : Auth & identité (services tiers) ──────────────────────── */
 
 export const authPhase: ProgramPhase = phase({
   slug: "auth",
   title: "Auth & identité",
   objective:
-    "Brancher un vrai provider d'authentification — ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
+    "Brancher un vrai provider d'authentification : ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
   modules: [
     module({
       id: "svc-auth-m01",
@@ -153,7 +153,7 @@ export const authPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P4 — Auth tiers + zone admin",
+    title: "Projet P4 : Auth tiers + zone admin",
     deliverable:
       "Le produit capstone avec auth via provider tiers, zone admin protégée et politique d'accès documentée.",
     assessment: [
@@ -164,7 +164,7 @@ export const authPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P5 — Données & backend ──────────────────────────────────────── */
+/* ── P5 : Données & backend ──────────────────────────────────────── */
 
 export const dataPhase: ProgramPhase = phase({
   slug: "data",
@@ -175,7 +175,7 @@ export const dataPhase: ProgramPhase = phase({
       id: "svc-data-m01",
       index: "01",
       title: "Modèle de données utile",
-      subtitle: "Entités, relations, migrations — sans schéma halluciné",
+      subtitle: "Entités, relations, migrations : sans schéma halluciné",
       duration: "40 min",
       difficulty: "intermediate",
       objectives: [
@@ -315,7 +315,7 @@ export const dataPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P5 — CRUD métier + upload + job async",
+    title: "Projet P5 : CRUD métier + upload + job async",
     deliverable:
       "Le produit capstone enrichi : CRUD métier, upload de fichiers et un job async, générés puis audités.",
     assessment: [
@@ -326,12 +326,12 @@ export const dataPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P6 — Paiements & services tiers ────────────────────────────── */
+/* ── P6 : Paiements & services tiers ────────────────────────────── */
 
 export const paiementsPhase: ProgramPhase = phase({
   slug: "paiements",
   title: "Paiements & services tiers",
-  objective: "Rendre le produit monétisable correctement — webhook compris.",
+  objective: "Rendre le produit monétisable correctement : webhook compris.",
   modules: [
     module({
       id: "svc-paiements-m01",
@@ -469,7 +469,7 @@ export const paiementsPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P6 — Plan Free/Pro avec webhook",
+    title: "Projet P6 : Plan Free/Pro avec webhook",
     deliverable:
       "Le produit capstone monétisé : plan Free/Pro, checkout Stripe et webhook qui active réellement l'accès.",
     assessment: [
@@ -480,7 +480,7 @@ export const paiementsPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P7 — Notifications ─────────────────────────────────────────── */
+/* ── P7 : Notifications ─────────────────────────────────────────── */
 
 export const notificationsPhase: ProgramPhase = phase({
   slug: "notifications",
@@ -614,7 +614,7 @@ export const notificationsPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P7 — Emails transactionnels + préférences",
+    title: "Projet P7 : Emails transactionnels + préférences",
     deliverable:
       "Le produit capstone avec trois emails transactionnels (auth + paiement) et des préférences utilisateur respectées.",
     assessment: [

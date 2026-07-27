@@ -57,7 +57,7 @@ function mapQuestion(raw: StrapiQuizQuestionAttrs): QuizQuestion {
       id: String(a.legacyId ?? a.label),
       label: a.label,
     })),
-    // Public API strips isCorrect — keep empty; scoring stays server-side later
+    // Public API strips isCorrect : keep empty; scoring stays server-side later
     correct: [],
     explanation: q.explanation,
   };
@@ -82,7 +82,7 @@ export function mapExercise(raw: StrapiExerciseAttrs): CodeExercise {
     instructions: ex.instructions ?? "",
     hints: ex.hints,
     starterFiles: ex.starterFiles ?? {},
-    // Private fields absent from public responses — empty until authenticated fetch
+    // Private fields absent from public responses : empty until authenticated fetch
     solutionFiles: ex.solutionFiles ?? {},
     tests: ex.tests,
     validator: ex.validator,

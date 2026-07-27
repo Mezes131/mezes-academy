@@ -8,7 +8,7 @@ export const typescriptExercises = {
       "Définis un type <code>User</code> (<code>id: number</code>, <code>name: string</code>, <code>email: string</code>, <code>role: 'admin' | 'user'</code>) et une fonction générique <code>filterBy&lt;T, K extends keyof T&gt;(items: T[], key: K, value: T[K]): T[]</code> qui retourne les éléments dont <code>item[key] === value</code>.",
     hints: [
       "Utilise `keyof T` pour que `key` soit forcément une vraie clé de T.",
-      "`T[K]` est le type de la valeur associée à cette clé — ça garantit la cohérence.",
+      "`T[K]` est le type de la valeur associée à cette clé : ça garantit la cohérence.",
     ],
     template: "react-ts",
     starterFiles: {
@@ -58,7 +58,7 @@ export default function App() {
       <h2>Admins</h2>
       <ul>
         {admins.map((u) => (
-          <li key={u.id}>{u.name} — {u.email}</li>
+          <li key={u.id}>{u.name} : {u.email}</li>
         ))}
       </ul>
     </div>
@@ -145,7 +145,7 @@ export default function App() {
       "Implémente un composant <code>&lt;List items renderItem /&gt;</code> générique sur <code>T</code>, qui prend une liste d'items et une fonction de rendu. Utilise-le pour afficher deux listes de types différents (strings et objets <code>{id, name}</code>) dans la même page.",
     hints: [
       "La signature : `function List<T>({ items, renderItem }: { items: T[]; renderItem: (item: T) => ReactNode }) {...}`",
-      "N'oublie pas la `key` — tu peux demander une prop `getKey` ou utiliser l'index en fallback.",
+      "N'oublie pas la `key` : tu peux demander une prop `getKey` ou utiliser l'index en fallback.",
     ],
     template: "react-ts",
     starterFiles: {

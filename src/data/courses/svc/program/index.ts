@@ -21,7 +21,7 @@ import {
 import { capstonePhase } from "./capstone";
 
 /**
- * Secure Vibe Coding — programme back-office ready.
+ * Secure Vibe Coding : programme back-office ready.
  * Source : docs/courses/secure-vibe-coding-syllabus.md (draft validé 2026-07-27).
  * Fil conducteur : dès P4, les projets de phase alimentent le même produit
  * qui devient le capstone.
@@ -61,7 +61,7 @@ export const svcProgram: CourseProgram = {
     {
       order: 2,
       target: "P4–P7 (auth, data, paiements, notifications)",
-      rationale: "Rend le produit fil rouge monétisable — cœur de la promesse.",
+      rationale: "Rend le produit fil rouge monétisable : cœur de la promesse.",
     },
     {
       order: 3,
@@ -81,7 +81,7 @@ export const svcProgram: CourseProgram = {
     {
       order: 6,
       target: "P0 (bases web, optionnelle)",
-      rationale: "Hors chemin critique — peut être produite en parallèle.",
+      rationale: "Hors chemin critique : peut être produite en parallèle.",
     },
   ],
 };

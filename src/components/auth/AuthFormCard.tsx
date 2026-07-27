@@ -14,7 +14,7 @@ import {
 export interface AuthFormCardProps {
   /** URL to redirect to once the user is authenticated. */
   nextPath: string;
-  /** Active tab — owned by the parent so siblings (e.g. benefits copy) stay in sync. */
+  /** Active tab : owned by the parent so siblings (e.g. benefits copy) stay in sync. */
   mode: AuthMode;
   onModeChange: (mode: AuthMode) => void;
   /** Toggle OAuth providers section. Default: `true`. */
@@ -81,7 +81,7 @@ export function AuthFormCard({
       const redirectTo = `${window.location.origin}/auth${suffix}`;
       await signInWithProvider(provider, { redirectTo });
       // Browser redirect happens on success; if we're still here, something
-      // unusual happened — reset UI state for safety.
+      // unusual happened : reset UI state for safety.
     } catch (err) {
       setError(humanizeAuthError((err as Error).message));
       setOauthBusy(null);

@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    LANDING CATALOG
    Auto-derived from the course registry (`@/data/courses/`) so the
-   landing stays in sync with the actual content — no more duplicate
+   landing stays in sync with the actual content : no more duplicate
    source of truth.
 
    Courses that are not yet registered (TypeScript, Next.js, Node.js,

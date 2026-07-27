@@ -105,7 +105,7 @@ export const basesQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["b"],
         explanation:
-          "Un secret commité reste dans l'historique Git même après suppression du fichier. C'est l'une des fuites les plus fréquentes — surtout avec du code généré par IA.",
+          "Un secret commité reste dans l'historique Git même après suppression du fichier. C'est l'une des fuites les plus fréquentes, surtout avec du code généré par IA.",
       },
       {
         id: "q3",
@@ -177,7 +177,7 @@ export const basesQuizzes: Record<"m01" | "m02" | "m03", Quiz> = {
         ],
         correct: ["b"],
         explanation:
-          "Piège classique : fetch ne rejette que sur erreur réseau. Un 404 ou un 500 « réussit » techniquement — il faut tester response.ok soi-même.",
+          "Piège classique : fetch ne rejette que sur erreur réseau. Un 404 ou un 500 « réussit » techniquement ; il faut tester response.ok soi-même.",
       },
       {
         id: "q3",

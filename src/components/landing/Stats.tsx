@@ -84,10 +84,10 @@ function FinalCta() {
         <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight">
           Prêt à commencer ?
         </h3>
-        <p className="mt-3 text-fg-2 max-w-xl mx-auto">
-          Les parcours React et Secure Vibe Coding sont disponibles dès
-          maintenant. Aucune inscription, ta progression est conservée dans ton
-          navigateur.
+        <p className="mt-3 text-fg-2 max-w-xl mx-auto leading-relaxed">
+          React et Secure Vibe Coding sont ouverts dès maintenant. Crée un
+          compte pour synchroniser ta progression, ou commence en local : ton
+          avance reste dans le navigateur.
         </p>
         <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
           <Link to="/react">

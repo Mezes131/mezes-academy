@@ -32,14 +32,12 @@ export function SvcCoursePage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[0.98]">
             Du prompt au{" "}
-            <em className="not-italic bg-gradient-to-r from-violet-400 to-brand-eco bg-clip-text text-transparent">
-              produit en prod
-            </em>
+            <em className="not-italic text-violet-400">produit en production</em>
             ,
             <br />
             sans la dette ni les failles.
           </h1>
-          <p className="mt-5 text-[16px] text-fg-2 font-serif leading-relaxed max-w-2xl">
+          <p className="mt-5 text-[17px] text-fg-2 leading-relaxed max-w-2xl prose-lesson">
             {meta.description}
           </p>
           <div className="mt-6 flex flex-wrap gap-2 text-[12px] font-mono text-fg-2">
@@ -66,12 +64,11 @@ export function SvcCoursePage() {
           <i className="fa-solid fa-pen-ruler" />
         </div>
         <div>
-          <div className="font-bold">Programme complet, leçons en cours de rédaction</div>
+          <div className="font-bold">Programme publié, leçons rédigées au fil de l&apos;eau</div>
           <p className="text-[13px] text-fg-2 mt-1 leading-relaxed">
-            Le syllabus ci-dessous est définitif : phases, modules, projets,
-            capstone et rubrique de certification. Le contenu détaillé des
-            leçons est publié progressivement, dans l'ordre des priorités de
-            rédaction.
+            Le syllabus ci-dessous est figé : phases, modules, projets, capstone
+            et rubrique de certification. La phase Bases web est déjà jouable.
+            Les autres leçons arrivent dans l&apos;ordre des priorités de rédaction.
           </p>
         </div>
       </div>

@@ -9,7 +9,7 @@ export const expertExercises = {
     hints: [
       "Compare type et children par index. Pour un nœud texte, renvoie UPDATE_TEXT si le contenu diffère.",
       "Retourne simplement un tableau d'objets { op, path, value }.",
-      "On ignore volontairement la gestion des `key` — c'est précisément ce qui rend l'algo de React complexe.",
+      "On ignore volontairement la gestion des `key` : c'est précisément ce qui rend l'algo de React complexe.",
     ],
     template: "react-ts",
     starterFiles: {

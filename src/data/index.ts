@@ -17,10 +17,10 @@ export const allPrograms: CourseProgram[] = courses
   .map((course) => course.program)
   .filter((program): program is CourseProgram => Boolean(program));
 
-/** All phases of all courses, flattened — used by the router. */
+/** All phases of all courses, flattened : used by the router. */
 export const allPhases: Phase[] = courses.flatMap((c) => c.phases);
 
-/** All modules of all courses, flattened — used by the router. */
+/** All modules of all courses, flattened : used by the router. */
 export const allModules: Array<{ course: Course; phase: Phase; module: Module }> =
   courses.flatMap((course) =>
     course.phases.flatMap((phase) =>

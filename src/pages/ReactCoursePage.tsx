@@ -89,15 +89,15 @@ export function ReactCoursePage() {
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[0.98]">
-            Ton parcours <em className="not-italic bg-gradient-to-r from-brand-core to-brand-intro bg-clip-text text-transparent">React</em>,
+            Ton parcours <em className="not-italic text-brand-core">React</em>,
             <br />
-            du premier JSX à l'architecture expert.
+            du premier JSX à l&apos;architecture expert.
           </h1>
-          <p className="mt-5 text-[16px] text-fg-2 font-serif leading-relaxed max-w-2xl">
+          <p className="mt-5 text-[17px] text-fg-2 leading-relaxed max-w-2xl">
             {phaseCount} phases progressives, {moduleCount} modules, des dizaines
-            d'exercices live.
-            Ta progression est sauvegardée automatiquement, reprends à tout
-            moment là où tu t'es arrêté.
+            d&apos;exercices live. Chaque notion est expliquée, pratiquée, puis
+            validée. Ta progression est sauvegardée : tu reprends à tout moment
+            là où tu t&apos;es arrêté.
           </p>
           {/* Module routes are auth-gated: RequireAuth redirects to
               /auth?next=… when the visitor is not signed in. */}
@@ -450,7 +450,7 @@ function LastActivityCard({
           Quiz : <strong className={passed ? "text-emerald-400" : "text-amber-400"}>
             {activity.score.correct}/{activity.score.total}
           </strong>{" "}
-          {passed ? "— validé" : "— à refaire pour valider"}
+          {passed ? " · validé" : " · à refaire pour valider"}
         </div>
       </div>
       <ArrowRight

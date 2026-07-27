@@ -18,7 +18,7 @@ export const basesModule01: Module = {
     { kind: "title", text: "Pourquoi ce module existe" },
     {
       kind: "paragraph",
-      html: "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front : il te donne les trois lectures indispensables — le dialogue HTTP, la structure HTML, et le JavaScript asynchrone — pour comprendre ce que l'IA produit et repérer quand elle se trompe.",
+      html: "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front. Il te donne trois lectures indispensables (le dialogue HTTP, la structure HTML et le JavaScript asynchrone) pour comprendre ce que l'IA produit et repérer quand elle se trompe.",
     },
     {
       kind: "info",
@@ -110,7 +110,7 @@ export const basesModule01: Module = {
     },
     {
       kind: "paragraph",
-      html: "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code> — tu viens d'apprendre ta première vérification d'audit.",
+      html: "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code>. Tu viens d'apprendre ta première vérification d'audit.",
     },
 
     { kind: "title", text: "À toi de jouer : autopsie d'un flux réseau" },

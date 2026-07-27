@@ -1,7 +1,7 @@
 import type { ProgramPhase } from "@/types";
 import { lesson, module, phase } from "./helpers";
 
-/* ── P8 — Audit Sécurité (checklist security-baseline) ──────────── */
+/* ── P8 : Audit Sécurité (checklist security-baseline) ──────────── */
 
 export const auditSecuritePhase: ProgramPhase = phase({
   slug: "audit-securite",
@@ -153,7 +153,7 @@ export const auditSecuritePhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P8 — Rapport Security baseline",
+    title: "Projet P8 : Rapport Security baseline",
     deliverable:
       "Le rapport Security baseline du produit capstone : preuves, correctifs appliqués, points restants.",
     assessment: [
@@ -164,7 +164,7 @@ export const auditSecuritePhase: ProgramPhase = phase({
   },
 });
 
-/* ── P9 — Audit Qualité (perf / design / a11y) ──────────────────── */
+/* ── P9 : Audit Qualité (perf / design / a11y) ──────────────────── */
 
 export const auditQualitePhase: ProgramPhase = phase({
   slug: "audit-qualite",
@@ -289,7 +289,7 @@ export const auditQualitePhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P9 — Scores avant/après",
+    title: "Projet P9 : Scores avant/après",
     deliverable:
       "Les checklists Perf / Design / A11y passées sur le capstone, avec scores avant/après documentés.",
     assessment: [
@@ -300,7 +300,7 @@ export const auditQualitePhase: ProgramPhase = phase({
   },
 });
 
-/* ── P10 — Hébergement & déploiement ────────────────────────────── */
+/* ── P10 : Hébergement & déploiement ────────────────────────────── */
 
 export const hebergementPhase: ProgramPhase = phase({
   slug: "hebergement",
@@ -367,7 +367,7 @@ export const hebergementPhase: ProgramPhase = phase({
       id: "svc-hebergement-m03",
       index: "03",
       title: "CI/CD minimal",
-      subtitle: "Build, test, deploy, rollback — et bloquer sur audit",
+      subtitle: "Build, test, deploy, rollback : et bloquer sur audit",
       duration: "45 min",
       difficulty: "intermediate",
       objectives: [
@@ -423,7 +423,7 @@ export const hebergementPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P10 — Déploiement preview + prod",
+    title: "Projet P10 : Déploiement preview + prod",
     deliverable:
       "Le produit capstone déployé : environnement preview + prod avec URL publique HTTPS.",
     assessment: [
@@ -434,12 +434,12 @@ export const hebergementPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P11 — Observabilité & ops légers ───────────────────────────── */
+/* ── P11 : Observabilité & ops légers ───────────────────────────── */
 
 export const opsPhase: ProgramPhase = phase({
   slug: "ops",
   title: "Observabilité & ops légers",
-  objective: "Savoir que ça casse — et quoi faire quand ça casse.",
+  objective: "Savoir que ça casse : et quoi faire quand ça casse.",
   modules: [
     module({
       id: "svc-ops-m01",
@@ -528,7 +528,7 @@ export const opsPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P11 — Runbook + alerte live",
+    title: "Projet P11 : Runbook + alerte live",
     deliverable:
       "Le runbook du produit + au moins une alerte réellement active sur l'environnement de prod.",
     assessment: [
@@ -539,7 +539,7 @@ export const opsPhase: ProgramPhase = phase({
   },
 });
 
-/* ── P12 — Ship commercial ──────────────────────────────────────── */
+/* ── P12 : Ship commercial ──────────────────────────────────────── */
 
 export const shipPhase: ProgramPhase = phase({
   slug: "ship",
@@ -633,7 +633,7 @@ export const shipPhase: ProgramPhase = phase({
     }),
   ],
   project: {
-    title: "Projet P12 — Dossier Ship",
+    title: "Projet P12 : Dossier Ship",
     deliverable:
       "Le dossier Ship complet : URL publique, plans et pricing, preuves d'audit, runbook.",
     assessment: [

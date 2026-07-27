@@ -73,7 +73,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             )}
           </button>
         </div>
-        <p className="text-fg-2 mt-2 font-serif text-[17px]">{module.subtitle}</p>
+        <p className="text-fg-2 mt-2 text-[17px] leading-relaxed max-w-[72ch]">{module.subtitle}</p>
 
         <div className="flex flex-wrap gap-2 mt-4">
           {isRead && (
@@ -169,7 +169,7 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
     case "paragraph":
       return (
         <p
-          className="text-[15px] leading-[1.75] text-fg-2 font-serif [&_strong]:text-fg [&_em]:text-fg-2 [&_code]:font-mono [&_code]:text-[13px] [&_code]:bg-bg-3 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:font-sans"
+          className="prose-lesson text-[15px] md:text-[17px] leading-[1.75] text-fg-2 [&_strong]:text-fg [&_em]:text-fg-2 [&_code]:font-mono [&_code]:text-[0.9em] [&_code]:bg-bg-3 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded"
           dangerouslySetInnerHTML={{ __html: block.html }}
         />
       );

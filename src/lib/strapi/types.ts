@@ -53,7 +53,7 @@ export interface StrapiExerciseAttrs {
   template?: "react" | "react-ts" | "vanilla";
   attemptsBeforeSolution?: number;
   challengeEligible?: boolean;
-  // private fields — absent from public API
+  // private fields : absent from public API
   solutionFiles?: Record<string, string>;
   tests?: Record<string, string>;
   validator?: string;

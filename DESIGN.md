@@ -12,23 +12,29 @@ marketing site or a toy classroom.
 
 Support light and dark themes. Dark mode is the preferred learning environment
 for code-heavy views, while long-form reading must remain comfortable in both
-themes.
+themes. Color tokens are defined under Color below; do not introduce
+per-component raw colors when a semantic token exists.
 
-Use semantic CSS variables already established by the project:
+## Typography
+
+- Body: IBM Plex Sans (loaded), with system-ui fallback.
+- Code and technical labels: JetBrains Mono.
+- Body text: 16px base, lesson prose ~17px with 65–75ch measure (`.prose-lesson`).
+- Fixed rem scale (~1.125). Hierarchy via weight and size, not color alone.
+- No gradient text. Em dashes (—) are banned in copy; use commas, colons, or parentheses.
+
+## Color
+
+Restrained strategy: indigo-tinted neutrals + one accent for actions, selection, and progress.
+
+Semantic tokens (never raw hex in components when a token exists):
 
 - `--bg`, `--bg2`, `--bg3`, `--bg4`
 - `--fg`, `--fg2`, `--fg3`
 - `--accent`, `--accent2`, `--accent3`
 - `--border`, `--border-strong`
 
-Do not introduce per-component raw colors when a semantic token exists.
-
-## Typography
-
-- Body: system sans-serif or IBM Plex Sans when the font is intentionally loaded.
-- Code and technical labels: JetBrains Mono.
-- Body text: minimum 16px with a readable 65–75ch measure.
-- Use weight, spacing, and size to express hierarchy rather than color alone.
+`fg2` is tuned for long-form reading contrast. Accent stays within ~10% of the surface.
 
 ## Layout
 

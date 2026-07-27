@@ -5,9 +5,34 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [ "system-ui", "sans-serif"],
+        sans: [
+          "IBM Plex Sans",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "sans-serif",
+        ],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
-        serif: ["Arial", "Helvetica", "sans-serif"],
+        /* Legacy alias: long-form intros use the same readable sans */
+        serif: [
+          "IBM Plex Sans",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "sans-serif",
+        ],
+      },
+      fontSize: {
+        /* Fixed rem scale (~1.125 ratio) for product UI */
+        xs: ["0.75rem", { lineHeight: "1.4" }],
+        sm: ["0.875rem", { lineHeight: "1.5" }],
+        base: ["1rem", { lineHeight: "1.65" }],
+        lg: ["1.125rem", { lineHeight: "1.6" }],
+        xl: ["1.25rem", { lineHeight: "1.4" }],
+        "2xl": ["1.5rem", { lineHeight: "1.3" }],
+        "3xl": ["1.875rem", { lineHeight: "1.2" }],
+        "4xl": ["2.25rem", { lineHeight: "1.15" }],
+        "5xl": ["3rem", { lineHeight: "1.1" }],
       },
       colors: {
         bg: {
