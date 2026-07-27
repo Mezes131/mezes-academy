@@ -99,6 +99,22 @@ export function ReactCoursePage() {
             Ta progression est sauvegardée automatiquement, reprends à tout
             moment là où tu t'es arrêté.
           </p>
+          {/* Module routes are auth-gated: RequireAuth redirects to
+              /auth?next=… when the visitor is not signed in. */}
+          <div className="mt-7">
+            <Link
+              to={
+                nextModule
+                  ? `/react/module/${nextModule.module.id}`
+                  : "/react/final-project"
+              }
+            >
+              <Button size="md">
+                {hasStarted ? "Continuer le cours" : "Commencer le cours"}
+                <ArrowRight size={16} />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

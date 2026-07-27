@@ -1,6 +1,5 @@
 import { Link, useParams, Navigate } from "react-router-dom";
-import { getPhase } from "@/data/phases";
-import type { PhaseId } from "@/types";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { useProgress } from "@/hooks/useProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { cn, phaseAccent } from "@/lib/utils";
@@ -8,13 +7,35 @@ import { Clock, CheckCircle2, ArrowRight, Trophy } from "lucide-react";
 
 export function PhasePage() {
   const { phaseId } = useParams<{ phaseId: string }>();
-  const phase = getPhase(phaseId as PhaseId);
-  const { progress, phaseStats } = useProgress();
+  const { basePath, phases, learnerTools } = useCourseArea();
+  const phase = phases.find((p) => p.id === phaseId);
+  const { progress } = useProgress();
 
   if (!phase) return <Navigate to="/" replace />;
 
   const accent = phaseAccent(phase.color);
-  const st = phaseStats.find((p) => p.id === phase.id)!;
+  // Phase stats computed locally so any course's phases work (the
+  // provider-level phaseStats only covers the React track).
+  const st = (() => {
+    let total = 0;
+    let done = 0;
+    for (const mod of phase.modules) {
+      total += 1;
+      if (progress.readModules.includes(mod.id)) done += 1;
+      if (mod.quiz) {
+        total += 1;
+        const s = progress.quizScores[mod.quiz.id];
+        if (s && s.total > 0 && s.correct / s.total >= 0.7) done += 1;
+      }
+      for (const ex of mod.exercises ?? []) {
+        total += 1;
+        if (progress.completedExercises.includes(ex.id)) done += 1;
+      }
+    }
+    return { total, done, percent: total === 0 ? 0 : Math.round((done / total) * 100) };
+  })();
+  const hasChallenge =
+    learnerTools && phase.modules.some((mod) => (mod.exercises?.length ?? 0) > 0);
   const challengeScore = progress.challengeScores[phase.id];
 
   return (
@@ -78,8 +99,9 @@ export function PhasePage() {
       </div>
 
       {/* ─── Final challenge entry point ─────────────────── */}
+      {hasChallenge && (
       <Link
-        to={`/react/phase/${phase.id}/challenge`}
+        to={`${basePath}/phase/${phase.id}/challenge`}
         className="mt-4 block rounded-xl border-base bg-bg-2 p-4 hover:border-accent/30 transition"
       >
         <div className="flex items-center gap-3">
@@ -107,6 +129,7 @@ export function PhasePage() {
           <ArrowRight size={16} className="text-fg-3" />
         </div>
       </Link>
+      )}
 
       {/* ─── Module list ───────────────────── */}
       <div className="mt-10 space-y-3">
@@ -117,7 +140,7 @@ export function PhasePage() {
           return (
             <Link
               key={mod.id}
-              to={`/react/module/${mod.id}`}
+              to={`${basePath}/module/${mod.id}`}
               className={cn(
                 "group flex items-start gap-4 rounded-xl border-base bg-bg-2 p-5 transition",
                 "hover:border-accent/30 hover:-translate-y-0.5 duration-200",

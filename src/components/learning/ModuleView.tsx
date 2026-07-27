@@ -1,5 +1,6 @@
 import type { Module, Phase, ContentBlock } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { InfoBox } from "@/components/ui/InfoBox";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Button } from "@/components/ui/Button";
@@ -17,6 +18,7 @@ interface ModuleViewProps {
 
 export function ModuleView({ phase, module }: ModuleViewProps) {
   const { progress, markModuleRead, canMarkModuleRead, toggleBookmark } = useProgress();
+  const { basePath } = useCourseArea();
   const accent = phaseAccent(phase.color);
   const isRead = progress.readModules.includes(module.id);
   const isBookmarked = progress.bookmarks.includes(module.id);
@@ -42,7 +44,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       <div className="mb-8">
         <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-2">
           <Link
-            to={`/react/phase/${phase.id}`}
+            to={`${basePath}/phase/${phase.id}`}
             className={cn("hover:underline", accent.text)}
           >
             <i className={`fa-solid ${phase.icon} mr-1.5`} /> {phase.label}

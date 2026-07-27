@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { phases } from "@/data/phases";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "./courseArea";
 import { cn, phaseAccent } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
 import { useEffect } from "react";
@@ -16,6 +16,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { progress } = useProgress();
+  const { basePath, phases } = useCourseArea();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -70,7 +71,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             return (
               <div key={phase.id}>
                 <NavLink
-                  to={`/react/phase/${phase.id}`}
+                  to={`${basePath}/phase/${phase.id}`}
                   onClick={() => {
                     if (window.innerWidth < 1024) onClose();
                   }}
@@ -97,7 +98,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     return (
                       <li key={mod.id}>
                         <NavLink
-                          to={`/react/module/${mod.id}`}
+                          to={`${basePath}/module/${mod.id}`}
                           onClick={() => {
                             if (window.innerWidth < 1024) onClose();
                           }}

@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { svcCourse } from "@/data/courses/svc";
 import { CourseSyllabus } from "@/components/course/CourseSyllabus";
+import { Button } from "@/components/ui/Button";
 
 /**
  * Secure Vibe Coding course page: presents the full program (syllabus,
- * projects, capstone and certification rubric). Lesson content is being
- * authored in Strapi, so modules are not clickable yet.
+ * projects, capstone and certification rubric). Modules link into the
+ * learning area; lesson routes are auth-gated.
  */
 export function SvcCoursePage() {
   const { meta, program, phases } = svcCourse;
@@ -45,6 +48,16 @@ export function SvcCoursePage() {
             <MetaChip icon="fa-layer-group" text={`${phases.length} phases · ${moduleCount} modules`} />
             <MetaChip icon="fa-award" text="Capstone + certificat" />
           </div>
+          {/* The lesson routes are auth-gated: RequireAuth redirects to
+              /auth?next=… when the visitor is not signed in. */}
+          <div className="mt-7">
+            <Link to="/secure-vibe-coding/phase/svc-bases">
+              <Button size="md">
+                Commencer le cours
+                <ArrowRight size={16} />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -67,6 +80,7 @@ export function SvcCoursePage() {
         <CourseSyllabus
           program={program}
           livePhases={phases}
+          moduleHref={(moduleId) => `/secure-vibe-coding/module/${moduleId}`}
           description="Cycle Prompt → Audit → Ship appliqué de bout en bout : dès la phase 4, les projets alimentent le même produit qui devient le capstone certifiant."
         />
       )}

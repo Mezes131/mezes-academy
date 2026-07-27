@@ -20,6 +20,7 @@ import type {
   LessonProgress,
 } from "@/types";
 import { phases, totalProgressItems } from "@/data/phases";
+import { allModules } from "@/data";
 import { useAuth } from "@/hooks/useAuth";
 import { loadRemoteProgress, saveRemoteProgress } from "@/lib/progressRemote";
 
@@ -535,9 +536,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const canMarkModuleRead = useCallback(
     (moduleId: string) => {
-      const found = phases
-        .flatMap((phase) => phase.modules)
-        .find((module) => module.id === moduleId);
+      // All courses, not only React: gating must hold for SVC modules too.
+      const found = allModules.find((entry) => entry.module.id === moduleId)?.module;
       if (!found) return true;
 
       const quizValidated = !found.quiz
@@ -598,9 +598,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       if (!(quizId in p.quizScores)) return p;
       const nextScores = { ...p.quizScores };
       delete nextScores[quizId];
-      const owningModule = phases
-        .flatMap((phase) => phase.modules)
-        .find((mod) => mod.quiz?.id === quizId);
+      const owningModule = allModules.find(
+        (entry) => entry.module.quiz?.id === quizId,
+      )?.module;
       const nextReadModules =
         owningModule && p.readModules.includes(owningModule.id)
           ? p.readModules.filter((id) => id !== owningModule.id)

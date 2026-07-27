@@ -1,15 +1,22 @@
-import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { ChevronRight, LogIn } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
+import { useAuth } from "@/hooks/useAuth";
+import { useCourseArea } from "./courseArea";
+import { cn } from "@/lib/utils";
 
 /**
- * Slim top navigation for the course area (/react/*).
+ * Slim top navigation for a course area.
  * Breadcrumb and theme; search, sidebar, progress, and bookmarks live in CourseBar.
  */
 export function CourseTopNav() {
+  const { basePath, navTitle, navIcon, navAccent } = useCourseArea();
+  const { user } = useAuth();
+  const location = useLocation();
+
   return (
     <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-3 items-center gap-2 px-4 sm:px-6">
       <div className="flex min-w-0 items-center gap-2 sm:gap-3 justify-self-start">
@@ -24,20 +31,40 @@ export function CourseTopNav() {
       </div>
 
       <Link
-        to="/react"
+        to={basePath}
         className="flex min-w-0 items-center justify-center gap-2 font-bold text-[14px] hover:text-accent-2 transition"
       >
-        <i className="fa-solid fa-atom text-brand-core flex-shrink-0" />
-        <span className="truncate">React de zéro à expert</span>
-        <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-brand-core/10 text-brand-core border border-brand-core/20 uppercase tracking-wider hidden sm:inline flex-shrink-0">
+        <i className={cn("fa-solid flex-shrink-0", navIcon, navAccent.text)} />
+        <span className="truncate">{navTitle}</span>
+        <span
+          className={cn(
+            "font-mono text-[10px] px-1.5 py-0.5 rounded border uppercase tracking-wider hidden sm:inline flex-shrink-0",
+            navAccent.chip,
+          )}
+        >
           parcours
         </span>
       </Link>
 
       <div className="flex items-center justify-self-end gap-2">
-        <SyncStatusBadge variant="pill" className="hidden sm:inline-flex" />
-        <ThemeToggle />
-        <UserMenu size={30} />
+        {user ? (
+          <>
+            <SyncStatusBadge variant="pill" className="hidden sm:inline-flex" />
+            <ThemeToggle />
+            <UserMenu size={30} />
+          </>
+        ) : (
+          <>
+            <ThemeToggle />
+            <Link
+              to={`/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`}
+              className="flex items-center gap-1.5 rounded-lg border-base px-3 py-1.5 text-[13px] font-semibold hover:bg-bg-3 transition"
+            >
+              <LogIn size={14} />
+              Se connecter
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
