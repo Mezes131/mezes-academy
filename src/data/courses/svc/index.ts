@@ -5,8 +5,10 @@ import { svcMeta } from "./meta";
 import { svcProgram } from "./program";
 import { basesPhase as basesPhaseFr } from "./locales/fr/phases/bases";
 import { fondationsPhase as fondationsPhaseFr } from "./locales/fr/phases/fondations";
+import { promptPhase as promptPhaseFr } from "./locales/fr/phases/prompt";
 import { basesPhase as basesPhaseEn } from "./locales/en/phases/bases";
 import { fondationsPhase as fondationsPhaseEn } from "./locales/en/phases/fondations";
+import { promptPhase as promptPhaseEn } from "./locales/en/phases/prompt";
 
 const phasePresentation: Record<string, PhasePresentation> = {
   bases: { color: "intro", icon: "fa-globe", label: "Phase 0" },
@@ -28,12 +30,14 @@ const phasePresentation: Record<string, PhasePresentation> = {
 const authoredFr: Record<string, Phase> = {
   [basesPhaseFr.id]: basesPhaseFr,
   [fondationsPhaseFr.id]: fondationsPhaseFr,
+  [promptPhaseFr.id]: promptPhaseFr,
 };
 
 /** EN-authored phases (same phase ids as FR). */
 const authoredEn: Record<string, Phase> = {
   [basesPhaseEn.id]: basesPhaseEn,
   [fondationsPhaseEn.id]: fondationsPhaseEn,
+  [promptPhaseEn.id]: promptPhaseEn,
 };
 
 /**

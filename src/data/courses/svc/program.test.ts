@@ -47,7 +47,7 @@ describe("svcProgram", () => {
   });
 });
 
-const AUTHORED_PHASE_IDS = ["svc-bases", "svc-fondations"];
+const AUTHORED_PHASE_IDS = ["svc-bases", "svc-fondations", "svc-prompt"];
 
 describe("svcCourse phases", () => {
   it("mirrors the program structure", () => {
@@ -87,10 +87,33 @@ describe("svcCourse phases", () => {
     }
   });
 
+  it("authored prompt phase uses audit exercises and 5-question quizzes", () => {
+    const prompt = svcCourse.phases.find((phase) => phase.id === "svc-prompt");
+    expect(prompt).toBeDefined();
+    expect(prompt!.scaffoldOnly).toBeFalsy();
+    expect(prompt!.modules).toHaveLength(3);
+    const exerciseIds = prompt!.modules.flatMap(
+      (m) => m.exercises?.map((e) => e.id) ?? [],
+    );
+    expect(exerciseIds).toEqual([
+      "svc-prompt-ex-m01-1",
+      "svc-prompt-ex-m02-1",
+      "svc-prompt-ex-m02-2",
+      "svc-prompt-ex-m03-projet",
+    ]);
+    for (const mod of prompt!.modules) {
+      expect(mod.content.length).toBeGreaterThan(0);
+      expect(mod.quiz?.questions).toHaveLength(5);
+      for (const exercise of mod.exercises ?? []) {
+        expect(exercise.format).toBe("audit");
+      }
+    }
+  });
+
   it("EN authored phases share the same ids as FR", () => {
     const fr = buildSvcCourse("fr");
     const en = buildSvcCourse("en");
-    for (const id of ["svc-bases", "svc-fondations"]) {
+    for (const id of ["svc-bases", "svc-fondations", "svc-prompt"]) {
       const frPhase = fr.phases.find((p) => p.id === id)!;
       const enPhase = en.phases.find((p) => p.id === id)!;
       expect(enPhase.title).not.toBe(frPhase.title);
