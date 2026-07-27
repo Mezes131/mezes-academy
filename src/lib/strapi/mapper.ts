@@ -120,6 +120,27 @@ function mapContentBlocks(raw: unknown): ContentBlock[] {
           html: String(block.code ?? ""),
         },
       });
+    } else if (component.includes("video")) {
+      const providerId = String(block.providerId ?? "").trim();
+      if (!providerId) continue;
+      blocks.push({
+        kind: "video",
+        video: {
+          provider:
+            (block.provider as
+              | "mux"
+              | "vimeo"
+              | "bunny"
+              | "youtube"
+              | "other") ?? "other",
+          providerId,
+          title: block.title ? String(block.title) : undefined,
+          durationSeconds:
+            typeof block.durationSeconds === "number"
+              ? block.durationSeconds
+              : undefined,
+        },
+      });
     } else if (component.includes("text")) {
       const body = String(block.body ?? "");
       if (body.startsWith("<h2>")) {

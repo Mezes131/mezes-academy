@@ -76,8 +76,11 @@ describe("mapCourse", () => {
     expect(mod.id).toBe("react-core-m06");
     expect(mod.quiz?.id).toBe("react-core-quiz-m06");
     expect(mod.exercises?.[0].id).toBe("react-core-ex-m06-1");
-    expect(mod.exercises?.[0].starterFiles["/App.js"]).toContain("App");
-    expect(mod.exercises?.[0].solutionFiles).toEqual({});
+    const first = mod.exercises?.[0];
+    expect(first && first.format !== "audit" && first.starterFiles["/App.js"]).toContain(
+      "App",
+    );
+    expect(first && first.format !== "audit" && first.solutionFiles).toEqual({});
   });
 
   it("tolerates missing optional quiz and media", () => {

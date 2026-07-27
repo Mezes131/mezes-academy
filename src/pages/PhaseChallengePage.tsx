@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getPhase } from "@/data/phases";
 import type { PhaseId } from "@/types";
+import { isCodeExercise } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
 import { CodeExercise as ExerciseCard } from "@/components/learning/CodeExercise";
 import { Button } from "@/components/ui/Button";
@@ -23,6 +24,7 @@ export function PhaseChallengePage() {
     if (!phase) return [];
     return phase.modules
       .flatMap((m) => m.exercises ?? [])
+      .filter(isCodeExercise)
       .filter((ex) => ex.challengeEligible !== false);
   }, [phase]);
 

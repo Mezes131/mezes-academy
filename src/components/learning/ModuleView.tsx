@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Quiz } from "./Quiz";
 import { CodeExercise } from "./CodeExercise";
+import { AuditExercise } from "./AuditExercise";
+import { isAuditExercise } from "@/types";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Bookmark, BookmarkCheck, CheckCircle2, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -122,9 +124,13 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             <i className="fa-solid fa-laptop-code text-accent-2" />
             Exercice{module.exercises.length > 1 ? "s" : ""} pratique{module.exercises.length > 1 ? "s" : ""}
           </h2>
-          {module.exercises.map((ex) => (
-            <CodeExercise key={ex.id} exercise={ex} />
-          ))}
+          {module.exercises.map((ex) =>
+            isAuditExercise(ex) ? (
+              <AuditExercise key={ex.id} exercise={ex} />
+            ) : (
+              <CodeExercise key={ex.id} exercise={ex} />
+            ),
+          )}
         </div>
       )}
 
@@ -219,5 +225,41 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
       );
     case "code":
       return <CodeBlock label={block.sample.label} html={block.sample.html} />;
+    case "video": {
+      const { video } = block;
+      if (!video.providerId?.trim()) return null;
+      // Stub player: YouTube embed when provider is youtube; otherwise a titled link.
+      if (video.provider === "youtube") {
+        return (
+          <div className="my-6 aspect-video w-full max-w-3xl overflow-hidden rounded-xl border-base bg-bg-2">
+            <iframe
+              title={video.title ?? "Vidéo du cours"}
+              src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.providerId)}`}
+              className="h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        );
+      }
+      return (
+        <a
+          href={video.providerId}
+          target="_blank"
+          rel="noreferrer"
+          className="my-6 flex items-center gap-3 rounded-xl border-base bg-bg-2 p-4 text-sm font-semibold hover:bg-bg-3 transition"
+        >
+          <i className="fa-solid fa-play text-accent-2" />
+          {video.title ?? "Ouvrir la vidéo"}
+          {video.durationSeconds != null && (
+            <span className="ml-auto font-mono text-[11px] text-fg-3">
+              {Math.round(video.durationSeconds / 60)} min
+            </span>
+          )}
+        </a>
+      );
+    }
+    default:
+      return null;
   }
 }
