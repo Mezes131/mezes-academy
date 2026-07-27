@@ -47,7 +47,7 @@ describe("svcProgram", () => {
   });
 });
 
-const AUTHORED_PHASE_IDS = ["svc-bases"];
+const AUTHORED_PHASE_IDS = ["svc-bases", "svc-fondations"];
 
 describe("svcCourse phases", () => {
   it("mirrors the program structure", () => {
@@ -68,6 +68,21 @@ describe("svcCourse phases", () => {
       expect(mod.quiz?.questions).toHaveLength(5);
       for (const exercise of mod.exercises ?? []) {
         expect(exercise.id).toMatch(new RegExp(`^svc-bases-ex-${mod.id.slice(-3)}-\\d$`));
+      }
+    }
+  });
+
+  it("authored fondations phase uses audit exercises and 5-question quizzes", () => {
+    const fondations = svcCourse.phases.find((phase) => phase.id === "svc-fondations");
+    expect(fondations).toBeDefined();
+    expect(fondations!.scaffoldOnly).toBeFalsy();
+    for (const mod of fondations!.modules) {
+      expect(mod.content.length).toBeGreaterThan(0);
+      expect(mod.quiz?.questions).toHaveLength(5);
+      expect(mod.exercises?.length).toBeGreaterThan(0);
+      for (const exercise of mod.exercises ?? []) {
+        expect(exercise.format).toBe("audit");
+        expect(exercise.id.startsWith("svc-fondations-ex-")).toBe(true);
       }
     }
   });

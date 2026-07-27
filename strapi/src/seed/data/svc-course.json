@@ -1,11 +1,11 @@
 {
-  "exportedAt": "2026-07-27T10:41:30.117Z",
+  "exportedAt": "2026-07-27T11:41:14.079Z",
   "course": {
     "legacyId": "svc",
     "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
     "slug": "secure-vibe-coding",
-    "tagline": "Du prompt au produit en prod — sans la dette ni les failles",
-    "description": "Concevoir et livrer une solution complète et commercialisable en développement assisté par IA : cycle Prompt → Audit → Ship, auth tiers, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant.",
+    "tagline": "Du prompt au produit en production, sans dette ni failles oubliées",
+    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Ship : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
     "icon": "fa-shield-halved",
     "iconFamily": "fa-solid",
     "level": "intermediate",
@@ -33,7 +33,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": false,
-        "projectTitle": "Projet P0 — Page connectée à une API",
+        "projectTitle": "Projet P0 : Page connectée à une API",
         "projectDeliverable": "Une page qui appelle une API publique et affiche correctement loading / erreur / succès.",
         "projectAssessment": [
           "Les trois états sont visibles et corrects",
@@ -65,7 +65,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front : il te donne les trois lectures indispensables — le dialogue HTTP, la structure HTML, et le JavaScript asynchrone — pour comprendre ce que l'IA produit et repérer quand elle se trompe."
+                "html": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front. Il te donne trois lectures indispensables (le dialogue HTTP, la structure HTML et le JavaScript asynchrone) pour comprendre ce que l'IA produit et repérer quand elle se trompe."
               },
               {
                 "kind": "info",
@@ -138,7 +138,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code> — tu viens d'apprendre ta première vérification d'audit."
+                "html": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code>. Tu viens d'apprendre ta première vérification d'audit."
               },
               {
                 "kind": "title",
@@ -163,7 +163,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front : il te donne les trois lectures indispensables — le dialogue HTTP, la structure HTML, et le JavaScript asynchrone — pour comprendre ce que l'IA produit et repérer quand elle se trompe."
+                  "body": "Tu vas passer cette formation à <strong>faire générer du code par une IA, puis à le vérifier</strong>. Impossible de vérifier ce qu'on ne sait pas lire. Ce module ne fait pas de toi un développeur front. Il te donne trois lectures indispensables (le dialogue HTTP, la structure HTML et le JavaScript asynchrone) pour comprendre ce que l'IA produit et repérer quand elle se trompe."
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -229,7 +229,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code> — tu viens d'apprendre ta première vérification d'audit."
+                  "body": "Retiens surtout le piège : <strong><code>fetch</code> ne rejette sa promesse que sur une panne réseau</strong>. Un serveur qui répond <code>500</code> est, du point de vue de <code>fetch</code>, une requête « réussie ». Le code généré par IA oublie très souvent le test <code>response.ok</code>. Tu viens d'apprendre ta première vérification d'audit."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -444,7 +444,7 @@
                 "kind": "code",
                 "sample": {
                   "label": "Le cycle Git de base",
-                  "html": "<span class=\"cm\"># créer le dépôt (une fois)</span>\n<span class=\"fn\">git</span> init\n\n<span class=\"cm\"># voir ce qui a changé — TON outil de contrôle du code généré</span>\n<span class=\"fn\">git</span> status\n<span class=\"fn\">git</span> diff\n\n<span class=\"cm\"># enregistrer un instantané</span>\n<span class=\"fn\">git</span> add .\n<span class=\"fn\">git</span> commit -m <span class=\"str\">\"feat: formulaire de contact avec validation\"</span>\n\n<span class=\"cm\"># travailler sur une branche, puis fusionner</span>\n<span class=\"fn\">git</span> switch -c feature/paiement\n<span class=\"fn\">git</span> switch main\n<span class=\"fn\">git</span> merge feature/paiement"
+                  "html": "<span class=\"cm\"># créer le dépôt (une fois)</span>\n<span class=\"fn\">git</span> init\n\n<span class=\"cm\"># voir ce qui a changé : TON outil de contrôle du code généré</span>\n<span class=\"fn\">git</span> status\n<span class=\"fn\">git</span> diff\n\n<span class=\"cm\"># enregistrer un instantané</span>\n<span class=\"fn\">git</span> add .\n<span class=\"fn\">git</span> commit -m <span class=\"str\">\"feat: formulaire de contact avec validation\"</span>\n\n<span class=\"cm\"># travailler sur une branche, puis fusionner</span>\n<span class=\"fn\">git</span> switch -c feature/paiement\n<span class=\"fn\">git</span> switch main\n<span class=\"fn\">git</span> merge feature/paiement"
                 }
               },
               {
@@ -461,13 +461,13 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite — et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
+                "html": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite, et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
               },
               {
                 "kind": "code",
                 "sample": {
                   "label": "Le trio .env / .env.example / .gitignore",
-                  "html": "<span class=\"cm\"># .env — les VRAIES valeurs, jamais commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">sk_live_…vraie clé…</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:motdepasse@host/db</span>\n\n<span class=\"cm\"># .env.example — la DOC des variables, commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">changeme</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:password@localhost/db</span>\n\n<span class=\"cm\"># .gitignore — ce que Git doit ignorer</span>\nnode_modules/\n.env"
+                  "html": "<span class=\"cm\"># .env : les VRAIES valeurs, jamais commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">sk_live_…vraie clé…</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:motdepasse@host/db</span>\n\n<span class=\"cm\"># .env.example : la DOC des variables, commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">changeme</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:password@localhost/db</span>\n\n<span class=\"cm\"># .gitignore : ce que Git doit ignorer</span>\nnode_modules/\n.env"
                 }
               },
               {
@@ -475,7 +475,7 @@
                 "box": {
                   "variant": "warn",
                   "title": "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
-                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés — la phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
+                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés. La phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
                 }
               },
               {
@@ -484,12 +484,12 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> — voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
+                "html": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> ; voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
               },
               {
                 "kind": "code",
                 "sample": {
-                  "label": "package.json — la section scripts",
+                  "label": "package.json : la section scripts",
                   "html": "{\n  <span class=\"str\">\"scripts\"</span>: {\n    <span class=\"str\">\"dev\"</span>: <span class=\"str\">\"vite\"</span>,            <span class=\"cm\">// serveur de développement</span>\n    <span class=\"str\">\"build\"</span>: <span class=\"str\">\"vite build\"</span>,    <span class=\"cm\">// version optimisée pour la prod</span>\n    <span class=\"str\">\"lint\"</span>: <span class=\"str\">\"eslint .\"</span>,        <span class=\"cm\">// vérification du code</span>\n    <span class=\"str\">\"test\"</span>: <span class=\"str\">\"vitest run\"</span>      <span class=\"cm\">// tests automatisés</span>\n  }\n}"
                 }
               },
@@ -518,7 +518,7 @@
                   "__component": "lesson.code-block",
                   "label": "Le cycle Git de base",
                   "language": "tsx",
-                  "code": "<span class=\"cm\"># créer le dépôt (une fois)</span>\n<span class=\"fn\">git</span> init\n\n<span class=\"cm\"># voir ce qui a changé — TON outil de contrôle du code généré</span>\n<span class=\"fn\">git</span> status\n<span class=\"fn\">git</span> diff\n\n<span class=\"cm\"># enregistrer un instantané</span>\n<span class=\"fn\">git</span> add .\n<span class=\"fn\">git</span> commit -m <span class=\"str\">\"feat: formulaire de contact avec validation\"</span>\n\n<span class=\"cm\"># travailler sur une branche, puis fusionner</span>\n<span class=\"fn\">git</span> switch -c feature/paiement\n<span class=\"fn\">git</span> switch main\n<span class=\"fn\">git</span> merge feature/paiement"
+                  "code": "<span class=\"cm\"># créer le dépôt (une fois)</span>\n<span class=\"fn\">git</span> init\n\n<span class=\"cm\"># voir ce qui a changé : TON outil de contrôle du code généré</span>\n<span class=\"fn\">git</span> status\n<span class=\"fn\">git</span> diff\n\n<span class=\"cm\"># enregistrer un instantané</span>\n<span class=\"fn\">git</span> add .\n<span class=\"fn\">git</span> commit -m <span class=\"str\">\"feat: formulaire de contact avec validation\"</span>\n\n<span class=\"cm\"># travailler sur une branche, puis fusionner</span>\n<span class=\"fn\">git</span> switch -c feature/paiement\n<span class=\"fn\">git</span> switch main\n<span class=\"fn\">git</span> merge feature/paiement"
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -532,19 +532,19 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite — et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
+                  "body": "Tout projet réel a des <strong>secrets</strong> : clés d'API, mots de passe de base de données, tokens de paiement. La règle est absolue : <strong>un secret ne va jamais dans le code, ni dans Git</strong>. Il vit dans un fichier <code>.env</code> local, que le <code>.gitignore</code> exclut du dépôt. Pourquoi « jamais » ? Parce qu'un secret commité reste dans l'<em>historique</em> même si tu supprimes le fichier ensuite, et les robots qui scannent GitHub trouvent une clé exposée en quelques minutes."
                 },
                 {
                   "__component": "lesson.code-block",
                   "label": "Le trio .env / .env.example / .gitignore",
                   "language": "tsx",
-                  "code": "<span class=\"cm\"># .env — les VRAIES valeurs, jamais commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">sk_live_…vraie clé…</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:motdepasse@host/db</span>\n\n<span class=\"cm\"># .env.example — la DOC des variables, commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">changeme</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:password@localhost/db</span>\n\n<span class=\"cm\"># .gitignore — ce que Git doit ignorer</span>\nnode_modules/\n.env"
+                  "code": "<span class=\"cm\"># .env : les VRAIES valeurs, jamais commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">sk_live_…vraie clé…</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:motdepasse@host/db</span>\n\n<span class=\"cm\"># .env.example : la DOC des variables, commité</span>\n<span class=\"prop\">STRIPE_SECRET_KEY</span>=<span class=\"str\">changeme</span>\n<span class=\"prop\">DATABASE_URL</span>=<span class=\"str\">postgres://user:password@localhost/db</span>\n\n<span class=\"cm\"># .gitignore : ce que Git doit ignorer</span>\nnode_modules/\n.env"
                 },
                 {
                   "__component": "lesson.callout-block",
                   "variant": "warn",
                   "title": "<i class='fa-solid fa-key'></i> L'IA colle des clés en dur",
-                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés — la phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
+                  "body": "Les exemples de doc que l'IA a appris contiennent souvent <code>const apiKey = \"sk_live_...\"</code>. Elle reproduit ce motif tel quel. C'est la fuite n°1 des projets vibe-codés. La phase 8 (Audit Sécurité) y consacre un module entier, avec scanner automatique."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -552,11 +552,11 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> — voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
+                  "body": "Le fichier <code>package.json</code> est la carte d'identité d'un projet JavaScript : ses <strong>dépendances</strong> (installées dans <code>node_modules/</code> via <code>npm install</code> ; voilà pourquoi on ne le versionne pas, il se reconstruit) et ses <strong>scripts</strong>. <code>npm run dev</code> n'a rien de magique : il exécute la commande définie sous <code>\"dev\"</code>. Ouvre toujours le <code>package.json</code> d'un projet inconnu : ses scripts te disent comment le lancer, le tester et le construire."
                 },
                 {
                   "__component": "lesson.code-block",
-                  "label": "package.json — la section scripts",
+                  "label": "package.json : la section scripts",
                   "language": "tsx",
                   "code": "{\n  <span class=\"str\">\"scripts\"</span>: {\n    <span class=\"str\">\"dev\"</span>: <span class=\"str\">\"vite\"</span>,            <span class=\"cm\">// serveur de développement</span>\n    <span class=\"str\">\"build\"</span>: <span class=\"str\">\"vite build\"</span>,    <span class=\"cm\">// version optimisée pour la prod</span>\n    <span class=\"str\">\"lint\"</span>: <span class=\"str\">\"eslint .\"</span>,        <span class=\"cm\">// vérification du code</span>\n    <span class=\"str\">\"test\"</span>: <span class=\"str\">\"vitest run\"</span>      <span class=\"cm\">// tests automatisés</span>\n  }\n}"
                 },
@@ -607,7 +607,7 @@
                   "legacyId": "svc-bases-quiz-m02-q2",
                   "prompt": "Pourquoi le fichier <code>.env</code> ne doit-il JAMAIS être commité ?",
                   "type": "single",
-                  "explanation": "Un secret commité reste dans l'historique Git même après suppression du fichier. C'est l'une des fuites les plus fréquentes — surtout avec du code généré par IA.",
+                  "explanation": "Un secret commité reste dans l'historique Git même après suppression du fichier. C'est l'une des fuites les plus fréquentes, surtout avec du code généré par IA.",
                   "order": 1,
                   "answers": [
                     {
@@ -757,7 +757,7 @@
                 "solutionFiles": {
                   "/index.js": "// La clé vient de la configuration d'environnement, jamais du code.\n// (Dans un vrai projet : process.env / import.meta.env chargé depuis .env)\nconst CONFIG = { API_KEY: \"\" }; // injecté au runtime, vide en démo\nconst API_KEY = CONFIG.API_KEY;\n\ndocument.getElementById(\"app\").innerHTML = `\n  <h2>Config du projet</h2>\n  <p>Clé utilisée : ${API_KEY ? \"définie\" : \"manquante\"}</p>\n`;\n",
                   "/.gitignore": "node_modules/\n.env\n",
-                  "/.env.example": "# Clé d'API du service de paiement (test) — vraie valeur dans .env, jamais commitée\nAPI_KEY=changeme\n"
+                  "/.env.example": "# Clé d'API du service de paiement (test) : vraie valeur dans .env, jamais commitée\nAPI_KEY=changeme\n"
                 },
                 "tests": null,
                 "validator": "const gitignore = files[\"/.gitignore\"] ?? \"\";\nconst envExample = files[\"/.env.example\"] ?? \"\";\nconst code = files[\"/index.js\"] ?? \"\";\n\nconst checks = [\n  { name: \".gitignore ignore node_modules\", pass: /node_modules/.test(gitignore) },\n  { name: \".gitignore ignore .env\", pass: /^\\.env\\s*$/m.test(gitignore) },\n  { name: \".env.example documente API_KEY sans vraie valeur\", pass: /API_KEY\\s*=/.test(envExample) && !/sk_live_/.test(envExample) },\n  { name: \"plus de clé en dur dans index.js\", pass: !/sk_live_/.test(code) },\n];\nconst failures = checks.filter((c) => !c.pass).map((c) => c.name);\nreturn { passed: checks.length - failures.length, total: checks.length, failures };",
@@ -792,7 +792,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> — c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
+                "html": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> : c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
               },
               {
                 "kind": "code",
@@ -807,13 +807,13 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois — un code généré à la va-vite n'en couvre souvent aucune."
+                "html": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois. Un code généré à la va-vite n'en couvre souvent aucune."
               },
               {
                 "kind": "code",
                 "sample": {
                   "label": "Les trois familles d'échec",
-                  "html": "<span class=\"kw\">try</span> {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// ① le serveur a répondu, mais en erreur (404, 500…)</span>\n    <span class=\"fn\">showError</span>(<span class=\"str\">`Erreur ${response.status}`</span>);\n    <span class=\"kw\">return</span>;\n  }\n\n  <span class=\"kw\">const</span> data = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>(); <span class=\"cm\">// ③ peut lever si corps invalide</span>\n  <span class=\"fn\">showData</span>(data);\n} <span class=\"kw\">catch</span> (error) {\n  <span class=\"cm\">// ② panne réseau — ou JSON invalide (③)</span>\n  <span class=\"fn\">showError</span>(<span class=\"str\">\"Impossible de joindre le serveur.\"</span>);\n}"
+                  "html": "<span class=\"kw\">try</span> {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// ① le serveur a répondu, mais en erreur (404, 500…)</span>\n    <span class=\"fn\">showError</span>(<span class=\"str\">`Erreur ${response.status}`</span>);\n    <span class=\"kw\">return</span>;\n  }\n\n  <span class=\"kw\">const</span> data = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>(); <span class=\"cm\">// ③ peut lever si corps invalide</span>\n  <span class=\"fn\">showData</span>(data);\n} <span class=\"kw\">catch</span> (error) {\n  <span class=\"cm\">// ② panne réseau, ou JSON invalide (③)</span>\n  <span class=\"fn\">showError</span>(<span class=\"str\">\"Impossible de joindre le serveur.\"</span>);\n}"
                 }
               },
               {
@@ -822,7 +822,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles) — jamais en bricolant la requête côté front."
+                "html": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles), jamais en bricolant la requête côté front."
               },
               {
                 "kind": "info",
@@ -838,7 +838,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré — qui suppose toujours que tout marche du premier coup."
+                "html": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré, qui suppose toujours que tout marche du premier coup."
               },
               {
                 "kind": "highlight",
@@ -850,11 +850,11 @@
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données — et un état « vide » prévu si la liste ne contient rien."
+                "html": "<i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données, et un état « vide » prévu si la liste ne contient rien."
               },
               {
                 "kind": "paragraph",
-                "html": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras — généré puis audité — dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
+                "html": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras (généré puis audité) dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
               }
             ],
             "assessment": null,
@@ -871,7 +871,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> — c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
+                  "body": "Le front et le serveur ne partagent ni langage ni mémoire : ils échangent du <strong>texte structuré</strong>, presque toujours du <strong>JSON</strong>. Objets entre accolades, tableaux entre crochets, chaînes, nombres, booléens, <code>null</code> : c'est tout le vocabulaire. Côté JavaScript, <code>response.json()</code> transforme ce texte en objet manipulable, et <code>JSON.stringify()</code> fait l'inverse pour envoyer des données."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -885,13 +885,13 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois — un code généré à la va-vite n'en couvre souvent aucune."
+                  "body": "Un appel d'API peut échouer de <strong>trois façons différentes</strong>, et chacune se détecte autrement. 1) Le serveur répond une erreur (<code>4xx</code>/<code>5xx</code>) : <code>fetch</code> « réussit » quand même, c'est <code>response.ok</code> qu'il faut tester. 2) Le réseau tombe (pas de connexion, DNS, timeout) : là, la promesse <em>rejette</em>, d'où le <code>try/catch</code>. 3) Le corps n'est pas le JSON attendu : <code>response.json()</code> lève une exception. Un code robuste couvre les trois. Un code généré à la va-vite n'en couvre souvent aucune."
                 },
                 {
                   "__component": "lesson.code-block",
                   "label": "Les trois familles d'échec",
                   "language": "tsx",
-                  "code": "<span class=\"kw\">try</span> {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// ① le serveur a répondu, mais en erreur (404, 500…)</span>\n    <span class=\"fn\">showError</span>(<span class=\"str\">`Erreur ${response.status}`</span>);\n    <span class=\"kw\">return</span>;\n  }\n\n  <span class=\"kw\">const</span> data = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>(); <span class=\"cm\">// ③ peut lever si corps invalide</span>\n  <span class=\"fn\">showData</span>(data);\n} <span class=\"kw\">catch</span> (error) {\n  <span class=\"cm\">// ② panne réseau — ou JSON invalide (③)</span>\n  <span class=\"fn\">showError</span>(<span class=\"str\">\"Impossible de joindre le serveur.\"</span>);\n}"
+                  "code": "<span class=\"kw\">try</span> {\n  <span class=\"kw\">const</span> response = <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(url);\n\n  <span class=\"kw\">if</span> (!response.<span class=\"prop\">ok</span>) {\n    <span class=\"cm\">// ① le serveur a répondu, mais en erreur (404, 500…)</span>\n    <span class=\"fn\">showError</span>(<span class=\"str\">`Erreur ${response.status}`</span>);\n    <span class=\"kw\">return</span>;\n  }\n\n  <span class=\"kw\">const</span> data = <span class=\"kw\">await</span> response.<span class=\"fn\">json</span>(); <span class=\"cm\">// ③ peut lever si corps invalide</span>\n  <span class=\"fn\">showData</span>(data);\n} <span class=\"kw\">catch</span> (error) {\n  <span class=\"cm\">// ② panne réseau, ou JSON invalide (③)</span>\n  <span class=\"fn\">showError</span>(<span class=\"str\">\"Impossible de joindre le serveur.\"</span>);\n}"
                 },
                 {
                   "__component": "lesson.text-block",
@@ -899,7 +899,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles) — jamais en bricolant la requête côté front."
+                  "body": "Ton front tourne sur <code>localhost:5173</code>, l'API sur un autre domaine. Par défaut, le navigateur <strong>interdit</strong> à une page de lire la réponse d'une autre <em>origine</em> (domaine + port + protocole) : c'est la <em>same-origin policy</em>, une protection fondamentale. Le <strong>CORS</strong> est le mécanisme par lequel le <em>serveur</em> déclare « ces origines ont le droit de m'appeler », via des headers <code>Access-Control-Allow-*</code>. Retiens l'essentiel : une erreur CORS se corrige <strong>côté serveur</strong> (ou via un proxy que tu contrôles), jamais en bricolant la requête côté front."
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -913,7 +913,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré — qui suppose toujours que tout marche du premier coup."
+                  "body": "Entre le clic et la réponse, il se passe du temps. Une interface honnête raconte ce temps : <strong>loading</strong> (« ça travaille »), puis <strong>succès</strong> (les données) ou <strong>erreur</strong> (un message actionnable, pas un écran figé). Ces trois états ne sont pas un détail cosmétique : c'est le premier critère de la checklist Design que tu appliqueras en phase 9, et l'oubli le plus fréquent du code généré, qui suppose toujours que tout marche du premier coup."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -925,11 +925,11 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données — et un état « vide » prévu si la liste ne contient rien.</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-circle-check'></i> <strong>Succès</strong> : les données, et un état « vide » prévu si la liste ne contient rien.</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras — généré puis audité — dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
+                  "body": "L'exercice ci-dessous te fait implémenter ce contrat complet sur une vraie API publique. C'est exactement le squelette que tu retrouveras (généré puis audité) dans toutes les features réseau du produit que tu construiras à partir de la phase 4."
                 }
               ]
             },
@@ -974,7 +974,7 @@
                   "legacyId": "svc-bases-quiz-m03-q2",
                   "prompt": "<code>fetch</code> ne rejette PAS sa promesse sur un statut 500. Comment détecter l'erreur ?",
                   "type": "single",
-                  "explanation": "Piège classique : fetch ne rejette que sur erreur réseau. Un 404 ou un 500 « réussit » techniquement — il faut tester response.ok soi-même.",
+                  "explanation": "Piège classique : fetch ne rejette que sur erreur réseau. Un 404 ou un 500 « réussit » techniquement ; il faut tester response.ok soi-même.",
                   "order": 1,
                   "answers": [
                     {
@@ -1143,13 +1143,16 @@
         "color": "intro",
         "icon": "fa-wand-magic-sparkles",
         "metaTags": [
-          "3 modules"
+          "tronc commun",
+          "lecture ~1h30",
+          "audits interactifs",
+          "cycle PAS"
         ],
         "objectives": [],
         "prerequisites": [],
-        "scaffoldOnly": true,
-        "projectTitle": "Projet P1 — Audit d'un dépôt généré par IA",
-        "projectDeliverable": "Un rapport d'audit d'un dépôt généré par IA : constats, gravité, recommandations priorisées.",
+        "scaffoldOnly": false,
+        "projectTitle": "Projet P1 : Audit d'un dépôt généré par IA",
+        "projectDeliverable": "Un rapport d'audit : constats, gravité, recommandations priorisées (exercice « Projet P1 » du module 03).",
         "projectAssessment": [
           "Constats factuels avec preuves (fichier, ligne)",
           "Gravité justifiée et cohérente",
@@ -1171,123 +1174,55 @@
               "Assumer la responsabilité finale : le développeur signe"
             ],
             "prerequisites": [],
-            "openByDefault": false,
+            "openByDefault": true,
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-fondations-m01-l1",
-                    "title": "Le spectre des outils IA",
-                    "desc": "Distinguer autocomplete, chat, assistants IDE et agents.",
-                    "objectives": [
-                      "Distinguer autocomplete, chat, assistants IDE et agents."
-                    ],
-                    "outline": {
-                      "context": "Distinguer autocomplete, chat, assistants IDE et agents.",
-                      "concepts": [
-                        "autocomplete",
-                        "assistants IDE",
-                        "agents"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Le spectre des outils IA.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "autocomplete",
-                        "assistants IDE",
-                        "agents"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-fondations-m01-l2",
-                    "title": "Forces et angles morts",
-                    "desc": "Savoir ce que l'IA fait bien et ce qu'elle rate systématiquement.",
-                    "objectives": [
-                      "Savoir ce que l'IA fait bien et ce qu'elle rate systématiquement."
-                    ],
-                    "outline": {
-                      "context": "Savoir ce que l'IA fait bien et ce qu'elle rate systématiquement.",
-                      "concepts": [
-                        "code plausible mais faux",
-                        "failles subtiles",
-                        "sur-ingénierie"
-                      ],
-                      "pitfalls": [
-                        "confiance aveugle",
-                        "code non lu",
-                        "prompt vague"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Forces et angles morts.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "code plausible mais faux",
-                        "failles subtiles",
-                        "sur-ingénierie"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-fondations-m01-l3",
-                    "title": "Le développeur signe",
-                    "desc": "Comprendre la responsabilité professionnelle sur le code livré.",
-                    "objectives": [
-                      "Comprendre la responsabilité professionnelle sur le code livré."
-                    ],
-                    "outline": {
-                      "context": "Comprendre la responsabilité professionnelle sur le code livré.",
-                      "concepts": [
-                        "responsabilité",
-                        "revue obligatoire",
-                        "échecs réels documentés"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Le développeur signe.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "responsabilité",
-                        "revue obligatoire",
-                        "échecs réels documentés"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Le spectre des outils IA"
+              },
+              {
+                "kind": "paragraph",
+                "html": "« Vibe coding », ici, ce n'est pas « laisser l'IA coder à ta place ». C'est <strong>générer vite, puis vérifier comme un professionnel</strong>. Les outils se placent sur un spectre : de l'<em>autocomplete</em> (une suggestion de token) au <em>chat</em>, aux <em>assistants IDE</em> (contexte multi-fichiers), jusqu'aux <em>agents</em> qui enchaînent lecture, écriture et commandes avec peu de supervision."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-gauge-high'></i> Plus l'autonomie monte, plus l'audit monte",
+                  "body": "Un autocomplete malheureux coûte une ligne. Un agent mal cadré peut réécrire ton auth, committer un secret et ouvrir une PR de 2000 lignes. Le cycle Prompt → Audit → Ship s'impose d'autant plus."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Forces et angles morts"
+              },
+              {
+                "kind": "paragraph",
+                "html": "L'IA est forte pour le boilerplate, les API courantes, les refactors mécaniques, les explications de code. Elle rate souvent : les contraintes métier implicites, les failles subtiles (auth, CORS, secrets), la sur-ingénierie « enterprise » inutile, et le code <strong>plausible mais faux</strong> qui survit à un coup d'œil distrait."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-eye'></i> <strong>Réflexe</strong> : si tu n'as pas lu le diff, tu n'as pas livré. Tu as espéré."
+              },
+              {
+                "kind": "title",
+                "text": "Le développeur signe"
+              },
+              {
+                "kind": "paragraph",
+                "html": "En production, le fournisseur du modèle ne porte pas ton incident Stripe. <strong>Toi (ou ton équipe) signe le merge, le déploiement, la promesse client.</strong> Les échecs documentés du vibe coding sauvage se ressemblent : confiance aveugle, prompt vague, revue zappée. Cette formation existe pour casser ce schéma."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Pièges à nommer tout de suite",
+                  "body": "Confiance aveugle · code non lu · prompt vague. Tu les retrouveras dans l'exercice d'autopsie ci-dessous."
+                }
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "autocomplete",
-                  "assistants IDE",
-                  "agents",
-                  "code plausible mais faux",
-                  "failles subtiles",
-                  "sur-ingénierie",
-                  "responsabilité",
-                  "revue obligatoire"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Autopsie d'un incident IA",
-                  "kind": "audit",
-                  "brief": "Analyser un incident réel causé par du code IA non audité : cause racine, signaux manqués, prévention."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m01-lesson",
               "title": "Le vibe coding : promesses et pièges",
@@ -1297,12 +1232,281 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Le spectre des outils IA</strong> — Distinguer autocomplete, chat, assistants IDE et agents.</li><li><strong>Forces et angles morts</strong> — Savoir ce que l'IA fait bien et ce qu'elle rate systématiquement.</li><li><strong>Le développeur signe</strong> — Comprendre la responsabilité professionnelle sur le code livré.</li></ul>"
+                  "body": "<h2>Le spectre des outils IA</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "« Vibe coding », ici, ce n'est pas « laisser l'IA coder à ta place ». C'est <strong>générer vite, puis vérifier comme un professionnel</strong>. Les outils se placent sur un spectre : de l'<em>autocomplete</em> (une suggestion de token) au <em>chat</em>, aux <em>assistants IDE</em> (contexte multi-fichiers), jusqu'aux <em>agents</em> qui enchaînent lecture, écriture et commandes avec peu de supervision."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "note",
+                  "title": "<i class='fa-solid fa-gauge-high'></i> Plus l'autonomie monte, plus l'audit monte",
+                  "body": "Un autocomplete malheureux coûte une ligne. Un agent mal cadré peut réécrire ton auth, committer un secret et ouvrir une PR de 2000 lignes. Le cycle Prompt → Audit → Ship s'impose d'autant plus."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Forces et angles morts</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "L'IA est forte pour le boilerplate, les API courantes, les refactors mécaniques, les explications de code. Elle rate souvent : les contraintes métier implicites, les failles subtiles (auth, CORS, secrets), la sur-ingénierie « enterprise » inutile, et le code <strong>plausible mais faux</strong> qui survit à un coup d'œil distrait."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-eye'></i> <strong>Réflexe</strong> : si tu n'as pas lu le diff, tu n'as pas livré. Tu as espéré.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Le développeur signe</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "En production, le fournisseur du modèle ne porte pas ton incident Stripe. <strong>Toi (ou ton équipe) signe le merge, le déploiement, la promesse client.</strong> Les échecs documentés du vibe coding sauvage se ressemblent : confiance aveugle, prompt vague, revue zappée. Cette formation existe pour casser ce schéma."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "warn",
+                  "title": "<i class='fa-solid fa-triangle-exclamation'></i> Pièges à nommer tout de suite",
+                  "body": "Confiance aveugle · code non lu · prompt vague. Tu les retrouveras dans l'exercice d'autopsie ci-dessous."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-fondations-quiz-m01",
+              "title": "Vibe coding : valide ta lecture",
+              "questions": [
+                {
+                  "legacyId": "svc-fondations-quiz-m01-q1",
+                  "prompt": "Sur le spectre des outils IA, qu'est-ce qu'un agent ?",
+                  "type": "single",
+                  "explanation": "L'agent agit : il peut modifier plusieurs fichiers, lancer des commandes, itérer. D'où un besoin d'audit plus strict qu'avec un autocomplete.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q1-a",
+                      "label": "Une simple suggestion de mot dans l'éditeur",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q1-b",
+                      "label": "Un système qui enchaîne des actions (lire, écrire, exécuter) avec peu de supervision",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q1-c",
+                      "label": "Un framework React concurrent",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q1-d",
+                      "label": "Un serveur de base de données",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m01-q2",
+                  "prompt": "Quel échec est typique du code généré par IA ?",
+                  "type": "single",
+                  "explanation": "Le danger n'est pas le code illisible : c'est le code qui a l'air correct. D'où l'audit systématique.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q2-a",
+                      "label": "Il ne compile jamais",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q2-b",
+                      "label": "Il est plausible, passe un coup d'œil rapide, mais cache des failles ou des absurdités",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q2-c",
+                      "label": "Il refuse d'utiliser TypeScript",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q2-d",
+                      "label": "Il ne produit que du HTML",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m01-q3",
+                  "prompt": "Qui porte la responsabilité finale du code livré ?",
+                  "type": "single",
+                  "explanation": "L'IA propose. Toi tu livres. En prod, c'est ta signature qui compte.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q3-a",
+                      "label": "Le fournisseur du modèle IA",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q3-b",
+                      "label": "Le développeur (ou l'équipe) qui signe et déploie",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q3-c",
+                      "label": "Personne, c'est expérimental",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q3-d",
+                      "label": "Le client uniquement",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m01-q4",
+                  "prompt": "Quel piège évite-t-on en lisant réellement le diff généré ?",
+                  "type": "single",
+                  "explanation": "Accepter sans lire, c'est déléguer la responsabilité à une boîte noire. Le diff est ton premier filet.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q4-a",
+                      "label": "La confiance aveugle",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q4-b",
+                      "label": "Les timeouts réseau",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q4-c",
+                      "label": "Le CSS cassé uniquement",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q4-d",
+                      "label": "Les conflits Git",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m01-q5",
+                  "prompt": "Pourquoi un prompt vague est-il dangereux ?",
+                  "type": "single",
+                  "explanation": "Un brief flou produit du code flou. Spécifier (Prompt) avant de générer réduit l'espace d'erreur.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q5-a",
+                      "label": "L'IA refuse de répondre",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q5-b",
+                      "label": "Elle invente des contraintes, sur-ingénierie ou oublie des exigences critiques",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q5-c",
+                      "label": "Elle ne sait générer que du Python",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m01-q5-d",
+                      "label": "Elle désactive Git",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-fondations-ex-m01-1",
+                "title": "Autopsie d'un incident IA",
+                "instructions": "Lis le scénario. Coche uniquement les constats qui tiennent. Attribue une gravité cohérente. Soumets ton rapport.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Une clé en dur dans le dépôt est presque toujours critique ou haute.",
+                  "Un commentaire TODO n'est pas une faille de sécurité à elle seule."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Une startup a laissé un agent IA « finir » l'auth. Deux jours après le go-live, un bot scrape le dépôt public miroir et trouve une clé Stripe <code>sk_live_…</code> commitée dans <code>src/lib/payments.ts</code>. Des charges frauduleuses apparaissent. Personne n'avait lu le diff de 1800 lignes.</p>\n<p>Identifie les causes racines et signaux manqués (pas les symptômes marketing).</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Secret de production commitée dans le code source",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Diff massif accepté sans revue humaine ligne à ligne",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Absence de scan de secrets dans la CI avant merge",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Le framework React est obsolète",
+                      "correct": false
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Le README utilise trop d'emojis",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Responsabilité déléguée à l'agent (« l'IA a généré, donc ce n'est pas nous »)",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Constats attendus : secret en dur (critique), diff non relu (haute), pas de scan secrets CI (haute), déni de responsabilité (moyenne). Les distracteurs UI/README ne sont pas des causes de cet incident.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-fondations-m02",
@@ -1323,86 +1527,51 @@
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-fondations-m02-l1",
-                    "title": "Pourquoi trois temps",
-                    "desc": "Comprendre la séparation spécifier / vérifier / livrer.",
-                    "objectives": [
-                      "Comprendre la séparation spécifier / vérifier / livrer."
-                    ],
-                    "outline": {
-                      "context": "Comprendre la séparation spécifier / vérifier / livrer.",
-                      "concepts": [
-                        "Prompt = spécifier + générer",
-                        "Audit = checklists + preuves",
-                        "Ship = livrer avec preuves"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Pourquoi trois temps.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "Prompt = spécifier + générer",
-                        "Audit = checklists + preuves",
-                        "Ship = livrer avec preuves"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-fondations-m02-l2",
-                    "title": "Boucle courte vs tunnel",
-                    "desc": "Itérer par petites boucles auditables plutôt qu'en tunnel.",
-                    "objectives": [
-                      "Itérer par petites boucles auditables plutôt qu'en tunnel."
-                    ],
-                    "outline": {
-                      "context": "Itérer par petites boucles auditables plutôt qu'en tunnel.",
-                      "concepts": [
-                        "itérations courtes",
-                        "revue incrémentale"
-                      ],
-                      "pitfalls": [
-                        "générer 2000 lignes d'un coup",
-                        "auditer à la fin seulement"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Boucle courte vs tunnel.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "itérations courtes",
-                        "revue incrémentale"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Pourquoi trois temps"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Mélanger spécification, génération, vérification et mise en ligne dans un seul élan, c'est le tunnel. On sépare volontairement :"
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-pen'></i> <strong>Prompt</strong> : spécifier le besoin, puis générer une proposition bornée."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-shield-halved'></i> <strong>Audit</strong> : vérifier avec checklists et preuves (pas « ça a l'air ok »)."
+              },
+              {
+                "kind": "highlight",
+                "html": "<i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer (preview/prod) en emportant ces preuves."
+              },
+              {
+                "kind": "paragraph",
+                "html": "Chaque phase du cours (auth, paiements, hébergement…) rejoue ce rythme. Tu n'apprends pas seulement des briques techniques : tu apprends une <strong>discipline de livraison</strong>."
+              },
+              {
+                "kind": "title",
+                "text": "Boucle courte vs tunnel"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Une boucle courte : une micro-feature, un diff lisible, un audit, un ship partiel. Un tunnel : 95 fichiers d'un coup, « on auditera lundi ». Le tunnel rend l'audit humainement impossible et multiplie les secrets oubliés."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-rotate'></i> Règle opérationnelle",
+                  "body": "Si tu ne peux pas résumer le diff en trois phrases, il est trop gros. Re-découpe avant d'auditer."
+                }
+              },
+              {
+                "kind": "paragraph",
+                "html": "L'exercice ci-dessous te fait distinguer les étapes saines d'un formulaire de contact des réflexes tunnel. Plus loin (P8–P12), les preuves d'audit deviennent formelles (scanners, scores, runbook)."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "Prompt = spécifier + générer",
-                  "Audit = checklists + preuves",
-                  "Ship = livrer avec preuves",
-                  "itérations courtes",
-                  "revue incrémentale"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Cycle complet sur une micro-feature",
-                  "kind": "guided",
-                  "brief": "Dérouler Prompt → Audit → Ship sur un formulaire de contact : brief, génération, checklist, livraison."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m02-lesson",
               "title": "Le cycle Prompt → Audit → Ship",
@@ -1412,12 +1581,283 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Pourquoi trois temps</strong> — Comprendre la séparation spécifier / vérifier / livrer.</li><li><strong>Boucle courte vs tunnel</strong> — Itérer par petites boucles auditables plutôt qu'en tunnel.</li></ul>"
+                  "body": "<h2>Pourquoi trois temps</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Mélanger spécification, génération, vérification et mise en ligne dans un seul élan, c'est le tunnel. On sépare volontairement :"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-pen'></i> <strong>Prompt</strong> : spécifier le besoin, puis générer une proposition bornée.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-shield-halved'></i> <strong>Audit</strong> : vérifier avec checklists et preuves (pas « ça a l'air ok »).</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<p><em><i class='fa-solid fa-rocket'></i> <strong>Ship</strong> : livrer (preview/prod) en emportant ces preuves.</em></p>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Chaque phase du cours (auth, paiements, hébergement…) rejoue ce rythme. Tu n'apprends pas seulement des briques techniques : tu apprends une <strong>discipline de livraison</strong>."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Boucle courte vs tunnel</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Une boucle courte : une micro-feature, un diff lisible, un audit, un ship partiel. Un tunnel : 95 fichiers d'un coup, « on auditera lundi ». Le tunnel rend l'audit humainement impossible et multiplie les secrets oubliés."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "tip",
+                  "title": "<i class='fa-solid fa-rotate'></i> Règle opérationnelle",
+                  "body": "Si tu ne peux pas résumer le diff en trois phrases, il est trop gros. Re-découpe avant d'auditer."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "L'exercice ci-dessous te fait distinguer les étapes saines d'un formulaire de contact des réflexes tunnel. Plus loin (P8–P12), les preuves d'audit deviennent formelles (scanners, scores, runbook)."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-fondations-quiz-m02",
+              "title": "Prompt → Audit → Ship : valide ta lecture",
+              "questions": [
+                {
+                  "legacyId": "svc-fondations-quiz-m02-q1",
+                  "prompt": "À quoi sert le temps « Prompt » dans le cycle ?",
+                  "type": "single",
+                  "explanation": "Prompt = cadrer + obtenir une proposition. Sans spec, l'audit n'a pas de référentiel.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q1-a",
+                      "label": "Déployer en production",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q1-b",
+                      "label": "Spécifier le besoin et générer une proposition",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q1-c",
+                      "label": "Mesurer le Lighthouse uniquement",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q1-d",
+                      "label": "Configurer le DNS",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m02-q2",
+                  "prompt": "Que produit un bon Audit ?",
+                  "type": "single",
+                  "explanation": "Audit = vérifier avec des preuves, pas « ça a l'air ok ».",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q2-a",
+                      "label": "Plus de lignes de code",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q2-b",
+                      "label": "Des preuves (checklists, scans, tests) que le livrable est acceptable",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q2-c",
+                      "label": "Un nouveau modèle de fondation",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q2-d",
+                      "label": "Une page marketing",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m02-q3",
+                  "prompt": "Que signifie « Ship » ici ?",
+                  "type": "single",
+                  "explanation": "Ship = mise à disposition contrôlée (preview/prod) avec un dossier de preuves.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q3-a",
+                      "label": "Livrer avec les preuves d'audit, pas seulement pousser du code",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q3-b",
+                      "label": "Supprimer le dépôt",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q3-c",
+                      "label": "Changer de framework",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q3-d",
+                      "label": "Écrire un tweet",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m02-q4",
+                  "prompt": "Pourquoi préférer des boucles courtes au « tunnel » ?",
+                  "type": "single",
+                  "explanation": "Petite feature → audit → ship partiel. Puis on recommence. C'est le rythme de toute la formation.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q4-a",
+                      "label": "Parce que Git n'accepte que de petits commits",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q4-b",
+                      "label": "On détecte tôt les dérives ; un tunnel de 2000 lignes est presque inauditable",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q4-c",
+                      "label": "L'IA facture moins",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q4-d",
+                      "label": "Les navigateurs limitent la taille des fichiers",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m02-q5",
+                  "prompt": "Quel anti-pattern du tunnel faut-il éviter ?",
+                  "type": "single",
+                  "explanation": "Auditer trop tard coûte cher. Le cycle impose un audit à chaque incrément.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q5-a",
+                      "label": "Générer une grosse livraison d'un coup, auditer seulement à la fin",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q5-b",
+                      "label": "Lire le diff après chaque génération",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q5-c",
+                      "label": "Écrire un brief avant de générer",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m02-q5-d",
+                      "label": "Lancer un scan de secrets",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-fondations-ex-m02-1",
+                "title": "Cycle Prompt → Audit → Ship sur un formulaire contact",
+                "instructions": "Tu dois livrer un formulaire de contact. Coche les étapes réellement présentes dans une boucle saine. Ignore ce qui relève du tunnel.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Ship sans preuve d'audit, ce n'est pas Ship dans ce cours.",
+                  "Générer 2000 lignes d'un coup avant toute checklist = tunnel."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Brief : page contact avec nom, email, message, envoi vers une API <code>POST /api/contact</code>, états loading / erreur / succès, pas de spam ouvert.</p>\n<p>Un junior a demandé à l'IA : « fais-moi tout le site ». Elle a produit 12 fichiers d'un coup, déployé sur un preview, puis « on verra l'audit plus tard ».</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Brief écrit (champs, endpoint, états UI, contraintes anti-spam) avant génération",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Génération limitée à la micro-feature formulaire (pas tout le site)",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Checklist audit : validation input, gestion d'erreur HTTP, pas de secret en front",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Ship preview seulement après preuves d'audit sur cet incrément",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Générer tout le produit d'un coup puis auditer à la fin",
+                      "correct": false
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Déployer en prod sans aucune checklist",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>La boucle saine : brief → génération ciblée → checklist avec preuves → ship preview. Le tunnel « tout générer puis voir » et le deploy sans audit sont des anti-patterns.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           },
           {
             "legacyId": "svc-fondations-m03",
@@ -1438,118 +1878,43 @@
             "workflowStatus": "draft",
             "contentBlocks": [
               {
-                "kind": "lessons",
-                "items": [
-                  {
-                    "id": "svc-fondations-m03-l1",
-                    "title": "Assistants, agents, revue assistée",
-                    "desc": "Cartographier les outils et leurs cas d'usage.",
-                    "objectives": [
-                      "Cartographier les outils et leurs cas d'usage."
-                    ],
-                    "outline": {
-                      "context": "Cartographier les outils et leurs cas d'usage.",
-                      "concepts": [
-                        "assistants IDE",
-                        "agents",
-                        "revue assistée"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Assistants, agents, revue assistée.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "assistants IDE",
-                        "agents",
-                        "revue assistée"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-fondations-m03-l2",
-                    "title": "Règles projet et scanners",
-                    "desc": "Encadrer la génération avec des règles et des checks déterministes.",
-                    "objectives": [
-                      "Encadrer la génération avec des règles et des checks déterministes."
-                    ],
-                    "outline": {
-                      "context": "Encadrer la génération avec des règles et des checks déterministes.",
-                      "concepts": [
-                        "règles projet",
-                        "lint",
-                        "scan de secrets",
-                        "audit deps",
-                        "Lighthouse"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Règles projet et scanners.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "règles projet",
-                        "lint",
-                        "scan de secrets",
-                        "audit deps",
-                        "Lighthouse"
-                      ]
-                    },
-                    "exercises": []
-                  },
-                  {
-                    "id": "svc-fondations-m03-l3",
-                    "title": "Quand ne pas utiliser l'IA",
-                    "desc": "Identifier les zones où la génération est un mauvais pari.",
-                    "objectives": [
-                      "Identifier les zones où la génération est un mauvais pari."
-                    ],
-                    "outline": {
-                      "context": "Identifier les zones où la génération est un mauvais pari.",
-                      "concepts": [
-                        "crypto/sécurité fine",
-                        "logique métier critique",
-                        "code légal"
-                      ],
-                      "guidedExample": "Exemple guidé autour de : Quand ne pas utiliser l'IA.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
-                    },
-                    "quiz": {
-                      "questionCount": 3,
-                      "focus": [
-                        "crypto/sécurité fine",
-                        "logique métier critique",
-                        "code légal"
-                      ]
-                    },
-                    "exercises": []
-                  }
-                ]
+                "kind": "title",
+                "text": "Assistants, agents, revue assistée"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Pour une ligne : autocomplete. Pour une feature cadrée : assistant IDE avec règles projet. Pour un chantier multi-fichiers : agent, mais sous brief strict et avec revue obligatoire. La « revue assistée » (l'IA commente ton diff) aide ; elle ne remplace pas ton jugement sur la sécu et le métier."
+              },
+              {
+                "kind": "title",
+                "text": "Règles projet et scanners"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Les <strong>règles projet</strong> disent à l'assistant quelle stack tu utilises, quels patterns sont interdits, où vivent les secrets. Les <strong>scanners déterministes</strong> (lint, scan de secrets, audit de dépendances, Lighthouse) produisent des preuves reproductibles. Ensemble, ils forment le filet de la phase Audit, avant même les checklists métier des phases 8 et 9."
+              },
+              {
+                "kind": "info",
+                "box": {
+                  "variant": "concept",
+                  "title": "<i class='fa-solid fa-robot'></i> IA + déterministe",
+                  "body": "L'IA propose vite. Le scanner tranche sans opinion. Toi tu arbitres les faux positifs et le risque métier."
+                }
+              },
+              {
+                "kind": "title",
+                "text": "Quand ne pas utiliser l'IA"
+              },
+              {
+                "kind": "paragraph",
+                "html": "Évite (ou surveille très fort) : crypto / sécurité fine maison, logique métier critique mal spécifiée, clauses légales, tout ce qui touche directement à l'argent ou aux données personnelles sans spec écrite. Dans ces zones, un vibe solo est un pari, pas une méthode."
+              },
+              {
+                "kind": "paragraph",
+                "html": "Deux exercices clôturent ce module : l'outillage jour 1, puis le <strong>projet P1</strong> (rapport d'audit d'un dépôt généré). C'est le même geste que tu répéteras en phase Audit Sécurité."
               }
             ],
-            "assessment": {
-              "quiz": {
-                "questionCount": 5,
-                "focus": [
-                  "assistants IDE",
-                  "agents",
-                  "revue assistée",
-                  "règles projet",
-                  "lint",
-                  "scan de secrets",
-                  "audit deps",
-                  "Lighthouse"
-                ]
-              },
-              "exercises": [
-                {
-                  "title": "Outillage minimal d'un projet",
-                  "kind": "guided",
-                  "brief": "Configurer règles projet + lint + scan de secrets sur un dépôt starter."
-                }
-              ]
-            },
+            "assessment": null,
             "lesson": {
               "legacyId": "svc-fondations-m03-lesson",
               "title": "La boîte à outils du vibe coder",
@@ -1559,12 +1924,338 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Assistants, agents, revue assistée</strong> — Cartographier les outils et leurs cas d'usage.</li><li><strong>Règles projet et scanners</strong> — Encadrer la génération avec des règles et des checks déterministes.</li><li><strong>Quand ne pas utiliser l'IA</strong> — Identifier les zones où la génération est un mauvais pari.</li></ul>"
+                  "body": "<h2>Assistants, agents, revue assistée</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Pour une ligne : autocomplete. Pour une feature cadrée : assistant IDE avec règles projet. Pour un chantier multi-fichiers : agent, mais sous brief strict et avec revue obligatoire. La « revue assistée » (l'IA commente ton diff) aide ; elle ne remplace pas ton jugement sur la sécu et le métier."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Règles projet et scanners</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Les <strong>règles projet</strong> disent à l'assistant quelle stack tu utilises, quels patterns sont interdits, où vivent les secrets. Les <strong>scanners déterministes</strong> (lint, scan de secrets, audit de dépendances, Lighthouse) produisent des preuves reproductibles. Ensemble, ils forment le filet de la phase Audit, avant même les checklists métier des phases 8 et 9."
+                },
+                {
+                  "__component": "lesson.callout-block",
+                  "variant": "concept",
+                  "title": "<i class='fa-solid fa-robot'></i> IA + déterministe",
+                  "body": "L'IA propose vite. Le scanner tranche sans opinion. Toi tu arbitres les faux positifs et le risque métier."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "<h2>Quand ne pas utiliser l'IA</h2>"
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Évite (ou surveille très fort) : crypto / sécurité fine maison, logique métier critique mal spécifiée, clauses légales, tout ce qui touche directement à l'argent ou aux données personnelles sans spec écrite. Dans ces zones, un vibe solo est un pari, pas une méthode."
+                },
+                {
+                  "__component": "lesson.text-block",
+                  "body": "Deux exercices clôturent ce module : l'outillage jour 1, puis le <strong>projet P1</strong> (rapport d'audit d'un dépôt généré). C'est le même geste que tu répéteras en phase Audit Sécurité."
                 }
               ]
             },
-            "quiz": null,
-            "exercises": []
+            "quiz": {
+              "legacyId": "svc-fondations-quiz-m03",
+              "title": "Boîte à outils : valide ta lecture",
+              "questions": [
+                {
+                  "legacyId": "svc-fondations-quiz-m03-q1",
+                  "prompt": "À quoi servent les « règles projet » pour un assistant IA ?",
+                  "type": "single",
+                  "explanation": "Les règles projet (ex. fichiers d'instructions IDE) réduisent les hallucinations de stack et de style.",
+                  "order": 0,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q1-a",
+                      "label": "À décorer le README",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q1-b",
+                      "label": "À encadrer la génération (stack, conventions, interdits) avant qu'elle parte dans le décor",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q1-c",
+                      "label": "À remplacer le lint",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q1-d",
+                      "label": "À désactiver Git",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m03-q2",
+                  "prompt": "Quel scanner est déterministe (pas une opinion d'IA) ?",
+                  "type": "single",
+                  "explanation": "Les scanners déterministes donnent des preuves reproductibles. Ils complètent (et ne remplacent pas) la revue humaine.",
+                  "order": 1,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q2-a",
+                      "label": "Un résumé ChatGPT du dépôt",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q2-b",
+                      "label": "Un scan de secrets / lint / audit de dépendances",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q2-c",
+                      "label": "Un like sur un commit",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q2-d",
+                      "label": "Une capture d'écran",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m03-q3",
+                  "prompt": "Dans quel cas vaut-il mieux NE PAS laisser l'IA générer ?",
+                  "type": "single",
+                  "explanation": "Les zones à fort risque (sécurité fine, argent, données personnelles) exigent spec humaine + revue serrée, pas de vibe solo.",
+                  "order": 2,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q3-a",
+                      "label": "Un composant UI banal",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q3-b",
+                      "label": "Crypto, auth maison fragile, logique métier critique non spécifiée",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q3-c",
+                      "label": "Un fichier README",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q3-d",
+                      "label": "Du CSS de mise en page",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m03-q4",
+                  "prompt": "Pourquoi combiner assistant IDE et scanners ?",
+                  "type": "single",
+                  "explanation": "Vitesse (IA) + filet déterministe (lint, secrets, deps) + revue humaine = cycle Prompt → Audit → Ship.",
+                  "order": 3,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q4-a",
+                      "label": "Parce que l'un écrit vite et l'autre vérifie sans opinion",
+                      "isCorrect": true,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q4-b",
+                      "label": "Parce que les scanners génèrent le code",
+                      "isCorrect": false,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q4-c",
+                      "label": "Ce n'est jamais utile",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q4-d",
+                      "label": "Pour remplacer les tests",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                },
+                {
+                  "legacyId": "svc-fondations-quiz-m03-q5",
+                  "prompt": "Que doit contenir un rapport d'audit minimal d'un dépôt généré ?",
+                  "type": "single",
+                  "explanation": "C'est exactement le livrable du projet P1 et le réflexe des phases Audit plus loin.",
+                  "order": 4,
+                  "answers": [
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q5-a",
+                      "label": "Uniquement « ça marche sur ma machine »",
+                      "isCorrect": false,
+                      "order": 0
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q5-b",
+                      "label": "Constats avec preuves, gravité, recommandations priorisées",
+                      "isCorrect": true,
+                      "order": 1
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q5-c",
+                      "label": "La liste des emojis du README",
+                      "isCorrect": false,
+                      "order": 2
+                    },
+                    {
+                      "legacyId": "svc-fondations-quiz-m03-q5-d",
+                      "label": "Le prix du modèle IA",
+                      "isCorrect": false,
+                      "order": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "exercises": [
+              {
+                "legacyId": "svc-fondations-ex-m03-1",
+                "title": "Outillage minimal d'un projet vibe",
+                "instructions": "Pour un dépôt starter destinée au vibe coding, coche ce qui doit être en place dès le jour 1.",
+                "kind": "audit",
+                "order": 0,
+                "hints": [
+                  "Les règles projet guident l'IA ; les scanners vérifient sans opinion.",
+                  "Une auth maison « rapide » n'est pas un outillage recommandé ici."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p>Tu initialises le dépôt qui servira de fil rouge jusqu'au capstone. L'équipe utilisera un assistant IDE au quotidien.</p>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Fichier de règles projet (stack, conventions, interdits) lisible par l'assistant",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Lint configuré et exécutable en local / CI",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Scan de secrets (pre-commit ou CI)",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f4",
+                      "label": "Auth maison avec mots de passe en SHA1 « pour aller vite »",
+                      "correct": false
+                    },
+                    {
+                      "id": "f5",
+                      "label": ".gitignore couvrant node_modules et .env",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Désactiver CORS avec * sur une API privée « pour que ça marche »",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": false,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Jour 1 : règles projet, lint, scan secrets, gitignore propre. Pas d'auth maison fragile ni de CORS * sur du privé.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 2,
+                "challengeEligible": false,
+                "validationMode": "local"
+              },
+              {
+                "legacyId": "svc-fondations-ex-m03-projet",
+                "title": "Projet P1 : rapport d'audit d'un dépôt généré par IA",
+                "instructions": "À partir du dépôt fictif décrit ci-dessous, produis un rapport : coche les constats réels, fixe une gravité minimale crédible, et ajoute une preuve courte (fichier ou motif).",
+                "kind": "audit",
+                "order": 1,
+                "hints": [
+                  "Chaque constat correct exige une preuve (chemin ou motif).",
+                  "Priorise sécurité et secrets avant le polish UI."
+                ],
+                "starterFiles": {
+                  "__format": "audit",
+                  "scenario": "<p><strong>Dépôt « vibe-crm-starter »</strong> (généré par agent, PR unique de 95 fichiers) :</p>\n<ul>\n<li><code>src/server/db.ts</code> contient <code>DATABASE_URL=postgres://admin:admin@prod/db</code></li>\n<li><code>src/pages/Login.tsx</code> compare le mot de passe en clair côté client</li>\n<li><code>package.json</code> n'a ni script <code>lint</code> ni <code>test</code></li>\n<li><code>.gitignore</code> ignore <code>node_modules</code> mais pas <code>.env</code></li>\n<li>Le README promet « production-ready » sans checklist</li>\n<li>Les couleurs du thème sont incohérentes (cosmétique)</li>\n</ul>",
+                  "findings": [
+                    {
+                      "id": "f1",
+                      "label": "Identifiants de base de données (ou URL complète) en dur dans le code",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f2",
+                      "label": "Vérification de mot de passe côté client / en clair",
+                      "correct": true,
+                      "minSeverity": "critical"
+                    },
+                    {
+                      "id": "f3",
+                      "label": "Pas de lint ni tests dans les scripts npm",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f4",
+                      "label": ".env non ignoré par Git",
+                      "correct": true,
+                      "minSeverity": "high"
+                    },
+                    {
+                      "id": "f5",
+                      "label": "Promesse « production-ready » sans preuves d'audit",
+                      "correct": true,
+                      "minSeverity": "medium"
+                    },
+                    {
+                      "id": "f6",
+                      "label": "Incohérence cosmétique du thème de couleurs",
+                      "correct": false
+                    }
+                  ],
+                  "requireEvidence": true,
+                  "passingScore": 0.7
+                },
+                "solutionFiles": {
+                  "__solution": "<p>Priorité : secrets DB (critique), auth client (critique), .env non ignoré (haute), absence lint/tests et claim prod sans preuves (moyenne). Le thème incohérent n'est pas un constat de sécurité pour ce projet.</p>"
+                },
+                "tests": null,
+                "validator": null,
+                "template": "vanilla",
+                "attemptsBeforeSolution": 3,
+                "challengeEligible": false,
+                "validationMode": "local"
+              }
+            ]
           }
         ]
       },
@@ -1573,7 +2264,7 @@
         "slug": "prompt",
         "title": "Prompt & cadrage produit",
         "label": "Phase 2",
-        "summary": "Obtenir du bon code plus souvent — et cadrer un MVP commercialisable avant de générer.",
+        "summary": "Obtenir du bon code plus souvent : et cadrer un MVP commercialisable avant de générer.",
         "order": 2,
         "color": "core",
         "icon": "fa-pen-to-square",
@@ -1583,7 +2274,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P2 — Feature CRUD générée par prompts documentés",
+        "projectTitle": "Projet P2 : Feature CRUD générée par prompts documentés",
         "projectDeliverable": "Une feature CRUD + UI générée par prompts, avec journal de prompts et justification des itérations.",
         "projectAssessment": [
           "Journal de prompts complet et honnête",
@@ -1727,7 +2418,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>User story et critères d'acceptation</strong> — Écrire un besoin testable avant tout prompt.</li><li><strong>Contraintes non fonctionnelles</strong> — Intégrer sécu, perf et a11y dès le cadrage.</li><li><strong>Découper en tâches auditables</strong> — Produire des unités de travail qu'on peut vérifier une à une.</li></ul>"
+                  "body": "<ul><li><strong>User story et critères d'acceptation</strong> : Écrire un besoin testable avant tout prompt.</li><li><strong>Contraintes non fonctionnelles</strong> : Intégrer sécu, perf et a11y dès le cadrage.</li><li><strong>Découper en tâches auditables</strong> : Produire des unités de travail qu'on peut vérifier une à une.</li></ul>"
                 }
               ]
             },
@@ -1879,7 +2570,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Contexte minimal suffisant</strong> — Donner assez de contexte, pas plus.</li><li><strong>Contraindre la sortie</strong> — Imposer stack, conventions et tests dans le prompt.</li><li><strong>Itérer et faire critiquer</strong> — Corriger par itérations ciblées, utiliser l'IA comme reviewer.</li></ul>"
+                  "body": "<ul><li><strong>Contexte minimal suffisant</strong> : Donner assez de contexte, pas plus.</li><li><strong>Contraindre la sortie</strong> : Imposer stack, conventions et tests dans le prompt.</li><li><strong>Itérer et faire critiquer</strong> : Corriger par itérations ciblées, utiliser l'IA comme reviewer.</li></ul>"
                 }
               ]
             },
@@ -1997,7 +2688,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Anticiper les services tiers</strong> — Prévoir auth, paiement, notifs, hébergement dans le brief initial.</li><li><strong>Checklist « prêt produit »</strong> — Vérifier qu'un brief couvre ce qui rend le produit vendable.</li></ul>"
+                  "body": "<ul><li><strong>Anticiper les services tiers</strong> : Prévoir auth, paiement, notifs, hébergement dans le brief initial.</li><li><strong>Checklist « prêt produit »</strong> : Vérifier qu'un brief couvre ce qui rend le produit vendable.</li></ul>"
                 }
               ]
             },
@@ -2021,7 +2712,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P3 — Architecture cible du capstone",
+        "projectTitle": "Projet P3 : Architecture cible du capstone",
         "projectDeliverable": "Le dossier d'architecture du futur capstone : diagramme, décisions, risques identifiés.",
         "projectAssessment": [
           "Diagramme lisible avec frontières de confiance",
@@ -2167,7 +2858,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Les briques du système</strong> — Cartographier front, API, DB, jobs et services tiers.</li><li><strong>Frontières de confiance</strong> — Savoir où la validation et l'autorisation sont obligatoires.</li><li><strong>Ce que l'IA n'invente pas seule</strong> — Garder architecture et contrats sous contrôle humain.</li></ul>"
+                  "body": "<ul><li><strong>Les briques du système</strong> : Cartographier front, API, DB, jobs et services tiers.</li><li><strong>Frontières de confiance</strong> : Savoir où la validation et l'autorisation sont obligatoires.</li><li><strong>Ce que l'IA n'invente pas seule</strong> : Garder architecture et contrats sous contrôle humain.</li></ul>"
                 }
               ]
             },
@@ -2284,7 +2975,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Runtime vs build-time</strong> — Comprendre quand une variable est figée dans le build.</li><li><strong>Environnements et fuites</strong> — Structurer local/preview/prod et bloquer les fuites Docker/CI.</li></ul>"
+                  "body": "<ul><li><strong>Runtime vs build-time</strong> : Comprendre quand une variable est figée dans le build.</li><li><strong>Environnements et fuites</strong> : Structurer local/preview/prod et bloquer les fuites Docker/CI.</li></ul>"
                 }
               ]
             },
@@ -2405,7 +3096,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Contrats d'API stables</strong> — Définir des contrats que les deux côtés peuvent respecter.</li><li><strong>Webhooks et idempotence</strong> — Traiter un webhook dupliqué sans effet de bord.</li></ul>"
+                  "body": "<ul><li><strong>Contrats d'API stables</strong> : Définir des contrats que les deux côtés peuvent respecter.</li><li><strong>Webhooks et idempotence</strong> : Traiter un webhook dupliqué sans effet de bord.</li></ul>"
                 }
               ]
             },
@@ -2419,7 +3110,7 @@
         "slug": "auth",
         "title": "Auth & identité",
         "label": "Phase 4",
-        "summary": "Brancher un vrai provider d'authentification — ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
+        "summary": "Brancher un vrai provider d'authentification : ne jamais réinventer l'auth. À partir d'ici, les projets de phase alimentent le produit capstone.",
         "order": 4,
         "color": "eco",
         "icon": "fa-user-lock",
@@ -2429,7 +3120,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P4 — Auth tiers + zone admin",
+        "projectTitle": "Projet P4 : Auth tiers + zone admin",
         "projectDeliverable": "Le produit capstone avec auth via provider tiers, zone admin protégée et politique d'accès documentée.",
         "projectAssessment": [
           "Auth provider fonctionnelle de bout en bout",
@@ -2551,7 +3242,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Panorama des modèles</strong> — Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs.</li><li><strong>Erreurs du code généré</strong> — Identifier les failles typiques de l'auth écrite par l'IA.</li></ul>"
+                  "body": "<ul><li><strong>Panorama des modèles</strong> : Comprendre sessions, JWT, magic link, OAuth et leurs trade-offs.</li><li><strong>Erreurs du code généré</strong> : Identifier les failles typiques de l'auth écrite par l'IA.</li></ul>"
                 }
               ]
             },
@@ -2665,7 +3356,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Parcours guidé provider</strong> — Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js).</li><li><strong>SDK vs serveur</strong> — Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur.</li></ul>"
+                  "body": "<ul><li><strong>Parcours guidé provider</strong> : Brancher un provider (Supabase Auth en guidé, variantes Clerk/Auth.js).</li><li><strong>SDK vs serveur</strong> : Savoir ce qui se vérifie côté client et ce qui DOIT l'être côté serveur.</li></ul>"
                 }
               ]
             },
@@ -2780,7 +3471,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Rôles et policies</strong> — Structurer l'autorisation avec rôles et RLS/policies.</li><li><strong>IDOR et protection serveur</strong> — Comprendre l'IDOR et pourquoi le client ne suffit jamais.</li></ul>"
+                  "body": "<ul><li><strong>Rôles et policies</strong> : Structurer l'autorisation avec rôles et RLS/policies.</li><li><strong>IDOR et protection serveur</strong> : Comprendre l'IDOR et pourquoi le client ne suffit jamais.</li></ul>"
                 }
               ]
             },
@@ -2894,7 +3585,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Reset et vérification email</strong> — Implémenter des parcours sensibles sans failles classiques.</li><li><strong>Sessions et révocation</strong> — Gérer multi-device, déconnexion et révocation de session.</li></ul>"
+                  "body": "<ul><li><strong>Reset et vérification email</strong> : Implémenter des parcours sensibles sans failles classiques.</li><li><strong>Sessions et révocation</strong> : Gérer multi-device, déconnexion et révocation de session.</li></ul>"
                 }
               ]
             },
@@ -2918,7 +3609,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P5 — CRUD métier + upload + job async",
+        "projectTitle": "Projet P5 : CRUD métier + upload + job async",
         "projectDeliverable": "Le produit capstone enrichi : CRUD métier, upload de fichiers et un job async, générés puis audités.",
         "projectAssessment": [
           "Validation serveur systématique",
@@ -2931,7 +3622,7 @@
             "moduleId": "svc-data-m01",
             "index": "01",
             "title": "Modèle de données utile",
-            "subtitle": "Entités, relations, migrations — sans schéma halluciné",
+            "subtitle": "Entités, relations, migrations : sans schéma halluciné",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
@@ -3031,13 +3722,13 @@
             "lesson": {
               "legacyId": "svc-data-m01-lesson",
               "title": "Modèle de données utile",
-              "desc": "Entités, relations, migrations — sans schéma halluciné",
+              "desc": "Entités, relations, migrations : sans schéma halluciné",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Entités et relations</strong> — Traduire le domaine en schéma relationnel minimal.</li><li><strong>Migrations et schéma halluciné</strong> — Versionner le schéma et auditer ce que l'IA propose.</li></ul>"
+                  "body": "<ul><li><strong>Entités et relations</strong> : Traduire le domaine en schéma relationnel minimal.</li><li><strong>Migrations et schéma halluciné</strong> : Versionner le schéma et auditer ce que l'IA propose.</li></ul>"
                 }
               ]
             },
@@ -3155,7 +3846,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Validation des entrées</strong> — Valider systématiquement aux frontières du système.</li><li><strong>Erreurs typées et pagination</strong> — Structurer les réponses d'erreur et paginer les collections.</li></ul>"
+                  "body": "<ul><li><strong>Validation des entrées</strong> : Valider systématiquement aux frontières du système.</li><li><strong>Erreurs typées et pagination</strong> : Structurer les réponses d'erreur et paginer les collections.</li></ul>"
                 }
               ]
             },
@@ -3269,7 +3960,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Uploads sûrs</strong> — Accepter des fichiers sans ouvrir de faille.</li><li><strong>URLs signées et ACL</strong> — Contrôler qui accède à quoi et pour combien de temps.</li></ul>"
+                  "body": "<ul><li><strong>Uploads sûrs</strong> : Accepter des fichiers sans ouvrir de faille.</li><li><strong>URLs signées et ACL</strong> : Contrôler qui accède à quoi et pour combien de temps.</li></ul>"
                 }
               ]
             },
@@ -3383,7 +4074,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Files légères</strong> — Choisir une solution de queue adaptée à un produit early-stage.</li><li><strong>Idempotence des jobs</strong> — Écrire des jobs rejouables sans effets doubles.</li></ul>"
+                  "body": "<ul><li><strong>Files légères</strong> : Choisir une solution de queue adaptée à un produit early-stage.</li><li><strong>Idempotence des jobs</strong> : Écrire des jobs rejouables sans effets doubles.</li></ul>"
                 }
               ]
             },
@@ -3397,7 +4088,7 @@
         "slug": "paiements",
         "title": "Paiements & services tiers",
         "label": "Phase 6",
-        "summary": "Rendre le produit monétisable correctement — webhook compris.",
+        "summary": "Rendre le produit monétisable correctement : webhook compris.",
         "order": 6,
         "color": "eco",
         "icon": "fa-credit-card",
@@ -3407,7 +4098,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P6 — Plan Free/Pro avec webhook",
+        "projectTitle": "Projet P6 : Plan Free/Pro avec webhook",
         "projectDeliverable": "Le produit capstone monétisé : plan Free/Pro, checkout Stripe et webhook qui active réellement l'accès.",
         "projectAssessment": [
           "Activation via webhook signé, jamais via redirect seul",
@@ -3494,7 +4185,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Modèles et implications</strong> — Relier chaque modèle économique à sa mécanique technique.</li></ul>"
+                  "body": "<ul><li><strong>Modèles et implications</strong> : Relier chaque modèle économique à sa mécanique technique.</li></ul>"
                 }
               ]
             },
@@ -3608,7 +4299,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Checkout et Portal</strong> — Intégrer le parcours de paiement hébergé par Stripe.</li><li><strong>Customer et Subscription</strong> — Relier les objets Stripe aux comptes du produit.</li></ul>"
+                  "body": "<ul><li><strong>Checkout et Portal</strong> : Intégrer le parcours de paiement hébergé par Stripe.</li><li><strong>Customer et Subscription</strong> : Relier les objets Stripe aux comptes du produit.</li></ul>"
                 }
               ]
             },
@@ -3726,7 +4417,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Signature et replay</strong> — Authentifier chaque webhook et absorber les doublons.</li><li><strong>États de commande</strong> — Modéliser le cycle de vie d'un paiement côté produit.</li></ul>"
+                  "body": "<ul><li><strong>Signature et replay</strong> : Authentifier chaque webhook et absorber les doublons.</li><li><strong>États de commande</strong> : Modéliser le cycle de vie d'un paiement côté produit.</li></ul>"
                 }
               ]
             },
@@ -3837,7 +4528,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Échecs de carte</strong> — Réagir proprement aux paiements refusés ou expirés.</li><li><strong>Conformité et logs</strong> — Mentions minimales et logs sans données de paiement.</li></ul>"
+                  "body": "<ul><li><strong>Échecs de carte</strong> : Réagir proprement aux paiements refusés ou expirés.</li><li><strong>Conformité et logs</strong> : Mentions minimales et logs sans données de paiement.</li></ul>"
                 }
               ]
             },
@@ -3861,7 +4552,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P7 — Emails transactionnels + préférences",
+        "projectTitle": "Projet P7 : Emails transactionnels + préférences",
         "projectDeliverable": "Le produit capstone avec trois emails transactionnels (auth + paiement) et des préférences utilisateur respectées.",
         "projectAssessment": [
           "Trois emails branchés sur de vrais événements",
@@ -3945,7 +4636,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Canaux et moments métier</strong> — Choisir le bon canal (email, push, SMS) au bon moment.</li></ul>"
+                  "body": "<ul><li><strong>Canaux et moments métier</strong> : Choisir le bon canal (email, push, SMS) au bon moment.</li></ul>"
                 }
               ]
             },
@@ -4059,7 +4750,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Brancher un provider</strong> — Envoyer un email transactionnel via Resend/Postmark.</li><li><strong>Domaines et deliverability</strong> — Configurer le domaine d'envoi pour arriver en inbox.</li></ul>"
+                  "body": "<ul><li><strong>Brancher un provider</strong> : Envoyer un email transactionnel via Resend/Postmark.</li><li><strong>Domaines et deliverability</strong> : Configurer le domaine d'envoi pour arriver en inbox.</li></ul>"
                 }
               ]
             },
@@ -4172,7 +4863,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Consentement et préférences</strong> — Gérer opt-in, préférences et désinscription.</li><li><strong>Anti-abus</strong> — Limiter le débit et prévenir l'usage malveillant.</li></ul>"
+                  "body": "<ul><li><strong>Consentement et préférences</strong> : Gérer opt-in, préférences et désinscription.</li><li><strong>Anti-abus</strong> : Limiter le débit et prévenir l'usage malveillant.</li></ul>"
                 }
               ]
             },
@@ -4255,7 +4946,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Du déclencheur à l'envoi</strong> — Orchestrer événement → job → notification de façon fiable.</li></ul>"
+                  "body": "<ul><li><strong>Du déclencheur à l'envoi</strong> : Orchestrer événement → job → notification de façon fiable.</li></ul>"
                 }
               ]
             },
@@ -4279,7 +4970,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P8 — Rapport Security baseline",
+        "projectTitle": "Projet P8 : Rapport Security baseline",
         "projectDeliverable": "Le rapport Security baseline du produit capstone : preuves, correctifs appliqués, points restants.",
         "projectAssessment": [
           "Checklist security-baseline entièrement passée",
@@ -4398,7 +5089,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Secrets en dur</strong> — Repérer les secrets collés par l'IA dans code, config et Docker.</li><li><strong>Coffres et rotation</strong> — Stocker et faire tourner les secrets proprement.</li></ul>"
+                  "body": "<ul><li><strong>Secrets en dur</strong> : Repérer les secrets collés par l'IA dans code, config et Docker.</li><li><strong>Coffres et rotation</strong> : Stocker et faire tourner les secrets proprement.</li></ul>"
                 }
               ]
             },
@@ -4524,7 +5215,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Injections</strong> — Comprendre et bloquer SQL/NoSQL/commande.</li><li><strong>XSS et uploads</strong> — Auditer les sorties HTML et les fichiers entrants.</li></ul>"
+                  "body": "<ul><li><strong>Injections</strong> : Comprendre et bloquer SQL/NoSQL/commande.</li><li><strong>XSS et uploads</strong> : Auditer les sorties HTML et les fichiers entrants.</li></ul>"
                 }
               ]
             },
@@ -4638,7 +5329,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Surfaces et routes</strong> — Lister tout ce qui est accessible et vérifier sa protection.</li><li><strong>Webhooks et RLS</strong> — Auditer les endpoints publics par construction et les policies.</li></ul>"
+                  "body": "<ul><li><strong>Surfaces et routes</strong> : Lister tout ce qui est accessible et vérifier sa protection.</li><li><strong>Webhooks et RLS</strong> : Auditer les endpoints publics par construction et les policies.</li></ul>"
                 }
               ]
             },
@@ -4728,7 +5419,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Supply chain du code généré</strong> — Assainir les dépendances qu'un prompt a fait entrer.</li></ul>"
+                  "body": "<ul><li><strong>Supply chain du code généré</strong> : Assainir les dépendances qu'un prompt a fait entrer.</li></ul>"
                 }
               ]
             },
@@ -4752,7 +5443,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P9 — Scores avant/après",
+        "projectTitle": "Projet P9 : Scores avant/après",
         "projectDeliverable": "Les checklists Perf / Design / A11y passées sur le capstone, avec scores avant/après documentés.",
         "projectAssessment": [
           "Scores mesurés avant et après, amélioration démontrée",
@@ -4843,7 +5534,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Mesurer et budgéter</strong> — Utiliser Lighthouse et poser des budgets tenables.</li></ul>"
+                  "body": "<ul><li><strong>Mesurer et budgéter</strong> : Utiliser Lighthouse et poser des budgets tenables.</li></ul>"
                 }
               ]
             },
@@ -4930,7 +5621,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Revue design structurée</strong> — Auditer un écran avec la checklist design-baseline.</li></ul>"
+                  "body": "<ul><li><strong>Revue design structurée</strong> : Auditer un écran avec la checklist design-baseline.</li></ul>"
                 }
               ]
             },
@@ -5017,7 +5708,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Audit a11y de base</strong> — Passer la checklist accessibility-baseline sur un parcours.</li></ul>"
+                  "body": "<ul><li><strong>Audit a11y de base</strong> : Passer la checklist accessibility-baseline sur un parcours.</li></ul>"
                 }
               ]
             },
@@ -5100,7 +5791,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Le parcours qui rapporte</strong> — Auditer le checkout et les emails sous l'angle conversion + confiance.</li></ul>"
+                  "body": "<ul><li><strong>Le parcours qui rapporte</strong> : Auditer le checkout et les emails sous l'angle conversion + confiance.</li></ul>"
                 }
               ]
             },
@@ -5124,7 +5815,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P10 — Déploiement preview + prod",
+        "projectTitle": "Projet P10 : Déploiement preview + prod",
         "projectDeliverable": "Le produit capstone déployé : environnement preview + prod avec URL publique HTTPS.",
         "projectAssessment": [
           "Prod accessible en HTTPS sur URL publique",
@@ -5211,7 +5902,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Panorama hébergement</strong> — Évaluer Vercel / Fly / Railway / VPS sur des critères concrets.</li></ul>"
+                  "body": "<ul><li><strong>Panorama hébergement</strong> : Évaluer Vercel / Fly / Railway / VPS sur des critères concrets.</li></ul>"
                 }
               ]
             },
@@ -5294,7 +5985,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Trois environnements</strong> — Configurer local/preview/prod sans fuite entre eux.</li></ul>"
+                  "body": "<ul><li><strong>Trois environnements</strong> : Configurer local/preview/prod sans fuite entre eux.</li></ul>"
                 }
               ]
             },
@@ -5306,7 +5997,7 @@
             "moduleId": "svc-hebergement-m03",
             "index": "03",
             "title": "CI/CD minimal",
-            "subtitle": "Build, test, deploy, rollback — et bloquer sur audit",
+            "subtitle": "Build, test, deploy, rollback : et bloquer sur audit",
             "duration": "45 min",
             "order": 2,
             "difficulty": "intermediate",
@@ -5376,13 +6067,13 @@
             "lesson": {
               "legacyId": "svc-hebergement-m03-lesson",
               "title": "CI/CD minimal",
-              "desc": "Build, test, deploy, rollback — et bloquer sur audit",
+              "desc": "Build, test, deploy, rollback : et bloquer sur audit",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Pipeline minimal</strong> — Automatiser build, tests et déploiement avec garde-fous.</li></ul>"
+                  "body": "<ul><li><strong>Pipeline minimal</strong> : Automatiser build, tests et déploiement avec garde-fous.</li></ul>"
                 }
               ]
             },
@@ -5468,7 +6159,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Go-live DNS</strong> — Configurer domaine, TLS, redirects et SPF/DKIM basique.</li></ul>"
+                  "body": "<ul><li><strong>Go-live DNS</strong> : Configurer domaine, TLS, redirects et SPF/DKIM basique.</li></ul>"
                 }
               ]
             },
@@ -5482,7 +6173,7 @@
         "slug": "ops",
         "title": "Observabilité & ops légers",
         "label": "Phase 11",
-        "summary": "Savoir que ça casse — et quoi faire quand ça casse.",
+        "summary": "Savoir que ça casse : et quoi faire quand ça casse.",
         "order": 11,
         "color": "expert",
         "icon": "fa-heart-pulse",
@@ -5492,7 +6183,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P11 — Runbook + alerte live",
+        "projectTitle": "Projet P11 : Runbook + alerte live",
         "projectDeliverable": "Le runbook du produit + au moins une alerte réellement active sur l'environnement de prod.",
         "projectAssessment": [
           "Runbook d'une page actionnable",
@@ -5580,7 +6271,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Logs qui servent</strong> — Logger ce qui aide à débugger, corrélé, sans données sensibles.</li></ul>"
+                  "body": "<ul><li><strong>Logs qui servent</strong> : Logger ce qui aide à débugger, corrélé, sans données sensibles.</li></ul>"
                 }
               ]
             },
@@ -5663,7 +6354,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Surveiller ce qui compte</strong> — Mettre en place uptime check, suivi 5xx et alertes ciblées.</li></ul>"
+                  "body": "<ul><li><strong>Surveiller ce qui compte</strong> : Mettre en place uptime check, suivi 5xx et alertes ciblées.</li></ul>"
                 }
               ]
             },
@@ -5749,7 +6440,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Backups et runbook</strong> — Se préparer à l'incident : backup testé + runbook + communication minimale.</li></ul>"
+                  "body": "<ul><li><strong>Backups et runbook</strong> : Se préparer à l'incident : backup testé + runbook + communication minimale.</li></ul>"
                 }
               ]
             },
@@ -5773,7 +6464,7 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P12 — Dossier Ship",
+        "projectTitle": "Projet P12 : Dossier Ship",
         "projectDeliverable": "Le dossier Ship complet : URL publique, plans et pricing, preuves d'audit, runbook.",
         "projectAssessment": [
           "Dossier complet et vérifiable",
@@ -5857,7 +6548,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>De la feature à l'offre</strong> — Traduire le produit en proposition de valeur et plans clairs.</li></ul>"
+                  "body": "<ul><li><strong>De la feature à l'offre</strong> : Traduire le produit en proposition de valeur et plans clairs.</li></ul>"
                 }
               ]
             },
@@ -5940,7 +6631,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Le minimum qui inspire confiance</strong> — Mettre en place le socle légal et support d'un produit payant.</li></ul>"
+                  "body": "<ul><li><strong>Le minimum qui inspire confiance</strong> : Mettre en place le socle légal et support d'un produit payant.</li></ul>"
                 }
               ]
             },
@@ -6024,7 +6715,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Livrer avec preuves</strong> — Produire les artefacts qui prouvent que le produit est shippé.</li></ul>"
+                  "body": "<ul><li><strong>Livrer avec preuves</strong> : Produire les artefacts qui prouvent que le produit est shippé.</li></ul>"
                 }
               ]
             },
@@ -6048,11 +6739,11 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Capstone — Produit commercialisable en prod",
+        "projectTitle": "Capstone : Produit commercialisable en prod",
         "projectDeliverable": "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier Ship. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
         "projectAssessment": [
           "Produit déployé accessible en HTTPS (obligatoire)",
-          "Auth via provider — pas d'auth maison fragile (obligatoire)",
+          "Auth via provider : pas d'auth maison fragile (obligatoire)",
           "Au moins un service tiers paiement ou notification, idéalement les deux (obligatoire)",
           "Checklist Security baseline : pass, aucune critique ouverte",
           "Checklists Perf / Design / A11y : pass selon seuils publiés",
@@ -6175,7 +6866,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Les trois briefs</strong> — Comparer SaaS B2B, e-commerce léger et produit service pour choisir son terrain.</li><li><strong>Cycle imposé et rubrique</strong> — S'approprier les livrables exigés et les critères éliminatoires.</li></ul>"
+                  "body": "<ul><li><strong>Les trois briefs</strong> : Comparer SaaS B2B, e-commerce léger et produit service pour choisir son terrain.</li><li><strong>Cycle imposé et rubrique</strong> : S'approprier les livrables exigés et les critères éliminatoires.</li></ul>"
                 }
               ]
             },

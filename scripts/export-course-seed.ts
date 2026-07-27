@@ -13,10 +13,13 @@ import type {
   Course,
   CourseMeta,
   Module,
+  ModuleExercise,
   Phase,
   Quiz,
+  AuditExercise,
   CodeExercise,
 } from "../src/types";
+import { isAuditExercise } from "../src/types";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -50,10 +53,21 @@ function mapContentBlocks(blocks: ContentBlock[]) {
           language: "tsx",
           code: block.sample.html,
         };
+      case "video":
+        if (!block.video.providerId?.trim()) {
+          return { __component: "lesson.text-block", body: "" };
+        }
+        return {
+          __component: "lesson.video-block",
+          provider: block.video.provider,
+          providerId: block.video.providerId,
+          title: block.video.title ?? null,
+          durationSeconds: block.video.durationSeconds ?? null,
+        };
       case "lessons":
         return {
           __component: "lesson.text-block",
-          body: `<ul>${block.items.map((l) => `<li><strong>${l.title}</strong> — ${l.desc ?? ""}</li>`).join("")}</ul>`,
+          body: `<ul>${block.items.map((l) => `<li><strong>${l.title}</strong> : ${l.desc ?? ""}</li>`).join("")}</ul>`,
         };
       default:
         return { __component: "lesson.text-block", body: "" };
@@ -81,7 +95,7 @@ function mapQuiz(quiz: Quiz) {
   };
 }
 
-function mapExercise(ex: CodeExercise, order: number) {
+function mapCodeExercise(ex: CodeExercise, order: number) {
   return {
     legacyId: ex.id,
     title: ex.title,
@@ -98,6 +112,38 @@ function mapExercise(ex: CodeExercise, order: number) {
     challengeEligible: ex.challengeEligible ?? true,
     validationMode: "local",
   };
+}
+
+/** Audit payload rides in starterFiles/solutionFiles JSON (no new Strapi attrs). */
+function mapAuditExercise(ex: AuditExercise, order: number) {
+  return {
+    legacyId: ex.id,
+    title: ex.title,
+    instructions: ex.instructions,
+    kind: "audit",
+    order,
+    hints: ex.hints ?? [],
+    starterFiles: {
+      __format: "audit",
+      scenario: ex.scenario,
+      findings: ex.findings,
+      requireEvidence: ex.requireEvidence ?? false,
+      passingScore: ex.passingScore ?? 0.7,
+    },
+    solutionFiles: ex.solution ? { __solution: ex.solution } : {},
+    tests: null,
+    validator: null,
+    template: "vanilla",
+    attemptsBeforeSolution: ex.attemptsBeforeSolution ?? 3,
+    challengeEligible: ex.challengeEligible ?? false,
+    validationMode: "local",
+  };
+}
+
+function mapExercise(ex: ModuleExercise, order: number) {
+  return isAuditExercise(ex)
+    ? mapAuditExercise(ex, order)
+    : mapCodeExercise(ex, order);
 }
 
 function mapModule(mod: Module, order: number) {

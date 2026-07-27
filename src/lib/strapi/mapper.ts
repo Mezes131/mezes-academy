@@ -1,9 +1,10 @@
 import type {
-  CodeExercise,
+  AuditExercise,
   ContentBlock,
   Course,
   CourseMeta,
   Module,
+  ModuleExercise,
   Phase,
   Quiz,
   QuizQuestion,
@@ -74,17 +75,40 @@ export function mapQuiz(raw: StrapiQuizAttrs | null | undefined): Quiz | undefin
   };
 }
 
-export function mapExercise(raw: StrapiExerciseAttrs): CodeExercise {
+export function mapExercise(raw: StrapiExerciseAttrs): ModuleExercise {
   const ex = flatten(raw as StrapiExerciseAttrs & { attributes?: StrapiExerciseAttrs })!;
+  const starter = (ex.starterFiles ?? {}) as Record<string, unknown>;
+  if (ex.kind === "audit" || starter.__format === "audit") {
+    const solutionFiles = (ex.solutionFiles ?? {}) as Record<string, unknown>;
+    return {
+      id: ex.legacyId,
+      title: ex.title,
+      instructions: ex.instructions ?? "",
+      hints: ex.hints,
+      format: "audit",
+      scenario: String(starter.scenario ?? ""),
+      findings: (starter.findings as AuditExercise["findings"]) ?? [],
+      requireEvidence: Boolean(starter.requireEvidence),
+      passingScore:
+        typeof starter.passingScore === "number" ? starter.passingScore : 0.7,
+      solution:
+        typeof solutionFiles.__solution === "string"
+          ? solutionFiles.__solution
+          : undefined,
+      attemptsBeforeSolution: ex.attemptsBeforeSolution,
+      challengeEligible: ex.challengeEligible,
+    };
+  }
   return {
     id: ex.legacyId,
     title: ex.title,
     instructions: ex.instructions ?? "",
     hints: ex.hints,
-    starterFiles: ex.starterFiles ?? {},
+    format: "code",
+    starterFiles: (ex.starterFiles as Record<string, string>) ?? {},
     // Private fields absent from public responses : empty until authenticated fetch
-    solutionFiles: ex.solutionFiles ?? {},
-    tests: ex.tests,
+    solutionFiles: (ex.solutionFiles as Record<string, string>) ?? {},
+    tests: ex.tests as Record<string, string> | undefined,
     validator: ex.validator,
     template: ex.template,
     attemptsBeforeSolution: ex.attemptsBeforeSolution,

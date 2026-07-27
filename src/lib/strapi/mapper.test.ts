@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapCourse, mapModule, mapQuiz } from "./mapper";
+import { mapCourse, mapExercise, mapModule, mapQuiz } from "./mapper";
 import type { StrapiCourseAttrs, StrapiModuleAttrs } from "./types";
 
 const sampleModule: StrapiModuleAttrs = {
@@ -97,6 +97,40 @@ describe("mapCourse", () => {
     expect(mod.quiz).toBeUndefined();
     expect(mod.exercises).toBeUndefined();
     expect(mod.content).toEqual([]);
+  });
+});
+
+describe("mapExercise audit", () => {
+  it("rebuilds AuditExercise from kind audit + starterFiles payload", () => {
+    const ex = mapExercise({
+      legacyId: "svc-fondations-ex-m01-1",
+      title: "Audit",
+      instructions: "Trouve les défauts",
+      kind: "audit",
+      starterFiles: {
+        __format: "audit",
+        scenario: "Snippet douteux",
+        findings: [
+          {
+            id: "f1",
+            label: "Secret en dur",
+            severity: "high",
+            isReal: true,
+            evidenceHint: "API_KEY",
+          },
+        ],
+        requireEvidence: true,
+        passingScore: 0.7,
+      },
+      solutionFiles: { __solution: "Le secret ne doit pas être en clair." },
+    });
+    expect(ex.format).toBe("audit");
+    if (ex.format === "audit") {
+      expect(ex.scenario).toBe("Snippet douteux");
+      expect(ex.findings).toHaveLength(1);
+      expect(ex.requireEvidence).toBe(true);
+      expect(ex.solution).toContain("clair");
+    }
   });
 });
 

@@ -49,13 +49,13 @@ export interface StrapiExerciseAttrs {
   kind?: string;
   order?: number;
   hints?: string[];
-  starterFiles?: Record<string, string>;
+  starterFiles?: Record<string, unknown>;
   template?: "react" | "react-ts" | "vanilla";
   attemptsBeforeSolution?: number;
   challengeEligible?: boolean;
   // private fields : absent from public API
-  solutionFiles?: Record<string, string>;
-  tests?: Record<string, string>;
+  solutionFiles?: Record<string, unknown>;
+  tests?: Record<string, unknown>;
   validator?: string;
 }
 
