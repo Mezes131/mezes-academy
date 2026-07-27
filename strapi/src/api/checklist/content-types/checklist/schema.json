@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "checklists",
+  "info": {
+    "singularName": "checklist",
+    "pluralName": "checklists",
+    "displayName": "Checklist"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "domain": {
+      "type": "enumeration",
+      "enum": ["security", "performance", "design", "accessibility"],
+      "required": true
+    },
+    "version": {
+      "type": "string",
+      "required": true,
+      "default": "1.0.0"
+    },
+    "workflowStatus": {
+      "type": "enumeration",
+      "enum": ["draft", "review", "published", "archived"],
+      "default": "draft"
+    },
+    "items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::checklist-item.checklist-item",
+      "mappedBy": "checklist"
+    },
+    "projectBriefs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project-brief.project-brief",
+      "mappedBy": "checklists"
+    }
+  }
+}

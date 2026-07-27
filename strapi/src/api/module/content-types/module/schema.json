@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modules",
+  "info": {
+    "singularName": "module",
+    "pluralName": "modules",
+    "displayName": "Module"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "legacyId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "moduleId": {
+      "type": "string"
+    },
+    "index": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": ["intro", "beginner", "intermediate", "advanced", "expert"]
+    },
+    "objectives": {
+      "type": "json"
+    },
+    "prerequisites": {
+      "type": "json"
+    },
+    "openByDefault": {
+      "type": "boolean",
+      "default": false
+    },
+    "workflowStatus": {
+      "type": "enumeration",
+      "enum": ["draft", "review", "published", "archived"],
+      "default": "draft"
+    },
+    "contentBlocks": {
+      "type": "json"
+    },
+    "assessment": {
+      "type": "json"
+    },
+    "phase": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::phase.phase",
+      "inversedBy": "modules"
+    },
+    "lessons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson.lesson",
+      "mappedBy": "module"
+    },
+    "quiz": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::quiz.quiz",
+      "mappedBy": "module"
+    },
+    "exercises": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exercise.exercise",
+      "mappedBy": "module"
+    }
+  }
+}

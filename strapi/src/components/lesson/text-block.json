@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_lesson_text_blocks",
+  "info": {
+    "displayName": "Text Block",
+    "icon": "pencil"
+  },
+  "attributes": {
+    "body": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

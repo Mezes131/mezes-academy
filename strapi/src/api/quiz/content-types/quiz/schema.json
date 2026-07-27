@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quizzes",
+  "info": {
+    "singularName": "quiz",
+    "pluralName": "quizzes",
+    "displayName": "Quiz"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "legacyId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "passingScore": {
+      "type": "integer",
+      "default": 70
+    },
+    "attemptsAllowed": {
+      "type": "integer",
+      "default": 3
+    },
+    "lesson": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::lesson.lesson",
+      "inversedBy": "quiz"
+    },
+    "module": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::module.module",
+      "inversedBy": "quiz"
+    },
+    "questions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quiz-question.quiz-question",
+      "mappedBy": "quiz"
+    }
+  }
+}

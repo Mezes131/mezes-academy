@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "phases",
+  "info": {
+    "singularName": "phase",
+    "pluralName": "phases",
+    "displayName": "Phase"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "legacyId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "color": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "metaTags": {
+      "type": "json"
+    },
+    "objectives": {
+      "type": "json"
+    },
+    "prerequisites": {
+      "type": "json"
+    },
+    "scaffoldOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "projectTitle": {
+      "type": "string"
+    },
+    "projectDeliverable": {
+      "type": "text"
+    },
+    "projectAssessment": {
+      "type": "json"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "phases"
+    },
+    "modules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::module.module",
+      "mappedBy": "phase"
+    }
+  }
+}

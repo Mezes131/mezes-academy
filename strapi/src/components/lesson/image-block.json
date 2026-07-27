@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_lesson_image_blocks",
+  "info": {
+    "displayName": "Image Block",
+    "icon": "picture"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"],
+      "required": true
+    },
+    "alt": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}

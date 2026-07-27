@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_briefs",
+  "info": {
+    "singularName": "project-brief",
+    "pluralName": "project-briefs",
+    "displayName": "Project Brief"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "brief": {
+      "type": "richtext"
+    },
+    "deliverables": {
+      "type": "json"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course"
+    },
+    "rubric": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::rubric.rubric",
+      "inversedBy": "projectBrief"
+    },
+    "stages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::learning-stage.learning-stage",
+      "mappedBy": "projectBrief"
+    },
+    "checklists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::checklist.checklist",
+      "inversedBy": "projectBriefs"
+    }
+  }
+}

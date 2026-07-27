@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_answers",
+  "info": {
+    "singularName": "quiz-answer",
+    "pluralName": "quiz-answers",
+    "displayName": "Quiz Answer"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "legacyId": {
+      "type": "string",
+      "unique": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "isCorrect": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "feedback": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "question": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::quiz-question.quiz-question",
+      "inversedBy": "answers"
+    }
+  }
+}

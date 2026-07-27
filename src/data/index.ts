@@ -9,6 +9,8 @@ import { courses } from "./courses";
    ═══════════════════════════════════════════════════════════════════ */
 
 export { courses };
+export { createCourseRepository } from "@/lib/courseRepository";
+export type { CourseRepository } from "@/lib/courseRepository";
 
 /** Back-office ready syllabi, when a course exposes one. */
 export const allPrograms: CourseProgram[] = courses

@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "learning_stages",
+  "info": {
+    "singularName": "learning-stage",
+    "pluralName": "learning-stages",
+    "displayName": "Learning Stage"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "enumeration",
+      "enum": ["prompt", "audit", "ship"],
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "completionRule": {
+      "type": "enumeration",
+      "enum": ["submitted", "reviewed", "approved"],
+      "default": "submitted"
+    },
+    "projectBrief": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-brief.project-brief",
+      "inversedBy": "stages"
+    }
+  }
+}

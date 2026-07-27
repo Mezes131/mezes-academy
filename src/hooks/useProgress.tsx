@@ -1,3 +1,8 @@
+/**
+ * Progress keys must stay stable content IDs (`react-core-m06`, quiz/exercise legacyIds).
+ * When Strapi content is enabled, the mapper sets domain `id` from `legacyId` so
+ * these keys continue to hit the same Supabase rows. Never key by Strapi numeric ids.
+ */
 import {
   createContext,
   useCallback,
