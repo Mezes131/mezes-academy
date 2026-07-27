@@ -12,25 +12,31 @@ course registry (`src/data/courses/`).
 
 ## Import (Strapi running against Postgres)
 
-With docker compose (the running container already uses port 1337, so start
-the console on another port):
+The importer uses the Strapi v5 **Documents API**, so dynamic zones (lesson
+content blocks) are populated. One-shot CLI (loads Strapi without starting
+the HTTP server, safe next to the live container):
 
 ```bash
-docker compose --env-file .env exec -e PORT=1338 strapi npm run strapi -- console
+docker compose --env-file .env exec strapi node dist/src/seed/run-import.js react svc
 ```
+
+Also available from `strapi console`:
 
 ```js
 const { importCourse } = require("./dist/src/seed/import-course");
-await importCourse(strapi, "react");
 await importCourse(strapi, "svc");
 ```
 
-If the JSON is missing inside the container (`dist/src/seed/data/`), copy it in:
+If the compiled files or JSON are missing inside the container
+(`dist/src/seed/`), compile locally (`npx tsc -p tsconfig.json` in `strapi/`)
+and copy them in:
 
 ```bash
-docker compose cp strapi/src/seed/data/svc-course.json strapi:/app/dist/src/seed/data/
+docker compose cp strapi/dist/src/seed/run-import.js strapi:/app/dist/src/seed/
+docker compose cp strapi/dist/src/seed/import-course.js strapi:/app/dist/src/seed/
+docker compose cp strapi/dist/src/seed/data/svc-course.json strapi:/app/dist/src/seed/data/
 ```
 
 All records are created/updated as **drafts** keyed by `legacyId`. Publish in
 the admin UI after review. Re-running the importer updates matching `legacyId`
-rows instead of duplicating.
+documents instead of duplicating.

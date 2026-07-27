@@ -1,17 +1,18 @@
 /**
  * Idempotent course importer for Strapi (any course exported by
- * scripts/export-course-seed.ts). Upserts by legacyId. All records stay
- * draft until manually published.
+ * scripts/export-course-seed.ts). Upserts by legacyId through the
+ * Documents API, so dynamic zones (lesson content) are populated.
+ * All records stay draft until manually published.
  *
- * Usage (inside Strapi container / local strapi app):
- *   npx strapi console
+ * Usage:
+ *   node dist/src/seed/run-import.js react svc
+ * or inside `strapi console`:
  *   > const { importCourse } = require("./dist/src/seed/import-course");
- *   > await importCourse(strapi, "react")
  *   > await importCourse(strapi, "svc")
  */
 import fs from "node:fs";
 import path from "node:path";
-import type { Core } from "@strapi/strapi";
+import type { Core, UID } from "@strapi/strapi";
 
 type AnswerPayload = {
   legacyId: string;
@@ -115,34 +116,40 @@ type CoursePayload = {
   phases: PhasePayload[];
 };
 
-/** Strapi db.query relations must be scalar ids, never row objects. */
-function relId(row: { id?: string | number } | null | undefined): number | string {
-  if (row?.id == null || typeof row.id === "object") {
-    throw new Error(`Expected row.id scalar, got ${JSON.stringify(row?.id)}`);
+type Doc = { documentId: string };
+
+/** Documents API relations are set with documentIds, never row objects. */
+function docId(doc: Doc | null | undefined): string {
+  if (!doc?.documentId) {
+    throw new Error(`Expected a document with documentId, got ${JSON.stringify(doc)}`);
   }
-  return row.id;
+  return doc.documentId;
 }
 
 async function upsertByLegacyId(
   strapi: Core.Strapi,
-  uid: string,
+  uid: UID.ContentType,
   legacyId: string,
   data: Record<string, unknown>,
-) {
-  const existing = await strapi.db.query(uid).findOne({ where: { legacyId } });
+): Promise<Doc> {
+  const docs = strapi.documents(uid);
+  const existing =
+    (await docs.findFirst({ filters: { legacyId } })) ??
+    (await docs.findFirst({ filters: { legacyId }, status: "published" }));
   if (existing) {
-    return strapi.db.query(uid).update({
-      where: { id: existing.id },
-      data,
-    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updated = await docs.update({ documentId: existing.documentId, data: data as any });
+    if (!updated) throw new Error(`Update failed for ${uid} legacyId=${legacyId}`);
+    return updated;
   }
-  return strapi.db.query(uid).create({ data });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return docs.create({ data: data as any });
 }
 
 async function importQuiz(
   strapi: Core.Strapi,
   quiz: QuizPayload,
-  links: { lessonId?: number | string; moduleId?: number | string },
+  links: { moduleDocumentId?: string; lessonDocumentId?: string },
 ) {
   const quizData: Record<string, unknown> = {
     legacyId: quiz.legacyId,
@@ -151,13 +158,13 @@ async function importQuiz(
     attemptsAllowed: 3,
   };
   // Module owns the learner-facing quiz; avoid dual oneToOne attach quirks
-  if (links.moduleId != null) quizData.module = links.moduleId;
-  else if (links.lessonId != null) quizData.lesson = links.lessonId;
+  if (links.moduleDocumentId) quizData.module = links.moduleDocumentId;
+  else if (links.lessonDocumentId) quizData.lesson = links.lessonDocumentId;
 
-  const quizRow = await upsertByLegacyId(strapi, "api::quiz.quiz", quiz.legacyId, quizData);
+  const quizDoc = await upsertByLegacyId(strapi, "api::quiz.quiz", quiz.legacyId, quizData);
 
   for (const question of quiz.questions) {
-    const qRow = await upsertByLegacyId(
+    const questionDoc = await upsertByLegacyId(
       strapi,
       "api::quiz-question.quiz-question",
       question.legacyId,
@@ -167,7 +174,7 @@ async function importQuiz(
         type: question.type,
         explanation: question.explanation,
         order: question.order,
-        quiz: relId(quizRow),
+        quiz: docId(quizDoc),
       },
     );
 
@@ -177,12 +184,12 @@ async function importQuiz(
         label: answer.label,
         isCorrect: answer.isCorrect,
         order: answer.order,
-        question: relId(qRow),
+        question: docId(questionDoc),
       });
     }
   }
 
-  return quizRow;
+  return quizDoc;
 }
 
 export async function importCourse(strapi: Core.Strapi, courseId = "react") {
@@ -203,7 +210,7 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
     course: CoursePayload;
   };
 
-  const courseRow = await upsertByLegacyId(strapi, "api::course.course", course.legacyId, {
+  const courseDoc = await upsertByLegacyId(strapi, "api::course.course", course.legacyId, {
     legacyId: course.legacyId,
     title: course.title,
     slug: course.slug,
@@ -220,7 +227,7 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
   });
 
   for (const phase of course.phases) {
-    const phaseRow = await upsertByLegacyId(strapi, "api::phase.phase", phase.legacyId, {
+    const phaseDoc = await upsertByLegacyId(strapi, "api::phase.phase", phase.legacyId, {
       legacyId: phase.legacyId,
       slug: phase.slug,
       title: phase.title,
@@ -236,11 +243,11 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
       projectTitle: phase.projectTitle,
       projectDeliverable: phase.projectDeliverable,
       projectAssessment: phase.projectAssessment,
-      course: relId(courseRow),
+      course: docId(courseDoc),
     });
 
     for (const mod of phase.modules) {
-      const moduleRow = await upsertByLegacyId(strapi, "api::module.module", mod.legacyId, {
+      const moduleDoc = await upsertByLegacyId(strapi, "api::module.module", mod.legacyId, {
         legacyId: mod.legacyId,
         moduleId: mod.moduleId,
         index: mod.index,
@@ -255,12 +262,10 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
         workflowStatus: mod.workflowStatus,
         contentBlocks: mod.contentBlocks,
         assessment: mod.assessment,
-        phase: relId(phaseRow),
+        phase: docId(phaseDoc),
       });
 
-      // ponytail: skip dynamic-zone `content` via db.query (relation attach bugs);
-      // body already lives on module.contentBlocks for the frontend mapper.
-      const lessonRow = await upsertByLegacyId(
+      const lessonDoc = await upsertByLegacyId(
         strapi,
         "api::lesson.lesson",
         mod.lesson.legacyId,
@@ -270,14 +275,13 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
           desc: mod.lesson.desc,
           order: mod.lesson.order,
           isRequired: mod.lesson.isRequired,
-          module: relId(moduleRow),
+          content: mod.lesson.content,
+          module: docId(moduleDoc),
         },
       );
 
       if (mod.quiz) {
-        await importQuiz(strapi, mod.quiz, {
-          moduleId: relId(moduleRow),
-        });
+        await importQuiz(strapi, mod.quiz, { moduleDocumentId: docId(moduleDoc) });
       }
 
       for (const ex of mod.exercises) {
@@ -296,19 +300,18 @@ export async function importCourse(strapi: Core.Strapi, courseId = "react") {
           attemptsBeforeSolution: ex.attemptsBeforeSolution,
           challengeEligible: ex.challengeEligible,
           validationMode: ex.validationMode,
-          lesson: relId(lessonRow),
-          module: relId(moduleRow),
+          lesson: docId(lessonDoc),
+          module: docId(moduleDoc),
         });
       }
     }
   }
 
   strapi.log.info(`Imported course draft (legacyId=${course.legacyId})`);
-  return courseRow;
+  return courseDoc;
 }
 
 /** Backwards-compatible alias (previous docs referenced this name). */
 export const importReactCourse = (strapi: Core.Strapi) => importCourse(strapi, "react");
 
 export default { importCourse, importReactCourse };
-
