@@ -33,9 +33,10 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       ? quizScore.correct / quizScore.total >= 0.7
       : false;
   const canMarkRead = canMarkModuleRead(module.id);
-  const solvedExercises = (module.exercises ?? []).filter(
-    (ex) => progress.exerciseProgress[ex.id]?.status === "solved",
-  ).length;
+  const solvedExercises = (module.exercises ?? []).filter((ex) => {
+    const status = progress.exerciseProgress[ex.id]?.status;
+    return status === "solved" || status === "revealed";
+  }).length;
   const totalExercises = module.exercises?.length ?? 0;
   const exercisesValidated =
     totalExercises === 0 ? true : solvedExercises === totalExercises;

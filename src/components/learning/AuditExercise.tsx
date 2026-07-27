@@ -32,6 +32,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
     markExerciseSolved,
     revealExerciseSolution,
     recordExerciseHint,
+    resetExercise,
   } = useProgress();
 
   const status = getExerciseStatus(exercise.id);
@@ -51,8 +52,8 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
   > | null>(null);
   const [showSolution, setShowSolution] = useState(false);
 
-  const solved = status.status === "solved" || status.status === "revealed";
-  const canReveal = !solved && status.attempts >= attemptsGate;
+  const done = status.status === "solved" || status.status === "revealed";
+  const canReveal = !done && status.attempts >= attemptsGate;
 
   const selectedIds = useMemo(
     () => Object.entries(selected).filter(([, v]) => v).map(([id]) => id),
@@ -88,6 +89,16 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
     setShowSolution(true);
   }
 
+  function onReset() {
+    resetExercise(exercise.id);
+    setSelected({});
+    setSeverities({});
+    setEvidence({});
+    setHintsShown(0);
+    setLastResult(null);
+    setShowSolution(false);
+  }
+
   function onHint() {
     if (!exercise.hints?.length) return;
     const next = Math.min(hintsShown + 1, exercise.hints.length);
@@ -108,9 +119,10 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
             dangerouslySetInnerHTML={{ __html: exercise.instructions }}
           />
         </div>
-        {solved && (
+        {done && (
           <span className="inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-wider text-emerald-400">
-            <CheckCircle2 size={12} /> validé
+            <CheckCircle2 size={12} />{" "}
+            {status.status === "revealed" ? "correction vue" : "validé"}
           </span>
         )}
       </div>
@@ -145,7 +157,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                   className="mt-1.5 h-4 w-4 accent-[rgb(var(--accent))]"
                   checked={checked}
                   onChange={() => toggleFinding(finding.id)}
-                  disabled={solved && status.status === "solved"}
+                  disabled={status.status === "solved"}
                 />
                 <span className="text-[14px] leading-relaxed text-fg">
                   {finding.label}
@@ -222,7 +234,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                 {hint}
               </div>
             ))}
-            {hintsShown < exercise.hints.length && !solved && (
+            {hintsShown < exercise.hints.length && !done && (
               <Button type="button" variant="ghost" size="sm" onClick={onHint}>
                 Afficher un indice ({hintsShown + 1}/{exercise.hints.length})
               </Button>
@@ -270,12 +282,17 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
         )}
 
         <div className="flex flex-wrap items-center gap-2 pt-2">
-          {!solved && (
+          {!done && (
             <Button type="submit">Soumettre le rapport</Button>
           )}
           {canReveal && exercise.solution && (
             <Button type="button" variant="ghost" onClick={onReveal}>
               Voir la correction
+            </Button>
+          )}
+          {done && (
+            <Button type="button" variant="ghost" size="sm" onClick={onReset}>
+              Recommencer à zéro
             </Button>
           )}
           <span className="text-[11px] font-mono text-fg-3">

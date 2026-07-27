@@ -552,9 +552,12 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const exercisesValidated =
         !found.exercises || found.exercises.length === 0
           ? true
-          : found.exercises.every(
-              (exercise) => progress.exerciseProgress[exercise.id]?.status === "solved",
-            );
+          : found.exercises.every((exercise) => {
+              const status = progress.exerciseProgress[exercise.id]?.status;
+              // Revealing the solution still counts as done for module completion
+              // (same rule as completedExercises sync).
+              return status === "solved" || status === "revealed";
+            });
 
       return quizValidated && exercisesValidated;
     },
