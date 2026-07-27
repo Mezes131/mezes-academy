@@ -11,6 +11,7 @@ import { SearchBar } from "@/components/ui/SearchBar";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useProgress } from "@/hooks/useProgress";
 import { useCourseArea } from "./courseArea";
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
 interface CourseBarProps {
@@ -31,6 +32,7 @@ export function CourseBar({
   const location = useLocation();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const t = useT();
 
   function onSubmitSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -48,7 +50,7 @@ export function CourseBar({
             type="button"
             onClick={onToggleSidebar}
             aria-label={
-              isSidebarOpen ? "Fermer le menu latéral" : "Ouvrir le menu latéral"
+              isSidebarOpen ? t("courseBar.closeSidebar") : t("courseBar.openSidebar")
             }
             className="w-9 h-9 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition text-fg-2 hover:text-fg"
           >
@@ -69,7 +71,7 @@ export function CourseBar({
               <SearchBar
                 value={query}
                 onChange={setQuery}
-                placeholder="Rechercher…"
+                placeholder={t("courseBar.search")}
                 className="w-full"
               />
             </form>

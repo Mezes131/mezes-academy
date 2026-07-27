@@ -20,6 +20,7 @@ import { BookmarksPage } from "@/pages/BookmarksPage";
 import { SearchPage } from "@/pages/SearchPage";
 import { CapstoneGatePage } from "@/pages/capstone/CapstoneGatePage";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
+import { LocaleProvider } from "@/i18n/LocaleProvider";
 
 function ThemeApplier({ children }: { children: React.ReactNode }) {
   useThemeEffect();
@@ -28,6 +29,7 @@ function ThemeApplier({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
+    <LocaleProvider>
     <AuthProvider>
       <ProgressProvider>
         <ThemeApplier>
@@ -140,5 +142,6 @@ export default function App() {
         </ThemeApplier>
       </ProgressProvider>
     </AuthProvider>
+    </LocaleProvider>
   );
 }

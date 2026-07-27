@@ -5,6 +5,8 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
+import { LanguageSwitcher } from "@/i18n/LanguageSwitcher";
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
 /**
@@ -13,6 +15,7 @@ import { cn } from "@/lib/utils";
  */
 export function LandingNav() {
   const { user } = useAuth();
+  const t = useT();
 
   return (
     <nav className="sticky top-0 z-50 h-16 bg-bg/80 backdrop-blur-xl border-b border-base">
@@ -27,23 +30,24 @@ export function LandingNav() {
 
         <div className="hidden md:flex items-center gap-1 ml-6">
           <NavLink to="/" end className={navLinkClass}>
-            Accueil
+            {t("nav.home")}
           </NavLink>
           <Link to="/#catalog" className={staticLinkClass}>
-            Catalogue
+            {t("nav.catalog")}
           </Link>
           <Link to="/#how-it-works" className={staticLinkClass}>
-            Comment ça marche
+            {t("nav.howItWorks")}
           </Link>
         </div>
 
         <div className="flex items-center gap-2 ml-auto">
+          <LanguageSwitcher />
           <ThemeToggle />
           {user ? (
             <>
               <Link to="/react" className="hidden sm:inline-flex">
                 <Button size="sm">
-                  Continuer
+                  {t("nav.continue")}
                   <ArrowRight size={14} />
                 </Button>
               </Link>
@@ -52,7 +56,7 @@ export function LandingNav() {
           ) : (
             <Link to="/auth">
               <Button size="sm">
-                Connexion
+                {t("nav.signIn")}
                 <ArrowRight size={14} />
               </Button>
             </Link>

@@ -5,6 +5,8 @@ import { MezesLogo } from "@/components/ui/MezesLogo";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { useAuth } from "@/hooks/useAuth";
+import { LanguageSwitcher } from "@/i18n/LanguageSwitcher";
+import { useT } from "@/i18n/useT";
 import { useCourseArea } from "./courseArea";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +18,7 @@ export function CourseTopNav() {
   const { basePath, navTitle, navIcon, navAccent } = useCourseArea();
   const { user } = useAuth();
   const location = useLocation();
+  const t = useT();
 
   return (
     <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-3 items-center gap-2 px-4 sm:px-6">
@@ -42,11 +45,12 @@ export function CourseTopNav() {
             navAccent.chip,
           )}
         >
-          parcours
+          {t("nav.pathBadge")}
         </span>
       </Link>
 
       <div className="flex items-center justify-self-end gap-2">
+        <LanguageSwitcher />
         {user ? (
           <>
             <SyncStatusBadge variant="pill" className="hidden sm:inline-flex" />
@@ -61,7 +65,7 @@ export function CourseTopNav() {
               className="flex items-center gap-1.5 rounded-lg border-base px-3 py-1.5 text-[13px] font-semibold hover:bg-bg-3 transition"
             >
               <LogIn size={14} />
-              Se connecter
+              {t("nav.signInShort")}
             </Link>
           </>
         )}
