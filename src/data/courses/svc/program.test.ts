@@ -47,13 +47,28 @@ describe("svcProgram", () => {
   });
 });
 
-describe("svcCourse scaffold phases", () => {
+const AUTHORED_PHASE_IDS = ["svc-bases"];
+
+describe("svcCourse phases", () => {
   it("mirrors the program structure", () => {
     expect(svcCourse.phases).toHaveLength(svcProgram.phases.length);
     svcCourse.phases.forEach((phase, i) => {
-      expect(phase.scaffoldOnly).toBe(true);
+      expect(phase.scaffoldOnly ?? false).toBe(!AUTHORED_PHASE_IDS.includes(phase.id));
       expect(phase.id).toBe(svcProgram.phases[i].phaseId);
       expect(phase.modules).toHaveLength(svcProgram.phases[i].modules.length);
     });
+  });
+
+  it("authored bases phase follows the syllabus conventions", () => {
+    const bases = svcCourse.phases.find((phase) => phase.id === "svc-bases");
+    expect(bases).toBeDefined();
+    for (const mod of bases!.modules) {
+      expect(mod.content.length).toBeGreaterThan(0);
+      expect(mod.quiz?.id).toBe(`svc-bases-quiz-${mod.id.slice(-3)}`);
+      expect(mod.quiz?.questions).toHaveLength(5);
+      for (const exercise of mod.exercises ?? []) {
+        expect(exercise.id).toMatch(new RegExp(`^svc-bases-ex-${mod.id.slice(-3)}-\\d$`));
+      }
+    }
   });
 });

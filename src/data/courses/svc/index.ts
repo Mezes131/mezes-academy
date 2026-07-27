@@ -2,6 +2,7 @@ import type { Course } from "@/types";
 import { programToScaffoldPhases, type PhasePresentation } from "../programScaffold";
 import { svcMeta } from "./meta";
 import { svcProgram } from "./program";
+import { basesPhase } from "./phases/bases";
 
 const phasePresentation: Record<string, PhasePresentation> = {
   bases: { color: "intro", icon: "fa-globe", label: "Phase 0" },
@@ -20,15 +21,22 @@ const phasePresentation: Record<string, PhasePresentation> = {
   capstone: { color: "expert", icon: "fa-award", label: "Capstone" },
 };
 
+/** Phases with authored content replace their program-derived scaffold. */
+const authoredPhases: Record<string, typeof basesPhase> = {
+  [basesPhase.id]: basesPhase,
+};
+
 /**
- * Secure Vibe Coding. Blueprint-level for now: the syllabus lives in
- * `program/`; lesson content will be authored in Strapi. Phases are
- * scaffold-only, derived from the program.
+ * Secure Vibe Coding. The syllabus lives in `program/`; phases are derived
+ * from it as scaffolds, then swapped for authored versions as lesson
+ * content gets written (P0 done, P1+ to come).
  */
 export const svcCourse: Course = {
   id: "svc",
   slug: "secure-vibe-coding",
   meta: svcMeta,
   program: svcProgram,
-  phases: programToScaffoldPhases(svcProgram, phasePresentation),
+  phases: programToScaffoldPhases(svcProgram, phasePresentation).map(
+    (phase) => authoredPhases[phase.id] ?? phase,
+  ),
 };
