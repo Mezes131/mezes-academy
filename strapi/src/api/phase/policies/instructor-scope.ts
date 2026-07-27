@@ -8,8 +8,6 @@ export default async (
     state: { user?: { assignedCourseIds?: Array<string | number> } };
     request: { body?: { data?: { course?: unknown; courseId?: unknown } } };
   },
-  _config: unknown,
-  _ctx: { strapi: unknown },
 ) => {
   const user = policyContext.state.user;
   if (!user) return false;

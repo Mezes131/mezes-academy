@@ -4,7 +4,7 @@ import type { AuditFinding } from "../types.js";
 
 const SECRET_PATTERNS: Array<{ name: string; re: RegExp }> = [
   { name: "AWS access key", re: /AKIA[0-9A-Z]{16}/ },
-  { name: "Generic API key assignment", re: /(?:api[_-]?key|secret|token)\s*[:=]\s*['\"][A-Za-z0-9_\-]{16,}['\"]/i },
+  { name: "Generic API key assignment", re: /(?:api[_-]?key|secret|token)\s*[:=]\s*['"][A-Za-z0-9_-]{16,}['"]/i },
   { name: "Private key block", re: /-----BEGIN (?:RSA |EC )?PRIVATE KEY-----/ },
 ];
 
