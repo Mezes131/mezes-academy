@@ -1,5 +1,6 @@
 import type { Course } from "@/types";
 import { reactCourse } from "./react";
+import { svcCourse } from "./svc";
 
 /**
  * Registry of all courses available in the Academy.
@@ -13,4 +14,4 @@ import { reactCourse } from "./react";
  *
  * Then import it here and append it to the array below.
  */
-export const courses: Course[] = [reactCourse];
+export const courses: Course[] = [reactCourse, svcCourse];

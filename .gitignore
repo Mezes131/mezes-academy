@@ -38,6 +38,8 @@ strapi/.cache/
 strapi/.tmp/
 strapi/.env
 
+docs/*
+
 # Worker artefacts
 worker/node_modules/
 worker/dist/
