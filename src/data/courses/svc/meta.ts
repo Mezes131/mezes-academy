@@ -7,7 +7,7 @@ export const svcMeta: CourseMeta = {
     "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, connexion via services tiers, données, paiements, notifications, hébergement, déploiement et mise en ligne. Projet final certifiant à la clé.",
   icon: "fa-shield-halved",
   accent: {
-    text: "text-violet-400",
+    text: "text-violet-700 dark:text-violet-300",
     bg: "bg-violet-500/10",
     border: "border-violet-500/30",
   },

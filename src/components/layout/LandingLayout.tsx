@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { LandingNav } from "./LandingNav";
 import { Footer } from "./Footer";
 import { BackToTopButton } from "./BackToTopButton";
+import { DeferredFontAwesome } from "./DeferredFontAwesome";
 
 /**
  * Mezes Academy landing layout: nav + content + footer.
@@ -10,8 +11,11 @@ import { BackToTopButton } from "./BackToTopButton";
 export function LandingLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
+      <DeferredFontAwesome />
       <LandingNav />
-      <main className="flex-1">{children}</main>
+      <main id="main" className="flex-1">
+        {children}
+      </main>
       <Footer />
       <BackToTopButton />
     </div>

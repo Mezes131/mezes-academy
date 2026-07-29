@@ -7,7 +7,7 @@ export const reactMeta: CourseMeta = {
     "Apprends React à fond en 6 phases progressives, des fondations JavaScript au capstone React/Next.js prêt pour portfolio.",
   icon: "fa-atom",
   accent: {
-    text: "text-brand-core",
+    text: "text-accent dark:text-brand-core",
     bg: "bg-brand-core/10",
     border: "border-brand-core/30",
   },

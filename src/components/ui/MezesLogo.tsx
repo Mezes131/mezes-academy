@@ -11,15 +11,13 @@ interface MezesLogoProps {
   showMark?: boolean;
   /** Show the "mezes." wordmark next to the mark (true = full logo). */
   showText?: boolean;
-  /** Accessible alt text for the link/image. */
+  /** Accessible name exposed via image alt (not aria-label on a bare div). */
   title?: string;
 }
 
 /**
  * Mezes Academy logo.
- * - Mark: `favicon.png` (red/navy M on a circular background).
- * - Wordmark: `mezes-dark.png` (dark theme) or `mezes-light.png` (light theme).
- *   Theme switching is handled by Tailwind via `dark` / `light` on <html>.
+ * Name comes from img alt text so the accessibility tree stays valid.
  */
 export function MezesLogo({
   size = 32,
@@ -28,17 +26,17 @@ export function MezesLogo({
   showText = false,
   title = "Mezes Academy",
 }: MezesLogoProps) {
+  const markAlt = showText ? "" : title;
+
   return (
-    <div
-      className={cn("inline-flex items-center gap-2.5", className)}
-      aria-label={title}
-    >
+    <div className={cn("inline-flex items-center gap-2.5", className)}>
       {showMark && (
         <img
           src={faviconUrl}
-          alt=""
+          alt={markAlt}
           width={size}
           height={size}
+          decoding="async"
           className="select-none flex-shrink-0"
           draggable={false}
           style={{ height: size, width: size }}
@@ -50,17 +48,21 @@ export function MezesLogo({
           className="relative inline-block flex-shrink-0"
           style={{ height: Math.round(size * 0.72) }}
         >
-          {/* Dark-theme wordmark (white text), visible when <html> has .dark */}
           <img
             src={mezesDarkUrl}
             alt={title}
+            width={160}
+            height={Math.round(size * 0.72)}
+            decoding="async"
             className="hidden dark:block h-full w-auto select-none"
             draggable={false}
           />
-          {/* Light-theme wordmark (dark text), visible by default / with .light */}
           <img
             src={mezesLightUrl}
             alt={title}
+            width={160}
+            height={Math.round(size * 0.72)}
+            decoding="async"
             className="block dark:hidden h-full w-auto select-none"
             draggable={false}
           />

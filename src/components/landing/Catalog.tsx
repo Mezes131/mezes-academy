@@ -68,7 +68,7 @@ function CourseCard({ course }: { course: CatalogCourse }) {
             </h3>
             <StatusBadge status={course.status} eta={course.eta} />
           </div>
-          <p className="text-[13px] text-fg-3 font-mono mt-0.5">
+          <p className="text-[13px] text-fg-2 font-mono mt-0.5">
             {course.tagline}
           </p>
           <p className="text-[13.5px] text-fg-2 leading-relaxed mt-3">
@@ -131,8 +131,8 @@ function StatusBadge({
 }) {
   if (status === "active") {
     return (
-      <span className="text-[10px] font-mono uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+      <span className="text-[10px] font-mono uppercase tracking-wider bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 border border-emerald-700/35 dark:border-emerald-500/40 px-2 py-0.5 rounded-full flex items-center gap-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-700 dark:bg-emerald-400" />
         En ligne
       </span>
     );

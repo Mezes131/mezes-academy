@@ -36,7 +36,7 @@ const upcomingCatalog: CatalogCourse[] = [
       "Les compétences ops d'un développeur moderne : GitHub Actions, Docker, monitoring, logs, déploiements Vercel & auto-hébergé. Sans devenir SRE.",
     icon: "fa-gears",
     accent: {
-      text: "text-pink-400",
+      text: "text-pink-700 dark:text-pink-300",
       bg: "bg-pink-500/10",
       border: "border-pink-500/30",
     },

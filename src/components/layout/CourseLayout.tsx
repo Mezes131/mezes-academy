@@ -3,6 +3,7 @@ import { CourseTopNav } from "./CourseTopNav";
 import { CourseBar } from "./CourseBar";
 import { Sidebar } from "./Sidebar";
 import { BackToTopButton } from "./BackToTopButton";
+import { DeferredFontAwesome } from "./DeferredFontAwesome";
 import {
   CourseAreaContext,
   resolveCourseArea,
@@ -32,6 +33,7 @@ export function CourseLayout({
   return (
     <CourseAreaContext.Provider value={resolved}>
     <div className="min-h-screen flex flex-col">
+      <DeferredFontAwesome />
       <header className="sticky top-0 z-50 bg-bg border-b border-base">
         <CourseTopNav />
         <CourseBar
@@ -44,7 +46,9 @@ export function CourseLayout({
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
-        <main className="flex-1 min-w-0">{children}</main>
+        <main id="main" className="flex-1 min-w-0">
+          {children}
+        </main>
       </div>
       <BackToTopButton />
     </div>

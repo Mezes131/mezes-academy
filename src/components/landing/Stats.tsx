@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Atom, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 /**
@@ -21,14 +21,18 @@ export function Stats() {
           <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
             <Link to="/react">
               <Button>
-                <i className="fa-solid fa-atom" />
+                <Atom size={16} aria-hidden="true" />
                 Ouvrir le parcours React
-                <ArrowRight size={14} />
+                <ArrowRight size={14} aria-hidden="true" />
               </Button>
             </Link>
             <Link to="/secure-vibe-coding">
               <Button variant="ghost" className="border border-violet-500/40">
-                <i className="fa-solid fa-shield-halved text-violet-400" />
+                <Shield
+                  size={16}
+                  className="text-violet-600 dark:text-violet-400"
+                  aria-hidden="true"
+                />
                 Découvrir Secure Vibe Coding
               </Button>
             </Link>
