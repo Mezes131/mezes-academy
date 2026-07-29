@@ -90,7 +90,7 @@ export function AuthFormCard({
 
   return (
     <section className="w-full">
-      <div className="mx-auto w-full max-w-md rounded-2xl border-base bg-bg-2/90 p-6 sm:p-7 shadow-soft backdrop-blur-md">
+      <div className="mx-auto w-full max-w-md rounded-2xl border-base bg-bg-2 p-6 sm:p-7 shadow-soft">
         <div className="flex items-center justify-between">
           <MezesLogo size={26} showText />
           <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3">

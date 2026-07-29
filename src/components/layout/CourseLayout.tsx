@@ -32,7 +32,7 @@ export function CourseLayout({
   return (
     <CourseAreaContext.Provider value={resolved}>
     <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-base">
+      <header className="sticky top-0 z-50 bg-bg border-b border-base">
         <CourseTopNav />
         <CourseBar
           isSidebarOpen={isSidebarOpen}

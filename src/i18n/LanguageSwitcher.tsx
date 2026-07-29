@@ -25,7 +25,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
           onClick={() => setLocale(code)}
           aria-pressed={locale === code}
           className={cn(
-            "min-w-8 rounded-md px-2 py-1 transition",
+            "min-w-11 min-h-11 rounded-md px-2 transition",
             locale === code
               ? "bg-bg-3 text-fg"
               : "text-fg-2 hover:text-fg",

@@ -128,14 +128,7 @@ export function ProfileHeader({
 function Cover() {
   return (
     <div className="relative h-28 sm:h-32">
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(500px 260px at 20% 30%, rgba(99,102,241,0.45), transparent 60%), radial-gradient(500px 260px at 80% 70%, rgba(236,72,153,0.35), transparent 60%), linear-gradient(120deg, rgba(16,185,129,0.18), rgba(99,102,241,0.18))",
-        }}
-      />
+      <div aria-hidden className="absolute inset-0 bg-bg-3" />
       <div
         aria-hidden
         className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-2"

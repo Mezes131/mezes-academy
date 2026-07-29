@@ -111,7 +111,7 @@ function SocialLink({
       target="_blank"
       rel="noreferrer"
       aria-label={label}
-      className="w-9 h-9 rounded-lg border-base flex items-center justify-center text-fg-2 hover:text-fg hover:bg-bg-3 transition"
+      className="min-w-11 min-h-11 rounded-lg border-base flex items-center justify-center text-fg-2 hover:text-fg hover:bg-bg-3 transition"
     >
       <i className={icon} />
     </a>

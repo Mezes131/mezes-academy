@@ -108,7 +108,7 @@ export function UserMenu({
         <div
           role="menu"
           className={cn(
-            "absolute right-0 top-[calc(100%+6px)] z-50 w-64 rounded-xl border-base bg-bg-2/95 backdrop-blur-md shadow-soft overflow-hidden",
+            "absolute right-0 top-[calc(100%+6px)] z-50 w-64 rounded-xl border-base bg-bg-2 shadow-soft overflow-hidden",
             "animate-fade-in origin-top-right",
           )}
         >

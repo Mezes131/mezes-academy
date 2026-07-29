@@ -18,7 +18,7 @@ export function LandingNav() {
   const t = useT();
 
   return (
-    <nav className="sticky top-0 z-50 h-16 bg-bg/80 backdrop-blur-xl border-b border-base">
+    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b border-base">
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center gap-6">
         <Link
           to="/"
@@ -69,11 +69,11 @@ export function LandingNav() {
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    "px-3 h-9 flex items-center rounded-lg text-[13px] font-medium transition",
+    "px-3 min-h-11 flex items-center rounded-lg text-[13px] font-medium transition",
     isActive ? "text-fg bg-bg-3" : "text-fg-2 hover:text-fg hover:bg-bg-3/60",
   );
 
 const staticLinkClass = cn(
-  "px-3 h-9 inline-flex items-center rounded-lg text-[13px] font-medium transition",
+  "px-3 min-h-11 inline-flex items-center rounded-lg text-[13px] font-medium transition",
   "text-fg-2 hover:text-fg hover:bg-bg-3/60",
 );

@@ -36,7 +36,7 @@ export function BackToTopButton({ threshold = 320 }: BackToTopButtonProps) {
       tabIndex={visible ? 0 : -1}
       className={cn(
         "fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full",
-        "bg-accent text-white shadow-glow",
+        "bg-accent text-white shadow-soft",
         "flex items-center justify-center",
         "border border-accent/40",
         "transition-all duration-200 ease-out",

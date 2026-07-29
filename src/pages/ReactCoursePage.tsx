@@ -74,14 +74,6 @@ export function ReactCoursePage() {
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       {/* ─── Course hero ────────────────────────── */}
       <section className="relative mb-10">
-        <div
-          className="absolute -top-12 -left-20 right-0 h-72 pointer-events-none opacity-60"
-          style={{
-            background:
-              "radial-gradient(600px circle at 30% 40%, rgb(108 99 255 / 0.18), transparent 60%)",
-          }}
-          aria-hidden
-        />
         <div className="relative">
           <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-brand-core mb-3">
             <i className="fa-solid fa-atom" />
@@ -353,16 +345,8 @@ function ContinueCard({
   return (
     <Link
       to={`/react/module/${nextModule.module.id}`}
-      className="lg:col-span-2 group relative rounded-2xl border-base bg-gradient-to-br from-bg-2 via-bg-2 to-bg-3 p-6 md:p-7 transition hover:border-accent/40 duration-200 overflow-hidden"
+      className="lg:col-span-2 group relative rounded-2xl border-base bg-bg-2 p-6 md:p-7 transition hover:border-accent/40 duration-200"
     >
-      {/* Colored halo */}
-      <div
-        className="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-40 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgb(108 99 255 / 0.25) 0%, transparent 70%)",
-        }}
-      />
       <div className="relative flex items-start gap-5">
         <div
           className={cn(

@@ -21,7 +21,7 @@ export function Button({
         "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60",
         "disabled:opacity-50 disabled:cursor-not-allowed",
-        size === "sm" ? "text-[13px] px-3 h-8" : "text-sm px-4 h-10",
+        size === "sm" ? "text-[13px] px-3 min-h-11" : "text-sm px-4 min-h-11",
         variant === "primary" &&
           "bg-accent text-white hover:bg-accent/90 shadow-soft",
         variant === "ghost" &&

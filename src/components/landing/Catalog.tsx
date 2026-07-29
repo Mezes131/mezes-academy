@@ -44,22 +44,12 @@ function CourseCard({ course }: { course: CatalogCourse }) {
   const cardInner = (
     <div
       className={cn(
-        "group relative h-full rounded-2xl border-base bg-bg-2 p-6 transition overflow-hidden",
+        "group relative h-full rounded-2xl border-base bg-bg-2 p-6 transition",
         isActive
-          ? "hover:border-accent/40 hover:-translate-y-0.5 duration-200"
+          ? "hover:border-accent/40 duration-200"
           : "opacity-80",
       )}
     >
-      {isActive && (
-        <div
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition"
-          style={{
-            background:
-              "radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgb(108 99 255 / 0.08), transparent 40%)",
-          }}
-        />
-      )}
-
       <div className="flex items-start gap-4">
         <div
           className={cn(

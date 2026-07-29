@@ -183,11 +183,11 @@ export function CodeExercise({
             {exercise.hints.slice(0, hintsShown).map((hint, i) => (
               <div
                 key={i}
-                className="flex items-start gap-2 text-[13px] rounded-md bg-amber-500/5 border border-amber-500/40 px-3 py-2 animate-fade-in"
+                className="flex items-start gap-2 text-[13px] rounded-md bg-accent/5 border border-accent/40 px-3 py-2 animate-fade-in"
               >
                 <Lightbulb
                   size={14}
-                  className="text-amber-400 mt-0.5 flex-shrink-0"
+                  className="text-accent-2 mt-0.5 flex-shrink-0"
                   aria-hidden="true"
                 />
                 <span>{hint}</span>
@@ -197,7 +197,7 @@ export function CodeExercise({
               <button
                 type="button"
                 onClick={onRevealNextHint}
-                className="min-h-11 text-[12px] font-semibold text-amber-400 hover:text-amber-300 transition inline-flex items-center gap-1 px-1"
+                className="min-h-11 text-[12px] font-semibold text-accent-2 hover:text-accent transition inline-flex items-center gap-1 px-1"
               >
                 <Lightbulb size={12} />
                 {hintsShown === 0
@@ -459,8 +459,8 @@ function TestResultSummary({
       className={cn(
         "flex items-center gap-1.5 text-[12px] font-semibold",
         allPass
-          ? "text-emerald-600 dark:text-emerald-400"
-          : "text-amber-600 dark:text-amber-400",
+          ? "text-accent-2"
+          : "text-fg-2",
       )}
     >
       {allPass ? (
@@ -534,7 +534,7 @@ function EditorPasteBlocker({
   if (!toastVisible) return null;
   return (
     <div
-      className="absolute z-50 bottom-4 right-4 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-800 dark:text-amber-200 text-[12px] font-medium px-3 py-2 shadow-soft pointer-events-none animate-fade-in"
+      className="absolute z-50 bottom-4 right-4 rounded-lg border border-accent/40 bg-accent/10 text-fg text-[12px] font-medium px-3 py-2 shadow-soft pointer-events-none animate-fade-in"
     >
       <i className="fa-solid fa-keyboard mr-1.5" />
       Le collage est désactivé ici : tape ton code pour mieux l'intégrer.
@@ -641,27 +641,26 @@ function getStatusBadge(status: ExerciseStatus): {
     case "solved":
       return {
         icon: <CheckCircle2 size={16} />,
-        iconBg: "bg-emerald-500/15",
-        iconFg: "text-emerald-600 dark:text-emerald-400",
+        iconBg: "bg-accent/15",
+        iconFg: "text-accent-2",
         label: "Résolu",
-        labelClasses:
-          "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
+        labelClasses: "bg-accent/10 text-accent-2",
       };
     case "revealed":
       return {
         icon: <Eye size={16} />,
-        iconBg: "bg-accent/15",
-        iconFg: "text-accent-2",
+        iconBg: "bg-bg-3",
+        iconFg: "text-fg-2",
         label: "Vu la solution",
-        labelClasses: "bg-accent/10 text-accent-2",
+        labelClasses: "bg-bg-3 text-fg-2",
       };
     case "attempted":
       return {
         icon: <Play size={14} />,
-        iconBg: "bg-amber-500/15",
-        iconFg: "text-amber-600 dark:text-amber-400",
+        iconBg: "bg-bg-3",
+        iconFg: "text-fg-2",
         label: "En cours",
-        labelClasses: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
+        labelClasses: "bg-bg-3 text-fg-2",
       };
     default:
       return {

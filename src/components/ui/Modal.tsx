@@ -173,7 +173,7 @@ export function Modal({
             type="button"
             onClick={handleClose}
             aria-label="Fermer"
-            className="absolute top-3 right-3 w-8 h-8 inline-flex items-center justify-center rounded-lg text-fg-3 hover:text-fg hover:bg-bg-3 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            className="absolute top-3 right-3 min-w-11 min-h-11 inline-flex items-center justify-center rounded-lg text-fg-3 hover:text-fg hover:bg-bg-3 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             <X size={16} />
           </button>

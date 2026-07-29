@@ -54,11 +54,7 @@ function PageBackground() {
   return (
     <div
       aria-hidden
-      className="absolute inset-0 -z-10 pointer-events-none"
-      style={{
-        backgroundImage:
-          "radial-gradient(1200px 600px at 15% 10%, rgba(99,102,241,0.18), transparent 60%), radial-gradient(900px 500px at 90% 20%, rgba(236,72,153,0.14), transparent 60%), radial-gradient(800px 500px at 50% 100%, rgba(16,185,129,0.12), transparent 60%)",
-      }}
+      className="absolute inset-0 -z-10 pointer-events-none bg-bg"
     />
   );
 }
