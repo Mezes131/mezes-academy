@@ -14,7 +14,7 @@ export const fondationsPhase: Phase = {
   title: "Fondations vibe coding",
   summary:
     "Comprendre le vibe coding, ses risques réels, et le cycle Prompt → Audit → Livraison qui le rend fiable.",
-  metaTags: ["tronc commun", "lecture ~1h30", "audits interactifs", "cycle PAS"],
+  metaTags: ["tronc commun", "lecture ~1h30"],
   modules: [fondationsModule01, fondationsModule02, fondationsModule03],
   project: {
     title: "Projet P1 : Audit d'un dépôt généré par IA",

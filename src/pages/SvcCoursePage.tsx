@@ -262,12 +262,14 @@ export function SvcCoursePage() {
       </section>
 
       {program && (
-        <CourseSyllabus
-          program={program}
-          livePhases={phases}
-          moduleHref={(moduleId) => `${basePath}/module/${moduleId}`}
-          description="Cycle Prompt → Audit → Ship appliqué de bout en bout : dès la phase 4, les projets alimentent le même produit qui devient le capstone certifiant."
-        />
+        <div className="hidden lg:block">
+          <CourseSyllabus
+            program={program}
+            livePhases={phases}
+            moduleHref={(moduleId) => `${basePath}/module/${moduleId}`}
+            description="Cycle Prompt → Audit → Ship appliqué de bout en bout : dès la phase 4, les projets alimentent le même produit qui devient le capstone certifiant."
+          />
+        </div>
       )}
 
       <section className="mt-8 lg:mt-10">

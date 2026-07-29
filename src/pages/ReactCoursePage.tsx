@@ -229,14 +229,16 @@ export function ReactCoursePage() {
       </section>
 
       {program && (
-        <CourseSyllabus
-          program={program}
-          livePhases={phases}
-          moduleHref={(moduleId) =>
-            findModule(moduleId) ? `/react/module/${moduleId}` : undefined
-          }
-          description="Le programme complet détaillé: phases, modules, leçons, objectifs, quiz, exercices de synthèse et projets."
-        />
+        <div className="hidden lg:block">
+          <CourseSyllabus
+            program={program}
+            livePhases={phases}
+            moduleHref={(moduleId) =>
+              findModule(moduleId) ? `/react/module/${moduleId}` : undefined
+            }
+            description="Le programme complet détaillé: phases, modules, leçons, objectifs, quiz, exercices de synthèse et projets."
+          />
+        </div>
       )}
 
       {/* ─── Shortcuts: collapsed on mobile ───────── */}
