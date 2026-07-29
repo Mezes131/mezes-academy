@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_lesson_video_blocks",
+  "info": {
+    "displayName": "Video Block",
+    "icon": "play"
+  },
+  "attributes": {
+    "provider": {
+      "type": "enumeration",
+      "enum": ["mux", "vimeo", "bunny", "youtube", "other"],
+      "default": "other"
+    },
+    "providerId": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "durationSeconds": {
+      "type": "integer"
+    },
+    "transcript": {
+      "type": "text"
+    }
+  }
+}

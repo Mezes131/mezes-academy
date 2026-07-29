@@ -9,7 +9,7 @@ export const expertQuizzes = {
         id: "q1",
         question: "Quel est l'argument principal pour organiser un projet React « par feature » plutôt que « par type » (components/, hooks/, services/) ?",
         options: [
-          { id: "a", label: "Le code lié à un même cas d'usage reste colocalisé — modification et suppression d'une feature deviennent triviales" },
+          { id: "a", label: "Le code lié à un même cas d'usage reste colocalisé : modification et suppression d'une feature deviennent triviales" },
           { id: "b", label: "C'est plus rapide à exécuter au runtime" },
           { id: "c", label: "Les linters l'imposent" },
         ],

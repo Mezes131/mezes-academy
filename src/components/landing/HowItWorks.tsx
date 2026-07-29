@@ -18,15 +18,15 @@ export function HowItWorks() {
             <i className="fa-solid fa-compass mr-1.5" /> Méthode
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            Comment ça marche.
+            Une méthode en trois temps.
           </h2>
-          <p className="mt-3 text-fg-2">
-            Une boucle simple, conçue pour que tu apprennes vraiment et que tu
-            le sentes dans ton code — pas juste dans ta tête.
+          <p className="mt-3 text-fg-2 leading-relaxed max-w-xl">
+            Lis, pratique, valide. La boucle est courte pour que chaque notion
+            se fixe dans ton code, pas seulement dans ta mémoire.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3 relative">
+        <div className="grid gap-6 md:grid-cols-3 md:items-start relative">
           {/* Horizontal connector line (desktop) */}
           <div className="hidden md:block absolute top-8 left-16 right-16 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
@@ -36,7 +36,7 @@ export function HowItWorks() {
         </div>
 
         {/* Promises */}
-        <div className="mt-16 grid md:grid-cols-2 gap-4">
+        <div className="mt-16 grid md:grid-cols-2 md:items-start gap-4">
           {PROMISES.map((promise) => (
             <Promise key={promise.title} promise={promise} />
           ))}
@@ -61,7 +61,7 @@ const STEPS: StepData[] = [
   {
     icon: "fa-book-open",
     title: "Apprends",
-    desc: "Des leçons claires et structurées avec exemples de code, analogies et bonnes pratiques. Ton rythme, sans deadline.",
+    desc: "Des leçons claires, avec exemples de code et analogies concrètes. Tu avances à ton rythme, sans deadline artificielle.",
     color: "text-brand-intro",
     bg: "bg-brand-intro/10",
     border: "border-brand-intro/30",
@@ -69,7 +69,7 @@ const STEPS: StepData[] = [
   {
     icon: "fa-code",
     title: "Pratique",
-    desc: "Chaque module a son quiz et ses exercices qui s'exécutent dans ton navigateur. Tu écris du vrai code, tu vois le résultat immédiatement.",
+    desc: "Chaque module a son quiz et ses exercices live. Tu écris du vrai code dans le navigateur et tu vois le résultat tout de suite.",
     color: "text-brand-core",
     bg: "bg-brand-core/10",
     border: "border-brand-core/30",
@@ -77,7 +77,7 @@ const STEPS: StepData[] = [
   {
     icon: "fa-chart-line",
     title: "Progresse",
-    desc: "Ta progression est sauvegardée automatiquement. Reviens quand tu veux, reprends là où tu t'es arrêté, exporte tout en JSON.",
+    desc: "Ta progression est sauvegardée automatiquement. Reviens quand tu veux, reprends le module en cours, exporte tout en JSON.",
     color: "text-brand-expert",
     bg: "bg-brand-expert/10",
     border: "border-brand-expert/30",
@@ -91,20 +91,20 @@ interface PromiseData {
 
 const PROMISES: PromiseData[] = [
   {
-    title: "Pas de bullshit",
-    desc: "On t'apprend ce que tu dois vraiment savoir pour être autonome, pas la mode du moment.",
+    title: "Du concret, pas de bruit",
+    desc: "On te montre ce qu'il faut maîtriser pour être autonome. Pas la mode du mois, pas le jargon pour faire joli.",
   },
   {
-    title: "Construit avec soin",
-    desc: "Chaque leçon est relue. Chaque exercice est testé. Chaque explication a un pourquoi.",
+    title: "Relu et testé",
+    desc: "Chaque leçon est relue. Chaque exercice est vérifié. Chaque explication dit pourquoi, pas seulement comment.",
   },
   {
-    title: "Accessible à tous",
-    desc: "Interface claire, thème clair/sombre, responsive, raccourcis clavier, barre de progression.",
+    title: "Confort de lecture",
+    desc: "Interface claire, thèmes clair et sombre, responsive, barre de progression toujours à portée de main.",
   },
   {
     title: "Ta progression t'appartient",
-    desc: "Tout est stocké dans ton navigateur. Exportable en JSON. Aucun tracker, aucune pub.",
+    desc: "Stockée localement et synchronisée quand tu es connecté. Exportable en JSON. Aucun tracker, aucune pub.",
   },
 ];
 

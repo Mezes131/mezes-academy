@@ -45,7 +45,7 @@ export const module22: Module = {
       kind: "code",
       sample: {
         label: "Server Component + Server Action",
-        html: `<span class="cm">// app/posts/page.tsx — Server Component</span>
+        html: `<span class="cm">// app/posts/page.tsx : Server Component</span>
 <span class="kw">import</span> { db } <span class="kw">from</span> <span class="str">"@/lib/db"</span>
 
 <span class="kw">async function</span> <span class="fn">createPost</span>(formData: <span class="ty">FormData</span>) {

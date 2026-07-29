@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { getPhase } from "@/data/phases";
 import type { PhaseId } from "@/types";
+import { isCodeExercise } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
 import { CodeExercise as ExerciseCard } from "@/components/learning/CodeExercise";
 import { Button } from "@/components/ui/Button";
@@ -23,6 +24,7 @@ export function PhaseChallengePage() {
     if (!phase) return [];
     return phase.modules
       .flatMap((m) => m.exercises ?? [])
+      .filter(isCodeExercise)
       .filter((ex) => ex.challengeEligible !== false);
   }, [phase]);
 
@@ -83,7 +85,7 @@ export function PhaseChallengePage() {
           </div>
           <div className="flex-1 min-w-0">
             <h1 className={cn("text-2xl font-extrabold tracking-tight", accent.text)}>
-              Challenge final — {phase.label}
+              Challenge final : {phase.label}
             </h1>
             <p className="text-[13px] text-fg-2 mt-1 leading-relaxed">
               Mode révision finale : pas de bouton solution, uniquement les indices.

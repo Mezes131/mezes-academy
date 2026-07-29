@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_lesson_exercise_blocks",
+  "info": {
+    "displayName": "Exercise Block",
+    "icon": "puzzle"
+  },
+  "attributes": {
+    "exercise": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::exercise.exercise"
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}

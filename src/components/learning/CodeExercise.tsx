@@ -55,7 +55,10 @@ export function CodeExercise({
     recordExerciseHint,
     getExerciseStatus,
     resetExercise,
+    progress,
   } = useProgress();
+
+  const sandpackTheme = progress.theme;
 
   const status = getExerciseStatus(exercise.id);
   const attemptsBeforeSolution =
@@ -180,19 +183,21 @@ export function CodeExercise({
             {exercise.hints.slice(0, hintsShown).map((hint, i) => (
               <div
                 key={i}
-                className="flex items-start gap-2 text-[13px] rounded-md bg-amber-500/5 border-l-2 border-amber-500/60 px-3 py-2 animate-fade-in"
+                className="flex items-start gap-2 text-[13px] rounded-md bg-accent/5 border border-accent/40 px-3 py-2 animate-fade-in"
               >
                 <Lightbulb
                   size={14}
-                  className="text-amber-400 mt-0.5 flex-shrink-0"
+                  className="text-accent-2 mt-0.5 flex-shrink-0"
+                  aria-hidden="true"
                 />
                 <span>{hint}</span>
               </div>
             ))}
             {hintsShown < exercise.hints.length && (
               <button
+                type="button"
                 onClick={onRevealNextHint}
-                className="text-[12px] font-semibold text-amber-400 hover:text-amber-300 transition inline-flex items-center gap-1"
+                className="min-h-11 text-[12px] font-semibold text-accent-2 hover:text-accent transition inline-flex items-center gap-1 px-1"
               >
                 <Lightbulb size={12} />
                 {hintsShown === 0
@@ -205,20 +210,25 @@ export function CodeExercise({
         )}
 
         {showSolution && !challengeMode && (
-          <div className="mt-4 inline-flex items-center gap-2 rounded-md bg-sky-500/10 border border-sky-500/30 px-3 py-2 text-[12px] text-sky-200">
-            <Eye size={14} />
-            Solution affichée — l'exercice sera marqué comme « Vu » plutôt que « Résolu ».
+          <div className="mt-4 inline-flex items-center gap-2 rounded-md bg-accent/10 border border-accent/30 px-3 py-2 text-[12px] text-fg-2">
+            <Eye size={14} aria-hidden="true" />
+            Solution affichée : l'exercice sera marqué comme « Vu » plutôt que « Résolu ».
             Tu peux masquer la solution et retenter à tout moment.
           </div>
         )}
       </div>
 
       {/* ─── Sandpack editor ───────────────────────────────── */}
-      <div className="bg-[#0d0d14] relative" key={resetKey} ref={sandboxRootRef}>
+      {/* ponytail: remount on theme so Sandpack picks light/dark chrome */}
+      <div
+        className="bg-bg relative"
+        key={`${resetKey}-${sandpackTheme}`}
+        ref={sandboxRootRef}
+      >
         <SandpackProvider
           template={exercise.template ?? "react"}
           files={files}
-          theme="dark"
+          theme={sandpackTheme}
           options={{
             // Explicitly disable auto-updates; learner clicks Run.
             autorun: false,
@@ -334,7 +344,7 @@ export function CodeExercise({
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   RunPanel — manual run + local validator (offline).
+   RunPanel : manual run + local validator (offline).
    No dependency on Sandpack remote test infra.
    ══════════════════════════════════════════════════════════════════ */
 
@@ -405,7 +415,7 @@ function RunPanel({
   }
 
   return (
-    <div className="border-t border-base bg-[#0a0a0f]">
+    <div className="border-t border-base bg-bg">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-base">
         <Button
           size="sm"
@@ -448,7 +458,9 @@ function TestResultSummary({
     <div
       className={cn(
         "flex items-center gap-1.5 text-[12px] font-semibold",
-        allPass ? "text-emerald-400" : "text-amber-400",
+        allPass
+          ? "text-accent-2"
+          : "text-fg-2",
       )}
     >
       {allPass ? (
@@ -460,7 +472,7 @@ function TestResultSummary({
       ) : (
         <>
           <AlertCircle size={14} />
-          {result.passed}/{result.total} — {result.failed} échec
+          {result.passed}/{result.total} : {result.failed} échec
           {result.failed > 1 ? "s" : ""}
         </>
       )}
@@ -469,7 +481,7 @@ function TestResultSummary({
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   EditorPasteBlocker — intercepts the paste event on the sandbox
+   EditorPasteBlocker : intercepts the paste event on the sandbox
    code editor only. This does NOT block paste elsewhere on the page.
    ══════════════════════════════════════════════════════════════════ */
 
@@ -522,7 +534,7 @@ function EditorPasteBlocker({
   if (!toastVisible) return null;
   return (
     <div
-      className="absolute z-50 bottom-4 right-4 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-200 text-[12px] font-medium px-3 py-2 shadow-xl backdrop-blur pointer-events-none animate-fade-in"
+      className="absolute z-50 bottom-4 right-4 rounded-lg border border-accent/40 bg-accent/10 text-fg text-[12px] font-medium px-3 py-2 shadow-soft pointer-events-none animate-fade-in"
     >
       <i className="fa-solid fa-keyboard mr-1.5" />
       Le collage est désactivé ici : tape ton code pour mieux l'intégrer.
@@ -552,8 +564,8 @@ function SolutionPanel({
   return (
     <div className="border-t border-base bg-bg-3">
       <div className="px-4 py-2 border-b border-base flex items-center gap-2">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-sky-300 inline-flex items-center gap-1">
-          <Eye size={12} />
+        <span className="text-[11px] font-mono uppercase tracking-wider text-accent-2 inline-flex items-center gap-1">
+          <Eye size={12} aria-hidden="true" />
           Solution (lecture seule)
         </span>
         <div className="flex-1" />
@@ -576,7 +588,7 @@ function SolutionPanel({
               className={cn(
                 "text-[11px] font-mono px-2 py-1 rounded border",
                 p === activePath
-                  ? "bg-sky-500/15 text-sky-200 border-sky-500/40"
+                  ? "bg-accent/15 text-accent-2 border-accent/40"
                   : "bg-bg-2 text-fg-3 border-base hover:text-fg-2",
               )}
             >
@@ -591,7 +603,7 @@ function SolutionPanel({
         onCopy={(e) => e.preventDefault()}
         onCut={(e) => e.preventDefault()}
       >
-        <pre className="max-h-[360px] overflow-auto text-[12px] leading-relaxed font-mono select-none bg-[#0b0b12] border border-base rounded-lg p-3 text-sky-50 whitespace-pre-wrap break-words">
+        <pre className="max-h-[360px] overflow-auto text-[12px] leading-relaxed font-mono select-none bg-bg-2 border border-base rounded-lg p-3 text-fg whitespace-pre-wrap break-words">
           {code}
         </pre>
       </div>
@@ -629,26 +641,26 @@ function getStatusBadge(status: ExerciseStatus): {
     case "solved":
       return {
         icon: <CheckCircle2 size={16} />,
-        iconBg: "bg-emerald-500/15",
-        iconFg: "text-emerald-400",
+        iconBg: "bg-accent/15",
+        iconFg: "text-accent-2",
         label: "Résolu",
-        labelClasses: "bg-emerald-500/10 text-emerald-400",
+        labelClasses: "bg-accent/10 text-accent-2",
       };
     case "revealed":
       return {
         icon: <Eye size={16} />,
-        iconBg: "bg-sky-500/15",
-        iconFg: "text-sky-300",
+        iconBg: "bg-bg-3",
+        iconFg: "text-fg-2",
         label: "Vu la solution",
-        labelClasses: "bg-sky-500/10 text-sky-300",
+        labelClasses: "bg-bg-3 text-fg-2",
       };
     case "attempted":
       return {
         icon: <Play size={14} />,
-        iconBg: "bg-amber-500/15",
-        iconFg: "text-amber-400",
+        iconBg: "bg-bg-3",
+        iconFg: "text-fg-2",
         label: "En cours",
-        labelClasses: "bg-amber-500/10 text-amber-400",
+        labelClasses: "bg-bg-3 text-fg-2",
       };
     default:
       return {
@@ -720,8 +732,9 @@ function ConsoleWrapper() {
   if (!show) {
     return (
       <button
+        type="button"
         onClick={() => setShow(true)}
-        className="w-full text-left px-4 py-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg-2 border-t border-base bg-[#0a0a0f]"
+        className="w-full min-h-11 text-left px-4 py-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg-2 border-t border-base bg-bg"
       >
         ▸ Afficher la console
       </button>
@@ -741,11 +754,14 @@ export function LiveSandpack({
   files: Record<string, string>;
   template?: "react" | "react-ts" | "vanilla";
 }) {
+  const { progress } = useProgress();
+  const theme = progress.theme;
   return (
     <Sandpack
+      key={theme}
       template={template}
       files={files}
-      theme="dark"
+      theme={theme}
       options={{
         showLineNumbers: true,
         editorHeight: 340,

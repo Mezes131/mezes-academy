@@ -40,7 +40,7 @@ export interface ModalProps {
   description?: ReactNode;
   /** Free-form content below the description (forms, lists, …). */
   children?: ReactNode;
-  /** Footer slot — use for action buttons. */
+  /** Footer slot : use for action buttons. */
   footer?: ReactNode;
   /** Visual flavor. Drives the icon + color accents. Default: `"default"`. */
   variant?: ModalVariant;
@@ -173,7 +173,7 @@ export function Modal({
             type="button"
             onClick={handleClose}
             aria-label="Fermer"
-            className="absolute top-3 right-3 w-8 h-8 inline-flex items-center justify-center rounded-lg text-fg-3 hover:text-fg hover:bg-bg-3 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            className="absolute top-3 right-3 min-w-11 min-h-11 inline-flex items-center justify-center rounded-lg text-fg-3 hover:text-fg hover:bg-bg-3 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             <X size={16} />
           </button>
@@ -230,7 +230,7 @@ export function Modal({
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   ConfirmDialog — common case on top of Modal
+   ConfirmDialog : common case on top of Modal
    ═══════════════════════════════════════════════════════════════════ */
 
 export interface ConfirmDialogProps {

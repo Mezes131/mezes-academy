@@ -124,8 +124,8 @@ export const typescriptQuizzes = {
         id: "q2",
         question: "Comment typer `useState` pour une valeur optionnelle initialement à `null` ?",
         options: [
-          { id: "a", label: "`useState(null)` — l'inférence suffit" },
-          { id: "b", label: "`useState<User | null>(null)` — explicite car l'inférence donnerait `null`" },
+          { id: "a", label: "`useState(null)` : l'inférence suffit" },
+          { id: "b", label: "`useState<User | null>(null)` : explicite car l'inférence donnerait `null`" },
           { id: "c", label: "`useState<User>(null!)`" },
         ],
         correct: ["b"],
@@ -144,8 +144,8 @@ export const typescriptQuizzes = {
         id: "q4",
         question: "Vrai ou faux : il faut activer `strict: true` dans tsconfig.json sur tout projet React moderne.",
         options: [
-          { id: "a", label: "Vrai — strict mode attrape la grande majorité des bugs de type" },
-          { id: "b", label: "Faux — c'est trop verbose, à éviter en 2026" },
+          { id: "a", label: "Vrai : strict mode attrape la grande majorité des bugs de type" },
+          { id: "b", label: "Faux : c'est trop verbose, à éviter en 2026" },
         ],
         correct: ["a"],
       },

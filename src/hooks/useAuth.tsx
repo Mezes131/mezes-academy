@@ -86,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   /**
    * Fetch the profile row for the current user, creating it if missing.
-   * Runs in the background — never blocks the auth `loading` state.
+   * Runs in the background : never blocks the auth `loading` state.
    */
   const fetchProfile = useCallback(async (user: User, force = false) => {
     if (!supabase) return;
@@ -151,7 +151,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    *   4. As a last resort, a timeout also flips `loading` to false so the
    *      UI never gets stuck on a blank "loading session" screen.
    *
-   * Profile fetch is triggered in the background — it never blocks loading.
+   * Profile fetch is triggered in the background : it never blocks loading.
    */
   useEffect(() => {
     if (!supabase) {
@@ -297,7 +297,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
       if (error) throw error;
       // On success, the browser is redirected to the provider. Any code after
-      // this line typically won't execute — we still await to surface errors.
+      // this line typically won't execute : we still await to surface errors.
     },
     [],
   );

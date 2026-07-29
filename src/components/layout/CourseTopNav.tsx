@@ -1,17 +1,25 @@
-import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { Link, useLocation } from "react-router-dom";
+import { ChevronRight, LogIn } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
+import { useAuth } from "@/hooks/useAuth";
+import { useT } from "@/i18n/useT";
+import { useCourseArea } from "./courseArea";
+import { cn } from "@/lib/utils";
 
 /**
- * Slim top navigation for the course area (/react/*).
- * Breadcrumb and theme; search, sidebar, progress, and bookmarks live in CourseBar.
+ * Slim top navigation for a course area.
+ * Language & theme live in account preferences only.
  */
 export function CourseTopNav() {
+  const { basePath, navTitle, navIcon, navAccent } = useCourseArea();
+  const { user } = useAuth();
+  const location = useLocation();
+  const t = useT();
+
   return (
-    <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-3 items-center gap-2 px-4 sm:px-6">
+    <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-[1fr_auto_1fr] sm:grid-cols-3 items-center gap-2 px-4 sm:px-6">
       <div className="flex min-w-0 items-center gap-2 sm:gap-3 justify-self-start">
         <Link
           to="/"
@@ -20,24 +28,40 @@ export function CourseTopNav() {
         >
           <MezesLogo size={26} />
         </Link>
-        <ChevronRight size={14} className="text-fg-3 flex-shrink-0" />
+        <ChevronRight size={14} className="text-fg-3 flex-shrink-0 hidden sm:block" aria-hidden="true" />
       </div>
 
       <Link
-        to="/react"
-        className="flex min-w-0 items-center justify-center gap-2 font-bold text-[14px] hover:text-accent-2 transition"
+        to={basePath}
+        className="flex min-w-0 max-w-[40vw] sm:max-w-none items-center justify-center gap-2 font-bold text-[13px] sm:text-[14px] hover:text-accent-2 transition"
       >
-        <i className="fa-solid fa-atom text-brand-core flex-shrink-0" />
-        <span className="truncate">React de zéro à expert</span>
-        <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-brand-core/10 text-brand-core border border-brand-core/20 uppercase tracking-wider hidden sm:inline flex-shrink-0">
-          parcours
+        <i className={cn("fa-solid flex-shrink-0", navIcon, navAccent.text)} aria-hidden="true" />
+        <span className="truncate">{navTitle}</span>
+        <span
+          className={cn(
+            "font-mono text-[10px] px-1.5 py-0.5 rounded border uppercase tracking-wider hidden md:inline flex-shrink-0",
+            navAccent.chip,
+          )}
+        >
+          {t("nav.pathBadge")}
         </span>
       </Link>
 
       <div className="flex items-center justify-self-end gap-2">
-        <SyncStatusBadge variant="pill" className="hidden sm:inline-flex" />
-        <ThemeToggle />
-        <UserMenu size={30} />
+        {user ? (
+          <>
+            <SyncStatusBadge variant="pill" className="hidden sm:inline-flex" />
+            <UserMenu size={30} />
+          </>
+        ) : (
+          <Link
+            to={`/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`}
+            className="flex items-center gap-1.5 rounded-lg border-base min-h-11 px-3 text-[13px] font-semibold hover:bg-bg-3 transition"
+          >
+            <LogIn size={14} aria-hidden="true" />
+            <span className="hidden sm:inline">{t("nav.signInShort")}</span>
+          </Link>
+        )}
       </div>
     </nav>
   );

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_lesson_checklist_blocks",
+  "info": {
+    "displayName": "Checklist Block",
+    "icon": "check"
+  },
+  "attributes": {
+    "checklistSlug": {
+      "type": "string",
+      "required": true
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}

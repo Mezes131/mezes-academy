@@ -24,3 +24,27 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .claude/settings.local.json
+
+# Scratch workspace (agent plans, SDDs, reports)
+.superpowers/
+
+# Strapi local media uploads
+strapi/public/uploads/
+
+# Strapi generated artefacts and secrets (never commit)
+strapi/node_modules/
+strapi/dist/
+strapi/.cache/
+strapi/.tmp/
+strapi/.env
+
+docs/*
+
+# Worker artefacts
+worker/node_modules/
+worker/dist/
+
+# Local docker test env (contains generated secrets)
+.env.test
+
+# Docker local data (named volumes are managed by Docker, not the filesystem)

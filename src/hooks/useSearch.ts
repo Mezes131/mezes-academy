@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import type { ContentBlock } from "@/types";
-import { phases } from "@/data/phases";
+import type { ContentBlock, Phase } from "@/types";
+import { phases as reactPhases } from "@/data/phases";
 
 /** Where in the module the query matched (for labels in the UI). */
 export type SearchMatchKind =
@@ -104,13 +104,16 @@ function matchBlock(
  * Full-text search over module titles, subtitles, all content blocks,
  * quiz wording, and exercise titles/instructions.
  */
-export function useSearch(query: string): SearchResult[] {
+export function useSearch(
+  query: string,
+  scopePhases: Phase[] = reactPhases,
+): SearchResult[] {
   return useMemo(() => {
     const q = normalize(query.trim());
     if (q.length < 2) return [];
 
     const results: SearchResult[] = [];
-    for (const phase of phases) {
+    for (const phase of scopePhases) {
       for (const mod of phase.modules) {
         const base = {
           phaseId: phase.id,
@@ -173,5 +176,5 @@ export function useSearch(query: string): SearchResult[] {
       }
     }
     return results.slice(0, 20);
-  }, [query]);
+  }, [query, scopePhases]);
 }

@@ -17,7 +17,7 @@ export const module13: Module = {
       kind: "info",
       box: {
         variant: "concept",
-        title: "<i class='fa-solid fa-lightbulb'></i> Règle fondamentale — Immutabilité",
+        title: "<i class='fa-solid fa-lightbulb'></i> Règle fondamentale : Immutabilité",
         body: "Ne jamais muter le state directement. <code>state.push(item)</code> est interdit : React ne détectera pas le changement. Toujours créer une nouvelle valeur : <code>setState([...state, item])</code>.",
       },
     },

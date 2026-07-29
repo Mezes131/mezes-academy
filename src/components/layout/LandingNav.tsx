@@ -1,22 +1,23 @@
 import { Link, NavLink } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
 /**
  * Mezes Academy landing navigation.
- * Clean and brand-centered, distinct from the course TopNav.
+ * Language & theme live in account preferences only.
  */
 export function LandingNav() {
   const { user } = useAuth();
+  const t = useT();
 
   return (
-    <nav className="sticky top-0 z-50 h-16 bg-bg/80 backdrop-blur-xl border-b border-base">
-      <div className="max-w-6xl mx-auto h-full px-6 flex items-center gap-6">
+    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b py-2 border-base">
+      <div className="max-w-6xl mx-auto h-full px-4 sm:px-6 flex items-center gap-3 sm:gap-6">
         <Link
           to="/"
           aria-label="Mezes Academy"
@@ -25,26 +26,25 @@ export function LandingNav() {
           <MezesLogo size={28} showText showMark={false} />
         </Link>
 
-        <div className="hidden md:flex items-center gap-1 ml-6">
+        <div className="hidden md:flex items-center gap-1 ml-2 lg:ml-6 min-w-0">
           <NavLink to="/" end className={navLinkClass}>
-            Accueil
+            {t("nav.home")}
           </NavLink>
           <Link to="/#catalog" className={staticLinkClass}>
-            Catalogue
+            {t("nav.catalog")}
           </Link>
           <Link to="/#how-it-works" className={staticLinkClass}>
-            Comment ça marche
+            {t("nav.howItWorks")}
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 ml-auto">
-          <ThemeToggle />
+        <div className="flex items-center gap-2 ml-auto min-w-0">
           {user ? (
             <>
               <Link to="/react" className="hidden sm:inline-flex">
                 <Button size="sm">
-                  Continuer
-                  <ArrowRight size={14} />
+                  {t("nav.continue")}
+                  <ArrowRight size={14} aria-hidden="true" />
                 </Button>
               </Link>
               <UserMenu showName size={32} />
@@ -52,8 +52,8 @@ export function LandingNav() {
           ) : (
             <Link to="/auth">
               <Button size="sm">
-                Connexion
-                <ArrowRight size={14} />
+                {t("nav.signIn")}
+                <ArrowRight size={14} aria-hidden="true" />
               </Button>
             </Link>
           )}
@@ -65,11 +65,11 @@ export function LandingNav() {
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    "px-3 h-9 flex items-center rounded-lg text-[13px] font-medium transition",
+    "px-3 min-h-11 flex items-center rounded-lg text-[13px] font-medium transition",
     isActive ? "text-fg bg-bg-3" : "text-fg-2 hover:text-fg hover:bg-bg-3/60",
   );
 
 const staticLinkClass = cn(
-  "px-3 h-9 inline-flex items-center rounded-lg text-[13px] font-medium transition",
+  "px-3 min-h-11 inline-flex items-center rounded-lg text-[13px] font-medium transition",
   "text-fg-2 hover:text-fg hover:bg-bg-3/60",
 );

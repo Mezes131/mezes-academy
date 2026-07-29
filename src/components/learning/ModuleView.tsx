@@ -1,11 +1,14 @@
 import type { Module, Phase, ContentBlock } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { InfoBox } from "@/components/ui/InfoBox";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Quiz } from "./Quiz";
 import { CodeExercise } from "./CodeExercise";
+import { AuditExercise } from "./AuditExercise";
+import { isAuditExercise } from "@/types";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Bookmark, BookmarkCheck, CheckCircle2, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -17,6 +20,7 @@ interface ModuleViewProps {
 
 export function ModuleView({ phase, module }: ModuleViewProps) {
   const { progress, markModuleRead, canMarkModuleRead, toggleBookmark } = useProgress();
+  const { basePath } = useCourseArea();
   const accent = phaseAccent(phase.color);
   const isRead = progress.readModules.includes(module.id);
   const isBookmarked = progress.bookmarks.includes(module.id);
@@ -29,9 +33,10 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       ? quizScore.correct / quizScore.total >= 0.7
       : false;
   const canMarkRead = canMarkModuleRead(module.id);
-  const solvedExercises = (module.exercises ?? []).filter(
-    (ex) => progress.exerciseProgress[ex.id]?.status === "solved",
-  ).length;
+  const solvedExercises = (module.exercises ?? []).filter((ex) => {
+    const status = progress.exerciseProgress[ex.id]?.status;
+    return status === "solved" || status === "revealed";
+  }).length;
   const totalExercises = module.exercises?.length ?? 0;
   const exercisesValidated =
     totalExercises === 0 ? true : solvedExercises === totalExercises;
@@ -42,7 +47,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       <div className="mb-8">
         <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-2">
           <Link
-            to={`/react/phase/${phase.id}`}
+            to={`${basePath}/phase/${phase.id}`}
             className={cn("hover:underline", accent.text)}
           >
             <i className={`fa-solid ${phase.icon} mr-1.5`} /> {phase.label}
@@ -71,7 +76,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             )}
           </button>
         </div>
-        <p className="text-fg-2 mt-2 font-serif text-[17px]">{module.subtitle}</p>
+        <p className="text-fg-2 mt-2 text-[17px] leading-relaxed max-w-[72ch]">{module.subtitle}</p>
 
         <div className="flex flex-wrap gap-2 mt-4">
           {isRead && (
@@ -120,21 +125,25 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
             <i className="fa-solid fa-laptop-code text-accent-2" />
             Exercice{module.exercises.length > 1 ? "s" : ""} pratique{module.exercises.length > 1 ? "s" : ""}
           </h2>
-          {module.exercises.map((ex) => (
-            <CodeExercise key={ex.id} exercise={ex} />
-          ))}
+          {module.exercises.map((ex) =>
+            isAuditExercise(ex) ? (
+              <AuditExercise key={ex.id} exercise={ex} />
+            ) : (
+              <CodeExercise key={ex.id} exercise={ex} />
+            ),
+          )}
         </div>
       )}
 
       {/* ─── Footer : marquer comme lu ─────────────── */}
-      <div className="mt-10 pt-6 border-t border-base flex items-center gap-3">
+      <div className="mt-10 pt-6 flex items-center gap-3">
         {isRead ? (
           <div className="text-sm text-emerald-400 font-medium flex items-center gap-2">
             <CheckCircle2 size={16} /> Module marqué comme lu
           </div>
         ) : (
           <Button onClick={() => markModuleRead(module.id)} disabled={!canMarkRead}>
-            J'ai lu ce module
+            Terminer
           </Button>
         )}
         {!isRead && module.quiz && !canMarkRead && (
@@ -160,14 +169,14 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
   switch (block.kind) {
     case "title":
       return (
-        <h2 className="relative text-xl font-bold mt-10 mb-3 pl-4 before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-0.5 before:bg-accent">
+        <h2 className="text-xl font-bold mt-10 mb-3 tracking-tight">
           {block.text}
         </h2>
       );
     case "paragraph":
       return (
         <p
-          className="text-[15px] leading-[1.75] text-fg-2 font-serif [&_strong]:text-fg [&_em]:text-fg-2 [&_code]:font-mono [&_code]:text-[13px] [&_code]:bg-bg-3 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:font-sans"
+          className="prose-lesson text-[15px] md:text-[17px] leading-[1.75] text-fg-2 [&_strong]:text-fg [&_em]:text-fg-2 [&_code]:font-mono [&_code]:text-[0.9em] [&_code]:bg-bg-3 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded"
           dangerouslySetInnerHTML={{ __html: block.html }}
         />
       );
@@ -217,5 +226,41 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
       );
     case "code":
       return <CodeBlock label={block.sample.label} html={block.sample.html} />;
+    case "video": {
+      const { video } = block;
+      if (!video.providerId?.trim()) return null;
+      // Stub player: YouTube embed when provider is youtube; otherwise a titled link.
+      if (video.provider === "youtube") {
+        return (
+          <div className="my-6 aspect-video w-full max-w-3xl overflow-hidden rounded-xl border-base bg-bg-2">
+            <iframe
+              title={video.title ?? "Vidéo du cours"}
+              src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.providerId)}`}
+              className="h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        );
+      }
+      return (
+        <a
+          href={video.providerId}
+          target="_blank"
+          rel="noreferrer"
+          className="my-6 flex items-center gap-3 rounded-xl border-base bg-bg-2 p-4 text-sm font-semibold hover:bg-bg-3 transition"
+        >
+          <i className="fa-solid fa-play text-accent-2" />
+          {video.title ?? "Ouvrir la vidéo"}
+          {video.durationSeconds != null && (
+            <span className="ml-auto font-mono text-[11px] text-fg-3">
+              {Math.round(video.durationSeconds / 60)} min
+            </span>
+          )}
+        </a>
+      );
+    }
+    default:
+      return null;
   }
 }

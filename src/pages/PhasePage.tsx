@@ -1,63 +1,91 @@
 import { Link, useParams, Navigate } from "react-router-dom";
-import { getPhase } from "@/data/phases";
-import type { PhaseId } from "@/types";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { useProgress } from "@/hooks/useProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { cn, phaseAccent } from "@/lib/utils";
-import { Clock, CheckCircle2, ArrowRight, Trophy } from "lucide-react";
+import { Clock, CheckCircle2, ArrowRight, Trophy, BookOpen } from "lucide-react";
 
 export function PhasePage() {
   const { phaseId } = useParams<{ phaseId: string }>();
-  const phase = getPhase(phaseId as PhaseId);
-  const { progress, phaseStats } = useProgress();
+  const { basePath, phases, learnerTools } = useCourseArea();
+  const phase = phases.find((p) => p.id === phaseId);
+  const { progress } = useProgress();
 
   if (!phase) return <Navigate to="/" replace />;
 
   const accent = phaseAccent(phase.color);
-  const st = phaseStats.find((p) => p.id === phase.id)!;
+  // Phase stats computed locally so any course's phases work (the
+  // provider-level phaseStats only covers the React track).
+  const st = (() => {
+    let total = 0;
+    let done = 0;
+    for (const mod of phase.modules) {
+      total += 1;
+      if (progress.readModules.includes(mod.id)) done += 1;
+      if (mod.quiz) {
+        total += 1;
+        const s = progress.quizScores[mod.quiz.id];
+        if (s && s.total > 0 && s.correct / s.total >= 0.7) done += 1;
+      }
+      for (const ex of mod.exercises ?? []) {
+        total += 1;
+        if (progress.completedExercises.includes(ex.id)) done += 1;
+      }
+    }
+    return { total, done, percent: total === 0 ? 0 : Math.round((done / total) * 100) };
+  })();
+  const hasChallenge =
+    learnerTools && phase.modules.some((mod) => (mod.exercises?.length ?? 0) > 0);
   const challengeScore = progress.challengeScores[phase.id];
 
   return (
-    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
-      {/* ─── Header ─────────────────────────────── */}
-      <div className="flex items-start gap-5 p-4 border-b border-base">
-        <div
-          className={cn(
-            "w-20 h-20 rounded-2xl border flex items-center justify-center text-3xl flex-shrink-0",
-            accent.bg,
-            accent.border,
-            accent.text,
-          )}
-        >
-          <i className={`fa-solid ${phase.icon}`} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 mb-2">
-            {phase.id.toUpperCase()}
+    <div className="mx-auto w-full min-w-0 max-w-5xl animate-fade-in px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
+      {/* ─── Header: icon + id + title on one row; rest below ─── */}
+      <header className="min-w-0 pb-5">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+          <div
+            className={cn(
+              "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border text-xl sm:h-14 sm:w-14 sm:text-2xl",
+              accent.bg,
+              accent.border,
+              accent.text,
+            )}
+          >
+            <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
           </div>
-          <h1 className={cn("text-3xl md:text-4xl font-extrabold tracking-tight", accent.text)}>
-            {phase.title}
-          </h1>
-          <p className="mt-2 text-fg-2 font-serif leading-relaxed max-w-2xl">
-            {phase.summary}
-          </p>
-          <div className="flex flex-wrap gap-2 mt-4">
-            {phase.metaTags.map((tag) => (
-              <span
-                key={tag}
-                className={cn(
-                  "text-[11px] font-semibold tracking-[0.08em] px-3 py-1 rounded-full border",
-                  accent.bg,
-                  accent.text,
-                  accent.border,
-                )}
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="min-w-0 flex-1">
+            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-fg-3 sm:text-[11px] sm:tracking-[0.15em]">
+              {phase.id.toUpperCase()}
+            </div>
+            <h1
+              className={cn(
+                "mt-0.5 text-xl font-extrabold leading-tight tracking-tight sm:text-2xl md:text-3xl",
+                accent.text,
+              )}
+            >
+              {phase.title}
+            </h1>
           </div>
         </div>
-      </div>
+        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-fg-2 sm:text-base">
+          {phase.summary}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {phase.metaTags.map((tag) => (
+            <span
+              key={tag}
+              className={cn(
+                "rounded-full border px-3 py-1 text-[11px] font-semibold tracking-[0.08em]",
+                accent.bg,
+                accent.text,
+                accent.border,
+              )}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </header>
 
       <div className="mt-8 rounded-xl border-base bg-bg-2 p-5">
         <div className="flex items-center justify-between mb-2">
@@ -78,8 +106,9 @@ export function PhasePage() {
       </div>
 
       {/* ─── Final challenge entry point ─────────────────── */}
+      {hasChallenge && (
       <Link
-        to={`/react/phase/${phase.id}/challenge`}
+        to={`${basePath}/phase/${phase.id}/challenge`}
         className="mt-4 block rounded-xl border-base bg-bg-2 p-4 hover:border-accent/30 transition"
       >
         <div className="flex items-center gap-3">
@@ -107,68 +136,78 @@ export function PhasePage() {
           <ArrowRight size={16} className="text-fg-3" />
         </div>
       </Link>
+      )}
 
       {/* ─── Module list ───────────────────── */}
       <div className="mt-10 space-y-3">
-        <h2 className="text-lg font-bold mb-4">Modules</h2>
+        <h2 className="mb-4 text-lg font-bold">Modules</h2>
         {phase.modules.map((mod) => {
           const isRead = progress.readModules.includes(mod.id);
           const quizScore = mod.quiz ? progress.quizScores[mod.quiz.id] : undefined;
           return (
             <Link
               key={mod.id}
-              to={`/react/module/${mod.id}`}
+              to={`${basePath}/module/${mod.id}`}
               className={cn(
-                "group flex items-start gap-4 rounded-xl border-base bg-bg-2 p-5 transition",
+                "group block min-w-0 rounded-xl border-base bg-bg-2 p-4 transition sm:p-5",
                 "hover:border-accent/30 hover:-translate-y-0.5 duration-200",
               )}
             >
-              <div
-                className={cn(
-                  "w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 border font-mono text-xs font-bold",
-                  isRead
-                    ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                    : cn(accent.bg, accent.border, accent.text),
-                )}
-              >
-                {isRead ? <CheckCircle2 size={18} /> : mod.index}
+              <div className="flex min-w-0 items-center gap-3">
+                <div
+                  className={cn(
+                    "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border sm:h-12 sm:w-12",
+                    isRead
+                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                      : cn(accent.bg, accent.border, accent.text),
+                  )}
+                >
+                  {isRead ? (
+                    <CheckCircle2 size={18} aria-hidden="true" />
+                  ) : (
+                    <BookOpen size={18} aria-hidden="true" />
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-fg-3 sm:text-[11px]">
+                    {mod.index}
+                  </div>
+                  <h3 className="mt-0.5 font-bold leading-tight">{mod.title}</h3>
+                </div>
+                <ArrowRight
+                  size={18}
+                  className="mt-0.5 shrink-0 text-fg-3 transition group-hover:translate-x-0.5 group-hover:text-fg"
+                  aria-hidden="true"
+                />
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="font-bold">{mod.title}</h3>
-                  <span className="flex items-center gap-1 text-[11px] text-fg-3 font-mono">
-                    <Clock size={11} /> {mod.duration}
+              <p className="mt-2 text-[13px] leading-relaxed text-fg-2">
+                {mod.subtitle}
+              </p>
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1 font-mono text-[11px] text-fg-3">
+                  <Clock size={11} aria-hidden="true" /> {mod.duration}
+                </span>
+                {mod.quiz && (
+                  <span
+                    className={cn(
+                      "rounded border px-2 py-0.5 text-[11px] font-medium",
+                      quizScore && quizScore.correct / quizScore.total >= 0.7
+                        ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                        : "border-base bg-bg-3 text-fg-2",
+                    )}
+                  >
+                    <i className="fa-solid fa-bullseye mr-1" aria-hidden="true" /> Quiz
+                    {quizScore && ` · ${quizScore.correct}/${quizScore.total}`}
                   </span>
-                </div>
-                <p className="text-[13px] text-fg-2 mt-1 leading-relaxed">
-                  {mod.subtitle}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {mod.quiz && (
-                    <span
-                      className={cn(
-                        "text-[11px] px-2 py-0.5 rounded border font-medium",
-                        quizScore && quizScore.correct / quizScore.total >= 0.7
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                          : "bg-bg-3 text-fg-2 border-base",
-                      )}
-                    >
-                      <i className="fa-solid fa-bullseye mr-1" /> Quiz
-                      {quizScore &&
-                        ` · ${quizScore.correct}/${quizScore.total}`}
-                    </span>
-                  )}
-                  {mod.exercises && mod.exercises.length > 0 && (
-                    <span className="text-[11px] px-2 py-0.5 rounded border font-medium bg-violet-500/10 text-violet-300 border-violet-500/20">
-                      <i className="fa-solid fa-laptop-code mr-1" /> {mod.exercises.length} exercice{mod.exercises.length > 1 ? "s" : ""}
-                    </span>
-                  )}
-                </div>
+                )}
+                {mod.exercises && mod.exercises.length > 0 && (
+                  <span className="rounded border border-violet-500/20 bg-violet-500/10 px-2 py-0.5 text-[11px] font-medium text-violet-300">
+                    <i className="fa-solid fa-laptop-code mr-1" aria-hidden="true" />{" "}
+                    {mod.exercises.length} exercice
+                    {mod.exercises.length > 1 ? "s" : ""}
+                  </span>
+                )}
               </div>
-              <ArrowRight
-                size={18}
-                className="text-fg-3 group-hover:text-fg group-hover:translate-x-0.5 transition flex-shrink-0 mt-3"
-              />
             </Link>
           );
         })}

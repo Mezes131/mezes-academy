@@ -41,18 +41,8 @@ function SessionLoading() {
   const slow = elapsedMs > 3500;
 
   return (
-    <div className="relative min-h-[80vh] grid place-items-center px-6 overflow-hidden">
-      {/* Soft decorative gradient */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 pointer-events-none opacity-80"
-        style={{
-          backgroundImage:
-            "radial-gradient(800px 400px at 50% 20%, rgba(99,102,241,0.18), transparent 60%), radial-gradient(600px 400px at 50% 80%, rgba(236,72,153,0.12), transparent 60%)",
-        }}
-      />
-
-      <div className="w-full max-w-md rounded-2xl border-base bg-bg-2/80 backdrop-blur-md p-8 shadow-soft flex flex-col items-center text-center animate-fade-in">
+    <div className="relative min-h-[80vh] grid place-items-center px-6">
+      <div className="w-full max-w-md rounded-2xl border-base bg-bg-2 p-8 shadow-soft flex flex-col items-center text-center animate-fade-in">
         <MezesLogo size={36} showText />
 
         <div className="mt-6 relative w-14 h-14 grid place-items-center">

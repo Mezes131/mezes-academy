@@ -35,8 +35,8 @@ export function BackToTopButton({ threshold = 320 }: BackToTopButtonProps) {
       aria-label="Retour en haut de la page"
       tabIndex={visible ? 0 : -1}
       className={cn(
-        "fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full",
-        "bg-accent text-white shadow-glow",
+        "fixed bottom-20 right-4 z-[55] w-11 h-11 rounded-full lg:bottom-6 lg:right-6",
+        "bg-accent text-white shadow-soft",
         "flex items-center justify-center",
         "border border-accent/40",
         "transition-all duration-200 ease-out",

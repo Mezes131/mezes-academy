@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_lesson_code_blocks",
+  "info": {
+    "displayName": "Code Block",
+    "icon": "code"
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "default": "tsx"
+    },
+    "code": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

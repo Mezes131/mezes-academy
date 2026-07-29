@@ -7,7 +7,7 @@ export const ecosystemExercises = {
     instructions:
       "Implémente un mini-store <code>useCart</code> <strong>à la Zustand</strong> (on simule avec <code>useState</code> + un <code>subscribe</code> maison pour rester dans Sandpack). Expose <code>items</code>, <code>add(item)</code> et <code>remove(id)</code>. Affiche le total du panier dans un composant et ajoute/enlève des items via deux boutons.",
     hints: [
-      "Pour cet exercice offline, utilise simplement `useReducer` ou `useState` dans un composant parent qui passe les fonctions en props — l'objectif est de comprendre le shape d'un store.",
+      "Pour cet exercice offline, utilise simplement `useReducer` ou `useState` dans un composant parent qui passe les fonctions en props : l'objectif est de comprendre le shape d'un store.",
       "En vrai projet, tu écrirais : `const useCart = create((set) => ({ items: [], add: (i) => set((s) => ({ items: [...s.items, i] })) }))`.",
     ],
     template: "react",
@@ -30,7 +30,7 @@ export default function App() {
       <ul>
         {CATALOG.map((p) => (
           <li key={p.id}>
-            {p.name} — {p.price}€
+            {p.name} : {p.price}€
             <button style={{ marginLeft: 8 }}>Ajouter</button>
           </li>
         ))}
@@ -64,7 +64,7 @@ export default function App() {
       <ul>
         {CATALOG.map((p) => (
           <li key={p.id}>
-            {p.name} — {p.price}€
+            {p.name} : {p.price}€
             <button style={{ marginLeft: 8 }} onClick={() => add(p)}>Ajouter</button>
           </li>
         ))}
@@ -74,7 +74,7 @@ export default function App() {
       <ul>
         {items.map((it) => (
           <li key={it.lineId}>
-            {it.name} — {it.price}€
+            {it.name} : {it.price}€
             <button style={{ marginLeft: 8 }} onClick={() => remove(it.lineId)}>Retirer</button>
           </li>
         ))}

@@ -14,7 +14,7 @@ import {
 export interface AuthFormCardProps {
   /** URL to redirect to once the user is authenticated. */
   nextPath: string;
-  /** Active tab — owned by the parent so siblings (e.g. benefits copy) stay in sync. */
+  /** Active tab : owned by the parent so siblings (e.g. benefits copy) stay in sync. */
   mode: AuthMode;
   onModeChange: (mode: AuthMode) => void;
   /** Toggle OAuth providers section. Default: `true`. */
@@ -81,7 +81,7 @@ export function AuthFormCard({
       const redirectTo = `${window.location.origin}/auth${suffix}`;
       await signInWithProvider(provider, { redirectTo });
       // Browser redirect happens on success; if we're still here, something
-      // unusual happened — reset UI state for safety.
+      // unusual happened : reset UI state for safety.
     } catch (err) {
       setError(humanizeAuthError((err as Error).message));
       setOauthBusy(null);
@@ -90,7 +90,7 @@ export function AuthFormCard({
 
   return (
     <section className="w-full">
-      <div className="mx-auto w-full max-w-md rounded-2xl border-base bg-bg-2/90 p-6 sm:p-7 shadow-soft backdrop-blur-md">
+      <div className="mx-auto w-full max-w-md rounded-2xl border-base bg-bg-2 p-6 sm:p-7 shadow-soft">
         <div className="flex items-center justify-between">
           <MezesLogo size={26} showText />
           <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3">

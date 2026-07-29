@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Github, Linkedin, Youtube } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 
 /**
@@ -11,7 +12,6 @@ export function Footer() {
     <footer className="mt-24 border-t border-base bg-bg-2/30">
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
-          {/* ─── Brand ───────────────────────────── */}
           <div>
             <MezesLogo size={34} showText />
             <p className="mt-4 text-[13px] text-fg-2 leading-relaxed max-w-xs">
@@ -19,23 +19,29 @@ export function Footer() {
               autonomie, avec exercices interactifs et suivi de progression.
             </p>
             <div className="mt-5 flex items-center gap-3">
-              <SocialLink href="https://twitter.com" icon="fa-brands fa-x-twitter" label="X / Twitter" />
-              <SocialLink href="https://github.com" icon="fa-brands fa-github" label="GitHub" />
-              <SocialLink href="https://linkedin.com" icon="fa-brands fa-linkedin-in" label="LinkedIn" />
-              <SocialLink href="https://youtube.com" icon="fa-brands fa-youtube" label="YouTube" />
+              <SocialLink href="https://twitter.com" label="X / Twitter">
+                <XIcon />
+              </SocialLink>
+              <SocialLink href="https://github.com" label="GitHub">
+                <Github size={16} aria-hidden="true" />
+              </SocialLink>
+              <SocialLink href="https://linkedin.com" label="LinkedIn">
+                <Linkedin size={16} aria-hidden="true" />
+              </SocialLink>
+              <SocialLink href="https://youtube.com" label="YouTube">
+                <Youtube size={16} aria-hidden="true" />
+              </SocialLink>
             </div>
           </div>
 
-          {/* ─── Tracks ─────────────────────────── */}
           <FooterCol title="Parcours">
             <FooterLink to="/react">React de zéro à expert</FooterLink>
-            <span className="text-[13px] text-fg-3">TypeScript · Bientôt</span>
-            <span className="text-[13px] text-fg-3">Next.js · Bientôt</span>
-            <span className="text-[13px] text-fg-3">Node.js · Bientôt</span>
-            <span className="text-[13px] text-fg-3">DevOps · Prévu</span>
+            <FooterMuted>TypeScript · Bientôt</FooterMuted>
+            <FooterMuted>Next.js · Bientôt</FooterMuted>
+            <FooterMuted>Node.js · Bientôt</FooterMuted>
+            <FooterMuted>DevOps · Prévu</FooterMuted>
           </FooterCol>
 
-          {/* ─── Resources ───────────────────────── */}
           <FooterCol title="Ressources">
             <FooterLink to="/#how-it-works">Comment ça marche</FooterLink>
             <FooterLink to="/react/progress">Ma progression</FooterLink>
@@ -43,7 +49,6 @@ export function Footer() {
             <FooterLink to="/react/search">Recherche</FooterLink>
           </FooterCol>
 
-          {/* ─── Legal ────────────────────────────── */}
           <FooterCol title="Académie">
             <FooterLink to="#">À propos</FooterLink>
             <FooterLink to="#">Contact</FooterLink>
@@ -87,23 +92,29 @@ function FooterLink({
   children: React.ReactNode;
 }) {
   return (
-    <Link
-      to={to}
-      className="text-[13px] text-fg-2 hover:text-fg transition w-fit"
-    >
-      {children}
-    </Link>
+    <li>
+      <Link
+        to={to}
+        className="text-[13px] text-fg-2 hover:text-fg transition w-fit inline-block"
+      >
+        {children}
+      </Link>
+    </li>
   );
+}
+
+function FooterMuted({ children }: { children: React.ReactNode }) {
+  return <li className="text-[13px] text-fg-3">{children}</li>;
 }
 
 function SocialLink({
   href,
-  icon,
   label,
+  children,
 }: {
   href: string;
-  icon: string;
   label: string;
+  children: React.ReactNode;
 }) {
   return (
     <a
@@ -111,9 +122,23 @@ function SocialLink({
       target="_blank"
       rel="noreferrer"
       aria-label={label}
-      className="w-9 h-9 rounded-lg border-base flex items-center justify-center text-fg-2 hover:text-fg hover:bg-bg-3 transition"
+      className="min-w-11 min-h-11 rounded-lg border-base flex items-center justify-center text-fg-2 hover:text-fg hover:bg-bg-3 transition"
     >
-      <i className={icon} />
+      {children}
     </a>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.227-8.66L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+    </svg>
   );
 }

@@ -1,5 +1,6 @@
 import type { Course, CourseProgram, Phase, Module } from "@/types";
-import { courses } from "./courses";
+import type { Locale } from "@/i18n/types";
+import { courses, getCourses } from "./courses";
 
 /* ═══════════════════════════════════════════════════════════════════
    DATA-LAYER HELPERS
@@ -8,17 +9,19 @@ import { courses } from "./courses";
    legacy `phases` array) rather than touching course files directly.
    ═══════════════════════════════════════════════════════════════════ */
 
-export { courses };
+export { courses, getCourses };
+export { createCourseRepository } from "@/lib/courseRepository";
+export type { CourseRepository } from "@/lib/courseRepository";
 
 /** Back-office ready syllabi, when a course exposes one. */
 export const allPrograms: CourseProgram[] = courses
   .map((course) => course.program)
   .filter((program): program is CourseProgram => Boolean(program));
 
-/** All phases of all courses, flattened — used by the router. */
+/** All phases of all courses, flattened : used by the router. */
 export const allPhases: Phase[] = courses.flatMap((c) => c.phases);
 
-/** All modules of all courses, flattened — used by the router. */
+/** All modules of all courses, flattened : used by the router. */
 export const allModules: Array<{ course: Course; phase: Phase; module: Module }> =
   courses.flatMap((course) =>
     course.phases.flatMap((phase) =>
@@ -26,8 +29,11 @@ export const allModules: Array<{ course: Course; phase: Phase; module: Module }>
     ),
   );
 
-export function findCourse(courseId: string): Course | undefined {
-  return courses.find((c) => c.id === courseId);
+export function findCourse(
+  courseId: string,
+  locale: Locale = "fr",
+): Course | undefined {
+  return getCourses(locale).find((c) => c.id === courseId);
 }
 
 export function findCourseProgram(courseId: string): CourseProgram | undefined {

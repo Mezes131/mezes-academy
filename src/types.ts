@@ -99,7 +99,17 @@ export type ContentBlock =
   | { kind: "info"; box: InfoBox }
   | { kind: "highlight"; html: string }
   | { kind: "lessons"; items: Lesson[] }
-  | { kind: "code"; sample: CodeSample };
+  | { kind: "code"; sample: CodeSample }
+  | { kind: "video"; video: LessonVideo };
+
+/** Video lesson block. Player UI renders only when providerId is non-empty. */
+export interface LessonVideo {
+  provider: "mux" | "vimeo" | "bunny" | "youtube" | "other";
+  providerId: string;
+  title?: string;
+  durationSeconds?: number;
+  posterUrl?: string;
+}
 
 export interface QuizQuestion {
   id: string;
@@ -138,6 +148,8 @@ export interface CodeExercise {
   title: string;
   instructions: string;
   hints?: string[];
+  /** Discriminant for ModuleExercise union. Defaults to "code" when omitted. */
+  format?: "code";
   starterFiles: Record<string, string>;
   solutionFiles: Record<string, string>;
   tests?: Record<string, string>;
@@ -145,6 +157,48 @@ export interface CodeExercise {
   template?: "react" | "react-ts" | "vanilla";
   attemptsBeforeSolution?: number;
   challengeEligible?: boolean;
+}
+
+export type AuditSeverity = "low" | "medium" | "high" | "critical";
+
+export interface AuditFinding {
+  id: string;
+  label: string;
+  /** Whether this finding should be selected in a correct report. */
+  correct: boolean;
+  /** Minimum severity the learner must assign when selecting this finding. */
+  minSeverity?: AuditSeverity;
+}
+
+/**
+ * Checklist / audit-report exercise (no Sandpack).
+ * Learner picks findings, optional severities and evidence, then submits.
+ */
+export interface AuditExercise {
+  id: string;
+  title: string;
+  instructions: string;
+  hints?: string[];
+  format: "audit";
+  scenario: string;
+  findings: AuditFinding[];
+  requireEvidence?: boolean;
+  /** 0–1 threshold; default 0.7 */
+  passingScore?: number;
+  /** Pedagogical summary shown after pass or reveal. */
+  solution?: string;
+  attemptsBeforeSolution?: number;
+  challengeEligible?: boolean;
+}
+
+export type ModuleExercise = CodeExercise | AuditExercise;
+
+export function isAuditExercise(ex: ModuleExercise): ex is AuditExercise {
+  return ex.format === "audit";
+}
+
+export function isCodeExercise(ex: ModuleExercise): ex is CodeExercise {
+  return ex.format !== "audit";
 }
 
 export interface Module {
@@ -160,7 +214,7 @@ export interface Module {
   status?: PublicationStatus;
   content: ContentBlock[];
   quiz?: Quiz;
-  exercises?: CodeExercise[];
+  exercises?: ModuleExercise[];
   assessment?: {
     quiz?: QuizBlueprint;
     exercises?: ExerciseBlueprint[];
@@ -286,6 +340,18 @@ export interface ExerciseProgress {
   revealedSolution: boolean;
   solvedAt?: number;
   updatedAt: number;
+  /** Persisted audit checklist answers (like quiz.answers). */
+  auditSubmission?: {
+    selectedIds: string[];
+    severities: Record<string, AuditSeverity | undefined>;
+    evidence: Record<string, string | undefined>;
+    score: number;
+    passed: boolean;
+    tp: number;
+    fp: number;
+    fn: number;
+    failures: string[];
+  };
 }
 
 export interface ChallengeScore {

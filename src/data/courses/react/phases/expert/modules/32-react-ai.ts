@@ -40,7 +40,7 @@ export const module32: Module = {
       kind: "code",
       sample: {
         label: "Vercel AI SDK : chat streamé",
-        html: `<span class="cm">// app/chat/page.tsx — client component</span>
+        html: `<span class="cm">// app/chat/page.tsx : client component</span>
 <span class="str">"use client"</span>
 <span class="kw">import</span> { useChat } <span class="kw">from</span> <span class="str">"ai/react"</span>
 

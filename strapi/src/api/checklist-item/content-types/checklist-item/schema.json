@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "checklist_items",
+  "info": {
+    "singularName": "checklist-item",
+    "pluralName": "checklist-items",
+    "displayName": "Checklist Item"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "severity": {
+      "type": "enumeration",
+      "enum": [
+        "info",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium"
+    },
+    "verification": {
+      "type": "enumeration",
+      "enum": [
+        "manual",
+        "automated",
+        "mixed"
+      ],
+      "default": "manual"
+    },
+    "evidenceRequired": {
+      "type": "boolean",
+      "default": false
+    },
+    "checklist": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::checklist.checklist",
+      "inversedBy": "items"
+    }
+  }
+}

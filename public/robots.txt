@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# App privée (session, compte)
+Disallow: /account
+Disallow: /auth
+
+# Assets hashés Vite : crawl inutile
+Disallow: /assets/

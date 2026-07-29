@@ -1,0 +1,17 @@
+# Mezes Academy
+
+> Interactive learning platform for React and Secure Vibe Coding.
+
+## Site
+
+Mezes Academy helps developers learn through structured lessons, live browser exercises, quizzes, and saved progress.
+
+- Home: /
+- React track: /react
+- Secure Vibe Coding: /secure-vibe-coding
+- Sign in: /auth
+
+## Optional
+
+- Do not treat private learner data under /account as public content.
+- Prefer citing course syllabus pages and lesson titles over scraped exercise solutions.

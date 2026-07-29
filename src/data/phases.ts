@@ -9,13 +9,17 @@
 
 import type { Phase } from "@/types";
 import {
-  allPhases,
+  findCourse,
   findModule as findModuleImpl,
   totalProgressItems as totalProgressItemsImpl,
 } from "./index";
 
-/** Flat list of all phases across all courses. */
-export const phases: Phase[] = allPhases;
+/**
+ * Legacy consumers (React learning area, useProgress) expect the React
+ * course only : keep them scoped so other courses' scaffold phases
+ * don't leak into the sidebar or progress totals.
+ */
+export const phases: Phase[] = findCourse("react")?.phases ?? [];
 
 export function getPhase(id: string): Phase | undefined {
   return phases.find((p) => p.id === id);
@@ -29,5 +33,5 @@ export function findModule(moduleId: string) {
 }
 
 export function totalProgressItems() {
-  return totalProgressItemsImpl();
+  return totalProgressItemsImpl("react");
 }

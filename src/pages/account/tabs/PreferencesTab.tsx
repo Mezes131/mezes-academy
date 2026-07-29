@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Bell, Globe, Moon, Palette, Sun } from "lucide-react";
+import { Bell, Globe, Languages, Moon, Palette, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
+import { LanguageSwitcher } from "@/i18n/LanguageSwitcher";
 
 interface PreferencesTabProps {
   onError: (message: string) => void;
@@ -10,7 +11,7 @@ interface PreferencesTabProps {
 }
 
 /**
- * Student-facing preferences: theme, public profile opt-in, notifications placeholder.
+ * Student-facing preferences: language, theme, public profile, notifications.
  */
 export function PreferencesTab({ onError, onSuccess }: PreferencesTabProps) {
   const { progress, setTheme } = useProgress();
@@ -38,8 +39,16 @@ export function PreferencesTab({ onError, onSuccess }: PreferencesTabProps) {
   return (
     <div className="space-y-6">
       <Section
+        title="Langue"
+        description="Interface et contenus quand une traduction existe."
+        icon={<Languages size={14} />}
+      >
+        <LanguageSwitcher />
+      </Section>
+
+      <Section
         title="Apparence"
-        description="Choisis l'ambiance qui te correspond."
+        description="Sombre par défaut. Tu peux passer en clair ici."
         icon={<Palette size={14} />}
       >
         <div className="flex flex-wrap gap-2">
@@ -135,7 +144,7 @@ function ThemeOption({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "inline-flex items-center gap-2 px-3 h-10 rounded-lg border transition text-sm font-semibold",
+        "inline-flex items-center gap-2 px-3 min-h-11 rounded-lg border transition text-sm font-semibold",
         active
           ? "border-accent/50 bg-accent/10 text-fg"
           : "border-base bg-bg-3 text-fg-2 hover:text-fg",

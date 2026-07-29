@@ -28,7 +28,7 @@ const TABS: Array<{
 
 /**
  * Student account page.
- * The admin interface lives on a different (private) URL — not here.
+ * The admin interface lives on a different (private) URL : not here.
  */
 export function AccountPage() {
   const { user, profile, refreshProfile } = useAuth();

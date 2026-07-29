@@ -63,7 +63,7 @@ export const module14: Module = {
       kind: "info",
       box: {
         variant: "warn",
-        title: "<i class='fa-solid fa-triangle-exclamation'></i> Piège classique — Boucle infinie",
+        title: "<i class='fa-solid fa-triangle-exclamation'></i> Piège classique : Boucle infinie",
         body: "Si vous mettez un objet ou un tableau dans le tableau de dépendances et le recréez à chaque render, useEffect boucle à l'infini. Utilisez <code>useMemo</code> ou <code>useCallback</code> pour stabiliser les références.",
       },
     },

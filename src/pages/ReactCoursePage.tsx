@@ -11,13 +11,14 @@ import {
   Target,
   Trophy,
 } from "lucide-react";
-import type { CourseProgram, ProgramModule, ProgramPhase } from "@/types";
 import { findCourseProgram } from "@/data";
 import { phases, findModule } from "@/data/phases";
 import { useProgress } from "@/hooks/useProgress";
 import { cn, phaseAccent } from "@/lib/utils";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
+import { MobileCollapse } from "@/components/ui/MobileCollapse";
+import { CourseSyllabus } from "@/components/course/CourseSyllabus";
 
 /**
  * React track dashboard (formerly HomePage).
@@ -71,44 +72,60 @@ export function ReactCoursePage() {
   const hasStarted = stats.done > 0;
 
   return (
-    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
+    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10 animate-fade-in">
       {/* ─── Course hero ────────────────────────── */}
-      <section className="relative mb-10">
-        <div
-          className="absolute -top-12 -left-20 right-0 h-72 pointer-events-none opacity-60"
-          style={{
-            background:
-              "radial-gradient(600px circle at 30% 40%, rgb(108 99 255 / 0.18), transparent 60%)",
-          }}
-          aria-hidden
-        />
-        <div className="relative">
-          <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-brand-core mb-3">
-            <i className="fa-solid fa-atom" />
+      <section className="relative mb-8 min-w-0 lg:mb-10">
+        <div className="relative min-w-0">
+          <div className="mb-2 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-core sm:mb-3">
+            <i className="fa-solid fa-atom" aria-hidden="true" />
             Parcours React
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[0.98]">
-            Ton parcours <em className="not-italic bg-gradient-to-r from-brand-core to-brand-intro bg-clip-text text-transparent">React</em>,
+          <h1 className="text-[1.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-4xl md:text-5xl">
+            Ton parcours <em className="not-italic text-brand-core">React</em>,
             <br />
-            du premier JSX à l'architecture expert.
+            du premier JSX à l&apos;architecture expert.
           </h1>
-          <p className="mt-5 text-[16px] text-fg-2 font-serif leading-relaxed max-w-2xl">
+          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-fg-2 sm:mt-5 sm:text-[17px]">
             {phaseCount} phases progressives, {moduleCount} modules, des dizaines
-            d'exercices live.
-            Ta progression est sauvegardée automatiquement, reprends à tout
-            moment là où tu t'es arrêté.
+            d&apos;exercices live. Chaque notion est expliquée, pratiquée, puis
+            validée. Ta progression est sauvegardée : tu reprends à tout moment
+            là où tu t&apos;es arrêté.
           </p>
+          {/* Module routes are auth-gated: RequireAuth redirects to
+              /auth?next=… when the visitor is not signed in. */}
+          <div className="mt-5 sm:mt-7">
+            <Link
+              to={
+                nextModule
+                  ? `/react/module/${nextModule.module.id}`
+                  : "/react/final-project"
+              }
+            >
+              <Button size="md">
+                {hasStarted ? "Continuer le cours" : "Commencer le cours"}
+                <ArrowRight size={16} />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ─── Row: Resume + stats ─────────────── */}
-      <section className="grid lg:grid-cols-3 gap-4 mb-10">
-        {/* Card reprise (2/3) */}
+      {/* ─── Row: Resume + stats (desktop). Mobile: resume + % only. */}
+      <section className="mb-8 grid gap-3 lg:mb-10 lg:grid-cols-3 lg:gap-4">
         <ContinueCard nextModule={nextModule} hasStarted={hasStarted} />
 
-        {/* Stats rapides (1/3) */}
-        <div className="grid gap-3">
+        {/* Mobile: single progress strip (no redundant mini-stats) */}
+        <div className="flex items-center justify-between gap-3 rounded-xl border-base bg-bg-2 px-4 py-3 lg:hidden">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-fg-3">
+            Progression
+          </span>
+          <span className="font-mono text-lg font-extrabold text-accent-2">
+            {stats.percent}%
+          </span>
+        </div>
+
+        <div className="hidden gap-3 lg:grid">
           <MiniStat
             icon={<TrendingUp size={16} />}
             label="Progression globale"
@@ -130,26 +147,30 @@ export function ReactCoursePage() {
 
       {/* ─── Last activity ────────────────────── */}
       {lastActivity && (
-        <section className="mb-10">
+        <section className="mb-8 lg:mb-10">
           <SectionTitle icon="fa-clock-rotate-left" text="Dernière activité" />
           <LastActivityCard activity={lastActivity} />
         </section>
       )}
 
       {/* ─── Phase track ─────────────────── */}
-      <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
+      <section className="mb-8 min-w-0 lg:mb-10">
+        <div className="mb-4 flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <SectionTitle
             icon="fa-layer-group"
             text={`Le parcours en ${phaseCount} phases`}
             noMargin
           />
-          <Link to="/react/progress" className="text-[13px] text-accent-2 hover:underline inline-flex items-center gap-1">
-            Voir tous les détails
-            <ArrowRight size={13} />
+          <Link
+            to="/react/progress"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1 self-start text-[13px] text-accent-2 hover:underline sm:min-h-0 sm:self-auto"
+          >
+            <span className="sm:hidden">Détails</span>
+            <span className="hidden sm:inline">Voir tous les détails</span>
+            <ArrowRight size={13} aria-hidden="true" />
           </Link>
         </div>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 md:items-start md:gap-4">
           {phases.map((phase, i) => {
             const accent = phaseAccent(phase.color);
             const st = phaseStats[i];
@@ -158,45 +179,45 @@ export function ReactCoursePage() {
                 key={phase.id}
                 to={`/react/phase/${phase.id}`}
                 className={cn(
-                  "group relative rounded-xl border-base bg-bg-2 p-5 transition",
+                  "group relative block min-w-0 overflow-hidden rounded-xl border-base bg-bg-2 p-4 sm:p-5 transition",
                   "hover:border-accent/30 hover:-translate-y-0.5 duration-200",
                 )}
               >
-                <div className="flex items-start gap-4">
+                <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                   <div
                     className={cn(
-                      "w-12 h-12 rounded-xl flex items-center justify-center text-lg flex-shrink-0 border",
+                      "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border text-base sm:h-12 sm:w-12 sm:text-lg",
                       accent.bg,
                       accent.border,
                       accent.text,
                     )}
                   >
-                    <i className={`fa-solid ${phase.icon}`} />
+                    <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <h3 className={cn("font-bold truncate", accent.text)}>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-0.5 flex min-w-0 items-center gap-2">
+                      <h3 className={cn("min-w-0 truncate font-bold", accent.text)}>
                         {phase.title}
                       </h3>
                       {phase.scaffoldOnly && (
-                        <span className="text-[9px] font-mono uppercase tracking-wider bg-bg-4 text-fg-3 px-1.5 py-0.5 rounded">
+                        <span className="shrink-0 rounded bg-bg-4 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-fg-3">
                           wip
                         </span>
                       )}
                     </div>
-                    <p className="text-[12.5px] text-fg-2 leading-snug line-clamp-2">
+                    <p className="break-words text-[12.5px] leading-snug text-fg-2 line-clamp-2">
                       {phase.summary}
                     </p>
-                    <div className="mt-3">
+                    <div className="mt-3 min-w-0">
                       <ProgressBar
                         value={st.done}
                         max={st.total}
                         color={phase.color}
                         size="sm"
                       />
-                      <div className="mt-1.5 flex justify-between text-[11px] font-mono text-fg-3">
-                        <span>{phase.modules.length} modules</span>
-                        <span className={accent.text}>{st.percent}%</span>
+                      <div className="mt-1.5 flex justify-between gap-2 font-mono text-[11px] text-fg-3">
+                        <span className="truncate">{phase.modules.length} modules</span>
+                        <span className={cn("shrink-0", accent.text)}>{st.percent}%</span>
                       </div>
                     </div>
                   </div>
@@ -207,37 +228,55 @@ export function ReactCoursePage() {
         </div>
       </section>
 
-      {program && <SyllabusSection program={program} />}
-
-      {/* ─── Shortcuts ───────────────────────────── */}
-      <section>
-        <SectionTitle icon="fa-bolt" text="Raccourcis" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <ShortcutCard
-            to="/react/progress"
-            icon={<TrendingUp size={16} />}
-            title="Progression"
-            desc="Stats détaillées, export / import JSON"
-          />
-          <ShortcutCard
-            to="/react/bookmarks"
-            icon={<Bookmark size={16} />}
-            title="Favoris"
-            desc={`${progress.bookmarks.length} module${progress.bookmarks.length > 1 ? "s" : ""} en favori`}
-          />
-          <ShortcutCard
-            to="/react/search"
-            icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
-            title="Recherche"
-            desc="Trouve un concept précis"
-          />
-          <ShortcutCard
-            to="/react/final-project"
-            icon={<Trophy size={16} />}
-            title="Projet final"
-            desc="Gate capstone + phase tutorielle"
+      {program && (
+        <div className="hidden lg:block">
+          <CourseSyllabus
+            program={program}
+            livePhases={phases}
+            moduleHref={(moduleId) =>
+              findModule(moduleId) ? `/react/module/${moduleId}` : undefined
+            }
+            description="Le programme complet détaillé: phases, modules, leçons, objectifs, quiz, exercices de synthèse et projets."
           />
         </div>
+      )}
+
+      {/* ─── Shortcuts: collapsed on mobile ───────── */}
+      <section className="mt-8 lg:mt-10">
+        <div className="hidden lg:block">
+          <SectionTitle icon="fa-bolt" text="Raccourcis" />
+        </div>
+        <MobileCollapse
+          title="Raccourcis"
+          icon={<i className="fa-solid fa-bolt text-fg-3" aria-hidden="true" />}
+        >
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <ShortcutCard
+              to="/react/progress"
+              icon={<TrendingUp size={16} />}
+              title="Progression"
+              desc="Stats détaillées, export / import JSON"
+            />
+            <ShortcutCard
+              to="/react/bookmarks"
+              icon={<Bookmark size={16} />}
+              title="Favoris"
+              desc={`${progress.bookmarks.length} module${progress.bookmarks.length > 1 ? "s" : ""} en favori`}
+            />
+            <ShortcutCard
+              to="/react/search"
+              icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
+              title="Recherche"
+              desc="Trouve un concept précis"
+            />
+            <ShortcutCard
+              to="/react/final-project"
+              icon={<Trophy size={16} />}
+              title="Projet final"
+              desc="Gate capstone + phase tutorielle"
+            />
+          </div>
+        </MobileCollapse>
       </section>
     </div>
   );
@@ -257,12 +296,12 @@ function SectionTitle({
   return (
     <h2
       className={cn(
-        "text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 flex items-center gap-2",
+        "flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-fg-3 sm:tracking-[0.15em]",
         !noMargin && "mb-4",
       )}
     >
-      <i className={`fa-solid ${icon}`} />
-      {text}
+      <i className={`fa-solid ${icon} shrink-0`} aria-hidden="true" />
+      <span className="min-w-0 leading-snug">{text}</span>
     </h2>
   );
 }
@@ -304,18 +343,18 @@ function ContinueCard({
 }) {
   if (!nextModule) {
     return (
-      <div className="lg:col-span-2 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-bg-2 p-6 md:p-8 flex items-center gap-5">
-        <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-2xl">
-          <i className="fa-solid fa-trophy" />
+      <div className="flex min-w-0 flex-col gap-4 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-bg-2 p-5 sm:flex-row sm:items-center sm:gap-5 sm:p-6 md:p-8 lg:col-span-2">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-2xl text-emerald-400">
+          <i className="fa-solid fa-trophy" aria-hidden="true" />
         </div>
-        <div className="flex-1">
-          <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-emerald-400 mb-1">
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 font-mono text-[11px] uppercase tracking-[0.15em] text-emerald-400">
             Parcours terminé
           </div>
-          <div className="text-xl font-extrabold">
+          <div className="text-lg font-extrabold sm:text-xl">
             Bravo, tu as complété tous les modules disponibles !
           </div>
-          <p className="text-[13px] text-fg-2 mt-1">
+          <p className="mt-1 text-[13px] text-fg-2">
             Le capstone React Pro Path est maintenant disponible : ouvre le gate
             du projet final pour passer en mode production.
           </p>
@@ -328,26 +367,18 @@ function ContinueCard({
   return (
     <Link
       to={`/react/module/${nextModule.module.id}`}
-      className="lg:col-span-2 group relative rounded-2xl border-base bg-gradient-to-br from-bg-2 via-bg-2 to-bg-3 p-6 md:p-7 transition hover:border-accent/40 duration-200 overflow-hidden"
+      className="group relative min-w-0 overflow-hidden rounded-2xl border-base bg-bg-2 p-5 transition duration-200 hover:border-accent/40 sm:p-6 md:p-7 lg:col-span-2"
     >
-      {/* Colored halo */}
-      <div
-        className="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-40 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgb(108 99 255 / 0.25) 0%, transparent 70%)",
-        }}
-      />
-      <div className="relative flex items-start gap-5">
+      <div className="relative flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
         <div
           className={cn(
-            "w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0",
-            "bg-accent/15 text-accent-2 border border-accent/30",
+            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl sm:h-14 sm:w-14",
+            "border border-accent/30 bg-accent/15 text-accent-2",
           )}
         >
-          <PlayCircle size={26} />
+          <PlayCircle size={26} aria-hidden="true" />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <div className={cn("text-[11px] font-mono uppercase tracking-[0.15em] mb-1", accent.text)}>
             {hasStarted ? "Continuer là où tu t'es arrêté" : "Commencer le parcours"}
           </div>
@@ -361,19 +392,19 @@ function ContinueCard({
               {nextModule.module.index}
             </span>
           </div>
-          <h3 className="text-xl md:text-2xl font-extrabold tracking-tight leading-tight">
+          <h3 className="break-words text-xl font-extrabold leading-tight tracking-tight md:text-2xl">
             {nextModule.module.title}
           </h3>
-          <p className="text-[13.5px] text-fg-2 mt-1.5 leading-relaxed">
+          <p className="mt-1.5 break-words text-[13.5px] leading-relaxed text-fg-2">
             {nextModule.module.subtitle}
           </p>
-          <div className="mt-4 flex items-center gap-2">
+          <div className="mt-4 flex flex-wrap items-center gap-2">
             <Button size="sm" className="pointer-events-none">
-              {hasStarted ? "Reprendre ce module" : "Ouvrir le module"}
+              {hasStarted ? "Reprendre" : "Ouvrir"}
               <ArrowRight size={14} />
             </Button>
-            <span className="flex items-center gap-1.5 text-[11px] font-mono text-fg-3 ml-1">
-              <Clock size={11} /> {nextModule.module.duration}
+            <span className="ml-1 flex items-center gap-1.5 font-mono text-[11px] text-fg-3">
+              <Clock size={11} aria-hidden="true" /> {nextModule.module.duration}
             </span>
           </div>
         </div>
@@ -425,7 +456,7 @@ function LastActivityCard({
           Quiz : <strong className={passed ? "text-emerald-400" : "text-amber-400"}>
             {activity.score.correct}/{activity.score.total}
           </strong>{" "}
-          {passed ? "— validé" : "— à refaire pour valider"}
+          {passed ? " · validé" : " · à refaire pour valider"}
         </div>
       </div>
       <ArrowRight
@@ -434,245 +465,6 @@ function LastActivityCard({
       />
     </Link>
   );
-}
-
-function SyllabusSection({ program }: { program: CourseProgram }) {
-  const lessonCount = program.phases.reduce(
-    (sum, phase) =>
-      sum +
-      phase.modules.reduce(
-        (moduleSum, module) => moduleSum + module.lessons.length,
-        0,
-      ),
-    0,
-  );
-
-  return (
-    <section className="mb-10">
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
-        <div>
-          <SectionTitle icon="fa-list-check" text="Syllabus complet" noMargin />
-          <p className="mt-2 text-[13px] text-fg-2 leading-relaxed max-w-2xl">
-            Le programme complet détaillé: phases,
-            modules, leçons, objectifs, quiz, exercices de synthèse et projets.
-          </p>
-        </div>
-        <div className="grid grid-cols-3 gap-2 text-center">
-          <SyllabusStat value={String(program.phases.length)} label="phases" />
-          <SyllabusStat
-            value={String(program.phases.reduce((sum, phase) => sum + phase.modules.length, 0))}
-            label="modules"
-          />
-          <SyllabusStat value={String(lessonCount)} label="leçons" />
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        {program.phases.map((phase, index) => (
-          <SyllabusPhaseCard key={phase.id} phase={phase} fallbackIndex={index} />
-        ))}
-      </div>
-
-      <div className="mt-5 rounded-xl border-base bg-bg-2 p-5">
-        <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 mb-3">
-          Priorité de rédaction
-        </div>
-        <div className="grid md:grid-cols-2 gap-3">
-          {program.authoringPriorities.map((priority) => (
-            <div key={priority.target} className="rounded-lg bg-bg-3 p-3">
-              <div className="text-sm font-bold">
-                {priority.order}. {priority.target}
-              </div>
-              <p className="mt-1 text-[12px] text-fg-2 leading-relaxed">
-                {priority.rationale}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SyllabusStat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="rounded-lg border-base bg-bg-2 px-3 py-2 min-w-[72px]">
-      <div className="text-lg font-extrabold font-mono text-accent-2">{value}</div>
-      <div className="text-[10px] font-mono uppercase tracking-wider text-fg-3">
-        {label}
-      </div>
-    </div>
-  );
-}
-
-function SyllabusPhaseCard({
-  phase,
-  fallbackIndex,
-}: {
-  phase: ProgramPhase;
-  fallbackIndex: number;
-}) {
-  const livePhase = phases.find((item) => item.id === phase.phaseId);
-  const accent = phaseAccent(livePhase?.color ?? "core");
-
-  return (
-    <details className="group rounded-2xl border-base bg-bg-2 overflow-hidden">
-      <summary className="list-none cursor-pointer p-5 flex items-start gap-4">
-        <div
-          className={cn(
-            "w-12 h-12 rounded-xl flex items-center justify-center text-lg flex-shrink-0 border",
-            accent.bg,
-            accent.border,
-            accent.text,
-          )}
-        >
-          {livePhase ? (
-            <i className={`fa-solid ${livePhase.icon}`} />
-          ) : (
-            <span className="font-mono text-sm">{fallbackIndex + 1}</span>
-          )}
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h3 className={cn("font-extrabold", accent.text)}>{phase.title}</h3>
-            <span className="rounded-full bg-bg-3 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-fg-3">
-              {phase.modules.length} modules
-            </span>
-            {phase.project && (
-              <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-accent-2">
-                projet
-              </span>
-            )}
-          </div>
-          <p className="text-[13px] text-fg-2 leading-relaxed">
-            {phase.objective}
-          </p>
-        </div>
-        <i className="fa-solid fa-chevron-down text-fg-3 mt-1 transition group-open:rotate-180" />
-      </summary>
-
-      <div className="px-5 pb-5 space-y-3">
-        {phase.modules.map((module) => (
-          <SyllabusModuleCard key={module.id} module={module} />
-        ))}
-
-        {phase.project && (
-          <div className="rounded-xl border border-accent/20 bg-accent/5 p-4">
-            <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-accent-2 mb-1">
-              Projet de phase
-            </div>
-            <h4 className="font-bold">{phase.project.title}</h4>
-            <p className="mt-1 text-[13px] text-fg-2 leading-relaxed">
-              {phase.project.deliverable}
-            </p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {phase.project.assessment.map((criterion) => (
-                <span
-                  key={criterion}
-                  className="rounded-full bg-bg-3 px-2 py-1 text-[11px] text-fg-2"
-                >
-                  {criterion}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </details>
-  );
-}
-
-function SyllabusModuleCard({ module }: { module: ProgramModule }) {
-  const found = module.moduleId ? findModule(module.moduleId) : undefined;
-  const moduleNumber = syllabusModuleNumber(module);
-  const content = (
-    <>
-      <div className="flex flex-wrap items-center gap-2 mb-1">
-        <span className="text-[11px] font-mono text-fg-3">Module {moduleNumber}</span>
-        <h4 className="font-bold group-hover:text-accent-2 transition">
-          {module.title}
-        </h4>
-        <span className="rounded-full bg-bg-3 px-2 py-0.5 text-[10px] font-mono uppercase text-fg-3">
-          {module.duration}
-        </span>
-        <span className="rounded-full bg-bg-3 px-2 py-0.5 text-[10px] font-mono uppercase text-fg-3">
-          {module.difficulty}
-        </span>
-      </div>
-      <p className="text-[12.5px] text-fg-2 leading-relaxed mb-3">
-        {module.subtitle}
-      </p>
-      <div className="grid lg:grid-cols-[1fr_220px] gap-4">
-        <div>
-          <div className="text-[10px] font-mono uppercase tracking-wider text-fg-3 mb-2">
-            Leçons
-          </div>
-          <div className="grid sm:grid-cols-2 gap-2">
-            {module.lessons.map((lesson, lessonIndex) => (
-              <div key={lesson.id} className="rounded-lg bg-bg-3 p-3">
-                <div className="text-[12px] font-bold">
-                  Leçon {lessonIndex + 1} · {lesson.title}
-                </div>
-                <p className="mt-1 text-[11.5px] text-fg-2 leading-relaxed">
-                  {lesson.objective}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="rounded-lg bg-bg-3 p-3">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-fg-3 mb-2">
-            Validation
-          </div>
-          <div className="text-[12px] text-fg-2">
-            Quiz :{" "}
-            <strong className="text-fg">
-              {module.assessment.quiz.questionCount} questions
-            </strong>
-          </div>
-          <div className="mt-1 text-[12px] text-fg-2">
-            Exercices :{" "}
-            <strong className="text-fg">
-              {module.assessment.exercises.length}
-            </strong>
-          </div>
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {module.assessment.quiz.focus.slice(0, 5).map((focus) => (
-              <span
-                key={focus}
-                className="rounded-full bg-bg-4 px-2 py-1 text-[10.5px] text-fg-2"
-              >
-                {focus}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
-  if (!found) {
-    return <div className="rounded-xl bg-bg-1 p-4">{content}</div>;
-  }
-
-  return (
-    <Link
-      to={`/react/module/${module.moduleId}`}
-      className="group block rounded-xl bg-bg-1 p-4 hover:bg-bg-3 transition"
-    >
-      {content}
-    </Link>
-  );
-}
-
-function syllabusModuleNumber(programModule: ProgramModule) {
-  if (programModule.moduleId) {
-    const m = /-m(\d+)$/.exec(programModule.moduleId);
-    if (m) return m[1];
-  }
-  const fromId = /-m(\d+)$/.exec(programModule.id);
-  if (fromId) return fromId[1];
-  return programModule.index;
 }
 
 function ShortcutCard({

@@ -78,7 +78,7 @@ export function CapstoneGatePage() {
 
         <ProgressBar value={ratioDone} max={Math.max(1, ratioValue)} size="md" />
 
-        <div className="mt-5 grid md:grid-cols-3 gap-3">
+        <div className="mt-5 grid md:grid-cols-3 md:items-start gap-3">
           {checks.map((check) => {
             const complete = check.done === check.total;
             return (

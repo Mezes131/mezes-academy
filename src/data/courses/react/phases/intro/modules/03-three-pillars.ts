@@ -29,7 +29,7 @@ export const module03: Module = {
     { kind: "title", text: "2 : Le state : des interfaces qui vivent" },
     {
       kind: "paragraph",
-      html: "Dès qu'il faut réagir à une action : un clic, une saisie, une requête réseau : il faut une <strong>mémoire</strong> pour suivre ce qui change : le <em>state</em>. Quand le state change, React re-dessine automatiquement les parties concernées.",
+      html: "Dès qu'il faut réagir à une action (un clic, une saisie, une requête réseau), il faut une <strong>mémoire</strong> pour suivre ce qui change : le <em>state</em>. Quand le state change, React re-dessine automatiquement les parties concernées.",
     },
     { kind: "highlight", html: "<i class='fa-solid fa-computer-mouse'></i> L'utilisateur clique sur « Like » → le state <code>likes</code> passe de 3 à 4" },
     { kind: "highlight", html: "<i class='fa-solid fa-bolt'></i> React détecte le changement → recalcule la partie affectée" },

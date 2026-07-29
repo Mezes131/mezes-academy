@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_lesson_callout_blocks",
+  "info": {
+    "displayName": "Callout Block",
+    "icon": "bullhorn"
+  },
+  "attributes": {
+    "variant": {
+      "type": "enumeration",
+      "enum": ["tip", "warn", "note", "concept"],
+      "default": "note"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

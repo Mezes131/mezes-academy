@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rubrics",
+  "info": {
+    "singularName": "rubric",
+    "pluralName": "rubrics",
+    "displayName": "Rubric"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "criteria": {
+      "type": "json",
+      "required": true
+    },
+    "passingScore": {
+      "type": "integer",
+      "default": 70
+    },
+    "projectBrief": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project-brief.project-brief",
+      "mappedBy": "rubric"
+    }
+  }
+}

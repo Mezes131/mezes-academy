@@ -11,4 +11,26 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("@codesandbox") || id.includes("sandpack")) {
+            return "sandpack";
+          }
+          if (id.includes("@supabase")) return "supabase";
+          if (id.includes("@fortawesome")) return "fontawesome";
+          if (id.includes("lucide-react")) return "lucide";
+          if (
+            id.includes("react-dom") ||
+            id.includes("react-router") ||
+            /[/\\]react[/\\]/.test(id)
+          ) {
+            return "react-vendor";
+          }
+        },
+      },
+    },
+  },
 });

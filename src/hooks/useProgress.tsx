@@ -1,3 +1,8 @@
+/**
+ * Progress keys must stay stable content IDs (`react-core-m06`, quiz/exercise legacyIds).
+ * When Strapi content is enabled, the mapper sets domain `id` from `legacyId` so
+ * these keys continue to hit the same Supabase rows. Never key by Strapi numeric ids.
+ */
 import {
   createContext,
   useCallback,
@@ -15,6 +20,7 @@ import type {
   LessonProgress,
 } from "@/types";
 import { phases, totalProgressItems } from "@/data/phases";
+import { allModules } from "@/data";
 import { useAuth } from "@/hooks/useAuth";
 import { loadRemoteProgress, saveRemoteProgress } from "@/lib/progressRemote";
 
@@ -74,7 +80,7 @@ function migrateV1ToV2(raw: Partial<LessonProgress>): Partial<LessonProgress> {
 /* ──────────────────────────────────────────────────────────────────
    v2 → v3: introduce exerciseProgress + challengeScores. We backfill
    `exerciseProgress` from the legacy `completedExercises` array so no
-   progress is lost — each legacy completion is recorded as "revealed"
+   progress is lost : each legacy completion is recorded as "revealed"
    (conservative) since we cannot retroactively know if tests passed.
    ────────────────────────────────────────────────────────────────── */
 function migrateV2ToV3(raw: Partial<LessonProgress>): LessonProgress {
@@ -310,6 +316,11 @@ interface ProgressContextValue {
   markExerciseSolved: (exerciseId: string) => void;
   /** Called when the learner clicks "Reveal solution". */
   revealExerciseSolution: (exerciseId: string) => void;
+  /** Persist audit checklist answers (quiz-like restore). */
+  saveAuditSubmission: (
+    exerciseId: string,
+    submission: NonNullable<ExerciseProgress["auditSubmission"]>,
+  ) => void;
   /** Called each time an additional hint is unveiled. */
   recordExerciseHint: (exerciseId: string, hintIndex: number) => void;
   /** Resets a single exercise's progress (debug / restart). */
@@ -530,9 +541,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const canMarkModuleRead = useCallback(
     (moduleId: string) => {
-      const found = phases
-        .flatMap((phase) => phase.modules)
-        .find((module) => module.id === moduleId);
+      // All courses, not only React: gating must hold for SVC modules too.
+      const found = allModules.find((entry) => entry.module.id === moduleId)?.module;
       if (!found) return true;
 
       const quizValidated = !found.quiz
@@ -547,9 +557,12 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       const exercisesValidated =
         !found.exercises || found.exercises.length === 0
           ? true
-          : found.exercises.every(
-              (exercise) => progress.exerciseProgress[exercise.id]?.status === "solved",
-            );
+          : found.exercises.every((exercise) => {
+              const status = progress.exerciseProgress[exercise.id]?.status;
+              // Revealing the solution still counts as done for module completion
+              // (same rule as completedExercises sync).
+              return status === "solved" || status === "revealed";
+            });
 
       return quizValidated && exercisesValidated;
     },
@@ -593,9 +606,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       if (!(quizId in p.quizScores)) return p;
       const nextScores = { ...p.quizScores };
       delete nextScores[quizId];
-      const owningModule = phases
-        .flatMap((phase) => phase.modules)
-        .find((mod) => mod.quiz?.id === quizId);
+      const owningModule = allModules.find(
+        (entry) => entry.module.quiz?.id === quizId,
+      )?.module;
       const nextReadModules =
         owningModule && p.readModules.includes(owningModule.id)
           ? p.readModules.filter((id) => id !== owningModule.id)
@@ -676,6 +689,24 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       return syncCompletedExercises(p, exerciseId, next);
     });
   }, []);
+
+  const saveAuditSubmission = useCallback(
+    (
+      exerciseId: string,
+      submission: NonNullable<ExerciseProgress["auditSubmission"]>,
+    ) => {
+      setProgress((p) => {
+        const prev = touch(p.exerciseProgress[exerciseId]);
+        const next: ExerciseProgress = {
+          ...prev,
+          auditSubmission: submission,
+          updatedAt: Date.now(),
+        };
+        return syncCompletedExercises(p, exerciseId, next);
+      });
+    },
+    [],
+  );
 
   const recordExerciseHint = useCallback(
     (exerciseId: string, hintIndex: number) => {
@@ -842,6 +873,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
+      saveAuditSubmission,
       recordExerciseHint,
       resetExercise,
       getExerciseStatus,
@@ -866,6 +898,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
+      saveAuditSubmission,
       recordExerciseHint,
       resetExercise,
       getExerciseStatus,

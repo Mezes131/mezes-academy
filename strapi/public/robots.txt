@@ -1,0 +1,5 @@
+# To allow search engines to index the Strapi admin API docs / uploads carefully:
+User-agent: *
+Disallow: /admin
+Disallow: /uploads/
+Allow: /api/

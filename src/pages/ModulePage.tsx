@@ -1,12 +1,14 @@
 import { Link, useParams, Navigate } from "react-router-dom";
-import { findModule, phases } from "@/data/phases";
+import { findAreaModule, useCourseArea } from "@/components/layout/courseArea";
 import { ModuleView } from "@/components/learning/ModuleView";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function ModulePage() {
   const { moduleId } = useParams<{ moduleId: string }>();
-  const found = moduleId ? findModule(moduleId) : undefined;
+  const area = useCourseArea();
+  const { basePath, phases } = area;
+  const found = moduleId ? findAreaModule(area, moduleId) : undefined;
 
   if (!found) return <Navigate to="/" replace />;
 
@@ -29,21 +31,21 @@ export function ModulePage() {
       <ModuleView key={module.id} phase={phase} module={module} />
 
       {/* ─── Previous / next navigation ──────── */}
-      <div className="mt-10 pt-6 border-t border-base flex items-stretch gap-3">
+      <div className="mt-10 pt-6 flex items-stretch gap-3">
         {prev ? (
           <Link
-            to={`/react/module/${prev.moduleId}`}
+            to={`${basePath}/module/${prev.moduleId}`}
             className={cn(
               "flex-1 group rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition",
               "flex items-center gap-3 text-left",
             )}
           >
-            <ChevronLeft
-              size={18}
-              className="text-fg-3 group-hover:text-fg transition flex-shrink-0"
-            />
             <div className="min-w-0">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
+              <div className="flex text-[11px] font-mono uppercase tracking-wider text-fg-3">
+                <ChevronLeft
+                  size={18}
+                  className="text-fg-3 group-hover:text-fg transition flex-shrink-0"
+                />
                 Précédent
               </div>
               <div className="text-sm font-semibold truncate">{prev.title}</div>
@@ -54,22 +56,22 @@ export function ModulePage() {
         )}
         {next ? (
           <Link
-            to={`/react/module/${next.moduleId}`}
+            to={`${basePath}/module/${next.moduleId}`}
             className={cn(
               "flex-1 group rounded-lg border-base bg-bg-2 p-4 hover:border-accent/30 transition",
               "flex items-center gap-3 text-right justify-end",
             )}
           >
             <div className="min-w-0 text-right">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
+              <div className="flex text-[11px] font-mono uppercase tracking-wider text-fg-3">
                 Suivant
+                <ChevronRight
+                  size={18}
+                  className="text-fg-3 group-hover:text-fg transition flex-shrink-0"
+                />
               </div>
               <div className="text-sm font-semibold truncate">{next.title}</div>
             </div>
-            <ChevronRight
-              size={18}
-              className="text-fg-3 group-hover:text-fg transition flex-shrink-0"
-            />
           </Link>
         ) : (
           <div className="flex-1" />

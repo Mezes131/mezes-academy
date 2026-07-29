@@ -46,7 +46,7 @@ export const module27: Module = {
 <span class="kw">export async function</span> <span class="fn">generateMetadata</span>({ params }) {
   <span class="kw">const</span> p = <span class="kw">await</span> <span class="fn">getProduct</span>(params.slug)
   <span class="kw">return</span> {
-    title: <span class="str">\`\${p.name} — MyShop\`</span>,
+    title: <span class="str">\`\${p.name} : MyShop\`</span>,
     description: p.summary,
     openGraph: { images: [p.image] },
   }

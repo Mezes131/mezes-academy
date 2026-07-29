@@ -62,7 +62,7 @@ export const module16: Module = {
     { kind: "title", text: "Piège fréquent : l'état interne qui « fuit » entre routes" },
     {
       kind: "paragraph",
-      html: "Quand React Router passe de <code>/users/1</code> à <code>/users/2</code>, il <strong>ne démonte pas</strong> le composant <code>&lt;Profile&gt;</code> : il lui change simplement son <code>useParams</code>. Résultat : tout le state interne (formulaire en cours de saisie, données d'un <code>fetch</code> précédent, onglet actif…) reste tel quel. C'est l'un des bugs les plus fréquents chez les débutants — et même chez les devs expérimentés.",
+      html: "Quand React Router passe de <code>/users/1</code> à <code>/users/2</code>, il <strong>ne démonte pas</strong> le composant <code>&lt;Profile&gt;</code> : il lui change simplement son <code>useParams</code>. Résultat : tout le state interne (formulaire en cours de saisie, données d'un <code>fetch</code> précédent, onglet actif…) reste tel quel. C'est l'un des bugs les plus fréquents chez les débutants, et même chez les devs expérimentés.",
     },
     {
       kind: "info",
@@ -80,13 +80,13 @@ export const module16: Module = {
       kind: "code",
       sample: {
         label: "Router pattern : key sur l'id de ressource",
-        html: `<span class="cm">// ❌ Anti-pattern — le state interne survit entre /users/1 et /users/2</span>
+        html: `<span class="cm">// ❌ Anti-pattern : le state interne survit entre /users/1 et /users/2</span>
 <span class="kw">function</span> <span class="fn">UsersPage</span>() {
   <span class="kw">const</span> { id } = <span class="fn">useParams</span>()
   <span class="kw">return</span> <span class="jsx">&lt;Profile</span> <span class="prop">userId</span>={id} <span class="jsx">/&gt;</span>
 }
 
-<span class="cm">// ✅ Correct — \`key\` force un remount complet sur changement d'id</span>
+<span class="cm">// ✅ Correct : \`key\` force un remount complet sur changement d'id</span>
 <span class="kw">function</span> <span class="fn">UsersPage</span>() {
   <span class="kw">const</span> { id } = <span class="fn">useParams</span>()
   <span class="kw">return</span> <span class="jsx">&lt;Profile</span> <span class="prop">key</span>={id} <span class="prop">userId</span>={id} <span class="jsx">/&gt;</span>
