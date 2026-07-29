@@ -26,7 +26,7 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3 relative">
+        <div className="grid gap-6 md:grid-cols-3 md:items-start relative">
           {/* Horizontal connector line (desktop) */}
           <div className="hidden md:block absolute top-8 left-16 right-16 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
@@ -36,7 +36,7 @@ export function HowItWorks() {
         </div>
 
         {/* Promises */}
-        <div className="mt-16 grid md:grid-cols-2 gap-4">
+        <div className="mt-16 grid md:grid-cols-2 md:items-start gap-4">
           {PROMISES.map((promise) => (
             <Promise key={promise.title} promise={promise} />
           ))}

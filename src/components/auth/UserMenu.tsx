@@ -4,6 +4,7 @@ import {
   BookMarked,
   ChevronDown,
   LogOut,
+  SlidersHorizontal,
   TrendingUp,
   UserCircle,
 } from "lucide-react";
@@ -132,6 +133,12 @@ export function UserMenu({
               to="/account"
               icon={<UserCircle size={14} />}
               label="Mon profil"
+              onClick={() => setOpen(false)}
+            />
+            <MenuItem
+              to="/account?tab=preferences"
+              icon={<SlidersHorizontal size={14} />}
+              label="Préférences"
               onClick={() => setOpen(false)}
             />
             <MenuItem

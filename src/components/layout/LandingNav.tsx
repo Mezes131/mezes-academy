@@ -1,25 +1,23 @@
 import { Link, NavLink } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
-import { LanguageSwitcher } from "@/i18n/LanguageSwitcher";
 import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
 /**
  * Mezes Academy landing navigation.
- * Clean and brand-centered, distinct from the course TopNav.
+ * Language & theme live in account preferences only.
  */
 export function LandingNav() {
   const { user } = useAuth();
   const t = useT();
 
   return (
-    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b border-base">
-      <div className="max-w-6xl mx-auto h-full px-6 flex items-center gap-6">
+    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b py-2 border-base">
+      <div className="max-w-6xl mx-auto h-full px-4 sm:px-6 flex items-center gap-3 sm:gap-6">
         <Link
           to="/"
           aria-label="Mezes Academy"
@@ -28,7 +26,7 @@ export function LandingNav() {
           <MezesLogo size={28} showText showMark={false} />
         </Link>
 
-        <div className="hidden md:flex items-center gap-1 ml-6">
+        <div className="hidden md:flex items-center gap-1 ml-2 lg:ml-6 min-w-0">
           <NavLink to="/" end className={navLinkClass}>
             {t("nav.home")}
           </NavLink>
@@ -40,15 +38,13 @@ export function LandingNav() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 ml-auto">
-          <LanguageSwitcher />
-          <ThemeToggle />
+        <div className="flex items-center gap-2 ml-auto min-w-0">
           {user ? (
             <>
               <Link to="/react" className="hidden sm:inline-flex">
                 <Button size="sm">
                   {t("nav.continue")}
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} aria-hidden="true" />
                 </Button>
               </Link>
               <UserMenu showName size={32} />
@@ -57,7 +53,7 @@ export function LandingNav() {
             <Link to="/auth">
               <Button size="sm">
                 {t("nav.signIn")}
-                <ArrowRight size={14} />
+                <ArrowRight size={14} aria-hidden="true" />
               </Button>
             </Link>
           )}

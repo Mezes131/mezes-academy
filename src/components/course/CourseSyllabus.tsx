@@ -72,7 +72,7 @@ export function CourseSyllabus({
         <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 mb-3">
           Priorité de rédaction
         </div>
-        <div className="grid md:grid-cols-2 gap-3">
+        <div className="grid md:grid-cols-2 md:items-start gap-3">
           {program.authoringPriorities.map((priority) => (
             <div key={priority.target} className="rounded-lg bg-bg-3 p-3">
               <div className="text-sm font-bold">

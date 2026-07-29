@@ -157,7 +157,7 @@ export function ReactCoursePage() {
             <ArrowRight size={13} />
           </Link>
         </div>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 md:items-start gap-4">
           {phases.map((phase, i) => {
             const accent = phaseAccent(phase.color);
             const st = phaseStats[i];
