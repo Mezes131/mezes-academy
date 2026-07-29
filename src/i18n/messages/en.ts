@@ -10,6 +10,16 @@ export const messagesEn: MessageTree = {
     signInShort: "Sign in",
     pathBadge: "path",
   },
+  bottomNav: {
+    method: "Method",
+    account: "Account",
+    course: "Course",
+    myCourse: "Course",
+    modules: "Modules",
+    progress: "Progress",
+    bookmarks: "Saved",
+    search: "Search",
+  },
   courseBar: {
     search: "Search…",
     openSidebar: "Open sidebar",

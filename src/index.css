@@ -98,6 +98,8 @@ html.light {
 
 html {
   scroll-behavior: smooth;
+  /* Clip off-screen drawers (sidebar -translate-x-full) so they don't widen the page */
+  overflow-x: clip;
 }
 
 body {
@@ -108,6 +110,8 @@ body {
   font-feature-settings: "kern" 1, "liga" 1;
   letter-spacing: -0.005em;
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

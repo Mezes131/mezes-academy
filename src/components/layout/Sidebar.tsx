@@ -42,14 +42,22 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         )}
       />
 
-      {/* Sidebar panel (drawer on mobile, static rail on desktop) */}
+      {/* Sidebar panel (drawer on mobile, static rail on desktop).
+          Closed mobile: stay off-canvas without expanding scrollWidth. */}
       <aside
+        aria-hidden={!isOpen}
         className={cn(
-          "fixed lg:sticky top-[6.5rem] left-0 z-40 lg:z-auto h-[calc(100vh-6.5rem)]",
-          "w-72 flex-shrink-0 bg-bg-2/95 lg:bg-bg-2/40",
-          "py-6 overflow-y-auto transition-all duration-200 ease-out",
-          isOpen ? "border-r border-base px-4 lg:w-72" : "px-4 border-r border-base lg:w-0 lg:px-0 lg:border-r-0",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:-translate-x-full",
+          "fixed left-0 z-40 lg:sticky lg:z-auto",
+          // Mobile: below top nav only (CourseBar hidden). Desktop: below both bars.
+          "top-14 h-[calc(100dvh-3.5rem)] lg:top-[6.5rem] lg:h-[calc(100vh-6.5rem)]",
+          "w-[min(18rem,85vw)] flex-shrink-0 bg-bg-2/95 lg:bg-bg-2/40",
+          "overflow-y-auto overscroll-contain py-6 transition-transform duration-200 ease-out",
+          "border-r border-base px-4",
+          isOpen ? "translate-x-0 pointer-events-auto" : "-translate-x-full pointer-events-none",
+          // Desktop closed: collapse in-flow width (no off-canvas overflow)
+          !isOpen &&
+            "lg:w-0 lg:translate-x-0 lg:overflow-hidden lg:border-0 lg:px-0",
+          isOpen && "lg:w-72",
         )}
       >
         <div

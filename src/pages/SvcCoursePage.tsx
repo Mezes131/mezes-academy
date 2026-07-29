@@ -106,15 +106,15 @@ export function SvcCoursePage() {
   ).length;
 
   return (
-    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
-      <section className="relative mb-10">
-        <div className="relative">
-          <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-violet-400 mb-3">
-            <i className={`fa-solid ${meta.icon}`} />
+    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10 animate-fade-in">
+      <section className="relative mb-10 min-w-0">
+        <div className="relative min-w-0">
+          <div className="mb-3 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-violet-400">
+            <i className={`fa-solid ${meta.icon}`} aria-hidden="true" />
             Parcours Secure Vibe Coding
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[0.98]">
+          <h1 className="text-[1.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-4xl md:text-5xl">
             Du prompt au{" "}
             <em className="not-italic text-violet-400">produit en production</em>
             ,
@@ -176,8 +176,8 @@ export function SvcCoursePage() {
         </section>
       )}
 
-      <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
+      <section className="mb-10 min-w-0">
+        <div className="mb-4 flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <SectionTitle
             icon="fa-layer-group"
             text={`Le parcours en ${phaseCount} phases`}
@@ -185,13 +185,14 @@ export function SvcCoursePage() {
           />
           <Link
             to={`${basePath}/progress`}
-            className="text-[13px] text-accent-2 hover:underline inline-flex items-center gap-1"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1 self-start text-[13px] text-accent-2 hover:underline sm:min-h-0 sm:self-auto"
           >
-            Voir tous les détails
-            <ArrowRight size={13} />
+            <span className="sm:hidden">Détails</span>
+            <span className="hidden sm:inline">Voir tous les détails</span>
+            <ArrowRight size={13} aria-hidden="true" />
           </Link>
         </div>
-        <div className="grid md:grid-cols-2 md:items-start gap-4">
+        <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 md:items-start md:gap-4">
           {phases.map((phase, i) => {
             const accent = phaseAccent(phase.color);
             const st = phaseStats[i];
@@ -200,45 +201,45 @@ export function SvcCoursePage() {
                 key={phase.id}
                 to={`${basePath}/phase/${phase.id}`}
                 className={cn(
-                  "group relative rounded-xl border-base bg-bg-2 p-5 transition",
+                  "group relative block min-w-0 overflow-hidden rounded-xl border-base bg-bg-2 p-4 sm:p-5 transition",
                   "hover:border-accent/30 hover:-translate-y-0.5 duration-200",
                 )}
               >
-                <div className="flex items-start gap-4">
+                <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                   <div
                     className={cn(
-                      "w-12 h-12 rounded-xl flex items-center justify-center text-lg flex-shrink-0 border",
+                      "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border text-base sm:h-12 sm:w-12 sm:text-lg",
                       accent.bg,
                       accent.border,
                       accent.text,
                     )}
                   >
-                    <i className={`fa-solid ${phase.icon}`} />
+                    <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <h3 className={cn("font-bold truncate", accent.text)}>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-0.5 flex min-w-0 items-center gap-2">
+                      <h3 className={cn("min-w-0 truncate font-bold", accent.text)}>
                         {phase.title}
                       </h3>
                       {phase.scaffoldOnly && (
-                        <span className="text-[9px] font-mono uppercase tracking-wider bg-bg-4 text-fg-3 px-1.5 py-0.5 rounded">
+                        <span className="shrink-0 rounded bg-bg-4 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-fg-3">
                           wip
                         </span>
                       )}
                     </div>
-                    <p className="text-[12.5px] text-fg-2 leading-snug line-clamp-2">
+                    <p className="break-words text-[12.5px] leading-snug text-fg-2 line-clamp-2">
                       {phase.summary}
                     </p>
-                    <div className="mt-3">
+                    <div className="mt-3 min-w-0">
                       <ProgressBar
                         value={st.done}
                         max={st.total}
                         color={phase.color}
                         size="sm"
                       />
-                      <div className="mt-1.5 flex justify-between text-[11px] font-mono text-fg-3">
-                        <span>{phase.modules.length} modules</span>
-                        <span className={accent.text}>{st.percent}%</span>
+                      <div className="mt-1.5 flex justify-between gap-2 font-mono text-[11px] text-fg-3">
+                        <span className="truncate">{phase.modules.length} modules</span>
+                        <span className={cn("shrink-0", accent.text)}>{st.percent}%</span>
                       </div>
                     </div>
                   </div>
@@ -297,12 +298,12 @@ function SectionTitle({
   return (
     <h2
       className={cn(
-        "text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 flex items-center gap-2",
+        "flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-fg-3 sm:tracking-[0.15em]",
         !noMargin && "mb-4",
       )}
     >
-      <i className={`fa-solid ${icon}`} />
-      {text}
+      <i className={`fa-solid ${icon} shrink-0`} aria-hidden="true" />
+      <span className="min-w-0 leading-snug">{text}</span>
     </h2>
   );
 }
@@ -346,18 +347,18 @@ function ContinueCard({
 }) {
   if (!nextModule) {
     return (
-      <div className="lg:col-span-2 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-bg-2 p-6 md:p-8 flex items-center gap-5">
-        <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-2xl">
-          <i className="fa-solid fa-trophy" />
+      <div className="flex min-w-0 flex-col gap-4 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-bg-2 p-5 sm:flex-row sm:items-center sm:gap-5 sm:p-6 md:p-8 lg:col-span-2">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-2xl text-emerald-400">
+          <i className="fa-solid fa-trophy" aria-hidden="true" />
         </div>
-        <div className="flex-1">
-          <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-emerald-400 mb-1">
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 font-mono text-[11px] uppercase tracking-[0.15em] text-emerald-400">
             Modules jouables terminés
           </div>
-          <div className="text-xl font-extrabold">
+          <div className="text-lg font-extrabold sm:text-xl">
             Bravo, tu as complété les modules déjà rédigés !
           </div>
-          <p className="text-[13px] text-fg-2 mt-1">
+          <p className="mt-1 text-[13px] text-fg-2">
             Les prochaines phases arrivent au fil de la rédaction. Tu peux
             revoir le syllabus ou approfondir les audits déjà faits.
           </p>
@@ -370,18 +371,18 @@ function ContinueCard({
   return (
     <Link
       to={`${basePath}/module/${nextModule.module.id}`}
-      className="lg:col-span-2 group relative rounded-2xl border-base bg-bg-2 p-6 md:p-7 transition hover:border-accent/40 duration-200"
+      className="group relative min-w-0 overflow-hidden rounded-2xl border-base bg-bg-2 p-5 transition duration-200 hover:border-accent/40 sm:p-6 md:p-7 lg:col-span-2"
     >
-      <div className="relative flex items-start gap-5">
+      <div className="relative flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
         <div
           className={cn(
-            "w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0",
-            "bg-violet-500/15 text-violet-400 border border-violet-500/30",
+            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl sm:h-14 sm:w-14",
+            "border border-violet-500/30 bg-violet-500/15 text-violet-400",
           )}
         >
-          <PlayCircle size={26} />
+          <PlayCircle size={26} aria-hidden="true" />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <div
             className={cn(
               "text-[11px] font-mono uppercase tracking-[0.15em] mb-1",
@@ -402,19 +403,19 @@ function ContinueCard({
               {nextModule.module.index}
             </span>
           </div>
-          <h3 className="text-xl md:text-2xl font-extrabold tracking-tight leading-tight">
+          <h3 className="break-words text-xl font-extrabold leading-tight tracking-tight md:text-2xl">
             {nextModule.module.title}
           </h3>
-          <p className="text-[13.5px] text-fg-2 mt-1.5 leading-relaxed">
+          <p className="mt-1.5 break-words text-[13.5px] leading-relaxed text-fg-2">
             {nextModule.module.subtitle}
           </p>
-          <div className="mt-4 flex items-center gap-2">
+          <div className="mt-4 flex flex-wrap items-center gap-2">
             <Button size="sm" className="pointer-events-none">
-              {hasStarted ? "Reprendre ce module" : "Ouvrir le module"}
+              {hasStarted ? "Reprendre" : "Ouvrir"}
               <ArrowRight size={14} />
             </Button>
-            <span className="flex items-center gap-1.5 text-[11px] font-mono text-fg-3 ml-1">
-              <Clock size={11} /> {nextModule.module.duration}
+            <span className="ml-1 flex items-center gap-1.5 font-mono text-[11px] text-fg-3">
+              <Clock size={11} aria-hidden="true" /> {nextModule.module.duration}
             </span>
           </div>
         </div>

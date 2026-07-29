@@ -9,6 +9,16 @@ export const messagesFr = {
     signInShort: "Se connecter",
     pathBadge: "parcours",
   },
+  bottomNav: {
+    method: "Méthode",
+    account: "Compte",
+    course: "Parcours",
+    myCourse: "Cours",
+    modules: "Modules",
+    progress: "Progrès",
+    bookmarks: "Favoris",
+    search: "Recherche",
+  },
   courseBar: {
     search: "Rechercher…",
     openSidebar: "Ouvrir le menu latéral",
