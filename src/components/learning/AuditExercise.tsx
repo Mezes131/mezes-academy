@@ -327,7 +327,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                         id={`${inputId}-ev`}
                         rows={2}
                         className={cn(
-                          "w-full rounded-lg border px-3 py-2 text-sm transition",
+                          "w-full min-h-11 rounded-lg border px-3 py-2 text-sm transition",
                           !done && "border-base bg-bg-2",
                           passedLock &&
                             "border-emerald-500/40 bg-emerald-500/5 text-fg",
@@ -364,7 +364,12 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
               </div>
             ))}
             {hintsShown < exercise.hints.length && !done && (
-              <Button type="button" variant="ghost" size="sm" onClick={onHint}>
+              <Button
+                type="button"
+                variant="ghost"
+                className="min-h-11"
+                onClick={onHint}
+              >
                 Afficher un indice ({hintsShown + 1}/{exercise.hints.length})
               </Button>
             )}
@@ -429,15 +434,27 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
 
         <div className="flex flex-wrap items-center gap-2 pt-2">
           {!done && (
-            <Button type="submit">Soumettre le rapport</Button>
+            <Button type="submit" className="min-h-11">
+              Soumettre le rapport
+            </Button>
           )}
           {canReveal && exercise.solution && (
-            <Button type="button" variant="ghost" onClick={onReveal}>
+            <Button
+              type="button"
+              variant="ghost"
+              className="min-h-11"
+              onClick={onReveal}
+            >
               Voir la correction
             </Button>
           )}
           {done && (
-            <Button type="button" variant="ghost" size="sm" onClick={onReset}>
+            <Button
+              type="button"
+              variant="ghost"
+              className="min-h-11"
+              onClick={onReset}
+            >
               Recommencer à zéro
             </Button>
           )}

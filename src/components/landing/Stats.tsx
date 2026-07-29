@@ -61,7 +61,7 @@ function StatCard({
       <div className="w-9 h-9 rounded-lg bg-accent/10 text-accent-2 flex items-center justify-center">
         {icon}
       </div>
-      <div className="mt-1 text-3xl font-extrabold font-mono tracking-tight text-fg">
+      <div className="mt-1 text-2xl font-bold tracking-tight text-fg">
         {value}
         {suffix}
       </div>
@@ -72,38 +72,29 @@ function StatCard({
 
 function FinalCta() {
   return (
-    <div className="mt-20 rounded-2xl border-base bg-gradient-to-br from-bg-2 via-bg-2 to-bg-3 p-10 md:p-14 text-center relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(600px circle at 50% 100%, rgb(108 99 255 / 0.35), transparent 60%)",
-        }}
-      />
-      <div className="relative">
-        <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-          Prêt à commencer ?
-        </h3>
-        <p className="mt-3 text-fg-2 max-w-xl mx-auto leading-relaxed">
-          React et Secure Vibe Coding sont ouverts dès maintenant. Crée un
-          compte pour synchroniser ta progression, ou commence en local : ton
-          avance reste dans le navigateur.
-        </p>
-        <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
-          <Link to="/react">
-            <Button>
-              <i className="fa-solid fa-atom" />
-              Ouvrir le parcours React
-              <ArrowRight size={14} />
-            </Button>
-          </Link>
-          <Link to="/secure-vibe-coding">
-            <Button variant="ghost" className="border border-violet-500/40">
-              <i className="fa-solid fa-shield-halved text-violet-400" />
-              Découvrir Secure Vibe Coding
-            </Button>
-          </Link>
-        </div>
+    <div className="mt-20 rounded-2xl border-base bg-bg-2 p-10 md:p-14 text-center">
+      <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+        Prêt à commencer ?
+      </h3>
+      <p className="mt-3 text-fg-2 max-w-xl mx-auto leading-relaxed">
+        React et Secure Vibe Coding sont ouverts dès maintenant. Crée un
+        compte pour synchroniser ta progression, ou commence en local : ton
+        avance reste dans le navigateur.
+      </p>
+      <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
+        <Link to="/react">
+          <Button>
+            <i className="fa-solid fa-atom" />
+            Ouvrir le parcours React
+            <ArrowRight size={14} />
+          </Button>
+        </Link>
+        <Link to="/secure-vibe-coding">
+          <Button variant="ghost" className="border border-violet-500/40">
+            <i className="fa-solid fa-shield-halved text-violet-400" />
+            Découvrir Secure Vibe Coding
+          </Button>
+        </Link>
       </div>
     </div>
   );

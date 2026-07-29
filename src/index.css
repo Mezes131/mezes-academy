@@ -174,12 +174,14 @@ body {
 .jsx { color: #f9a8d4; }
 .prop { color: #e2e8f0; }
 
-html.light .kw { color: #7c3aed; }
-html.light .fn { color: #2563eb; }
-html.light .str { color: #16a34a; }
+html.light .kw { color: #6d28d9; }
+html.light .fn { color: #1d4ed8; }
+html.light .str { color: #15803d; }
 html.light .cm { color: #64748b; }
-html.light .num { color: #ea580c; }
-html.light .jsx { color: #db2777; }
+html.light .num { color: #c2410c; }
+html.light .ty { color: #a16207; }
+html.light .op { color: #0e7490; }
+html.light .jsx { color: #be185d; }
 html.light .prop { color: #334155; }
 
 /* Text selection */

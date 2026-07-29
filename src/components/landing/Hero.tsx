@@ -23,13 +23,13 @@ export function Hero({ hasProgress }: HeroProps) {
           Mezes Academy
         </div>
 
-        <h1 className="text-[2.6rem] md:text-7xl font-extrabold leading-[0.95] tracking-tight max-w-4xl text-slate-950 dark:text-fg drop-shadow-[0_1px_6px_rgba(255,255,255,0.52)] dark:drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]">
+        <h1 className="text-[2.6rem] md:text-7xl font-extrabold leading-[0.95] tracking-tight max-w-4xl text-slate-950 dark:text-fg">
           Apprends à coder,
           <br />
           <span className="text-accent-2">sérieusement.</span>
         </h1>
 
-        <p className="mt-7 text-[17px] md:text-lg text-slate-50 dark:text-fg-2 leading-relaxed max-w-2xl drop-shadow-[0_1px_4px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
+        <p className="mt-7 text-[17px] md:text-lg text-slate-50 dark:text-fg-2 leading-relaxed max-w-2xl">
           Mezes Academy propose des parcours en ligne pour développeurs et
           développeuses qui veulent progresser en autonomie. Chaque concept est
           expliqué, pratiqué dans le navigateur, puis validé par un quiz avant
@@ -58,37 +58,14 @@ export function Hero({ hasProgress }: HeroProps) {
             <Button variant="ghost" className="border border-slate dark:border-base text-slate-50 dark:text-fg hover:text-slate-950 dark:hover:text-fg3">Voir le catalogue</Button>
           </a>
         </div>
-
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
-          <QuickPoint icon="fa-check-double" text="100% gratuit" />
-          <QuickPoint icon="fa-infinity" text="Accès illimité" />
-          <QuickPoint icon="fa-laptop-code" text="Exercices live" />
-          <QuickPoint icon="fa-chart-line" text="Progression suivie" />
-        </div>
       </div>
     </section>
   );
 }
 
-/* ─── Private subcomponents ─────────────────────────────────── */
-
-function QuickPoint({ icon, text }: { icon: string; text: string }) {
-  return (
-    <div className="flex items-center gap-2 text-[13px] text-slate-100 text-fg3 dark:text-fg-2">
-      <span className="w-7 h-7 rounded-lg border border-slate-400/30 dark:border-base bg-white/80 dark:bg-bg-2/70 backdrop-blur flex items-center justify-center">
-        <i className={`fa-solid ${icon} text-brand-core dark:text-accent-2 text-[12px]`} />
-      </span>
-      {text}
-    </div>
-  );
-}
-
 /**
- * Animated hero background.
- * - Autoplay muted video in `cover`, disabled for users who
- *   enabled reduced motion (respects prefers-reduced-motion).
- * - Dark/light gradient overlay to ensure text contrast.
- * - Accent gradient + code grid to preserve visual identity.
+ * Hero background: muted video + contrast overlay + subtle grid.
+ * Respects prefers-reduced-motion (video hidden).
  */
 function HeroBackdrop() {
   return (
@@ -109,15 +86,6 @@ function HeroBackdrop() {
 
       {/* Adaptive overlay: light in light mode, dark in dark mode for contrast */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/65 via-white/50 to-white/82 dark:from-bg/70 dark:via-bg/55 dark:to-bg/95" />
-
-      {/* Gradient radial accent violet */}
-      <div
-        className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full opacity-35 dark:opacity-50 mix-blend-normal dark:mix-blend-screen"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, rgb(108 99 255 / 0.45) 0%, rgb(77 163 255 / 0.25) 35%, transparent 65%)",
-        }}
-      />
 
       {/* Dotted code grid (subtle) */}
       <div

@@ -169,7 +169,7 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
   switch (block.kind) {
     case "title":
       return (
-        <h2 className="relative text-xl font-bold mt-10 mb-3 pl-4 before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-0.5 before:bg-accent">
+        <h2 className="text-xl font-bold mt-10 mb-3 tracking-tight">
           {block.text}
         </h2>
       );
