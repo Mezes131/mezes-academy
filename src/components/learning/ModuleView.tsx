@@ -136,14 +136,14 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       )}
 
       {/* ─── Footer : marquer comme lu ─────────────── */}
-      <div className="mt-10 pt-6 border-t border-base flex items-center gap-3">
+      <div className="mt-10 pt-6 flex items-center gap-3">
         {isRead ? (
           <div className="text-sm text-emerald-400 font-medium flex items-center gap-2">
             <CheckCircle2 size={16} /> Module marqué comme lu
           </div>
         ) : (
           <Button onClick={() => markModuleRead(module.id)} disabled={!canMarkRead}>
-            J'ai lu ce module
+            Terminer
           </Button>
         )}
         {!isRead && module.quiz && !canMarkRead && (
