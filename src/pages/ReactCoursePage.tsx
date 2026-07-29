@@ -17,6 +17,7 @@ import { useProgress } from "@/hooks/useProgress";
 import { cn, phaseAccent } from "@/lib/utils";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
+import { MobileCollapse } from "@/components/ui/MobileCollapse";
 import { CourseSyllabus } from "@/components/course/CourseSyllabus";
 
 /**
@@ -73,19 +74,19 @@ export function ReactCoursePage() {
   return (
     <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10 animate-fade-in">
       {/* ─── Course hero ────────────────────────── */}
-      <section className="relative mb-10 min-w-0">
+      <section className="relative mb-8 min-w-0 lg:mb-10">
         <div className="relative min-w-0">
-          <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-brand-core mb-3">
-            <i className="fa-solid fa-atom" />
+          <div className="mb-2 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-core sm:mb-3">
+            <i className="fa-solid fa-atom" aria-hidden="true" />
             Parcours React
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
-          <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.05] text-balance">
+          <h1 className="text-[1.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-4xl md:text-5xl">
             Ton parcours <em className="not-italic text-brand-core">React</em>,
             <br />
             du premier JSX à l&apos;architecture expert.
           </h1>
-          <p className="mt-5 text-[17px] text-fg-2 leading-relaxed max-w-2xl">
+          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-fg-2 sm:mt-5 sm:text-[17px]">
             {phaseCount} phases progressives, {moduleCount} modules, des dizaines
             d&apos;exercices live. Chaque notion est expliquée, pratiquée, puis
             validée. Ta progression est sauvegardée : tu reprends à tout moment
@@ -93,7 +94,7 @@ export function ReactCoursePage() {
           </p>
           {/* Module routes are auth-gated: RequireAuth redirects to
               /auth?next=… when the visitor is not signed in. */}
-          <div className="mt-7">
+          <div className="mt-5 sm:mt-7">
             <Link
               to={
                 nextModule
@@ -110,13 +111,21 @@ export function ReactCoursePage() {
         </div>
       </section>
 
-      {/* ─── Row: Resume + stats ─────────────── */}
-      <section className="grid lg:grid-cols-3 gap-4 mb-10">
-        {/* Card reprise (2/3) */}
+      {/* ─── Row: Resume + stats (desktop). Mobile: resume + % only. */}
+      <section className="mb-8 grid gap-3 lg:mb-10 lg:grid-cols-3 lg:gap-4">
         <ContinueCard nextModule={nextModule} hasStarted={hasStarted} />
 
-        {/* Stats rapides (1/3) */}
-        <div className="grid gap-3">
+        {/* Mobile: single progress strip (no redundant mini-stats) */}
+        <div className="flex items-center justify-between gap-3 rounded-xl border-base bg-bg-2 px-4 py-3 lg:hidden">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-fg-3">
+            Progression
+          </span>
+          <span className="font-mono text-lg font-extrabold text-accent-2">
+            {stats.percent}%
+          </span>
+        </div>
+
+        <div className="hidden gap-3 lg:grid">
           <MiniStat
             icon={<TrendingUp size={16} />}
             label="Progression globale"
@@ -138,14 +147,14 @@ export function ReactCoursePage() {
 
       {/* ─── Last activity ────────────────────── */}
       {lastActivity && (
-        <section className="mb-10">
+        <section className="mb-8 lg:mb-10">
           <SectionTitle icon="fa-clock-rotate-left" text="Dernière activité" />
           <LastActivityCard activity={lastActivity} />
         </section>
       )}
 
       {/* ─── Phase track ─────────────────── */}
-      <section className="mb-10 min-w-0">
+      <section className="mb-8 min-w-0 lg:mb-10">
         <div className="mb-4 flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <SectionTitle
             icon="fa-layer-group"
@@ -230,35 +239,42 @@ export function ReactCoursePage() {
         />
       )}
 
-      {/* ─── Shortcuts ───────────────────────────── */}
-      <section>
-        <SectionTitle icon="fa-bolt" text="Raccourcis" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <ShortcutCard
-            to="/react/progress"
-            icon={<TrendingUp size={16} />}
-            title="Progression"
-            desc="Stats détaillées, export / import JSON"
-          />
-          <ShortcutCard
-            to="/react/bookmarks"
-            icon={<Bookmark size={16} />}
-            title="Favoris"
-            desc={`${progress.bookmarks.length} module${progress.bookmarks.length > 1 ? "s" : ""} en favori`}
-          />
-          <ShortcutCard
-            to="/react/search"
-            icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
-            title="Recherche"
-            desc="Trouve un concept précis"
-          />
-          <ShortcutCard
-            to="/react/final-project"
-            icon={<Trophy size={16} />}
-            title="Projet final"
-            desc="Gate capstone + phase tutorielle"
-          />
+      {/* ─── Shortcuts: collapsed on mobile ───────── */}
+      <section className="mt-8 lg:mt-10">
+        <div className="hidden lg:block">
+          <SectionTitle icon="fa-bolt" text="Raccourcis" />
         </div>
+        <MobileCollapse
+          title="Raccourcis"
+          icon={<i className="fa-solid fa-bolt text-fg-3" aria-hidden="true" />}
+        >
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <ShortcutCard
+              to="/react/progress"
+              icon={<TrendingUp size={16} />}
+              title="Progression"
+              desc="Stats détaillées, export / import JSON"
+            />
+            <ShortcutCard
+              to="/react/bookmarks"
+              icon={<Bookmark size={16} />}
+              title="Favoris"
+              desc={`${progress.bookmarks.length} module${progress.bookmarks.length > 1 ? "s" : ""} en favori`}
+            />
+            <ShortcutCard
+              to="/react/search"
+              icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
+              title="Recherche"
+              desc="Trouve un concept précis"
+            />
+            <ShortcutCard
+              to="/react/final-project"
+              icon={<Trophy size={16} />}
+              title="Projet final"
+              desc="Gate capstone + phase tutorielle"
+            />
+          </div>
+        </MobileCollapse>
       </section>
     </div>
   );

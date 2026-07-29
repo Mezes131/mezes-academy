@@ -23,6 +23,7 @@ import {
 import { cn, phaseAccent } from "@/lib/utils";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
+import { MobileCollapse } from "@/components/ui/MobileCollapse";
 import { CourseSyllabus } from "@/components/course/CourseSyllabus";
 import type { Module, Phase } from "@/types";
 
@@ -107,9 +108,9 @@ export function SvcCoursePage() {
 
   return (
     <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10 animate-fade-in">
-      <section className="relative mb-10 min-w-0">
+      <section className="relative mb-8 min-w-0 lg:mb-10">
         <div className="relative min-w-0">
-          <div className="mb-3 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-violet-400">
+          <div className="mb-2 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-violet-400 sm:mb-3">
             <i className={`fa-solid ${meta.icon}`} aria-hidden="true" />
             Parcours Secure Vibe Coding
             <span className="text-fg-2"> Mezes Academy</span>
@@ -121,12 +122,12 @@ export function SvcCoursePage() {
             <br />
             sans la dette ni les failles.
           </h1>
-          <p className="mt-5 text-[17px] text-fg-2 leading-relaxed max-w-2xl prose-lesson">
+          <p className="prose-lesson mt-3 max-w-2xl text-[15px] leading-relaxed text-fg-2 sm:mt-5 sm:text-[17px]">
             {phaseCount} phases, {moduleCount} modules. Chaque notion est
             expliquée, vérifiée, puis validée. Ta progression est sauvegardée :
             tu reprends à tout moment là où tu t&apos;es arrêté.
           </p>
-          <div className="mt-7">
+          <div className="mt-5 sm:mt-7">
             <Link
               to={
                 nextModule
@@ -143,13 +144,23 @@ export function SvcCoursePage() {
         </div>
       </section>
 
-      <section className="grid lg:grid-cols-3 gap-4 mb-10">
+      <section className="mb-8 grid gap-3 lg:mb-10 lg:grid-cols-3 lg:gap-4">
         <ContinueCard
           basePath={basePath}
           nextModule={nextModule}
           hasStarted={hasStarted}
         />
-        <div className="grid gap-3">
+
+        <div className="flex items-center justify-between gap-3 rounded-xl border-base bg-bg-2 px-4 py-3 lg:hidden">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-fg-3">
+            Progression
+          </span>
+          <span className="font-mono text-lg font-extrabold text-violet-400">
+            {stats.percent}%
+          </span>
+        </div>
+
+        <div className="hidden gap-3 lg:grid">
           <MiniStat
             icon={<TrendingUp size={16} />}
             label="Progression globale"
@@ -170,13 +181,13 @@ export function SvcCoursePage() {
       </section>
 
       {lastActivity && (
-        <section className="mb-10">
+        <section className="mb-8 lg:mb-10">
           <SectionTitle icon="fa-clock-rotate-left" text="Dernière activité" />
           <LastActivityCard basePath={basePath} activity={lastActivity} />
         </section>
       )}
 
-      <section className="mb-10 min-w-0">
+      <section className="mb-8 min-w-0 lg:mb-10">
         <div className="mb-4 flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <SectionTitle
             icon="fa-layer-group"
@@ -259,28 +270,35 @@ export function SvcCoursePage() {
         />
       )}
 
-      <section className="mt-10">
-        <SectionTitle icon="fa-bolt" text="Raccourcis" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <ShortcutCard
-            to={`${basePath}/progress`}
-            icon={<TrendingUp size={16} />}
-            title="Progression"
-            desc="Stats détaillées, export / import JSON"
-          />
-          <ShortcutCard
-            to={`${basePath}/bookmarks`}
-            icon={<Bookmark size={16} />}
-            title="Favoris"
-            desc={`${bookmarksInCourse} module${bookmarksInCourse > 1 ? "s" : ""} en favori`}
-          />
-          <ShortcutCard
-            to={`${basePath}/search`}
-            icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
-            title="Recherche"
-            desc="Trouve un concept précis"
-          />
+      <section className="mt-8 lg:mt-10">
+        <div className="hidden lg:block">
+          <SectionTitle icon="fa-bolt" text="Raccourcis" />
         </div>
+        <MobileCollapse
+          title="Raccourcis"
+          icon={<i className="fa-solid fa-bolt text-fg-3" aria-hidden="true" />}
+        >
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <ShortcutCard
+              to={`${basePath}/progress`}
+              icon={<TrendingUp size={16} />}
+              title="Progression"
+              desc="Stats détaillées, export / import JSON"
+            />
+            <ShortcutCard
+              to={`${basePath}/bookmarks`}
+              icon={<Bookmark size={16} />}
+              title="Favoris"
+              desc={`${bookmarksInCourse} module${bookmarksInCourse > 1 ? "s" : ""} en favori`}
+            />
+            <ShortcutCard
+              to={`${basePath}/search`}
+              icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
+              title="Recherche"
+              desc="Trouve un concept précis"
+            />
+          </div>
+        </MobileCollapse>
       </section>
     </div>
   );
