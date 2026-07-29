@@ -50,7 +50,8 @@ function CourseCard({ course }: { course: CatalogCourse }) {
           : "opacity-80",
       )}
     >
-      <div className="flex items-start gap-3 sm:gap-4">
+      {/* Header: logo + title + badge on one row */}
+      <div className="flex items-center gap-3 sm:gap-4">
         <div
           className={cn(
             "w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0 text-xl sm:text-2xl border",
@@ -59,32 +60,39 @@ function CourseCard({ course }: { course: CatalogCourse }) {
             course.accent.border,
           )}
         >
-          <i className={`${course.iconFamily ?? "fa-solid"} ${course.icon}`} aria-hidden="true" />
+          <i
+            className={`${course.iconFamily ?? "fa-solid"} ${course.icon}`}
+            aria-hidden="true"
+          />
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className={cn("text-base sm:text-lg font-bold", course.accent.text)}>
-              {course.title}
-            </h3>
-            <StatusBadge status={course.status} eta={course.eta} />
-          </div>
-          <p className="text-[13px] text-fg-2 font-mono mt-0.5">
-            {course.tagline}
-          </p>
-          <p className="text-[13.5px] text-fg-2 leading-relaxed mt-3 line-clamp-4 sm:line-clamp-none">
-            {course.description}
-          </p>
+        <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+          <h3
+            className={cn(
+              "text-base sm:text-lg font-bold leading-snug",
+              course.accent.text,
+            )}
+          >
+            {course.title}
+          </h3>
+          <StatusBadge status={course.status} eta={course.eta} />
+        </div>
+      </div>
 
-          <div className="flex flex-wrap gap-1.5 mt-4">
-            {course.tags.map((tag) => (
-              <span
-                key={tag}
-                className="font-mono text-[11px] px-2 py-0.5 rounded bg-bg-3 text-fg-2 border-base"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+      {/* Body: full width under the header */}
+      <div className="mt-4">
+        <p className="text-[13px] text-fg-2 font-mono">{course.tagline}</p>
+        <p className="text-[13.5px] text-fg-2 leading-relaxed mt-2 line-clamp-4 sm:line-clamp-none">
+          {course.description}
+        </p>
+        <div className="flex flex-wrap gap-1.5 mt-4">
+          {course.tags.map((tag) => (
+            <span
+              key={tag}
+              className="font-mono text-[11px] px-2 py-0.5 rounded bg-bg-3 text-fg-2 border-base"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 
