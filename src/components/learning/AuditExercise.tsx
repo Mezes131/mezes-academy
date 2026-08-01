@@ -195,7 +195,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
 
   return (
     <section className="mb-6 rounded-xl border-base bg-bg-2 overflow-hidden">
-      <div className="flex items-start gap-3 border-b border-base px-5 py-4">
+      <div className="flex items-start gap-3 border-b-base px-5 py-4">
         <div className="mt-0.5 w-9 h-9 rounded-lg bg-accent/10 text-accent-2 flex items-center justify-center flex-shrink-0">
           <ClipboardList size={16} />
         </div>
@@ -215,7 +215,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
       </div>
 
       <div
-        className="px-5 py-4 border-b border-base prose-lesson text-[14px] max-w-none"
+        className="px-5 py-4 border-b-base prose-lesson text-[14px] max-w-none"
         dangerouslySetInnerHTML={{ __html: exercise.scenario }}
       />
 

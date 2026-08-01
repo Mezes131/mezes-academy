@@ -136,10 +136,32 @@ body {
   }
 }
 
-/* Custom border utility honoring theme variables */
+/* Custom border utility honoring theme variables.
+   `.border-base` is a full-box shorthand. For one side only, use
+   `.border-t-base` / `.border-b-base` / etc. (do not combine `border-t` + `border-base`). */
 @layer utilities {
   .border-base {
     border: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  }
+  .border-t-base {
+    border-top: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  }
+  .border-b-base {
+    border-bottom: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  }
+  .border-l-base {
+    border-left: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  }
+  .border-r-base {
+    border-right: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  }
+  .border-x-base {
+    border-left: 0.5px solid rgb(var(--border) / var(--border-alpha));
+    border-right: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  }
+  .border-y-base {
+    border-top: 0.5px solid rgb(var(--border) / var(--border-alpha));
+    border-bottom: 0.5px solid rgb(var(--border) / var(--border-alpha));
   }
   .border-base-strong {
     border: 0.5px solid rgb(var(--border-strong) / var(--border-strong-alpha));

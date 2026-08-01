@@ -9,7 +9,7 @@ import { MezesLogo } from "@/components/ui/MezesLogo";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 border-t border-base bg-bg-2/30">
+    <footer className="mt-24 border-t-base bg-bg-2/30">
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
@@ -55,7 +55,7 @@ export function Footer() {
           </FooterCol>
         </div>
 
-        <div className="mt-12 p-4 border-t border-base flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <div className="mt-12 p-4 border-t-base flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="text-[12px] text-fg-3 font-mono">
             © {year} Mezes Corporation Tous droits réservés.
           </div>

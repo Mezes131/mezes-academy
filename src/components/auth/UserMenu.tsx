@@ -113,7 +113,7 @@ export function UserMenu({
             "animate-fade-in origin-top-right",
           )}
         >
-          <div className="p-3 flex items-center gap-3 border-b border-base">
+          <div className="p-3 flex items-center gap-3 border-b-base">
             <Avatar initials={initials} size={40} src={avatarUrl} />
             <div className="min-w-0">
               <div className="text-[13px] font-semibold truncate">
@@ -155,7 +155,7 @@ export function UserMenu({
             />
           </div>
 
-          <div className="border-t border-base py-1.5">
+          <div className="border-t-base py-1.5">
             <button
               type="button"
               onClick={onRequestSignOut}

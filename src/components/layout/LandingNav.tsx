@@ -16,7 +16,7 @@ export function LandingNav() {
   const t = useT();
 
   return (
-    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b py-2 border-base">
+    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b-base py-2">
       <div className="max-w-6xl mx-auto h-full px-4 sm:px-6 flex items-center gap-3 sm:gap-6">
         <Link
           to="/"

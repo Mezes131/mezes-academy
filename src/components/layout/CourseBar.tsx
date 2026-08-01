@@ -48,7 +48,7 @@ export function CourseBar({
   }
 
   return (
-    <div className="w-full border-t border-base bg-bg">
+    <div className="w-full border-t-base bg-bg">
       <div className="mx-auto flex min-h-14 w-full justify-between items-center gap-12 px-4 sm:px-6">
         <div className="flex justify-start pr-1 sm:pr-2">
           <button

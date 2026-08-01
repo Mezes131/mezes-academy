@@ -254,7 +254,7 @@ export function Quiz({ quiz }: QuizProps) {
         })}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-base">
+      <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t-base">
         {!submitted ? (
           <Button onClick={submit} disabled={!allAnswered} className="min-h-11">
             Valider mes réponses

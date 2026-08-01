@@ -140,7 +140,7 @@ export function CodeExercise({
   return (
     <div className="rounded-xl border-base bg-bg-2 overflow-hidden my-6">
       {/* ─── Header ───────────────────────────────────────── */}
-      <div className="p-5 border-b border-base">
+      <div className="p-5 border-b-base">
         <div className="flex items-start gap-3 mb-2">
           <div
             className={cn(
@@ -277,7 +277,7 @@ export function CodeExercise({
       )}
 
       {/* ─── Actions ──────────────────────────────────────── */}
-      <div className="p-4 border-t border-base flex items-center gap-2 flex-wrap">
+      <div className="p-4 border-t-base flex items-center gap-2 flex-wrap">
         <Button
           size="sm"
           variant="ghost"
@@ -415,8 +415,8 @@ function RunPanel({
   }
 
   return (
-    <div className="border-t border-base bg-bg">
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-base">
+    <div className="border-t-base bg-bg">
+      <div className="flex items-center gap-2 px-3 py-2 border-b-base">
         <Button
           size="sm"
           leftIcon={<Play size={13} />}
@@ -562,8 +562,8 @@ function SolutionPanel({
   if (hiddenByChallenge) return null;
 
   return (
-    <div className="border-t border-base bg-bg-3">
-      <div className="px-4 py-2 border-b border-base flex items-center gap-2">
+    <div className="border-t-base bg-bg-3">
+      <div className="px-4 py-2 border-b-base flex items-center gap-2">
         <span className="text-[11px] font-mono uppercase tracking-wider text-accent-2 inline-flex items-center gap-1">
           <Eye size={12} aria-hidden="true" />
           Solution (lecture seule)
@@ -734,14 +734,14 @@ function ConsoleWrapper() {
       <button
         type="button"
         onClick={() => setShow(true)}
-        className="w-full min-h-11 text-left px-4 py-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg-2 border-t border-base bg-bg"
+        className="w-full min-h-11 text-left px-4 py-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg-2 border-t-base bg-bg"
       >
         ▸ Afficher la console
       </button>
     );
   }
   return (
-    <div className="border-t border-base">
+    <div className="border-t-base">
       <SandpackConsole style={{ height: 120 }} />
     </div>
   );

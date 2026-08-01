@@ -45,7 +45,7 @@ export function CourseLayout({
     <CourseAreaContext.Provider value={resolved}>
       <div className="min-h-screen flex flex-col pb-20 lg:pb-0 overflow-x-clip max-w-full">
         <DeferredFontAwesome />
-        <header className="sticky top-0 z-50 bg-bg border-b border-base">
+        <header className="sticky top-0 z-50 bg-bg border-b-base">
           <CourseTopNav />
           <div className="hidden lg:block">
             <CourseBar

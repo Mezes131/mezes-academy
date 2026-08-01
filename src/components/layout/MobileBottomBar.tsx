@@ -40,7 +40,7 @@ export function MobileBottomBar({
       className={cn(
         "fixed inset-x-0 bottom-0 z-[60] w-full max-w-full",
         hideFromClassName,
-        "border-t border-base bg-bg",
+        "border-t-base bg-bg",
         "pb-[max(0.5rem,env(safe-area-inset-bottom))]",
       )}
     >

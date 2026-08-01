@@ -10,7 +10,7 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative py-12 md:py-20 bg-bg-2/30 border-y border-base"
+      className="relative py-12 md:py-20 bg-bg-2/30 border-y-base"
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-14 max-w-2xl">
