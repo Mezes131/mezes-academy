@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { getCapstoneEligibility } from "@/lib/capstone";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
@@ -11,6 +12,7 @@ const TUTORIAL_PHASE_ID = "react-tooling";
 
 export function CapstoneGatePage() {
   const { progress } = useProgress();
+  const { basePath } = useCourseArea();
   const eligibility = getCapstoneEligibility(progress);
 
   const ratioValue =
@@ -113,7 +115,7 @@ export function CapstoneGatePage() {
               capstone.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Link to={`/react/phase/${TUTORIAL_PHASE_ID}`}>
+              <Link to={`${basePath}/phase/${TUTORIAL_PHASE_ID}`}>
                 <Button size="sm" variant="subtle">
                   Ouvrir la phase Transition Pro
                   <ArrowRight size={14} />

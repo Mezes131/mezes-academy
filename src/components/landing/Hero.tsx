@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 interface HeroProps {
   hasProgress: boolean;
@@ -12,6 +14,9 @@ interface HeroProps {
  * LCP is the headline; video loads after idle on desktop only (8MB source).
  */
 export function Hero({ hasProgress }: HeroProps) {
+  const t = useT();
+  const lp = useLocalePath();
+
   return (
     <section className="relative overflow-hidden">
       <HeroBackdrop />
@@ -20,57 +25,46 @@ export function Hero({ hasProgress }: HeroProps) {
         <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-brand-core dark:text-accent-2 mb-5 flex items-center gap-2">
           <span className="inline-block w-6 h-px bg-brand-core/60 dark:bg-accent-2/60" />
           <GraduationCap size={14} aria-hidden="true" />
-          Mezes Academy
+          {t("landing.heroEyebrow")}
         </div>
 
         <h1 className="text-[2.6rem] md:text-7xl font-extrabold leading-[0.95] tracking-tight max-w-4xl text-slate-950 dark:text-fg">
-          Apprends à construire
+          {t("landing.heroTitleLine1")}
           <br />
-          <span className="text-accent-2">des solutions performantes.</span>
+          <span className="text-accent-2">{t("landing.heroTitleLine2")}</span>
         </h1>
 
         <p className="mt-7 text-[17px] md:text-lg text-slate-800 dark:text-fg-2 leading-relaxed max-w-2xl">
-          Que tu veuilles solidifier ton React ou apprendre à construire avec
-          l&apos;IA sans te faire piéger, on t&apos;accompagne pas à pas. Tu lis
-          une notion, tu la pratiques dans le navigateur, tu valides, et tu
-          reprends plus tard pile où tu t&apos;étais arrêté.
+          {t("landing.heroBody")}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Link to="/react">
+          <Link to={lp("/react")}>
             <Button size="md">
-              {hasProgress ? "Continuer React" : "Parcours React"}
+              {hasProgress ? t("landing.ctaReactContinue") : t("landing.ctaReact")}
               <ArrowRight size={16} aria-hidden="true" />
             </Button>
           </Link>
-          <Link to="/secure-vibe-coding">
+          <Link to={lp("/secure-vibe-coding")}>
             <Button
               variant="ghost"
               size="md"
               className="border border-violet-500/40 text-slate-900 dark:text-fg hover:bg-bg-3"
             >
-              <Shield size={16} className="text-violet-600 dark:text-violet-400" aria-hidden="true" />
-              Secure Vibe Coding
+              <Shield
+                size={16}
+                className="text-violet-600 dark:text-violet-400"
+                aria-hidden="true"
+              />
+              {t("landing.ctaSvc")}
             </Button>
           </Link>
-          <a href="#catalog">
-            <Button
-              variant="ghost"
-              className="border border-slate-400/50 dark:border-base text-slate-900 dark:text-fg hover:bg-bg-3"
-            >
-              Voir les parcours
-            </Button>
-          </a>
         </div>
       </div>
     </section>
   );
 }
 
-/**
- * Atmosphere first (CSS), optional deferred video.
- * Skips video when reduced-motion, Save-Data, or narrow viewports.
- */
 function HeroBackdrop() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);

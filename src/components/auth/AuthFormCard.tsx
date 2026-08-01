@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { Divider } from "@/components/ui/Divider";
 import { useAuth, type OAuthProvider } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
 import { humanizeAuthError } from "@/lib/authErrors";
 import { AuthModeSwitcher, type AuthMode } from "./AuthModeSwitcher";
 import { OAuthProviders } from "./OAuthProviders";
@@ -35,6 +36,7 @@ export function AuthFormCard({
   showOAuthProviders = true,
 }: AuthFormCardProps) {
   const navigate = useNavigate();
+  const lp = useLocalePath();
   const { signIn, signUp, signInWithProvider } = useAuth();
 
   const [oauthBusy, setOauthBusy] = useState<OAuthProvider | null>(null);
@@ -74,11 +76,12 @@ export function AuthFormCard({
     setInfo(null);
     setOauthBusy(provider);
     try {
+      const defaultNext = lp("/react");
       const suffix =
-        nextPath && nextPath !== "/react"
+        nextPath && nextPath !== defaultNext && nextPath !== "/react"
           ? `?next=${encodeURIComponent(nextPath)}`
           : "";
-      const redirectTo = `${window.location.origin}/auth${suffix}`;
+      const redirectTo = `${window.location.origin}${lp("/auth")}${suffix}`;
       await signInWithProvider(provider, { redirectTo });
       // Browser redirect happens on success; if we're still here, something
       // unusual happened : reset UI state for safety.

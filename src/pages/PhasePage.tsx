@@ -11,7 +11,7 @@ export function PhasePage() {
   const phase = phases.find((p) => p.id === phaseId);
   const { progress } = useProgress();
 
-  if (!phase) return <Navigate to="/" replace />;
+  if (!phase) return <Navigate to={basePath} replace />;
 
   const accent = phaseAccent(phase.color);
   // Phase stats computed locally so any course's phases work (the

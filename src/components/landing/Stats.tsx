@@ -1,39 +1,42 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Atom, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 /**
  * Landing closing CTA. One job: get the learner into a track.
  */
 export function Stats() {
+  const t = useT();
+  const lp = useLocalePath();
+
   return (
     <section className="relative py-12 md:py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="rounded-2xl border-base bg-bg-2 p-10 md:p-14 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            On y va ?
+            {t("landing.ctaTitle")}
           </h2>
           <p className="mt-3 text-fg-2 max-w-xl mx-auto leading-relaxed">
-            React et Secure Vibe Coding t&apos;attendent. Crée un compte si tu
-            veux synchroniser ton avance, ou commence tout de suite en local :
-            rien ne se perd dans le navigateur.
+            {t("landing.ctaBody")}
           </p>
           <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
-            <Link to="/react">
+            <Link to={lp("/react")}>
               <Button>
                 <Atom size={16} aria-hidden="true" />
-                C&apos;est parti pour React
+                {t("landing.ctaOpenReact")}
                 <ArrowRight size={14} aria-hidden="true" />
               </Button>
             </Link>
-            <Link to="/secure-vibe-coding">
+            <Link to={lp("/secure-vibe-coding")}>
               <Button variant="ghost" className="border border-violet-500/40">
                 <Shield
                   size={16}
                   className="text-violet-600 dark:text-violet-400"
                   aria-hidden="true"
                 />
-                Essayer Secure Vibe Coding
+                {t("landing.ctaOpenSvc")}
               </Button>
             </Link>
           </div>

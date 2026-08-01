@@ -4,6 +4,7 @@ import { AuthBenefits } from "@/components/auth/AuthBenefits";
 import { AuthFormCard } from "@/components/auth/AuthFormCard";
 import type { AuthMode } from "@/components/auth/AuthModeSwitcher";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 /**
  * Entry route for authentication. Pure shell:
@@ -17,10 +18,11 @@ import { useAuth } from "@/hooks/useAuth";
 export function AuthPage() {
   const [searchParams] = useSearchParams();
   const { configured, user, loading } = useAuth();
+  const lp = useLocalePath();
 
   const nextPath = useMemo(
-    () => searchParams.get("next") || "/react",
-    [searchParams],
+    () => searchParams.get("next") || lp("/react"),
+    [searchParams, lp],
   );
   const [mode, setMode] = useState<AuthMode>(() =>
     searchParams.get("mode") === "register" ? "register" : "login",

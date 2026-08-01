@@ -1,5 +1,7 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import { useLocale } from "./LocaleProvider";
 import { useT } from "./useT";
+import { switchLocalePath } from "./localePath";
 import type { Locale } from "./types";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +10,20 @@ const options: Locale[] = ["fr", "en"];
 export function LanguageSwitcher({ className }: { className?: string }) {
   const { locale, setLocale } = useLocale();
   const t = useT();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function select(code: Locale) {
+    if (code === locale) return;
+    const next = switchLocalePath(
+      location.pathname,
+      location.search,
+      location.hash,
+      code,
+    );
+    setLocale(code);
+    navigate(next);
+  }
 
   return (
     <div
@@ -22,7 +38,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         <button
           key={code}
           type="button"
-          onClick={() => setLocale(code)}
+          onClick={() => select(code)}
           aria-pressed={locale === code}
           className={cn(
             "min-w-11 min-h-11 rounded-md px-2 transition",

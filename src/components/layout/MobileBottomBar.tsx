@@ -1,6 +1,7 @@
 import { NavLink, Link, useLocation } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { stripLocalePrefix } from "@/i18n/localePath";
 
 export type BottomNavItem =
   | {
@@ -33,6 +34,7 @@ export function MobileBottomBar({
   hideFromClassName?: string;
 }) {
   const location = useLocation();
+  const barePath = stripLocalePrefix(location.pathname);
 
   return (
     <nav
@@ -70,7 +72,7 @@ export function MobileBottomBar({
 
           const hashActive =
             item.hash !== undefined &&
-            location.pathname === "/" &&
+            barePath === "/" &&
             location.hash === item.hash;
 
           if (item.hash) {
@@ -92,16 +94,20 @@ export function MobileBottomBar({
             );
           }
 
+          const isHome =
+            item.end &&
+            (item.to === "/" ||
+              item.to === "/en" ||
+              item.to.endsWith("/en") ||
+              item.to.endsWith("/"));
+
           return (
             <li key={item.to} className="flex-1 min-w-0">
               <NavLink
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) => {
-                  const active =
-                    item.end && (item.to === "/" || item.to.endsWith("/"))
-                      ? isActive && !location.hash
-                      : isActive;
+                  const active = isHome ? isActive && !location.hash : isActive;
                   return cn(
                     "flex w-full min-h-14 flex-col items-center justify-center gap-0.5 px-1",
                     "text-[10px] font-medium tracking-wide",
@@ -111,10 +117,7 @@ export function MobileBottomBar({
                 }}
               >
                 {({ isActive }) => {
-                  const active =
-                    item.end && (item.to === "/" || item.to.endsWith("/"))
-                      ? isActive && !location.hash
-                      : isActive;
+                  const active = isHome ? isActive && !location.hash : isActive;
                   return (
                     <>
                       <Icon

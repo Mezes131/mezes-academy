@@ -4,6 +4,7 @@ import { getPhase } from "@/data/phases";
 import type { PhaseId } from "@/types";
 import { isCodeExercise } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "@/components/layout/courseArea";
 import { CodeExercise as ExerciseCard } from "@/components/learning/CodeExercise";
 import { Button } from "@/components/ui/Button";
 import { cn, phaseAccent } from "@/lib/utils";
@@ -13,6 +14,7 @@ const CHALLENGE_SIZE = 3;
 
 export function PhaseChallengePage() {
   const { phaseId } = useParams<{ phaseId: string }>();
+  const { basePath } = useCourseArea();
   const phase = getPhase(phaseId as PhaseId);
   const { progress, saveChallengeScore } = useProgress();
   const [resultMap, setResultMap] = useState<Record<string, boolean>>({});
@@ -33,7 +35,7 @@ export function PhaseChallengePage() {
     [pool],
   );
 
-  if (!phase) return <Navigate to="/" replace />;
+  if (!phase) return <Navigate to={basePath} replace />;
 
   const accent = phaseAccent(phase.color);
 
@@ -59,7 +61,7 @@ export function PhaseChallengePage() {
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       <div className="flex items-center justify-between gap-3 mb-4">
         <Link
-          to={`/react/phase/${phaseIdSafe}`}
+          to={`${basePath}/phase/${phaseIdSafe}`}
           className="text-[12px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg transition inline-flex items-center gap-1.5"
         >
           <ArrowLeft size={14} />

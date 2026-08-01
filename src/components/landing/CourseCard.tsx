@@ -2,10 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { CatalogCourse } from "@/data/catalog";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 import { StatusBadge } from "./StatusBadge";
 
 export function CourseCard({ course }: { course: CatalogCourse }) {
+  const t = useT();
+  const lp = useLocalePath();
   const isActive = course.status === "active";
+  const href = course.href ? lp(course.href) : undefined;
+
   const cardInner = (
     <div
       className={cn(
@@ -68,11 +74,11 @@ export function CourseCard({ course }: { course: CatalogCourse }) {
         </span>
         <span className="inline-flex items-center gap-1.5">
           <i className="fa-solid fa-layer-group text-fg-2" aria-hidden="true" />{" "}
-          {course.modules} modules
+          {course.modules} {t("common.modules")}
         </span>
         {isActive && (
           <span className="sm:ml-auto text-accent-2 inline-flex items-center gap-1 font-semibold normal-case">
-            Accéder
+            {t("common.access")}
             <ArrowRight
               size={13}
               className="group-hover:translate-x-0.5 transition"
@@ -84,9 +90,9 @@ export function CourseCard({ course }: { course: CatalogCourse }) {
     </div>
   );
 
-  if (isActive && course.href) {
+  if (isActive && href) {
     return (
-      <Link to={course.href} className="block h-full">
+      <Link to={href} className="block h-full">
         {cardInner}
       </Link>
     );

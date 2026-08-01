@@ -5,6 +5,7 @@ import { UserMenu } from "@/components/auth/UserMenu";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { useAuth } from "@/hooks/useAuth";
 import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 import { useCourseArea } from "./courseArea";
 import { cn } from "@/lib/utils";
 
@@ -17,12 +18,13 @@ export function CourseTopNav() {
   const { user } = useAuth();
   const location = useLocation();
   const t = useT();
+  const lp = useLocalePath();
 
   return (
     <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-[1fr_auto_1fr] sm:grid-cols-3 items-center gap-2 px-4 sm:px-6">
       <div className="flex min-w-0 items-center gap-2 sm:gap-3 justify-self-start">
         <Link
-          to="/"
+          to={lp("/")}
           aria-label="Mezes Academy"
           className="flex items-center gap-2 flex-shrink-0"
         >
@@ -55,7 +57,9 @@ export function CourseTopNav() {
           </>
         ) : (
           <Link
-            to={`/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`}
+            to={lp(
+              `/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`,
+            )}
             className="flex items-center gap-1.5 rounded-lg border-base min-h-11 px-3 text-[13px] font-semibold hover:bg-bg-3 transition"
           >
             <LogIn size={14} aria-hidden="true" />

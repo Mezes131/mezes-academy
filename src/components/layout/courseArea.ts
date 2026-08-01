@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import type { Phase } from "@/types";
 import type { Locale } from "@/i18n/types";
+import { localePath } from "@/i18n/localePath";
 import { findCourse } from "@/data";
 
 /**
@@ -9,7 +10,7 @@ import { findCourse } from "@/data";
  */
 export interface CourseArea {
   courseId: string;
-  /** Route prefix of the learning area, e.g. "/react". */
+  /** Route prefix of the learning area, e.g. "/react" or "/en/react". */
   basePath: string;
   navTitle: string;
   navIcon: string;
@@ -53,12 +54,22 @@ export const svcCourseArea: CourseAreaBase = {
   showFinalProject: false,
 };
 
+const navTitleEn: Record<string, string> = {
+  react: "React from zero to expert",
+  svc: "Secure Vibe Coding",
+};
+
 export function resolveCourseArea(
   base: CourseAreaBase,
   locale: Locale,
 ): CourseArea {
   return {
     ...base,
+    basePath: localePath(base.basePath, locale),
+    navTitle:
+      locale === "en"
+        ? (navTitleEn[base.courseId] ?? base.navTitle)
+        : base.navTitle,
     phases: findCourse(base.courseId, locale)?.phases ?? [],
   };
 }

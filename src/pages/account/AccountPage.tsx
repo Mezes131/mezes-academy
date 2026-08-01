@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
 import { ProfileHeader } from "../../components/account/ProfileHeader";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { PreferencesTab } from "./tabs/PreferencesTab";
@@ -32,6 +33,7 @@ const TABS: Array<{
  */
 export function AccountPage() {
   const { user, profile, refreshProfile } = useAuth();
+  const lp = useLocalePath();
   const [searchParams, setSearchParams] = useSearchParams();
   const [toast, setToast] = useState<{
     kind: "success" | "error";
@@ -73,7 +75,7 @@ export function AccountPage() {
     <div className="relative min-h-[80vh]">
       <div className="max-w-5xl mx-auto px-5 sm:px-8 py-10">
         <Link
-          to="/react"
+          to={lp("/react")}
           className="inline-flex items-center gap-1.5 text-[12px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg transition mb-6"
         >
           <ArrowLeft size={12} />

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/hooks/useProgress";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 export interface SidePanelProps {
   completeness: number;
@@ -20,6 +21,7 @@ export interface SidePanelProps {
  */
 export function SidePanel({ completeness, className }: SidePanelProps) {
   const { progress, stats } = useProgress();
+  const lp = useLocalePath();
   const totalQuizzes = Object.keys(progress.quizScores).length;
 
   return (
@@ -74,7 +76,7 @@ export function SidePanel({ completeness, className }: SidePanelProps) {
       </div>
 
       <Link
-        to="/react/progress"
+        to={lp("/react/progress")}
         className="inline-flex items-center justify-center gap-1.5 w-full h-9 rounded-md bg-accent text-white text-[12px] font-semibold hover:bg-accent/90 transition"
       >
         Voir tous les détails

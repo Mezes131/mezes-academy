@@ -4,10 +4,12 @@ import { AlertTriangle, Loader2, RefreshCw } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { Button } from "@/components/ui/Button";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 export function RequireAuth({ children }: { children: ReactNode }) {
   const { user, loading, configured } = useAuth();
   const location = useLocation();
+  const lp = useLocalePath();
 
   if (!configured) {
     return <NotConfigured />;
@@ -19,7 +21,12 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 
   if (!user) {
     const next = `${location.pathname}${location.search}`;
-    return <Navigate to={`/auth?next=${encodeURIComponent(next)}`} replace />;
+    return (
+      <Navigate
+        to={lp(`/auth?next=${encodeURIComponent(next)}`)}
+        replace
+      />
+    );
   }
 
   return <>{children}</>;

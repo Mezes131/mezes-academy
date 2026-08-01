@@ -10,7 +10,7 @@ export function ModulePage() {
   const { basePath, phases } = area;
   const found = moduleId ? findAreaModule(area, moduleId) : undefined;
 
-  if (!found) return <Navigate to="/" replace />;
+  if (!found) return <Navigate to={basePath} replace />;
 
   const { phase, module } = found;
 

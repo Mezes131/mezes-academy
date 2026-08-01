@@ -9,6 +9,7 @@ import {
   UserCircle,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
 import { getDisplayName, getInitials } from "@/lib/identity";
 import { cn } from "@/lib/utils";
 import { ConfirmDialog } from "@/components/ui/Modal";
@@ -36,6 +37,7 @@ export function UserMenu({
   size = 32,
 }: UserMenuProps) {
   const { user, profile, signOut } = useAuth();
+  const lp = useLocalePath();
   const [open, setOpen] = useState(false);
   const [confirmingSignOut, setConfirmingSignOut] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -130,25 +132,25 @@ export function UserMenu({
 
           <div className="py-1.5">
             <MenuItem
-              to="/account"
+              to={lp("/account")}
               icon={<UserCircle size={14} />}
               label="Mon profil"
               onClick={() => setOpen(false)}
             />
             <MenuItem
-              to="/account?tab=preferences"
+              to={lp("/account?tab=preferences")}
               icon={<SlidersHorizontal size={14} />}
               label="Préférences"
               onClick={() => setOpen(false)}
             />
             <MenuItem
-              to="/react/progress"
+              to={lp("/react/progress")}
               icon={<TrendingUp size={14} />}
               label="Ma progression"
               onClick={() => setOpen(false)}
             />
             <MenuItem
-              to="/react/bookmarks"
+              to={lp("/react/bookmarks")}
               icon={<BookMarked size={14} />}
               label="Mes favoris"
               onClick={() => setOpen(false)}

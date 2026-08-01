@@ -13,6 +13,7 @@ import { useProgress } from "@/hooks/useProgress";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
 import { phases } from "@/data/phases";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 /**
  * Overview of the student's account: learning stats + what's missing to
@@ -21,6 +22,7 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 export function OverviewTab() {
   const { profile } = useAuth();
   const { progress, stats, phaseStats } = useProgress();
+  const lp = useLocalePath();
 
   if (!profile) return null;
 
@@ -94,7 +96,7 @@ export function OverviewTab() {
             )}
           </div>
           <Link
-            to="/react"
+            to={lp("/react")}
             className="self-center inline-flex items-center gap-1.5 px-3 h-8 rounded-md bg-accent text-white text-[12px] font-semibold hover:bg-accent/90 transition"
           >
             Continuer
@@ -114,7 +116,7 @@ export function OverviewTab() {
             return (
               <Link
                 key={phase.id}
-                to={`/react/phase/${phase.id}`}
+                to={lp(`/react/phase/${phase.id}`)}
                 className="flex items-center gap-4 rounded-xl border-base bg-bg-2 p-4 hover:border-accent/30 transition"
               >
                 <div

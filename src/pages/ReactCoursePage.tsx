@@ -19,6 +19,7 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { MobileCollapse } from "@/components/ui/MobileCollapse";
 import { CourseSyllabus } from "@/components/course/CourseSyllabus";
+import { useCourseArea } from "@/components/layout/courseArea";
 
 /**
  * React track dashboard (formerly HomePage).
@@ -26,6 +27,7 @@ import { CourseSyllabus } from "@/components/course/CourseSyllabus";
  * by phase, and shortcuts to cross-cutting pages.
  */
 export function ReactCoursePage() {
+  const { basePath } = useCourseArea();
   const { progress, stats, phaseStats } = useProgress();
   const phaseCount = phases.length;
   const moduleCount = phases.reduce((sum, phase) => sum + phase.modules.length, 0);
@@ -98,8 +100,8 @@ export function ReactCoursePage() {
             <Link
               to={
                 nextModule
-                  ? `/react/module/${nextModule.module.id}`
-                  : "/react/final-project"
+                  ? `${basePath}/module/${nextModule.module.id}`
+                  : `${basePath}/final-project`
               }
             >
               <Button size="md">
@@ -162,7 +164,7 @@ export function ReactCoursePage() {
             noMargin
           />
           <Link
-            to="/react/progress"
+            to={`${basePath}/progress`}
             className="inline-flex min-h-11 shrink-0 items-center gap-1 self-start text-[13px] text-accent-2 hover:underline sm:min-h-0 sm:self-auto"
           >
             <span className="sm:hidden">Détails</span>
@@ -177,7 +179,7 @@ export function ReactCoursePage() {
             return (
               <Link
                 key={phase.id}
-                to={`/react/phase/${phase.id}`}
+                to={`${basePath}/phase/${phase.id}`}
                 className={cn(
                   "group relative block min-w-0 overflow-hidden rounded-xl border-base bg-bg-2 p-4 sm:p-5 transition",
                   "hover:border-accent/30 hover:-translate-y-0.5 duration-200",
@@ -234,7 +236,7 @@ export function ReactCoursePage() {
             program={program}
             livePhases={phases}
             moduleHref={(moduleId) =>
-              findModule(moduleId) ? `/react/module/${moduleId}` : undefined
+              findModule(moduleId) ? `${basePath}/module/${moduleId}` : undefined
             }
             description="Le programme complet détaillé: phases, modules, leçons, objectifs, quiz, exercices de synthèse et projets."
           />
@@ -252,25 +254,25 @@ export function ReactCoursePage() {
         >
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <ShortcutCard
-              to="/react/progress"
+              to={`${basePath}/progress`}
               icon={<TrendingUp size={16} />}
               title="Progression"
               desc="Stats détaillées, export / import JSON"
             />
             <ShortcutCard
-              to="/react/bookmarks"
+              to={`${basePath}/bookmarks`}
               icon={<Bookmark size={16} />}
               title="Favoris"
               desc={`${progress.bookmarks.length} module${progress.bookmarks.length > 1 ? "s" : ""} en favori`}
             />
             <ShortcutCard
-              to="/react/search"
+              to={`${basePath}/search`}
               icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
               title="Recherche"
               desc="Trouve un concept précis"
             />
             <ShortcutCard
-              to="/react/final-project"
+              to={`${basePath}/final-project`}
               icon={<Trophy size={16} />}
               title="Projet final"
               desc="Gate capstone + phase tutorielle"
@@ -341,6 +343,7 @@ function ContinueCard({
   nextModule: { phase: NonNullable<ReturnType<typeof findModule>>["phase"]; module: NonNullable<ReturnType<typeof findModule>>["module"] } | null;
   hasStarted: boolean;
 }) {
+  const { basePath } = useCourseArea();
   if (!nextModule) {
     return (
       <div className="flex min-w-0 flex-col gap-4 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-bg-2 p-5 sm:flex-row sm:items-center sm:gap-5 sm:p-6 md:p-8 lg:col-span-2">
@@ -366,7 +369,7 @@ function ContinueCard({
   const accent = phaseAccent(nextModule.phase.color);
   return (
     <Link
-      to={`/react/module/${nextModule.module.id}`}
+      to={`${basePath}/module/${nextModule.module.id}`}
       className="group relative min-w-0 overflow-hidden rounded-2xl border-base bg-bg-2 p-5 transition duration-200 hover:border-accent/40 sm:p-6 md:p-7 lg:col-span-2"
     >
       <div className="relative flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
@@ -423,6 +426,7 @@ function LastActivityCard({
   };
 }) {
   const accent = phaseAccent(activity.phase.color);
+  const { basePath } = useCourseArea();
   const passed =
     activity.score.total > 0 &&
     activity.score.correct / activity.score.total >= 0.7;
@@ -430,7 +434,7 @@ function LastActivityCard({
 
   return (
     <Link
-      to={`/react/module/${activity.module.id}`}
+      to={`${basePath}/module/${activity.module.id}`}
       className="flex items-start gap-4 rounded-xl border-base bg-bg-2 p-5 hover:border-accent/30 transition group"
     >
       <div
