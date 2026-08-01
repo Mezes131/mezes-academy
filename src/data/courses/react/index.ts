@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/types";
 import { reactMeta } from "./meta";
 import { reactMetaEn } from "./meta.en";
 import { reactProgram } from "./program";
+import { reactProgramEn } from "./program.en";
 import { introPhase as introPhaseFr } from "./phases/intro";
 import { corePhase as corePhaseFr } from "./phases/core";
 import { typescriptPhase as typescriptPhaseFr } from "./phases/typescript";
@@ -56,7 +57,7 @@ export function buildReactCourse(locale: Locale = "fr"): Course {
     id: "react",
     slug: "react",
     meta: locale === "en" ? reactMetaEn : reactMeta,
-    program: reactProgram,
+    program: locale === "en" ? reactProgramEn : reactProgram,
     phases: phaseOrder.map((id) => authored[id]).filter(Boolean),
   };
 }

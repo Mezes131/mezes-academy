@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { getPhase } from "@/data/phases";
 import type { PhaseId } from "@/types";
 import { isCodeExercise } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
@@ -16,8 +15,8 @@ const CHALLENGE_SIZE = 3;
 export function PhaseChallengePage() {
   const t = useT();
   const { phaseId } = useParams<{ phaseId: string }>();
-  const { basePath } = useCourseArea();
-  const phase = getPhase(phaseId as PhaseId);
+  const { basePath, phases } = useCourseArea();
+  const phase = phases.find((p) => p.id === (phaseId as PhaseId));
   const { progress, saveChallengeScore } = useProgress();
   const [resultMap, setResultMap] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);

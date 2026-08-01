@@ -12,15 +12,16 @@ import {
   Trophy,
 } from "lucide-react";
 import { findCourseProgram } from "@/data";
-import { phases, findModule } from "@/data/phases";
 import { useProgress } from "@/hooks/useProgress";
+import { useLocale } from "@/i18n/LocaleProvider";
 import { useT } from "@/i18n/useT";
 import { cn, phaseAccent } from "@/lib/utils";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { MobileCollapse } from "@/components/ui/MobileCollapse";
 import { CourseSyllabus } from "@/components/course/CourseSyllabus";
-import { useCourseArea } from "@/components/layout/courseArea";
+import { findAreaModule, useCourseArea } from "@/components/layout/courseArea";
+import type { Module, Phase } from "@/types";
 
 /**
  * React track dashboard (formerly HomePage).
@@ -29,11 +30,13 @@ import { useCourseArea } from "@/components/layout/courseArea";
  */
 export function ReactCoursePage() {
   const t = useT();
-  const { basePath } = useCourseArea();
+  const { locale } = useLocale();
+  const area = useCourseArea();
+  const { basePath, phases } = area;
   const { progress, stats, phaseStats } = useProgress();
   const phaseCount = phases.length;
   const moduleCount = phases.reduce((sum, phase) => sum + phase.modules.length, 0);
-  const program = findCourseProgram("react");
+  const program = findCourseProgram("react", locale);
 
   // ─── Compute the "next module to do" ──────────────────────
   const nextModule = (() => {
@@ -82,7 +85,7 @@ export function ReactCoursePage() {
         <div className="relative min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-core sm:mb-3">
             <i className="fa-solid fa-atom" aria-hidden="true" />
-            Parcours React
+            {t("landing.ctaReact")}
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
           <h1 className="text-[1.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-4xl md:text-5xl">
@@ -240,7 +243,9 @@ export function ReactCoursePage() {
             program={program}
             livePhases={phases}
             moduleHref={(moduleId) =>
-              findModule(moduleId) ? `${basePath}/module/${moduleId}` : undefined
+              findAreaModule(area, moduleId)
+                ? `${basePath}/module/${moduleId}`
+                : undefined
             }
             description={t("course.reactSyllabusDesc")}
           />
@@ -348,7 +353,7 @@ function ContinueCard({
   hasStarted,
   t,
 }: {
-  nextModule: { phase: NonNullable<ReturnType<typeof findModule>>["phase"]; module: NonNullable<ReturnType<typeof findModule>>["module"] } | null;
+  nextModule: { phase: Phase; module: Module } | null;
   hasStarted: boolean;
   t: ReturnType<typeof useT>;
 }) {
@@ -429,18 +434,19 @@ function LastActivityCard({
   t,
 }: {
   activity: {
-    phase: NonNullable<ReturnType<typeof findModule>>["phase"];
-    module: NonNullable<ReturnType<typeof findModule>>["module"];
+    phase: Phase;
+    module: Module;
     score: { correct: number; total: number; updatedAt: number };
   };
   t: ReturnType<typeof useT>;
 }) {
   const accent = phaseAccent(activity.phase.color);
   const { basePath } = useCourseArea();
+  const { locale } = useLocale();
   const passed =
     activity.score.total > 0 &&
     activity.score.correct / activity.score.total >= 0.7;
-  const when = formatRelativeTime(activity.score.updatedAt, t);
+  const when = formatRelativeTime(activity.score.updatedAt, t, locale);
 
   return (
     <Link
@@ -512,7 +518,11 @@ function ShortcutCard({
   );
 }
 
-function formatRelativeTime(ts: number, t: ReturnType<typeof useT>) {
+function formatRelativeTime(
+  ts: number,
+  t: ReturnType<typeof useT>,
+  locale: "fr" | "en",
+) {
   const diff = Date.now() - ts;
   const minutes = Math.floor(diff / 60_000);
   if (minutes < 1) return t("course.justNow");
@@ -521,5 +531,5 @@ function formatRelativeTime(ts: number, t: ReturnType<typeof useT>) {
   if (hours < 24) return t("course.hoursAgo", { n: hours });
   const days = Math.floor(hours / 24);
   if (days < 7) return t("course.daysAgo", { n: days });
-  return new Date(ts).toLocaleDateString("fr-FR");
+  return new Date(ts).toLocaleDateString(locale === "en" ? "en-US" : "fr-FR");
 }

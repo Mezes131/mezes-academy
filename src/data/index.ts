@@ -36,8 +36,11 @@ export function findCourse(
   return getCourses(locale).find((c) => c.id === courseId);
 }
 
-export function findCourseProgram(courseId: string): CourseProgram | undefined {
-  return findCourse(courseId)?.program;
+export function findCourseProgram(
+  courseId: string,
+  locale: Locale = "fr",
+): CourseProgram | undefined {
+  return findCourse(courseId, locale)?.program;
 }
 
 export function findPhase(phaseId: string): { course: Course; phase: Phase } | undefined {
