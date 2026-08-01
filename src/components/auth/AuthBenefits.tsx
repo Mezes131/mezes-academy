@@ -23,32 +23,32 @@ export function AuthBenefits({ mode }: AuthBenefitsProps) {
           <>
             Crée ton compte
             <span className="block text-accent-2">
-              et commence à apprendre.
+              et construis pour de vrai.
             </span>
           </>
         )}
       </h1>
       <div className="hidden lg:block">
         <p className="mt-4 text-fg-2 text-[16px] leading-relaxed max-w-prose">
-          Ton compte synchronise ta progression dans le cloud. Modules lus, quiz
-          validés et exercices résolus te suivent sur n&apos;importe quel appareil.
+          Avec un compte, ton avance te suit partout : modules lus, quiz et
+          exercices restent à jour, que tu sois sur l&apos;ordi ou le téléphone.
         </p>
 
         <ul className="mt-8 space-y-3">
           <Benefit
             icon={<CheckCircle2 size={16} />}
-            title="Progression sauvegardée"
-            body="Reprends exactement où tu t'étais arrêté, sans perdre un quiz ni un exercice."
+            title="Rien ne se perd"
+            body="Tu fermes la page, tu reviens plus tard : on te remet pile où tu t'étais arrêté."
           />
           <Benefit
             icon={<ShieldCheck size={16} />}
-            title="Données protégées"
-            body="Authentification sécurisée : chaque apprenant ne voit que sa propre progression."
+            title="Tes données restent à toi"
+            body="Connexion sécurisée. Tu ne vois que ta progression, personne d'autre."
           />
           <Benefit
             icon={<Sparkles size={16} />}
-            title="Multi-appareils"
-            body="Laptop, tablette ou téléphone : une seule session, le même parcours."
+            title="Sur tous tes écrans"
+            body="Laptop, tablette ou téléphone : le même parcours, la même avance."
           />
         </ul>
 

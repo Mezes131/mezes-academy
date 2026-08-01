@@ -33,7 +33,7 @@ const upcomingCatalog: CatalogCourse[] = [
     title: "DevOps pour développeurs",
     tagline: "Git, CI/CD, Docker, déploiement",
     description:
-      "Les compétences ops d'un développeur moderne : GitHub Actions, Docker, monitoring, logs, déploiements Vercel & auto-hébergé. Sans devenir SRE.",
+      "Les bases ops dont tu as vraiment besoin au quotidien : GitHub Actions, Docker, logs, déploiement. Sans te transformer en SRE.",
     icon: "fa-gears",
     accent: {
       text: "text-pink-700 dark:text-pink-300",

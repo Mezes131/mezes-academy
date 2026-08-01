@@ -18,11 +18,11 @@ export function HowItWorks() {
             <i className="fa-solid fa-compass mr-1.5" /> Méthode
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            Une méthode en trois temps.
+            Comment on avance, concrètement.
           </h2>
           <p className="mt-3 text-fg-2 leading-relaxed max-w-xl">
-            Lis, pratique, valide. La boucle est courte pour que chaque notion
-            se fixe dans ton code, pas seulement dans ta mémoire.
+            Tu comprends une idée, tu la mets
+            en pratique, tu vérifies que ça tient. Puis tu passes à la suite.
           </p>
         </div>
 
@@ -60,24 +60,24 @@ interface StepData {
 const STEPS: StepData[] = [
   {
     icon: "fa-book-open",
-    title: "Apprends",
-    desc: "Des leçons claires, avec exemples de code et analogies concrètes. Tu avances à ton rythme, sans deadline artificielle.",
+    title: "Comprends",
+    desc: "Des leçons courtes, avec des exemples que tu peux relier à ton quotidien. Que tu codes à la main ou avec l'IA, tu sais pourquoi ça marche.",
     color: "text-brand-intro",
     bg: "bg-brand-intro/10",
     border: "border-brand-intro/30",
   },
   {
     icon: "fa-code",
-    title: "Pratique",
-    desc: "Chaque module a son quiz et ses exercices live. Tu écris du vrai code dans le navigateur et tu vois le résultat tout de suite.",
+    title: "Construis",
+    desc: "Tu pratiques dans le navigateur : un vrai exercice, un vrai rendu. React comme craft, vibe coding comme façon de livrer sans te perdre.",
     color: "text-brand-core",
     bg: "bg-brand-core/10",
     border: "border-brand-core/30",
   },
   {
     icon: "fa-chart-line",
-    title: "Progresse",
-    desc: "Ta progression est sauvegardée automatiquement. Reviens quand tu veux, reprends le module en cours, exporte tout en JSON.",
+    title: "Valide",
+    desc: "Un quiz pour ancrer, une progression qui se souvient de toi. Tu fermes l'onglet, tu reviens demain, tu reprends pile au bon endroit.",
     color: "text-brand-expert",
     bg: "bg-brand-expert/10",
     border: "border-brand-expert/30",
@@ -91,20 +91,20 @@ interface PromiseData {
 
 const PROMISES: PromiseData[] = [
   {
-    title: "Du concret, pas de bruit",
-    desc: "On te montre ce qu'il faut maîtriser pour être autonome. Pas la mode du mois, pas le jargon pour faire joli.",
+    title: "Du vrai travail",
+    desc: "On t'aide à livrer quelque chose d'utile : un front solide, un produit IA que tu peux expliquer, des choix que tu assumes.",
   },
   {
-    title: "Relu et testé",
-    desc: "Chaque leçon est relue. Chaque exercice est vérifié. Chaque explication dit pourquoi, pas seulement comment.",
+    title: "Relu avant d'arriver jusqu'à toi",
+    desc: "Chaque leçon a été passée au peigne fin. On te dit pourquoi, pas seulement quoi cliquer.",
   },
   {
-    title: "Confort de lecture",
-    desc: "Interface claire, thèmes clair et sombre, responsive, barre de progression toujours à portée de main.",
+    title: "Agréable à lire, partout",
+    desc: "Clair ou sombre, téléphone ou grand écran : tu restes concentré sur le cours, pas sur l'interface.",
   },
   {
-    title: "Ta progression t'appartient",
-    desc: "Stockée localement et synchronisée quand tu es connecté. Exportable en JSON. Aucun tracker, aucune pub.",
+    title: "Ta progression, c'est la tienne",
+    desc: "Elle reste sur ton appareil, et se synchronise si tu te connectes. Tu peux l'exporter. Pas de pub, pas de pistage.",
   },
 ];
 

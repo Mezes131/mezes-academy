@@ -4,7 +4,7 @@ export const reactMeta: CourseMeta = {
   title: "React : de zéro à expert",
   tagline: "Le parcours front-end complet",
   description:
-    "Apprends React à fond en 6 phases progressives, des fondations JavaScript au capstone React/Next.js prêt pour portfolio.",
+    "Tu veux enfin te sentir à l'aise avec React ? On part des bases JavaScript et on monte jusqu'à un projet portfolio. Six phases, à ton rythme, avec de la pratique dès le premier module.",
   icon: "fa-atom",
   accent: {
     text: "text-accent dark:text-brand-core",

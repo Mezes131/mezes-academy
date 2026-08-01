@@ -11,18 +11,18 @@ export function Stats() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="rounded-2xl border-base bg-bg-2 p-10 md:p-14 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            Prêt à commencer ?
+            On y va ?
           </h2>
           <p className="mt-3 text-fg-2 max-w-xl mx-auto leading-relaxed">
-            React et Secure Vibe Coding sont ouverts dès maintenant. Crée un
-            compte pour synchroniser ta progression, ou commence en local : ton
-            avance reste dans le navigateur.
+            React et Secure Vibe Coding t&apos;attendent. Crée un compte si tu
+            veux synchroniser ton avance, ou commence tout de suite en local :
+            rien ne se perd dans le navigateur.
           </p>
           <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
             <Link to="/react">
               <Button>
                 <Atom size={16} aria-hidden="true" />
-                Ouvrir le parcours React
+                C&apos;est parti pour React
                 <ArrowRight size={14} aria-hidden="true" />
               </Button>
             </Link>
@@ -33,7 +33,7 @@ export function Stats() {
                   className="text-violet-600 dark:text-violet-400"
                   aria-hidden="true"
                 />
-                Découvrir Secure Vibe Coding
+                Essayer Secure Vibe Coding
               </Button>
             </Link>
           </div>

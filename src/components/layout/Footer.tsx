@@ -15,8 +15,8 @@ export function Footer() {
           <div>
             <MezesLogo size={34} showText />
             <p className="mt-4 text-[13px] text-fg-2 leading-relaxed max-w-xs">
-              Des parcours sérieux pour apprendre le développement web en
-              autonomie, avec exercices interactifs et suivi de progression.
+              On t&apos;aide à construire des trucs qui tiennent : React solide,
+              vibe coding sans mauvaises surprises, à ton rythme.
             </p>
             <div className="mt-5 flex items-center gap-3">
               <SocialLink href="https://twitter.com" label="X / Twitter">
@@ -36,9 +36,7 @@ export function Footer() {
 
           <FooterCol title="Parcours">
             <FooterLink to="/react">React de zéro à expert</FooterLink>
-            <FooterMuted>TypeScript · Bientôt</FooterMuted>
-            <FooterMuted>Next.js · Bientôt</FooterMuted>
-            <FooterMuted>Node.js · Bientôt</FooterMuted>
+            <FooterLink to="/secure-vibe-coding">Secure Vibe Coding</FooterLink>
             <FooterMuted>DevOps · Prévu</FooterMuted>
           </FooterCol>
 

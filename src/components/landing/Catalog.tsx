@@ -17,13 +17,12 @@ export function Catalog() {
             <i className="fa-solid fa-layer-group mr-1.5" /> Catalogue
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            {academyStats.coursesActive} parcours actifs,{" "}
-            <span className="text-fg-2">plusieurs en préparation.</span>
+            Choisis par où tu veux commencer.
           </h2>
           <p className="mt-3 text-fg-2 max-w-xl leading-relaxed">
-            Chaque parcours mène d&apos;une notion claire à un exercice live, puis
-            à une validation. Théorie courte, pratique immédiate, progression
-            visible.
+            {academyStats.coursesActive} parcours sont déjà ouverts, d&apos;autres
+            arrivent. Chacun te prend par la main : une idée claire, un exercice
+            tout de suite, et tu vois où tu en es.
           </p>
         </div>
 

@@ -24,23 +24,22 @@ export function Hero({ hasProgress }: HeroProps) {
         </div>
 
         <h1 className="text-[2.6rem] md:text-7xl font-extrabold leading-[0.95] tracking-tight max-w-4xl text-slate-950 dark:text-fg">
-          Apprends à coder,
+          Apprends à construire
           <br />
-          <span className="text-accent-2">sérieusement.</span>
+          <span className="text-accent-2">des solutions performantes.</span>
         </h1>
 
         <p className="mt-7 text-[17px] md:text-lg text-slate-800 dark:text-fg-2 leading-relaxed max-w-2xl">
-          Mezes Academy propose des parcours en ligne pour développeurs et
-          développeuses qui veulent progresser en autonomie. Chaque concept est
-          expliqué, pratiqué dans le navigateur, puis validé par un quiz avant
-          de passer à la suite. Ta progression est sauvegardée : tu reprends
-          exactement où tu t&apos;étais arrêté.
+          Que tu veuilles solidifier ton React ou apprendre à construire avec
+          l&apos;IA sans te faire piéger, on t&apos;accompagne pas à pas. Tu lis
+          une notion, tu la pratiques dans le navigateur, tu valides, et tu
+          reprends plus tard pile où tu t&apos;étais arrêté.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <Link to="/react">
             <Button size="md">
-              {hasProgress ? "Continuer React" : "Commencer par React"}
+              {hasProgress ? "Continuer React" : "Parcours React"}
               <ArrowRight size={16} aria-hidden="true" />
             </Button>
           </Link>
@@ -51,7 +50,7 @@ export function Hero({ hasProgress }: HeroProps) {
               className="border border-violet-500/40 text-slate-900 dark:text-fg hover:bg-bg-3"
             >
               <Shield size={16} className="text-violet-600 dark:text-violet-400" aria-hidden="true" />
-              Découvrir Secure Vibe Coding
+              Secure Vibe Coding
             </Button>
           </Link>
           <a href="#catalog">
@@ -59,7 +58,7 @@ export function Hero({ hasProgress }: HeroProps) {
               variant="ghost"
               className="border border-slate-400/50 dark:border-base text-slate-900 dark:text-fg hover:bg-bg-3"
             >
-              Voir le catalogue
+              Voir les parcours
             </Button>
           </a>
         </div>
