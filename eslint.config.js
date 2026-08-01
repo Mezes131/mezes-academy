@@ -5,7 +5,10 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", "node_modules"] },
+  {
+    // Build outputs (strapi/dist is CJS; root dist is Vite).
+    ignores: ["dist", "node_modules", "strapi/dist/**", "worker/dist/**"],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   reactHooks.configs["recommended-latest"],
@@ -23,7 +26,7 @@ export default tseslint.config(
         {
           allowConstantExport: true,
           // Provider modules legitimately export a hook next to the provider.
-          allowExportNames: ["useAuth", "useProgress"],
+          allowExportNames: ["useAuth", "useProgress", "useLocale"],
         },
       ],
     },

@@ -142,17 +142,16 @@ async function upsertByLegacyId(
       status: "published",
     }));
   if (existing) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updated = await docs.update({
       documentId: existing.documentId,
       locale,
-      data: data as any,
+      // Strapi Documents API input is UID-dependent; payload is built as Record.
+      data: data as never,
     });
     if (!updated) throw new Error(`Update failed for ${uid} legacyId=${legacyId}`);
     return updated;
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return docs.create({ data: data as any, locale });
+  return docs.create({ data: data as never, locale });
 }
 
 async function importQuiz(
