@@ -1,6 +1,13 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Download, Upload, RefreshCw, TrendingUp, ArrowRight } from "lucide-react";
+import {
+  Download,
+  Upload,
+  RefreshCw,
+  TrendingUp,
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocale } from "@/i18n/LocaleProvider";
@@ -63,6 +70,8 @@ export function ProgressPage() {
       }),
     [learnerCourses, locale, progress],
   );
+
+  const useAccordion = courseRows.length > 1;
 
   const platform = useMemo(
     () => aggregateCourseStats(courseRows.map((row) => row.stats)),
@@ -219,7 +228,7 @@ export function ProgressPage() {
       </div>
 
       <h2 className="mb-4 mt-8 text-lg font-bold lg:mt-10">{t("progress.byTrack")}</h2>
-      <div className="space-y-8">
+      <div className={cn(useAccordion ? "space-y-4" : "space-y-8")}>
         {courseRows.map((row) => (
           <CourseProgressSection
             key={row.course.id}
@@ -228,11 +237,13 @@ export function ProgressPage() {
             accent={row.navAccent}
             href={row.basePath}
             openLabel={t("progress.openTrack")}
+            phasesLabel={t("progress.byPhase")}
             stats={row.stats}
             phases={row.course.phases}
             phaseStats={row.phaseStats}
             basePath={row.basePath}
             notStartedLabel={t("progress.notStarted")}
+            collapsible={useAccordion}
           />
         ))}
       </div>
@@ -296,25 +307,93 @@ function CourseProgressSection({
   accent,
   href,
   openLabel,
+  phasesLabel,
   stats,
   phases,
   phaseStats,
   basePath,
   notStartedLabel,
+  collapsible,
 }: {
   title: string;
   icon: string;
   accent: { text: string; chip: string };
   href: string;
   openLabel: string;
+  phasesLabel: string;
   stats: { done: number; total: number; percent: number };
   phases: Course["phases"];
   phaseStats: ReturnType<typeof computePhaseStats>;
   basePath: string;
   notStartedLabel: string;
+  collapsible: boolean;
 }) {
+  const [phasesOpen, setPhasesOpen] = useState(false);
+
+  const phaseList = (
+    <div className="space-y-2">
+      {phases.map((phase, i) => {
+        const phaseAccentCls = phaseAccent(phase.color);
+        const st = phaseStats[i];
+        return (
+          <Link
+            key={phase.id}
+            to={`${basePath}/phase/${phase.id}`}
+            className="block min-w-0 rounded-xl border-base bg-bg-2 p-3.5 transition hover:border-accent/30 sm:p-4"
+          >
+            <div className="flex min-w-0 items-center gap-3">
+              <div
+                className={cn(
+                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border text-base sm:h-10 sm:w-10",
+                  phaseAccentCls.bg,
+                  phaseAccentCls.border,
+                  phaseAccentCls.text,
+                )}
+              >
+                <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex min-w-0 items-center gap-2">
+                  <div
+                    className={cn(
+                      "min-w-0 truncate text-sm font-bold",
+                      phaseAccentCls.text,
+                    )}
+                  >
+                    {phase.title}
+                  </div>
+                  <span
+                    className={cn(
+                      "shrink-0 font-mono text-[11px]",
+                      phaseAccentCls.text,
+                    )}
+                  >
+                    {st.percent}%
+                  </span>
+                </div>
+                <div className="mt-1.5">
+                  <ProgressBar
+                    value={st.done}
+                    max={st.total}
+                    color={phase.color}
+                    size="sm"
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+
   return (
-    <section className="min-w-0">
+    <section
+      className={cn(
+        "min-w-0",
+        collapsible && "rounded-xl border-base bg-bg-2/40 p-4 sm:p-5",
+      )}
+    >
       <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2.5">
           <i
@@ -348,60 +427,36 @@ function CourseProgressSection({
         {stats.done === 0 ? ` · ${notStartedLabel}` : ""}
       </div>
 
-      <div className="mt-3 space-y-2">
-        {phases.map((phase, i) => {
-          const phaseAccentCls = phaseAccent(phase.color);
-          const st = phaseStats[i];
-          return (
-            <Link
-              key={phase.id}
-              to={`${basePath}/phase/${phase.id}`}
-              className="block min-w-0 rounded-xl border-base bg-bg-2 p-3.5 transition hover:border-accent/30 sm:p-4"
-            >
-              <div className="flex min-w-0 items-center gap-3">
-                <div
-                  className={cn(
-                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border text-base sm:h-10 sm:w-10",
-                    phaseAccentCls.bg,
-                    phaseAccentCls.border,
-                    phaseAccentCls.text,
-                  )}
-                >
-                  <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex min-w-0 items-center gap-2">
-                    <div
-                      className={cn(
-                        "min-w-0 truncate text-sm font-bold",
-                        phaseAccentCls.text,
-                      )}
-                    >
-                      {phase.title}
-                    </div>
-                    <span
-                      className={cn(
-                        "shrink-0 font-mono text-[11px]",
-                        phaseAccentCls.text,
-                      )}
-                    >
-                      {st.percent}%
-                    </span>
-                  </div>
-                  <div className="mt-1.5">
-                    <ProgressBar
-                      value={st.done}
-                      max={st.total}
-                      color={phase.color}
-                      size="sm"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      {collapsible ? (
+        <details
+          className="group mt-3"
+          open={phasesOpen}
+          onToggle={(e) => setPhasesOpen(e.currentTarget.open)}
+        >
+          <summary
+            className={cn(
+              "flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-1 py-2",
+              "text-[13px] font-semibold text-fg-2 hover:text-fg",
+              "[&::-webkit-details-marker]:hidden",
+            )}
+          >
+            <span className="min-w-0 flex-1">
+              {phasesLabel}
+              <span className="ml-1.5 font-mono text-[11px] font-normal text-fg-3">
+                ({phases.length})
+              </span>
+            </span>
+            <ChevronDown
+              size={16}
+              className="shrink-0 text-fg-3 transition-transform duration-200 group-open:rotate-180"
+              aria-hidden="true"
+            />
+          </summary>
+          <div className="pt-1">{phaseList}</div>
+        </details>
+      ) : (
+        <div className="mt-3">{phaseList}</div>
+      )}
     </section>
   );
 }
