@@ -113,15 +113,17 @@ export function SvcCoursePage() {
         <div className="relative min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em] text-violet-400 sm:mb-3">
             <i className={`fa-solid ${meta.icon}`} aria-hidden="true" />
-            Parcours Secure Vibe Coding
+            {t("course.svcEyebrow")}
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
           <h1 className="text-[1.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-4xl md:text-5xl">
-            Du prompt au{" "}
-            <em className="not-italic text-violet-400">produit en production</em>
+            {t("course.svcHeroBefore")}{" "}
+            <em className="not-italic text-violet-400">
+              {t("course.svcHeroAccent")}
+            </em>
             ,
             <br />
-            sans la dette ni les failles.
+            {t("course.svcHeroAfter")}
           </h1>
           <p className="prose-lesson mt-3 max-w-2xl text-[15px] leading-relaxed text-fg-2 sm:mt-5 sm:text-[17px]">
             {t("course.svcHeroBody")}

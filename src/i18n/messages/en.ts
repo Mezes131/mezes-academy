@@ -456,6 +456,10 @@ export const messagesEn: MessageTree = {
     reactHeroLine2: "from first JSX to expert architecture.",
     reactHeroBody:
       "{phases} progressive phases, {modules} modules, dozens of live exercises. Every idea is explained, practiced, then validated. Your progress is saved: pick up anytime where you left off.",
+    svcEyebrow: "Secure Vibe Coding track",
+    svcHeroBefore: "From prompt to",
+    svcHeroAccent: "production product",
+    svcHeroAfter: "without the debt or the flaws.",
     svcHeroBody:
       "Every idea is explained, checked, then validated. Your progress is saved: pick up anytime where you left off.",
     svcSyllabusDesc:

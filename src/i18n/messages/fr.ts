@@ -464,6 +464,10 @@ export const messagesFr = {
     reactHeroLine2: "du premier JSX à l'architecture expert.",
     reactHeroBody:
       "{phases} phases progressives, {modules} modules, des dizaines d'exercices live. Chaque notion est expliquée, pratiquée, puis validée. Ta progression est sauvegardée : tu reprends à tout moment là où tu t'es arrêté.",
+    svcEyebrow: "Parcours Secure Vibe Coding",
+    svcHeroBefore: "Du prompt au",
+    svcHeroAccent: "produit en production",
+    svcHeroAfter: "sans la dette ni les failles.",
     svcHeroBody:
       "Chaque notion est expliquée, vérifiée, puis validée. Ta progression est sauvegardée : tu reprends à tout moment là où tu t'es arrêté.",
     svcSyllabusDesc:
