@@ -18,7 +18,7 @@ export const module13: Module = {
       box: {
         variant: "concept",
         title: "<i class='fa-solid fa-lightbulb'></i> Fundamental rule: immutability",
-        body: "Never mutate state directly. <code>state.push(item)</code> is forbidden — React will not detect the change. Always create a new value: <code>setState([...state, item])</code>.",
+        body: "Never mutate state directly. <code>state.push(item)</code> is forbidden: React will not detect the change. Always create a new value: <code>setState([...state, item])</code>.",
       },
     },
     {
@@ -26,7 +26,7 @@ export const module13: Module = {
       items: [
         {
           id: "13.1",
-          title: "3.1: useState — declare and update state",
+          title: "3.1: useState, declare and update state",
           desc: "useState returns a two-element array: the current value and a function to update it. Convention: <code>[value, setValue]</code>.",
           tags: ["useState", "setState", "setter", "re-render"],
         },
@@ -37,7 +37,7 @@ export const module13: Module = {
         },
         {
           id: "13.3",
-          title: "3.3: Sharing state — lifting state up",
+          title: "3.3: Sharing state, lifting state up",
           desc: "When two components need the same state, lift it to their common ancestor and pass it down via props.",
         },
         {

@@ -292,7 +292,7 @@ export const promptPhase: ProgramPhase = phase({
   slug: "prompt",
   title: "Prompt & product framing",
   objective:
-    "Get good code more often—and frame a shippable MVP before generating anything.",
+    "Get good code more often: and frame a shippable MVP before generating anything.",
   modules: [
     module({
       id: "svc-prompt-m01",
@@ -351,7 +351,7 @@ export const promptPhase: ProgramPhase = phase({
         lesson({
           id: "svc-prompt-m02-l1",
           title: "Minimal sufficient context",
-          objective: "Give enough context—no more.",
+          objective: "Give enough context: no more.",
           concepts: ["context", "relevant files", "noise"],
         }),
         lesson({

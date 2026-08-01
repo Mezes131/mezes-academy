@@ -367,7 +367,7 @@ export const hebergementPhase: ProgramPhase = phase({
       id: "svc-hebergement-m03",
       index: "03",
       title: "Minimal CI/CD",
-      subtitle: "Build, test, deploy, rollback — and block on audit",
+      subtitle: "Build, test, deploy, rollback: and block on audit",
       duration: "45 min",
       difficulty: "intermediate",
       objectives: [
@@ -439,7 +439,7 @@ export const hebergementPhase: ProgramPhase = phase({
 export const opsPhase: ProgramPhase = phase({
   slug: "ops",
   title: "Observability & lightweight ops",
-  objective: "Know when it breaks — and what to do when it does.",
+  objective: "Know when it breaks: and what to do when it does.",
   modules: [
     module({
       id: "svc-ops-m01",

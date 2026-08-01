@@ -35,7 +35,7 @@ export const module18: Module = {
         },
         {
           id: "18.2",
-          title: "8.2: Framer Motion — advanced animations",
+          title: "8.2: Framer Motion, advanced animations",
           desc: "The most powerful animation library for React. Motion components, variants, transitions, layout animations, drag & drop.",
           tags: ["motion.div", "variants", "AnimatePresence"],
         },

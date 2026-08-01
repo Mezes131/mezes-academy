@@ -9,7 +9,7 @@ export const typescriptQuizzes = {
         id: "q1",
         question: "What is the main difference between `unknown` and `any`?",
         options: [
-          { id: "a", label: "None — they are aliases of each other" },
+          { id: "a", label: "None: they are aliases of each other" },
           { id: "b", label: "`unknown` requires narrowing (typeof, instanceof) before use; `any` disables all checking" },
           { id: "c", label: "`unknown` compiles faster" },
         ],
@@ -114,7 +114,7 @@ export const typescriptQuizzes = {
         options: [
           { id: "a", label: "`const Button: React.FC<Props> = ...` with FC" },
           { id: "b", label: "`function Button(props: Props) {...}` without FC" },
-          { id: "c", label: "Don't type — TypeScript infers everything" },
+          { id: "c", label: "Don't type: TypeScript infers everything" },
         ],
         correct: ["b"],
         explanation:

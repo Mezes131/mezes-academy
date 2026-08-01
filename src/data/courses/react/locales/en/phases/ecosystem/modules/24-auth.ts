@@ -40,7 +40,7 @@ export const module24: Module = {
       box: {
         variant: "warn",
         title: "<i class='fa-solid fa-shield-halved'></i> Security rules to memorize",
-        body: "1) Never store a sensitive token in <code>localStorage</code> (XSS). 2) Always use <code>httpOnly</code> + <code>Secure</code> + <code>SameSite=Lax</code> cookies. 3) Authorization checks must <strong>always</strong> happen on the server — the client can lie.",
+        body: "1) Never store a sensitive token in <code>localStorage</code> (XSS). 2) Always use <code>httpOnly</code> + <code>Secure</code> + <code>SameSite=Lax</code> cookies. 3) Authorization checks must <strong>always</strong> happen on the server: the client can lie.",
       },
     },
     {

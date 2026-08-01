@@ -218,7 +218,7 @@ export const messagesEn: MessageTree = {
     milestoneProfileTitle: "Complete your profile",
     milestoneProfileBody:
       "Add your name and public username: they'll be used for your certificate and to showcase your profile later.",
-    milestoneDoneTitle: "Well done — track complete!",
+    milestoneDoneTitle: "Well done, track complete!",
     milestoneDoneBody:
       "You can now aim for the final project phase to lock in your skills in a real pro setup.",
     milestoneKeepGoing:
@@ -262,7 +262,7 @@ export const messagesEn: MessageTree = {
     publicBadge: "Public profile",
     privateBadge: "Private",
     completeness: "Completeness",
-    completenessGood: "Solid start — keep filling your profile.",
+    completenessGood: "Solid start, keep filling your profile.",
     completenessLow: "Complete your profile to unlock what comes next.",
     avatarUpdated: "Profile photo updated.",
     avatarRemoved: "Photo removed.",
@@ -465,11 +465,11 @@ export const messagesEn: MessageTree = {
     svcSyllabusDesc:
       "Prompt → Audit → Ship applied end to end: from phase 4, projects feed the same product that becomes the certifying capstone.",
     pathCompleteEyebrow: "Track complete",
-    pathCompleteTitle: "Well done — you've completed every available module!",
+    pathCompleteTitle: "Well done, you've completed every available module!",
     pathCompleteBody:
       "The React Pro Path capstone is now available: open the final project gate to move into production mode.",
     svcModulesDoneEyebrow: "Playable modules done",
-    svcModulesDoneTitle: "Well done — you've finished the modules written so far!",
+    svcModulesDoneTitle: "Well done, you've finished the modules written so far!",
     svcModulesDoneBody:
       "More phases arrive as we write them. You can review the syllabus or dig deeper into audits already done.",
     gateBoth:
@@ -482,7 +482,7 @@ export const messagesEn: MessageTree = {
     challengeTitle: "Final challenge: {label}",
     challengeIntro:
       "Final review mode: no solution button, hints only.",
-    challengeSaved: "Score saved. Well done — challenge passed.",
+    challengeSaved: "Score saved. Well done, challenge passed.",
     challengeSubmit: "Save challenge",
     challengeProgress: "{done} / {total} exercises passed",
     challengeNoExercises: "No eligible exercises for this challenge.",

@@ -18,7 +18,7 @@ export const module23: Module = {
       items: [
         {
           id: "23.1",
-          title: "23.1: Zustand — modern simplicity",
+          title: "23.1: Zustand, modern simplicity",
           desc: "Minimal API, no required Provider, granular selectors to avoid re-renders. Became the default choice in 2026 for shared UI state.",
           tags: ["create", "set", "get", "shallow"],
         },

@@ -10,7 +10,7 @@ export const module27: Module = {
   content: [
     {
       kind: "paragraph",
-      html: "Performance is not optional in 2026: Google penalizes slow sites and users leave below 3 s. Good news: Next.js provides excellent optimization tools by default — you just need to know how to use them.",
+      html: "Performance is not optional in 2026: Google penalizes slow sites and users leave below 3 s. Good news: Next.js provides excellent optimization tools by default, you just need to know how to use them.",
     },
     {
       kind: "lessons",

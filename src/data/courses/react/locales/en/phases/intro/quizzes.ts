@@ -112,7 +112,7 @@ export const introQuizzes = {
         options: [
           { id: "a", label: "Every second by default" },
           { id: "b", label: "When its state or props change" },
-          { id: "c", label: "Never automatically — you must call render() yourself" },
+          { id: "c", label: "Never automatically: you must call render() yourself" },
         ],
         correct: ["b"],
       },

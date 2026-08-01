@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-01T08:56:30.567Z",
+  "exportedAt": "2026-08-01T09:17:33.399Z",
   "locale": "en",
   "course": {
     "legacyId": "svc",
@@ -8100,7 +8100,7 @@
             "moduleId": "svc-hebergement-m03",
             "index": "03",
             "title": "Minimal CI/CD",
-            "subtitle": "Build, test, deploy, rollback — and block on audit",
+            "subtitle": "Build, test, deploy, rollback: and block on audit",
             "duration": "45 min",
             "order": 2,
             "difficulty": "intermediate",
@@ -8170,7 +8170,7 @@
             "lesson": {
               "legacyId": "svc-hebergement-m03-lesson",
               "title": "Minimal CI/CD",
-              "desc": "Build, test, deploy, rollback — and block on audit",
+              "desc": "Build, test, deploy, rollback: and block on audit",
               "order": 0,
               "isRequired": true,
               "content": [
@@ -8276,7 +8276,7 @@
         "slug": "ops",
         "title": "Observability & lightweight ops",
         "label": "Phase 11",
-        "summary": "Know when it breaks — and what to do when it does.",
+        "summary": "Know when it breaks: and what to do when it does.",
         "order": 11,
         "color": "expert",
         "icon": "fa-heart-pulse",

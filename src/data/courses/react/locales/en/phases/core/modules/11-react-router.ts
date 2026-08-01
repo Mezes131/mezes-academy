@@ -61,7 +61,7 @@ export const module16: Module = {
     { kind: "title", text: "Common trap: internal state that « leaks » between routes" },
     {
       kind: "paragraph",
-      html: "When React Router goes from <code>/users/1</code> to <code>/users/2</code>, it <strong>does not unmount</strong> the <code>&lt;Profile&gt;</code> component — it only changes its <code>useParams</code>. Result: all internal state (form in progress, previous <code>fetch</code> data, active tab…) stays as-is. One of the most common bugs for beginners — and experienced devs too.",
+      html: "When React Router goes from <code>/users/1</code> to <code>/users/2</code>, it <strong>does not unmount</strong> the <code>&lt;Profile&gt;</code> component: it only changes its <code>useParams</code>. Result: all internal state (form in progress, previous <code>fetch</code> data, active tab…) stays as-is. One of the most common bugs for beginners: and experienced devs too.",
     },
     {
       kind: "info",

@@ -68,7 +68,7 @@ export const ecosystemQuizzes = {
         id: "q2",
         question: "What is the fundamental difference between Zustand and TanStack Query?",
         options: [
-          { id: "a", label: "None — they are equivalent alternatives" },
+          { id: "a", label: "None: they are equivalent alternatives" },
           { id: "b", label: "Zustand manages CLIENT state (UI); TanStack Query manages SERVER state (cache, refetch, invalidation)" },
           { id: "c", label: "Zustand is for small projects, TanStack for large ones" },
         ],
@@ -146,7 +146,7 @@ export const ecosystemQuizzes = {
       },
       {
         id: "q2",
-        question: "Prisma vs Drizzle — what is the main trade-off?",
+        question: "Prisma vs Drizzle: what is the main trade-off?",
         options: [
           { id: "a", label: "Prisma = high-level DSL (.prisma schema); Drizzle = close to SQL, type-safe, no abstract runtime" },
           { id: "b", label: "No notable difference" },

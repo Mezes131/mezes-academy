@@ -49,7 +49,7 @@ export const coreQuizzes = {
         ],
         correct: ["b"],
         explanation:
-          "You use expressions (that produce a value), not statements. An if/else won't work—you need a ternary or && instead.",
+          "You use expressions (that produce a value), not statements. An if/else won't work: you need a ternary or && instead.",
       },
     ],
   },
@@ -174,7 +174,7 @@ export const coreQuizzes = {
         options: [
           { id: "a", label: "To provide the effect's return value" },
           { id: "b", label: "It's the cleanup: it runs before the next effect or on unmount" },
-          { id: "c", label: "It has no effect—it's optional and useless" },
+          { id: "c", label: "It has no effect: it's optional and useless" },
         ],
         correct: ["b"],
       },

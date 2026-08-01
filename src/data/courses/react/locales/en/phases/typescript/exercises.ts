@@ -8,7 +8,7 @@ export const typescriptExercises = {
       "Define a <code>User</code> type (<code>id: number</code>, <code>name: string</code>, <code>email: string</code>, <code>role: 'admin' | 'user'</code>) and a generic function <code>filterBy&lt;T, K extends keyof T&gt;(items: T[], key: K, value: T[K]): T[]</code> that returns items where <code>item[key] === value</code>.",
     hints: [
       "Use `keyof T` so `key` must be a real key of T.",
-      "`T[K]` is the type of the value for that key — it guarantees consistency.",
+      "`T[K]` is the type of the value for that key: it guarantees consistency.",
     ],
     template: "react-ts",
     starterFiles: {

@@ -23,7 +23,7 @@ export const module12: Module = {
         },
         {
           id: "12.2",
-          title: "2.2: Props — passing data",
+          title: "2.2: Props, passing data",
           desc: "Props are read-only. A component must never mutate its own props. You can pass any type: string, number, object, array, function, JSX component.",
           tags: ["props", "defaultProps", "PropTypes", "destructuring"],
         },

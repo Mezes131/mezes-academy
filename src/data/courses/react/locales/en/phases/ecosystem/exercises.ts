@@ -7,7 +7,7 @@ export const ecosystemExercises = {
     instructions:
       "Implement a mini <code>useCart</code> store <strong>Zustand-style</strong> (we simulate it with <code>useState</code> + a homemade <code>subscribe</code> to stay within Sandpack). Expose <code>items</code>, <code>add(item)</code>, and <code>remove(id)</code>. Display the cart total in a component and add/remove items via two buttons.",
     hints: [
-      "For this offline exercise, simply use `useReducer` or `useState` in a parent component that passes functions as props — the goal is to understand the shape of a store.",
+      "For this offline exercise, simply use `useReducer` or `useState` in a parent component that passes functions as props: the goal is to understand the shape of a store.",
       "In a real project, you would write: `const useCart = create((set) => ({ items: [], add: (i) => set((s) => ({ items: [...s.items, i] })) }))`.",
     ],
     template: "react",

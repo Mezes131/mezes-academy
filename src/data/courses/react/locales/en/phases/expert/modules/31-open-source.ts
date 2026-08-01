@@ -34,7 +34,7 @@ export const module31: Module = {
       box: {
         variant: "note",
         title: "<i class='fa-solid fa-pen-ruler'></i> Writing exercise",
-        body: "Pick a React library you use daily. Open its GitHub repo, read 3 open issues, and draft (for yourself) a small PR plan: <strong>problem → root cause → proposed fix → tests to write</strong>. That is the exercise that takes you from \"user\" to \"contributor\". No code to deliver — clarity of analysis is the product.",
+        body: "Pick a React library you use daily. Open its GitHub repo, read 3 open issues, and draft (for yourself) a small PR plan: <strong>problem → root cause → proposed fix → tests to write</strong>. That is the exercise that takes you from \"user\" to \"contributor\". No code to deliver: clarity of analysis is the product.",
       },
     },
     {

@@ -23,13 +23,13 @@ export const module25: Module = {
         },
         {
           id: "25.2",
-          title: "25.2: Prisma — the modern ORM",
+          title: "25.2: Prisma, the modern ORM",
           desc: "Declarative schema (<code>schema.prisma</code>), versioned migrations, auto-generated TypeScript client with perfect typing. Ideal for projects getting started.",
           tags: ["schema.prisma", "prisma migrate", "prisma generate"],
         },
         {
           id: "25.3",
-          title: "25.3: Drizzle — the type-safe alternative",
+          title: "25.3: Drizzle, the type-safe alternative",
           desc: "Closer to SQL, without a heavy abstract runtime, fantastic on the Edge. For those who want fine control over generated queries.",
           tags: ["drizzle-orm", "drizzle-kit", "sql-like"],
         },

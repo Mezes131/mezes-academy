@@ -5,14 +5,14 @@ export const module01: Module = {
   id: "react-intro-m01",
   index: "01",
   title: "A plain definition, no jargon",
-  subtitle: "Understand React in one sentence — then really understand it",
+  subtitle: "Understand React in one sentence: then really understand it",
   duration: "3 min",
   openByDefault: true,
   content: [
     { kind: "title", text: "The official definition" },
     {
       kind: "paragraph",
-      html: "<strong>React is a JavaScript library created by Facebook (now Meta) in 2013 for building user interfaces.</strong> That's it. No magic, no mystery: React is a <em>tool</em> that helps you render buttons, forms, lists, whole pages — in short, everything the user sees and interacts with in a browser.",
+      html: "<strong>React is a JavaScript library created by Facebook (now Meta) in 2013 for building user interfaces.</strong> That's it. No magic, no mystery: React is a <em>tool</em> that helps you render buttons, forms, lists, whole pages: in short, everything the user sees and interacts with in a browser.",
     },
     {
       kind: "paragraph",

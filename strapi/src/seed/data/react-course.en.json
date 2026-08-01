@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-01T08:56:27.430Z",
+  "exportedAt": "2026-08-01T09:17:30.816Z",
   "locale": "en",
   "course": {
     "legacyId": "react",
@@ -43,7 +43,7 @@
             "moduleId": "react-intro-m01",
             "index": "01",
             "title": "A plain definition, no jargon",
-            "subtitle": "Understand React in one sentence — then really understand it",
+            "subtitle": "Understand React in one sentence: then really understand it",
             "duration": "3 min",
             "order": 0,
             "difficulty": null,
@@ -58,7 +58,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "<strong>React is a JavaScript library created by Facebook (now Meta) in 2013 for building user interfaces.</strong> That's it. No magic, no mystery: React is a <em>tool</em> that helps you render buttons, forms, lists, whole pages — in short, everything the user sees and interacts with in a browser."
+                "html": "<strong>React is a JavaScript library created by Facebook (now Meta) in 2013 for building user interfaces.</strong> That's it. No magic, no mystery: React is a <em>tool</em> that helps you render buttons, forms, lists, whole pages: in short, everything the user sees and interacts with in a browser."
               },
               {
                 "kind": "paragraph",
@@ -105,7 +105,7 @@
             "lesson": {
               "legacyId": "react-intro-m01-lesson",
               "title": "A plain definition, no jargon",
-              "desc": "Understand React in one sentence — then really understand it",
+              "desc": "Understand React in one sentence: then really understand it",
               "order": 0,
               "isRequired": true,
               "content": [
@@ -115,7 +115,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<strong>React is a JavaScript library created by Facebook (now Meta) in 2013 for building user interfaces.</strong> That's it. No magic, no mystery: React is a <em>tool</em> that helps you render buttons, forms, lists, whole pages — in short, everything the user sees and interacts with in a browser."
+                  "body": "<strong>React is a JavaScript library created by Facebook (now Meta) in 2013 for building user interfaces.</strong> That's it. No magic, no mystery: React is a <em>tool</em> that helps you render buttons, forms, lists, whole pages: in short, everything the user sees and interacts with in a browser."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -263,7 +263,7 @@
             "moduleId": "react-intro-m02",
             "index": "02",
             "title": "Library or framework? The nuance that changes everything",
-            "subtitle": "Why React is deliberately minimal — and what that implies",
+            "subtitle": "Why React is deliberately minimal: and what that implies",
             "duration": "2 min",
             "order": 1,
             "difficulty": null,
@@ -293,7 +293,7 @@
             "lesson": {
               "legacyId": "react-intro-m02-lesson",
               "title": "Library or framework? The nuance that changes everything",
-              "desc": "Why React is deliberately minimal — and what that implies",
+              "desc": "Why React is deliberately minimal: and what that implies",
               "order": 0,
               "isRequired": true,
               "content": [
@@ -397,7 +397,7 @@
             "contentBlocks": [
               {
                 "kind": "paragraph",
-                "html": "All of React's magic rests on three pillars. Everything else — hooks, state, props, effects — is just a set of <em>tools</em> to put those three ideas into practice."
+                "html": "All of React's magic rests on three pillars. Everything else: hooks, state, props, effects: is just a set of <em>tools</em> to put those three ideas into practice."
               },
               {
                 "kind": "title",
@@ -405,7 +405,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "A component is a <strong>reusable piece of UI</strong>, wrapped in a JavaScript function. A button, a navbar, a page — everything is a component. Like LEGO bricks, components nest to form complex interfaces from simple pieces."
+                "html": "A component is a <strong>reusable piece of UI</strong>, wrapped in a JavaScript function. A button, a navbar, a page: everything is a component. Like LEGO bricks, components nest to form complex interfaces from simple pieces."
               },
               {
                 "kind": "info",
@@ -433,7 +433,7 @@
               },
               {
                 "kind": "highlight",
-                "html": "<i class='fa-solid fa-palette'></i> The browser shows « 4 likes » — you didn't have to do anything"
+                "html": "<i class='fa-solid fa-palette'></i> The browser shows « 4 likes »: you didn't have to do anything"
               },
               {
                 "kind": "title",
@@ -461,7 +461,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "All of React's magic rests on three pillars. Everything else — hooks, state, props, effects — is just a set of <em>tools</em> to put those three ideas into practice."
+                  "body": "All of React's magic rests on three pillars. Everything else: hooks, state, props, effects: is just a set of <em>tools</em> to put those three ideas into practice."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -469,7 +469,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "A component is a <strong>reusable piece of UI</strong>, wrapped in a JavaScript function. A button, a navbar, a page — everything is a component. Like LEGO bricks, components nest to form complex interfaces from simple pieces."
+                  "body": "A component is a <strong>reusable piece of UI</strong>, wrapped in a JavaScript function. A button, a navbar, a page: everything is a component. Like LEGO bricks, components nest to form complex interfaces from simple pieces."
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -495,7 +495,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><i class='fa-solid fa-palette'></i> The browser shows « 4 likes » — you didn't have to do anything</em></p>"
+                  "body": "<p><em><i class='fa-solid fa-palette'></i> The browser shows « 4 likes »: you didn't have to do anything</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
@@ -604,7 +604,7 @@
                     },
                     {
                       "legacyId": "react-intro-quiz-m03-q3-c",
-                      "label": "Never automatically — you must call render() yourself",
+                      "label": "Never automatically: you must call render() yourself",
                       "isCorrect": false,
                       "order": 2
                     }
@@ -811,19 +811,19 @@
               },
               {
                 "kind": "highlight",
-                "html": "<strong>Phase: React Core</strong> — Foundations: JSX, components, props, state, hooks, routing, styling"
+                "html": "<strong>Phase: React Core</strong>, Foundations: JSX, components, props, state, hooks, routing, styling"
               },
               {
                 "kind": "highlight",
-                "html": "<strong>Phase: TypeScript</strong> — Add typing to write robust code"
+                "html": "<strong>Phase: TypeScript</strong>, Add typing to write robust code"
               },
               {
                 "kind": "highlight",
-                "html": "<strong>Phase: Ecosystem</strong> — Next.js, auth, databases, tests, performance"
+                "html": "<strong>Phase: Ecosystem</strong>, Next.js, auth, databases, tests, performance"
               },
               {
                 "kind": "highlight",
-                "html": "<strong>Phase: Expert</strong> — Architecture, DevOps, React internals, open source, AI"
+                "html": "<strong>Phase: Expert</strong>, Architecture, DevOps, React internals, open source, AI"
               },
               {
                 "kind": "info",
@@ -848,19 +848,19 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><strong>Phase: React Core</strong> — Foundations: JSX, components, props, state, hooks, routing, styling</em></p>"
+                  "body": "<p><em><strong>Phase: React Core</strong>, Foundations: JSX, components, props, state, hooks, routing, styling</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><strong>Phase: TypeScript</strong> — Add typing to write robust code</em></p>"
+                  "body": "<p><em><strong>Phase: TypeScript</strong>, Add typing to write robust code</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><strong>Phase: Ecosystem</strong> — Next.js, auth, databases, tests, performance</em></p>"
+                  "body": "<p><em><strong>Phase: Ecosystem</strong>, Next.js, auth, databases, tests, performance</em></p>"
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<p><em><strong>Phase: Expert</strong> — Architecture, DevOps, React internals, open source, AI</em></p>"
+                  "body": "<p><em><strong>Phase: Expert</strong>, Architecture, DevOps, React internals, open source, AI</em></p>"
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -880,7 +880,7 @@
         "slug": "core",
         "title": "React Core (JavaScript)",
         "label": "React Core",
-        "summary": "Master React from scratch: components, state, hooks, routing, and styling. The most important phase of the track — the foundations everything else rests on.",
+        "summary": "Master React from scratch: components, state, hooks, routing, and styling. The most important phase of the track: the foundations everything else rests on.",
         "order": 1,
         "color": "core",
         "icon": "fa-atom",
@@ -1051,7 +1051,7 @@
                 "box": {
                   "variant": "concept",
                   "title": "<i class='fa-solid fa-diagram-project'></i> Up next: core phase roadmap",
-                  "body": "<strong>Prerequisites used in this module:</strong> arrow functions, destructuring, ES6 modules — you will reuse them throughout the path below.<br/><br/><strong>Core program next steps:</strong><br/>→ <strong>01</strong> <code>components-props</code>: reusable components, <em>props</em>, parent → child communication<br/>→ <strong>02</strong> <code>use-state</code>: local state and interactivity with <code>useState</code><br/>→ <strong>03</strong> <code>use-effect</code>: side effects, async data, lifecycle<br/>→ <strong>04</strong> <code>advanced-hooks</code>: advanced hooks and common patterns<br/>→ <strong>05</strong> <code>react-router</code>: navigation, routes, and pages<br/>→ <strong>06</strong> <code>forms</code>: controlled forms, validation, and UX<br/>→ <strong>07</strong> <code>styling</code>: styles, themes, and visual consistency<br/><br/><strong>Ecosystem:</strong> the basics covered here (JSX, fragments, <code>key</code>) remain the foundation of every React project: Next.js, Remix, animations (Framer Motion), virtualized lists (react-window), etc."
+                  "body": "<strong>Prerequisites used in this module:</strong> arrow functions, destructuring, ES6 modules: you will reuse them throughout the path below.<br/><br/><strong>Core program next steps:</strong><br/>→ <strong>01</strong> <code>components-props</code>: reusable components, <em>props</em>, parent → child communication<br/>→ <strong>02</strong> <code>use-state</code>: local state and interactivity with <code>useState</code><br/>→ <strong>03</strong> <code>use-effect</code>: side effects, async data, lifecycle<br/>→ <strong>04</strong> <code>advanced-hooks</code>: advanced hooks and common patterns<br/>→ <strong>05</strong> <code>react-router</code>: navigation, routes, and pages<br/>→ <strong>06</strong> <code>forms</code>: controlled forms, validation, and UX<br/>→ <strong>07</strong> <code>styling</code>: styles, themes, and visual consistency<br/><br/><strong>Ecosystem:</strong> the basics covered here (JSX, fragments, <code>key</code>) remain the foundation of every React project: Next.js, Remix, animations (Framer Motion), virtualized lists (react-window), etc."
                 }
               }
             ],
@@ -1139,7 +1139,7 @@
                   "__component": "lesson.callout-block",
                   "variant": "concept",
                   "title": "<i class='fa-solid fa-diagram-project'></i> Up next: core phase roadmap",
-                  "body": "<strong>Prerequisites used in this module:</strong> arrow functions, destructuring, ES6 modules — you will reuse them throughout the path below.<br/><br/><strong>Core program next steps:</strong><br/>→ <strong>01</strong> <code>components-props</code>: reusable components, <em>props</em>, parent → child communication<br/>→ <strong>02</strong> <code>use-state</code>: local state and interactivity with <code>useState</code><br/>→ <strong>03</strong> <code>use-effect</code>: side effects, async data, lifecycle<br/>→ <strong>04</strong> <code>advanced-hooks</code>: advanced hooks and common patterns<br/>→ <strong>05</strong> <code>react-router</code>: navigation, routes, and pages<br/>→ <strong>06</strong> <code>forms</code>: controlled forms, validation, and UX<br/>→ <strong>07</strong> <code>styling</code>: styles, themes, and visual consistency<br/><br/><strong>Ecosystem:</strong> the basics covered here (JSX, fragments, <code>key</code>) remain the foundation of every React project: Next.js, Remix, animations (Framer Motion), virtualized lists (react-window), etc."
+                  "body": "<strong>Prerequisites used in this module:</strong> arrow functions, destructuring, ES6 modules: you will reuse them throughout the path below.<br/><br/><strong>Core program next steps:</strong><br/>→ <strong>01</strong> <code>components-props</code>: reusable components, <em>props</em>, parent → child communication<br/>→ <strong>02</strong> <code>use-state</code>: local state and interactivity with <code>useState</code><br/>→ <strong>03</strong> <code>use-effect</code>: side effects, async data, lifecycle<br/>→ <strong>04</strong> <code>advanced-hooks</code>: advanced hooks and common patterns<br/>→ <strong>05</strong> <code>react-router</code>: navigation, routes, and pages<br/>→ <strong>06</strong> <code>forms</code>: controlled forms, validation, and UX<br/>→ <strong>07</strong> <code>styling</code>: styles, themes, and visual consistency<br/><br/><strong>Ecosystem:</strong> the basics covered here (JSX, fragments, <code>key</code>) remain the foundation of every React project: Next.js, Remix, animations (Framer Motion), virtualized lists (react-window), etc."
                 }
               ]
             },
@@ -1238,7 +1238,7 @@
                   "legacyId": "react-core-quiz-m11-q4",
                   "prompt": "What expressions can you put inside curly braces {} in JSX?",
                   "type": "single",
-                  "explanation": "You use expressions (that produce a value), not statements. An if/else won't work—you need a ternary or && instead.",
+                  "explanation": "You use expressions (that produce a value), not statements. An if/else won't work: you need a ternary or && instead.",
                   "order": 3,
                   "answers": [
                     {
@@ -1319,7 +1319,7 @@
                   },
                   {
                     "id": "12.2",
-                    "title": "2.2: Props — passing data",
+                    "title": "2.2: Props, passing data",
                     "desc": "Props are read-only. A component must never mutate its own props. You can pass any type: string, number, object, array, function, JSX component.",
                     "tags": [
                       "props",
@@ -1362,7 +1362,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>2.1: Creating and naming components</strong> : Convention: always start with a capital letter (<code>Button</code>, not <code>button</code>). One component per file.</li><li><strong>2.2: Props — passing data</strong> : Props are read-only. A component must never mutate its own props. You can pass any type: string, number, object, array, function, JSX component.</li><li><strong>2.3: The children prop</strong> : Lets you build flexible container components like Layouts, Cards, Modals. One of React's most powerful patterns.</li><li><strong>2.4: Composition vs inheritance</strong> : React strongly favors composition. You never inherit components. Composition is more flexible and readable.</li></ul>"
+                  "body": "<ul><li><strong>2.1: Creating and naming components</strong> : Convention: always start with a capital letter (<code>Button</code>, not <code>button</code>). One component per file.</li><li><strong>2.2: Props, passing data</strong> : Props are read-only. A component must never mutate its own props. You can pass any type: string, number, object, array, function, JSX component.</li><li><strong>2.3: The children prop</strong> : Lets you build flexible container components like Layouts, Cards, Modals. One of React's most powerful patterns.</li><li><strong>2.4: Composition vs inheritance</strong> : React strongly favors composition. You never inherit components. Composition is more flexible and readable.</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -1535,7 +1535,7 @@
                 "box": {
                   "variant": "concept",
                   "title": "<i class='fa-solid fa-lightbulb'></i> Fundamental rule: immutability",
-                  "body": "Never mutate state directly. <code>state.push(item)</code> is forbidden — React will not detect the change. Always create a new value: <code>setState([...state, item])</code>."
+                  "body": "Never mutate state directly. <code>state.push(item)</code> is forbidden: React will not detect the change. Always create a new value: <code>setState([...state, item])</code>."
                 }
               },
               {
@@ -1543,7 +1543,7 @@
                 "items": [
                   {
                     "id": "13.1",
-                    "title": "3.1: useState — declare and update state",
+                    "title": "3.1: useState, declare and update state",
                     "desc": "useState returns a two-element array: the current value and a function to update it. Convention: <code>[value, setValue]</code>.",
                     "tags": [
                       "useState",
@@ -1559,7 +1559,7 @@
                   },
                   {
                     "id": "13.3",
-                    "title": "3.3: Sharing state — lifting state up",
+                    "title": "3.3: Sharing state, lifting state up",
                     "desc": "When two components need the same state, lift it to their common ancestor and pass it down via props."
                   },
                   {
@@ -1599,11 +1599,11 @@
                   "__component": "lesson.callout-block",
                   "variant": "concept",
                   "title": "<i class='fa-solid fa-lightbulb'></i> Fundamental rule: immutability",
-                  "body": "Never mutate state directly. <code>state.push(item)</code> is forbidden — React will not detect the change. Always create a new value: <code>setState([...state, item])</code>."
+                  "body": "Never mutate state directly. <code>state.push(item)</code> is forbidden: React will not detect the change. Always create a new value: <code>setState([...state, item])</code>."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>3.1: useState — declare and update state</strong> : useState returns a two-element array: the current value and a function to update it. Convention: <code>[value, setValue]</code>.</li><li><strong>3.2: Controlled forms</strong> : In React, inputs are bound to state (controlled components). That is the single source of truth. onChange + value = full control.</li><li><strong>3.3: Sharing state — lifting state up</strong> : When two components need the same state, lift it to their common ancestor and pass it down via props.</li><li><strong>3.4: State with objects and arrays</strong> : Update nested structures immutably. The spread operator and functional methods are your friends.</li></ul>"
+                  "body": "<ul><li><strong>3.1: useState, declare and update state</strong> : useState returns a two-element array: the current value and a function to update it. Convention: <code>[value, setValue]</code>.</li><li><strong>3.2: Controlled forms</strong> : In React, inputs are bound to state (controlled components). That is the single source of truth. onChange + value = full control.</li><li><strong>3.3: Sharing state, lifting state up</strong> : When two components need the same state, lift it to their common ancestor and pass it down via props.</li><li><strong>3.4: State with objects and arrays</strong> : Update nested structures immutably. The spread operator and functional methods are your friends.</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -1903,7 +1903,7 @@
                     },
                     {
                       "legacyId": "react-core-quiz-m14-q2-c",
-                      "label": "It has no effect—it's optional and useless",
+                      "label": "It has no effect: it's optional and useless",
                       "isCorrect": false,
                       "order": 2
                     }
@@ -1959,7 +1959,7 @@
                 "items": [
                   {
                     "id": "15.1",
-                    "title": "5.1: useContext — global data sharing",
+                    "title": "5.1: useContext, global data sharing",
                     "desc": "Avoids prop drilling (passing props through 5 levels). Perfect for theme, language, and the signed-in user.",
                     "tags": [
                       "createContext",
@@ -1969,7 +1969,7 @@
                   },
                   {
                     "id": "15.2",
-                    "title": "5.2: useReducer — complex state",
+                    "title": "5.2: useReducer, complex state",
                     "desc": "An alternative to useState for complex logic. Inspired by Redux. Ideal when several actions update state in different ways.",
                     "tags": [
                       "useReducer",
@@ -1980,7 +1980,7 @@
                   },
                   {
                     "id": "15.3",
-                    "title": "5.3: useRef — persistent values without re-render",
+                    "title": "5.3: useRef, persistent values without re-render",
                     "desc": "useRef has two use cases: accessing a DOM element, and storing a mutable value that must not trigger a re-render.",
                     "tags": [
                       "useRef",
@@ -1990,12 +1990,12 @@
                   },
                   {
                     "id": "15.4",
-                    "title": "5.4: useMemo & useCallback — optimization",
+                    "title": "5.4: useMemo & useCallback, optimization",
                     "desc": "Memoize expensive computed values (useMemo) and functions (useCallback). Caution: use sparingly."
                   },
                   {
                     "id": "15.5",
-                    "title": "5.5: Custom hooks — your superpower",
+                    "title": "5.5: Custom hooks, your superpower",
                     "desc": "Build your own hooks to extract and reuse logic. Rule: the name must start with <code>use</code>.",
                     "tags": [
                       "useLocalStorage",
@@ -2023,7 +2023,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>5.1: useContext — global data sharing</strong> : Avoids prop drilling (passing props through 5 levels). Perfect for theme, language, and the signed-in user.</li><li><strong>5.2: useReducer — complex state</strong> : An alternative to useState for complex logic. Inspired by Redux. Ideal when several actions update state in different ways.</li><li><strong>5.3: useRef — persistent values without re-render</strong> : useRef has two use cases: accessing a DOM element, and storing a mutable value that must not trigger a re-render.</li><li><strong>5.4: useMemo & useCallback — optimization</strong> : Memoize expensive computed values (useMemo) and functions (useCallback). Caution: use sparingly.</li><li><strong>5.5: Custom hooks — your superpower</strong> : Build your own hooks to extract and reuse logic. Rule: the name must start with <code>use</code>.</li></ul>"
+                  "body": "<ul><li><strong>5.1: useContext, global data sharing</strong> : Avoids prop drilling (passing props through 5 levels). Perfect for theme, language, and the signed-in user.</li><li><strong>5.2: useReducer, complex state</strong> : An alternative to useState for complex logic. Inspired by Redux. Ideal when several actions update state in different ways.</li><li><strong>5.3: useRef, persistent values without re-render</strong> : useRef has two use cases: accessing a DOM element, and storing a mutable value that must not trigger a re-render.</li><li><strong>5.4: useMemo & useCallback, optimization</strong> : Memoize expensive computed values (useMemo) and functions (useCallback). Caution: use sparingly.</li><li><strong>5.5: Custom hooks, your superpower</strong> : Build your own hooks to extract and reuse logic. Rule: the name must start with <code>use</code>.</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -2236,7 +2236,7 @@
               },
               {
                 "kind": "paragraph",
-                "html": "When React Router goes from <code>/users/1</code> to <code>/users/2</code>, it <strong>does not unmount</strong> the <code>&lt;Profile&gt;</code> component — it only changes its <code>useParams</code>. Result: all internal state (form in progress, previous <code>fetch</code> data, active tab…) stays as-is. One of the most common bugs for beginners — and experienced devs too."
+                "html": "When React Router goes from <code>/users/1</code> to <code>/users/2</code>, it <strong>does not unmount</strong> the <code>&lt;Profile&gt;</code> component: it only changes its <code>useParams</code>. Result: all internal state (form in progress, previous <code>fetch</code> data, active tab…) stays as-is. One of the most common bugs for beginners: and experienced devs too."
               },
               {
                 "kind": "info",
@@ -2290,7 +2290,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "When React Router goes from <code>/users/1</code> to <code>/users/2</code>, it <strong>does not unmount</strong> the <code>&lt;Profile&gt;</code> component — it only changes its <code>useParams</code>. Result: all internal state (form in progress, previous <code>fetch</code> data, active tab…) stays as-is. One of the most common bugs for beginners — and experienced devs too."
+                  "body": "When React Router goes from <code>/users/1</code> to <code>/users/2</code>, it <strong>does not unmount</strong> the <code>&lt;Profile&gt;</code> component: it only changes its <code>useParams</code>. Result: all internal state (form in progress, previous <code>fetch</code> data, active tab…) stays as-is. One of the most common bugs for beginners: and experienced devs too."
                 },
                 {
                   "__component": "lesson.callout-block",
@@ -2542,7 +2542,7 @@
               {
                 "legacyId": "react-core-ex-m17-1",
                 "title": "Controlled form",
-                "instructions": "Create a sign-up form with email and password fields (no React Hook Form for this exercise — just useState). Validate that the email contains @ and the password is at least 6 characters. Display errors below each field.",
+                "instructions": "Create a sign-up form with email and password fields (no React Hook Form for this exercise: just useState). Validate that the email contains @ and the password is at least 6 characters. Display errors below each field.",
                 "kind": "code",
                 "order": 0,
                 "hints": [
@@ -2610,7 +2610,7 @@
                   },
                   {
                     "id": "18.2",
-                    "title": "8.2: Framer Motion — advanced animations",
+                    "title": "8.2: Framer Motion, advanced animations",
                     "desc": "The most powerful animation library for React. Motion components, variants, transitions, layout animations, drag & drop.",
                     "tags": [
                       "motion.div",
@@ -2650,7 +2650,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>8.1: Tailwind CSS with React</strong> : Install, configure, responsive classes, dark mode, and Tailwind-based component libraries (shadcn/ui, DaisyUI).</li><li><strong>8.2: Framer Motion — advanced animations</strong> : The most powerful animation library for React. Motion components, variants, transitions, layout animations, drag & drop.</li></ul>"
+                  "body": "<ul><li><strong>8.1: Tailwind CSS with React</strong> : Install, configure, responsive classes, dark mode, and Tailwind-based component libraries (shadcn/ui, DaisyUI).</li><li><strong>8.2: Framer Motion, advanced animations</strong> : The most powerful animation library for React. Motion components, variants, transitions, layout animations, drag & drop.</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -2898,7 +2898,7 @@
                   "answers": [
                     {
                       "legacyId": "react-typescript-quiz-m19-q1-a",
-                      "label": "None — they are aliases of each other",
+                      "label": "None: they are aliases of each other",
                       "isCorrect": false,
                       "order": 0
                     },
@@ -3008,7 +3008,7 @@
                 "order": 0,
                 "hints": [
                   "Use `keyof T` so `key` must be a real key of T.",
-                  "`T[K]` is the type of the value for that key — it guarantees consistency."
+                  "`T[K]` is the type of the value for that key: it guarantees consistency."
                 ],
                 "starterFiles": {
                   "/App.tsx": "// TODO: define the User type\n\n// TODO: implement filterBy<T, K extends keyof T>(items: T[], key: K, value: T[K]): T[]\n\nconst users /* : User[] */ = [\n  { id: 1, name: \"Ada\", email: \"ada@ex.com\", role: \"admin\" as const },\n  { id: 2, name: \"Linus\", email: \"linus@ex.com\", role: \"user\" as const },\n  { id: 3, name: \"Grace\", email: \"grace@ex.com\", role: \"admin\" as const },\n];\n\nexport default function App() {\n  // TODO: filter admin users via filterBy(users, \"role\", \"admin\")\n  return (\n    <div style={{ padding: 24, fontFamily: \"system-ui\" }}>\n      <h2>Admins</h2>\n      <ul>{/* render admins */}</ul>\n    </div>\n  );\n}\n"
@@ -3406,7 +3406,7 @@
                     },
                     {
                       "legacyId": "react-typescript-quiz-m21-q1-c",
-                      "label": "Don't type — TypeScript infers everything",
+                      "label": "Don't type: TypeScript infers everything",
                       "isCorrect": false,
                       "order": 2
                     }
@@ -3791,7 +3791,7 @@
                 "items": [
                   {
                     "id": "23.1",
-                    "title": "23.1: Zustand — modern simplicity",
+                    "title": "23.1: Zustand, modern simplicity",
                     "desc": "Minimal API, no required Provider, granular selectors to avoid re-renders. Became the default choice in 2026 for shared UI state.",
                     "tags": [
                       "create",
@@ -3845,7 +3845,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>23.1: Zustand — modern simplicity</strong> : Minimal API, no required Provider, granular selectors to avoid re-renders. Became the default choice in 2026 for shared UI state.</li><li><strong>23.2: Redux Toolkit</strong> : The historical standard. Verbose but traceable and well tooled (DevTools, middleware). Still relevant on large applications with multiple teams.</li><li><strong>23.3: TanStack Query for server state</strong> : <strong>The most important architectural choice</strong>: do NOT put server data in Zustand/Redux. TanStack Query handles cache, refetch, invalidation, stale-while-revalidate. Your client store no longer has to orchestrate all of that.</li></ul>"
+                  "body": "<ul><li><strong>23.1: Zustand, modern simplicity</strong> : Minimal API, no required Provider, granular selectors to avoid re-renders. Became the default choice in 2026 for shared UI state.</li><li><strong>23.2: Redux Toolkit</strong> : The historical standard. Verbose but traceable and well tooled (DevTools, middleware). Still relevant on large applications with multiple teams.</li><li><strong>23.3: TanStack Query for server state</strong> : <strong>The most important architectural choice</strong>: do NOT put server data in Zustand/Redux. TanStack Query handles cache, refetch, invalidation, stale-while-revalidate. Your client store no longer has to orchestrate all of that.</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -3895,7 +3895,7 @@
                   "answers": [
                     {
                       "legacyId": "react-ecosystem-quiz-m23-q2-a",
-                      "label": "None — they are equivalent alternatives",
+                      "label": "None: they are equivalent alternatives",
                       "isCorrect": false,
                       "order": 0
                     },
@@ -3950,7 +3950,7 @@
                 "kind": "code",
                 "order": 0,
                 "hints": [
-                  "For this offline exercise, simply use `useReducer` or `useState` in a parent component that passes functions as props — the goal is to understand the shape of a store.",
+                  "For this offline exercise, simply use `useReducer` or `useState` in a parent component that passes functions as props: the goal is to understand the shape of a store.",
                   "In a real project, you would write: `const useCart = create((set) => ({ items: [], add: (i) => set((s) => ({ items: [...s.items, i] })) }))`."
                 ],
                 "starterFiles": {
@@ -4027,7 +4027,7 @@
                 "box": {
                   "variant": "warn",
                   "title": "<i class='fa-solid fa-shield-halved'></i> Security rules to memorize",
-                  "body": "1) Never store a sensitive token in <code>localStorage</code> (XSS). 2) Always use <code>httpOnly</code> + <code>Secure</code> + <code>SameSite=Lax</code> cookies. 3) Authorization checks must <strong>always</strong> happen on the server — the client can lie."
+                  "body": "1) Never store a sensitive token in <code>localStorage</code> (XSS). 2) Always use <code>httpOnly</code> + <code>Secure</code> + <code>SameSite=Lax</code> cookies. 3) Authorization checks must <strong>always</strong> happen on the server: the client can lie."
                 }
               },
               {
@@ -4058,7 +4058,7 @@
                   "__component": "lesson.callout-block",
                   "variant": "warn",
                   "title": "<i class='fa-solid fa-shield-halved'></i> Security rules to memorize",
-                  "body": "1) Never store a sensitive token in <code>localStorage</code> (XSS). 2) Always use <code>httpOnly</code> + <code>Secure</code> + <code>SameSite=Lax</code> cookies. 3) Authorization checks must <strong>always</strong> happen on the server — the client can lie."
+                  "body": "1) Never store a sensitive token in <code>localStorage</code> (XSS). 2) Always use <code>httpOnly</code> + <code>Secure</code> + <code>SameSite=Lax</code> cookies. 3) Authorization checks must <strong>always</strong> happen on the server: the client can lie."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -4191,7 +4191,7 @@
                   },
                   {
                     "id": "25.2",
-                    "title": "25.2: Prisma — the modern ORM",
+                    "title": "25.2: Prisma, the modern ORM",
                     "desc": "Declarative schema (<code>schema.prisma</code>), versioned migrations, auto-generated TypeScript client with perfect typing. Ideal for projects getting started.",
                     "tags": [
                       "schema.prisma",
@@ -4201,7 +4201,7 @@
                   },
                   {
                     "id": "25.3",
-                    "title": "25.3: Drizzle — the type-safe alternative",
+                    "title": "25.3: Drizzle, the type-safe alternative",
                     "desc": "Closer to SQL, without a heavy abstract runtime, fantastic on the Edge. For those who want fine control over generated queries.",
                     "tags": [
                       "drizzle-orm",
@@ -4241,7 +4241,7 @@
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>25.1: PostgreSQL for front-end developers</strong> : Essential concepts to master: schema, primary/foreign keys, indexes, joins, transactions. Know how to read an <code>EXPLAIN</code> and spot a missing index.</li><li><strong>25.2: Prisma — the modern ORM</strong> : Declarative schema (<code>schema.prisma</code>), versioned migrations, auto-generated TypeScript client with perfect typing. Ideal for projects getting started.</li><li><strong>25.3: Drizzle — the type-safe alternative</strong> : Closer to SQL, without a heavy abstract runtime, fantastic on the Edge. For those who want fine control over generated queries.</li></ul>"
+                  "body": "<ul><li><strong>25.1: PostgreSQL for front-end developers</strong> : Essential concepts to master: schema, primary/foreign keys, indexes, joins, transactions. Know how to read an <code>EXPLAIN</code> and spot a missing index.</li><li><strong>25.2: Prisma, the modern ORM</strong> : Declarative schema (<code>schema.prisma</code>), versioned migrations, auto-generated TypeScript client with perfect typing. Ideal for projects getting started.</li><li><strong>25.3: Drizzle, the type-safe alternative</strong> : Closer to SQL, without a heavy abstract runtime, fantastic on the Edge. For those who want fine control over generated queries.</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -4290,7 +4290,7 @@
                 },
                 {
                   "legacyId": "react-ecosystem-quiz-m25-q2",
-                  "prompt": "Prisma vs Drizzle — what is the main trade-off?",
+                  "prompt": "Prisma vs Drizzle: what is the main trade-off?",
                   "type": "single",
                   "explanation": null,
                   "order": 1,
@@ -4575,7 +4575,7 @@
             "contentBlocks": [
               {
                 "kind": "paragraph",
-                "html": "Performance is not optional in 2026: Google penalizes slow sites and users leave below 3 s. Good news: Next.js provides excellent optimization tools by default — you just need to know how to use them."
+                "html": "Performance is not optional in 2026: Google penalizes slow sites and users leave below 3 s. Good news: Next.js provides excellent optimization tools by default, you just need to know how to use them."
               },
               {
                 "kind": "lessons",
@@ -4641,7 +4641,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "Performance is not optional in 2026: Google penalizes slow sites and users leave below 3 s. Good news: Next.js provides excellent optimization tools by default — you just need to know how to use them."
+                  "body": "Performance is not optional in 2026: Google penalizes slow sites and users leave below 3 s. Good news: Next.js provides excellent optimization tools by default, you just need to know how to use them."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -4954,7 +4954,7 @@
                     },
                     {
                       "legacyId": "react-expert-quiz-m28-q3-c",
-                      "label": "In every direction — the rule does not exist",
+                      "label": "In every direction: the rule does not exist",
                       "isCorrect": false,
                       "order": 2
                     }
@@ -4980,7 +4980,7 @@
             "contentBlocks": [
               {
                 "kind": "paragraph",
-                "html": "A senior developer in 2026 does more than write code: they know how to ship it to production. <strong>Lint, test, build, deploy automated</strong> on every PR — that is the bare minimum for a serious team."
+                "html": "A senior developer in 2026 does more than write code: they know how to ship it to production. <strong>Lint, test, build, deploy automated</strong> on every PR: that is the bare minimum for a serious team."
               },
               {
                 "kind": "lessons",
@@ -5044,7 +5044,7 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "A senior developer in 2026 does more than write code: they know how to ship it to production. <strong>Lint, test, build, deploy automated</strong> on every PR — that is the bare minimum for a serious team."
+                  "body": "A senior developer in 2026 does more than write code: they know how to ship it to production. <strong>Lint, test, build, deploy automated</strong> on every PR: that is the bare minimum for a serious team."
                 },
                 {
                   "__component": "lesson.text-block",
@@ -5318,7 +5318,7 @@
                     },
                     {
                       "legacyId": "react-expert-quiz-m30-q3-c",
-                      "label": "Nothing — hydration is a myth",
+                      "label": "Nothing: hydration is a myth",
                       "isCorrect": false,
                       "order": 2
                     }
@@ -5363,7 +5363,7 @@
                 "hints": [
                   "Compare type and children by index. For a text node, return UPDATE_TEXT if the content differs.",
                   "Simply return an array of objects { op, path, value }.",
-                  "We intentionally ignore `key` handling — that is precisely what makes React's algorithm complex."
+                  "We intentionally ignore `key` handling: that is precisely what makes React's algorithm complex."
                 ],
                 "starterFiles": {
                   "/App.tsx": "type VNode =\n  | { type: \"text\"; value: string }\n  | { type: string; children: VNode[] };\n\ntype Op =\n  | { op: \"ADD\"; path: number[]; node: VNode }\n  | { op: \"REMOVE\"; path: number[] }\n  | { op: \"UPDATE_TEXT\"; path: number[]; value: string };\n\n// TODO: implement diff(prev, next, path = []) that returns Op[]\n\nconst prev: VNode = {\n  type: \"div\",\n  children: [{ type: \"text\", value: \"Hello\" }, { type: \"text\", value: \"World\" }],\n};\nconst next: VNode = {\n  type: \"div\",\n  children: [{ type: \"text\", value: \"Hello\" }, { type: \"text\", value: \"Sandpack\" }],\n};\n\nexport default function App() {\n  return (\n    <pre style={{ padding: 24, fontFamily: \"monospace\" }}>\n      {/* JSON.stringify(diff(prev, next), null, 2) */}\n    </pre>\n  );\n}\n"
@@ -5430,7 +5430,7 @@
                 "box": {
                   "variant": "note",
                   "title": "<i class='fa-solid fa-pen-ruler'></i> Writing exercise",
-                  "body": "Pick a React library you use daily. Open its GitHub repo, read 3 open issues, and draft (for yourself) a small PR plan: <strong>problem → root cause → proposed fix → tests to write</strong>. That is the exercise that takes you from \"user\" to \"contributor\". No code to deliver — clarity of analysis is the product."
+                  "body": "Pick a React library you use daily. Open its GitHub repo, read 3 open issues, and draft (for yourself) a small PR plan: <strong>problem → root cause → proposed fix → tests to write</strong>. That is the exercise that takes you from \"user\" to \"contributor\". No code to deliver: clarity of analysis is the product."
                 }
               },
               {
@@ -5461,7 +5461,7 @@
                   "__component": "lesson.callout-block",
                   "variant": "note",
                   "title": "<i class='fa-solid fa-pen-ruler'></i> Writing exercise",
-                  "body": "Pick a React library you use daily. Open its GitHub repo, read 3 open issues, and draft (for yourself) a small PR plan: <strong>problem → root cause → proposed fix → tests to write</strong>. That is the exercise that takes you from \"user\" to \"contributor\". No code to deliver — clarity of analysis is the product."
+                  "body": "Pick a React library you use daily. Open its GitHub repo, read 3 open issues, and draft (for yourself) a small PR plan: <strong>problem → root cause → proposed fix → tests to write</strong>. That is the exercise that takes you from \"user\" to \"contributor\". No code to deliver: clarity of analysis is the product."
                 },
                 {
                   "__component": "lesson.code-block",
@@ -5576,7 +5576,7 @@
             "contentBlocks": [
               {
                 "kind": "paragraph",
-                "html": "Since 2023, AI has become a pillar of most new products. Knowing how to cleanly integrate an LLM into a React app — with <strong>good streaming</strong>, <strong>robust error handling</strong>, and <strong>thoughtful UX</strong> — is a skill that pays off enormously."
+                "html": "Since 2023, AI has become a pillar of most new products. Knowing how to cleanly integrate an LLM into a React app: with <strong>good streaming</strong>, <strong>robust error handling</strong>, and <strong>thoughtful UX</strong>: is a skill that pays off enormously."
               },
               {
                 "kind": "lessons",
@@ -5594,7 +5594,7 @@
                   },
                   {
                     "id": "32.2",
-                    "title": "32.2: RAG — Retrieval-Augmented Generation",
+                    "title": "32.2: RAG, Retrieval-Augmented Generation",
                     "desc": "The pattern for making an LLM answer from <em>your data</em>. (1) split documents into chunks, (2) generate embeddings, (3) store in a vector DB (pgvector, Qdrant…), (4) at prompt time, retrieve relevant chunks and inject them into context.",
                     "tags": [
                       "embeddings",
@@ -5642,11 +5642,11 @@
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "Since 2023, AI has become a pillar of most new products. Knowing how to cleanly integrate an LLM into a React app — with <strong>good streaming</strong>, <strong>robust error handling</strong>, and <strong>thoughtful UX</strong> — is a skill that pays off enormously."
+                  "body": "Since 2023, AI has become a pillar of most new products. Knowing how to cleanly integrate an LLM into a React app: with <strong>good streaming</strong>, <strong>robust error handling</strong>, and <strong>thoughtful UX</strong>: is a skill that pays off enormously."
                 },
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>32.1: Vercel AI SDK</strong> : The reference tool for LLM interfaces in React/Next.js. <code>useChat</code> hook, automatic token streaming, Server Actions integration, adapters for OpenAI, Anthropic, Groq, Mistral…</li><li><strong>32.2: RAG — Retrieval-Augmented Generation</strong> : The pattern for making an LLM answer from <em>your data</em>. (1) split documents into chunks, (2) generate embeddings, (3) store in a vector DB (pgvector, Qdrant…), (4) at prompt time, retrieve relevant chunks and inject them into context.</li><li><strong>32.3: AI interface UX</strong> : Key points: visible token streaming, clear status indicator (<em>thinking / tool call / done</em>), interrupt button, explicit handling of model errors (rate limit, refusal, hallucinations).</li></ul>"
+                  "body": "<ul><li><strong>32.1: Vercel AI SDK</strong> : The reference tool for LLM interfaces in React/Next.js. <code>useChat</code> hook, automatic token streaming, Server Actions integration, adapters for OpenAI, Anthropic, Groq, Mistral…</li><li><strong>32.2: RAG, Retrieval-Augmented Generation</strong> : The pattern for making an LLM answer from <em>your data</em>. (1) split documents into chunks, (2) generate embeddings, (3) store in a vector DB (pgvector, Qdrant…), (4) at prompt time, retrieve relevant chunks and inject them into context.</li><li><strong>32.3: AI interface UX</strong> : Key points: visible token streaming, clear status indicator (<em>thinking / tool call / done</em>), interrupt button, explicit handling of model errors (rate limit, refusal, hallucinations).</li></ul>"
                 },
                 {
                   "__component": "lesson.code-block",
@@ -5741,7 +5741,7 @@
                     },
                     {
                       "legacyId": "react-expert-quiz-m32-q3-c",
-                      "label": "Do not handle errors — the model never makes mistakes",
+                      "label": "Do not handle errors: the model never makes mistakes",
                       "isCorrect": false,
                       "order": 2
                     }

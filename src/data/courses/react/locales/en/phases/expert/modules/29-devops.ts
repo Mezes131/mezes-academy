@@ -10,7 +10,7 @@ export const module29: Module = {
   content: [
     {
       kind: "paragraph",
-      html: "A senior developer in 2026 does more than write code: they know how to ship it to production. <strong>Lint, test, build, deploy automated</strong> on every PR — that is the bare minimum for a serious team.",
+      html: "A senior developer in 2026 does more than write code: they know how to ship it to production. <strong>Lint, test, build, deploy automated</strong> on every PR: that is the bare minimum for a serious team.",
     },
     {
       kind: "lessons",

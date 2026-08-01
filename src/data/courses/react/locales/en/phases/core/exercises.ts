@@ -311,7 +311,7 @@ export default function App() {
     id: "react-core-ex-m17-1",
     title: "Controlled form",
     instructions:
-      "Create a sign-up form with email and password fields (no React Hook Form for this exercise — just useState). Validate that the email contains @ and the password is at least 6 characters. Display errors below each field.",
+      "Create a sign-up form with email and password fields (no React Hook Form for this exercise: just useState). Validate that the email contains @ and the password is at least 6 characters. Display errors below each field.",
     hints: [
       "Use state for each field and a separate errors state.",
       "Validate in onSubmit and prevent the default submit with e.preventDefault().",

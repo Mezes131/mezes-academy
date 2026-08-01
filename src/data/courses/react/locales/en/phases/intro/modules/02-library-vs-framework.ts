@@ -5,7 +5,7 @@ export const module02: Module = {
   id: "react-intro-m02",
   index: "02",
   title: "Library or framework? The nuance that changes everything",
-  subtitle: "Why React is deliberately minimal — and what that implies",
+  subtitle: "Why React is deliberately minimal: and what that implies",
   duration: "2 min",
   content: [
     {

@@ -9,7 +9,7 @@ export const expertExercises = {
     hints: [
       "Compare type and children by index. For a text node, return UPDATE_TEXT if the content differs.",
       "Simply return an array of objects { op, path, value }.",
-      "We intentionally ignore `key` handling — that is precisely what makes React's algorithm complex.",
+      "We intentionally ignore `key` handling: that is precisely what makes React's algorithm complex.",
     ],
     template: "react-ts",
     starterFiles: {

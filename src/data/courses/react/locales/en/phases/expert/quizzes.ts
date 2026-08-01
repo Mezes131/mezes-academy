@@ -31,7 +31,7 @@ export const expertQuizzes = {
         options: [
           { id: "a", label: "From domain to infrastructure (UI depends on domain, domain depends on infra)" },
           { id: "b", label: "From outside to inside: UI → application → domain. Never the reverse" },
-          { id: "c", label: "In every direction — the rule does not exist" },
+          { id: "c", label: "In every direction: the rule does not exist" },
         ],
         correct: ["b"],
         explanation:
@@ -107,7 +107,7 @@ export const expertQuizzes = {
         options: [
           { id: "a", label: "The server sends static HTML. The client attaches event listeners and « rebuilds » the matching Virtual DOM to pick up where the server left off" },
           { id: "b", label: "The client downloads a `.hydrate.js` file that replaces all the HTML" },
-          { id: "c", label: "Nothing — hydration is a myth" },
+          { id: "c", label: "Nothing: hydration is a myth" },
         ],
         correct: ["a"],
       },
@@ -191,7 +191,7 @@ export const expertQuizzes = {
         options: [
           { id: "a", label: "Hide the stream and wait for the full response to avoid confusion" },
           { id: "b", label: "Stream tokens, show status clearly (thinking/tool call/done), and allow interrupting generation" },
-          { id: "c", label: "Do not handle errors — the model never makes mistakes" },
+          { id: "c", label: "Do not handle errors: the model never makes mistakes" },
         ],
         correct: ["b"],
       },

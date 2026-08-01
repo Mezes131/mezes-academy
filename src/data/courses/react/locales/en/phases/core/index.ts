@@ -17,7 +17,7 @@ export const corePhase: Phase = {
   label: "React Core",
   title: "React Core (JavaScript)",
   summary:
-    "Master React from scratch: components, state, hooks, routing, and styling. The most important phase of the track — the foundations everything else rests on.",
+    "Master React from scratch: components, state, hooks, routing, and styling. The most important phase of the track: the foundations everything else rests on.",
   metaTags: ["8 modules", "~10 weeks", "2 portfolio projects", "React 18", "Vite"],
   modules: [
     module11,

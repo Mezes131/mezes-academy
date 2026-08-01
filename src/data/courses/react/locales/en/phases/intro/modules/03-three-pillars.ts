@@ -11,12 +11,12 @@ export const module03: Module = {
   content: [
     {
       kind: "paragraph",
-      html: "All of React's magic rests on three pillars. Everything else — hooks, state, props, effects — is just a set of <em>tools</em> to put those three ideas into practice.",
+      html: "All of React's magic rests on three pillars. Everything else: hooks, state, props, effects: is just a set of <em>tools</em> to put those three ideas into practice.",
     },
     { kind: "title", text: "1. Components: divide and conquer" },
     {
       kind: "paragraph",
-      html: "A component is a <strong>reusable piece of UI</strong>, wrapped in a JavaScript function. A button, a navbar, a page — everything is a component. Like LEGO bricks, components nest to form complex interfaces from simple pieces.",
+      html: "A component is a <strong>reusable piece of UI</strong>, wrapped in a JavaScript function. A button, a navbar, a page: everything is a component. Like LEGO bricks, components nest to form complex interfaces from simple pieces.",
     },
     {
       kind: "info",
@@ -33,7 +33,7 @@ export const module03: Module = {
     },
     { kind: "highlight", html: "<i class='fa-solid fa-computer-mouse'></i> The user clicks « Like » → the <code>likes</code> state goes from 3 to 4" },
     { kind: "highlight", html: "<i class='fa-solid fa-bolt'></i> React detects the change → recalculates the affected part" },
-    { kind: "highlight", html: "<i class='fa-solid fa-palette'></i> The browser shows « 4 likes » — you didn't have to do anything" },
+    { kind: "highlight", html: "<i class='fa-solid fa-palette'></i> The browser shows « 4 likes »: you didn't have to do anything" },
     { kind: "title", text: "3. The Virtual DOM: performance through cleverness" },
     {
       kind: "paragraph",

@@ -14,30 +14,30 @@ export const module15: Module = {
       items: [
         {
           id: "15.1",
-          title: "5.1: useContext — global data sharing",
+          title: "5.1: useContext, global data sharing",
           desc: "Avoids prop drilling (passing props through 5 levels). Perfect for theme, language, and the signed-in user.",
           tags: ["createContext", "Provider", "useContext"],
         },
         {
           id: "15.2",
-          title: "5.2: useReducer — complex state",
+          title: "5.2: useReducer, complex state",
           desc: "An alternative to useState for complex logic. Inspired by Redux. Ideal when several actions update state in different ways.",
           tags: ["useReducer", "reducer", "dispatch", "action"],
         },
         {
           id: "15.3",
-          title: "5.3: useRef — persistent values without re-render",
+          title: "5.3: useRef, persistent values without re-render",
           desc: "useRef has two use cases: accessing a DOM element, and storing a mutable value that must not trigger a re-render.",
           tags: ["useRef", "ref.current", "DOM access"],
         },
         {
           id: "15.4",
-          title: "5.4: useMemo & useCallback — optimization",
+          title: "5.4: useMemo & useCallback, optimization",
           desc: "Memoize expensive computed values (useMemo) and functions (useCallback). Caution: use sparingly.",
         },
         {
           id: "15.5",
-          title: "5.5: Custom hooks — your superpower",
+          title: "5.5: Custom hooks, your superpower",
           desc: "Build your own hooks to extract and reuse logic. Rule: the name must start with <code>use</code>.",
           tags: ["useLocalStorage", "useFetch", "useDebounce"],
         },

@@ -11,10 +11,10 @@ export const module05: Module = {
       kind: "paragraph",
       html: "This track is organized into <strong>progressive phases</strong>, designed so each idea builds on the previous one.",
     },
-    { kind: "highlight", html: "<strong>Phase: React Core</strong> — Foundations: JSX, components, props, state, hooks, routing, styling" },
-    { kind: "highlight", html: "<strong>Phase: TypeScript</strong> — Add typing to write robust code" },
-    { kind: "highlight", html: "<strong>Phase: Ecosystem</strong> — Next.js, auth, databases, tests, performance" },
-    { kind: "highlight", html: "<strong>Phase: Expert</strong> — Architecture, DevOps, React internals, open source, AI" },
+    { kind: "highlight", html: "<strong>Phase: React Core</strong>, Foundations: JSX, components, props, state, hooks, routing, styling" },
+    { kind: "highlight", html: "<strong>Phase: TypeScript</strong>, Add typing to write robust code" },
+    { kind: "highlight", html: "<strong>Phase: Ecosystem</strong>, Next.js, auth, databases, tests, performance" },
+    { kind: "highlight", html: "<strong>Phase: Expert</strong>, Architecture, DevOps, React internals, open source, AI" },
     {
       kind: "info",
       box: {

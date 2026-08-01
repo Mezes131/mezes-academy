@@ -11,7 +11,7 @@ export const module32: Module = {
   content: [
     {
       kind: "paragraph",
-      html: "Since 2023, AI has become a pillar of most new products. Knowing how to cleanly integrate an LLM into a React app — with <strong>good streaming</strong>, <strong>robust error handling</strong>, and <strong>thoughtful UX</strong> — is a skill that pays off enormously.",
+      html: "Since 2023, AI has become a pillar of most new products. Knowing how to cleanly integrate an LLM into a React app: with <strong>good streaming</strong>, <strong>robust error handling</strong>, and <strong>thoughtful UX</strong>: is a skill that pays off enormously.",
     },
     {
       kind: "lessons",
@@ -24,7 +24,7 @@ export const module32: Module = {
         },
         {
           id: "32.2",
-          title: "32.2: RAG — Retrieval-Augmented Generation",
+          title: "32.2: RAG, Retrieval-Augmented Generation",
           desc: "The pattern for making an LLM answer from <em>your data</em>. (1) split documents into chunks, (2) generate embeddings, (3) store in a vector DB (pgvector, Qdrant…), (4) at prompt time, retrieve relevant chunks and inject them into context.",
           tags: ["embeddings", "vector DB", "pgvector", "chunking"],
         },
