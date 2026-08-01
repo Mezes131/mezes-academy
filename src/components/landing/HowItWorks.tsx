@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
 /**
@@ -7,37 +8,70 @@ import { cn } from "@/lib/utils";
  * followed by 4 core promises.
  */
 export function HowItWorks() {
+  const t = useT();
+
+  const steps: StepData[] = [
+    {
+      icon: "fa-book-open",
+      title: t("landing.step1Title"),
+      desc: t("landing.step1Body"),
+      color: "text-brand-intro",
+      bg: "bg-brand-intro/10",
+      border: "border-brand-intro/30",
+    },
+    {
+      icon: "fa-code",
+      title: t("landing.step2Title"),
+      desc: t("landing.step2Body"),
+      color: "text-brand-core",
+      bg: "bg-brand-core/10",
+      border: "border-brand-core/30",
+    },
+    {
+      icon: "fa-chart-line",
+      title: t("landing.step3Title"),
+      desc: t("landing.step3Body"),
+      color: "text-brand-expert",
+      bg: "bg-brand-expert/10",
+      border: "border-brand-expert/30",
+    },
+  ];
+
+  const promises: PromiseData[] = [
+    { title: t("landing.promise1Title"), desc: t("landing.promise1Body") },
+    { title: t("landing.promise2Title"), desc: t("landing.promise2Body") },
+    { title: t("landing.promise3Title"), desc: t("landing.promise3Body") },
+    { title: t("landing.promise4Title"), desc: t("landing.promise4Body") },
+  ];
+
   return (
     <section
       id="how-it-works"
-      className="relative py-12 md:py-20 bg-bg-2/30 border-y border-base"
+      className="relative py-12 md:py-20 bg-bg-2/30 border-y-base"
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-14 max-w-2xl">
           <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-fg-3 mb-3">
-            <i className="fa-solid fa-compass mr-1.5" /> Méthode
+            <i className="fa-solid fa-compass mr-1.5" /> {t("landing.methodEyebrow")}
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            Une méthode en trois temps.
+            {t("landing.methodTitle")}
           </h2>
           <p className="mt-3 text-fg-2 leading-relaxed max-w-xl">
-            Lis, pratique, valide. La boucle est courte pour que chaque notion
-            se fixe dans ton code, pas seulement dans ta mémoire.
+            {t("landing.methodBody")}
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 md:items-start relative">
-          {/* Horizontal connector line (desktop) */}
           <div className="hidden md:block absolute top-8 left-16 right-16 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
-          {STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <Step key={step.title} step={step} index={i} />
           ))}
         </div>
 
-        {/* Promises */}
         <div className="mt-16 grid md:grid-cols-2 md:items-start gap-4">
-          {PROMISES.map((promise) => (
+          {promises.map((promise) => (
             <Promise key={promise.title} promise={promise} />
           ))}
         </div>
@@ -45,8 +79,6 @@ export function HowItWorks() {
     </section>
   );
 }
-
-/* ─── Internal data ───────────────────────────────────────── */
 
 interface StepData {
   icon: string;
@@ -57,58 +89,10 @@ interface StepData {
   border: string;
 }
 
-const STEPS: StepData[] = [
-  {
-    icon: "fa-book-open",
-    title: "Apprends",
-    desc: "Des leçons claires, avec exemples de code et analogies concrètes. Tu avances à ton rythme, sans deadline artificielle.",
-    color: "text-brand-intro",
-    bg: "bg-brand-intro/10",
-    border: "border-brand-intro/30",
-  },
-  {
-    icon: "fa-code",
-    title: "Pratique",
-    desc: "Chaque module a son quiz et ses exercices live. Tu écris du vrai code dans le navigateur et tu vois le résultat tout de suite.",
-    color: "text-brand-core",
-    bg: "bg-brand-core/10",
-    border: "border-brand-core/30",
-  },
-  {
-    icon: "fa-chart-line",
-    title: "Progresse",
-    desc: "Ta progression est sauvegardée automatiquement. Reviens quand tu veux, reprends le module en cours, exporte tout en JSON.",
-    color: "text-brand-expert",
-    bg: "bg-brand-expert/10",
-    border: "border-brand-expert/30",
-  },
-];
-
 interface PromiseData {
   title: string;
   desc: string;
 }
-
-const PROMISES: PromiseData[] = [
-  {
-    title: "Du concret, pas de bruit",
-    desc: "On te montre ce qu'il faut maîtriser pour être autonome. Pas la mode du mois, pas le jargon pour faire joli.",
-  },
-  {
-    title: "Relu et testé",
-    desc: "Chaque leçon est relue. Chaque exercice est vérifié. Chaque explication dit pourquoi, pas seulement comment.",
-  },
-  {
-    title: "Confort de lecture",
-    desc: "Interface claire, thèmes clair et sombre, responsive, barre de progression toujours à portée de main.",
-  },
-  {
-    title: "Ta progression t'appartient",
-    desc: "Stockée localement et synchronisée quand tu es connecté. Exportable en JSON. Aucun tracker, aucune pub.",
-  },
-];
-
-/* ─── Private subcomponents ─────────────────────────────────── */
 
 function Step({ step, index }: { step: StepData; index: number }) {
   return (

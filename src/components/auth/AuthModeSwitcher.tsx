@@ -1,3 +1,4 @@
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
 export type AuthMode = "login" | "register";
@@ -17,10 +18,12 @@ export function AuthModeSwitcher({
   onChange,
   className,
 }: AuthModeSwitcherProps) {
+  const t = useT();
+
   return (
     <div
       role="tablist"
-      aria-label="Mode d'authentification"
+      aria-label={t("auth.modeAria")}
       className={cn(
         "grid grid-cols-2 gap-1 rounded-xl bg-bg-3 p-1",
         className,
@@ -30,13 +33,13 @@ export function AuthModeSwitcher({
         active={mode === "login"}
         onClick={() => onChange("login")}
       >
-        Se connecter
+        {t("nav.signInShort")}
       </TabButton>
       <TabButton
         active={mode === "register"}
         onClick={() => onChange("register")}
       >
-        Créer un compte
+        {t("nav.createAccount")}
       </TabButton>
     </div>
   );

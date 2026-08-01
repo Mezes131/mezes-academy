@@ -1,5 +1,10 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { lazy, Suspense, type ReactNode } from "react";
+import {
+  Routes,
+  Route,
+  useRoutes,
+  type RouteObject,
+} from "react-router-dom";
 import { AppRouter } from "@/router/AppRouter";
 import { ProgressProvider } from "@/hooks/useProgress";
 import { AuthProvider } from "@/hooks/useAuth";
@@ -11,8 +16,9 @@ import { RequireAuth } from "@/components/auth/RequireAuth";
 import { LandingPage } from "@/pages/LandingPage";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
+import { LocaleRouteSync } from "@/i18n/LocaleRouteSync";
+import { useT } from "@/i18n/useT";
 
-// ponytail: landing stays eager; everything else splits the initial JS
 const AuthPage = lazy(() =>
   import("@/pages/AuthPage").then((m) => ({ default: m.AuthPage })),
 );
@@ -51,17 +57,171 @@ const CapstoneGatePage = lazy(() =>
   })),
 );
 
-function ThemeApplier({ children }: { children: React.ReactNode }) {
+function ThemeApplier({ children }: { children: ReactNode }) {
   useThemeEffect();
   return <>{children}</>;
 }
 
 function RouteFallback() {
+  const t = useT();
   return (
     <div className="flex min-h-[40vh] items-center justify-center text-fg-3 text-sm">
-      Chargement…
+      {t("common.loading")}
     </div>
   );
+}
+
+function withLanding(page: ReactNode) {
+  return <LandingLayout>{page}</LandingLayout>;
+}
+
+function SvcCourseRoutes() {
+  return (
+    <CourseLayout area={svcCourseArea}>
+      <Routes>
+        <Route index element={<SvcCoursePage />} />
+        <Route
+          path="phase/:phaseId"
+          element={
+            <RequireAuth>
+              <PhasePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="module/:moduleId"
+          element={
+            <RequireAuth>
+              <ModulePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="progress"
+          element={
+            <RequireAuth>
+              <ProgressPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="bookmarks"
+          element={
+            <RequireAuth>
+              <BookmarksPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="search"
+          element={
+            <RequireAuth>
+              <SearchPage />
+            </RequireAuth>
+          }
+        />
+        <Route path="*" element={<SvcCoursePage />} />
+      </Routes>
+    </CourseLayout>
+  );
+}
+
+function ReactCourseRoutes() {
+  return (
+    <CourseLayout area={reactCourseArea}>
+      <Routes>
+        <Route index element={<ReactCoursePage />} />
+        <Route
+          path="phase/:phaseId"
+          element={
+            <RequireAuth>
+              <PhasePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="phase/:phaseId/challenge"
+          element={
+            <RequireAuth>
+              <PhaseChallengePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="module/:moduleId"
+          element={
+            <RequireAuth>
+              <ModulePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="progress"
+          element={
+            <RequireAuth>
+              <ProgressPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="final-project"
+          element={
+            <RequireAuth>
+              <CapstoneGatePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="bookmarks"
+          element={
+            <RequireAuth>
+              <BookmarksPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="search"
+          element={
+            <RequireAuth>
+              <SearchPage />
+            </RequireAuth>
+          }
+        />
+        <Route path="*" element={<ReactCoursePage />} />
+      </Routes>
+    </CourseLayout>
+  );
+}
+
+function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
+  const p = (path: string) => {
+    if (path === "/") return prefix === "" ? "/" : "/en";
+    return `${prefix}${path}`;
+  };
+
+  return [
+    { path: p("/"), element: withLanding(<LandingPage />) },
+    { path: p("/auth"), element: withLanding(<AuthPage />) },
+    {
+      path: p("/account"),
+      element: (
+        <RequireAuth>{withLanding(<AccountPage />)}</RequireAuth>
+      ),
+    },
+    {
+      path: p("/secure-vibe-coding/*"),
+      element: <SvcCourseRoutes />,
+    },
+    { path: p("/react/*"), element: <ReactCourseRoutes /> },
+  ];
+}
+
+function AppRoutes() {
+  return useRoutes([
+    ...siteRouteObjects("/en"),
+    ...siteRouteObjects(""),
+    { path: "*", element: withLanding(<LandingPage />) },
+  ]);
 }
 
 export default function App() {
@@ -71,167 +231,10 @@ export default function App() {
         <ProgressProvider>
           <ThemeApplier>
             <AppRouter>
+              <LocaleRouteSync />
               <ScrollToTop />
               <Suspense fallback={<RouteFallback />}>
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <LandingLayout>
-                        <LandingPage />
-                      </LandingLayout>
-                    }
-                  />
-
-                  <Route
-                    path="/auth"
-                    element={
-                      <LandingLayout>
-                        <AuthPage />
-                      </LandingLayout>
-                    }
-                  />
-
-                  <Route
-                    path="/account"
-                    element={
-                      <RequireAuth>
-                        <LandingLayout>
-                          <AccountPage />
-                        </LandingLayout>
-                      </RequireAuth>
-                    }
-                  />
-
-                  <Route
-                    path="/secure-vibe-coding/*"
-                    element={
-                      <CourseLayout area={svcCourseArea}>
-                        <Routes>
-                          <Route index element={<SvcCoursePage />} />
-                          <Route
-                            path="phase/:phaseId"
-                            element={
-                              <RequireAuth>
-                                <PhasePage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="module/:moduleId"
-                            element={
-                              <RequireAuth>
-                                <ModulePage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="progress"
-                            element={
-                              <RequireAuth>
-                                <ProgressPage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="bookmarks"
-                            element={
-                              <RequireAuth>
-                                <BookmarksPage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="search"
-                            element={
-                              <RequireAuth>
-                                <SearchPage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route path="*" element={<SvcCoursePage />} />
-                        </Routes>
-                      </CourseLayout>
-                    }
-                  />
-
-                  <Route
-                    path="/react/*"
-                    element={
-                      <CourseLayout area={reactCourseArea}>
-                        <Routes>
-                          <Route index element={<ReactCoursePage />} />
-                          <Route
-                            path="phase/:phaseId"
-                            element={
-                              <RequireAuth>
-                                <PhasePage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="phase/:phaseId/challenge"
-                            element={
-                              <RequireAuth>
-                                <PhaseChallengePage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="module/:moduleId"
-                            element={
-                              <RequireAuth>
-                                <ModulePage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="progress"
-                            element={
-                              <RequireAuth>
-                                <ProgressPage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="final-project"
-                            element={
-                              <RequireAuth>
-                                <CapstoneGatePage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="bookmarks"
-                            element={
-                              <RequireAuth>
-                                <BookmarksPage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route
-                            path="search"
-                            element={
-                              <RequireAuth>
-                                <SearchPage />
-                              </RequireAuth>
-                            }
-                          />
-                          <Route path="*" element={<ReactCoursePage />} />
-                        </Routes>
-                      </CourseLayout>
-                    }
-                  />
-
-                  <Route
-                    path="*"
-                    element={
-                      <LandingLayout>
-                        <LandingPage />
-                      </LandingLayout>
-                    }
-                  />
-                </Routes>
+                <AppRoutes />
               </Suspense>
             </AppRouter>
           </ThemeApplier>

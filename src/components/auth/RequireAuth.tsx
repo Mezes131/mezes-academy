@@ -4,10 +4,13 @@ import { AlertTriangle, Loader2, RefreshCw } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { Button } from "@/components/ui/Button";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
 
 export function RequireAuth({ children }: { children: ReactNode }) {
   const { user, loading, configured } = useAuth();
   const location = useLocation();
+  const lp = useLocalePath();
 
   if (!configured) {
     return <NotConfigured />;
@@ -19,7 +22,12 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 
   if (!user) {
     const next = `${location.pathname}${location.search}`;
-    return <Navigate to={`/auth?next=${encodeURIComponent(next)}`} replace />;
+    return (
+      <Navigate
+        to={lp(`/auth?next=${encodeURIComponent(next)}`)}
+        replace
+      />
+    );
   }
 
   return <>{children}</>;
@@ -28,6 +36,7 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 /* ─── Loading screen ─────────────────────────────────────────── */
 
 function SessionLoading() {
+  const t = useT();
   const [elapsedMs, setElapsedMs] = useState(0);
 
   useEffect(() => {
@@ -55,10 +64,10 @@ function SessionLoading() {
         </div>
 
         <h2 className="mt-5 text-base font-semibold tracking-tight">
-          Préparation de ton espace…
+          {t("auth.preparingSpace")}
         </h2>
         <p className="mt-1.5 text-[13px] text-fg-2 leading-relaxed max-w-sm">
-          On vérifie ta session et on synchronise ta progression.
+          {t("auth.checkingSession")}
         </p>
 
         {slow && <SlowHint />}
@@ -68,6 +77,8 @@ function SessionLoading() {
 }
 
 function SlowHint() {
+  const t = useT();
+
   return (
     <div className="mt-6 w-full rounded-xl border border-amber-500/30 bg-amber-500/5 text-left p-3 animate-fade-in">
       <div className="flex items-start gap-2.5">
@@ -77,11 +88,10 @@ function SlowHint() {
         />
         <div className="flex-1">
           <div className="text-[13px] font-semibold text-amber-200">
-            Ça prend un peu plus de temps que d'habitude
+            {t("auth.slowTitle")}
           </div>
           <p className="mt-1 text-[12px] text-fg-2 leading-relaxed">
-            Vérifie ta connexion, puis recharge la page. Si le problème persiste,
-            réessaie dans quelques instants.
+            {t("auth.slowBody")}
           </p>
           <Button
             size="sm"
@@ -90,7 +100,7 @@ function SlowHint() {
             leftIcon={<RefreshCw size={13} />}
             onClick={() => window.location.reload()}
           >
-            Recharger la page
+            {t("common.reloadPage")}
           </Button>
         </div>
       </div>
@@ -101,13 +111,14 @@ function SlowHint() {
 /* ─── Not configured screen ──────────────────────────────────── */
 
 function NotConfigured() {
+  const t = useT();
+
   return (
     <div className="min-h-[70vh] grid place-items-center px-6">
       <div className="max-w-xl rounded-2xl border-base bg-bg-2 p-6">
-        <h1 className="text-xl font-bold mb-2">Service temporairement indisponible</h1>
+        <h1 className="text-xl font-bold mb-2">{t("auth.unavailableTitle")}</h1>
         <p className="text-sm text-fg-2 leading-relaxed">
-          L'authentification n'est pas encore disponible. L'administrateur doit
-          terminer la configuration du backend. Réessaie dans quelques minutes.
+          {t("auth.unavailableBody")}
         </p>
       </div>
     </div>

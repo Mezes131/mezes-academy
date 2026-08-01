@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/hooks/useProgress";
+import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
 
 export interface SidePanelProps {
   completeness: number;
@@ -20,6 +22,8 @@ export interface SidePanelProps {
  */
 export function SidePanel({ completeness, className }: SidePanelProps) {
   const { progress, stats } = useProgress();
+  const lp = useLocalePath();
+  const t = useT();
   const totalQuizzes = Object.keys(progress.quizScores).length;
 
   return (
@@ -29,14 +33,14 @@ export function SidePanel({ completeness, className }: SidePanelProps) {
         className,
       )}
     >
-      <CompletenessRing value={completeness} />
+      <CompletenessRing value={completeness} t={t} />
 
       <div className="h-px bg-base" />
 
       <div>
         <div className="flex items-center justify-between mb-2">
           <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
-            Ma progression
+            {t("footer.myProgress")}
           </span>
           <span
             className={cn(
@@ -51,22 +55,22 @@ export function SidePanel({ completeness, className }: SidePanelProps) {
         <div className="space-y-1.5">
           <StatRow
             icon={<Target size={12} />}
-            label="Progression globale"
+            label={t("account.progress")}
             value={`${stats.percent}%`}
           />
           <StatRow
             icon={<BookOpen size={12} />}
-            label="Modules lus"
+            label={t("account.modulesRead")}
             value={String(progress.readModules.length)}
           />
           <StatRow
             icon={<Trophy size={12} />}
-            label="Quiz validés"
+            label={t("account.quizzesPassed")}
             value={`${stats.quizPassed}/${totalQuizzes || 0}`}
           />
           <StatRow
             icon={<Rocket size={12} />}
-            label="Exos résolus"
+            label={t("account.exercisesSolved")}
             value={String(stats.exercisesSolved)}
             accent="text-emerald-400"
           />
@@ -74,10 +78,10 @@ export function SidePanel({ completeness, className }: SidePanelProps) {
       </div>
 
       <Link
-        to="/react/progress"
+        to={lp("/react/progress")}
         className="inline-flex items-center justify-center gap-1.5 w-full h-9 rounded-md bg-accent text-white text-[12px] font-semibold hover:bg-accent/90 transition"
       >
-        Voir tous les détails
+        {t("common.seeAllDetails")}
         <ArrowRight size={13} />
       </Link>
     </div>
@@ -86,7 +90,13 @@ export function SidePanel({ completeness, className }: SidePanelProps) {
 
 /* ─── Subcomponents ───────────────────────────────────────────── */
 
-function CompletenessRing({ value }: { value: number }) {
+function CompletenessRing({
+  value,
+  t,
+}: {
+  value: number;
+  t: ReturnType<typeof useT>;
+}) {
   const clamp = Math.max(0, Math.min(100, Math.round(value)));
   const radius = 15.9155;
   const circumference = 2 * Math.PI * radius;
@@ -98,10 +108,10 @@ function CompletenessRing({ value }: { value: number }) {
       : clamp >= 75
         ? "Presque fini, plus qu'un petit effort."
         : clamp >= 50
-          ? "Bonne base, continue à remplir ton profil."
+          ? t("account.completenessGood")
           : clamp >= 25
             ? "Commence par renseigner ton nom et ton pseudo."
-            : "Remplis ton profil pour personnaliser ton compte.";
+            : t("account.completenessLow");
 
   return (
     <div className="flex items-center gap-3">
@@ -145,7 +155,7 @@ function CompletenessRing({ value }: { value: number }) {
 
       <div className="min-w-0">
         <div className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
-          Complétion
+          {t("account.completeness")}
         </div>
         <p className="text-[12px] text-fg-2 leading-snug mt-0.5">{helper}</p>
       </div>

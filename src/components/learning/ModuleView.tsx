@@ -1,5 +1,6 @@
 import type { Module, Phase, ContentBlock } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useT } from "@/i18n/useT";
 import { useCourseArea } from "@/components/layout/courseArea";
 import { InfoBox } from "@/components/ui/InfoBox";
 import { CodeBlock } from "@/components/ui/CodeBlock";
@@ -19,6 +20,7 @@ interface ModuleViewProps {
 }
 
 export function ModuleView({ phase, module }: ModuleViewProps) {
+  const t = useT();
   const { progress, markModuleRead, canMarkModuleRead, toggleBookmark } = useProgress();
   const { basePath } = useCourseArea();
   const accent = phaseAccent(phase.color);
@@ -65,7 +67,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
           <button
             onClick={() => toggleBookmark(module.id)}
             aria-label={
-              isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"
+              isBookmarked ? t("learn.removeBookmark") : t("learn.addBookmark")
             }
             className="p-2 rounded-lg hover:bg-bg-3 text-fg-2 hover:text-fg transition"
           >
@@ -81,17 +83,22 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
         <div className="flex flex-wrap gap-2 mt-4">
           {isRead && (
             <Badge variant="success">
-              <CheckCircle2 size={12} className="mr-1" /> Lu
+              <CheckCircle2 size={12} className="mr-1" /> {t("learn.read")}
             </Badge>
           )}
           {quizScore && (
             <Badge variant={quizPassed ? "success" : "warn"}>
-              Quiz : {quizScore.correct}/{quizScore.total}
+              {t("learn.quizScore", {
+                score: `${quizScore.correct}/${quizScore.total}`,
+              })}
             </Badge>
           )}
           {module.exercises && module.exercises.length > 0 && (
             <Badge variant={exercisesValidated ? "success" : "default"}>
-              Exercices validés : {solvedExercises}/{module.exercises.length}
+              {t("learn.exercisesDone", {
+                done: solvedExercises,
+                total: module.exercises.length,
+              })}
             </Badge>
           )}
         </div>
@@ -100,7 +107,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       {/* ─── Contenu ───────────────────────────────── */}
       <div className="space-y-8">
         {module.content.map((block, i) => (
-          <ContentRenderer key={i} block={block} />
+          <ContentRenderer key={i} block={block} t={t} />
         ))}
       </div>
 
@@ -109,11 +116,9 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
         <div className="mt-10">
           <h2 className="text-lg font-bold mb-1 flex items-center gap-2">
             <i className="fa-solid fa-bullseye text-accent-2" />
-            Quiz de fin de module
+            {t("learn.endQuiz")}
           </h2>
-          <p className="text-sm text-fg-2 mb-2">
-            Validation : 70% de bonnes réponses minimum pour marquer ce quiz comme réussi.
-          </p>
+          <p className="text-sm text-fg-2 mb-2">{t("learn.quizRule")}</p>
           <Quiz quiz={module.quiz} />
         </div>
       )}
@@ -123,7 +128,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
         <div className="mt-10">
           <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
             <i className="fa-solid fa-laptop-code text-accent-2" />
-            Exercice{module.exercises.length > 1 ? "s" : ""} pratique{module.exercises.length > 1 ? "s" : ""}
+            {t("learn.practiceExercises")}
           </h2>
           {module.exercises.map((ex) =>
             isAuditExercise(ex) ? (
@@ -139,33 +144,37 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       <div className="mt-10 pt-6 flex items-center gap-3">
         {isRead ? (
           <div className="text-sm text-emerald-400 font-medium flex items-center gap-2">
-            <CheckCircle2 size={16} /> Module marqué comme lu
+            <CheckCircle2 size={16} /> {t("learn.markedRead")}
           </div>
         ) : (
           <Button onClick={() => markModuleRead(module.id)} disabled={!canMarkRead}>
-            Terminer
+            {t("learn.markRead")}
           </Button>
         )}
         {!isRead && module.quiz && !canMarkRead && (
           <p className="text-sm text-amber-400">
             {!quizPassed && !exercisesValidated
-              ? "Valide d'abord le quiz (70% minimum) et termine l'exercice pour marquer ce module comme lu."
+              ? t("course.gateBoth")
               : !quizPassed
-                ? "Valide d'abord le quiz (70% minimum) pour marquer ce module comme lu."
-                : "Termine d'abord l'exercice pour marquer ce module comme lu."}
+                ? t("learn.gateQuiz")
+                : t("learn.gateExercise")}
           </p>
         )}
         {!isRead && !module.quiz && !canMarkRead && (
-          <p className="text-sm text-amber-400">
-            Termine d'abord l'exercice pour marquer ce module comme lu.
-          </p>
+          <p className="text-sm text-amber-400">{t("learn.gateExercise")}</p>
         )}
       </div>
     </article>
   );
 }
 
-function ContentRenderer({ block }: { block: ContentBlock }) {
+function ContentRenderer({
+  block,
+  t,
+}: {
+  block: ContentBlock;
+  t: ReturnType<typeof useT>;
+}) {
   switch (block.kind) {
     case "title":
       return (
@@ -234,7 +243,7 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
         return (
           <div className="my-6 aspect-video w-full max-w-3xl overflow-hidden rounded-xl border-base bg-bg-2">
             <iframe
-              title={video.title ?? "Vidéo du cours"}
+              title={video.title ?? t("learn.courseVideo")}
               src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.providerId)}`}
               className="h-full w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -251,7 +260,7 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
           className="my-6 flex items-center gap-3 rounded-xl border-base bg-bg-2 p-4 text-sm font-semibold hover:bg-bg-3 transition"
         >
           <i className="fa-solid fa-play text-accent-2" />
-          {video.title ?? "Ouvrir la vidéo"}
+          {video.title ?? t("learn.openVideo")}
           {video.durationSeconds != null && (
             <span className="ml-auto font-mono text-[11px] text-fg-3">
               {Math.round(video.durationSeconds / 60)} min

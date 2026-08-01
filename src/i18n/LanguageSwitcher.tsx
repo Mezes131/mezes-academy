@@ -1,12 +1,12 @@
-import { useLocale } from "./LocaleProvider";
 import { useT } from "./useT";
+import { useLocaleSwitch } from "./useLocaleSwitch";
 import type { Locale } from "./types";
 import { cn } from "@/lib/utils";
 
 const options: Locale[] = ["fr", "en"];
 
 export function LanguageSwitcher({ className }: { className?: string }) {
-  const { locale, setLocale } = useLocale();
+  const { locale, select } = useLocaleSwitch();
   const t = useT();
 
   return (
@@ -22,7 +22,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         <button
           key={code}
           type="button"
-          onClick={() => setLocale(code)}
+          onClick={() => select(code)}
           aria-pressed={locale === code}
           className={cn(
             "min-w-11 min-h-11 rounded-md px-2 transition",

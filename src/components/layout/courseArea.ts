@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import type { Phase } from "@/types";
 import type { Locale } from "@/i18n/types";
+import { localePath } from "@/i18n/localePath";
 import { findCourse } from "@/data";
 
 /**
@@ -9,17 +10,12 @@ import { findCourse } from "@/data";
  */
 export interface CourseArea {
   courseId: string;
-  /** Route prefix of the learning area, e.g. "/react". */
+  /** Route prefix of the learning area, e.g. "/react" or "/en/react". */
   basePath: string;
   navTitle: string;
   navIcon: string;
   navAccent: { text: string; chip: string };
   phases: Phase[];
-  /**
-   * Whether the cross-cutting learner tools (search, progress, bookmarks,
-   * final project) are wired for this course.
-   */
-  learnerTools: boolean;
   /** Capstone / final-project shortcut in CourseBar (React only for now). */
   showFinalProject?: boolean;
 }
@@ -36,7 +32,6 @@ export const reactCourseArea: CourseAreaBase = {
     text: "text-brand-core",
     chip: "bg-brand-core/10 text-brand-core border-brand-core/20",
   },
-  learnerTools: true,
   showFinalProject: true,
 };
 
@@ -49,8 +44,18 @@ export const svcCourseArea: CourseAreaBase = {
     text: "text-violet-400",
     chip: "bg-violet-500/10 text-violet-400 border-violet-500/20",
   },
-  learnerTools: true,
   showFinalProject: false,
+};
+
+/** Registry keyed by courseId (Progress page, cross-course UI). */
+export const COURSE_AREAS: Record<string, CourseAreaBase> = {
+  react: reactCourseArea,
+  svc: svcCourseArea,
+};
+
+const navTitleEn: Record<string, string> = {
+  react: "React from zero to expert",
+  svc: "Secure Vibe Coding",
 };
 
 export function resolveCourseArea(
@@ -59,6 +64,11 @@ export function resolveCourseArea(
 ): CourseArea {
   return {
     ...base,
+    basePath: localePath(base.basePath, locale),
+    navTitle:
+      locale === "en"
+        ? (navTitleEn[base.courseId] ?? base.navTitle)
+        : base.navTitle,
     phases: findCourse(base.courseId, locale)?.phases ?? [],
   };
 }

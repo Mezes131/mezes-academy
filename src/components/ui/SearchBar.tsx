@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/useT";
 import type { ChangeEvent } from "react";
 
 interface SearchBarProps {
@@ -13,10 +14,13 @@ interface SearchBarProps {
 export function SearchBar({
   value,
   onChange,
-  placeholder = "Rechercher une leçon, un concept…",
+  placeholder,
   autoFocus,
   className,
 }: SearchBarProps) {
+  const t = useT();
+  const resolvedPlaceholder = placeholder ?? t("search.placeholder");
+
   return (
     <div
       className={cn(
@@ -30,7 +34,7 @@ export function SearchBar({
         enterKeyHint="search"
         value={value}
         onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         autoFocus={autoFocus}
         className="flex-1 min-w-0 bg-transparent outline-none text-sm text-fg placeholder:text-fg-3"
       />
@@ -39,7 +43,7 @@ export function SearchBar({
           type="button"
           onClick={() => onChange("")}
           className="text-fg-3 hover:text-fg text-xs w-5 h-5 flex items-center justify-center"
-          aria-label="Effacer la recherche"
+          aria-label={t("search.clearAria")}
         >
           <i className="fa-solid fa-xmark" />
         </button>

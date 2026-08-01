@@ -4,6 +4,8 @@ import { AuthBenefits } from "@/components/auth/AuthBenefits";
 import { AuthFormCard } from "@/components/auth/AuthFormCard";
 import type { AuthMode } from "@/components/auth/AuthModeSwitcher";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
 
 /**
  * Entry route for authentication. Pure shell:
@@ -17,10 +19,11 @@ import { useAuth } from "@/hooks/useAuth";
 export function AuthPage() {
   const [searchParams] = useSearchParams();
   const { configured, user, loading } = useAuth();
+  const lp = useLocalePath();
 
   const nextPath = useMemo(
-    () => searchParams.get("next") || "/react",
-    [searchParams],
+    () => searchParams.get("next") || lp("/react"),
+    [searchParams, lp],
   );
   const [mode, setMode] = useState<AuthMode>(() =>
     searchParams.get("mode") === "register" ? "register" : "login",
@@ -60,14 +63,13 @@ function PageBackground() {
 }
 
 function ConfigurationRequired() {
+  const t = useT();
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
       <div className="rounded-2xl border-base bg-bg-2 p-6">
-        <h1 className="text-2xl font-bold">Configuration requise</h1>
+        <h1 className="text-2xl font-bold">{t("auth.unavailableTitle")}</h1>
         <p className="mt-2 text-sm text-fg-2 leading-relaxed">
-          L'authentification n'est pas encore disponible : l'administrateur
-          doit terminer la configuration du backend. Réessaie plus tard ou
-          contacte l'équipe.
+          {t("auth.unavailableBody")}
         </p>
       </div>
     </div>

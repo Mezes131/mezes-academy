@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Pencil, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/useT";
 
 export interface InlineTextProps {
   /** Field identifier, used as a11y label and inside the editor header. */
@@ -55,6 +56,7 @@ export function InlineText({
   validate,
   onSave,
 }: InlineTextProps) {
+  const t = useT();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value);
   const [saving, setSaving] = useState(false);
@@ -104,7 +106,7 @@ export function InlineText({
       <button
         type="button"
         onClick={() => setEditing(true)}
-        aria-label={`Modifier ${label.toLowerCase()}`}
+        aria-label={t("account.editAria", { label: label.toLowerCase() })}
         className={cn(
           "group inline-flex items-start gap-1.5 max-w-full text-left",
           "rounded-md -mx-1 px-1 py-0.5 hover:bg-bg-3 transition",
@@ -142,7 +144,7 @@ export function InlineText({
       >
         {icon && <span className="not-italic">{icon}</span>}
         <span className="not-italic">
-          {emptyLabel ?? `Ajouter ${label.toLowerCase()}`}
+          {emptyLabel ?? t("account.addField", { label: label.toLowerCase() })}
         </span>
         <Plus size={12} className="text-fg-3 not-italic" />
       </button>
@@ -205,7 +207,7 @@ export function InlineText({
           disabled={saving}
           leftIcon={<X size={13} />}
         >
-          Annuler
+          {t("common.cancel")}
         </Button>
       </div>
       <div className="flex items-center justify-between mt-1">
@@ -214,8 +216,8 @@ export function InlineText({
         ) : (
           <span className="text-[11px] text-fg-3">
             {multiline
-              ? "Entrée = retour ligne · 240 caractères max"
-              : "Entrée pour valider · Échap pour annuler"}
+              ? t("account.inlineMultilineHint")
+              : t("account.inlineHint")}
           </span>
         )}
         {maxLength && (

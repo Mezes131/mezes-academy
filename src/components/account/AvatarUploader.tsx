@@ -7,6 +7,7 @@ import {
   deleteAllAvatarsForUser,
   uploadAvatar,
 } from "@/lib/avatarStorage";
+import { useT } from "@/i18n/useT";
 
 export interface AvatarUploaderProps {
   userId: string;
@@ -31,6 +32,7 @@ export function AvatarUploader({
   onChange,
 }: AvatarUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const t = useT();
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [hover, setHover] = useState(false);
@@ -45,7 +47,7 @@ export function AvatarUploader({
     try {
       const { publicUrl } = await uploadAvatar(userId, file);
       await onChange(publicUrl);
-      onSuccess("Photo de profil mise à jour.");
+      onSuccess(t("account.avatarUpdated"));
     } catch (error) {
       onError((error as Error).message);
     } finally {
@@ -55,16 +57,14 @@ export function AvatarUploader({
 
   async function onRemove() {
     if (!currentUrl) return;
-    const ok = window.confirm(
-      "Supprimer ta photo de profil ? Tes initiales s'afficheront à la place.",
-    );
+    const ok = window.confirm(t("account.avatarRemoveConfirm"));
     if (!ok) return;
 
     setRemoving(true);
     try {
       await deleteAllAvatarsForUser(userId);
       await onChange(null);
-      onSuccess("Photo supprimée.");
+      onSuccess(t("account.avatarRemoved"));
     } catch (error) {
       onError((error as Error).message);
     } finally {
@@ -132,9 +132,7 @@ export function AvatarUploader({
             onClick={() => fileInputRef.current?.click()}
             disabled={busy}
             aria-label={
-              currentUrl
-                ? "Changer ma photo de profil"
-                : "Ajouter une photo de profil"
+              currentUrl ? t("account.changePhoto") : t("account.addPhoto")
             }
             className={cn(
               " w-8 h-8 rounded-full inline-flex items-center justify-center",
@@ -164,7 +162,7 @@ export function AvatarUploader({
             disabled={busy}
             className="text-[11px] font-semibold text-accent-2 hover:underline underline-offset-4 disabled:opacity-60"
           >
-            {currentUrl ? "Changer" : "Ajouter une photo"}
+            {currentUrl ? t("account.changePhoto") : t("account.addPhoto")}
           </button>
           {currentUrl && (
             <>
@@ -178,7 +176,7 @@ export function AvatarUploader({
                 className="inline-flex items-center gap-1 text-[11px] text-fg-3 hover:text-red-300 transition disabled:opacity-60"
               >
                 <Trash2 size={10} />
-                Supprimer
+                {t("account.removePhoto")}
               </button>
             </>
           )}

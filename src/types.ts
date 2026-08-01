@@ -253,7 +253,15 @@ export interface CourseMeta {
   /** Tailwind accent classes used by the catalog card. */
   accent: { text: string; bg: string; border: string };
   tags: string[];
-  level: "Débutant" | "Intermédiaire" | "Avancé" | "Tous niveaux";
+  level:
+    | "Débutant"
+    | "Intermédiaire"
+    | "Avancé"
+    | "Tous niveaux"
+    | "Beginner"
+    | "Intermediate"
+    | "Advanced"
+    | "All levels";
   duration: string;
   status: "active" | "soon" | "planned";
   eta?: string;

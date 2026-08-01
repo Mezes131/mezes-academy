@@ -1,17 +1,17 @@
 {
-  "exportedAt": "2026-07-27T15:52:29.565Z",
+  "exportedAt": "2026-08-01T09:17:32.185Z",
   "locale": "fr",
   "course": {
     "legacyId": "svc",
     "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
     "slug": "secure-vibe-coding",
-    "tagline": "Du prompt au produit en production, sans dette ni failles oubliées",
-    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, connexion via services tiers, données, paiements, notifications, hébergement, déploiement et mise en ligne. Projet final certifiant à la clé.",
+    "tagline": "Du prompt au produit en production.",
+    "description": "Tu veux construire avec l'IA sans te retrouver avec une dette ou une faille au milieu ? On te guide du cadrage à la mise en ligne : connexion, données, paiements, hébergement. Un vrai projet à la clé.",
     "icon": "fa-shield-halved",
     "iconFamily": "fa-solid",
     "level": "intermediate",
     "duration": "≈16–20 semaines",
-    "accentText": "text-violet-400",
+    "accentText": "text-violet-700 dark:text-violet-300",
     "accentBg": "bg-violet-500/10",
     "accentBorder": "border-violet-500/30",
     "workflowStatus": "draft",
@@ -1145,9 +1145,7 @@
         "icon": "fa-wand-magic-sparkles",
         "metaTags": [
           "tronc commun",
-          "lecture ~1h30",
-          "audits interactifs",
-          "cycle PAS"
+          "lecture ~1h30"
         ],
         "objectives": [],
         "prerequisites": [],

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 import { MobileBottomBar, type BottomNavItem } from "./MobileBottomBar";
 
 /**
@@ -15,38 +16,39 @@ import { MobileBottomBar, type BottomNavItem } from "./MobileBottomBar";
 export function LandingBottomBar() {
   const { user } = useAuth();
   const t = useT();
+  const lp = useLocalePath();
 
   const items: BottomNavItem[] = [
     {
       kind: "link",
-      to: "/",
+      to: lp("/"),
       end: true,
       label: t("nav.home"),
       icon: Home,
     },
     {
       kind: "link",
-      to: "/#catalog",
+      to: lp("/#catalog"),
       hash: "#catalog",
       label: t("nav.catalog"),
       icon: BookOpen,
     },
     {
       kind: "link",
-      to: "/react",
+      to: lp("/react"),
       label: t("bottomNav.myCourse"),
       icon: GraduationCap,
     },
     user
       ? {
           kind: "link",
-          to: "/account",
+          to: lp("/account"),
           label: t("bottomNav.account"),
           icon: UserCircle,
         }
       : {
           kind: "link",
-          to: "/auth",
+          to: lp("/auth"),
           label: t("nav.signInShort"),
           icon: LogIn,
         },

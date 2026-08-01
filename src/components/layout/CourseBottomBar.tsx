@@ -16,7 +16,7 @@ export function CourseBottomBar({
   isSidebarOpen,
   onToggleSidebar,
 }: CourseBottomBarProps) {
-  const { basePath, learnerTools } = useCourseArea();
+  const { basePath } = useCourseArea();
   const t = useT();
 
   const items: BottomNavItem[] = [
@@ -34,24 +34,19 @@ export function CourseBottomBar({
       onClick: onToggleSidebar,
       active: isSidebarOpen,
     },
+    {
+      kind: "link",
+      to: `${basePath}/progress`,
+      label: t("bottomNav.progress"),
+      icon: TrendingUp,
+    },
+    {
+      kind: "link",
+      to: `${basePath}/bookmarks`,
+      label: t("bottomNav.bookmarks"),
+      icon: Bookmark,
+    },
   ];
-
-  if (learnerTools) {
-    items.push(
-      {
-        kind: "link",
-        to: `${basePath}/progress`,
-        label: t("bottomNav.progress"),
-        icon: TrendingUp,
-      },
-      {
-        kind: "link",
-        to: `${basePath}/bookmarks`,
-        label: t("bottomNav.bookmarks"),
-        icon: Bookmark,
-      },
-    );
-  }
 
   return <MobileBottomBar items={items} hideFromClassName="lg:hidden" />;
 }

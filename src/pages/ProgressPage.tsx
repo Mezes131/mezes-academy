@@ -1,45 +1,95 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Download,
+  Upload,
+  RefreshCw,
+  TrendingUp,
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
-import { useCourseArea } from "@/components/layout/courseArea";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
+import { getCourses } from "@/data/courses";
 import {
+  COURSE_AREAS,
+  reactCourseArea,
+  resolveCourseArea,
+} from "@/components/layout/courseArea";
+import {
+  activeCourses,
+  aggregateCourseStats,
+  computeCourseDetailStats,
   computeCourseStats,
   computePhaseStats,
-  courseModuleIds,
 } from "@/lib/courseProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { MobileCollapse } from "@/components/ui/MobileCollapse";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { cn, phaseAccent } from "@/lib/utils";
-import { Download, Upload, RefreshCw, TrendingUp } from "lucide-react";
-import { Link } from "react-router-dom";
+import type { Course } from "@/types";
 
 export function ProgressPage() {
+  const t = useT();
+  const { locale } = useLocale();
+  const lp = useLocalePath();
   const { user } = useAuth();
-  const { basePath, phases } = useCourseArea();
   const { progress, reset, exportJson, importJson } = useProgress();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const stats = useMemo(
-    () => computeCourseStats(phases, progress),
-    [phases, progress],
+  const learnerCourses = useMemo(
+    () => activeCourses(getCourses(locale)),
+    [locale],
   );
-  const phaseStats = useMemo(
-    () => computePhaseStats(phases, progress),
-    [phases, progress],
-  );
-  const moduleIds = useMemo(() => courseModuleIds(phases), [phases]);
 
-  const exerciseIds = useMemo(() => {
-    const ids = new Set<string>();
-    for (const phase of phases) {
-      for (const mod of phase.modules) {
-        for (const ex of mod.exercises ?? []) ids.add(ex.id);
-      }
-    }
-    return ids;
-  }, [phases]);
+  const courseRows = useMemo(
+    () =>
+      learnerCourses.map((course) => {
+        const areaBase = COURSE_AREAS[course.id] ?? reactCourseArea;
+        const area = resolveCourseArea(areaBase, locale);
+        return {
+          course,
+          basePath: area.basePath,
+          navTitle: area.navTitle,
+          navIcon: area.navIcon,
+          navAccent: area.navAccent,
+          stats: computeCourseStats(course.phases, progress),
+          phaseStats: computePhaseStats(course.phases, progress),
+          detail: computeCourseDetailStats(course.phases, progress),
+        };
+      }),
+    [learnerCourses, locale, progress],
+  );
+
+  const useAccordion = courseRows.length > 1;
+
+  const platform = useMemo(
+    () => aggregateCourseStats(courseRows.map((row) => row.stats)),
+    [courseRows],
+  );
+
+  const platformDetail = useMemo(() => {
+    return courseRows.reduce(
+      (acc, row) => ({
+        read: acc.read + row.detail.read,
+        quizzesTaken: acc.quizzesTaken + row.detail.quizzesTaken,
+        exercisesSolved: acc.exercisesSolved + row.detail.exercisesSolved,
+        exercisesRevealed: acc.exercisesRevealed + row.detail.exercisesRevealed,
+        challenges: acc.challenges + row.detail.challenges,
+      }),
+      {
+        read: 0,
+        quizzesTaken: 0,
+        exercisesSolved: 0,
+        exercisesRevealed: 0,
+        challenges: 0,
+      },
+    );
+  }, [courseRows]);
 
   function handleExport() {
     const json = exportJson();
@@ -61,9 +111,9 @@ export function ProgressPage() {
     reader.onload = (ev) => {
       try {
         importJson(String(ev.target?.result ?? ""));
-        alert("Progression importée avec succès !");
+        alert(t("progress.importOk"));
       } catch (err) {
-        alert("Fichier invalide : " + (err as Error).message);
+        alert(t("progress.importBad", { error: (err as Error).message }));
       }
     };
     reader.readAsText(file);
@@ -71,50 +121,16 @@ export function ProgressPage() {
   }
 
   function handleReset() {
-    if (
-      window.confirm(
-        "Réinitialiser toute la progression ? Cette action est irréversible (mais ton fichier exporté reste valable).",
-      )
-    ) {
+    if (window.confirm(t("progress.resetConfirm"))) {
       reset();
     }
   }
-
-  const courseQuizIds = useMemo(() => {
-    const ids = new Set<string>();
-    for (const phase of phases) {
-      for (const mod of phase.modules) {
-        if (mod.quiz) ids.add(mod.quiz.id);
-      }
-    }
-    return ids;
-  }, [phases]);
-
-  const totalQuizzesTaken = Object.keys(progress.quizScores).filter((id) =>
-    courseQuizIds.has(id),
-  ).length;
-
-  const exercisesSolved = Object.entries(progress.exerciseProgress).filter(
-    ([id, e]) => exerciseIds.has(id) && e.status === "solved",
-  ).length;
-  const exercisesRevealed = Object.entries(progress.exerciseProgress).filter(
-    ([id, e]) => exerciseIds.has(id) && e.status === "revealed",
-  ).length;
-  const challengeValidated = Object.values(progress.challengeScores).filter(
-    (s) => s.total > 0 && s.passedIds.length === s.total,
-  ).length;
-
-  const readInCourse = progress.readModules.filter((id) =>
-    moduleIds.has(id),
-  ).length;
 
   const backupBody = (
     <>
       {user && <SyncStatusBadge variant="card" className="mb-3" />}
       <p className="mb-4 text-[13px] leading-relaxed text-fg-2">
-        {user
-          ? "Ta progression est sauvegardée sur ton compte et synchronisée automatiquement. Tu peux aussi exporter un JSON comme sauvegarde locale."
-          : "Ta progression est sauvegardée dans le navigateur. Exporte-la en JSON pour en faire une copie de sécurité ou la restaurer sur un autre appareil."}
+        {user ? t("progress.backupSignedIn") : t("progress.backupGuest")}
       </p>
       <div className="flex flex-wrap gap-2">
         <Button
@@ -122,14 +138,14 @@ export function ProgressPage() {
           leftIcon={<Download size={14} />}
           onClick={handleExport}
         >
-          Exporter (JSON)
+          {t("progress.exportJson")}
         </Button>
         <Button
           variant="ghost"
           leftIcon={<Upload size={14} />}
           onClick={() => fileInputRef.current?.click()}
         >
-          Importer
+          {t("progress.import")}
         </Button>
         <input
           ref={fileInputRef}
@@ -144,7 +160,7 @@ export function ProgressPage() {
           leftIcon={<RefreshCw size={14} />}
           onClick={handleReset}
         >
-          Tout réinitialiser
+          {t("progress.resetAll")}
         </Button>
       </div>
     </>
@@ -153,109 +169,89 @@ export function ProgressPage() {
   return (
     <div className="mx-auto w-full min-w-0 max-w-5xl animate-fade-in px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
       <div className="mb-2 flex items-center gap-3 font-mono text-[11px] uppercase tracking-wider text-accent-2 sm:mb-3">
-        <TrendingUp size={14} aria-hidden="true" /> Ma progression
+        <TrendingUp size={14} aria-hidden="true" /> {t("progress.title")}
       </div>
-      <h1 className="mb-4 text-[1.75rem] font-extrabold tracking-tight sm:text-4xl">
-        Où en es-tu ?
+      <h1 className="mb-2 text-[1.75rem] font-extrabold tracking-tight sm:text-4xl">
+        {t("progress.where")}
       </h1>
+      <p className="max-w-2xl text-[14px] leading-relaxed text-fg-2 sm:text-[15px]">
+        {t("progress.acrossTracks", { n: courseRows.length })}
+      </p>
 
-      <div className="mt-4 rounded-xl border-base bg-bg-2 p-4 sm:mt-6 sm:p-5">
-        <div className="mb-3 text-sm font-semibold">Progression globale</div>
-        <ProgressBar value={stats.done} max={stats.total} size="md" />
+      <div className="mt-5 rounded-xl border-base bg-bg-2 p-4 sm:mt-6 sm:p-5">
+        <div className="mb-3 text-sm font-semibold">{t("progress.global")}</div>
+        <ProgressBar value={platform.done} max={platform.total} size="md" />
         <div className="mt-1.5 flex justify-between font-mono text-[12px] text-fg-3">
           <span>
-            {stats.done} / {stats.total} étapes
+            {t("progress.steps", { done: platform.done, total: platform.total })}
           </span>
-          <span className="text-accent-2">{stats.percent}%</span>
+          <span className="text-accent-2">{platform.percent}%</span>
         </div>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-6 sm:grid-cols-3 lg:grid-cols-6">
         <StatCard
-          label="Progression"
-          value={`${stats.percent}%`}
+          label={t("progress.global")}
+          value={`${platform.percent}%`}
           accent="text-accent-2"
           className="hidden lg:block"
         />
         <StatCard
-          label="Modules lus"
-          value={String(readInCourse)}
+          label={t("progress.modulesRead")}
+          value={String(platformDetail.read)}
           className="hidden lg:block"
         />
         <StatCard
-          label="Quiz validés"
-          value={`${stats.quizPassed}/${totalQuizzesTaken || 0}`}
+          label={t("progress.quizzesPassed")}
+          value={`${platform.quizPassed}/${platformDetail.quizzesTaken || 0}`}
         />
         <StatCard
-          label="Exos résolus"
-          value={String(exercisesSolved)}
+          label={t("progress.exercisesSolved")}
+          value={String(platformDetail.exercisesSolved)}
           accent="text-emerald-400"
         />
         <StatCard
-          label="Exos vus"
-          value={String(exercisesRevealed)}
+          label={t("progress.exercisesSeen")}
+          value={String(platformDetail.exercisesRevealed)}
           accent="text-sky-300"
         />
         <StatCard
-          label="Challenges"
-          value={String(challengeValidated)}
-          className="sm:col-span-1"
+          label={t("progress.challenges")}
+          value={String(platformDetail.challenges)}
         />
       </div>
 
-      <h2 className="mb-3 mt-8 text-lg font-bold lg:mt-10 lg:mb-4">Par phase</h2>
-      <div className="space-y-3">
-        {phases.map((phase, i) => {
-          const accent = phaseAccent(phase.color);
-          const st = phaseStats[i];
-          return (
-            <Link
-              key={phase.id}
-              to={`${basePath}/phase/${phase.id}`}
-              className="block min-w-0 rounded-xl border-base bg-bg-2 p-4 transition hover:border-accent/30 sm:p-5"
-            >
-              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-                <div
-                  className={cn(
-                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border text-lg sm:h-11 sm:w-11",
-                    accent.bg,
-                    accent.border,
-                    accent.text,
-                  )}
-                >
-                  <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex min-w-0 items-center gap-2">
-                    <div className={cn("min-w-0 truncate font-bold", accent.text)}>
-                      {phase.title}
-                    </div>
-                    <span className={cn("shrink-0 font-mono text-xs", accent.text)}>
-                      {st.percent}%
-                    </span>
-                  </div>
-                  <div className="mt-2">
-                    <ProgressBar
-                      value={st.done}
-                      max={st.total}
-                      color={phase.color}
-                      size="sm"
-                    />
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-fg-3">
-                    {st.done} / {st.total}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
+      <h2 className="mb-4 mt-8 text-lg font-bold lg:mt-10">{t("progress.byTrack")}</h2>
+      <div className={cn(useAccordion ? "space-y-4" : "space-y-8")}>
+        {courseRows.map((row) => (
+          <CourseProgressSection
+            key={row.course.id}
+            title={row.navTitle}
+            icon={row.navIcon}
+            accent={row.navAccent}
+            href={row.basePath}
+            openLabel={t("progress.openTrack")}
+            phasesLabel={t("progress.byPhase")}
+            stats={row.stats}
+            phases={row.course.phases}
+            phaseStats={row.phaseStats}
+            basePath={row.basePath}
+            notStartedLabel={t("progress.notStarted")}
+            collapsible={useAccordion}
+          />
+        ))}
       </div>
 
+      <p className="mt-6 text-[13px] text-fg-3">
+        <Link to={lp("/#catalog")} className="text-accent-2 hover:underline">
+          {t("progress.browseCatalog")}
+        </Link>
+      </p>
+
       <section className="mt-8 lg:mt-10">
-        <h2 className="mb-3 hidden text-lg font-bold lg:block">Sauvegarde</h2>
+        <h2 className="mb-3 hidden text-lg font-bold lg:block">{t("progress.backup")}</h2>
         <MobileCollapse
-          title="Sauvegarde"
+          title={t("progress.backup")}
           icon={<Download size={14} className="text-fg-3" aria-hidden="true" />}
         >
           <div className="lg:rounded-xl lg:border-base lg:bg-bg-2 lg:p-5">
@@ -264,6 +260,166 @@ export function ProgressPage() {
         </MobileCollapse>
       </section>
     </div>
+  );
+}
+
+function CourseProgressSection({
+  title,
+  icon,
+  accent,
+  href,
+  openLabel,
+  phasesLabel,
+  stats,
+  phases,
+  phaseStats,
+  basePath,
+  notStartedLabel,
+  collapsible,
+}: {
+  title: string;
+  icon: string;
+  accent: { text: string; chip: string };
+  href: string;
+  openLabel: string;
+  phasesLabel: string;
+  stats: { done: number; total: number; percent: number };
+  phases: Course["phases"];
+  phaseStats: ReturnType<typeof computePhaseStats>;
+  basePath: string;
+  notStartedLabel: string;
+  collapsible: boolean;
+}) {
+  const [phasesOpen, setPhasesOpen] = useState(false);
+
+  const phaseList = (
+    <div className="space-y-2">
+      {phases.map((phase, i) => {
+        const phaseAccentCls = phaseAccent(phase.color);
+        const st = phaseStats[i];
+        return (
+          <Link
+            key={phase.id}
+            to={`${basePath}/phase/${phase.id}`}
+            className="block min-w-0 rounded-xl border-base bg-bg-2 p-3.5 transition hover:border-accent/30 sm:p-4"
+          >
+            <div className="flex min-w-0 items-center gap-3">
+              <div
+                className={cn(
+                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border text-base sm:h-10 sm:w-10",
+                  phaseAccentCls.bg,
+                  phaseAccentCls.border,
+                  phaseAccentCls.text,
+                )}
+              >
+                <i className={`fa-solid ${phase.icon}`} aria-hidden="true" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex min-w-0 items-center gap-2">
+                  <div
+                    className={cn(
+                      "min-w-0 truncate text-sm font-bold",
+                      phaseAccentCls.text,
+                    )}
+                  >
+                    {phase.title}
+                  </div>
+                  <span
+                    className={cn(
+                      "shrink-0 font-mono text-[11px]",
+                      phaseAccentCls.text,
+                    )}
+                  >
+                    {st.percent}%
+                  </span>
+                </div>
+                <div className="mt-1.5">
+                  <ProgressBar
+                    value={st.done}
+                    max={st.total}
+                    color={phase.color}
+                    size="sm"
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    <section
+      className={cn(
+        "min-w-0",
+        collapsible && "rounded-xl border-base bg-bg-2/40 p-4 sm:p-5",
+      )}
+    >
+      <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <i
+            className={cn("fa-solid shrink-0 text-[15px]", icon, accent.text)}
+            aria-hidden="true"
+          />
+          <h3 className="min-w-0 truncate text-base font-bold sm:text-lg">
+            {title}
+          </h3>
+          <span
+            className={cn(
+              "shrink-0 rounded border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider",
+              accent.chip,
+            )}
+          >
+            {stats.percent}%
+          </span>
+        </div>
+        <Link
+          to={href}
+          className="inline-flex min-h-11 items-center gap-1 text-[13px] font-semibold text-accent-2 hover:underline sm:min-h-0"
+        >
+          {openLabel}
+          <ArrowRight size={13} aria-hidden="true" />
+        </Link>
+      </div>
+
+      <ProgressBar value={stats.done} max={stats.total} size="sm" />
+      <div className="mt-1.5 font-mono text-[11px] text-fg-3">
+        {stats.done} / {stats.total}
+        {stats.done === 0 ? ` · ${notStartedLabel}` : ""}
+      </div>
+
+      {collapsible ? (
+        <details
+          className="group mt-3"
+          open={phasesOpen}
+          onToggle={(e) => setPhasesOpen(e.currentTarget.open)}
+        >
+          <summary
+            className={cn(
+              "flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-1 py-2",
+              "text-[13px] font-semibold text-fg-2 hover:text-fg",
+              "[&::-webkit-details-marker]:hidden",
+            )}
+          >
+            <span className="min-w-0 flex-1">
+              {phasesLabel}
+              <span className="ml-1.5 font-mono text-[11px] font-normal text-fg-3">
+                ({phases.length})
+              </span>
+            </span>
+            <ChevronDown
+              size={16}
+              className="shrink-0 text-fg-3 transition-transform duration-200 group-open:rotate-180"
+              aria-hidden="true"
+            />
+          </summary>
+          <div className="pt-1">{phaseList}</div>
+        </details>
+      ) : (
+        <div className="mt-3">{phaseList}</div>
+      )}
+    </section>
   );
 }
 

@@ -1,28 +1,26 @@
+import type { MessageTree } from "@/i18n/messages/fr";
+import { translate, type MessageKey } from "@/i18n/useT";
+
 /**
- * Translate raw Supabase auth errors into short, actionable French messages.
- * Falls back to the raw message when no rule matches so unexpected errors
- * are still surfaced to the user instead of being silently swallowed.
+ * Translate raw Supabase auth errors into short, actionable messages.
+ * Falls back to the raw message when no rule matches.
  */
-export function humanizeAuthError(raw: string): string {
+export function humanizeAuthError(
+  raw: string,
+  messages: MessageTree,
+): string {
+  const t = (key: MessageKey) => translate(messages, key);
   const lower = raw.toLowerCase();
 
-  if (lower.includes("invalid login")) {
-    return "Email ou mot de passe incorrect.";
-  }
-  if (lower.includes("email not confirmed")) {
-    return "Ton email n'est pas encore confirmé. Vérifie ta boîte mail.";
-  }
+  if (lower.includes("invalid login")) return t("auth.errInvalidLogin");
+  if (lower.includes("email not confirmed")) return t("auth.errEmailNotConfirmed");
   if (lower.includes("already registered") || lower.includes("user already")) {
-    return "Un compte existe déjà avec cet email. Essaie de te connecter.";
+    return t("auth.errAlreadyRegistered");
   }
   if (lower.includes("password") && lower.includes("short")) {
-    return "Le mot de passe doit contenir au moins 6 caractères.";
+    return t("auth.errPasswordShort");
   }
-  if (lower.includes("rate limit")) {
-    return "Trop de tentatives. Réessaie dans quelques minutes.";
-  }
-  if (lower.includes("provider is not enabled")) {
-    return "Cette méthode de connexion n'est pas encore activée. Réessaie plus tard.";
-  }
+  if (lower.includes("rate limit")) return t("auth.errRateLimit");
+  if (lower.includes("provider is not enabled")) return t("auth.errProviderDisabled");
   return raw;
 }

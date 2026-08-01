@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "@/components/layout/courseArea";
+import { useT } from "@/i18n/useT";
 import { getCapstoneEligibility } from "@/lib/capstone";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
@@ -10,7 +12,9 @@ import { ArrowRight, CheckCircle2, Lock, Rocket, Trophy } from "lucide-react";
 const TUTORIAL_PHASE_ID = "react-tooling";
 
 export function CapstoneGatePage() {
+  const t = useT();
   const { progress } = useProgress();
+  const { basePath } = useCourseArea();
   const eligibility = getCapstoneEligibility(progress);
 
   const ratioValue =
@@ -24,17 +28,17 @@ export function CapstoneGatePage() {
 
   const checks = [
     {
-      label: "Modules lus",
+      label: t("course.modulesCheck"),
       done: eligibility.readModulesCount,
       total: eligibility.moduleCount,
     },
     {
-      label: "Quiz validés (>= 70%)",
+      label: t("course.quizzesCheck"),
       done: eligibility.quizPassed,
       total: eligibility.quizTotal,
     },
     {
-      label: "Exercices résolus (sans révélation)",
+      label: t("course.exercisesCheck"),
       done: eligibility.exerciseSolved,
       total: eligibility.exerciseTotal,
     },
@@ -44,26 +48,24 @@ export function CapstoneGatePage() {
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-3">
         <Trophy size={14} />
-        Projet final
+        {t("course.finalProject")}
       </div>
 
       <h1 className="text-4xl font-extrabold tracking-tight">
-        Gate du Capstone React Pro Path
+        {t("course.finalProject")}
       </h1>
       <p className="mt-3 text-fg-2 max-w-3xl leading-relaxed">
-        Le projet final se débloque uniquement après validation complète du
-        parcours: modules, quiz et exercices. La phase tutorielle Transition Pro
-        fait partie des prérequis.
+        {t("course.capstoneIntro")}
       </p>
 
       <section className="mt-8 rounded-2xl border-base bg-bg-2 p-5 md:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-2">
             <Badge variant={eligibility.unlocked ? "success" : "warn"}>
-              {eligibility.unlocked ? "Débloqué" : "Verrouillé"}
+              {eligibility.unlocked ? t("course.unlocked") : t("course.locked")}
             </Badge>
             <span className="text-[12px] font-mono text-fg-3">
-              {eligibility.phaseCount} phases à valider
+              {t("course.capstonePhases", { n: eligibility.phaseCount })}
             </span>
           </div>
           <span
@@ -72,7 +74,10 @@ export function CapstoneGatePage() {
               eligibility.unlocked ? "text-emerald-400" : "text-amber-400",
             )}
           >
-            {ratioDone}/{ratioValue} étapes validées
+            {t("course.capstoneSteps", {
+              done: ratioDone,
+              total: ratioValue,
+            })}
           </span>
         </div>
 
@@ -106,31 +111,30 @@ export function CapstoneGatePage() {
             <Rocket size={18} />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="text-lg font-bold">Phase tutorielle (Sprint 2)</h2>
+            <h2 className="text-lg font-bold">{t("course.tutorialTitle")}</h2>
             <p className="mt-1 text-[13px] text-fg-2 leading-relaxed">
-              Prépare ta transition vers les outils réels: VS Code, Git/GitHub,
-              et déploiement. Cette phase doit être complétée avant le studio
-              capstone.
+              {t("course.tutorialBody")}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Link to={`/react/phase/${TUTORIAL_PHASE_ID}`}>
+              <Link to={`${basePath}/phase/${TUTORIAL_PHASE_ID}`}>
                 <Button size="sm" variant="subtle">
-                  Ouvrir la phase Transition Pro
+                  {t("course.openTutorial")}
                   <ArrowRight size={14} />
                 </Button>
               </Link>
               {eligibility.unlocked ? (
-                <Button size="sm">Entrer dans le Capstone Studio</Button>
+                <Button size="sm">
+                  {t("course.openStudio")}
+                </Button>
               ) : (
                 <Button size="sm" disabled>
-                  Capstone Studio verrouillé
+                  {t("course.studioLocked")}
                 </Button>
               )}
             </div>
             {!eligibility.unlocked && (
               <p className="mt-3 text-[12px] text-amber-300">
-                Termine les éléments restants dans le parcours React pour
-                déverrouiller le projet final.
+                {t("course.studioUnlockHint")}
               </p>
             )}
           </div>

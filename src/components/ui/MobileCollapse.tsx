@@ -35,7 +35,7 @@ export function MobileCollapse({
             aria-hidden="true"
           />
         </summary>
-        <div className="border-t border-base px-4 py-4">{children}</div>
+        <div className="border-t-base px-4 py-4">{children}</div>
       </details>
 
       <div className="hidden lg:block">{children}</div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/useT";
 
 interface BackToTopButtonProps {
   /** Scroll distance (px) after which the button appears. */
@@ -13,6 +14,7 @@ interface BackToTopButtonProps {
  * with an entrance animation and accessible focus ring.
  */
 export function BackToTopButton({ threshold = 320 }: BackToTopButtonProps) {
+  const t = useT();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export function BackToTopButton({ threshold = 320 }: BackToTopButtonProps) {
     <button
       type="button"
       onClick={scrollTop}
-      aria-label="Retour en haut de la page"
+      aria-label={t("common.backToTop")}
       tabIndex={visible ? 0 : -1}
       className={cn(
         "fixed bottom-20 right-4 z-[55] w-11 h-11 rounded-full lg:bottom-6 lg:right-6",

@@ -7,47 +7,36 @@ import {
 import { useProgress } from "@/hooks/useProgress";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/useT";
 import { CheckCircle2, ClipboardList, Lightbulb } from "lucide-react";
 
-function formatAuditSummary(result: AuditScoreResult): string {
+function formatAuditSummary(
+  result: AuditScoreResult,
+  t: ReturnType<typeof useT>,
+): string {
   const { tp, fp, fn, passed } = result;
   if (passed && fp === 0 && fn === 0) {
     return tp === 1
-      ? "Tu as bien repéré le seul constat attendu, sans fausse piste."
-      : `Tu as bien repéré les ${tp} constats attendus, sans fausse piste ni oubli.`;
+      ? t("audit.summaryOne")
+      : t("audit.summaryMany", { n: tp });
   }
   const parts: string[] = [];
   if (tp > 0) {
-    parts.push(
-      tp === 1
-        ? "1 constat juste"
-        : `${tp} constats justes`,
-    );
+    parts.push(tp === 1 ? t("audit.tpOne") : t("audit.tpMany", { n: tp }));
   } else {
-    parts.push("aucun constat juste pour l'instant");
+    parts.push(t("audit.tpNone"));
   }
   if (fp > 0) {
-    parts.push(
-      fp === 1
-        ? "1 fausse piste"
-        : `${fp} fausses pistes`,
-    );
+    parts.push(fp === 1 ? t("audit.fpOne") : t("audit.fpMany", { n: fp }));
   }
   if (fn > 0) {
-    parts.push(fn === 1 ? "1 oubli" : `${fn} oublis`);
+    parts.push(fn === 1 ? t("audit.fnOne") : t("audit.fnMany", { n: fn }));
   }
-  return `Bilan : ${parts.join(", ")}.`;
+  return t("audit.bilan", { parts: parts.join(", ") });
 }
 
 const DEFAULT_ATTEMPTS_BEFORE_SOLUTION = 3;
 const SEVERITIES: AuditSeverity[] = ["low", "medium", "high", "critical"];
-
-const SEVERITY_LABEL: Record<AuditSeverity, string> = {
-  low: "Faible",
-  medium: "Moyenne",
-  high: "Haute",
-  critical: "Critique",
-};
 
 interface AuditExerciseProps {
   exercise: AuditExerciseType;
@@ -58,6 +47,16 @@ interface AuditExerciseProps {
  * optionally add evidence, submit for scoring.
  */
 export function AuditExercise({ exercise }: AuditExerciseProps) {
+  const t = useT();
+  const severityLabel = useMemo(
+    (): Record<AuditSeverity, string> => ({
+      low: t("audit.sevLow"),
+      medium: t("audit.sevMedium"),
+      high: t("audit.sevHigh"),
+      critical: t("audit.sevCritical"),
+    }),
+    [t],
+  );
   const formId = useId();
   const {
     getExerciseStatus,
@@ -195,7 +194,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
 
   return (
     <section className="mb-6 rounded-xl border-base bg-bg-2 overflow-hidden">
-      <div className="flex items-start gap-3 border-b border-base px-5 py-4">
+      <div className="flex items-start gap-3 border-b-base px-5 py-4">
         <div className="mt-0.5 w-9 h-9 rounded-lg bg-accent/10 text-accent-2 flex items-center justify-center flex-shrink-0">
           <ClipboardList size={16} />
         </div>
@@ -209,19 +208,19 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
         {done && (
           <span className="inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-wider text-emerald-400">
             <CheckCircle2 size={12} />{" "}
-            {status.status === "revealed" ? "correction vue" : "validé"}
+            {status.status === "revealed" ? t("audit.seen") : t("audit.validated")}
           </span>
         )}
       </div>
 
       <div
-        className="px-5 py-4 border-b border-base prose-lesson text-[14px] max-w-none"
+        className="px-5 py-4 border-b-base prose-lesson text-[14px] max-w-none"
         dangerouslySetInnerHTML={{ __html: exercise.scenario }}
       />
 
       <form onSubmit={onSubmit} className="px-5 py-4 space-y-3">
         <div className="text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1">
-          Constats
+          {t("audit.findings")}
         </div>
         {exercise.findings.map((finding) => {
           const checked = Boolean(selected[finding.id]);
@@ -284,7 +283,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                       htmlFor={`${inputId}-sev`}
                       className="block text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1"
                     >
-                      Gravité
+                      {t("audit.severity")}
                     </label>
                     <select
                       id={`${inputId}-sev`}
@@ -307,10 +306,10 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                         }))
                       }
                     >
-                      <option value="">Choisir…</option>
+                      <option value="">{t("audit.choose")}</option>
                       {SEVERITIES.map((s) => (
                         <option key={s} value={s}>
-                          {SEVERITY_LABEL[s]}
+                          {severityLabel[s]}
                         </option>
                       ))}
                     </select>
@@ -321,7 +320,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                         htmlFor={`${inputId}-ev`}
                         className="block text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1"
                       >
-                        Preuve (fichier, ligne, note)
+                        {t("audit.evidence")}
                       </label>
                       <textarea
                         id={`${inputId}-ev`}
@@ -370,7 +369,10 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
                 className="min-h-11"
                 onClick={onHint}
               >
-                Afficher un indice ({hintsShown + 1}/{exercise.hints.length})
+                {t("audit.showHint", {
+                  n: hintsShown + 1,
+                  total: exercise.hints.length,
+                })}
               </Button>
             )}
           </div>
@@ -388,29 +390,27 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
             )}
           >
             <div className="font-semibold">
-              {lastResult.passed
-                ? "Rapport validé"
-                : "Rapport incomplet ou incorrect"}
+              {lastResult.passed ? t("audit.reportOk") : t("audit.reportBad")}
             </div>
             <p className="mt-1.5 leading-relaxed opacity-95">
-              Score :{" "}
+              {t("audit.score")}{" "}
               <strong className="font-mono">
                 {Math.round(lastResult.score * 100)}%
               </strong>
-              . {formatAuditSummary(lastResult)}
+              . {formatAuditSummary(lastResult, t)}
             </p>
             <ul className="mt-2 space-y-1 text-[12px] opacity-90">
               <li>
-                <span className="font-medium">Constats justes</span> :{" "}
-                {lastResult.tp} (ceux que tu as bien repérés)
+                <span className="font-medium">{t("audit.tpLegend")}</span> :{" "}
+                {lastResult.tp} {t("audit.tpLegendHint")}
               </li>
               <li>
-                <span className="font-medium">Fausses pistes</span> :{" "}
-                {lastResult.fp} (cochés alors qu&apos;ils n&apos;étaient pas en cause)
+                <span className="font-medium">{t("audit.fpLegend")}</span> :{" "}
+                {lastResult.fp} {t("audit.fpLegendHint")}
               </li>
               <li>
-                <span className="font-medium">Oublis</span> : {lastResult.fn}{" "}
-                (constats importants non cochés)
+                <span className="font-medium">{t("audit.fnLegend")}</span> :{" "}
+                {lastResult.fn} {t("audit.fnLegendHint")}
               </li>
             </ul>
             {lastResult.failures.length > 0 && (
@@ -426,7 +426,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
         {(showSolution || status.status === "revealed") && exercise.solution && (
           <div className="rounded-lg border-base bg-bg-3 px-4 py-3 text-[13px] text-fg-2 leading-relaxed">
             <div className="text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-1">
-              Correction
+              {t("audit.correction")}
             </div>
             <div dangerouslySetInnerHTML={{ __html: exercise.solution }} />
           </div>
@@ -435,7 +435,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
         <div className="flex flex-wrap items-center gap-2 pt-2">
           {!done && (
             <Button type="submit" className="min-h-11">
-              Soumettre le rapport
+              {t("audit.submit")}
             </Button>
           )}
           {canReveal && exercise.solution && (
@@ -445,7 +445,7 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
               className="min-h-11"
               onClick={onReveal}
             >
-              Voir la correction
+              {t("audit.seeCorrection")}
             </Button>
           )}
           {done && (
@@ -455,11 +455,14 @@ export function AuditExercise({ exercise }: AuditExerciseProps) {
               className="min-h-11"
               onClick={onReset}
             >
-              Recommencer à zéro
+              {t("audit.restart")}
             </Button>
           )}
           <span className="text-[11px] font-mono text-fg-3">
-            {status.attempts} tentative{status.attempts === 1 ? "" : "s"}
+            {t("audit.attempts", {
+              n: status.attempts,
+              s: status.attempts === 1 ? "" : "s",
+            })}
           </span>
         </div>
       </form>

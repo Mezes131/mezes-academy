@@ -3,10 +3,12 @@ import { useMemo } from "react";
 import { useProgress } from "@/hooks/useProgress";
 import { useCourseArea } from "@/components/layout/courseArea";
 import { courseModuleIds } from "@/lib/courseProgress";
+import { useT } from "@/i18n/useT";
 import { phaseAccent, cn } from "@/lib/utils";
 import { BookmarkCheck, Bookmark, ArrowRight } from "lucide-react";
 
 export function BookmarksPage() {
+  const t = useT();
   const { progress, toggleBookmark } = useProgress();
   const { basePath, phases } = useCourseArea();
   const moduleIds = useMemo(() => courseModuleIds(phases), [phases]);
@@ -25,13 +27,13 @@ export function BookmarksPage() {
   return (
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-accent-2 mb-3">
-        <BookmarkCheck size={14} /> Favoris
+        <BookmarkCheck size={14} /> {t("bookmarks.title")}
       </div>
       <h1 className="text-4xl font-extrabold tracking-tight mb-4">
-        Tes modules favoris
+        {t("bookmarks.subtitle")}
       </h1>
       <p className="text-fg-2 font-serif mb-8">
-        Les modules marqués comme favoris pour y revenir facilement.
+        {t("course.bookmarksIntro")}
       </p>
 
       {bookmarked.length === 0 ? (
@@ -39,12 +41,7 @@ export function BookmarksPage() {
           <div className="text-4xl mb-3 text-fg-3">
             <i className="fa-solid fa-bookmark" />
           </div>
-          <div className="text-sm font-semibold mb-1">
-            Aucun module en favori
-          </div>
-          <p className="text-[13px] text-fg-2">
-            Clique sur l&apos;icône de signet en haut d&apos;un module pour l&apos;ajouter ici.
-          </p>
+          <p className="text-[13px] text-fg-2">{t("bookmarks.empty")}</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -84,7 +81,7 @@ export function BookmarksPage() {
                     type="button"
                     onClick={() => toggleBookmark(module.id)}
                     className="p-2 rounded-lg hover:bg-bg-3 text-fg-2 transition"
-                    aria-label="Retirer des favoris"
+                    aria-label={t("bookmarks.remove")}
                   >
                     <Bookmark size={16} />
                   </button>

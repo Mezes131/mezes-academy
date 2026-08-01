@@ -1,6 +1,8 @@
 import { NavLink, Link, useLocation } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { stripLocalePrefix } from "@/i18n/localePath";
+import { useT } from "@/i18n/useT";
 
 export type BottomNavItem =
   | {
@@ -32,15 +34,17 @@ export function MobileBottomBar({
   items: BottomNavItem[];
   hideFromClassName?: string;
 }) {
+  const t = useT();
   const location = useLocation();
+  const barePath = stripLocalePrefix(location.pathname);
 
   return (
     <nav
-      aria-label="Navigation mobile"
+      aria-label={t("common.mobileNav")}
       className={cn(
         "fixed inset-x-0 bottom-0 z-[60] w-full max-w-full",
         hideFromClassName,
-        "border-t border-base bg-bg",
+        "border-t-base bg-bg",
         "pb-[max(0.5rem,env(safe-area-inset-bottom))]",
       )}
     >
@@ -70,7 +74,7 @@ export function MobileBottomBar({
 
           const hashActive =
             item.hash !== undefined &&
-            location.pathname === "/" &&
+            barePath === "/" &&
             location.hash === item.hash;
 
           if (item.hash) {
@@ -92,16 +96,20 @@ export function MobileBottomBar({
             );
           }
 
+          const isHome =
+            item.end &&
+            (item.to === "/" ||
+              item.to === "/en" ||
+              item.to.endsWith("/en") ||
+              item.to.endsWith("/"));
+
           return (
             <li key={item.to} className="flex-1 min-w-0">
               <NavLink
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) => {
-                  const active =
-                    item.end && (item.to === "/" || item.to.endsWith("/"))
-                      ? isActive && !location.hash
-                      : isActive;
+                  const active = isHome ? isActive && !location.hash : isActive;
                   return cn(
                     "flex w-full min-h-14 flex-col items-center justify-center gap-0.5 px-1",
                     "text-[10px] font-medium tracking-wide",
@@ -111,10 +119,7 @@ export function MobileBottomBar({
                 }}
               >
                 {({ isActive }) => {
-                  const active =
-                    item.end && (item.to === "/" || item.to.endsWith("/"))
-                      ? isActive && !location.hash
-                      : isActive;
+                  const active = isHome ? isActive && !location.hash : isActive;
                   return (
                     <>
                       <Icon

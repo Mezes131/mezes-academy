@@ -1,16 +1,18 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { findAreaModule, useCourseArea } from "@/components/layout/courseArea";
 import { ModuleView } from "@/components/learning/ModuleView";
+import { useT } from "@/i18n/useT";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function ModulePage() {
+  const t = useT();
   const { moduleId } = useParams<{ moduleId: string }>();
   const area = useCourseArea();
   const { basePath, phases } = area;
   const found = moduleId ? findAreaModule(area, moduleId) : undefined;
 
-  if (!found) return <Navigate to="/" replace />;
+  if (!found) return <Navigate to={basePath} replace />;
 
   const { phase, module } = found;
 
@@ -46,7 +48,7 @@ export function ModulePage() {
                   size={18}
                   className="text-fg-3 group-hover:text-fg transition flex-shrink-0"
                 />
-                Précédent
+                {t("common.previous")}
               </div>
               <div className="text-sm font-semibold truncate">{prev.title}</div>
             </div>
@@ -64,7 +66,7 @@ export function ModulePage() {
           >
             <div className="min-w-0 text-right">
               <div className="flex text-[11px] font-mono uppercase tracking-wider text-fg-3">
-                Suivant
+                {t("common.next")}
                 <ChevronRight
                   size={18}
                   className="text-fg-3 group-hover:text-fg transition flex-shrink-0"

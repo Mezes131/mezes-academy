@@ -5,23 +5,11 @@ import { courses, getCourses } from "./courses";
 /* ═══════════════════════════════════════════════════════════════════
    DATA-LAYER HELPERS
    Single source of truth for course / phase / module lookups.
-   UI code should import from here (or from @/data/phases for the
-   legacy `phases` array) rather than touching course files directly.
    ═══════════════════════════════════════════════════════════════════ */
 
 export { courses, getCourses };
-export { createCourseRepository } from "@/lib/courseRepository";
-export type { CourseRepository } from "@/lib/courseRepository";
 
-/** Back-office ready syllabi, when a course exposes one. */
-export const allPrograms: CourseProgram[] = courses
-  .map((course) => course.program)
-  .filter((program): program is CourseProgram => Boolean(program));
-
-/** All phases of all courses, flattened : used by the router. */
-export const allPhases: Phase[] = courses.flatMap((c) => c.phases);
-
-/** All modules of all courses, flattened : used by the router. */
+/** All modules of all courses, flattened : used by progress lookups. */
 export const allModules: Array<{ course: Course; phase: Phase; module: Module }> =
   courses.flatMap((course) =>
     course.phases.flatMap((phase) =>
@@ -36,16 +24,11 @@ export function findCourse(
   return getCourses(locale).find((c) => c.id === courseId);
 }
 
-export function findCourseProgram(courseId: string): CourseProgram | undefined {
-  return findCourse(courseId)?.program;
-}
-
-export function findPhase(phaseId: string): { course: Course; phase: Phase } | undefined {
-  for (const course of courses) {
-    const phase = course.phases.find((p) => p.id === phaseId);
-    if (phase) return { course, phase };
-  }
-  return undefined;
+export function findCourseProgram(
+  courseId: string,
+  locale: Locale = "fr",
+): CourseProgram | undefined {
+  return findCourse(courseId, locale)?.program;
 }
 
 export function findModule(

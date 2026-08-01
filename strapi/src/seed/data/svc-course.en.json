@@ -1,17 +1,17 @@
 {
-  "exportedAt": "2026-07-27T15:39:36.191Z",
+  "exportedAt": "2026-08-01T09:17:33.399Z",
   "locale": "en",
   "course": {
     "legacyId": "svc",
-    "title": "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
+    "title": "Secure Vibe Coding: ship commercial software with AI",
     "slug": "secure-vibe-coding",
-    "tagline": "Du prompt au produit en production, sans dette ni failles oubliées",
-    "description": "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, auth tiers, données, paiements, notifications, hébergement, déploiement et go-live. Capstone certifiant à la clé.",
+    "tagline": "From prompt to production product.",
+    "description": "Want to build with AI without ending up with debt or a security hole in the middle? We guide you from framing to go-live: auth, data, payments, hosting. A real project at the end.",
     "icon": "fa-shield-halved",
     "iconFamily": "fa-solid",
     "level": "intermediate",
-    "duration": "≈16–20 semaines",
-    "accentText": "text-violet-400",
+    "duration": "≈16–20 weeks",
+    "accentText": "text-violet-700 dark:text-violet-300",
     "accentBg": "bg-violet-500/10",
     "accentBorder": "border-violet-500/30",
     "workflowStatus": "draft",
@@ -5700,9 +5700,9 @@
       {
         "legacyId": "svc-data",
         "slug": "data",
-        "title": "Données & backend",
+        "title": "Data & backend",
         "label": "Phase 5",
-        "summary": "Persistance, API et traitements async solides pour le produit.",
+        "summary": "Solid persistence, API, and async processing for the product.",
         "order": 5,
         "color": "eco",
         "icon": "fa-database",
@@ -5712,27 +5712,27 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P5 : CRUD métier + upload + job async",
-        "projectDeliverable": "Le produit capstone enrichi : CRUD métier, upload de fichiers et un job async, générés puis audités.",
+        "projectTitle": "Project P5: Business CRUD + upload + async job",
+        "projectDeliverable": "The enriched capstone product: business CRUD, file upload, and an async job, generated then audited.",
         "projectAssessment": [
-          "Validation serveur systématique",
-          "Upload avec contrôle d'accès prouvé",
-          "Job async idempotent et rejouable"
+          "Systematic server-side validation",
+          "Upload with proven access control",
+          "Idempotent, replayable async job"
         ],
         "modules": [
           {
             "legacyId": "svc-data-m01",
             "moduleId": "svc-data-m01",
             "index": "01",
-            "title": "Modèle de données utile",
-            "subtitle": "Entités, relations, migrations : sans schéma halluciné",
+            "title": "A useful data model",
+            "subtitle": "Entities, relations, migrations: no hallucinated schema",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Modéliser entités et relations depuis le besoin",
-              "Gérer les migrations proprement",
-              "Repérer un schéma halluciné par l'IA"
+              "Model entities and relations from requirements",
+              "Manage migrations cleanly",
+              "Spot an AI-hallucinated schema"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -5743,58 +5743,58 @@
                 "items": [
                   {
                     "id": "svc-data-m01-l1",
-                    "title": "Entités et relations",
-                    "desc": "Traduire le domaine en schéma relationnel minimal.",
+                    "title": "Entities and relations",
+                    "desc": "Translate the domain into a minimal relational schema.",
                     "objectives": [
-                      "Traduire le domaine en schéma relationnel minimal."
+                      "Translate the domain into a minimal relational schema."
                     ],
                     "outline": {
-                      "context": "Traduire le domaine en schéma relationnel minimal.",
+                      "context": "Translate the domain into a minimal relational schema.",
                       "concepts": [
-                        "entités",
+                        "entities",
                         "relations",
-                        "clés étrangères"
+                        "foreign keys"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Entités et relations.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Entities and relations.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "entités",
+                        "entities",
                         "relations",
-                        "clés étrangères"
+                        "foreign keys"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-data-m01-l2",
-                    "title": "Migrations et schéma halluciné",
-                    "desc": "Versionner le schéma et auditer ce que l'IA propose.",
+                    "title": "Migrations and hallucinated schema",
+                    "desc": "Version the schema and audit what the AI proposes.",
                     "objectives": [
-                      "Versionner le schéma et auditer ce que l'IA propose."
+                      "Version the schema and audit what the AI proposes."
                     ],
                     "outline": {
-                      "context": "Versionner le schéma et auditer ce que l'IA propose.",
+                      "context": "Version the schema and audit what the AI proposes.",
                       "concepts": [
                         "migrations",
-                        "schéma halluciné",
-                        "revue de schéma"
+                        "hallucinated schema",
+                        "schema review"
                       ],
                       "pitfalls": [
-                        "tables inutiles générées",
-                        "champs redondants"
+                        "unnecessary generated tables",
+                        "redundant fields"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Migrations et schéma halluciné.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Migrations and hallucinated schema.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "migrations",
-                        "schéma halluciné",
-                        "revue de schéma"
+                        "hallucinated schema",
+                        "schema review"
                       ]
                     },
                     "exercises": []
@@ -5806,32 +5806,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "entités",
+                  "entities",
                   "relations",
-                  "clés étrangères",
+                  "foreign keys",
                   "migrations",
-                  "schéma halluciné",
-                  "revue de schéma"
+                  "hallucinated schema",
+                  "schema review"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Schéma d'un SaaS simple",
+                  "title": "Schema for a simple SaaS",
                   "kind": "synthesis",
-                  "brief": "Concevoir le schéma users / orgs / resources d'un SaaS simple, avec justification des relations."
+                  "brief": "Design the users / orgs / resources schema for a simple SaaS, with justification for the relations."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-data-m01-lesson",
-              "title": "Modèle de données utile",
-              "desc": "Entités, relations, migrations : sans schéma halluciné",
+              "title": "A useful data model",
+              "desc": "Entities, relations, migrations: no hallucinated schema",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Entités et relations</strong> : Traduire le domaine en schéma relationnel minimal.</li><li><strong>Migrations et schéma halluciné</strong> : Versionner le schéma et auditer ce que l'IA propose.</li></ul>"
+                  "body": "<ul><li><strong>Entities and relations</strong> : Translate the domain into a minimal relational schema.</li><li><strong>Migrations and hallucinated schema</strong> : Version the schema and audit what the AI proposes.</li></ul>"
                 }
               ]
             },
@@ -5842,15 +5842,15 @@
             "legacyId": "svc-data-m02",
             "moduleId": "svc-data-m02",
             "index": "02",
-            "title": "API et validation aux frontières",
+            "title": "API and validation at boundaries",
             "subtitle": "Never trust the client",
             "duration": "45 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Valider toutes les entrées côté serveur",
-              "Retourner des erreurs typées",
-              "Paginer les listes"
+              "Validate all inputs server-side",
+              "Return typed errors",
+              "Paginate lists"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -5861,58 +5861,58 @@
                 "items": [
                   {
                     "id": "svc-data-m02-l1",
-                    "title": "Validation des entrées",
-                    "desc": "Valider systématiquement aux frontières du système.",
+                    "title": "Input validation",
+                    "desc": "Validate systematically at system boundaries.",
                     "objectives": [
-                      "Valider systématiquement aux frontières du système."
+                      "Validate systematically at system boundaries."
                     ],
                     "outline": {
-                      "context": "Valider systématiquement aux frontières du système.",
+                      "context": "Validate systematically at system boundaries.",
                       "concepts": [
-                        "validation input",
-                        "schémas de validation",
-                        "frontières"
+                        "input validation",
+                        "validation schemas",
+                        "boundaries"
                       ],
                       "pitfalls": [
-                        "valider seulement côté client",
-                        "trust du payload"
+                        "client-only validation",
+                        "trusting the payload"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Validation des entrées.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Input validation.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "validation input",
-                        "schémas de validation",
-                        "frontières"
+                        "input validation",
+                        "validation schemas",
+                        "boundaries"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-data-m02-l2",
-                    "title": "Erreurs typées et pagination",
-                    "desc": "Structurer les réponses d'erreur et paginer les collections.",
+                    "title": "Typed errors and pagination",
+                    "desc": "Structure error responses and paginate collections.",
                     "objectives": [
-                      "Structurer les réponses d'erreur et paginer les collections."
+                      "Structure error responses and paginate collections."
                     ],
                     "outline": {
-                      "context": "Structurer les réponses d'erreur et paginer les collections.",
+                      "context": "Structure error responses and paginate collections.",
                       "concepts": [
-                        "erreurs typées",
+                        "typed errors",
                         "pagination",
-                        "codes HTTP"
+                        "HTTP status codes"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Erreurs typées et pagination.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Typed errors and pagination.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "erreurs typées",
+                        "typed errors",
                         "pagination",
-                        "codes HTTP"
+                        "HTTP status codes"
                       ]
                     },
                     "exercises": []
@@ -5924,32 +5924,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "validation input",
-                  "schémas de validation",
-                  "frontières",
-                  "erreurs typées",
+                  "input validation",
+                  "validation schemas",
+                  "boundaries",
+                  "typed errors",
                   "pagination",
-                  "codes HTTP"
+                  "HTTP status codes"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Sécuriser un endpoint généré",
+                  "title": "Secure a generated endpoint",
                   "kind": "audit",
-                  "brief": "Auditer un endpoint généré par IA et le sécuriser : validation, erreurs, autorisation."
+                  "brief": "Audit an AI-generated endpoint and secure it: validation, errors, authorization."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-data-m02-lesson",
-              "title": "API et validation aux frontières",
+              "title": "API and validation at boundaries",
               "desc": "Never trust the client",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Validation des entrées</strong> : Valider systématiquement aux frontières du système.</li><li><strong>Erreurs typées et pagination</strong> : Structurer les réponses d'erreur et paginer les collections.</li></ul>"
+                  "body": "<ul><li><strong>Input validation</strong> : Validate systematically at system boundaries.</li><li><strong>Typed errors and pagination</strong> : Structure error responses and paginate collections.</li></ul>"
                 }
               ]
             },
@@ -5960,15 +5960,15 @@
             "legacyId": "svc-data-m03",
             "moduleId": "svc-data-m03",
             "index": "03",
-            "title": "Storage & fichiers",
-            "subtitle": "Uploads, URLs signées, quotas, ACL",
+            "title": "Storage & files",
+            "subtitle": "Uploads, signed URLs, quotas, ACL",
             "duration": "35 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Gérer des uploads sûrs",
-              "Servir des fichiers via URLs signées",
-              "Appliquer quotas et contrôle d'accès"
+              "Handle safe uploads",
+              "Serve files via signed URLs",
+              "Apply quotas and access control"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -5979,52 +5979,52 @@
                 "items": [
                   {
                     "id": "svc-data-m03-l1",
-                    "title": "Uploads sûrs",
-                    "desc": "Accepter des fichiers sans ouvrir de faille.",
+                    "title": "Safe uploads",
+                    "desc": "Accept files without opening a vulnerability.",
                     "objectives": [
-                      "Accepter des fichiers sans ouvrir de faille."
+                      "Accept files without opening a vulnerability."
                     ],
                     "outline": {
-                      "context": "Accepter des fichiers sans ouvrir de faille.",
+                      "context": "Accept files without opening a vulnerability.",
                       "concepts": [
-                        "validation de fichiers",
-                        "taille et type",
-                        "stockage objet"
+                        "file validation",
+                        "size and type",
+                        "object storage"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Uploads sûrs.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Safe uploads.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "validation de fichiers",
-                        "taille et type",
-                        "stockage objet"
+                        "file validation",
+                        "size and type",
+                        "object storage"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-data-m03-l2",
-                    "title": "URLs signées et ACL",
-                    "desc": "Contrôler qui accède à quoi et pour combien de temps.",
+                    "title": "Signed URLs and ACL",
+                    "desc": "Control who accesses what and for how long.",
                     "objectives": [
-                      "Contrôler qui accède à quoi et pour combien de temps."
+                      "Control who accesses what and for how long."
                     ],
                     "outline": {
-                      "context": "Contrôler qui accède à quoi et pour combien de temps.",
+                      "context": "Control who accesses what and for how long.",
                       "concepts": [
-                        "URLs signées",
+                        "signed URLs",
                         "ACL",
                         "quotas"
                       ],
-                      "guidedExample": "Exemple guidé autour de : URLs signées et ACL.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Signed URLs and ACL.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "URLs signées",
+                        "signed URLs",
                         "ACL",
                         "quotas"
                       ]
@@ -6038,32 +6038,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "validation de fichiers",
-                  "taille et type",
-                  "stockage objet",
-                  "URLs signées",
+                  "file validation",
+                  "size and type",
+                  "object storage",
+                  "signed URLs",
                   "ACL",
                   "quotas"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Upload avec contrôle d'accès",
+                  "title": "Upload with access control",
                   "kind": "guided",
-                  "brief": "Implémenter un upload avec URL signée et vérification d'accès à la lecture."
+                  "brief": "Implement an upload with a signed URL and read-access verification."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-data-m03-lesson",
-              "title": "Storage & fichiers",
-              "desc": "Uploads, URLs signées, quotas, ACL",
+              "title": "Storage & files",
+              "desc": "Uploads, signed URLs, quotas, ACL",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Uploads sûrs</strong> : Accepter des fichiers sans ouvrir de faille.</li><li><strong>URLs signées et ACL</strong> : Contrôler qui accède à quoi et pour combien de temps.</li></ul>"
+                  "body": "<ul><li><strong>Safe uploads</strong> : Accept files without opening a vulnerability.</li><li><strong>Signed URLs and ACL</strong> : Control who accesses what and for how long.</li></ul>"
                 }
               ]
             },
@@ -6074,15 +6074,15 @@
             "legacyId": "svc-data-m04",
             "moduleId": "svc-data-m04",
             "index": "04",
-            "title": "Jobs & traitements async",
-            "subtitle": "Files légères, retries, idempotence",
+            "title": "Jobs & async processing",
+            "subtitle": "Lightweight queues, retries, idempotence",
             "duration": "40 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Découpler les traitements lents de la requête HTTP",
-              "Concevoir des jobs idempotents",
-              "Gérer retries et échecs"
+              "Decouple slow processing from the HTTP request",
+              "Design idempotent jobs",
+              "Handle retries and failures"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6093,47 +6093,47 @@
                 "items": [
                   {
                     "id": "svc-data-m04-l1",
-                    "title": "Files légères",
-                    "desc": "Choisir une solution de queue adaptée à un produit early-stage.",
+                    "title": "Lightweight queues",
+                    "desc": "Pick a queue solution suited to an early-stage product.",
                     "objectives": [
-                      "Choisir une solution de queue adaptée à un produit early-stage."
+                      "Pick a queue solution suited to an early-stage product."
                     ],
                     "outline": {
-                      "context": "Choisir une solution de queue adaptée à un produit early-stage.",
+                      "context": "Pick a queue solution suited to an early-stage product.",
                       "concepts": [
                         "queues",
                         "workers",
-                        "découplage"
+                        "decoupling"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Files légères.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Lightweight queues.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "queues",
                         "workers",
-                        "découplage"
+                        "decoupling"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-data-m04-l2",
-                    "title": "Idempotence des jobs",
-                    "desc": "Écrire des jobs rejouables sans effets doubles.",
+                    "title": "Job idempotence",
+                    "desc": "Write replayable jobs without duplicate side effects.",
                     "objectives": [
-                      "Écrire des jobs rejouables sans effets doubles."
+                      "Write replayable jobs without duplicate side effects."
                     ],
                     "outline": {
-                      "context": "Écrire des jobs rejouables sans effets doubles.",
+                      "context": "Write replayable jobs without duplicate side effects.",
                       "concepts": [
                         "idempotence",
                         "retries",
                         "dead letter"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Idempotence des jobs.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Job idempotence.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
@@ -6154,7 +6154,7 @@
                 "focus": [
                   "queues",
                   "workers",
-                  "découplage",
+                  "decoupling",
                   "idempotence",
                   "retries",
                   "dead letter"
@@ -6162,22 +6162,22 @@
               },
               "exercises": [
                 {
-                  "title": "Job « envoyer email »",
+                  "title": "Send email job",
                   "kind": "guided",
-                  "brief": "Implémenter un job d'envoi d'email découplé de la requête HTTP, avec retry sûr."
+                  "brief": "Implement an email-sending job decoupled from the HTTP request, with safe retry."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-data-m04-lesson",
-              "title": "Jobs & traitements async",
-              "desc": "Files légères, retries, idempotence",
+              "title": "Jobs & async processing",
+              "desc": "Lightweight queues, retries, idempotence",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Files légères</strong> : Choisir une solution de queue adaptée à un produit early-stage.</li><li><strong>Idempotence des jobs</strong> : Écrire des jobs rejouables sans effets doubles.</li></ul>"
+                  "body": "<ul><li><strong>Lightweight queues</strong> : Pick a queue solution suited to an early-stage product.</li><li><strong>Job idempotence</strong> : Write replayable jobs without duplicate side effects.</li></ul>"
                 }
               ]
             },
@@ -6189,9 +6189,9 @@
       {
         "legacyId": "svc-paiements",
         "slug": "paiements",
-        "title": "Paiements & services tiers",
+        "title": "Payments & third-party services",
         "label": "Phase 6",
-        "summary": "Rendre le produit monétisable correctement : webhook compris.",
+        "summary": "Monetize the product correctly: webhooks included.",
         "order": 6,
         "color": "eco",
         "icon": "fa-credit-card",
@@ -6201,26 +6201,26 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P6 : Plan Free/Pro avec webhook",
-        "projectDeliverable": "Le produit capstone monétisé : plan Free/Pro, checkout Stripe et webhook qui active réellement l'accès.",
+        "projectTitle": "Project P6: Free/Pro plan with webhook",
+        "projectDeliverable": "The monetized capstone product: Free/Pro plan, Stripe checkout, and a webhook that actually grants access.",
         "projectAssessment": [
-          "Activation via webhook signé, jamais via redirect seul",
-          "Idempotence prouvée (webhook dupliqué)",
-          "Parcours d'échec géré et visible"
+          "Activation via signed webhook, never redirect alone",
+          "Proven idempotence (duplicate webhook)",
+          "Failure flow handled and visible"
         ],
         "modules": [
           {
             "legacyId": "svc-paiements-m01",
             "moduleId": "svc-paiements-m01",
             "index": "01",
-            "title": "Modèles économiques",
-            "subtitle": "One-shot, abonnement, usage : mapping offre ↔ technique",
+            "title": "Business models",
+            "subtitle": "One-shot, subscription, usage: offer ↔ technical mapping",
             "duration": "30 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Comparer one-shot, abonnement et usage",
-              "Traduire une offre en objets techniques"
+              "Compare one-shot, subscription, and usage-based pricing",
+              "Translate an offer into technical objects"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6231,29 +6231,29 @@
                 "items": [
                   {
                     "id": "svc-paiements-m01-l1",
-                    "title": "Modèles et implications",
-                    "desc": "Relier chaque modèle économique à sa mécanique technique.",
+                    "title": "Models and implications",
+                    "desc": "Connect each business model to its technical mechanics.",
                     "objectives": [
-                      "Relier chaque modèle économique à sa mécanique technique."
+                      "Connect each business model to its technical mechanics."
                     ],
                     "outline": {
-                      "context": "Relier chaque modèle économique à sa mécanique technique.",
+                      "context": "Connect each business model to its technical mechanics.",
                       "concepts": [
                         "one-shot",
-                        "abonnement",
+                        "subscription",
                         "usage-based",
-                        "mapping offre/technique"
+                        "offer/technical mapping"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Modèles et implications.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Models and implications.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "one-shot",
-                        "abonnement",
+                        "subscription",
                         "usage-based",
-                        "mapping offre/technique"
+                        "offer/technical mapping"
                       ]
                     },
                     "exercises": []
@@ -6266,29 +6266,29 @@
                 "questionCount": 5,
                 "focus": [
                   "one-shot",
-                  "abonnement",
+                  "subscription",
                   "usage-based",
-                  "mapping offre/technique"
+                  "offer/technical mapping"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Choisir le modèle pour trois produits",
+                  "title": "Pick the model for three products",
                   "kind": "synthesis",
-                  "brief": "Choisir et justifier un modèle économique pour trois produits types."
+                  "brief": "Choose and justify a business model for three typical products."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-paiements-m01-lesson",
-              "title": "Modèles économiques",
-              "desc": "One-shot, abonnement, usage : mapping offre ↔ technique",
+              "title": "Business models",
+              "desc": "One-shot, subscription, usage: offer ↔ technical mapping",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Modèles et implications</strong> : Relier chaque modèle économique à sa mécanique technique.</li></ul>"
+                  "body": "<ul><li><strong>Models and implications</strong> : Connect each business model to its technical mechanics.</li></ul>"
                 }
               ]
             },
@@ -6299,15 +6299,15 @@
             "legacyId": "svc-paiements-m02",
             "moduleId": "svc-paiements-m02",
             "index": "02",
-            "title": "Stripe bout-en-bout",
+            "title": "Stripe end to end",
             "subtitle": "Checkout, Customer Portal, test mode",
             "duration": "55 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Mettre en place Stripe Checkout et le Customer Portal",
-              "Manipuler Customer et Subscription",
-              "Travailler en test mode"
+              "Set up Stripe Checkout and the Customer Portal",
+              "Work with Customer and Subscription",
+              "Work in test mode"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6318,20 +6318,20 @@
                 "items": [
                   {
                     "id": "svc-paiements-m02-l1",
-                    "title": "Checkout et Portal",
-                    "desc": "Intégrer le parcours de paiement hébergé par Stripe.",
+                    "title": "Checkout and Portal",
+                    "desc": "Integrate Stripe-hosted payment flow.",
                     "objectives": [
-                      "Intégrer le parcours de paiement hébergé par Stripe."
+                      "Integrate Stripe-hosted payment flow."
                     ],
                     "outline": {
-                      "context": "Intégrer le parcours de paiement hébergé par Stripe.",
+                      "context": "Integrate Stripe-hosted payment flow.",
                       "concepts": [
                         "Checkout",
                         "Customer Portal",
                         "test mode"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Checkout et Portal.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Checkout and Portal.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
@@ -6345,27 +6345,27 @@
                   },
                   {
                     "id": "svc-paiements-m02-l2",
-                    "title": "Customer et Subscription",
-                    "desc": "Relier les objets Stripe aux comptes du produit.",
+                    "title": "Customer and Subscription",
+                    "desc": "Link Stripe objects to product accounts.",
                     "objectives": [
-                      "Relier les objets Stripe aux comptes du produit."
+                      "Link Stripe objects to product accounts."
                     ],
                     "outline": {
-                      "context": "Relier les objets Stripe aux comptes du produit.",
+                      "context": "Link Stripe objects to product accounts.",
                       "concepts": [
                         "Customer",
                         "Subscription",
-                        "mapping user ↔ customer"
+                        "user ↔ customer mapping"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Customer et Subscription.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Customer and Subscription.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "Customer",
                         "Subscription",
-                        "mapping user ↔ customer"
+                        "user ↔ customer mapping"
                       ]
                     },
                     "exercises": []
@@ -6382,27 +6382,27 @@
                   "test mode",
                   "Customer",
                   "Subscription",
-                  "mapping user ↔ customer"
+                  "user ↔ customer mapping"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Parcours Free → Pro",
+                  "title": "Free → Pro flow",
                   "kind": "guided",
-                  "brief": "Implémenter le parcours d'upgrade Free → Pro en test mode, de la pricing page au retour de Checkout."
+                  "brief": "Implement the Free → Pro upgrade flow in test mode, from the pricing page to the Checkout return."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-paiements-m02-lesson",
-              "title": "Stripe bout-en-bout",
+              "title": "Stripe end to end",
               "desc": "Checkout, Customer Portal, test mode",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Checkout et Portal</strong> : Intégrer le parcours de paiement hébergé par Stripe.</li><li><strong>Customer et Subscription</strong> : Relier les objets Stripe aux comptes du produit.</li></ul>"
+                  "body": "<ul><li><strong>Checkout and Portal</strong> : Integrate Stripe-hosted payment flow.</li><li><strong>Customer and Subscription</strong> : Link Stripe objects to product accounts.</li></ul>"
                 }
               ]
             },
@@ -6414,14 +6414,14 @@
             "moduleId": "svc-paiements-m03",
             "index": "03",
             "title": "Webhooks & idempotence",
-            "subtitle": "Jamais activer l'accès seulement sur redirect",
+            "subtitle": "Never grant access on redirect alone",
             "duration": "50 min",
             "order": 2,
             "difficulty": "advanced",
             "objectives": [
-              "Vérifier la signature des webhooks",
-              "Traiter les replays sans double effet",
-              "Modéliser les états de commande"
+              "Verify webhook signatures",
+              "Handle replays without duplicate effects",
+              "Model order states"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6432,29 +6432,29 @@
                 "items": [
                   {
                     "id": "svc-paiements-m03-l1",
-                    "title": "Signature et replay",
-                    "desc": "Authentifier chaque webhook et absorber les doublons.",
+                    "title": "Signature and replay",
+                    "desc": "Authenticate every webhook and absorb duplicates.",
                     "objectives": [
-                      "Authentifier chaque webhook et absorber les doublons."
+                      "Authenticate every webhook and absorb duplicates."
                     ],
                     "outline": {
-                      "context": "Authentifier chaque webhook et absorber les doublons.",
+                      "context": "Authenticate every webhook and absorb duplicates.",
                       "concepts": [
-                        "signature webhook",
+                        "webhook signature",
                         "replay",
                         "idempotence"
                       ],
                       "pitfalls": [
-                        "activer l'accès sur le redirect",
-                        "traiter un webhook non signé"
+                        "granting access on redirect",
+                        "processing an unsigned webhook"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Signature et replay.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Signature and replay.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "signature webhook",
+                        "webhook signature",
                         "replay",
                         "idempotence"
                       ]
@@ -6463,27 +6463,27 @@
                   },
                   {
                     "id": "svc-paiements-m03-l2",
-                    "title": "États de commande",
-                    "desc": "Modéliser le cycle de vie d'un paiement côté produit.",
+                    "title": "Order states",
+                    "desc": "Model the payment lifecycle on the product side.",
                     "objectives": [
-                      "Modéliser le cycle de vie d'un paiement côté produit."
+                      "Model the payment lifecycle on the product side."
                     ],
                     "outline": {
-                      "context": "Modéliser le cycle de vie d'un paiement côté produit.",
+                      "context": "Model the payment lifecycle on the product side.",
                       "concepts": [
-                        "états de commande",
-                        "machine à états",
-                        "réconciliation"
+                        "order states",
+                        "state machine",
+                        "reconciliation"
                       ],
-                      "guidedExample": "Exemple guidé autour de : États de commande.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Order states.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "états de commande",
-                        "machine à états",
-                        "réconciliation"
+                        "order states",
+                        "state machine",
+                        "reconciliation"
                       ]
                     },
                     "exercises": []
@@ -6495,32 +6495,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "signature webhook",
+                  "webhook signature",
                   "replay",
                   "idempotence",
-                  "états de commande",
-                  "machine à états",
-                  "réconciliation"
+                  "order states",
+                  "state machine",
+                  "reconciliation"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Webhook dupliqué",
+                  "title": "Duplicate webhook",
                   "kind": "audit",
-                  "brief": "Simuler un webhook dupliqué et prouver que le système reste cohérent (pas de double activation)."
+                  "brief": "Simulate a duplicate webhook and prove the system stays consistent (no double activation)."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-paiements-m03-lesson",
               "title": "Webhooks & idempotence",
-              "desc": "Jamais activer l'accès seulement sur redirect",
+              "desc": "Never grant access on redirect alone",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Signature et replay</strong> : Authentifier chaque webhook et absorber les doublons.</li><li><strong>États de commande</strong> : Modéliser le cycle de vie d'un paiement côté produit.</li></ul>"
+                  "body": "<ul><li><strong>Signature and replay</strong> : Authenticate every webhook and absorb duplicates.</li><li><strong>Order states</strong> : Model the payment lifecycle on the product side.</li></ul>"
                 }
               ]
             },
@@ -6531,15 +6531,15 @@
             "legacyId": "svc-paiements-m04",
             "moduleId": "svc-paiements-m04",
             "index": "04",
-            "title": "Échecs & conformité minimale",
-            "subtitle": "Cartes refusées, mentions, logs sans fuite",
+            "title": "Failures & minimal compliance",
+            "subtitle": "Declined cards, disclosures, logs without leaks",
             "duration": "35 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Gérer les échecs de paiement côté produit",
-              "Couvrir les mentions minimales",
-              "Logger sans exposer de données sensibles"
+              "Handle payment failures on the product side",
+              "Cover minimal disclosures",
+              "Log without exposing sensitive data"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6550,52 +6550,52 @@
                 "items": [
                   {
                     "id": "svc-paiements-m04-l1",
-                    "title": "Échecs de carte",
-                    "desc": "Réagir proprement aux paiements refusés ou expirés.",
+                    "title": "Card failures",
+                    "desc": "Respond cleanly to declined or expired payments.",
                     "objectives": [
-                      "Réagir proprement aux paiements refusés ou expirés."
+                      "Respond cleanly to declined or expired payments."
                     ],
                     "outline": {
-                      "context": "Réagir proprement aux paiements refusés ou expirés.",
+                      "context": "Respond cleanly to declined or expired payments.",
                       "concepts": [
-                        "échecs carte",
-                        "dunning basique",
-                        "communication client"
+                        "card failures",
+                        "basic dunning",
+                        "customer communication"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Échecs de carte.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Card failures.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "échecs carte",
-                        "dunning basique",
-                        "communication client"
+                        "card failures",
+                        "basic dunning",
+                        "customer communication"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-paiements-m04-l2",
-                    "title": "Conformité et logs",
-                    "desc": "Mentions minimales et logs sans données de paiement.",
+                    "title": "Compliance and logs",
+                    "desc": "Minimal disclosures and logs without payment data.",
                     "objectives": [
-                      "Mentions minimales et logs sans données de paiement."
+                      "Minimal disclosures and logs without payment data."
                     ],
                     "outline": {
-                      "context": "Mentions minimales et logs sans données de paiement.",
+                      "context": "Minimal disclosures and logs without payment data.",
                       "concepts": [
-                        "mentions légales paiement",
-                        "logs sans PAN/PII"
+                        "payment legal disclosures",
+                        "logs without PAN/PII"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Conformité et logs.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Compliance and logs.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "mentions légales paiement",
-                        "logs sans PAN/PII"
+                        "payment legal disclosures",
+                        "logs without PAN/PII"
                       ]
                     },
                     "exercises": []
@@ -6607,31 +6607,31 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "échecs carte",
-                  "dunning basique",
-                  "communication client",
-                  "mentions légales paiement",
-                  "logs sans PAN/PII"
+                  "card failures",
+                  "basic dunning",
+                  "customer communication",
+                  "payment legal disclosures",
+                  "logs without PAN/PII"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Matrice d'erreurs paiement",
+                  "title": "Payment error matrix",
                   "kind": "synthesis",
-                  "brief": "Construire la matrice erreurs de paiement → réaction produit → message utilisateur."
+                  "brief": "Build the matrix: payment error → product response → user message."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-paiements-m04-lesson",
-              "title": "Échecs & conformité minimale",
-              "desc": "Cartes refusées, mentions, logs sans fuite",
+              "title": "Failures & minimal compliance",
+              "desc": "Declined cards, disclosures, logs without leaks",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Échecs de carte</strong> : Réagir proprement aux paiements refusés ou expirés.</li><li><strong>Conformité et logs</strong> : Mentions minimales et logs sans données de paiement.</li></ul>"
+                  "body": "<ul><li><strong>Card failures</strong> : Respond cleanly to declined or expired payments.</li><li><strong>Compliance and logs</strong> : Minimal disclosures and logs without payment data.</li></ul>"
                 }
               ]
             },
@@ -6645,7 +6645,7 @@
         "slug": "notifications",
         "title": "Notifications",
         "label": "Phase 7",
-        "summary": "Faire de l'email (et des canaux associés) une partie du produit.",
+        "summary": "Make email (and related channels) a first-class part of the product.",
         "order": 7,
         "color": "eco",
         "icon": "fa-envelope",
@@ -6655,26 +6655,26 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P7 : Emails transactionnels + préférences",
-        "projectDeliverable": "Le produit capstone avec trois emails transactionnels (auth + paiement) et des préférences utilisateur respectées.",
+        "projectTitle": "Project P7: Transactional emails + preferences",
+        "projectDeliverable": "The capstone product with three transactional emails (auth + payment) and respected user preferences.",
         "projectAssessment": [
-          "Trois emails branchés sur de vrais événements",
-          "Préférences et unsubscribe respectés",
-          "Envoi découplé (queue/job), pas dans la requête HTTP"
+          "Three emails wired to real events",
+          "Preferences and unsubscribe respected",
+          "Decoupled sending (queue/job), not in the HTTP request"
         ],
         "modules": [
           {
             "legacyId": "svc-notifications-m01",
             "moduleId": "svc-notifications-m01",
             "index": "01",
-            "title": "Canaux & moments",
-            "subtitle": "Transactionnel vs marketing, moments métier",
+            "title": "Channels & moments",
+            "subtitle": "Transactional vs marketing, business moments",
             "duration": "30 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Distinguer transactionnel et marketing",
-              "Relier événements métier et canaux"
+              "Distinguish transactional and marketing",
+              "Link business events to channels"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6685,27 +6685,27 @@
                 "items": [
                   {
                     "id": "svc-notifications-m01-l1",
-                    "title": "Canaux et moments métier",
-                    "desc": "Choisir le bon canal (email, push, SMS) au bon moment.",
+                    "title": "Channels and business moments",
+                    "desc": "Pick the right channel (email, push, SMS) at the right moment.",
                     "objectives": [
-                      "Choisir le bon canal (email, push, SMS) au bon moment."
+                      "Pick the right channel (email, push, SMS) at the right moment."
                     ],
                     "outline": {
-                      "context": "Choisir le bon canal (email, push, SMS) au bon moment.",
+                      "context": "Pick the right channel (email, push, SMS) at the right moment.",
                       "concepts": [
-                        "transactionnel vs marketing",
-                        "push/SMS optionnels",
-                        "moments métier"
+                        "transactional vs marketing",
+                        "optional push/SMS",
+                        "business moments"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Canaux et moments métier.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Channels and business moments.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "transactionnel vs marketing",
-                        "push/SMS optionnels",
-                        "moments métier"
+                        "transactional vs marketing",
+                        "optional push/SMS",
+                        "business moments"
                       ]
                     },
                     "exercises": []
@@ -6717,29 +6717,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "transactionnel vs marketing",
-                  "push/SMS optionnels",
-                  "moments métier"
+                  "transactional vs marketing",
+                  "optional push/SMS",
+                  "business moments"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Matrice événements → canal",
+                  "title": "Event → channel matrix",
                   "kind": "synthesis",
-                  "brief": "Construire la matrice des événements métier du produit et du canal de notification associé."
+                  "brief": "Build the matrix of business events for the product and the associated notification channel."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-notifications-m01-lesson",
-              "title": "Canaux & moments",
-              "desc": "Transactionnel vs marketing, moments métier",
+              "title": "Channels & moments",
+              "desc": "Transactional vs marketing, business moments",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Canaux et moments métier</strong> : Choisir le bon canal (email, push, SMS) au bon moment.</li></ul>"
+                  "body": "<ul><li><strong>Channels and business moments</strong> : Pick the right channel (email, push, SMS) at the right moment.</li></ul>"
                 }
               ]
             },
@@ -6750,15 +6750,15 @@
             "legacyId": "svc-notifications-m02",
             "moduleId": "svc-notifications-m02",
             "index": "02",
-            "title": "Provider email",
-            "subtitle": "Resend / Postmark : templates, domaines, deliverability",
+            "title": "Email provider",
+            "subtitle": "Resend / Postmark: templates, domains, deliverability",
             "duration": "45 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Brancher un provider email",
-              "Créer des templates propres",
-              "Comprendre la deliverability de base"
+              "Wire up an email provider",
+              "Create clean templates",
+              "Understand basic deliverability"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6769,26 +6769,26 @@
                 "items": [
                   {
                     "id": "svc-notifications-m02-l1",
-                    "title": "Brancher un provider",
-                    "desc": "Envoyer un email transactionnel via Resend/Postmark.",
+                    "title": "Wire up a provider",
+                    "desc": "Send a transactional email via Resend/Postmark.",
                     "objectives": [
-                      "Envoyer un email transactionnel via Resend/Postmark."
+                      "Send a transactional email via Resend/Postmark."
                     ],
                     "outline": {
-                      "context": "Envoyer un email transactionnel via Resend/Postmark.",
+                      "context": "Send a transactional email via Resend/Postmark.",
                       "concepts": [
-                        "provider email",
-                        "API d'envoi",
+                        "email provider",
+                        "send API",
                         "templates"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Brancher un provider.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Wire up a provider.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "provider email",
-                        "API d'envoi",
+                        "email provider",
+                        "send API",
                         "templates"
                       ]
                     },
@@ -6796,26 +6796,26 @@
                   },
                   {
                     "id": "svc-notifications-m02-l2",
-                    "title": "Domaines et deliverability",
-                    "desc": "Configurer le domaine d'envoi pour arriver en inbox.",
+                    "title": "Domains and deliverability",
+                    "desc": "Configure the sending domain to reach the inbox.",
                     "objectives": [
-                      "Configurer le domaine d'envoi pour arriver en inbox."
+                      "Configure the sending domain to reach the inbox."
                     ],
                     "outline": {
-                      "context": "Configurer le domaine d'envoi pour arriver en inbox.",
+                      "context": "Configure the sending domain to reach the inbox.",
                       "concepts": [
-                        "domaine d'envoi",
-                        "SPF/DKIM basique",
+                        "sending domain",
+                        "basic SPF/DKIM",
                         "deliverability"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Domaines et deliverability.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Domains and deliverability.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "domaine d'envoi",
-                        "SPF/DKIM basique",
+                        "sending domain",
+                        "basic SPF/DKIM",
                         "deliverability"
                       ]
                     },
@@ -6828,32 +6828,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "provider email",
-                  "API d'envoi",
+                  "email provider",
+                  "send API",
                   "templates",
-                  "domaine d'envoi",
-                  "SPF/DKIM basique",
+                  "sending domain",
+                  "basic SPF/DKIM",
                   "deliverability"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Emails welcome + receipt",
+                  "title": "Welcome + receipt emails",
                   "kind": "guided",
-                  "brief": "Implémenter les emails welcome et reçu de paiement avec templates."
+                  "brief": "Implement welcome and payment receipt emails with templates."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-notifications-m02-lesson",
-              "title": "Provider email",
-              "desc": "Resend / Postmark : templates, domaines, deliverability",
+              "title": "Email provider",
+              "desc": "Resend / Postmark: templates, domains, deliverability",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Brancher un provider</strong> : Envoyer un email transactionnel via Resend/Postmark.</li><li><strong>Domaines et deliverability</strong> : Configurer le domaine d'envoi pour arriver en inbox.</li></ul>"
+                  "body": "<ul><li><strong>Wire up a provider</strong> : Send a transactional email via Resend/Postmark.</li><li><strong>Domains and deliverability</strong> : Configure the sending domain to reach the inbox.</li></ul>"
                 }
               ]
             },
@@ -6864,14 +6864,14 @@
             "legacyId": "svc-notifications-m03",
             "moduleId": "svc-notifications-m03",
             "index": "03",
-            "title": "Opt-in, préférences, abuse",
-            "subtitle": "Consentement, unsubscribe, rate limits",
+            "title": "Opt-in, preferences, abuse",
+            "subtitle": "Consent, unsubscribe, rate limits",
             "duration": "35 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Respecter le consentement et l'unsubscribe",
-              "Protéger l'envoi contre les abus"
+              "Respect consent and unsubscribe",
+              "Protect sending against abuse"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6882,54 +6882,54 @@
                 "items": [
                   {
                     "id": "svc-notifications-m03-l1",
-                    "title": "Consentement et préférences",
-                    "desc": "Gérer opt-in, préférences et désinscription.",
+                    "title": "Consent and preferences",
+                    "desc": "Handle opt-in, preferences, and unsubscribe.",
                     "objectives": [
-                      "Gérer opt-in, préférences et désinscription."
+                      "Handle opt-in, preferences, and unsubscribe."
                     ],
                     "outline": {
-                      "context": "Gérer opt-in, préférences et désinscription.",
+                      "context": "Handle opt-in, preferences, and unsubscribe.",
                       "concepts": [
                         "opt-in",
                         "unsubscribe",
-                        "préférences utilisateur"
+                        "user preferences"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Consentement et préférences.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Consent and preferences.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "opt-in",
                         "unsubscribe",
-                        "préférences utilisateur"
+                        "user preferences"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-notifications-m03-l2",
-                    "title": "Anti-abus",
-                    "desc": "Limiter le débit et prévenir l'usage malveillant.",
+                    "title": "Anti-abuse",
+                    "desc": "Rate-limit and prevent malicious use.",
                     "objectives": [
-                      "Limiter le débit et prévenir l'usage malveillant."
+                      "Rate-limit and prevent malicious use."
                     ],
                     "outline": {
-                      "context": "Limiter le débit et prévenir l'usage malveillant.",
+                      "context": "Rate-limit and prevent malicious use.",
                       "concepts": [
                         "rate limits",
                         "abuse",
-                        "quotas d'envoi"
+                        "send quotas"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Anti-abus.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Anti-abuse.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "rate limits",
                         "abuse",
-                        "quotas d'envoi"
+                        "send quotas"
                       ]
                     },
                     "exercises": []
@@ -6943,30 +6943,30 @@
                 "focus": [
                   "opt-in",
                   "unsubscribe",
-                  "préférences utilisateur",
+                  "user preferences",
                   "rate limits",
                   "abuse",
-                  "quotas d'envoi"
+                  "send quotas"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Préférences utilisateur",
+                  "title": "User preferences",
                   "kind": "guided",
-                  "brief": "Implémenter un écran de préférences de notifications respecté par l'envoi."
+                  "brief": "Implement a notification preferences screen enforced at send time."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-notifications-m03-lesson",
-              "title": "Opt-in, préférences, abuse",
-              "desc": "Consentement, unsubscribe, rate limits",
+              "title": "Opt-in, preferences, abuse",
+              "desc": "Consent, unsubscribe, rate limits",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Consentement et préférences</strong> : Gérer opt-in, préférences et désinscription.</li><li><strong>Anti-abus</strong> : Limiter le débit et prévenir l'usage malveillant.</li></ul>"
+                  "body": "<ul><li><strong>Consent and preferences</strong> : Handle opt-in, preferences, and unsubscribe.</li><li><strong>Anti-abuse</strong> : Rate-limit and prevent malicious use.</li></ul>"
                 }
               ]
             },
@@ -6978,13 +6978,13 @@
             "moduleId": "svc-notifications-m04",
             "index": "04",
             "title": "Orchestration",
-            "subtitle": "Déclencheurs métier → queue → notification",
+            "subtitle": "Business triggers → queue → notification",
             "duration": "40 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Chaîner événements métier, queue et envoi",
-              "Corréler notifications, paiement et auth"
+              "Chain business events, queue, and sending",
+              "Correlate notifications, payments, and auth"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -6995,27 +6995,27 @@
                 "items": [
                   {
                     "id": "svc-notifications-m04-l1",
-                    "title": "Du déclencheur à l'envoi",
-                    "desc": "Orchestrer événement → job → notification de façon fiable.",
+                    "title": "From trigger to send",
+                    "desc": "Orchestrate event → job → notification reliably.",
                     "objectives": [
-                      "Orchestrer événement → job → notification de façon fiable."
+                      "Orchestrate event → job → notification reliably."
                     ],
                     "outline": {
-                      "context": "Orchestrer événement → job → notification de façon fiable.",
+                      "context": "Orchestrate event → job → notification reliably.",
                       "concepts": [
-                        "déclencheurs métier",
+                        "business triggers",
                         "queue",
-                        "corrélation paiement/auth"
+                        "payment/auth correlation"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Du déclencheur à l'envoi.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: From trigger to send.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "déclencheurs métier",
+                        "business triggers",
                         "queue",
-                        "corrélation paiement/auth"
+                        "payment/auth correlation"
                       ]
                     },
                     "exercises": []
@@ -7027,29 +7027,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "déclencheurs métier",
+                  "business triggers",
                   "queue",
-                  "corrélation paiement/auth"
+                  "payment/auth correlation"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Chaîne paiement → email",
+                  "title": "Payment → email chain",
                   "kind": "guided",
-                  "brief": "Implémenter la chaîne complète : webhook de paiement → job → email de confirmation."
+                  "brief": "Implement the full chain: payment webhook → job → confirmation email."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-notifications-m04-lesson",
               "title": "Orchestration",
-              "desc": "Déclencheurs métier → queue → notification",
+              "desc": "Business triggers → queue → notification",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Du déclencheur à l'envoi</strong> : Orchestrer événement → job → notification de façon fiable.</li></ul>"
+                  "body": "<ul><li><strong>From trigger to send</strong> : Orchestrate event → job → notification reliably.</li></ul>"
                 }
               ]
             },
@@ -7061,9 +7061,9 @@
       {
         "legacyId": "svc-audit-securite",
         "slug": "audit-securite",
-        "title": "Audit Sécurité",
+        "title": "Security Audit",
         "label": "Phase 8",
-        "summary": "Appliquer la checklist Security baseline au produit. Cœur « Secure » du positionnement.",
+        "summary": "Apply the Security baseline checklist to the product. The 'Secure' core of the positioning.",
         "order": 8,
         "color": "expert",
         "icon": "fa-shield-halved",
@@ -7073,27 +7073,27 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P8 : Rapport Security baseline",
-        "projectDeliverable": "Le rapport Security baseline du produit capstone : preuves, correctifs appliqués, points restants.",
+        "projectTitle": "Project P8: Security baseline report",
+        "projectDeliverable": "The capstone product's Security baseline report: evidence, fixes applied, remaining items.",
         "projectAssessment": [
-          "Checklist security-baseline entièrement passée",
-          "Chaque constat a une preuve et un correctif",
-          "Aucune faille critique ouverte"
+          "Full security-baseline checklist passed",
+          "Every finding has evidence and a fix",
+          "No open critical vulnerabilities"
         ],
         "modules": [
           {
             "legacyId": "svc-audit-securite-m01",
             "moduleId": "svc-audit-securite-m01",
             "index": "01",
-            "title": "Secrets et configuration",
-            "subtitle": "Les secrets en dur que l'IA colle sans prévenir",
+            "title": "Secrets and configuration",
+            "subtitle": "Hardcoded secrets AI drops in without warning",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Détecter les secrets en dur dans un dépôt",
-              "Organiser coffres et rotation",
-              "Verrouiller .gitignore et .dockerignore"
+              "Detect hardcoded secrets in a repo",
+              "Organize vaults and rotation",
+              "Lock down .gitignore and .dockerignore"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7104,30 +7104,30 @@
                 "items": [
                   {
                     "id": "svc-audit-securite-m01-l1",
-                    "title": "Secrets en dur",
-                    "desc": "Repérer les secrets collés par l'IA dans code, config et Docker.",
+                    "title": "Hardcoded secrets",
+                    "desc": "Spot secrets pasted by AI in code, config, and Docker.",
                     "objectives": [
-                      "Repérer les secrets collés par l'IA dans code, config et Docker."
+                      "Spot secrets pasted by AI in code, config, and Docker."
                     ],
                     "outline": {
-                      "context": "Repérer les secrets collés par l'IA dans code, config et Docker.",
+                      "context": "Spot secrets pasted by AI in code, config, and Docker.",
                       "concepts": [
-                        "secrets en dur",
-                        "scan de secrets",
+                        "hardcoded secrets",
+                        "secret scanning",
                         ".gitignore/.dockerignore"
                       ],
                       "pitfalls": [
-                        "clé API dans le code d'exemple copié",
-                        "secret dans l'historique git"
+                        "API key in copied example code",
+                        "secret in git history"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Secrets en dur.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Hardcoded secrets.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "secrets en dur",
-                        "scan de secrets",
+                        "hardcoded secrets",
+                        "secret scanning",
                         ".gitignore/.dockerignore"
                       ]
                     },
@@ -7135,27 +7135,27 @@
                   },
                   {
                     "id": "svc-audit-securite-m01-l2",
-                    "title": "Coffres et rotation",
-                    "desc": "Stocker et faire tourner les secrets proprement.",
+                    "title": "Vaults and rotation",
+                    "desc": "Store and rotate secrets properly.",
                     "objectives": [
-                      "Stocker et faire tourner les secrets proprement."
+                      "Store and rotate secrets properly."
                     ],
                     "outline": {
-                      "context": "Stocker et faire tourner les secrets proprement.",
+                      "context": "Store and rotate secrets properly.",
                       "concepts": [
-                        "coffres de secrets",
+                        "secret vaults",
                         "rotation",
-                        "principe du moindre accès"
+                        "least privilege"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Coffres et rotation.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Vaults and rotation.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "coffres de secrets",
+                        "secret vaults",
                         "rotation",
-                        "principe du moindre accès"
+                        "least privilege"
                       ]
                     },
                     "exercises": []
@@ -7167,32 +7167,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "secrets en dur",
-                  "scan de secrets",
+                  "hardcoded secrets",
+                  "secret scanning",
                   ".gitignore/.dockerignore",
-                  "coffres de secrets",
+                  "secret vaults",
                   "rotation",
-                  "principe du moindre accès"
+                  "least privilege"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Trouver et corriger cinq fuites",
+                  "title": "Find and fix five leaks",
                   "kind": "audit",
-                  "brief": "Auditer un dépôt piégé : trouver cinq fuites de secrets et les corriger (code + historique + rotation)."
+                  "brief": "Audit a rigged repo: find five secret leaks and fix them (code + history + rotation)."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-securite-m01-lesson",
-              "title": "Secrets et configuration",
-              "desc": "Les secrets en dur que l'IA colle sans prévenir",
+              "title": "Secrets and configuration",
+              "desc": "Hardcoded secrets AI drops in without warning",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Secrets en dur</strong> : Repérer les secrets collés par l'IA dans code, config et Docker.</li><li><strong>Coffres et rotation</strong> : Stocker et faire tourner les secrets proprement.</li></ul>"
+                  "body": "<ul><li><strong>Hardcoded secrets</strong> : Spot secrets pasted by AI in code, config, and Docker.</li><li><strong>Vaults and rotation</strong> : Store and rotate secrets properly.</li></ul>"
                 }
               ]
             },
@@ -7203,15 +7203,15 @@
             "legacyId": "svc-audit-securite-m02",
             "moduleId": "svc-audit-securite-m02",
             "index": "02",
-            "title": "Entrées utilisateur et injections",
-            "subtitle": "SQL, NoSQL, commandes, XSS, uploads",
+            "title": "User input and injections",
+            "subtitle": "SQL, NoSQL, commands, XSS, uploads",
             "duration": "50 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Valider aux frontières systématiquement",
-              "Détecter injections SQL/NoSQL/commande",
-              "Auditer les XSS côté front"
+              "Validate at boundaries systematically",
+              "Detect SQL/NoSQL/command injections",
+              "Audit front-end XSS"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7223,59 +7223,59 @@
                   {
                     "id": "svc-audit-securite-m02-l1",
                     "title": "Injections",
-                    "desc": "Comprendre et bloquer SQL/NoSQL/commande.",
+                    "desc": "Understand and block SQL/NoSQL/command injection.",
                     "objectives": [
-                      "Comprendre et bloquer SQL/NoSQL/commande."
+                      "Understand and block SQL/NoSQL/command injection."
                     ],
                     "outline": {
-                      "context": "Comprendre et bloquer SQL/NoSQL/commande.",
+                      "context": "Understand and block SQL/NoSQL/command injection.",
                       "concepts": [
-                        "injection SQL",
-                        "injection NoSQL",
-                        "injection de commande",
-                        "requêtes paramétrées"
+                        "SQL injection",
+                        "NoSQL injection",
+                        "command injection",
+                        "parameterized queries"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Injections.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Injections.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "injection SQL",
-                        "injection NoSQL",
-                        "injection de commande",
-                        "requêtes paramétrées"
+                        "SQL injection",
+                        "NoSQL injection",
+                        "command injection",
+                        "parameterized queries"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-audit-securite-m02-l2",
-                    "title": "XSS et uploads",
-                    "desc": "Auditer les sorties HTML et les fichiers entrants.",
+                    "title": "XSS and uploads",
+                    "desc": "Audit HTML output and incoming files.",
                     "objectives": [
-                      "Auditer les sorties HTML et les fichiers entrants."
+                      "Audit HTML output and incoming files."
                     ],
                     "outline": {
-                      "context": "Auditer les sorties HTML et les fichiers entrants.",
+                      "context": "Audit HTML output and incoming files.",
                       "concepts": [
                         "XSS",
                         "dangerouslySetInnerHTML",
-                        "validation d'uploads"
+                        "upload validation"
                       ],
                       "pitfalls": [
-                        "HTML non échappé rendu tel quel",
-                        "upload sans contrôle de type"
+                        "unescaped HTML rendered as-is",
+                        "upload without type checks"
                       ],
-                      "guidedExample": "Exemple guidé autour de : XSS et uploads.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: XSS and uploads.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "XSS",
                         "dangerouslySetInnerHTML",
-                        "validation d'uploads"
+                        "upload validation"
                       ]
                     },
                     "exercises": []
@@ -7287,38 +7287,38 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "injection SQL",
-                  "injection NoSQL",
-                  "injection de commande",
-                  "requêtes paramétrées",
+                  "SQL injection",
+                  "NoSQL injection",
+                  "command injection",
+                  "parameterized queries",
                   "XSS",
                   "dangerouslySetInnerHTML",
-                  "validation d'uploads"
+                  "upload validation"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Exploiter et corriger une injection",
+                  "title": "Exploit and fix an injection",
                   "kind": "audit",
-                  "brief": "Exploiter une injection sur une app d'entraînement puis la corriger avec preuve."
+                  "brief": "Exploit an injection on a training app, then fix it with proof."
                 },
                 {
-                  "title": "Auditer un composant XSS",
+                  "title": "Audit an XSS component",
                   "kind": "audit",
-                  "brief": "Auditer un composant React utilisant dangerouslySetInnerHTML et le sécuriser."
+                  "brief": "Audit a React component using dangerouslySetInnerHTML and secure it."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-securite-m02-lesson",
-              "title": "Entrées utilisateur et injections",
-              "desc": "SQL, NoSQL, commandes, XSS, uploads",
+              "title": "User input and injections",
+              "desc": "SQL, NoSQL, commands, XSS, uploads",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Injections</strong> : Comprendre et bloquer SQL/NoSQL/commande.</li><li><strong>XSS et uploads</strong> : Auditer les sorties HTML et les fichiers entrants.</li></ul>"
+                  "body": "<ul><li><strong>Injections</strong> : Understand and block SQL/NoSQL/command injection.</li><li><strong>XSS and uploads</strong> : Audit HTML output and incoming files.</li></ul>"
                 }
               ]
             },
@@ -7329,15 +7329,15 @@
             "legacyId": "svc-audit-securite-m03",
             "moduleId": "svc-audit-securite-m03",
             "index": "03",
-            "title": "AuthZ et surfaces API",
-            "subtitle": "IDOR, routes non protégées, webhooks exposés, RLS",
+            "title": "AuthZ and API surfaces",
+            "subtitle": "IDOR, unprotected routes, exposed webhooks, RLS",
             "duration": "50 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Cartographier les surfaces exposées",
-              "Vérifier chaque route contre l'IDOR",
-              "Auditer RLS et webhooks"
+              "Map exposed surfaces",
+              "Check every route for IDOR",
+              "Audit RLS and webhooks"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7348,52 +7348,52 @@
                 "items": [
                   {
                     "id": "svc-audit-securite-m03-l1",
-                    "title": "Surfaces et routes",
-                    "desc": "Lister tout ce qui est accessible et vérifier sa protection.",
+                    "title": "Surfaces and routes",
+                    "desc": "List everything accessible and verify its protection.",
                     "objectives": [
-                      "Lister tout ce qui est accessible et vérifier sa protection."
+                      "List everything accessible and verify its protection."
                     ],
                     "outline": {
-                      "context": "Lister tout ce qui est accessible et vérifier sa protection.",
+                      "context": "List everything accessible and verify its protection.",
                       "concepts": [
-                        "cartographie des routes",
+                        "route mapping",
                         "IDOR",
-                        "routes non protégées"
+                        "unprotected routes"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Surfaces et routes.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Surfaces and routes.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "cartographie des routes",
+                        "route mapping",
                         "IDOR",
-                        "routes non protégées"
+                        "unprotected routes"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-audit-securite-m03-l2",
-                    "title": "Webhooks et RLS",
-                    "desc": "Auditer les endpoints publics par construction et les policies.",
+                    "title": "Webhooks and RLS",
+                    "desc": "Audit inherently public endpoints and policies.",
                     "objectives": [
-                      "Auditer les endpoints publics par construction et les policies."
+                      "Audit inherently public endpoints and policies."
                     ],
                     "outline": {
-                      "context": "Auditer les endpoints publics par construction et les policies.",
+                      "context": "Audit inherently public endpoints and policies.",
                       "concepts": [
-                        "webhooks exposés",
+                        "exposed webhooks",
                         "RLS",
                         "policies"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Webhooks et RLS.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Webhooks and RLS.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "webhooks exposés",
+                        "exposed webhooks",
                         "RLS",
                         "policies"
                       ]
@@ -7407,32 +7407,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "cartographie des routes",
+                  "route mapping",
                   "IDOR",
-                  "routes non protégées",
-                  "webhooks exposés",
+                  "unprotected routes",
+                  "exposed webhooks",
                   "RLS",
                   "policies"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Audit d'accès de l'app en cours",
+                  "title": "Access audit of the current app",
                   "kind": "audit",
-                  "brief": "Auditer les accès du produit capstone : matrice route × rôle avec verdict et correctifs."
+                  "brief": "Audit capstone product access: route × role matrix with verdicts and fixes."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-securite-m03-lesson",
-              "title": "AuthZ et surfaces API",
-              "desc": "IDOR, routes non protégées, webhooks exposés, RLS",
+              "title": "AuthZ and API surfaces",
+              "desc": "IDOR, unprotected routes, exposed webhooks, RLS",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Surfaces et routes</strong> : Lister tout ce qui est accessible et vérifier sa protection.</li><li><strong>Webhooks et RLS</strong> : Auditer les endpoints publics par construction et les policies.</li></ul>"
+                  "body": "<ul><li><strong>Surfaces and routes</strong> : List everything accessible and verify its protection.</li><li><strong>Webhooks and RLS</strong> : Audit inherently public endpoints and policies.</li></ul>"
                 }
               ]
             },
@@ -7443,14 +7443,14 @@
             "legacyId": "svc-audit-securite-m04",
             "moduleId": "svc-audit-securite-m04",
             "index": "04",
-            "title": "Dépendances et supply chain",
-            "subtitle": "Deps inutiles ou hallucinées, pin, npm audit",
+            "title": "Dependencies and supply chain",
+            "subtitle": "Unnecessary or hallucinated deps, pin, npm audit",
             "duration": "35 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Détecter les dépendances inutiles ou hallucinées",
-              "Pinner les versions et auditer régulièrement"
+              "Detect unnecessary or hallucinated dependencies",
+              "Pin versions and audit regularly"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7461,31 +7461,31 @@
                 "items": [
                   {
                     "id": "svc-audit-securite-m04-l1",
-                    "title": "Supply chain du code généré",
-                    "desc": "Assainir les dépendances qu'un prompt a fait entrer.",
+                    "title": "Generated code supply chain",
+                    "desc": "Clean up dependencies a prompt introduced.",
                     "objectives": [
-                      "Assainir les dépendances qu'un prompt a fait entrer."
+                      "Clean up dependencies a prompt introduced."
                     ],
                     "outline": {
-                      "context": "Assainir les dépendances qu'un prompt a fait entrer.",
+                      "context": "Clean up dependencies a prompt introduced.",
                       "concepts": [
-                        "deps hallucinées",
-                        "pin de versions",
+                        "hallucinated deps",
+                        "version pinning",
                         "npm audit",
                         "typosquatting"
                       ],
                       "pitfalls": [
-                        "installer une lib inventée par l'IA",
-                        "ranges trop larges"
+                        "installing an AI-invented library",
+                        "overly wide version ranges"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Supply chain du code généré.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Generated code supply chain.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "deps hallucinées",
-                        "pin de versions",
+                        "hallucinated deps",
+                        "version pinning",
                         "npm audit",
                         "typosquatting"
                       ]
@@ -7499,30 +7499,30 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "deps hallucinées",
-                  "pin de versions",
+                  "hallucinated deps",
+                  "version pinning",
                   "npm audit",
                   "typosquatting"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Assainir package.json",
+                  "title": "Clean up package.json",
                   "kind": "audit",
-                  "brief": "Auditer et assainir le package.json d'un projet généré : supprimer, pinner, corriger."
+                  "brief": "Audit and clean up a generated project's package.json: remove, pin, fix."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-securite-m04-lesson",
-              "title": "Dépendances et supply chain",
-              "desc": "Deps inutiles ou hallucinées, pin, npm audit",
+              "title": "Dependencies and supply chain",
+              "desc": "Unnecessary or hallucinated deps, pin, npm audit",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Supply chain du code généré</strong> : Assainir les dépendances qu'un prompt a fait entrer.</li></ul>"
+                  "body": "<ul><li><strong>Generated code supply chain</strong> : Clean up dependencies a prompt introduced.</li></ul>"
                 }
               ]
             },
@@ -7534,9 +7534,9 @@
       {
         "legacyId": "svc-audit-qualite",
         "slug": "audit-qualite",
-        "title": "Audit Qualité",
+        "title": "Quality Audit",
         "label": "Phase 9",
-        "summary": "Appliquer les checklists Performance, Design et Accessibility au produit.",
+        "summary": "Apply the Performance, Design, and Accessibility checklists to the product.",
         "order": 9,
         "color": "expert",
         "icon": "fa-gauge-high",
@@ -7546,27 +7546,27 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P9 : Scores avant/après",
-        "projectDeliverable": "Les checklists Perf / Design / A11y passées sur le capstone, avec scores avant/après documentés.",
+        "projectTitle": "Project P9: Before/after scores",
+        "projectDeliverable": "Perf / Design / A11y checklists passed on the capstone, with documented before/after scores.",
         "projectAssessment": [
-          "Scores mesurés avant et après, amélioration démontrée",
-          "Checklists perf/design/a11y passées selon seuils",
-          "Corrections tracées (commit ou diff)"
+          "Scores measured before and after, improvement demonstrated",
+          "Perf/design/a11y checklists passed per published thresholds",
+          "Fixes tracked (commit or diff)"
         ],
         "modules": [
           {
             "legacyId": "svc-audit-qualite-m01",
             "moduleId": "svc-audit-qualite-m01",
             "index": "01",
-            "title": "Performance produit",
+            "title": "Product performance",
             "subtitle": "LCP, TBT, budgets, images, waterfalls",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Mesurer LCP/TBT et lire un waterfall",
-              "Poser des budgets de performance",
-              "Optimiser les images"
+              "Measure LCP/TBT and read a waterfall",
+              "Set performance budgets",
+              "Optimize images"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7577,29 +7577,29 @@
                 "items": [
                   {
                     "id": "svc-audit-qualite-m01-l1",
-                    "title": "Mesurer et budgéter",
-                    "desc": "Utiliser Lighthouse et poser des budgets tenables.",
+                    "title": "Measure and budget",
+                    "desc": "Use Lighthouse and set realistic budgets.",
                     "objectives": [
-                      "Utiliser Lighthouse et poser des budgets tenables."
+                      "Use Lighthouse and set realistic budgets."
                     ],
                     "outline": {
-                      "context": "Utiliser Lighthouse et poser des budgets tenables.",
+                      "context": "Use Lighthouse and set realistic budgets.",
                       "concepts": [
                         "LCP",
                         "TBT",
-                        "budgets perf",
+                        "perf budgets",
                         "waterfalls",
                         "images"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Mesurer et budgéter.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Measure and budget.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "LCP",
                         "TBT",
-                        "budgets perf",
+                        "perf budgets",
                         "waterfalls",
                         "images"
                       ]
@@ -7615,29 +7615,29 @@
                 "focus": [
                   "LCP",
                   "TBT",
-                  "budgets perf",
+                  "perf budgets",
                   "waterfalls",
                   "images"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Lighthouse + plan d'action",
+                  "title": "Lighthouse + action plan",
                   "kind": "audit",
-                  "brief": "Lancer Lighthouse sur le produit et produire un plan d'action priorisé."
+                  "brief": "Run Lighthouse on the product and produce a prioritized action plan."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-qualite-m01-lesson",
-              "title": "Performance produit",
+              "title": "Product performance",
               "desc": "LCP, TBT, budgets, images, waterfalls",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Mesurer et budgéter</strong> : Utiliser Lighthouse et poser des budgets tenables.</li></ul>"
+                  "body": "<ul><li><strong>Measure and budget</strong> : Use Lighthouse and set realistic budgets.</li></ul>"
                 }
               ]
             },
@@ -7648,14 +7648,14 @@
             "legacyId": "svc-audit-qualite-m02",
             "moduleId": "svc-audit-qualite-m02",
             "index": "02",
-            "title": "Design shippable",
-            "subtitle": "Hiérarchie, CTA unique, états vides/erreur/loading",
+            "title": "Shippable design",
+            "subtitle": "Hierarchy, single CTA, empty/error/loading states",
             "duration": "35 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Vérifier la hiérarchie visuelle",
-              "Garantir les états vides, erreur et loading"
+              "Verify visual hierarchy",
+              "Ensure empty, error, and loading states"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7666,31 +7666,31 @@
                 "items": [
                   {
                     "id": "svc-audit-qualite-m02-l1",
-                    "title": "Revue design structurée",
-                    "desc": "Auditer un écran avec la checklist design-baseline.",
+                    "title": "Structured design review",
+                    "desc": "Audit a screen with the design-baseline checklist.",
                     "objectives": [
-                      "Auditer un écran avec la checklist design-baseline."
+                      "Audit a screen with the design-baseline checklist."
                     ],
                     "outline": {
-                      "context": "Auditer un écran avec la checklist design-baseline.",
+                      "context": "Audit a screen with the design-baseline checklist.",
                       "concepts": [
-                        "hiérarchie visuelle",
-                        "CTA unique",
-                        "états vides/erreur/loading"
+                        "visual hierarchy",
+                        "single CTA",
+                        "empty/error/loading states"
                       ],
                       "pitfalls": [
-                        "écran sans état vide",
-                        "trois CTA en concurrence"
+                        "screen with no empty state",
+                        "three competing CTAs"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Revue design structurée.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Structured design review.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "hiérarchie visuelle",
-                        "CTA unique",
-                        "états vides/erreur/loading"
+                        "visual hierarchy",
+                        "single CTA",
+                        "empty/error/loading states"
                       ]
                     },
                     "exercises": []
@@ -7702,29 +7702,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "hiérarchie visuelle",
-                  "CTA unique",
-                  "états vides/erreur/loading"
+                  "visual hierarchy",
+                  "single CTA",
+                  "empty/error/loading states"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Revue design d'un écran critique",
+                  "title": "Design review of a critical screen",
                   "kind": "audit",
-                  "brief": "Auditer l'écran le plus critique du produit avec la checklist design et corriger."
+                  "brief": "Audit the product's most critical screen with the design checklist and fix issues."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-qualite-m02-lesson",
-              "title": "Design shippable",
-              "desc": "Hiérarchie, CTA unique, états vides/erreur/loading",
+              "title": "Shippable design",
+              "desc": "Hierarchy, single CTA, empty/error/loading states",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Revue design structurée</strong> : Auditer un écran avec la checklist design-baseline.</li></ul>"
+                  "body": "<ul><li><strong>Structured design review</strong> : Audit a screen with the design-baseline checklist.</li></ul>"
                 }
               ]
             },
@@ -7735,15 +7735,15 @@
             "legacyId": "svc-audit-qualite-m03",
             "moduleId": "svc-audit-qualite-m03",
             "index": "03",
-            "title": "Accessibilité",
-            "subtitle": "Contraste, clavier, labels, focus",
+            "title": "Accessibility",
+            "subtitle": "Contrast, keyboard, labels, focus",
             "duration": "40 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Vérifier contraste et navigation clavier",
-              "Labelliser correctement les contrôles",
-              "Gérer le focus"
+              "Verify contrast and keyboard navigation",
+              "Label controls correctly",
+              "Manage focus"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7754,29 +7754,29 @@
                 "items": [
                   {
                     "id": "svc-audit-qualite-m03-l1",
-                    "title": "Audit a11y de base",
-                    "desc": "Passer la checklist accessibility-baseline sur un parcours.",
+                    "title": "Basic a11y audit",
+                    "desc": "Run the accessibility-baseline checklist on a user flow.",
                     "objectives": [
-                      "Passer la checklist accessibility-baseline sur un parcours."
+                      "Run the accessibility-baseline checklist on a user flow."
                     ],
                     "outline": {
-                      "context": "Passer la checklist accessibility-baseline sur un parcours.",
+                      "context": "Run the accessibility-baseline checklist on a user flow.",
                       "concepts": [
-                        "contraste",
-                        "navigation clavier",
+                        "contrast",
+                        "keyboard navigation",
                         "labels",
-                        "gestion du focus"
+                        "focus management"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Audit a11y de base.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Basic a11y audit.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "contraste",
-                        "navigation clavier",
+                        "contrast",
+                        "keyboard navigation",
                         "labels",
-                        "gestion du focus"
+                        "focus management"
                       ]
                     },
                     "exercises": []
@@ -7788,30 +7788,30 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "contraste",
-                  "navigation clavier",
+                  "contrast",
+                  "keyboard navigation",
                   "labels",
-                  "gestion du focus"
+                  "focus management"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Audit a11y ciblé",
+                  "title": "Targeted a11y audit",
                   "kind": "audit",
-                  "brief": "Auditer un parcours complet au clavier + lecteur d'écran et corriger les blocages."
+                  "brief": "Audit a full flow with keyboard + screen reader and fix blockers."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-qualite-m03-lesson",
-              "title": "Accessibilité",
-              "desc": "Contraste, clavier, labels, focus",
+              "title": "Accessibility",
+              "desc": "Contrast, keyboard, labels, focus",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Audit a11y de base</strong> : Passer la checklist accessibility-baseline sur un parcours.</li></ul>"
+                  "body": "<ul><li><strong>Basic a11y audit</strong> : Run the accessibility-baseline checklist on a user flow.</li></ul>"
                 }
               ]
             },
@@ -7822,14 +7822,14 @@
             "legacyId": "svc-audit-qualite-m04",
             "moduleId": "svc-audit-qualite-m04",
             "index": "04",
-            "title": "UX des parcours argent",
-            "subtitle": "Checkout, emails de confiance, friction inutile",
+            "title": "Revenue flow UX",
+            "subtitle": "Checkout, trust emails, unnecessary friction",
             "duration": "35 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Fluidifier le parcours de paiement",
-              "Inspirer confiance aux moments critiques"
+              "Streamline the payment flow",
+              "Build trust at critical moments"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7840,27 +7840,27 @@
                 "items": [
                   {
                     "id": "svc-audit-qualite-m04-l1",
-                    "title": "Le parcours qui rapporte",
-                    "desc": "Auditer le checkout et les emails sous l'angle conversion + confiance.",
+                    "title": "The flow that pays",
+                    "desc": "Audit checkout and emails for conversion + trust.",
                     "objectives": [
-                      "Auditer le checkout et les emails sous l'angle conversion + confiance."
+                      "Audit checkout and emails for conversion + trust."
                     ],
                     "outline": {
-                      "context": "Auditer le checkout et les emails sous l'angle conversion + confiance.",
+                      "context": "Audit checkout and emails for conversion + trust.",
                       "concepts": [
                         "checkout",
-                        "emails de confiance",
-                        "friction inutile"
+                        "trust emails",
+                        "unnecessary friction"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Le parcours qui rapporte.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: The flow that pays.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "checkout",
-                        "emails de confiance",
-                        "friction inutile"
+                        "trust emails",
+                        "unnecessary friction"
                       ]
                     },
                     "exercises": []
@@ -7873,28 +7873,28 @@
                 "questionCount": 5,
                 "focus": [
                   "checkout",
-                  "emails de confiance",
-                  "friction inutile"
+                  "trust emails",
+                  "unnecessary friction"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Parcours payant sans friction",
+                  "title": "Frictionless paid flow",
                   "kind": "audit",
-                  "brief": "Dérouler le parcours payant complet et éliminer chaque friction identifiée."
+                  "brief": "Walk through the full paid flow and eliminate every friction point found."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-audit-qualite-m04-lesson",
-              "title": "UX des parcours argent",
-              "desc": "Checkout, emails de confiance, friction inutile",
+              "title": "Revenue flow UX",
+              "desc": "Checkout, trust emails, unnecessary friction",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Le parcours qui rapporte</strong> : Auditer le checkout et les emails sous l'angle conversion + confiance.</li></ul>"
+                  "body": "<ul><li><strong>The flow that pays</strong> : Audit checkout and emails for conversion + trust.</li></ul>"
                 }
               ]
             },
@@ -7906,9 +7906,9 @@
       {
         "legacyId": "svc-hebergement",
         "slug": "hebergement",
-        "title": "Hébergement & déploiement",
+        "title": "Hosting & deployment",
         "label": "Phase 10",
-        "summary": "Mettre le produit en ligne pour de vrai.",
+        "summary": "Get the product live for real.",
         "order": 10,
         "color": "eco",
         "icon": "fa-cloud-arrow-up",
@@ -7918,26 +7918,26 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P10 : Déploiement preview + prod",
-        "projectDeliverable": "Le produit capstone déployé : environnement preview + prod avec URL publique HTTPS.",
+        "projectTitle": "Project P10: Preview + prod deployment",
+        "projectDeliverable": "Capstone product deployed: preview + prod environments with public HTTPS URL.",
         "projectAssessment": [
-          "Prod accessible en HTTPS sur URL publique",
-          "Preview distinct de la prod",
-          "Pipeline ou procédure de déploiement documentée"
+          "Prod accessible over HTTPS on a public URL",
+          "Preview distinct from prod",
+          "Pipeline or deployment procedure documented"
         ],
         "modules": [
           {
             "legacyId": "svc-hebergement-m01",
             "moduleId": "svc-hebergement-m01",
             "index": "01",
-            "title": "Choisir où héberger",
-            "subtitle": "Vercel, Fly, Railway, VPS : critères réels",
+            "title": "Choose where to host",
+            "subtitle": "Vercel, Fly, Railway, VPS: real criteria",
             "duration": "30 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Comparer les plateformes selon coût, ops et cold start",
-              "Choisir selon le produit, pas la mode"
+              "Compare platforms by cost, ops, and cold start",
+              "Choose based on the product, not trends"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -7948,28 +7948,28 @@
                 "items": [
                   {
                     "id": "svc-hebergement-m01-l1",
-                    "title": "Panorama hébergement",
-                    "desc": "Évaluer Vercel / Fly / Railway / VPS sur des critères concrets.",
+                    "title": "Hosting landscape",
+                    "desc": "Evaluate Vercel / Fly / Railway / VPS on concrete criteria.",
                     "objectives": [
-                      "Évaluer Vercel / Fly / Railway / VPS sur des critères concrets."
+                      "Evaluate Vercel / Fly / Railway / VPS on concrete criteria."
                     ],
                     "outline": {
-                      "context": "Évaluer Vercel / Fly / Railway / VPS sur des critères concrets.",
+                      "context": "Evaluate Vercel / Fly / Railway / VPS on concrete criteria.",
                       "concepts": [
                         "PaaS vs VPS",
-                        "coût",
-                        "charge ops",
+                        "cost",
+                        "ops burden",
                         "cold start"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Panorama hébergement.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Hosting landscape.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "PaaS vs VPS",
-                        "coût",
-                        "charge ops",
+                        "cost",
+                        "ops burden",
                         "cold start"
                       ]
                     },
@@ -7983,29 +7983,29 @@
                 "questionCount": 5,
                 "focus": [
                   "PaaS vs VPS",
-                  "coût",
-                  "charge ops",
+                  "cost",
+                  "ops burden",
                   "cold start"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Choisir pour trois produits",
+                  "title": "Choose for three products",
                   "kind": "synthesis",
-                  "brief": "Choisir et justifier un hébergement pour trois produits différents."
+                  "brief": "Choose and justify hosting for three different products."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-hebergement-m01-lesson",
-              "title": "Choisir où héberger",
-              "desc": "Vercel, Fly, Railway, VPS : critères réels",
+              "title": "Choose where to host",
+              "desc": "Vercel, Fly, Railway, VPS: real criteria",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Panorama hébergement</strong> : Évaluer Vercel / Fly / Railway / VPS sur des critères concrets.</li></ul>"
+                  "body": "<ul><li><strong>Hosting landscape</strong> : Evaluate Vercel / Fly / Railway / VPS on concrete criteria.</li></ul>"
                 }
               ]
             },
@@ -8016,14 +8016,14 @@
             "legacyId": "svc-hebergement-m02",
             "moduleId": "svc-hebergement-m02",
             "index": "02",
-            "title": "Environnements",
-            "subtitle": "Local, preview, prod et secrets runtime",
+            "title": "Environments",
+            "subtitle": "Local, preview, prod, and runtime secrets",
             "duration": "35 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Séparer local / preview / prod",
-              "Gérer secrets runtime et config build"
+              "Separate local / preview / prod",
+              "Manage runtime secrets and build config"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8034,27 +8034,27 @@
                 "items": [
                   {
                     "id": "svc-hebergement-m02-l1",
-                    "title": "Trois environnements",
-                    "desc": "Configurer local/preview/prod sans fuite entre eux.",
+                    "title": "Three environments",
+                    "desc": "Configure local/preview/prod without cross-leakage.",
                     "objectives": [
-                      "Configurer local/preview/prod sans fuite entre eux."
+                      "Configure local/preview/prod without cross-leakage."
                     ],
                     "outline": {
-                      "context": "Configurer local/preview/prod sans fuite entre eux.",
+                      "context": "Configure local/preview/prod without cross-leakage.",
                       "concepts": [
-                        "environnements",
-                        "secrets runtime",
-                        "config Vite build vs runtime"
+                        "environments",
+                        "runtime secrets",
+                        "Vite build vs runtime config"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Trois environnements.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Three environments.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "environnements",
-                        "secrets runtime",
-                        "config Vite build vs runtime"
+                        "environments",
+                        "runtime secrets",
+                        "Vite build vs runtime config"
                       ]
                     },
                     "exercises": []
@@ -8066,29 +8066,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "environnements",
-                  "secrets runtime",
-                  "config Vite build vs runtime"
+                  "environments",
+                  "runtime secrets",
+                  "Vite build vs runtime config"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Matrice d'environnements",
+                  "title": "Environment matrix",
                   "kind": "synthesis",
-                  "brief": "Construire la matrice complète des variables du produit par environnement."
+                  "brief": "Build the full product variable matrix per environment."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-hebergement-m02-lesson",
-              "title": "Environnements",
-              "desc": "Local, preview, prod et secrets runtime",
+              "title": "Environments",
+              "desc": "Local, preview, prod, and runtime secrets",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Trois environnements</strong> : Configurer local/preview/prod sans fuite entre eux.</li></ul>"
+                  "body": "<ul><li><strong>Three environments</strong> : Configure local/preview/prod without cross-leakage.</li></ul>"
                 }
               ]
             },
@@ -8099,15 +8099,15 @@
             "legacyId": "svc-hebergement-m03",
             "moduleId": "svc-hebergement-m03",
             "index": "03",
-            "title": "CI/CD minimal",
-            "subtitle": "Build, test, deploy, rollback : et bloquer sur audit",
+            "title": "Minimal CI/CD",
+            "subtitle": "Build, test, deploy, rollback: and block on audit",
             "duration": "45 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Mettre en place un pipeline build/test/deploy",
-              "Bloquer le déploiement sur lint ou audit rouge",
-              "Savoir revenir en arrière"
+              "Set up a build/test/deploy pipeline",
+              "Block deployment on failed lint or audit",
+              "Know how to roll back"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8118,30 +8118,30 @@
                 "items": [
                   {
                     "id": "svc-hebergement-m03-l1",
-                    "title": "Pipeline minimal",
-                    "desc": "Automatiser build, tests et déploiement avec garde-fous.",
+                    "title": "Minimal pipeline",
+                    "desc": "Automate build, tests, and deployment with guardrails.",
                     "objectives": [
-                      "Automatiser build, tests et déploiement avec garde-fous."
+                      "Automate build, tests, and deployment with guardrails."
                     ],
                     "outline": {
-                      "context": "Automatiser build, tests et déploiement avec garde-fous.",
+                      "context": "Automate build, tests, and deployment with guardrails.",
                       "concepts": [
                         "CI/CD",
-                        "gates lint/audit",
+                        "lint/audit gates",
                         "rollback"
                       ],
                       "pitfalls": [
-                        "déployer sans gate",
-                        "pas de stratégie de rollback"
+                        "deploying without gates",
+                        "no rollback strategy"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Pipeline minimal.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Minimal pipeline.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "CI/CD",
-                        "gates lint/audit",
+                        "lint/audit gates",
                         "rollback"
                       ]
                     },
@@ -8155,28 +8155,28 @@
                 "questionCount": 5,
                 "focus": [
                   "CI/CD",
-                  "gates lint/audit",
+                  "lint/audit gates",
                   "rollback"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Pipeline qui refuse",
+                  "title": "Pipeline that refuses",
                   "kind": "guided",
-                  "brief": "Configurer un pipeline qui refuse de déployer si un secret ou un lint rouge est détecté."
+                  "brief": "Configure a pipeline that refuses to deploy if a secret or lint failure is detected."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-hebergement-m03-lesson",
-              "title": "CI/CD minimal",
-              "desc": "Build, test, deploy, rollback : et bloquer sur audit",
+              "title": "Minimal CI/CD",
+              "desc": "Build, test, deploy, rollback: and block on audit",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Pipeline minimal</strong> : Automatiser build, tests et déploiement avec garde-fous.</li></ul>"
+                  "body": "<ul><li><strong>Minimal pipeline</strong> : Automate build, tests, and deployment with guardrails.</li></ul>"
                 }
               ]
             },
@@ -8187,14 +8187,14 @@
             "legacyId": "svc-hebergement-m04",
             "moduleId": "svc-hebergement-m04",
             "index": "04",
-            "title": "Domaines, TLS, DNS",
-            "subtitle": "Custom domain, HTTPS, redirects, DNS email",
+            "title": "Domains, TLS, DNS",
+            "subtitle": "Custom domain, HTTPS, redirects, email DNS",
             "duration": "40 min",
             "order": 3,
             "difficulty": "intermediate",
             "objectives": [
-              "Brancher un domaine custom en HTTPS",
-              "Configurer redirects et DNS email"
+              "Connect a custom domain over HTTPS",
+              "Configure redirects and email DNS"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8206,20 +8206,20 @@
                   {
                     "id": "svc-hebergement-m04-l1",
                     "title": "Go-live DNS",
-                    "desc": "Configurer domaine, TLS, redirects et SPF/DKIM basique.",
+                    "desc": "Configure domain, TLS, redirects, and basic SPF/DKIM.",
                     "objectives": [
-                      "Configurer domaine, TLS, redirects et SPF/DKIM basique."
+                      "Configure domain, TLS, redirects, and basic SPF/DKIM."
                     ],
                     "outline": {
-                      "context": "Configurer domaine, TLS, redirects et SPF/DKIM basique.",
+                      "context": "Configure domain, TLS, redirects, and basic SPF/DKIM.",
                       "concepts": [
                         "custom domain",
                         "HTTPS/TLS",
                         "redirects",
                         "SPF/DKIM"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Go-live DNS.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Go-live DNS.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
@@ -8247,22 +8247,22 @@
               },
               "exercises": [
                 {
-                  "title": "Checklist go-live DNS",
+                  "title": "Go-live DNS checklist",
                   "kind": "synthesis",
-                  "brief": "Dérouler la checklist go-live DNS complète sur le domaine du produit."
+                  "brief": "Run the full go-live DNS checklist on the product domain."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-hebergement-m04-lesson",
-              "title": "Domaines, TLS, DNS",
-              "desc": "Custom domain, HTTPS, redirects, DNS email",
+              "title": "Domains, TLS, DNS",
+              "desc": "Custom domain, HTTPS, redirects, email DNS",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Go-live DNS</strong> : Configurer domaine, TLS, redirects et SPF/DKIM basique.</li></ul>"
+                  "body": "<ul><li><strong>Go-live DNS</strong> : Configure domain, TLS, redirects, and basic SPF/DKIM.</li></ul>"
                 }
               ]
             },
@@ -8274,9 +8274,9 @@
       {
         "legacyId": "svc-ops",
         "slug": "ops",
-        "title": "Observabilité & ops légers",
+        "title": "Observability & lightweight ops",
         "label": "Phase 11",
-        "summary": "Savoir que ça casse : et quoi faire quand ça casse.",
+        "summary": "Know when it breaks: and what to do when it does.",
         "order": 11,
         "color": "expert",
         "icon": "fa-heart-pulse",
@@ -8286,26 +8286,26 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P11 : Runbook + alerte live",
-        "projectDeliverable": "Le runbook du produit + au moins une alerte réellement active sur l'environnement de prod.",
+        "projectTitle": "Project P11: Runbook + live alert",
+        "projectDeliverable": "Product runbook + at least one alert actually active on the prod environment.",
         "projectAssessment": [
-          "Runbook d'une page actionnable",
-          "Alerte déclenchable et testée",
-          "Backup restaurable démontré"
+          "Actionable one-page runbook",
+          "Triggerable and tested alert",
+          "Restorable backup demonstrated"
         ],
         "modules": [
           {
             "legacyId": "svc-ops-m01",
             "moduleId": "svc-ops-m01",
             "index": "01",
-            "title": "Logs utiles",
-            "subtitle": "Corrélation request/user, jamais de secrets",
+            "title": "Useful logs",
+            "subtitle": "Request/user correlation, never secrets",
             "duration": "30 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Structurer des logs corrélés",
-              "Garantir zéro secret dans les logs"
+              "Structure correlated logs",
+              "Ensure zero secrets in logs"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8316,31 +8316,31 @@
                 "items": [
                   {
                     "id": "svc-ops-m01-l1",
-                    "title": "Logs qui servent",
-                    "desc": "Logger ce qui aide à débugger, corrélé, sans données sensibles.",
+                    "title": "Logs that help",
+                    "desc": "Log what's useful for debugging, correlated, without sensitive data.",
                     "objectives": [
-                      "Logger ce qui aide à débugger, corrélé, sans données sensibles."
+                      "Log what's useful for debugging, correlated, without sensitive data."
                     ],
                     "outline": {
-                      "context": "Logger ce qui aide à débugger, corrélé, sans données sensibles.",
+                      "context": "Log what's useful for debugging, correlated, without sensitive data.",
                       "concepts": [
-                        "corrélation request/user",
-                        "logs structurés",
-                        "pas de secrets"
+                        "request/user correlation",
+                        "structured logs",
+                        "no secrets"
                       ],
                       "pitfalls": [
-                        "logger un token ou un mot de passe",
-                        "logs illisibles sans contexte"
+                        "logging a token or password",
+                        "unreadable logs without context"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Logs qui servent.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Logs that help.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "corrélation request/user",
-                        "logs structurés",
-                        "pas de secrets"
+                        "request/user correlation",
+                        "structured logs",
+                        "no secrets"
                       ]
                     },
                     "exercises": []
@@ -8352,29 +8352,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "corrélation request/user",
-                  "logs structurés",
-                  "pas de secrets"
+                  "request/user correlation",
+                  "structured logs",
+                  "no secrets"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Instrumenter un flux critique",
+                  "title": "Instrument a critical flow",
                   "kind": "guided",
-                  "brief": "Instrumenter le flux paiement ou auth avec des logs corrélés exploitables."
+                  "brief": "Instrument the payment or auth flow with actionable correlated logs."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ops-m01-lesson",
-              "title": "Logs utiles",
-              "desc": "Corrélation request/user, jamais de secrets",
+              "title": "Useful logs",
+              "desc": "Request/user correlation, never secrets",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Logs qui servent</strong> : Logger ce qui aide à débugger, corrélé, sans données sensibles.</li></ul>"
+                  "body": "<ul><li><strong>Logs that help</strong> : Log what's useful for debugging, correlated, without sensitive data.</li></ul>"
                 }
               ]
             },
@@ -8385,14 +8385,14 @@
             "legacyId": "svc-ops-m02",
             "moduleId": "svc-ops-m02",
             "index": "02",
-            "title": "Monitoring & alertes",
+            "title": "Monitoring & alerts",
             "subtitle": "Uptime, 5xx, webhook down",
             "duration": "35 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Surveiller uptime et erreurs 5xx",
-              "Alerter sur les pannes qui coûtent (webhook down)"
+              "Monitor uptime and 5xx errors",
+              "Alert on costly outages (webhook down)"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8403,27 +8403,27 @@
                 "items": [
                   {
                     "id": "svc-ops-m02-l1",
-                    "title": "Surveiller ce qui compte",
-                    "desc": "Mettre en place uptime check, suivi 5xx et alertes ciblées.",
+                    "title": "Monitor what matters",
+                    "desc": "Set up uptime checks, 5xx tracking, and targeted alerts.",
                     "objectives": [
-                      "Mettre en place uptime check, suivi 5xx et alertes ciblées."
+                      "Set up uptime checks, 5xx tracking, and targeted alerts."
                     ],
                     "outline": {
-                      "context": "Mettre en place uptime check, suivi 5xx et alertes ciblées.",
+                      "context": "Set up uptime checks, 5xx tracking, and targeted alerts.",
                       "concepts": [
                         "uptime",
-                        "erreurs 5xx",
-                        "alerte webhook down"
+                        "5xx errors",
+                        "webhook-down alert"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Surveiller ce qui compte.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Monitor what matters.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "uptime",
-                        "erreurs 5xx",
-                        "alerte webhook down"
+                        "5xx errors",
+                        "webhook-down alert"
                       ]
                     },
                     "exercises": []
@@ -8436,28 +8436,28 @@
                 "questionCount": 5,
                 "focus": [
                   "uptime",
-                  "erreurs 5xx",
-                  "alerte webhook down"
+                  "5xx errors",
+                  "webhook-down alert"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Alerte « paiement cassé »",
+                  "title": "'Payment broken' alert",
                   "kind": "guided",
-                  "brief": "Configurer une alerte qui se déclenche quand le webhook de paiement échoue."
+                  "brief": "Configure an alert that fires when the payment webhook fails."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ops-m02-lesson",
-              "title": "Monitoring & alertes",
+              "title": "Monitoring & alerts",
               "desc": "Uptime, 5xx, webhook down",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Surveiller ce qui compte</strong> : Mettre en place uptime check, suivi 5xx et alertes ciblées.</li></ul>"
+                  "body": "<ul><li><strong>Monitor what matters</strong> : Set up uptime checks, 5xx tracking, and targeted alerts.</li></ul>"
                 }
               ]
             },
@@ -8468,14 +8468,14 @@
             "legacyId": "svc-ops-m03",
             "moduleId": "svc-ops-m03",
             "index": "03",
-            "title": "Backups & incident minimal",
-            "subtitle": "Backup DB, runbook 1 page, communication",
+            "title": "Backups & minimal incident response",
+            "subtitle": "DB backup, 1-page runbook, communication",
             "duration": "35 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Mettre en place un backup DB restaurable",
-              "Écrire un runbook d'incident d'une page"
+              "Set up a restorable DB backup",
+              "Write a one-page incident runbook"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8486,29 +8486,29 @@
                 "items": [
                   {
                     "id": "svc-ops-m03-l1",
-                    "title": "Backups et runbook",
-                    "desc": "Se préparer à l'incident : backup testé + runbook + communication minimale.",
+                    "title": "Backups and runbook",
+                    "desc": "Prepare for incidents: tested backup + runbook + minimal communication.",
                     "objectives": [
-                      "Se préparer à l'incident : backup testé + runbook + communication minimale."
+                      "Prepare for incidents: tested backup + runbook + minimal communication."
                     ],
                     "outline": {
-                      "context": "Se préparer à l'incident : backup testé + runbook + communication minimale.",
+                      "context": "Prepare for incidents: tested backup + runbook + minimal communication.",
                       "concepts": [
-                        "backup DB",
-                        "restauration testée",
-                        "runbook 1 page",
-                        "communication d'incident"
+                        "DB backup",
+                        "tested restore",
+                        "1-page runbook",
+                        "incident communication"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Backups et runbook.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Backups and runbook.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "backup DB",
-                        "restauration testée",
-                        "runbook 1 page",
-                        "communication d'incident"
+                        "DB backup",
+                        "tested restore",
+                        "1-page runbook",
+                        "incident communication"
                       ]
                     },
                     "exercises": []
@@ -8520,30 +8520,30 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "backup DB",
-                  "restauration testée",
-                  "runbook 1 page",
-                  "communication d'incident"
+                  "DB backup",
+                  "tested restore",
+                  "1-page runbook",
+                  "incident communication"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Simulation d'incident",
+                  "title": "Incident simulation",
                   "kind": "synthesis",
-                  "brief": "Dérouler une simulation d'incident avec le runbook : détection, action, communication, post-mortem court."
+                  "brief": "Run an incident simulation with the runbook: detection, action, communication, short post-mortem."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ops-m03-lesson",
-              "title": "Backups & incident minimal",
-              "desc": "Backup DB, runbook 1 page, communication",
+              "title": "Backups & minimal incident response",
+              "desc": "DB backup, 1-page runbook, communication",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Backups et runbook</strong> : Se préparer à l'incident : backup testé + runbook + communication minimale.</li></ul>"
+                  "body": "<ul><li><strong>Backups and runbook</strong> : Prepare for incidents: tested backup + runbook + minimal communication.</li></ul>"
                 }
               ]
             },
@@ -8555,9 +8555,9 @@
       {
         "legacyId": "svc-ship",
         "slug": "ship",
-        "title": "Livraison commerciale",
+        "title": "Commercial delivery",
         "label": "Phase 12",
-        "summary": "Transformer un déploiement en offre commercialisable.",
+        "summary": "Turn a deployment into a marketable offer.",
         "order": 12,
         "color": "core",
         "icon": "fa-rocket",
@@ -8567,26 +8567,26 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Projet P12 : Dossier de livraison",
-        "projectDeliverable": "Le dossier de livraison complet : URL publique, plans et pricing, preuves d'audit, runbook.",
+        "projectTitle": "Project P12: Delivery package",
+        "projectDeliverable": "Complete delivery package: public URL, plans and pricing, audit evidence, runbook.",
         "projectAssessment": [
-          "Dossier complet et vérifiable",
-          "Pricing page en ligne avec CTA",
-          "Socle légal et support en place"
+          "Complete and verifiable package",
+          "Pricing page live with CTA",
+          "Legal foundation and support in place"
         ],
         "modules": [
           {
             "legacyId": "svc-ship-m01",
             "moduleId": "svc-ship-m01",
             "index": "01",
-            "title": "Offre & pricing page",
-            "subtitle": "Proposition de valeur, Free/Pro, CTA clair",
+            "title": "Offer & pricing page",
+            "subtitle": "Value proposition, Free/Pro, clear CTA",
             "duration": "35 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Formuler la proposition de valeur",
-              "Construire une pricing page qui convertit"
+              "Articulate the value proposition",
+              "Build a pricing page that converts"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8597,27 +8597,27 @@
                 "items": [
                   {
                     "id": "svc-ship-m01-l1",
-                    "title": "De la feature à l'offre",
-                    "desc": "Traduire le produit en proposition de valeur et plans clairs.",
+                    "title": "From feature to offer",
+                    "desc": "Translate the product into a value proposition and clear plans.",
                     "objectives": [
-                      "Traduire le produit en proposition de valeur et plans clairs."
+                      "Translate the product into a value proposition and clear plans."
                     ],
                     "outline": {
-                      "context": "Traduire le produit en proposition de valeur et plans clairs.",
+                      "context": "Translate the product into a value proposition and clear plans.",
                       "concepts": [
-                        "proposition de valeur",
-                        "plans Free/Pro",
-                        "CTA clair"
+                        "value proposition",
+                        "Free/Pro plans",
+                        "clear CTA"
                       ],
-                      "guidedExample": "Exemple guidé autour de : De la feature à l'offre.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: From feature to offer.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "proposition de valeur",
-                        "plans Free/Pro",
-                        "CTA clair"
+                        "value proposition",
+                        "Free/Pro plans",
+                        "clear CTA"
                       ]
                     },
                     "exercises": []
@@ -8629,29 +8629,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "proposition de valeur",
-                  "plans Free/Pro",
-                  "CTA clair"
+                  "value proposition",
+                  "Free/Pro plans",
+                  "clear CTA"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Landing « pourquoi payer »",
+                  "title": "'Why pay' landing",
                   "kind": "synthesis",
-                  "brief": "Rédiger la landing du produit centrée sur la raison de payer, avec un CTA unique."
+                  "brief": "Write the product landing focused on the reason to pay, with a single CTA."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ship-m01-lesson",
-              "title": "Offre & pricing page",
-              "desc": "Proposition de valeur, Free/Pro, CTA clair",
+              "title": "Offer & pricing page",
+              "desc": "Value proposition, Free/Pro, clear CTA",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>De la feature à l'offre</strong> : Traduire le produit en proposition de valeur et plans clairs.</li></ul>"
+                  "body": "<ul><li><strong>From feature to offer</strong> : Translate the product into a value proposition and clear plans.</li></ul>"
                 }
               ]
             },
@@ -8662,14 +8662,14 @@
             "legacyId": "svc-ship-m02",
             "moduleId": "svc-ship-m02",
             "index": "02",
-            "title": "Confiance & légal minimal",
-            "subtitle": "CGU/privacy légères, mentions, support",
+            "title": "Trust & minimal legal",
+            "subtitle": "Light ToS/privacy, legal notices, support",
             "duration": "30 min",
             "order": 1,
             "difficulty": "intermediate",
             "objectives": [
-              "Couvrir CGU, privacy et mentions minimales",
-              "Ouvrir un canal support crédible"
+              "Cover ToS, privacy, and minimal legal notices",
+              "Open a credible support channel"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8680,27 +8680,27 @@
                 "items": [
                   {
                     "id": "svc-ship-m02-l1",
-                    "title": "Le minimum qui inspire confiance",
-                    "desc": "Mettre en place le socle légal et support d'un produit payant.",
+                    "title": "The minimum that builds trust",
+                    "desc": "Set up the legal and support foundation for a paid product.",
                     "objectives": [
-                      "Mettre en place le socle légal et support d'un produit payant."
+                      "Set up the legal and support foundation for a paid product."
                     ],
                     "outline": {
-                      "context": "Mettre en place le socle légal et support d'un produit payant.",
+                      "context": "Set up the legal and support foundation for a paid product.",
                       "concepts": [
-                        "CGU/privacy légères",
-                        "mentions",
-                        "canal support"
+                        "light ToS/privacy",
+                        "legal notices",
+                        "support channel"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Le minimum qui inspire confiance.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: The minimum that builds trust.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "CGU/privacy légères",
-                        "mentions",
-                        "canal support"
+                        "light ToS/privacy",
+                        "legal notices",
+                        "support channel"
                       ]
                     },
                     "exercises": []
@@ -8712,29 +8712,29 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "CGU/privacy légères",
-                  "mentions",
-                  "canal support"
+                  "light ToS/privacy",
+                  "legal notices",
+                  "support channel"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Checklist conformité mini",
+                  "title": "Mini compliance checklist",
                   "kind": "synthesis",
-                  "brief": "Passer la checklist conformité minimale sur le produit et combler les manques."
+                  "brief": "Run the minimal compliance checklist on the product and fill gaps."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ship-m02-lesson",
-              "title": "Confiance & légal minimal",
-              "desc": "CGU/privacy légères, mentions, support",
+              "title": "Trust & minimal legal",
+              "desc": "Light ToS/privacy, legal notices, support",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Le minimum qui inspire confiance</strong> : Mettre en place le socle légal et support d'un produit payant.</li></ul>"
+                  "body": "<ul><li><strong>The minimum that builds trust</strong> : Set up the legal and support foundation for a paid product.</li></ul>"
                 }
               ]
             },
@@ -8745,15 +8745,15 @@
             "legacyId": "svc-ship-m03",
             "moduleId": "svc-ship-m03",
             "index": "03",
-            "title": "Preuves de livraison",
-            "subtitle": "Changelog, smoke tests, dossier de release",
+            "title": "Delivery proof",
+            "subtitle": "Changelog, smoke tests, release package",
             "duration": "35 min",
             "order": 2,
             "difficulty": "intermediate",
             "objectives": [
-              "Tenir un changelog",
-              "Automatiser des smoke tests",
-              "Assembler le dossier de release"
+              "Maintain a changelog",
+              "Automate smoke tests",
+              "Assemble the release package"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8764,27 +8764,27 @@
                 "items": [
                   {
                     "id": "svc-ship-m03-l1",
-                    "title": "Livrer avec preuves",
-                    "desc": "Produire les artefacts qui prouvent que le produit est livré.",
+                    "title": "Ship with proof",
+                    "desc": "Produce artifacts that prove the product is delivered.",
                     "objectives": [
-                      "Produire les artefacts qui prouvent que le produit est livré."
+                      "Produce artifacts that prove the product is delivered."
                     ],
                     "outline": {
-                      "context": "Produire les artefacts qui prouvent que le produit est livré.",
+                      "context": "Produce artifacts that prove the product is delivered.",
                       "concepts": [
                         "changelog",
                         "smoke tests",
-                        "dossier de release"
+                        "release package"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Livrer avec preuves.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Ship with proof.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
                         "changelog",
                         "smoke tests",
-                        "dossier de release"
+                        "release package"
                       ]
                     },
                     "exercises": []
@@ -8798,27 +8798,27 @@
                 "focus": [
                   "changelog",
                   "smoke tests",
-                  "dossier de release"
+                  "release package"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Assembler le dossier de livraison",
+                  "title": "Assemble the delivery package",
                   "kind": "synthesis",
-                  "brief": "Assembler le dossier de livraison du produit : URL, plans, preuves d'audit, runbook."
+                  "brief": "Assemble the product delivery package: URL, plans, audit evidence, runbook."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-ship-m03-lesson",
-              "title": "Preuves de livraison",
-              "desc": "Changelog, smoke tests, dossier de release",
+              "title": "Delivery proof",
+              "desc": "Changelog, smoke tests, release package",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Livrer avec preuves</strong> : Produire les artefacts qui prouvent que le produit est livré.</li></ul>"
+                  "body": "<ul><li><strong>Ship with proof</strong> : Produce artifacts that prove the product is delivered.</li></ul>"
                 }
               ]
             },
@@ -8830,9 +8830,9 @@
       {
         "legacyId": "svc-capstone",
         "slug": "capstone",
-        "title": "Capstone + certificat",
+        "title": "Capstone + certificate",
         "label": "Capstone",
-        "summary": "Livrer un produit commercialisable de bout en bout avec le cycle imposé Prompt → Audit → Livraison, validé par la rubrique de certification.",
+        "summary": "Deliver an end-to-end marketable product using the required Prompt → Audit → Delivery cycle, validated by the certification rubric.",
         "order": 13,
         "color": "expert",
         "icon": "fa-award",
@@ -8842,33 +8842,33 @@
         "objectives": [],
         "prerequisites": [],
         "scaffoldOnly": true,
-        "projectTitle": "Capstone : Produit commercialisable en prod",
-        "projectDeliverable": "Un produit déployé publiquement en HTTPS, monétisable, audité (Security + Qualité) et livré avec son dossier de livraison. Certificat délivré si la rubrique est validée (revue formateur ou grille automatisée + spot-check).",
+        "projectTitle": "Capstone: Marketable product in prod",
+        "projectDeliverable": "A publicly deployed HTTPS product, monetizable, audited (Security + Quality), and delivered with its delivery package. Certificate issued if the rubric is validated (instructor review or automated grid + spot-check).",
         "projectAssessment": [
-          "Produit déployé accessible en HTTPS (obligatoire)",
-          "Auth via provider : pas d'auth maison fragile (obligatoire)",
-          "Au moins un service tiers paiement ou notification, idéalement les deux (obligatoire)",
-          "Checklist Security baseline : pass, aucune critique ouverte",
-          "Checklists Perf / Design / A11y : pass selon seuils publiés",
-          "Webhooks + idempotence si le brief inclut le paiement (obligatoire)",
-          "Déploiement documenté : CI ou procédure (obligatoire)",
-          "Dossier de livraison complet (obligatoire)",
-          "Échecs automatiques : secrets en clair, checkout redirect-only, prod sans HTTPS, autorisation client-only"
+          "Product deployed and accessible over HTTPS (required)",
+          "Login via a third-party service: no fragile homegrown auth (required)",
+          "At least one third-party payment or notification service, ideally both (required)",
+          "Security baseline checklist: pass, no open criticals",
+          "Perf / Design / A11y checklists: pass per published thresholds",
+          "Webhooks + idempotency if the brief includes payment (required)",
+          "Documented deployment: CI or procedure (required)",
+          "Complete delivery package (required)",
+          "Automatic failures: plaintext secrets, checkout redirect-only, prod without HTTPS, client-only authorization"
         ],
         "modules": [
           {
             "legacyId": "svc-capstone-m01",
             "moduleId": "svc-capstone-m01",
             "index": "01",
-            "title": "Cadrage et jalons du capstone",
-            "subtitle": "Choisir son brief, comprendre la rubrique, planifier le cycle",
+            "title": "Capstone scoping and milestones",
+            "subtitle": "Choose your brief, understand the rubric, plan the cycle",
             "duration": "40 min",
             "order": 0,
             "difficulty": "intermediate",
             "objectives": [
-              "Choisir un brief parmi les trois proposés",
-              "Comprendre chaque critère de la rubrique et les échecs automatiques",
-              "Planifier les jalons Prompt → Audit → Livraison"
+              "Choose one of the three briefs",
+              "Understand each rubric criterion and automatic failures",
+              "Plan Prompt → Audit → Delivery milestones"
             ],
             "prerequisites": [],
             "openByDefault": false,
@@ -8879,60 +8879,60 @@
                 "items": [
                   {
                     "id": "svc-capstone-m01-l1",
-                    "title": "Les trois briefs",
-                    "desc": "Comparer SaaS B2B, e-commerce léger et produit service pour choisir son terrain.",
+                    "title": "The three briefs",
+                    "desc": "Compare B2B SaaS, lightweight e-commerce, and service product to pick your path.",
                     "objectives": [
-                      "Comparer SaaS B2B, e-commerce léger et produit service pour choisir son terrain."
+                      "Compare B2B SaaS, lightweight e-commerce, and service product to pick your path."
                     ],
                     "outline": {
-                      "context": "Comparer SaaS B2B, e-commerce léger et produit service pour choisir son terrain.",
+                      "context": "Compare B2B SaaS, lightweight e-commerce, and service product to pick your path.",
                       "concepts": [
-                        "svc-capstone-saas : auth + abonnement + dashboard",
-                        "svc-capstone-commerce : catalogue + paiement + notifs commande",
-                        "svc-capstone-service : booking/lead + paiement + emails transactionnels"
+                        "svc-capstone-saas: auth + subscription + dashboard",
+                        "svc-capstone-commerce: catalog + payment + order notifications",
+                        "svc-capstone-service: booking/lead + payment + transactional emails"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Les trois briefs.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: The three briefs.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "svc-capstone-saas : auth + abonnement + dashboard",
-                        "svc-capstone-commerce : catalogue + paiement + notifs commande",
-                        "svc-capstone-service : booking/lead + paiement + emails transactionnels"
+                        "svc-capstone-saas: auth + subscription + dashboard",
+                        "svc-capstone-commerce: catalog + payment + order notifications",
+                        "svc-capstone-service: booking/lead + payment + transactional emails"
                       ]
                     },
                     "exercises": []
                   },
                   {
                     "id": "svc-capstone-m01-l2",
-                    "title": "Cycle imposé et rubrique",
-                    "desc": "S'approprier les livrables exigés et les critères éliminatoires.",
+                    "title": "Required cycle and rubric",
+                    "desc": "Internalize required deliverables and disqualifying criteria.",
                     "objectives": [
-                      "S'approprier les livrables exigés et les critères éliminatoires."
+                      "Internalize required deliverables and disqualifying criteria."
                     ],
                     "outline": {
-                      "context": "S'approprier les livrables exigés et les critères éliminatoires.",
+                      "context": "Internalize required deliverables and disqualifying criteria.",
                       "concepts": [
-                        "Prompt : brief + journal de prompts + architecture",
-                        "Audit : Security + Qualité avec preuves",
-                        "Livraison : prod publique + dossier de release"
+                        "Prompt: brief + prompt journal + architecture",
+                        "Audit: Security + Quality with evidence",
+                        "Delivery: public prod + release package"
                       ],
                       "pitfalls": [
-                        "Secrets en clair dans le repo ou les logs (échec automatique)",
-                        "Checkout sans activation via webhook (échec automatique)",
-                        "Prod sans HTTPS (échec automatique)",
-                        "Autorisation uniquement côté client (échec automatique)"
+                        "Plaintext secrets in repo or logs (automatic failure)",
+                        "Checkout without webhook activation (automatic failure)",
+                        "Prod without HTTPS (automatic failure)",
+                        "Authorization only on the client (automatic failure)"
                       ],
-                      "guidedExample": "Exemple guidé autour de : Cycle imposé et rubrique.",
-                      "recap": "Synthèse des décisions, des erreurs fréquentes et des critères de réussite."
+                      "guidedExample": "Guided example around: Required cycle and rubric.",
+                      "recap": "Summary of decisions, common mistakes, and success criteria."
                     },
                     "quiz": {
                       "questionCount": 3,
                       "focus": [
-                        "Prompt : brief + journal de prompts + architecture",
-                        "Audit : Security + Qualité avec preuves",
-                        "Livraison : prod publique + dossier de release"
+                        "Prompt: brief + prompt journal + architecture",
+                        "Audit: Security + Quality with evidence",
+                        "Delivery: public prod + release package"
                       ]
                     },
                     "exercises": []
@@ -8944,32 +8944,32 @@
               "quiz": {
                 "questionCount": 5,
                 "focus": [
-                  "svc-capstone-saas : auth + abonnement + dashboard",
-                  "svc-capstone-commerce : catalogue + paiement + notifs commande",
-                  "svc-capstone-service : booking/lead + paiement + emails transactionnels",
-                  "Prompt : brief + journal de prompts + architecture",
-                  "Audit : Security + Qualité avec preuves",
-                  "Livraison : prod publique + dossier de release"
+                  "svc-capstone-saas: auth + subscription + dashboard",
+                  "svc-capstone-commerce: catalog + payment + order notifications",
+                  "svc-capstone-service: booking/lead + payment + transactional emails",
+                  "Prompt: brief + prompt journal + architecture",
+                  "Audit: Security + Quality with evidence",
+                  "Delivery: public prod + release package"
                 ]
               },
               "exercises": [
                 {
-                  "title": "Plan de capstone",
+                  "title": "Capstone plan",
                   "kind": "project",
-                  "brief": "Choisir un brief et produire le plan jalonné : livrables par temps du cycle, risques, checklist des critères."
+                  "brief": "Choose a brief and produce a milestone plan: deliverables per cycle phase, risks, criteria checklist."
                 }
               ]
             },
             "lesson": {
               "legacyId": "svc-capstone-m01-lesson",
-              "title": "Cadrage et jalons du capstone",
-              "desc": "Choisir son brief, comprendre la rubrique, planifier le cycle",
+              "title": "Capstone scoping and milestones",
+              "desc": "Choose your brief, understand the rubric, plan the cycle",
               "order": 0,
               "isRequired": true,
               "content": [
                 {
                   "__component": "lesson.text-block",
-                  "body": "<ul><li><strong>Les trois briefs</strong> : Comparer SaaS B2B, e-commerce léger et produit service pour choisir son terrain.</li><li><strong>Cycle imposé et rubrique</strong> : S'approprier les livrables exigés et les critères éliminatoires.</li></ul>"
+                  "body": "<ul><li><strong>The three briefs</strong> : Compare B2B SaaS, lightweight e-commerce, and service product to pick your path.</li><li><strong>Required cycle and rubric</strong> : Internalize required deliverables and disqualifying criteria.</li></ul>"
                 }
               ]
             },

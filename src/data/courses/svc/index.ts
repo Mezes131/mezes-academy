@@ -2,7 +2,9 @@ import type { Course, Phase } from "@/types";
 import type { Locale } from "@/i18n/types";
 import { programToScaffoldPhases, type PhasePresentation } from "../programScaffold";
 import { svcMeta } from "./meta";
+import { svcMetaEn } from "./meta.en";
 import { svcProgram } from "./program";
+import { svcProgramEn } from "./program.en";
 import { basesPhase as basesPhaseFr } from "./locales/fr/phases/bases";
 import { fondationsPhase as fondationsPhaseFr } from "./locales/fr/phases/fondations";
 import { promptPhase as promptPhaseFr } from "./locales/fr/phases/prompt";
@@ -55,12 +57,13 @@ const authoredEn: Record<string, Phase> = {
 export function buildSvcCourse(locale: Locale = "fr"): Course {
   const authored =
     locale === "en" ? { ...authoredFr, ...authoredEn } : authoredFr;
+  const program = locale === "en" ? svcProgramEn : svcProgram;
   return {
     id: "svc",
     slug: "secure-vibe-coding",
-    meta: svcMeta,
-    program: svcProgram,
-    phases: programToScaffoldPhases(svcProgram, phasePresentation).map(
+    meta: locale === "en" ? svcMetaEn : svcMeta,
+    program,
+    phases: programToScaffoldPhases(program, phasePresentation).map(
       (phase) => authored[phase.id] ?? phase,
     ),
   };

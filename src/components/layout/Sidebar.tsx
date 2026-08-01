@@ -52,7 +52,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           "top-14 h-[calc(100dvh-3.5rem)] lg:top-[6.5rem] lg:h-[calc(100vh-6.5rem)]",
           "w-[min(18rem,85vw)] flex-shrink-0 bg-bg-2/95 lg:bg-bg-2/40",
           "overflow-y-auto overscroll-contain py-6 transition-transform duration-200 ease-out",
-          "border-r border-base px-4",
+          "border-r-base px-4",
           isOpen ? "translate-x-0 pointer-events-auto" : "-translate-x-full pointer-events-none",
           // Desktop closed: collapse in-flow width (no off-canvas overflow)
           !isOpen &&
@@ -100,7 +100,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     </span>
                   )}
                 </NavLink>
-                <ul className="mt-1 ml-3 space-y-0.5 border-l border-base pl-2">
+                <ul className="mt-1 ml-3 space-y-0.5 border-l-base pl-2">
                   {phase.modules.map((mod) => {
                     const isRead = progress.readModules.includes(mod.id);
                     return (

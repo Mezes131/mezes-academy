@@ -1,41 +1,24 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { useCourseArea } from "@/components/layout/courseArea";
 import { useProgress } from "@/hooks/useProgress";
+import { useT } from "@/i18n/useT";
+import { computePhaseStats } from "@/lib/courseProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Clock, CheckCircle2, ArrowRight, Trophy, BookOpen } from "lucide-react";
 
 export function PhasePage() {
+  const t = useT();
   const { phaseId } = useParams<{ phaseId: string }>();
-  const { basePath, phases, learnerTools } = useCourseArea();
+  const { basePath, phases } = useCourseArea();
   const phase = phases.find((p) => p.id === phaseId);
   const { progress } = useProgress();
 
-  if (!phase) return <Navigate to="/" replace />;
+  if (!phase) return <Navigate to={basePath} replace />;
 
   const accent = phaseAccent(phase.color);
-  // Phase stats computed locally so any course's phases work (the
-  // provider-level phaseStats only covers the React track).
-  const st = (() => {
-    let total = 0;
-    let done = 0;
-    for (const mod of phase.modules) {
-      total += 1;
-      if (progress.readModules.includes(mod.id)) done += 1;
-      if (mod.quiz) {
-        total += 1;
-        const s = progress.quizScores[mod.quiz.id];
-        if (s && s.total > 0 && s.correct / s.total >= 0.7) done += 1;
-      }
-      for (const ex of mod.exercises ?? []) {
-        total += 1;
-        if (progress.completedExercises.includes(ex.id)) done += 1;
-      }
-    }
-    return { total, done, percent: total === 0 ? 0 : Math.round((done / total) * 100) };
-  })();
-  const hasChallenge =
-    learnerTools && phase.modules.some((mod) => (mod.exercises?.length ?? 0) > 0);
+  const st = computePhaseStats([phase], progress)[0];
+  const hasChallenge = phase.modules.some((mod) => (mod.exercises?.length ?? 0) > 0);
   const challengeScore = progress.challengeScores[phase.id];
 
   return (
@@ -89,7 +72,7 @@ export function PhasePage() {
 
       <div className="mt-8 rounded-xl border-base bg-bg-2 p-5">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-sm font-semibold">Progression de la phase</div>
+          <div className="text-sm font-semibold">{t("course.phaseProgress")}</div>
           <div className={cn("font-mono font-bold", accent.text)}>
             {st.percent}%
           </div>
@@ -101,7 +84,7 @@ export function PhasePage() {
           size="md"
         />
         <div className="mt-1.5 text-[12px] text-fg-3 font-mono">
-          {st.done} / {st.total} étapes
+          {t("course.phaseSteps", { done: st.done, total: st.total })}
         </div>
       </div>
 
@@ -123,12 +106,14 @@ export function PhasePage() {
             <Trophy size={16} />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-semibold">Challenge final de phase</div>
+            <div className="text-sm font-semibold">{t("course.phaseChallenge")}</div>
             <div className="text-[12px] text-fg-3 font-mono">
-              3 exercices aléatoires · sans solution · hints autorisés
+              {t("course.phaseChallengeHint")}
               {challengeScore && (
                 <span className="ml-2 text-emerald-400">
-                  (meilleur: {challengeScore.passedIds.length}/{challengeScore.total})
+                  {t("course.bestScore", {
+                    score: `${challengeScore.passedIds.length}/${challengeScore.total}`,
+                  })}
                 </span>
               )}
             </div>
@@ -140,7 +125,7 @@ export function PhasePage() {
 
       {/* ─── Module list ───────────────────── */}
       <div className="mt-10 space-y-3">
-        <h2 className="mb-4 text-lg font-bold">Modules</h2>
+        <h2 className="mb-4 text-lg font-bold capitalize">{t("common.modules")}</h2>
         {phase.modules.map((mod) => {
           const isRead = progress.readModules.includes(mod.id);
           const quizScore = mod.quiz ? progress.quizScores[mod.quiz.id] : undefined;
@@ -216,13 +201,9 @@ export function PhasePage() {
       {phase.scaffoldOnly && (
         <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-5">
           <div className="text-sm font-bold text-amber-400 mb-1 flex items-center gap-2">
-            <i className="fa-solid fa-person-digging" /> Contenu en construction
+            <i className="fa-solid fa-person-digging" /> {t("course.scaffoldTitle")}
           </div>
-          <p className="text-[13px] text-fg-2">
-            Cette phase est scaffoldée : la structure et les grandes lignes sont
-            là, mais les quiz interactifs et les exercices Sandpack seront
-            ajoutés dans une prochaine version.
-          </p>
+          <p className="text-[13px] text-fg-2">{t("course.scaffoldBody")}</p>
         </div>
       )}
     </div>

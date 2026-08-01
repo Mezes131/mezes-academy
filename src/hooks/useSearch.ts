@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import type { ContentBlock, Phase } from "@/types";
-import { phases as reactPhases } from "@/data/phases";
 
 /** Where in the module the query matched (for labels in the UI). */
 export type SearchMatchKind =
@@ -106,7 +105,7 @@ function matchBlock(
  */
 export function useSearch(
   query: string,
-  scopePhases: Phase[] = reactPhases,
+  scopePhases: Phase[],
 ): SearchResult[] {
   return useMemo(() => {
     const q = normalize(query.trim());

@@ -1,6 +1,7 @@
 import { useState, useMemo, useId } from "react";
 import type { Quiz as QuizType } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useT } from "@/i18n/useT";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, RefreshCw, Award } from "lucide-react";
@@ -10,6 +11,7 @@ interface QuizProps {
 }
 
 export function Quiz({ quiz }: QuizProps) {
+  const t = useT();
   const { progress, saveQuizScore, clearQuizScore } = useProgress();
   const saved = progress.quizScores[quiz.id];
   const reactId = useId();
@@ -93,7 +95,7 @@ export function Quiz({ quiz }: QuizProps) {
               {score.correct} / {score.total}
             </span>
             <span className="font-sans font-semibold normal-case tracking-normal text-[13px]">
-              {passed ? "Réussi" : "À revoir"}
+              {passed ? t("learn.quizPassed") : t("learn.quizRetry")}
             </span>
           </div>
         )}
@@ -135,7 +137,7 @@ export function Quiz({ quiz }: QuizProps) {
                   </p>
                   {isMulti && !submitted && (
                     <p id={multiHintId} className="text-xs text-fg-3 mt-1">
-                      (plusieurs réponses possibles)
+                      {t("learn.multiAnswer")}
                     </p>
                   )}
                 </div>
@@ -223,10 +225,10 @@ export function Quiz({ quiz }: QuizProps) {
                         />
                       )}
                       {showState && isCorrectOpt && (
-                        <span className="sr-only">Bonne réponse</span>
+                        <span className="sr-only">{t("learn.correctAnswer")}</span>
                       )}
                       {showState && selected && !isCorrectOpt && (
-                        <span className="sr-only">Réponse incorrecte</span>
+                        <span className="sr-only">{t("learn.wrongAnswer")}</span>
                       )}
                     </button>
                   );
@@ -243,7 +245,7 @@ export function Quiz({ quiz }: QuizProps) {
                   )}
                 >
                   <span className="font-semibold">
-                    {isQuestionCorrect ? "Correct : " : "À retenir : "}
+                    {isQuestionCorrect ? t("learn.correctLabel") : t("learn.rememberLabel")}
                   </span>
                   <i className="fa-solid fa-lightbulb mr-1.5" aria-hidden="true" />
                   {q.explanation}
@@ -254,10 +256,10 @@ export function Quiz({ quiz }: QuizProps) {
         })}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-base">
+      <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t-base">
         {!submitted ? (
           <Button onClick={submit} disabled={!allAnswered} className="min-h-11">
-            Valider mes réponses
+            {t("learn.submitAnswers")}
           </Button>
         ) : (
           <>
@@ -273,13 +275,18 @@ export function Quiz({ quiz }: QuizProps) {
                 <span className="inline-flex items-center gap-2 flex-wrap">
                   <Award size={16} aria-hidden="true" />
                   <span>
-                    Quiz validé : {score.correct}/{score.total} (réussi).
+                    {t("learn.quizPassedMsg", {
+                      n: score.correct,
+                      m: score.total,
+                    })}
                   </span>
                 </span>
               ) : (
                 <span>
-                  À revoir : il faut au moins 70 %. Tu as {score.correct}/
-                  {score.total}. Tu peux retenter.
+                  {t("learn.quizFailedMsg", {
+                    n: score.correct,
+                    m: score.total,
+                  })}
                 </span>
               )}
             </div>
@@ -289,7 +296,7 @@ export function Quiz({ quiz }: QuizProps) {
               leftIcon={<RefreshCw size={14} aria-hidden="true" />}
               onClick={retake}
             >
-              Refaire le quiz
+              {t("learn.redoQuiz")}
             </Button>
           </>
         )}

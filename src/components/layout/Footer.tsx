@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Youtube } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
+import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 /**
  * Global footer for Mezes Academy landing.
@@ -8,15 +10,17 @@ import { MezesLogo } from "@/components/ui/MezesLogo";
  */
 export function Footer() {
   const year = new Date().getFullYear();
+  const t = useT();
+  const lp = useLocalePath();
+
   return (
-    <footer className="mt-24 border-t border-base bg-bg-2/30">
+    <footer className="mt-24 border-t-base bg-bg-2/30">
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
             <MezesLogo size={34} showText />
             <p className="mt-4 text-[13px] text-fg-2 leading-relaxed max-w-xs">
-              Des parcours sérieux pour apprendre le développement web en
-              autonomie, avec exercices interactifs et suivi de progression.
+              {t("footer.blurb")}
             </p>
             <div className="mt-5 flex items-center gap-3">
               <SocialLink href="https://twitter.com" label="X / Twitter">
@@ -34,32 +38,30 @@ export function Footer() {
             </div>
           </div>
 
-          <FooterCol title="Parcours">
-            <FooterLink to="/react">React de zéro à expert</FooterLink>
-            <FooterMuted>TypeScript · Bientôt</FooterMuted>
-            <FooterMuted>Next.js · Bientôt</FooterMuted>
-            <FooterMuted>Node.js · Bientôt</FooterMuted>
-            <FooterMuted>DevOps · Prévu</FooterMuted>
+          <FooterCol title={t("footer.tracks")}>
+            <FooterLink to={lp("/react")}>{t("footer.reactTrack")}</FooterLink>
+            <FooterLink to={lp("/secure-vibe-coding")}>Secure Vibe Coding</FooterLink>
+            <FooterMuted>DevOps · {t("footer.planned")}</FooterMuted>
           </FooterCol>
 
-          <FooterCol title="Ressources">
-            <FooterLink to="/#how-it-works">Comment ça marche</FooterLink>
-            <FooterLink to="/react/progress">Ma progression</FooterLink>
-            <FooterLink to="/react/bookmarks">Mes favoris</FooterLink>
-            <FooterLink to="/react/search">Recherche</FooterLink>
+          <FooterCol title={t("footer.resources")}>
+            <FooterLink to={lp("/#how-it-works")}>{t("footer.howItWorks")}</FooterLink>
+            <FooterLink to={lp("/react/progress")}>{t("footer.myProgress")}</FooterLink>
+            <FooterLink to={lp("/react/bookmarks")}>{t("footer.myBookmarks")}</FooterLink>
+            <FooterLink to={lp("/react/search")}>{t("footer.search")}</FooterLink>
           </FooterCol>
 
-          <FooterCol title="Académie">
-            <FooterLink to="#">À propos</FooterLink>
-            <FooterLink to="#">Contact</FooterLink>
-            <FooterLink to="#">Conditions</FooterLink>
-            <FooterLink to="#">Confidentialité</FooterLink>
+          <FooterCol title={t("footer.academy")}>
+            <FooterLink to="#">{t("footer.about")}</FooterLink>
+            <FooterLink to="#">{t("footer.contact")}</FooterLink>
+            <FooterLink to="#">{t("footer.terms")}</FooterLink>
+            <FooterLink to="#">{t("footer.privacy")}</FooterLink>
           </FooterCol>
         </div>
 
-        <div className="mt-12 p-4 border-t border-base flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <div className="mt-12 p-4 border-t-base flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="text-[12px] text-fg-3 font-mono">
-            © {year} Mezes Corporation Tous droits réservés.
+            © {year} Mezes Corporation {t("course.rightsReserved")}
           </div>
         </div>
       </div>

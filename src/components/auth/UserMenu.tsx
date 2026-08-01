@@ -9,6 +9,8 @@ import {
   UserCircle,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
 import { getDisplayName, getInitials } from "@/lib/identity";
 import { cn } from "@/lib/utils";
 import { ConfirmDialog } from "@/components/ui/Modal";
@@ -36,6 +38,8 @@ export function UserMenu({
   size = 32,
 }: UserMenuProps) {
   const { user, profile, signOut } = useAuth();
+  const lp = useLocalePath();
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [confirmingSignOut, setConfirmingSignOut] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -113,7 +117,7 @@ export function UserMenu({
             "animate-fade-in origin-top-right",
           )}
         >
-          <div className="p-3 flex items-center gap-3 border-b border-base">
+          <div className="p-3 flex items-center gap-3 border-b-base">
             <Avatar initials={initials} size={40} src={avatarUrl} />
             <div className="min-w-0">
               <div className="text-[13px] font-semibold truncate">
@@ -130,32 +134,32 @@ export function UserMenu({
 
           <div className="py-1.5">
             <MenuItem
-              to="/account"
+              to={lp("/account")}
               icon={<UserCircle size={14} />}
-              label="Mon profil"
+              label={t("nav.myProfile")}
               onClick={() => setOpen(false)}
             />
             <MenuItem
-              to="/account?tab=preferences"
+              to={lp("/account?tab=preferences")}
               icon={<SlidersHorizontal size={14} />}
-              label="Préférences"
+              label={t("nav.preferences")}
               onClick={() => setOpen(false)}
             />
             <MenuItem
-              to="/react/progress"
+              to={lp("/react/progress")}
               icon={<TrendingUp size={14} />}
-              label="Ma progression"
+              label={t("footer.myProgress")}
               onClick={() => setOpen(false)}
             />
             <MenuItem
-              to="/react/bookmarks"
+              to={lp("/react/bookmarks")}
               icon={<BookMarked size={14} />}
-              label="Mes favoris"
+              label={t("footer.myBookmarks")}
               onClick={() => setOpen(false)}
             />
           </div>
 
-          <div className="border-t border-base py-1.5">
+          <div className="border-t-base py-1.5">
             <button
               type="button"
               onClick={onRequestSignOut}
@@ -163,7 +167,7 @@ export function UserMenu({
               role="menuitem"
             >
               <LogOut size={14} />
-              <span>Déconnexion</span>
+              <span>{t("nav.signOut")}</span>
             </button>
           </div>
         </div>
@@ -175,10 +179,10 @@ export function UserMenu({
         onConfirm={onConfirmSignOut}
         variant="warning"
         icon={<LogOut size={18} />}
-        title="Se déconnecter ?"
-        description={`Tu devras te reconnecter avec ${email} pour reprendre ton parcours.`}
-        confirmLabel="Se déconnecter"
-        cancelLabel="Rester connecté"
+        title={t("auth.signOutTitle")}
+        description={t("auth.signOutBody", { email })}
+        confirmLabel={t("auth.signOutConfirm")}
+        cancelLabel={t("auth.staySignedIn")}
       />
     </div>
   );

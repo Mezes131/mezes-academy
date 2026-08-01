@@ -5,24 +5,27 @@ import { UserMenu } from "@/components/auth/UserMenu";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { useAuth } from "@/hooks/useAuth";
 import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
+import { LanguageMenu } from "@/i18n/LanguageMenu";
 import { useCourseArea } from "./courseArea";
 import { cn } from "@/lib/utils";
 
 /**
  * Slim top navigation for a course area.
- * Language & theme live in account preferences only.
+ * Guests: language menu in the bar. Signed-in: language in account prefs.
  */
 export function CourseTopNav() {
   const { basePath, navTitle, navIcon, navAccent } = useCourseArea();
   const { user } = useAuth();
   const location = useLocation();
   const t = useT();
+  const lp = useLocalePath();
 
   return (
     <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-[1fr_auto_1fr] sm:grid-cols-3 items-center gap-2 px-4 sm:px-6">
       <div className="flex min-w-0 items-center gap-2 sm:gap-3 justify-self-start">
         <Link
-          to="/"
+          to={lp("/")}
           aria-label="Mezes Academy"
           className="flex items-center gap-2 flex-shrink-0"
         >
@@ -54,13 +57,18 @@ export function CourseTopNav() {
             <UserMenu size={30} />
           </>
         ) : (
-          <Link
-            to={`/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`}
-            className="flex items-center gap-1.5 rounded-lg border-base min-h-11 px-3 text-[13px] font-semibold hover:bg-bg-3 transition"
-          >
-            <LogIn size={14} aria-hidden="true" />
-            <span className="hidden sm:inline">{t("nav.signInShort")}</span>
-          </Link>
+          <>
+            <LanguageMenu />
+            <Link
+              to={lp(
+                `/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`,
+              )}
+              className="flex items-center gap-1.5 rounded-lg border-base min-h-11 px-3 text-[13px] font-semibold hover:bg-bg-3 transition"
+            >
+              <LogIn size={14} aria-hidden="true" />
+              <span className="hidden sm:inline">{t("nav.signInShort")}</span>
+            </Link>
+          </>
         )}
       </div>
     </nav>

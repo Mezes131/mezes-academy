@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 import type { AuthMode } from "./AuthModeSwitcher";
+import { useT } from "@/i18n/useT";
+import { useLocalePath } from "@/i18n/useLocalePath";
 
 interface AuthBenefitsProps {
   mode: AuthMode;
@@ -11,53 +13,53 @@ interface AuthBenefitsProps {
  * Pure presentation, safe to render anywhere.
  */
 export function AuthBenefits({ mode }: AuthBenefitsProps) {
+  const t = useT();
+  const lp = useLocalePath();
+
   return (
     <section className="max-w-xl md:max-w-none">
       <h1 className="text-center lg:text-left text-3xl lg:text-5xl font-extrabold tracking-tight leading-[1.05]">
         {mode === "login" ? (
           <>
-            Ravi de te revoir
-            <span className="block text-accent-2">sur ton parcours.</span>
+            {t("auth.welcomeBack")}
+            <span className="block text-accent-2">{t("auth.onYourPath")}</span>
           </>
         ) : (
           <>
-            Crée ton compte
-            <span className="block text-accent-2">
-              et commence à apprendre.
-            </span>
+            {t("auth.createAccount")}
+            <span className="block text-accent-2">{t("auth.buildForReal")}</span>
           </>
         )}
       </h1>
       <div className="hidden lg:block">
         <p className="mt-4 text-fg-2 text-[16px] leading-relaxed max-w-prose">
-          Ton compte synchronise ta progression dans le cloud. Modules lus, quiz
-          validés et exercices résolus te suivent sur n&apos;importe quel appareil.
+          {t("auth.syncBody")}
         </p>
 
         <ul className="mt-8 space-y-3">
           <Benefit
             icon={<CheckCircle2 size={16} />}
-            title="Progression sauvegardée"
-            body="Reprends exactement où tu t'étais arrêté, sans perdre un quiz ni un exercice."
+            title={t("auth.benefitSaveTitle")}
+            body={t("auth.benefitSaveBody")}
           />
           <Benefit
             icon={<ShieldCheck size={16} />}
-            title="Données protégées"
-            body="Authentification sécurisée : chaque apprenant ne voit que sa propre progression."
+            title={t("auth.benefitDataTitle")}
+            body={t("auth.benefitDataBody")}
           />
           <Benefit
             icon={<Sparkles size={16} />}
-            title="Multi-appareils"
-            body="Laptop, tablette ou téléphone : une seule session, le même parcours."
+            title={t("auth.benefitDevicesTitle")}
+            body={t("auth.benefitDevicesBody")}
           />
         </ul>
 
         <div className="mt-10 flex items-center gap-3 text-[13px] text-fg-3">
           <Link
-            to="/"
+            to={lp("/")}
             className="underline underline-offset-4 hover:text-fg transition"
           >
-            Retour à l'accueil
+            {t("auth.backHome")}
           </Link>
         </div>
       </div>

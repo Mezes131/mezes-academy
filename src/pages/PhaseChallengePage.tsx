@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { getPhase } from "@/data/phases";
 import type { PhaseId } from "@/types";
 import { isCodeExercise } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useCourseArea } from "@/components/layout/courseArea";
+import { useT } from "@/i18n/useT";
 import { CodeExercise as ExerciseCard } from "@/components/learning/CodeExercise";
 import { Button } from "@/components/ui/Button";
 import { cn, phaseAccent } from "@/lib/utils";
@@ -12,8 +13,10 @@ import { ArrowLeft, Trophy, ShieldCheck, Shuffle } from "lucide-react";
 const CHALLENGE_SIZE = 3;
 
 export function PhaseChallengePage() {
+  const t = useT();
   const { phaseId } = useParams<{ phaseId: string }>();
-  const phase = getPhase(phaseId as PhaseId);
+  const { basePath, phases } = useCourseArea();
+  const phase = phases.find((p) => p.id === (phaseId as PhaseId));
   const { progress, saveChallengeScore } = useProgress();
   const [resultMap, setResultMap] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
@@ -33,7 +36,7 @@ export function PhaseChallengePage() {
     [pool],
   );
 
-  if (!phase) return <Navigate to="/" replace />;
+  if (!phase) return <Navigate to={basePath} replace />;
 
   const accent = phaseAccent(phase.color);
 
@@ -59,15 +62,15 @@ export function PhaseChallengePage() {
     <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
       <div className="flex items-center justify-between gap-3 mb-4">
         <Link
-          to={`/react/phase/${phaseIdSafe}`}
+          to={`${basePath}/phase/${phaseIdSafe}`}
           className="text-[12px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg transition inline-flex items-center gap-1.5"
         >
           <ArrowLeft size={14} />
-          Retour à la phase
+          {t("course.backToPhase")}
         </Link>
         <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3 inline-flex items-center gap-1">
           <Shuffle size={12} />
-          3 exercices aléatoires
+          {t("course.randomExercises")}
         </span>
       </div>
 
@@ -85,18 +88,21 @@ export function PhaseChallengePage() {
           </div>
           <div className="flex-1 min-w-0">
             <h1 className={cn("text-2xl font-extrabold tracking-tight", accent.text)}>
-              Challenge final : {phase.label}
+              {t("course.challengeTitle", { label: phase.label })}
             </h1>
             <p className="text-[13px] text-fg-2 mt-1 leading-relaxed">
-              Mode révision finale : pas de bouton solution, uniquement les indices.
-              Objectif : valider les {selected.length} exercices du challenge en
-              obtenant un run vert pour chacun.
+              {t("course.challengeIntro")}
             </p>
             <div className="mt-3 text-[12px] font-mono text-fg-3">
-              Progression challenge : {passedIds.length}/{selected.length || 0}
+              {t("course.challengeProgress", {
+                done: passedIds.length,
+                total: selected.length || 0,
+              })}
               {previous && (
                 <span className="ml-3 text-emerald-400">
-                  Meilleur score : {previous.passedIds.length}/{previous.total}
+                  {t("course.bestScore", {
+                    score: `${previous.passedIds.length}/${previous.total}`,
+                  })}
                 </span>
               )}
             </div>
@@ -106,7 +112,7 @@ export function PhaseChallengePage() {
 
       {selected.length === 0 && (
         <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 text-[13px] text-fg-2">
-          Cette phase ne contient pas encore d'exercices challenge-eligible.
+          {t("course.challengeNoExercises")}
         </div>
       )}
 
@@ -130,16 +136,14 @@ export function PhaseChallengePage() {
       {selected.length > 0 && (
         <div className="mt-8 rounded-xl border-base bg-bg-2 p-4 flex items-center gap-3">
           <div className="text-[13px] text-fg-2 flex-1">
-            {canSubmit
-              ? "Tous les exercices du challenge sont validés. Tu peux enregistrer ce résultat."
-              : "Valide chaque exercice (run vert) pour débloquer l'enregistrement du challenge."}
+            {canSubmit ? t("course.challengeReady") : t("course.challengePending")}
           </div>
           <Button
             leftIcon={<ShieldCheck size={14} />}
             onClick={onFinalize}
             disabled={!canSubmit}
           >
-            Valider le challenge
+            {t("course.challengeSubmit")}
           </Button>
         </div>
       )}
@@ -147,7 +151,7 @@ export function PhaseChallengePage() {
       {saved && (
         <div className="mt-4 text-[13px] text-emerald-400 font-medium inline-flex items-center gap-2">
           <ShieldCheck size={15} />
-          Score enregistré. Bravo, challenge validé.
+          {t("course.challengeSaved")}
         </div>
       )}
     </div>

@@ -2,9 +2,9 @@ import type { CourseMeta } from "@/types";
 
 export const svcMeta: CourseMeta = {
   title: "Secure Vibe Coding : produire un logiciel commercialisable avec l'IA",
-  tagline: "Du prompt au produit en production, sans dette ni failles oubliées",
+  tagline: "Du prompt au produit en production.",
   description:
-    "Concevoir et livrer une solution complète avec le développement assisté par IA. Tu suis le cycle Prompt → Audit → Livraison : cadrage, connexion via services tiers, données, paiements, notifications, hébergement, déploiement et mise en ligne. Projet final certifiant à la clé.",
+    "Tu veux construire avec l'IA sans te retrouver avec une dette ou une faille au milieu ? On te guide du cadrage à la mise en ligne : connexion, données, paiements, hébergement. Un vrai projet à la clé.",
   icon: "fa-shield-halved",
   accent: {
     text: "text-violet-700 dark:text-violet-300",

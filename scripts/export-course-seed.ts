@@ -31,6 +31,10 @@ const LEVEL_MAP: Record<CourseMeta["level"], string> = {
   Intermédiaire: "intermediate",
   Avancé: "advanced",
   "Tous niveaux": "beginner",
+  Beginner: "beginner",
+  Intermediate: "intermediate",
+  Advanced: "advanced",
+  "All levels": "beginner",
 };
 
 function mapContentBlocks(blocks: ContentBlock[]) {
