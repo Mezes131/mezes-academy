@@ -6,12 +6,13 @@ import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { useAuth } from "@/hooks/useAuth";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { LanguageMenu } from "@/i18n/LanguageMenu";
 import { useCourseArea } from "./courseArea";
 import { cn } from "@/lib/utils";
 
 /**
  * Slim top navigation for a course area.
- * Language & theme live in account preferences only.
+ * Guests: language menu in the bar. Signed-in: language in account prefs.
  */
 export function CourseTopNav() {
   const { basePath, navTitle, navIcon, navAccent } = useCourseArea();
@@ -56,15 +57,18 @@ export function CourseTopNav() {
             <UserMenu size={30} />
           </>
         ) : (
-          <Link
-            to={lp(
-              `/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`,
-            )}
-            className="flex items-center gap-1.5 rounded-lg border-base min-h-11 px-3 text-[13px] font-semibold hover:bg-bg-3 transition"
-          >
-            <LogIn size={14} aria-hidden="true" />
-            <span className="hidden sm:inline">{t("nav.signInShort")}</span>
-          </Link>
+          <>
+            <LanguageMenu />
+            <Link
+              to={lp(
+                `/auth?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`,
+              )}
+              className="flex items-center gap-1.5 rounded-lg border-base min-h-11 px-3 text-[13px] font-semibold hover:bg-bg-3 transition"
+            >
+              <LogIn size={14} aria-hidden="true" />
+              <span className="hidden sm:inline">{t("nav.signInShort")}</span>
+            </Link>
+          </>
         )}
       </div>
     </nav>

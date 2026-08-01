@@ -132,6 +132,8 @@ function normalizeProgress(raw: Partial<LessonProgress>): LessonProgress {
     exerciseProgress,
     completedExercises,
     challengeScores: raw.challengeScores ?? {},
+    // ponytail: coerce unknown theme → dark (product default)
+    theme: raw.theme === "light" ? "light" : "dark",
   };
 }
 

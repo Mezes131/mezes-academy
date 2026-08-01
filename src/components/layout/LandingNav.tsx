@@ -6,11 +6,12 @@ import { UserMenu } from "@/components/auth/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { LanguageMenu } from "@/i18n/LanguageMenu";
 import { cn } from "@/lib/utils";
 
 /**
  * Mezes Academy landing navigation.
- * Language & theme live in account preferences only.
+ * Guests: language menu in the bar. Signed-in: language in account prefs.
  */
 export function LandingNav() {
   const { user } = useAuth();
@@ -52,12 +53,15 @@ export function LandingNav() {
               <UserMenu showName size={32} />
             </>
           ) : (
-            <Link to={lp("/auth")}>
-              <Button size="sm">
-                {t("nav.signIn")}
-                <ArrowRight size={14} aria-hidden="true" />
-              </Button>
-            </Link>
+            <>
+              <LanguageMenu />
+              <Link to={lp("/auth")}>
+                <Button size="sm">
+                  {t("nav.signIn")}
+                  <ArrowRight size={14} aria-hidden="true" />
+                </Button>
+              </Link>
+            </>
           )}
         </div>
       </div>
