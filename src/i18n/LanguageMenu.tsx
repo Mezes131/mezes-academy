@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { Check, Globe } from "lucide-react";
-import { useLocale } from "./LocaleProvider";
+import { useLocaleSwitch } from "./useLocaleSwitch";
 import { useT } from "./useT";
-import { switchLocalePath } from "./localePath";
 import type { Locale } from "./types";
 import { cn } from "@/lib/utils";
 
@@ -14,10 +12,8 @@ const options: Locale[] = ["fr", "en"];
  * For guests (signed-in users switch language in account preferences).
  */
 export function LanguageMenu({ className }: { className?: string }) {
-  const { locale, setLocale } = useLocale();
+  const { locale, select } = useLocaleSwitch();
   const t = useT();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,17 +35,9 @@ export function LanguageMenu({ className }: { className?: string }) {
     };
   }, [open]);
 
-  function select(code: Locale) {
+  function onSelect(code: Locale) {
     setOpen(false);
-    if (code === locale) return;
-    const next = switchLocalePath(
-      location.pathname,
-      location.search,
-      location.hash,
-      code,
-    );
-    setLocale(code);
-    navigate(next);
+    select(code);
   }
 
   return (
@@ -84,7 +72,7 @@ export function LanguageMenu({ className }: { className?: string }) {
               type="button"
               role="menuitemradio"
               aria-checked={locale === code}
-              onClick={() => select(code)}
+              onClick={() => onSelect(code)}
               className={cn(
                 "flex w-full items-center justify-between gap-3 px-3 h-10 text-[13px] transition",
                 locale === code

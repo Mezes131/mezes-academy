@@ -16,12 +16,42 @@ export type CourseProgressStat = {
   quizPassed: number;
 };
 
-function quizPassed(
-  progress: LessonProgress,
-  quizId: string,
-): boolean {
+export type CourseDetailStats = {
+  read: number;
+  quizzesTaken: number;
+  exercisesSolved: number;
+  exercisesRevealed: number;
+  challenges: number;
+};
+
+function quizPassed(progress: LessonProgress, quizId: string): boolean {
   const s = progress.quizScores[quizId];
   return Boolean(s && s.total > 0 && s.correct / s.total >= 0.7);
+}
+
+/** Module ids belonging to the given phases. */
+export function courseModuleIds(phases: Phase[]): Set<string> {
+  return new Set(phases.flatMap((p) => p.modules.map((m) => m.id)));
+}
+
+function courseQuizIds(phases: Phase[]): Set<string> {
+  return new Set(
+    phases.flatMap(
+      (p) => p.modules.map((m) => m.quiz?.id).filter(Boolean) as string[],
+    ),
+  );
+}
+
+function courseExerciseIds(phases: Phase[]): Set<string> {
+  return new Set(
+    phases.flatMap((p) =>
+      p.modules.flatMap((m) => (m.exercises ?? []).map((e) => e.id)),
+    ),
+  );
+}
+
+function coursePhaseIds(phases: Phase[]): Set<string> {
+  return new Set(phases.map((p) => p.id));
 }
 
 /** Per-phase progress for any course phase list. */
@@ -39,11 +69,9 @@ export function computePhaseStats(
         total += 1;
         if (quizPassed(progress, mod.quiz.id)) done += 1;
       }
-      if (mod.exercises) {
-        for (const ex of mod.exercises) {
-          total += 1;
-          if (progress.completedExercises.includes(ex.id)) done += 1;
-        }
+      for (const ex of mod.exercises ?? []) {
+        total += 1;
+        if (progress.completedExercises.includes(ex.id)) done += 1;
       }
     }
     return {
@@ -65,11 +93,7 @@ export function computeCourseStats(
   const phaseStats = computePhaseStats(phases, progress);
   const total = phaseStats.reduce((sum, s) => sum + s.total, 0);
   const done = phaseStats.reduce((sum, s) => sum + s.done, 0);
-  const quizIds = new Set(
-    phases.flatMap((p) =>
-      p.modules.map((m) => m.quiz?.id).filter(Boolean) as string[],
-    ),
-  );
+  const quizIds = courseQuizIds(phases);
   const quizPassedCount = [...quizIds].filter((id) =>
     quizPassed(progress, id),
   ).length;
@@ -81,65 +105,36 @@ export function computeCourseStats(
   };
 }
 
-/** Module ids belonging to the given phases. */
-export function courseModuleIds(phases: Phase[]): Set<string> {
-  return new Set(phases.flatMap((p) => p.modules.map((m) => m.id)));
-}
-
-function courseQuizIds(phases: Phase[]): Set<string> {
-  return new Set(
-    phases.flatMap(
-      (p) => p.modules.map((m) => m.quiz?.id).filter(Boolean) as string[],
-    ),
-  );
-}
-
-function courseExerciseIds(phases: Phase[]): Set<string> {
-  return new Set(
-    phases.flatMap((p) =>
-      (p.modules ?? []).flatMap((m) => (m.exercises ?? []).map((e) => e.id)),
-    ),
-  );
-}
-
-function coursePhaseIds(phases: Phase[]): Set<string> {
-  return new Set(phases.map((p) => p.id));
-}
-
-/** True if the learner has any saved activity in this course. */
-export function courseHasActivity(
+/** Extra counters scoped to a course's phases (progress page, account). */
+export function computeCourseDetailStats(
   phases: Phase[],
   progress: LessonProgress,
-): boolean {
-  const modules = courseModuleIds(phases);
-  if (progress.readModules.some((id) => modules.has(id))) return true;
-  if (progress.bookmarks.some((id) => modules.has(id))) return true;
-
-  const quizzes = courseQuizIds(phases);
-  if (Object.keys(progress.quizScores).some((id) => quizzes.has(id))) {
-    return true;
-  }
-
-  const exercises = courseExerciseIds(phases);
-  if (
-    progress.completedExercises.some((id) => exercises.has(id)) ||
-    Object.keys(progress.exerciseProgress).some((id) => exercises.has(id))
-  ) {
-    return true;
-  }
-
+): CourseDetailStats {
+  const moduleIds = courseModuleIds(phases);
+  const quizIds = courseQuizIds(phases);
+  const exerciseIds = courseExerciseIds(phases);
   const phaseIds = coursePhaseIds(phases);
-  return Object.keys(progress.challengeScores).some((id) => phaseIds.has(id));
+
+  return {
+    read: progress.readModules.filter((id) => moduleIds.has(id)).length,
+    quizzesTaken: Object.keys(progress.quizScores).filter((id) =>
+      quizIds.has(id),
+    ).length,
+    exercisesSolved: Object.entries(progress.exerciseProgress).filter(
+      ([id, e]) => exerciseIds.has(id) && e.status === "solved",
+    ).length,
+    exercisesRevealed: Object.entries(progress.exerciseProgress).filter(
+      ([id, e]) => exerciseIds.has(id) && e.status === "revealed",
+    ).length,
+    challenges: Object.entries(progress.challengeScores).filter(
+      ([id, s]) =>
+        phaseIds.has(id) && s.total > 0 && s.passedIds.length === s.total,
+    ).length,
+  };
 }
 
-/**
- * Every active track on the platform. Progress is scoped per course, but the
- * progress page lists them all (not only the course area you opened).
- */
-export function selectLearnerCourses(
-  courses: Course[],
-  _progress: LessonProgress,
-): Course[] {
+/** Active courses listed on the progress page. */
+export function activeCourses(courses: Course[]): Course[] {
   return courses.filter((c) => c.meta.status === "active");
 }
 

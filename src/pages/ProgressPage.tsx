@@ -15,29 +15,23 @@ import { useLocalePath } from "@/i18n/useLocalePath";
 import { useT } from "@/i18n/useT";
 import { getCourses } from "@/data/courses";
 import {
+  COURSE_AREAS,
   reactCourseArea,
-  svcCourseArea,
   resolveCourseArea,
-  type CourseAreaBase,
 } from "@/components/layout/courseArea";
 import {
+  activeCourses,
   aggregateCourseStats,
+  computeCourseDetailStats,
   computeCourseStats,
   computePhaseStats,
-  courseModuleIds,
-  selectLearnerCourses,
 } from "@/lib/courseProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { MobileCollapse } from "@/components/ui/MobileCollapse";
 import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { cn, phaseAccent } from "@/lib/utils";
-import type { Course, LessonProgress, Phase } from "@/types";
-
-const AREA_BY_COURSE: Record<string, CourseAreaBase> = {
-  react: reactCourseArea,
-  svc: svcCourseArea,
-};
+import type { Course } from "@/types";
 
 export function ProgressPage() {
   const t = useT();
@@ -48,14 +42,14 @@ export function ProgressPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const learnerCourses = useMemo(
-    () => selectLearnerCourses(getCourses(locale), progress),
-    [locale, progress],
+    () => activeCourses(getCourses(locale)),
+    [locale],
   );
 
   const courseRows = useMemo(
     () =>
       learnerCourses.map((course) => {
-        const areaBase = AREA_BY_COURSE[course.id] ?? reactCourseArea;
+        const areaBase = COURSE_AREAS[course.id] ?? reactCourseArea;
         const area = resolveCourseArea(areaBase, locale);
         return {
           course,
@@ -65,7 +59,7 @@ export function ProgressPage() {
           navAccent: area.navAccent,
           stats: computeCourseStats(course.phases, progress),
           phaseStats: computePhaseStats(course.phases, progress),
-          detail: courseDetailStats(course.phases, progress),
+          detail: computeCourseDetailStats(course.phases, progress),
         };
       }),
     [learnerCourses, locale, progress],
@@ -267,38 +261,6 @@ export function ProgressPage() {
       </section>
     </div>
   );
-}
-
-function courseDetailStats(phases: Phase[], progress: LessonProgress) {
-  const moduleIds = courseModuleIds(phases);
-  const quizIds = new Set(
-    phases.flatMap(
-      (p) => p.modules.map((m) => m.quiz?.id).filter(Boolean) as string[],
-    ),
-  );
-  const exerciseIds = new Set(
-    phases.flatMap((p) =>
-      p.modules.flatMap((m) => (m.exercises ?? []).map((e) => e.id)),
-    ),
-  );
-  const phaseIds = new Set(phases.map((p) => p.id));
-
-  return {
-    read: progress.readModules.filter((id) => moduleIds.has(id)).length,
-    quizzesTaken: Object.keys(progress.quizScores).filter((id) =>
-      quizIds.has(id),
-    ).length,
-    exercisesSolved: Object.entries(progress.exerciseProgress).filter(
-      ([id, e]) => exerciseIds.has(id) && e.status === "solved",
-    ).length,
-    exercisesRevealed: Object.entries(progress.exerciseProgress).filter(
-      ([id, e]) => exerciseIds.has(id) && e.status === "revealed",
-    ).length,
-    challenges: Object.entries(progress.challengeScores).filter(
-      ([id, s]) =>
-        phaseIds.has(id) && s.total > 0 && s.passedIds.length === s.total,
-    ).length,
-  };
 }
 
 function CourseProgressSection({

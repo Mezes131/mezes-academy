@@ -19,10 +19,17 @@ import type {
   ExerciseStatus,
   LessonProgress,
 } from "@/types";
-import { phases, totalProgressItems } from "@/data/phases";
 import { allModules } from "@/data";
+import { getCourses } from "@/data/courses";
 import { useAuth } from "@/hooks/useAuth";
 import { loadRemoteProgress, saveRemoteProgress } from "@/lib/progressRemote";
+import {
+  activeCourses,
+  aggregateCourseStats,
+  computeCourseDetailStats,
+  computeCourseStats,
+  computePhaseStats,
+} from "@/lib/courseProgress";
 
 const STORAGE_KEY_V1 = "react-learn:progress:v1";
 const STORAGE_KEY_V2 = "react-learn:progress:v2";
@@ -310,8 +317,6 @@ interface ProgressContextValue {
   ) => void;
   clearQuizScore: (quizId: string) => void;
 
-  /** Legacy entry point: marks as "revealed" (conservative). */
-  markExerciseComplete: (exerciseId: string) => void;
   /** Called each time the learner hits "Run" on the sandbox. */
   trackExerciseAttempt: (exerciseId: string) => void;
   /** Called when the test suite passes. Idempotent. */
@@ -621,21 +626,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   /* ─── Exercises ────────────────────────────────────────────── */
 
-  const markExerciseComplete = useCallback((exerciseId: string) => {
-    setProgress((p) => {
-      const prev = touch(p.exerciseProgress[exerciseId]);
-      // Conservative mapping: a bare "I'm done" is recorded as revealed
-      // (= progress counts, but not as a pure solve).
-      const next: ExerciseProgress = {
-        ...prev,
-        status: prev.status === "solved" ? "solved" : "revealed",
-        revealedSolution: true,
-        updatedAt: Date.now(),
-      };
-      return syncCompletedExercises(p, exerciseId, next);
-    });
-  }, []);
-
   const trackExerciseAttempt = useCallback((exerciseId: string) => {
     setProgress((p) => {
       const prev = touch(p.exerciseProgress[exerciseId]);
@@ -805,61 +795,39 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     setProgress(normalizeProgress(parsed));
   }, []);
 
-  /* ─── Stats ──────────────────────────────────────────────── */
+  /* ─── Stats (all active courses; ids are locale-stable) ─── */
+
+  const courses = useMemo(() => activeCourses(getCourses("fr")), []);
+
+  const activePhases = useMemo(
+    () => courses.flatMap((c) => c.phases),
+    [courses],
+  );
 
   const stats = useMemo(() => {
-    const total = totalProgressItems();
-    const quizPassed = Object.values(progress.quizScores).filter(
-      (s) => s.total > 0 && s.correct / s.total >= 0.7,
-    ).length;
-    const eps = Object.values(progress.exerciseProgress);
-    const exercisesSolved = eps.filter((e) => e.status === "solved").length;
-    const exercisesRevealed = eps.filter((e) => e.status === "revealed").length;
-    const done =
-      progress.readModules.length +
-      quizPassed +
-      progress.completedExercises.length;
+    const agg = aggregateCourseStats(
+      courses.map((c) => computeCourseStats(c.phases, progress)),
+    );
+    const detail = courses.reduce(
+      (acc, c) => {
+        const d = computeCourseDetailStats(c.phases, progress);
+        return {
+          exercisesSolved: acc.exercisesSolved + d.exercisesSolved,
+          exercisesRevealed: acc.exercisesRevealed + d.exercisesRevealed,
+        };
+      },
+      { exercisesSolved: 0, exercisesRevealed: 0 },
+    );
     return {
-      total,
-      done,
-      percent: total === 0 ? 0 : Math.min(100, Math.round((done / total) * 100)),
-      quizPassed,
-      exercisesSolved,
-      exercisesRevealed,
+      ...agg,
+      exercisesSolved: detail.exercisesSolved,
+      exercisesRevealed: detail.exercisesRevealed,
     };
-  }, [progress]);
+  }, [courses, progress]);
 
   const phaseStats = useMemo(
-    () =>
-      phases.map((phase) => {
-        let phaseTotal = 0;
-        let phaseDone = 0;
-        for (const mod of phase.modules) {
-          phaseTotal += 1;
-          if (progress.readModules.includes(mod.id)) phaseDone += 1;
-          if (mod.quiz) {
-            phaseTotal += 1;
-            const s = progress.quizScores[mod.quiz.id];
-            if (s && s.total > 0 && s.correct / s.total >= 0.7) phaseDone += 1;
-          }
-          if (mod.exercises) {
-            for (const ex of mod.exercises) {
-              phaseTotal += 1;
-              if (progress.completedExercises.includes(ex.id)) phaseDone += 1;
-            }
-          }
-        }
-        return {
-          id: phase.id,
-          label: phase.label,
-          color: phase.color,
-          total: phaseTotal,
-          done: phaseDone,
-          percent:
-            phaseTotal === 0 ? 0 : Math.round((phaseDone / phaseTotal) * 100),
-        };
-      }),
-    [progress],
+    () => computePhaseStats(activePhases, progress),
+    [activePhases, progress],
   );
 
   const value = useMemo<ProgressContextValue>(
@@ -871,7 +839,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       canMarkModuleRead,
       saveQuizScore,
       clearQuizScore,
-      markExerciseComplete,
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,
@@ -896,7 +863,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       canMarkModuleRead,
       saveQuizScore,
       clearQuizScore,
-      markExerciseComplete,
       trackExerciseAttempt,
       markExerciseSolved,
       revealExerciseSolution,

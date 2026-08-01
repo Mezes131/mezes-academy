@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "test:mapper": "vitest run --config vitest.config.ts src/lib/strapi/mapper.test.ts",
+    "test:progress": "vitest run --config vitest.config.ts src/lib/courseProgress.test.ts",
     "export:strapi-seed": "tsx scripts/export-course-seed.ts"
   },
   "dependencies": {

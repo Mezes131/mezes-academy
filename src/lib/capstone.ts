@@ -1,4 +1,5 @@
-import { phases } from "@/data/phases";
+import { findCourse } from "@/data";
+import { computeCourseDetailStats } from "@/lib/courseProgress";
 import type { LessonProgress } from "@/types";
 
 export interface CapstoneEligibility {
@@ -12,62 +13,48 @@ export interface CapstoneEligibility {
   exerciseSolved: number;
 }
 
-function isReactPhaseId(id: string) {
-  return id.startsWith("react-");
+function quizPassed(progress: LessonProgress, quizId: string): boolean {
+  const s = progress.quizScores[quizId];
+  return Boolean(s && s.total > 0 && s.correct / s.total >= 0.7);
 }
 
 export function getCapstoneEligibility(
   progress: LessonProgress,
 ): CapstoneEligibility {
-  const reactPhases = phases.filter(
-    (phase) => phase.courseId === "react" || isReactPhaseId(phase.id),
-  );
+  const phases = findCourse("react")?.phases ?? [];
+  const detail = computeCourseDetailStats(phases, progress);
 
   let moduleCount = 0;
-  let readModulesCount = 0;
   let quizTotal = 0;
-  let quizPassed = 0;
   let exerciseTotal = 0;
-  let exerciseSolved = 0;
+  const quizIds: string[] = [];
 
-  for (const phase of reactPhases) {
-    for (const module of phase.modules) {
+  for (const phase of phases) {
+    for (const mod of phase.modules) {
       moduleCount += 1;
-      if (progress.readModules.includes(module.id)) readModulesCount += 1;
-
-      if (module.quiz) {
+      if (mod.quiz) {
         quizTotal += 1;
-        const score = progress.quizScores[module.quiz.id];
-        if (score && score.total > 0 && score.correct / score.total >= 0.7) {
-          quizPassed += 1;
-        }
+        quizIds.push(mod.quiz.id);
       }
-
-      if (module.exercises) {
-        for (const exercise of module.exercises) {
-          exerciseTotal += 1;
-          if (progress.exerciseProgress[exercise.id]?.status === "solved") {
-            exerciseSolved += 1;
-          }
-        }
-      }
+      exerciseTotal += mod.exercises?.length ?? 0;
     }
   }
 
+  const quizPassedCount = quizIds.filter((id) => quizPassed(progress, id)).length;
   const unlocked =
     moduleCount > 0 &&
-    readModulesCount === moduleCount &&
-    quizPassed === quizTotal &&
-    exerciseSolved === exerciseTotal;
+    detail.read === moduleCount &&
+    quizPassedCount === quizTotal &&
+    detail.exercisesSolved === exerciseTotal;
 
   return {
     unlocked,
-    phaseCount: reactPhases.length,
+    phaseCount: phases.length,
     moduleCount,
-    readModulesCount,
+    readModulesCount: detail.read,
     quizTotal,
-    quizPassed,
+    quizPassed: quizPassedCount,
     exerciseTotal,
-    exerciseSolved,
+    exerciseSolved: detail.exercisesSolved,
   };
 }

@@ -1,29 +1,13 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { useLocale } from "./LocaleProvider";
 import { useT } from "./useT";
-import { switchLocalePath } from "./localePath";
+import { useLocaleSwitch } from "./useLocaleSwitch";
 import type { Locale } from "./types";
 import { cn } from "@/lib/utils";
 
 const options: Locale[] = ["fr", "en"];
 
 export function LanguageSwitcher({ className }: { className?: string }) {
-  const { locale, setLocale } = useLocale();
+  const { locale, select } = useLocaleSwitch();
   const t = useT();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  function select(code: Locale) {
-    if (code === locale) return;
-    const next = switchLocalePath(
-      location.pathname,
-      location.search,
-      location.hash,
-      code,
-    );
-    setLocale(code);
-    navigate(next);
-  }
 
   return (
     <div

@@ -11,7 +11,7 @@ import {
 import { cn, phaseAccent } from "@/lib/utils";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
-import { phases } from "@/data/phases";
+import { findCourse } from "@/data";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import { useT } from "@/i18n/useT";
@@ -26,6 +26,7 @@ export function OverviewTab() {
   const { progress, stats, phaseStats } = useProgress();
   const lp = useLocalePath();
   const t = useT();
+  const phases = findCourse("react")?.phases ?? [];
 
   if (!profile) return null;
 
@@ -113,8 +114,12 @@ export function OverviewTab() {
           {t("account.byPhase")}
         </h2>
         <div className="space-y-2">
-          {phases.map((phase, i) => {
-            const st = phaseStats[i];
+          {phases.map((phase) => {
+            const st = phaseStats.find((s) => s.id === phase.id) ?? {
+              done: 0,
+              total: 0,
+              percent: 0,
+            };
             const accent = phaseAccent(phase.color);
             return (
               <Link

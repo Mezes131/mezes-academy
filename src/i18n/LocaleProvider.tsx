@@ -54,7 +54,3 @@ export function useLocale(): LocaleContextValue {
   return ctx;
 }
 
-/** Message catalog for a locale (usable outside React). */
-export function getMessages(locale: Locale): MessageTree {
-  return catalogs[locale];
-}

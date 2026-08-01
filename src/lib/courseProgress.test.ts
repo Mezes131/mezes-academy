@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
+  activeCourses,
   aggregateCourseStats,
+  computeCourseDetailStats,
   computeCourseStats,
   computePhaseStats,
-  courseHasActivity,
-  selectLearnerCourses,
 } from "./courseProgress";
 import type { Course, LessonProgress, Phase } from "@/types";
 
@@ -14,8 +14,24 @@ const progress: LessonProgress = {
     q1: { correct: 4, total: 5, answers: {}, updatedAt: 1 },
   },
   completedExercises: ["e1"],
-  exerciseProgress: {},
-  challengeScores: {},
+  exerciseProgress: {
+    e1: {
+      status: "solved",
+      attempts: 1,
+      hintsUsed: 0,
+      revealedSolution: false,
+      updatedAt: 1,
+    },
+  },
+  challengeScores: {
+    p1: {
+      phaseId: "p1",
+      exerciseIds: ["c1"],
+      passedIds: ["c1"],
+      total: 1,
+      at: 1,
+    },
+  },
   bookmarks: [],
   theme: "dark",
 };
@@ -96,7 +112,17 @@ describe("computeCourseStats", () => {
   });
 });
 
-describe("selectLearnerCourses", () => {
+describe("computeCourseDetailStats", () => {
+  it("scopes counters to the course phases", () => {
+    const detail = computeCourseDetailStats(phases, progress);
+    expect(detail.read).toBe(1);
+    expect(detail.quizzesTaken).toBe(1);
+    expect(detail.exercisesSolved).toBe(1);
+    expect(detail.challenges).toBe(1);
+  });
+});
+
+describe("activeCourses", () => {
   it("lists every active course, ignoring soon/planned", () => {
     const react = fakeCourse("react", phases);
     const svc = fakeCourse("svc", [
@@ -109,14 +135,14 @@ describe("selectLearnerCourses", () => {
     ] as unknown as Phase[]);
     const soon = fakeCourse("soon", phases, "soon");
 
-    expect(
-      selectLearnerCourses([react, svc, soon], emptyProgress).map((c) => c.id),
-    ).toEqual(["react", "svc"]);
-    expect(
-      selectLearnerCourses([react, svc], progress).map((c) => c.id),
-    ).toEqual(["react", "svc"]);
-    expect(courseHasActivity(svc.phases, progress)).toBe(false);
-    expect(courseHasActivity(react.phases, progress)).toBe(true);
+    expect(activeCourses([react, svc, soon]).map((c) => c.id)).toEqual([
+      "react",
+      "svc",
+    ]);
+    expect(activeCourses([react, svc]).map((c) => c.id)).toEqual([
+      "react",
+      "svc",
+    ]);
   });
 });
 

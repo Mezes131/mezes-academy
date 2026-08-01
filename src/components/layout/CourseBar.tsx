@@ -29,7 +29,7 @@ export function CourseBar({
   onToggleSidebar,
 }: CourseBarProps) {
   const { progress } = useProgress();
-  const { basePath, learnerTools, phases, showFinalProject } = useCourseArea();
+  const { basePath, phases, showFinalProject } = useCourseArea();
   const stats = useMemo(
     () => computeCourseStats(phases, progress),
     [phases, progress],
@@ -68,71 +68,65 @@ export function CourseBar({
         </div>
 
         <div className="flex min-w-0 justify-center px-1">
-          {learnerTools && (
-            <form
-              onSubmit={onSubmitSearch}
-              className="w-full max-w-xl min-w-0"
-            >
-              <SearchBar
-                value={query}
-                onChange={setQuery}
-                placeholder={t("courseBar.search")}
-                className="w-full"
-              />
-            </form>
-          )}
+          <form
+            onSubmit={onSubmitSearch}
+            className="w-full max-w-xl min-w-0"
+          >
+            <SearchBar
+              value={query}
+              onChange={setQuery}
+              placeholder={t("courseBar.search")}
+              className="w-full"
+            />
+          </form>
         </div>
 
-        {learnerTools ? (
-          <div className="flex min-w-0 flex-nowrap items-center justify-end gap-1.5 pl-1 sm:gap-2 sm:pl-2">
-            <Link
-              to={`${basePath}/progress`}
-              className={cn(
-                "flex items-center gap-1.5 sm:gap-2 rounded-lg border-base px-1.5 sm:px-2.5 min-h-11 hover:bg-bg-3 transition text-fg-2 hover:text-fg flex-shrink-0",
-                location.pathname === `${basePath}/progress` && "bg-bg-3 text-fg",
-              )}
-              title={t("courseBar.progress")}
-            >
-              <TrendingUp size={16} className="text-fg-3" />
-              <span className="text-[11px] font-mono font-semibold tabular-nums">
-                {stats.percent}%
-              </span>
-              <div className="w-20 hidden md:block">
-                <ProgressBar value={stats.done} max={stats.total} size="sm" />
-              </div>
-            </Link>
+        <div className="flex min-w-0 flex-nowrap items-center justify-end gap-1.5 pl-1 sm:gap-2 sm:pl-2">
+          <Link
+            to={`${basePath}/progress`}
+            className={cn(
+              "flex items-center gap-1.5 sm:gap-2 rounded-lg border-base px-1.5 sm:px-2.5 min-h-11 hover:bg-bg-3 transition text-fg-2 hover:text-fg flex-shrink-0",
+              location.pathname === `${basePath}/progress` && "bg-bg-3 text-fg",
+            )}
+            title={t("courseBar.progress")}
+          >
+            <TrendingUp size={16} className="text-fg-3" />
+            <span className="text-[11px] font-mono font-semibold tabular-nums">
+              {stats.percent}%
+            </span>
+            <div className="w-20 hidden md:block">
+              <ProgressBar value={stats.done} max={stats.total} size="sm" />
+            </div>
+          </Link>
 
+          <NavLink
+            to={`${basePath}/bookmarks`}
+            className={({ isActive }) =>
+              cn(
+                "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
+                isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
+              )
+            }
+            title={t("courseBar.bookmarks")}
+          >
+            <Bookmark size={16} />
+          </NavLink>
+
+          {showFinalProject !== false && (
             <NavLink
-              to={`${basePath}/bookmarks`}
+              to={`${basePath}/final-project`}
               className={({ isActive }) =>
                 cn(
                   "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
                   isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
                 )
               }
-              title={t("courseBar.bookmarks")}
+              title={t("courseBar.finalProject")}
             >
-              <Bookmark size={16} />
+              <Trophy size={16} />
             </NavLink>
-
-            {showFinalProject !== false && (
-              <NavLink
-                to={`${basePath}/final-project`}
-                className={({ isActive }) =>
-                  cn(
-                    "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
-                    isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
-                  )
-                }
-                title={t("courseBar.finalProject")}
-              >
-                <Trophy size={16} />
-              </NavLink>
-            )}
-          </div>
-        ) : (
-          <div />
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

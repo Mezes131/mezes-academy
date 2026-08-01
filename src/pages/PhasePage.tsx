@@ -2,6 +2,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { useCourseArea } from "@/components/layout/courseArea";
 import { useProgress } from "@/hooks/useProgress";
 import { useT } from "@/i18n/useT";
+import { computePhaseStats } from "@/lib/courseProgress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Clock, CheckCircle2, ArrowRight, Trophy, BookOpen } from "lucide-react";
@@ -9,35 +10,15 @@ import { Clock, CheckCircle2, ArrowRight, Trophy, BookOpen } from "lucide-react"
 export function PhasePage() {
   const t = useT();
   const { phaseId } = useParams<{ phaseId: string }>();
-  const { basePath, phases, learnerTools } = useCourseArea();
+  const { basePath, phases } = useCourseArea();
   const phase = phases.find((p) => p.id === phaseId);
   const { progress } = useProgress();
 
   if (!phase) return <Navigate to={basePath} replace />;
 
   const accent = phaseAccent(phase.color);
-  // Phase stats computed locally so any course's phases work (the
-  // provider-level phaseStats only covers the React track).
-  const st = (() => {
-    let total = 0;
-    let done = 0;
-    for (const mod of phase.modules) {
-      total += 1;
-      if (progress.readModules.includes(mod.id)) done += 1;
-      if (mod.quiz) {
-        total += 1;
-        const s = progress.quizScores[mod.quiz.id];
-        if (s && s.total > 0 && s.correct / s.total >= 0.7) done += 1;
-      }
-      for (const ex of mod.exercises ?? []) {
-        total += 1;
-        if (progress.completedExercises.includes(ex.id)) done += 1;
-      }
-    }
-    return { total, done, percent: total === 0 ? 0 : Math.round((done / total) * 100) };
-  })();
-  const hasChallenge =
-    learnerTools && phase.modules.some((mod) => (mod.exercises?.length ?? 0) > 0);
+  const st = computePhaseStats([phase], progress)[0];
+  const hasChallenge = phase.modules.some((mod) => (mod.exercises?.length ?? 0) > 0);
   const challengeScore = progress.challengeScores[phase.id];
 
   return (
