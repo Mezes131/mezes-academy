@@ -2,6 +2,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { stripLocalePrefix } from "@/i18n/localePath";
+import { useT } from "@/i18n/useT";
 
 export type BottomNavItem =
   | {
@@ -33,12 +34,13 @@ export function MobileBottomBar({
   items: BottomNavItem[];
   hideFromClassName?: string;
 }) {
+  const t = useT();
   const location = useLocation();
   const barePath = stripLocalePrefix(location.pathname);
 
   return (
     <nav
-      aria-label="Navigation mobile"
+      aria-label={t("common.mobileNav")}
       className={cn(
         "fixed inset-x-0 bottom-0 z-[60] w-full max-w-full",
         hideFromClassName,

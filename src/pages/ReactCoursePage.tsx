@@ -14,6 +14,7 @@ import {
 import { findCourseProgram } from "@/data";
 import { phases, findModule } from "@/data/phases";
 import { useProgress } from "@/hooks/useProgress";
+import { useT } from "@/i18n/useT";
 import { cn, phaseAccent } from "@/lib/utils";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Button } from "@/components/ui/Button";
@@ -27,6 +28,7 @@ import { useCourseArea } from "@/components/layout/courseArea";
  * by phase, and shortcuts to cross-cutting pages.
  */
 export function ReactCoursePage() {
+  const t = useT();
   const { basePath } = useCourseArea();
   const { progress, stats, phaseStats } = useProgress();
   const phaseCount = phases.length;
@@ -84,15 +86,15 @@ export function ReactCoursePage() {
             <span className="text-fg-2"> Mezes Academy</span>
           </div>
           <h1 className="text-[1.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-4xl md:text-5xl">
-            Ton parcours <em className="not-italic text-brand-core">React</em>,
+            {t("course.reactHeroLine1")}
             <br />
-            du premier JSX à l&apos;architecture expert.
+            {t("course.reactHeroLine2")}
           </h1>
           <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-fg-2 sm:mt-5 sm:text-[17px]">
-            {phaseCount} phases progressives, {moduleCount} modules, des dizaines
-            d&apos;exercices live. Chaque notion est expliquée, pratiquée, puis
-            validée. Ta progression est sauvegardée : tu reprends à tout moment
-            là où tu t&apos;es arrêté.
+            {t("course.reactHeroBody", {
+              phases: phaseCount,
+              modules: moduleCount,
+            })}
           </p>
           {/* Module routes are auth-gated: RequireAuth redirects to
               /auth?next=… when the visitor is not signed in. */}
@@ -105,7 +107,7 @@ export function ReactCoursePage() {
               }
             >
               <Button size="md">
-                {hasStarted ? "Continuer le cours" : "Commencer le cours"}
+                {hasStarted ? t("course.continueCourse") : t("course.startCourse")}
                 <ArrowRight size={16} />
               </Button>
             </Link>
@@ -115,12 +117,12 @@ export function ReactCoursePage() {
 
       {/* ─── Row: Resume + stats (desktop). Mobile: resume + % only. */}
       <section className="mb-8 grid gap-3 lg:mb-10 lg:grid-cols-3 lg:gap-4">
-        <ContinueCard nextModule={nextModule} hasStarted={hasStarted} />
+        <ContinueCard nextModule={nextModule} hasStarted={hasStarted} t={t} />
 
         {/* Mobile: single progress strip (no redundant mini-stats) */}
         <div className="flex items-center justify-between gap-3 rounded-xl border-base bg-bg-2 px-4 py-3 lg:hidden">
           <span className="font-mono text-[11px] uppercase tracking-wider text-fg-3">
-            Progression
+            {t("courseBar.progress")}
           </span>
           <span className="font-mono text-lg font-extrabold text-accent-2">
             {stats.percent}%
@@ -130,18 +132,18 @@ export function ReactCoursePage() {
         <div className="hidden gap-3 lg:grid">
           <MiniStat
             icon={<TrendingUp size={16} />}
-            label="Progression globale"
+            label={t("course.globalProgress")}
             value={`${stats.percent}%`}
             accent="text-accent-2"
           />
           <MiniStat
             icon={<BookOpen size={16} />}
-            label="Modules lus"
+            label={t("course.modulesRead")}
             value={String(progress.readModules.length)}
           />
           <MiniStat
             icon={<Code2 size={16} />}
-            label="Exercices faits"
+            label={t("course.exercisesDone")}
             value={String(progress.completedExercises.length)}
           />
         </div>
@@ -150,8 +152,8 @@ export function ReactCoursePage() {
       {/* ─── Last activity ────────────────────── */}
       {lastActivity && (
         <section className="mb-8 lg:mb-10">
-          <SectionTitle icon="fa-clock-rotate-left" text="Dernière activité" />
-          <LastActivityCard activity={lastActivity} />
+          <SectionTitle icon="fa-clock-rotate-left" text={t("course.lastActivity")} />
+          <LastActivityCard activity={lastActivity} t={t} />
         </section>
       )}
 
@@ -160,15 +162,15 @@ export function ReactCoursePage() {
         <div className="mb-4 flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <SectionTitle
             icon="fa-layer-group"
-            text={`Le parcours en ${phaseCount} phases`}
+            text={t("course.pathInPhases", { n: phaseCount })}
             noMargin
           />
           <Link
             to={`${basePath}/progress`}
             className="inline-flex min-h-11 shrink-0 items-center gap-1 self-start text-[13px] text-accent-2 hover:underline sm:min-h-0 sm:self-auto"
           >
-            <span className="sm:hidden">Détails</span>
-            <span className="hidden sm:inline">Voir tous les détails</span>
+            <span className="sm:hidden">{t("common.details")}</span>
+            <span className="hidden sm:inline">{t("common.seeAllDetails")}</span>
             <ArrowRight size={13} aria-hidden="true" />
           </Link>
         </div>
@@ -218,7 +220,9 @@ export function ReactCoursePage() {
                         size="sm"
                       />
                       <div className="mt-1.5 flex justify-between gap-2 font-mono text-[11px] text-fg-3">
-                        <span className="truncate">{phase.modules.length} modules</span>
+                        <span className="truncate">
+                          {phase.modules.length} {t("common.modules")}
+                        </span>
                         <span className={cn("shrink-0", accent.text)}>{st.percent}%</span>
                       </div>
                     </div>
@@ -238,7 +242,7 @@ export function ReactCoursePage() {
             moduleHref={(moduleId) =>
               findModule(moduleId) ? `${basePath}/module/${moduleId}` : undefined
             }
-            description="Le programme complet détaillé: phases, modules, leçons, objectifs, quiz, exercices de synthèse et projets."
+            description={t("course.reactSyllabusDesc")}
           />
         </div>
       )}
@@ -246,36 +250,39 @@ export function ReactCoursePage() {
       {/* ─── Shortcuts: collapsed on mobile ───────── */}
       <section className="mt-8 lg:mt-10">
         <div className="hidden lg:block">
-          <SectionTitle icon="fa-bolt" text="Raccourcis" />
+          <SectionTitle icon="fa-bolt" text={t("course.shortcuts")} />
         </div>
         <MobileCollapse
-          title="Raccourcis"
+          title={t("course.shortcuts")}
           icon={<i className="fa-solid fa-bolt text-fg-3" aria-hidden="true" />}
         >
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <ShortcutCard
               to={`${basePath}/progress`}
               icon={<TrendingUp size={16} />}
-              title="Progression"
-              desc="Stats détaillées, export / import JSON"
+              title={t("course.shortcutProgress")}
+              desc={t("course.shortcutProgressDesc")}
             />
             <ShortcutCard
               to={`${basePath}/bookmarks`}
               icon={<Bookmark size={16} />}
-              title="Favoris"
-              desc={`${progress.bookmarks.length} module${progress.bookmarks.length > 1 ? "s" : ""} en favori`}
+              title={t("course.shortcutBookmarks")}
+              desc={t("course.shortcutBookmarksDesc", {
+                n: progress.bookmarks.length,
+                s: progress.bookmarks.length > 1 ? "s" : "",
+              })}
             />
             <ShortcutCard
               to={`${basePath}/search`}
               icon={<i className="fa-solid fa-magnifying-glass text-[14px]" />}
-              title="Recherche"
-              desc="Trouve un concept précis"
+              title={t("course.shortcutSearch")}
+              desc={t("course.shortcutSearchDesc")}
             />
             <ShortcutCard
               to={`${basePath}/final-project`}
               icon={<Trophy size={16} />}
-              title="Projet final"
-              desc="Gate capstone + phase tutorielle"
+              title={t("course.shortcutFinal")}
+              desc={t("course.shortcutFinalDesc")}
             />
           </div>
         </MobileCollapse>
@@ -339,9 +346,11 @@ function MiniStat({
 function ContinueCard({
   nextModule,
   hasStarted,
+  t,
 }: {
   nextModule: { phase: NonNullable<ReturnType<typeof findModule>>["phase"]; module: NonNullable<ReturnType<typeof findModule>>["module"] } | null;
   hasStarted: boolean;
+  t: ReturnType<typeof useT>;
 }) {
   const { basePath } = useCourseArea();
   if (!nextModule) {
@@ -352,14 +361,13 @@ function ContinueCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 font-mono text-[11px] uppercase tracking-[0.15em] text-emerald-400">
-            Parcours terminé
+            {t("course.pathCompleteEyebrow")}
           </div>
           <div className="text-lg font-extrabold sm:text-xl">
-            Bravo, tu as complété tous les modules disponibles !
+            {t("course.pathCompleteTitle")}
           </div>
           <p className="mt-1 text-[13px] text-fg-2">
-            Le capstone React Pro Path est maintenant disponible : ouvre le gate
-            du projet final pour passer en mode production.
+            {t("course.pathCompleteBody")}
           </p>
         </div>
       </div>
@@ -383,7 +391,7 @@ function ContinueCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className={cn("text-[11px] font-mono uppercase tracking-[0.15em] mb-1", accent.text)}>
-            {hasStarted ? "Continuer là où tu t'es arrêté" : "Commencer le parcours"}
+            {hasStarted ? t("course.continueWhere") : t("course.startPath")}
           </div>
           <div className="flex items-center gap-2 mb-1">
             <i className={`fa-solid ${nextModule.phase.icon} ${accent.text}`} />
@@ -403,7 +411,7 @@ function ContinueCard({
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <Button size="sm" className="pointer-events-none">
-              {hasStarted ? "Reprendre" : "Ouvrir"}
+              {hasStarted ? t("course.resume") : t("course.open")}
               <ArrowRight size={14} />
             </Button>
             <span className="ml-1 flex items-center gap-1.5 font-mono text-[11px] text-fg-3">
@@ -418,19 +426,21 @@ function ContinueCard({
 
 function LastActivityCard({
   activity,
+  t,
 }: {
   activity: {
     phase: NonNullable<ReturnType<typeof findModule>>["phase"];
     module: NonNullable<ReturnType<typeof findModule>>["module"];
     score: { correct: number; total: number; updatedAt: number };
   };
+  t: ReturnType<typeof useT>;
 }) {
   const accent = phaseAccent(activity.phase.color);
   const { basePath } = useCourseArea();
   const passed =
     activity.score.total > 0 &&
     activity.score.correct / activity.score.total >= 0.7;
-  const when = formatRelativeTime(activity.score.updatedAt);
+  const when = formatRelativeTime(activity.score.updatedAt, t);
 
   return (
     <Link
@@ -457,10 +467,10 @@ function LastActivityCard({
           {activity.module.title}
         </div>
         <div className="text-[13px] text-fg-2 mt-1">
-          Quiz : <strong className={passed ? "text-emerald-400" : "text-amber-400"}>
-            {activity.score.correct}/{activity.score.total}
-          </strong>{" "}
-          {passed ? " · validé" : " · à refaire pour valider"}
+          {t("learn.quizScore", {
+            score: `${activity.score.correct}/${activity.score.total}`,
+          })}
+          {passed ? t("course.validated") : t("course.redo")}
         </div>
       </div>
       <ArrowRight
@@ -502,14 +512,14 @@ function ShortcutCard({
   );
 }
 
-function formatRelativeTime(ts: number) {
+function formatRelativeTime(ts: number, t: ReturnType<typeof useT>) {
   const diff = Date.now() - ts;
   const minutes = Math.floor(diff / 60_000);
-  if (minutes < 1) return "À l'instant";
-  if (minutes < 60) return `il y a ${minutes} min`;
+  if (minutes < 1) return t("course.justNow");
+  if (minutes < 60) return t("course.minutesAgo", { n: minutes });
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `il y a ${hours} h`;
+  if (hours < 24) return t("course.hoursAgo", { n: hours });
   const days = Math.floor(hours / 24);
-  if (days < 7) return `il y a ${days} j`;
+  if (days < 7) return t("course.daysAgo", { n: days });
   return new Date(ts).toLocaleDateString("fr-FR");
 }

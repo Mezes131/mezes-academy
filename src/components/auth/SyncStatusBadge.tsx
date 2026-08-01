@@ -8,6 +8,8 @@ import {
   UploadCloud,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/useT";
+import type { MessageKey } from "@/i18n/useT";
 import { useProgress, type SyncState, type SyncStatus } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -29,15 +31,23 @@ export function SyncStatusBadge({
 }: SyncStatusBadgeProps) {
   const { user } = useAuth();
   const { sync, forceSync } = useProgress();
+  const t = useT();
 
   if (!user) return null;
 
   if (variant === "pill") {
-    return <SyncPill sync={sync} onRetry={() => void forceSync()} className={className} />;
+    return (
+      <SyncPill
+        sync={sync}
+        onRetry={() => void forceSync()}
+        className={className}
+        t={t}
+      />
+    );
   }
 
   return (
-    <SyncCard sync={sync} onRetry={() => void forceSync()} className={className} />
+    <SyncCard sync={sync} onRetry={() => void forceSync()} className={className} t={t} />
   );
 }
 
@@ -47,13 +57,15 @@ function SyncPill({
   sync,
   onRetry,
   className,
+  t,
 }: {
   sync: SyncState;
   onRetry: () => void;
   className?: string;
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string;
 }) {
   const palette = paletteFor(sync.status);
-  const label = pillLabelFor(sync);
+  const label = pillLabelFor(sync, t);
 
   const needsRetry = sync.status === "offline" || sync.status === "error";
 
@@ -62,7 +74,7 @@ function SyncPill({
       type="button"
       onClick={needsRetry ? onRetry : undefined}
       disabled={!needsRetry}
-      title={fullTooltip(sync)}
+      title={fullTooltip(sync, t)}
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-2.5 h-7 text-[11px] font-mono uppercase tracking-wider transition",
         palette.bg,
@@ -87,10 +99,12 @@ function SyncCard({
   sync,
   onRetry,
   className,
+  t,
 }: {
   sync: SyncState;
   onRetry: () => void;
   className?: string;
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string;
 }) {
   const palette = paletteFor(sync.status);
   const justSynced = useRecentSynced(sync);
@@ -115,15 +129,15 @@ function SyncCard({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="text-sm font-semibold">{cardTitleFor(sync)}</div>
+          <div className="text-sm font-semibold">{cardTitleFor(sync, t)}</div>
           {justSynced && (
             <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">
-              Sauvegardé
+              {t("sync.savedPulse")}
             </span>
           )}
         </div>
         <div className="text-[13px] text-fg-2 leading-relaxed mt-0.5">
-          {cardBodyFor(sync)}
+          {cardBodyFor(sync, t)}
         </div>
       </div>
 
@@ -134,7 +148,7 @@ function SyncCard({
           className="self-center inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 h-8 rounded-md border-base bg-bg-3 text-fg-2 hover:text-fg hover:bg-bg-4 transition"
         >
           <RefreshCw size={13} />
-          Réessayer
+          {t("sync.retry")}
         </button>
       )}
     </div>
@@ -213,94 +227,105 @@ function paletteFor(status: SyncStatus): {
   }
 }
 
-function pillLabelFor(sync: SyncState): string {
+function pillLabelFor(
+  sync: SyncState,
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string,
+): string {
   switch (sync.status) {
     case "hydrating":
-      return "Chargement...";
+      return t("sync.pillHydrating");
     case "migrating":
-      return "Migration...";
+      return t("sync.pillMigrating");
     case "syncing":
-      return "Sauvegarde...";
+      return t("sync.pillSyncing");
     case "synced":
-      return "Synchronisé";
+      return t("sync.synced");
     case "offline":
-      return "Hors ligne";
+      return t("sync.pillOffline");
     case "error":
-      return "Erreur de sync";
+      return t("sync.pillError");
     default:
-      return "Local";
+      return t("sync.pillLocal");
   }
 }
 
-function cardTitleFor(sync: SyncState): string {
+function cardTitleFor(
+  sync: SyncState,
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string,
+): string {
   switch (sync.status) {
     case "hydrating":
-      return "Chargement de ta progression...";
+      return t("sync.titleHydrating");
     case "migrating":
-      return `Migration de ta progression (${sync.migratedItems} élément${
-        sync.migratedItems > 1 ? "s" : ""
-      })`;
+      return t("sync.titleMigrating", {
+        n: sync.migratedItems,
+        s: sync.migratedItems > 1 ? "s" : "",
+      });
     case "syncing":
-      return "Sauvegarde en cours...";
+      return t("sync.titleSyncing");
     case "synced":
       return sync.migratedItems > 0
-        ? `Progression migrée et synchronisée (${sync.migratedItems} élément${
-            sync.migratedItems > 1 ? "s" : ""
-          })`
-        : "Tout est synchronisé";
+        ? t("sync.titleMigrated", {
+            n: sync.migratedItems,
+            s: sync.migratedItems > 1 ? "s" : "",
+          })
+        : t("sync.allSynced");
     case "offline":
-      return "Synchronisation indisponible";
+      return t("sync.titleOffline");
     case "error":
-      return "Erreur lors de la synchronisation";
+      return t("sync.titleError");
     default:
-      return "Progression locale";
+      return t("sync.titleLocal");
   }
 }
 
-function cardBodyFor(sync: SyncState): string {
+function cardBodyFor(
+  sync: SyncState,
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string,
+): string {
   switch (sync.status) {
     case "hydrating":
-      return "On récupère ta progression depuis ton compte.";
+      return t("sync.pulling");
     case "migrating":
-      return "Tes données locales sont envoyées sur ton compte, une seule fois. Tu peux continuer à travailler.";
+      return t("sync.merging");
     case "syncing":
-      return "Tes dernières actions sont en cours d'enregistrement.";
+      return t("sync.saving");
     case "synced":
       return sync.lastSyncedAt
-        ? `Dernière sauvegarde : ${relativeTime(sync.lastSyncedAt)}.`
-        : "Tes données sont à jour sur ton compte.";
+        ? t("sync.lastSaved", { when: relativeTime(sync.lastSyncedAt, t) })
+        : t("sync.upToDate");
     case "offline":
-      return (
-        sync.errorMessage ??
-        "Le backend est injoignable pour le moment. Ta progression reste sauvegardée localement."
-      );
+      return sync.errorMessage ?? t("sync.offline");
     case "error":
-      return (
-        sync.errorMessage ??
-        "Une erreur est survenue. Réessaie, ou contacte le support si le problème persiste."
-      );
+      return sync.errorMessage ?? t("sync.error");
     default:
-      return "Connecte-toi pour activer la sauvegarde dans le cloud.";
+      return t("sync.bodyLocal");
   }
 }
 
-function fullTooltip(sync: SyncState): string {
-  const title = cardTitleFor(sync);
-  const body = cardBodyFor(sync);
+function fullTooltip(
+  sync: SyncState,
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string,
+): string {
+  const title = cardTitleFor(sync, t);
+  const body = cardBodyFor(sync, t);
   return `${title}\n${body}`;
 }
 
-function relativeTime(timestamp: number): string {
+function relativeTime(
+  timestamp: number,
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string,
+): string {
   const diffMs = Date.now() - timestamp;
   const sec = Math.round(diffMs / 1000);
-  if (sec < 10) return "à l'instant";
-  if (sec < 60) return `il y a ${sec}s`;
+  if (sec < 10) return t("sync.justNow");
+  if (sec < 60) return t("sync.secondsAgo", { n: sec });
   const min = Math.round(sec / 60);
-  if (min < 60) return `il y a ${min} min`;
+  if (min < 60) return t("course.minutesAgo", { n: min });
   const hours = Math.round(min / 60);
-  if (hours < 24) return `il y a ${hours} h`;
+  if (hours < 24) return t("course.hoursAgo", { n: hours });
   const days = Math.round(hours / 24);
-  return `il y a ${days} j`;
+  return t("course.daysAgo", { n: days });
 }
 
 /**

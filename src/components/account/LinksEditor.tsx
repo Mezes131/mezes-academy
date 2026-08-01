@@ -1,32 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Check, Github, Globe, Linkedin, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { ProfileLinks } from "@/hooks/useAuth";
 import { isPlausibleUrl } from "@/lib/identity";
+import { useT } from "@/i18n/useT";
 
-interface LinkField {
+interface LinkFieldConfig {
   key: keyof ProfileLinks;
   label: string;
   icon: React.ReactNode;
   placeholder: string;
 }
 
-const LINK_FIELDS: LinkField[] = [
+const LINK_FIELD_CONFIGS: Omit<LinkFieldConfig, "label">[] = [
   {
     key: "github",
-    label: "GitHub",
     icon: <Github size={14} />,
     placeholder: "https://github.com/pseudo",
   },
   {
     key: "linkedin",
-    label: "LinkedIn",
     icon: <Linkedin size={14} />,
     placeholder: "https://linkedin.com/in/pseudo",
   },
   {
     key: "website",
-    label: "Site web",
     icon: <Globe size={14} />,
     placeholder: "https://mon-portfolio.dev",
   },
@@ -42,30 +40,40 @@ export interface LinksEditorProps {
  * Shows filled links as chips; switches to a small form on edit.
  */
 export function LinksEditor({ links, onSave }: LinksEditorProps) {
+  const t = useT();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState<ProfileLinks>(links);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const fields = useMemo<LinkFieldConfig[]>(
+    () =>
+      LINK_FIELD_CONFIGS.map((f) => ({
+        ...f,
+        label: f.key === "website" ? t("account.website") : f.key === "github" ? "GitHub" : "LinkedIn",
+      })),
+    [t],
+  );
+
   useEffect(() => {
     if (!editing) setDraft(links);
   }, [links, editing]);
 
-  const hasAnyLink = LINK_FIELDS.some((f) => links[f.key]);
+  const hasAnyLink = fields.some((f) => links[f.key]);
 
   async function commit() {
     setError(null);
-    for (const f of LINK_FIELDS) {
+    for (const f of fields) {
       const v = draft[f.key];
       if (v && !isPlausibleUrl(v)) {
-        setError(`URL invalide pour ${f.label}.`);
+        setError(t("account.invalidUrl", { label: f.label }));
         return;
       }
     }
     setSaving(true);
     try {
       const clean: ProfileLinks = {};
-      for (const f of LINK_FIELDS) {
+      for (const f of fields) {
         const v = draft[f.key]?.trim();
         if (v) clean[f.key] = v;
       }
@@ -88,7 +96,7 @@ export function LinksEditor({ links, onSave }: LinksEditorProps) {
           className="inline-flex items-center gap-1.5 text-[13px] italic text-fg-3 rounded-md border border-dashed border-base/70 bg-bg-3/30 px-2.5 h-8 hover:text-fg-2 hover:border-base hover:bg-bg-3 transition"
         >
           <Globe size={12} className="not-italic" />
-          <span className="not-italic">Ajouter des liens publics</span>
+          <span className="not-italic">{t("account.addPublicLinks")}</span>
           <Plus size={12} className="not-italic" />
         </button>
       );
@@ -97,7 +105,7 @@ export function LinksEditor({ links, onSave }: LinksEditorProps) {
     return (
       <div>
         <div className="flex flex-wrap items-center gap-2">
-          {LINK_FIELDS.map((f) => {
+          {fields.map((f) => {
             const v = links[f.key];
             if (!v) return null;
             return (
@@ -129,10 +137,10 @@ export function LinksEditor({ links, onSave }: LinksEditorProps) {
   return (
     <div className="rounded-xl border-base bg-bg-3/40 p-4">
       <div className="text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-3">
-        Liens publics
+        {t("account.publicLinks")}
       </div>
       <div className="space-y-2">
-        {LINK_FIELDS.map((f) => (
+        {fields.map((f) => (
           <label key={f.key} className="flex items-center gap-2">
             <span className="w-24 inline-flex items-center gap-1.5 text-[12px] text-fg-2">
               <span className="text-fg-3">{f.icon}</span>
@@ -158,7 +166,7 @@ export function LinksEditor({ links, onSave }: LinksEditorProps) {
           disabled={saving}
           leftIcon={<Check size={13} />}
         >
-          {saving ? "..." : "Enregistrer"}
+          {saving ? "..." : t("common.save")}
         </Button>
         <Button
           size="sm"
@@ -171,7 +179,7 @@ export function LinksEditor({ links, onSave }: LinksEditorProps) {
           disabled={saving}
           leftIcon={<X size={13} />}
         >
-          Annuler
+          {t("common.cancel")}
         </Button>
       </div>
     </div>

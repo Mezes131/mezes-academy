@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
 import { LanguageSwitcher } from "@/i18n/LanguageSwitcher";
+import { useT } from "@/i18n/useT";
 
 interface PreferencesTabProps {
   onError: (message: string) => void;
@@ -16,17 +17,14 @@ interface PreferencesTabProps {
 export function PreferencesTab({ onError, onSuccess }: PreferencesTabProps) {
   const { progress, setTheme } = useProgress();
   const { profile, updateProfile } = useAuth();
+  const t = useT();
   const [savingPublic, setSavingPublic] = useState(false);
 
   async function togglePublic(next: boolean) {
     setSavingPublic(true);
     try {
       await updateProfile({ isPublic: next });
-      onSuccess(
-        next
-          ? "Profil rendu public."
-          : "Profil repassé en privé.",
-      );
+      onSuccess(next ? t("account.publicOn") : t("account.publicOff"));
     } catch (error) {
       onError((error as Error).message);
     } finally {
@@ -39,16 +37,16 @@ export function PreferencesTab({ onError, onSuccess }: PreferencesTabProps) {
   return (
     <div className="space-y-6">
       <Section
-        title="Langue"
-        description="Interface et contenus quand une traduction existe."
+        title={t("language.label")}
+        description={t("account.languageDesc")}
         icon={<Languages size={14} />}
       >
         <LanguageSwitcher />
       </Section>
 
       <Section
-        title="Apparence"
-        description="Sombre par défaut. Tu peux passer en clair ici."
+        title={t("account.themeTitle")}
+        description={t("account.themeDesc")}
         icon={<Palette size={14} />}
       >
         <div className="flex flex-wrap gap-2">
@@ -56,25 +54,25 @@ export function PreferencesTab({ onError, onSuccess }: PreferencesTabProps) {
             active={theme === "light"}
             onClick={() => setTheme("light")}
             icon={<Sun size={16} />}
-            label="Clair"
+            label={t("account.themeLight")}
           />
           <ThemeOption
             active={theme === "dark"}
             onClick={() => setTheme("dark")}
             icon={<Moon size={16} />}
-            label="Sombre"
+            label={t("account.themeDark")}
           />
         </div>
       </Section>
 
       <Section
-        title="Visibilité"
-        description="Ton profil peut être visible dans la future galerie des projets étudiants."
+        title={t("account.visibilityTitle")}
+        description={t("account.visibilityDesc")}
         icon={<Globe size={14} />}
       >
         <ToggleRow
-          label="Profil public"
-          hint="Ton pseudo, ta bio et ton projet final pourront apparaître dans la galerie. Désactivé par défaut."
+          label={t("account.publicBadge")}
+          hint={t("account.publicHint")}
           checked={Boolean(profile?.isPublic)}
           onChange={togglePublic}
           disabled={savingPublic}
@@ -82,8 +80,8 @@ export function PreferencesTab({ onError, onSuccess }: PreferencesTabProps) {
       </Section>
 
       <Section
-        title="Notifications"
-        description="Bientôt : reçois des rappels doux pour ne pas casser ta série d'étude."
+        title={t("account.notificationsTitle")}
+        description={t("account.notificationsDesc")}
         icon={<Bell size={14} />}
       >
         <div className="rounded-lg border border-dashed border-base bg-bg-3/40 p-4 text-[13px] text-fg-3">

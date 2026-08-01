@@ -12,10 +12,9 @@ export function Catalog() {
   const t = useT();
   const { locale } = useLocale();
   const courses = getCatalog(locale);
-  const body = t("landing.catalogBody").replace(
-    "{count}",
-    String(academyStats.coursesActive),
-  );
+  const body = t("landing.catalogBody", {
+    count: academyStats.coursesActive,
+  });
 
   return (
     <section id="catalog" className="relative py-12 md:py-20">

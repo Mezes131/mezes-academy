@@ -14,6 +14,8 @@ import { useAuth, type UserProfile } from "@/hooks/useAuth";
 import { phases } from "@/data/phases";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
+import type { MessageKey } from "@/i18n/useT";
 
 /**
  * Overview of the student's account: learning stats + what's missing to
@@ -23,41 +25,42 @@ export function OverviewTab() {
   const { profile } = useAuth();
   const { progress, stats, phaseStats } = useProgress();
   const lp = useLocalePath();
+  const t = useT();
 
   if (!profile) return null;
 
   const totalQuizzesTaken = Object.keys(progress.quizScores).length;
-  const checklist = buildChecklist(profile);
+  const checklist = buildChecklist(profile, t);
   const currentPhase = pickCurrentPhase(phaseStats);
-  const nextMilestone = buildMilestone(stats, profile);
+  const nextMilestone = buildMilestone(stats, profile, t);
 
   return (
     <div className="space-y-8">
       {/* Stats ─────────────────────────────────────────────── */}
       <section>
         <h2 className="text-sm font-bold uppercase tracking-wider text-fg-3 mb-3">
-          Mes chiffres clés
+          {t("account.keyStats")}
         </h2>
         <div className="grid sm:grid-cols-4 gap-3">
           <StatCard
             icon={<Target size={14} />}
-            label="Progression"
+            label={t("account.progress")}
             value={`${stats.percent}%`}
             accent="text-accent-2"
           />
           <StatCard
             icon={<BookOpen size={14} />}
-            label="Modules lus"
+            label={t("account.modulesRead")}
             value={String(progress.readModules.length)}
           />
           <StatCard
             icon={<Trophy size={14} />}
-            label="Quiz validés"
+            label={t("account.quizzesPassed")}
             value={`${stats.quizPassed}/${totalQuizzesTaken || 0}`}
           />
           <StatCard
             icon={<Rocket size={14} />}
-            label="Exos résolus"
+            label={t("account.exercisesSolved")}
             value={String(stats.exercisesSolved)}
             accent="text-emerald-400"
           />
@@ -67,7 +70,7 @@ export function OverviewTab() {
       {/* Next milestone ────────────────────────────────────── */}
       <section>
         <h2 className="text-sm font-bold uppercase tracking-wider text-fg-3 mb-3">
-          Prochain jalon
+          {t("account.nextMilestone")}
         </h2>
         <div className="rounded-xl border-base bg-bg-2 p-5 flex items-start gap-3">
           <div className="w-9 h-9 rounded-lg bg-accent/10 text-accent-2 inline-flex items-center justify-center flex-shrink-0">
@@ -99,7 +102,7 @@ export function OverviewTab() {
             to={lp("/react")}
             className="self-center inline-flex items-center gap-1.5 px-3 h-8 rounded-md bg-accent text-white text-[12px] font-semibold hover:bg-accent/90 transition"
           >
-            Continuer
+            {t("nav.continue")}
           </Link>
         </div>
       </section>
@@ -107,7 +110,7 @@ export function OverviewTab() {
       {/* Phase breakdown ───────────────────────────────────── */}
       <section>
         <h2 className="text-sm font-bold uppercase tracking-wider text-fg-3 mb-3">
-          Par phase
+          {t("account.byPhase")}
         </h2>
         <div className="space-y-2">
           {phases.map((phase, i) => {
@@ -156,7 +159,7 @@ export function OverviewTab() {
       {/* Profile checklist ─────────────────────────────────── */}
       <section>
         <h2 className="text-sm font-bold uppercase tracking-wider text-fg-3 mb-3">
-          Complète ton profil
+          {t("account.completeProfile")}
         </h2>
         <div className="rounded-xl border-base bg-bg-2 p-5">
           <ul className="space-y-2.5">
@@ -232,33 +235,35 @@ interface ChecklistItem {
   done: boolean;
 }
 
-function buildChecklist(profile: UserProfile): ChecklistItem[] {
+type Translate = (key: MessageKey, vars?: Record<string, string | number>) => string;
+
+function buildChecklist(profile: UserProfile, t: Translate): ChecklistItem[] {
   const hasLink = Object.values(profile.links ?? {}).some(
     (v) => typeof v === "string" && v.length > 0,
   );
   return [
     {
       key: "name",
-      label: "Renseigner ton nom complet",
-      hint: "Utilisé sur ton certificat de fin de parcours.",
+      label: t("account.checklistName"),
+      hint: t("account.checklistNameHint"),
       done: Boolean(profile.fullName),
     },
     {
       key: "username",
-      label: "Choisir un pseudo public",
-      hint: "Il servira plus tard pour la galerie des projets et ton profil partageable.",
+      label: t("account.checklistUsername"),
+      hint: t("account.checklistUsernameHint"),
       done: Boolean(profile.username),
     },
     {
       key: "bio",
-      label: "Ajouter une bio courte",
-      hint: "Une phrase qui donne envie de te découvrir.",
+      label: t("account.checklistBio"),
+      hint: t("account.checklistBioHint"),
       done: Boolean(profile.bio),
     },
     {
       key: "links",
-      label: "Ajouter au moins un lien public (GitHub, LinkedIn, site)",
-      hint: "Ça enrichit ton portfolio dès la fin du parcours.",
+      label: t("account.checklistLinks"),
+      hint: t("account.checklistLinksHint"),
       done: hasLink,
     },
   ];
@@ -283,12 +288,12 @@ function pickCurrentPhase(
 function buildMilestone(
   stats: { percent: number; quizPassed: number; exercisesSolved: number },
   profile: UserProfile,
+  t: Translate,
 ): { title: string; description: string } {
   if (!profile.fullName || !profile.username) {
     return {
-      title: "Complète ton profil",
-      description:
-        "Renseigne ton nom et ton pseudo public : ils seront utilisés pour ton certificat et pour valoriser ton profil plus tard.",
+      title: t("account.milestoneProfileTitle"),
+      description: t("account.milestoneProfileBody"),
     };
   }
   if (stats.percent === 0) {
@@ -300,14 +305,12 @@ function buildMilestone(
   }
   if (stats.percent === 100) {
     return {
-      title: "Bravo, parcours terminé !",
-      description:
-        "Tu peux désormais viser la phase projet final pour consolider tes acquis dans un vrai environnement pro.",
+      title: t("account.milestoneDoneTitle"),
+      description: t("account.milestoneDoneBody"),
     };
   }
   return {
-    title: "Continue ta progression",
-    description:
-      "Garde le rythme : valide quelques modules supplémentaires pour rester proche de tes prochains jalons.",
+    title: t("account.nextMilestone"),
+    description: t("account.milestoneKeepGoing"),
   };
 }

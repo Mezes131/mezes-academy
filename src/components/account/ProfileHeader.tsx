@@ -3,6 +3,7 @@ import { AtSign, FileText, UserCircle } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
 import { getInitials } from "@/lib/identity";
+import { useT } from "@/i18n/useT";
 import { AvatarUploader } from "./AvatarUploader";
 import { InlineText } from "./InlineText";
 import { LinksEditor } from "./LinksEditor";
@@ -31,6 +32,7 @@ export function ProfileHeader({
   onSuccess,
 }: ProfileHeaderProps) {
   const { updateProfile } = useAuth();
+  const t = useT();
 
   const initials = useMemo(
     () => getInitials(profile.fullName ?? "", email),
@@ -43,7 +45,7 @@ export function ProfileHeader({
   ): Promise<void> {
     try {
       await updateProfile({ [field]: value } as never);
-      onSuccess("Enregistré.");
+      onSuccess(t("account.saved"));
     } catch (error) {
       onError((error as Error).message);
       throw error;
@@ -71,37 +73,38 @@ export function ProfileHeader({
               role={profile.role}
               isPublic={profile.isPublic}
               email={email}
+              t={t}
             />
 
             <InlineText
-              label="Nom complet"
+              label={t("account.checklistName")}
               icon={<UserCircle size={14} />}
               value={profile.fullName ?? ""}
-              placeholder="Ex : Ada Lovelace"
-              emptyLabel="Ajouter ton nom"
+              placeholder={t("account.namePlaceholder")}
+              emptyLabel={t("account.addName")}
               valueClassName="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight"
               onSave={(next) => onSave("fullName", next || null)}
             />
 
             <InlineText
-              label="Pseudo public"
+              label={t("account.checklistUsername")}
               icon={<AtSign size={14} />}
               value={profile.username ?? ""}
               placeholder="ada_lovelace"
-              emptyLabel="Choisir un pseudo"
+              emptyLabel={t("account.addUsername")}
               prefix="@"
               valueClassName="text-[15px] font-semibold text-accent-2"
               normalize={(raw) => raw.trim().toLowerCase()}
-              validate={validateUsername}
+              validate={(raw) => validateUsername(raw, t)}
               onSave={(next) => onSave("username", next || null)}
             />
 
             <InlineText
-              label="Bio courte"
+              label={t("account.checklistBio")}
               icon={<FileText size={14} />}
               value={profile.bio ?? ""}
-              placeholder="Une phrase qui te décrit..."
-              emptyLabel="Ajouter une bio"
+              placeholder={t("account.bioPlaceholder")}
+              emptyLabel={t("account.addBio")}
               multiline
               maxLength={240}
               valueClassName="text-[14px] text-fg-2 leading-relaxed"
@@ -141,10 +144,12 @@ function IdentityBadges({
   role,
   isPublic,
   email,
+  t,
 }: {
   role: "student" | "admin";
   isPublic: boolean;
   email: string;
+  t: ReturnType<typeof useT>;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -154,10 +159,10 @@ function IdentityBadges({
         </Badge>
       )}
       {isPublic ? (
-        <Badge variant="success">Profil public</Badge>
+        <Badge variant="success">{t("account.publicBadge")}</Badge>
       ) : (
         <span className="inline-flex items-center gap-1 rounded-full border border-base bg-bg-3 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-fg-3">
-          Privé
+          {t("account.privateBadge")}
         </span>
       )}
       <span className="inline-flex items-center gap-1 text-[11px] font-mono text-fg-3 truncate max-w-[260px]">
@@ -169,10 +174,13 @@ function IdentityBadges({
 
 /* ─── Validators ─────────────────────────────────────────────── */
 
-function validateUsername(raw: string): string | null {
+function validateUsername(
+  raw: string,
+  t: ReturnType<typeof useT>,
+): string | null {
   if (!raw) return null;
   if (!/^[a-z0-9_]{3,30}$/.test(raw)) {
-    return "3 à 30 caractères : lettres, chiffres ou _.";
+    return t("account.usernameRule");
   }
   return null;
 }

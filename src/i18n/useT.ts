@@ -27,8 +27,30 @@ function lookup(tree: MessageTree, key: string): string {
   return typeof cur === "string" ? cur : key;
 }
 
+function applyVars(
+  text: string,
+  vars?: Record<string, string | number>,
+): string {
+  if (!vars) return text;
+  let out = text;
+  for (const [k, v] of Object.entries(vars)) {
+    out = out.replaceAll(`{${k}}`, String(v));
+  }
+  return out;
+}
+
 /** Translate a dotted key from the chrome UI message tree. */
 export function useT() {
   const { messages } = useLocale();
-  return (key: MessageKey) => lookup(messages, key);
+  return (key: MessageKey, vars?: Record<string, string | number>) =>
+    applyVars(lookup(messages, key), vars);
+}
+
+/** Non-React lookup (auth error helpers, etc.). */
+export function translate(
+  messages: MessageTree,
+  key: MessageKey,
+  vars?: Record<string, string | number>,
+): string {
+  return applyVars(lookup(messages, key), vars);
 }

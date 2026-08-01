@@ -10,6 +10,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import type { CodeExercise as CodeExerciseType, ExerciseStatus } from "@/types";
 import { useProgress } from "@/hooks/useProgress";
+import { useT } from "@/i18n/useT";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import {
@@ -48,6 +49,7 @@ export function CodeExercise({
   challengeMode = false,
   onChallengeResult,
 }: CodeExerciseProps) {
+  const t = useT();
   const {
     trackExerciseAttempt,
     markExerciseSolved,
@@ -93,7 +95,7 @@ export function CodeExercise({
   );
 
   /* ─── Visual status badge ───────────────────────────────────── */
-  const badge = getStatusBadge(status.status);
+  const badge = getStatusBadge(status.status, t);
 
   /* ─── Hint unveiling ────────────────────────────────────────── */
   function onRevealNextHint() {
@@ -201,8 +203,8 @@ export function CodeExercise({
               >
                 <Lightbulb size={12} />
                 {hintsShown === 0
-                  ? "Voir un indice"
-                  : "Encore bloqué ? Indice suivant"}{" "}
+                  ? t("learn.showHint")
+                  : t("learn.nextHint")}{" "}
                 ({hintsShown + 1}/{exercise.hints.length})
               </button>
             )}
@@ -212,8 +214,8 @@ export function CodeExercise({
         {showSolution && !challengeMode && (
           <div className="mt-4 inline-flex items-center gap-2 rounded-md bg-accent/10 border border-accent/30 px-3 py-2 text-[12px] text-fg-2">
             <Eye size={14} aria-hidden="true" />
-            Solution affichée : l'exercice sera marqué comme « Vu » plutôt que « Résolu ».
-            Tu peux masquer la solution et retenter à tout moment.
+            {t("learn.solutionShownBanner")}{" "}
+            {t("course.solutionRetryHint")}
           </div>
         )}
       </div>
@@ -255,16 +257,17 @@ export function CodeExercise({
 
           {/* Disable paste on the starter editor to raise the bar
               for blind copy-paste of the solution. */}
-          <EditorPasteBlocker rootRef={sandboxRootRef} />
+          <EditorPasteBlocker rootRef={sandboxRootRef} t={t} />
 
           <RunPanel
             validator={exercise.validator}
             onValidationCompleted={onValidationCompleted}
             onAttemptOnly={() => trackExerciseAttempt(exercise.id)}
             locked={status.status === "solved" && !challengeMode}
+            t={t}
           />
 
-          <ConsoleWrapper />
+          <ConsoleWrapper t={t} />
         </SandpackProvider>
       </div>
 
@@ -273,6 +276,7 @@ export function CodeExercise({
           files={exercise.solutionFiles}
           onHide={onHideSolution}
           hiddenByChallenge={challengeMode}
+          t={t}
         />
       )}
 
@@ -284,7 +288,7 @@ export function CodeExercise({
           leftIcon={<RotateCcw size={13} />}
           onClick={onReset}
         >
-          Repartir du starter
+          {t("learn.resetStarter")}
         </Button>
 
         {!challengeMode && !showSolution && (
@@ -296,13 +300,16 @@ export function CodeExercise({
             onClick={onRevealSolution}
             title={
               canRevealSolution
-                ? "Révéler la solution (marque l'exercice comme « Vu »)"
-                : `Fais au moins ${attemptsBeforeSolution} tentatives pour débloquer la solution`
+                ? t("learn.revealSolution")
+                : t("learn.unlockSolution", { n: attemptsBeforeSolution })
             }
           >
             {canRevealSolution
-              ? "Voir la solution"
-              : `Solution verrouillée (${attemptsLeftBeforeReveal} tentative${attemptsLeftBeforeReveal > 1 ? "s" : ""})`}
+              ? t("learn.seeSolution")
+              : t("learn.solutionLocked", {
+                  n: attemptsLeftBeforeReveal,
+                  s: attemptsLeftBeforeReveal > 1 ? "s" : "",
+                })}
           </Button>
         )}
 
@@ -319,9 +326,9 @@ export function CodeExercise({
                 resetExercise(exercise.id);
                 onReset();
               }}
-              title="Remettre à zéro l'état de cet exercice"
+              title={t("learn.resetExercise")}
             >
-              Recommencer à zéro
+              {t("learn.restartZero")}
             </Button>
           )}
 
@@ -335,7 +342,7 @@ export function CodeExercise({
               leftIcon={<CheckCircle2 size={14} />}
               onClick={() => revealExerciseSolution(exercise.id)}
             >
-              J'ai terminé cet exercice
+              {t("learn.iFinished")}
             </Button>
           )}
       </div>
@@ -353,6 +360,7 @@ interface RunPanelProps {
   onValidationCompleted: (result: { passed: number; total: number }) => void;
   onAttemptOnly: () => void;
   locked: boolean;
+  t: ReturnType<typeof useT>;
 }
 
 function RunPanel({
@@ -360,6 +368,7 @@ function RunPanel({
   onValidationCompleted,
   onAttemptOnly,
   locked,
+  t,
 }: RunPanelProps) {
   const { sandpack } = useSandpack();
   const [running, setRunning] = useState(false);
@@ -424,22 +433,21 @@ function RunPanel({
           disabled={running}
         >
           {running
-            ? "Exécution..."
+            ? t("learn.running")
             : validator
-              ? "Run + Vérifier"
-              : "Exécuter (Run)"}
+              ? t("learn.runAndCheck")
+              : t("learn.runManual")}
         </Button>
-        {result && <TestResultSummary result={result} locked={locked} />}
+        {result && <TestResultSummary result={result} locked={locked} t={t} />}
         <div className="flex-1" />
         <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
           <TerminalSquare size={12} className="inline mr-1" />
-          {validator ? "Validation locale" : "Run manuel"}
+          {validator ? t("learn.localValidation") : t("course.runManual")}
         </span>
       </div>
       {!validator && (
         <div className="px-3 py-2 text-[12px] text-fg-3">
-          Aucun validateur configuré sur cet exercice. Le bouton Run compte comme
-          tentative pour déverrouiller la solution.
+          {t("course.noValidator")}
         </div>
       )}
     </div>
@@ -449,9 +457,11 @@ function RunPanel({
 function TestResultSummary({
   result,
   locked,
+  t,
 }: {
   result: { passed: number; failed: number; total: number; failures: string[] };
   locked: boolean;
+  t: ReturnType<typeof useT>;
 }) {
   const allPass = result.total > 0 && result.failed === 0;
   return (
@@ -466,14 +476,15 @@ function TestResultSummary({
       {allPass ? (
         <>
           <ShieldCheck size={14} />
-          {result.passed}/{result.total} test{result.total > 1 ? "s" : ""} OK
-          {locked && " (déjà validé)"}
+          {result.passed}/{result.total}{" "}
+          {t("learn.testsOk", { n: result.total })}
+          {locked && t("learn.alreadyValidated")}
         </>
       ) : (
         <>
           <AlertCircle size={14} />
-          {result.passed}/{result.total} : {result.failed} échec
-          {result.failed > 1 ? "s" : ""}
+          {result.passed}/{result.total} :{" "}
+          {t("learn.testsFail", { n: result.failed })}
         </>
       )}
     </div>
@@ -487,8 +498,10 @@ function TestResultSummary({
 
 function EditorPasteBlocker({
   rootRef,
+  t,
 }: {
   rootRef: React.RefObject<HTMLElement | null>;
+  t: ReturnType<typeof useT>;
 }) {
   const [toastVisible, setToastVisible] = useState(false);
 
@@ -537,7 +550,7 @@ function EditorPasteBlocker({
       className="absolute z-50 bottom-4 right-4 rounded-lg border border-accent/40 bg-accent/10 text-fg text-[12px] font-medium px-3 py-2 shadow-soft pointer-events-none animate-fade-in"
     >
       <i className="fa-solid fa-keyboard mr-1.5" />
-      Le collage est désactivé ici : tape ton code pour mieux l'intégrer.
+      {t("learn.pasteDisabled")}
     </div>
   );
 }
@@ -546,10 +559,12 @@ function SolutionPanel({
   files,
   onHide,
   hiddenByChallenge,
+  t,
 }: {
   files: Record<string, string>;
   onHide: () => void;
   hiddenByChallenge: boolean;
+  t: ReturnType<typeof useT>;
 }) {
   const paths = Object.keys(files);
   const [activePath, setActivePath] = useState(paths[0] ?? "");
@@ -566,7 +581,7 @@ function SolutionPanel({
       <div className="px-4 py-2 border-b-base flex items-center gap-2">
         <span className="text-[11px] font-mono uppercase tracking-wider text-accent-2 inline-flex items-center gap-1">
           <Eye size={12} aria-hidden="true" />
-          Solution (lecture seule)
+          {t("learn.solutionReadonly")}
         </span>
         <div className="flex-1" />
         <Button
@@ -575,7 +590,7 @@ function SolutionPanel({
           leftIcon={<EyeOff size={13} />}
           onClick={onHide}
         >
-          Masquer la solution
+          {t("learn.hideSolution")}
         </Button>
       </div>
 
@@ -630,7 +645,10 @@ function getActiveFile(files: Record<string, string>): string | undefined {
   return nonTest ?? Object.keys(files)[0];
 }
 
-function getStatusBadge(status: ExerciseStatus): {
+function getStatusBadge(
+  status: ExerciseStatus,
+  t: ReturnType<typeof useT>,
+): {
   icon: JSX.Element | string;
   iconBg: string;
   iconFg: string;
@@ -643,7 +661,7 @@ function getStatusBadge(status: ExerciseStatus): {
         icon: <CheckCircle2 size={16} />,
         iconBg: "bg-accent/15",
         iconFg: "text-accent-2",
-        label: "Résolu",
+        label: t("learn.statusSolved"),
         labelClasses: "bg-accent/10 text-accent-2",
       };
     case "revealed":
@@ -651,7 +669,7 @@ function getStatusBadge(status: ExerciseStatus): {
         icon: <Eye size={16} />,
         iconBg: "bg-bg-3",
         iconFg: "text-fg-2",
-        label: "Vu la solution",
+        label: t("learn.statusSeen"),
         labelClasses: "bg-bg-3 text-fg-2",
       };
     case "attempted":
@@ -659,7 +677,7 @@ function getStatusBadge(status: ExerciseStatus): {
         icon: <Play size={14} />,
         iconBg: "bg-bg-3",
         iconFg: "text-fg-2",
-        label: "En cours",
+        label: t("learn.statusInProgress"),
         labelClasses: "bg-bg-3 text-fg-2",
       };
     default:
@@ -727,7 +745,7 @@ function extractCodeMap(
    Miscellaneous legacy bits (console toggle, compact live sandpack)
    ══════════════════════════════════════════════════════════════════ */
 
-function ConsoleWrapper() {
+function ConsoleWrapper({ t }: { t: ReturnType<typeof useT> }) {
   const [show, setShow] = useState(false);
   if (!show) {
     return (
@@ -736,7 +754,7 @@ function ConsoleWrapper() {
         onClick={() => setShow(true)}
         className="w-full min-h-11 text-left px-4 py-2 text-[11px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg-2 border-t-base bg-bg"
       >
-        ▸ Afficher la console
+        {t("learn.showConsole")}
       </button>
     );
   }

@@ -91,7 +91,7 @@ export function CourseBar({
                 "flex items-center gap-1.5 sm:gap-2 rounded-lg border-base px-1.5 sm:px-2.5 min-h-11 hover:bg-bg-3 transition text-fg-2 hover:text-fg flex-shrink-0",
                 location.pathname === `${basePath}/progress` && "bg-bg-3 text-fg",
               )}
-              title="Progression"
+              title={t("courseBar.progress")}
             >
               <TrendingUp size={16} className="text-fg-3" />
               <span className="text-[11px] font-mono font-semibold tabular-nums">
@@ -110,7 +110,7 @@ export function CourseBar({
                   isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
                 )
               }
-              title="Favoris"
+              title={t("courseBar.bookmarks")}
             >
               <Bookmark size={16} />
             </NavLink>
@@ -124,7 +124,7 @@ export function CourseBar({
                     isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
                   )
                 }
-                title="Projet final"
+                title={t("courseBar.finalProject")}
               >
                 <Trophy size={16} />
               </NavLink>

@@ -61,7 +61,7 @@ export function Footer() {
 
         <div className="mt-12 p-4 border-t-base flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="text-[12px] text-fg-3 font-mono">
-            © {year} Mezes Corporation Tous droits réservés.
+            © {year} Mezes Corporation {t("course.rightsReserved")}
           </div>
         </div>
       </div>

@@ -14,8 +14,10 @@ import { SyncStatusBadge } from "@/components/auth/SyncStatusBadge";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Download, Upload, RefreshCw, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useT } from "@/i18n/useT";
 
 export function ProgressPage() {
+  const t = useT();
   const { user } = useAuth();
   const { basePath, phases } = useCourseArea();
   const { progress, reset, exportJson, importJson } = useProgress();
@@ -61,9 +63,9 @@ export function ProgressPage() {
     reader.onload = (ev) => {
       try {
         importJson(String(ev.target?.result ?? ""));
-        alert("Progression importée avec succès !");
+        alert(t("progress.importOk"));
       } catch (err) {
-        alert("Fichier invalide : " + (err as Error).message);
+        alert(t("progress.importBad", { error: (err as Error).message }));
       }
     };
     reader.readAsText(file);
@@ -72,9 +74,7 @@ export function ProgressPage() {
 
   function handleReset() {
     if (
-      window.confirm(
-        "Réinitialiser toute la progression ? Cette action est irréversible (mais ton fichier exporté reste valable).",
-      )
+      window.confirm(t("progress.resetConfirm"))
     ) {
       reset();
     }
@@ -112,9 +112,7 @@ export function ProgressPage() {
     <>
       {user && <SyncStatusBadge variant="card" className="mb-3" />}
       <p className="mb-4 text-[13px] leading-relaxed text-fg-2">
-        {user
-          ? "Ta progression est sauvegardée sur ton compte et synchronisée automatiquement. Tu peux aussi exporter un JSON comme sauvegarde locale."
-          : "Ta progression est sauvegardée dans le navigateur. Exporte-la en JSON pour en faire une copie de sécurité ou la restaurer sur un autre appareil."}
+        {user ? t("progress.backupSignedIn") : t("progress.backupGuest")}
       </p>
       <div className="flex flex-wrap gap-2">
         <Button
@@ -122,14 +120,14 @@ export function ProgressPage() {
           leftIcon={<Download size={14} />}
           onClick={handleExport}
         >
-          Exporter (JSON)
+          {t("progress.exportJson")}
         </Button>
         <Button
           variant="ghost"
           leftIcon={<Upload size={14} />}
           onClick={() => fileInputRef.current?.click()}
         >
-          Importer
+          {t("progress.import")}
         </Button>
         <input
           ref={fileInputRef}
@@ -144,7 +142,7 @@ export function ProgressPage() {
           leftIcon={<RefreshCw size={14} />}
           onClick={handleReset}
         >
-          Tout réinitialiser
+          {t("progress.resetAll")}
         </Button>
       </div>
     </>
@@ -153,18 +151,18 @@ export function ProgressPage() {
   return (
     <div className="mx-auto w-full min-w-0 max-w-5xl animate-fade-in px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
       <div className="mb-2 flex items-center gap-3 font-mono text-[11px] uppercase tracking-wider text-accent-2 sm:mb-3">
-        <TrendingUp size={14} aria-hidden="true" /> Ma progression
+        <TrendingUp size={14} aria-hidden="true" /> {t("progress.title")}
       </div>
       <h1 className="mb-4 text-[1.75rem] font-extrabold tracking-tight sm:text-4xl">
-        Où en es-tu ?
+        {t("progress.where")}
       </h1>
 
       <div className="mt-4 rounded-xl border-base bg-bg-2 p-4 sm:mt-6 sm:p-5">
-        <div className="mb-3 text-sm font-semibold">Progression globale</div>
+        <div className="mb-3 text-sm font-semibold">{t("progress.global")}</div>
         <ProgressBar value={stats.done} max={stats.total} size="md" />
         <div className="mt-1.5 flex justify-between font-mono text-[12px] text-fg-3">
           <span>
-            {stats.done} / {stats.total} étapes
+            {t("progress.steps", { done: stats.done, total: stats.total })}
           </span>
           <span className="text-accent-2">{stats.percent}%</span>
         </div>
@@ -172,38 +170,38 @@ export function ProgressPage() {
 
       <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-6 sm:grid-cols-3 lg:grid-cols-6">
         <StatCard
-          label="Progression"
+          label={t("progress.global")}
           value={`${stats.percent}%`}
           accent="text-accent-2"
           className="hidden lg:block"
         />
         <StatCard
-          label="Modules lus"
+          label={t("progress.modulesRead")}
           value={String(readInCourse)}
           className="hidden lg:block"
         />
         <StatCard
-          label="Quiz validés"
+          label={t("progress.quizzesPassed")}
           value={`${stats.quizPassed}/${totalQuizzesTaken || 0}`}
         />
         <StatCard
-          label="Exos résolus"
+          label={t("progress.exercisesSolved")}
           value={String(exercisesSolved)}
           accent="text-emerald-400"
         />
         <StatCard
-          label="Exos vus"
+          label={t("progress.exercisesSeen")}
           value={String(exercisesRevealed)}
           accent="text-sky-300"
         />
         <StatCard
-          label="Challenges"
+          label={t("progress.challenges")}
           value={String(challengeValidated)}
           className="sm:col-span-1"
         />
       </div>
 
-      <h2 className="mb-3 mt-8 text-lg font-bold lg:mt-10 lg:mb-4">Par phase</h2>
+      <h2 className="mb-3 mt-8 text-lg font-bold lg:mt-10 lg:mb-4">{t("progress.byPhase")}</h2>
       <div className="space-y-3">
         {phases.map((phase, i) => {
           const accent = phaseAccent(phase.color);
@@ -253,9 +251,9 @@ export function ProgressPage() {
       </div>
 
       <section className="mt-8 lg:mt-10">
-        <h2 className="mb-3 hidden text-lg font-bold lg:block">Sauvegarde</h2>
+        <h2 className="mb-3 hidden text-lg font-bold lg:block">{t("progress.backup")}</h2>
         <MobileCollapse
-          title="Sauvegarde"
+          title={t("progress.backup")}
           icon={<Download size={14} className="text-fg-3" aria-hidden="true" />}
         >
           <div className="lg:rounded-xl lg:border-base lg:bg-bg-2 lg:p-5">

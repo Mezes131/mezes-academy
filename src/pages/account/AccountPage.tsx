@@ -10,22 +10,13 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth, type UserProfile } from "@/hooks/useAuth";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
 import { ProfileHeader } from "../../components/account/ProfileHeader";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { PreferencesTab } from "./tabs/PreferencesTab";
 import { SecurityTab } from "./tabs/SecurityTab";
 
 type AccountTab = "overview" | "preferences" | "security";
-
-const TABS: Array<{
-  id: AccountTab;
-  label: string;
-  icon: React.ReactNode;
-}> = [
-  { id: "overview", label: "Aperçu", icon: <LayoutGrid size={14} /> },
-  { id: "preferences", label: "Préférences", icon: <Sliders size={14} /> },
-  { id: "security", label: "Compte & sécurité", icon: <ShieldCheck size={14} /> },
-];
 
 /**
  * Student account page.
@@ -34,6 +25,17 @@ const TABS: Array<{
 export function AccountPage() {
   const { user, profile, refreshProfile } = useAuth();
   const lp = useLocalePath();
+  const t = useT();
+
+  const tabs = useMemo(
+    () =>
+      [
+        { id: "overview" as const, label: t("account.tabOverview"), icon: <LayoutGrid size={14} /> },
+        { id: "preferences" as const, label: t("account.tabPreferences"), icon: <Sliders size={14} /> },
+        { id: "security" as const, label: t("account.tabSecurity"), icon: <ShieldCheck size={14} /> },
+      ] satisfies Array<{ id: AccountTab; label: string; icon: React.ReactNode }>,
+    [t],
+  );
   const [searchParams, setSearchParams] = useSearchParams();
   const [toast, setToast] = useState<{
     kind: "success" | "error";
@@ -79,14 +81,14 @@ export function AccountPage() {
           className="inline-flex items-center gap-1.5 text-[12px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg transition mb-6"
         >
           <ArrowLeft size={12} />
-          Retour au parcours
+          {t("account.backToCourse")}
         </Link>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-          Mon compte
+          {t("account.title")}
         </h1>
         <p className="mt-1.5 text-fg-2 text-[15px] leading-relaxed">
-          Personnalise ton profil, tes préférences et les paramètres de sécurité.
+          {t("account.subtitle")}
         </p>
 
         <div className="mt-8 space-y-8">
@@ -106,7 +108,7 @@ export function AccountPage() {
             className="rounded-xl border-base bg-bg-2 p-1 flex gap-1 overflow-x-auto"
             role="tablist"
           >
-            {TABS.map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 role="tab"

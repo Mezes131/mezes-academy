@@ -1,4 +1,5 @@
 import type { OAuthProvider } from "@/hooks/useAuth";
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 import { ProviderIcon } from "./ProviderIcon";
 
@@ -23,6 +24,8 @@ export function OAuthButton({
   disabled,
   onClick,
 }: OAuthButtonProps) {
+  const t = useT();
+
   return (
     <button
       type="button"
@@ -43,7 +46,7 @@ export function OAuthButton({
       ) : (
         <ProviderIcon provider={provider} />
       )}
-      <span>{busy ? "Redirection..." : label}</span>
+      <span>{busy ? t("common.redirecting") : label}</span>
     </button>
   );
 }

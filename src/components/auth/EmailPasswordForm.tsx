@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, Eye, EyeOff, Lock, Mail, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useT } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 import type { AuthMode } from "./AuthModeSwitcher";
 
@@ -37,6 +38,7 @@ export function EmailPasswordForm({
   error,
   info,
 }: EmailPasswordFormProps) {
+  const t = useT();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -71,7 +73,7 @@ export function EmailPasswordForm({
     <form onSubmit={onFormSubmit} className="space-y-3.5">
       {mode === "register" && (
         <Field
-          label="Nom complet"
+          label={t("auth.fullName")}
           icon={<UserIcon size={14} />}
           htmlFor="auth-fullname"
         >
@@ -83,13 +85,13 @@ export function EmailPasswordForm({
             required
             minLength={2}
             autoComplete="name"
-            placeholder="Ex: Ada Lovelace"
+            placeholder={t("auth.fullNamePlaceholder")}
             disabled={allDisabled}
           />
         </Field>
       )}
 
-      <Field label="Email" icon={<Mail size={14} />} htmlFor="auth-email">
+      <Field label={t("auth.email")} icon={<Mail size={14} />} htmlFor="auth-email">
         <input
           id="auth-email"
           type="email"
@@ -98,13 +100,13 @@ export function EmailPasswordForm({
           onChange={(e) => setEmail(e.target.value)}
           required
           autoComplete={mode === "login" ? "current-email" : "email"}
-          placeholder="toi@email.com"
+          placeholder={t("auth.emailPlaceholder")}
           disabled={allDisabled}
         />
       </Field>
 
       <Field
-        label="Mot de passe"
+        label={t("auth.password")}
         icon={<Lock size={14} />}
         htmlFor="auth-password"
         rightSlot={
@@ -114,13 +116,13 @@ export function EmailPasswordForm({
             className="text-[11px] font-mono uppercase tracking-wider text-fg-3 hover:text-fg transition inline-flex items-center gap-1"
             aria-label={
               showPassword
-                ? "Masquer le mot de passe"
-                : "Afficher le mot de passe"
+                ? t("auth.hidePasswordAria")
+                : t("auth.showPasswordAria")
             }
             disabled={allDisabled}
           >
             {showPassword ? <EyeOff size={12} /> : <Eye size={12} />}
-            {showPassword ? "Masquer" : "Afficher"}
+            {showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
           </button>
         }
       >
@@ -135,7 +137,9 @@ export function EmailPasswordForm({
           autoComplete={
             mode === "login" ? "current-password" : "new-password"
           }
-          placeholder={mode === "login" ? "••••••••" : "6 caractères min."}
+          placeholder={
+            mode === "login" ? "••••••••" : t("auth.passwordPlaceholderMin")
+          }
           disabled={allDisabled}
         />
       </Field>
@@ -163,15 +167,15 @@ export function EmailPasswordForm({
         className="w-full !h-11"
       >
         {submitting ? (
-          "Traitement..."
+          t("common.processing")
         ) : mode === "login" ? (
           <>
-            Se connecter
+            {t("nav.signInShort")}
             <ArrowRight size={14} />
           </>
         ) : (
           <>
-            Créer mon compte
+            {t("nav.createMyAccount")}
             <ArrowRight size={14} />
           </>
         )}
@@ -180,24 +184,24 @@ export function EmailPasswordForm({
       <p className="text-center text-[12px] text-fg-3">
         {mode === "login" ? (
           <>
-            Nouveau ici ?{" "}
+            {t("auth.newHere")}{" "}
             <button
               type="button"
               onClick={() => onSwitchMode("register")}
               className="text-accent-2 hover:underline underline-offset-4"
             >
-              Créer un compte
+              {t("nav.createAccount")}
             </button>
           </>
         ) : (
           <>
-            Déjà inscrit ?{" "}
+            {t("auth.alreadyRegistered")}{" "}
             <button
               type="button"
               onClick={() => onSwitchMode("login")}
               className="text-accent-2 hover:underline underline-offset-4"
             >
-              Se connecter
+              {t("nav.signInShort")}
             </button>
           </>
         )}

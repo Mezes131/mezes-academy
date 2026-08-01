@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { useT } from "@/i18n/useT";
 import { getDisplayName, getInitials } from "@/lib/identity";
 import { cn } from "@/lib/utils";
 import { ConfirmDialog } from "@/components/ui/Modal";
@@ -38,6 +39,7 @@ export function UserMenu({
 }: UserMenuProps) {
   const { user, profile, signOut } = useAuth();
   const lp = useLocalePath();
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [confirmingSignOut, setConfirmingSignOut] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -134,25 +136,25 @@ export function UserMenu({
             <MenuItem
               to={lp("/account")}
               icon={<UserCircle size={14} />}
-              label="Mon profil"
+              label={t("nav.myProfile")}
               onClick={() => setOpen(false)}
             />
             <MenuItem
               to={lp("/account?tab=preferences")}
               icon={<SlidersHorizontal size={14} />}
-              label="Préférences"
+              label={t("nav.preferences")}
               onClick={() => setOpen(false)}
             />
             <MenuItem
               to={lp("/react/progress")}
               icon={<TrendingUp size={14} />}
-              label="Ma progression"
+              label={t("footer.myProgress")}
               onClick={() => setOpen(false)}
             />
             <MenuItem
               to={lp("/react/bookmarks")}
               icon={<BookMarked size={14} />}
-              label="Mes favoris"
+              label={t("footer.myBookmarks")}
               onClick={() => setOpen(false)}
             />
           </div>
@@ -165,7 +167,7 @@ export function UserMenu({
               role="menuitem"
             >
               <LogOut size={14} />
-              <span>Déconnexion</span>
+              <span>{t("nav.signOut")}</span>
             </button>
           </div>
         </div>
@@ -177,10 +179,10 @@ export function UserMenu({
         onConfirm={onConfirmSignOut}
         variant="warning"
         icon={<LogOut size={18} />}
-        title="Se déconnecter ?"
-        description={`Tu devras te reconnecter avec ${email} pour reprendre ton parcours.`}
-        confirmLabel="Se déconnecter"
-        cancelLabel="Rester connecté"
+        title={t("auth.signOutTitle")}
+        description={t("auth.signOutBody", { email })}
+        confirmLabel={t("auth.signOutConfirm")}
+        cancelLabel={t("auth.staySignedIn")}
       />
     </div>
   );

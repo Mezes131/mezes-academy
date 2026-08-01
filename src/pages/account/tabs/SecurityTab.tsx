@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AlertTriangle, KeyRound, Mail, ShieldCheck, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useAuth } from "@/hooks/useAuth";
+import { useT } from "@/i18n/useT";
 
 interface SecurityTabProps {
   email: string;
@@ -15,6 +16,7 @@ interface SecurityTabProps {
  */
 export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
   const { updatePassword } = useAuth();
+  const t = useT();
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,11 +28,11 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
     setPwError(null);
 
     if (newPassword.length < 6) {
-      setPwError("Le nouveau mot de passe doit contenir au moins 6 caractères.");
+      setPwError(t("account.passwordMinError"));
       return;
     }
     if (newPassword !== confirmPassword) {
-      setPwError("Les deux mots de passe ne correspondent pas.");
+      setPwError(t("account.passwordMismatch"));
       return;
     }
 
@@ -39,10 +41,10 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
       await updatePassword(newPassword);
       setNewPassword("");
       setConfirmPassword("");
-      onSuccess("Mot de passe mis à jour.");
+      onSuccess(t("account.passwordUpdated"));
     } catch (error) {
       const message = (error as Error).message;
-      setPwError(humanizePasswordError(message));
+      setPwError(humanizePasswordError(message, t));
       onError(message);
     } finally {
       setSaving(false);
@@ -51,16 +53,13 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
 
   function onRequestDeletion() {
     const ok = window.confirm(
-      "Confirmer la demande de suppression ?\n\n" +
-        "Un administrateur traitera ta demande manuellement. Ta progression restera conservée 30 jours avant effacement définitif.",
+      `${t("common.confirm")} ?\n\n${t("account.deleteConfirm")}`,
     );
     if (!ok) return;
 
     const to = "contact@mezescorp.com";
-    const subject = encodeURIComponent("Demande de suppression de compte");
-    const body = encodeURIComponent(
-      `Bonjour,\n\nJe demande la suppression de mon compte lié à l'adresse ${email}.\n\nMerci.`,
-    );
+    const subject = encodeURIComponent(t("account.deleteMailSubject"));
+    const body = encodeURIComponent(t("account.deleteMailBody", { email }));
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
   }
 
@@ -68,28 +67,36 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
     <div className="space-y-6">
       <Section
         icon={<Mail size={14} />}
-        title="Email"
-        description="Tu te connectes avec cette adresse."
+        title={t("account.emailSectionTitle")}
+        description={t("account.emailSectionDesc")}
       >
         <div className="rounded-lg border-base bg-bg-3/40 p-4">
           <div className="text-sm font-mono text-fg">{email}</div>
           <p className="text-[12px] text-fg-3 mt-2 leading-relaxed">
-            Pour changer d'email, contacte{" "}
-            <a
-              className="underline underline-offset-4 hover:text-fg"
-              href="mailto:contact@mezescorp.com?subject=Changement%20d%27email"
-            >
-              contact@mezescorp.com
-            </a>
-            . Cette opération sera automatisée prochainement.
+            {t("account.emailChangeHint", { email: "contact@mezescorp.com" })
+              .split("contact@mezescorp.com")
+              .flatMap((part, i, arr) =>
+                i < arr.length - 1
+                  ? [
+                      part,
+                      <a
+                        key="mail"
+                        className="underline underline-offset-4 hover:text-fg"
+                        href={`mailto:contact@mezescorp.com?subject=${encodeURIComponent(t("account.emailChangeSubject"))}`}
+                      >
+                        contact@mezescorp.com
+                      </a>,
+                    ]
+                  : [part],
+              )}
           </p>
         </div>
       </Section>
 
       <Section
         icon={<KeyRound size={14} />}
-        title="Mot de passe"
-        description="Choisis un mot de passe robuste, différent de tes autres comptes."
+        title={t("account.passwordTitle")}
+        description={t("account.passwordDesc")}
       >
         <form
           onSubmit={onChangePassword}
@@ -97,7 +104,7 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
         >
           <label className="block">
             <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
-              Nouveau mot de passe
+              {t("account.newPassword")}
             </span>
             <input
               type="password"
@@ -107,12 +114,12 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
               required
               minLength={6}
               className="mt-1 w-full h-10 rounded-lg border-base bg-bg-3 px-3 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
-              placeholder="6 caractères minimum"
+              placeholder={t("account.passwordMinPlaceholder")}
             />
           </label>
           <label className="block">
             <span className="text-[11px] font-mono uppercase tracking-wider text-fg-3">
-              Confirmer le mot de passe
+              {t("account.confirmPassword")}
             </span>
             <input
               type="password"
@@ -137,10 +144,10 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
               disabled={saving}
               leftIcon={<ShieldCheck size={14} />}
             >
-              {saving ? "Enregistrement..." : "Mettre à jour"}
+              {saving ? t("account.updating") : t("account.updatePassword")}
             </Button>
             <p className="text-[11px] text-fg-3">
-              Tu seras déconnecté des autres sessions actives.
+              {t("account.passwordSessionsNote")}
             </p>
           </div>
         </form>
@@ -148,8 +155,8 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
 
       <DangerZone
         icon={<AlertTriangle size={14} />}
-        title="Zone sensible"
-        description="Actions irréversibles. Réfléchis bien avant de poursuivre."
+        title={t("account.dangerTitle")}
+        description={t("account.dangerDesc")}
       >
         <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-4 flex items-start justify-between gap-4 flex-wrap">
           <div className="flex-1 min-w-[220px]">
@@ -157,8 +164,7 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
               Supprimer mon compte
             </div>
             <p className="text-[12px] text-fg-2 leading-relaxed mt-1">
-              Cette demande contactera un administrateur. Ta progression sera
-              conservée 30 jours avant effacement définitif.
+              {t("account.deleteConfirm")}
             </p>
           </div>
           <Button
@@ -166,7 +172,7 @@ export function SecurityTab({ email, onError, onSuccess }: SecurityTabProps) {
             leftIcon={<Trash2 size={14} />}
             onClick={onRequestDeletion}
           >
-            Demander la suppression
+            {t("account.deleteAccount")}
           </Button>
         </div>
       </DangerZone>
@@ -236,13 +242,16 @@ function DangerZone({
 
 /* ─── Helpers ───────────────────────────────────────────────── */
 
-function humanizePasswordError(message: string): string {
+function humanizePasswordError(
+  message: string,
+  t: ReturnType<typeof useT>,
+): string {
   const lower = message.toLowerCase();
   if (lower.includes("same") && lower.includes("password")) {
-    return "Le nouveau mot de passe doit être différent de l'actuel.";
+    return t("account.passwordSameError");
   }
   if (lower.includes("weak") || lower.includes("short")) {
-    return "Ce mot de passe est trop faible. Utilise au moins 6 caractères.";
+    return t("account.passwordWeakError");
   }
   return message;
 }
