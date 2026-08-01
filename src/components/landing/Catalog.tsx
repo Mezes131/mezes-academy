@@ -1,5 +1,6 @@
-import { academyStats, catalog } from "@/data/catalog";
+import { academyStats, getCatalog } from "@/data/catalog";
 import { useT } from "@/i18n/useT";
+import { useLocale } from "@/i18n/LocaleProvider";
 import { CourseCard } from "./CourseCard";
 
 /**
@@ -9,6 +10,8 @@ import { CourseCard } from "./CourseCard";
  */
 export function Catalog() {
   const t = useT();
+  const { locale } = useLocale();
+  const courses = getCatalog(locale);
   const body = t("landing.catalogBody").replace(
     "{count}",
     String(academyStats.coursesActive),
@@ -28,7 +31,7 @@ export function Catalog() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
-          {catalog.map((course) => (
+          {courses.map((course) => (
             <CourseCard key={course.slug} course={course} />
           ))}
         </div>

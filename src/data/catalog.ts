@@ -1,16 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════════
    LANDING CATALOG
-   Auto-derived from the course registry (`@/data/courses/`) so the
-   landing stays in sync with the actual content : no more duplicate
-   source of truth.
-
-   Courses that are not yet registered (TypeScript, Next.js, Node.js,
-   DevOps…) are listed here as placeholders until their data folder
-   is implemented.
+   Derived from `@/data/courses/` so the landing stays in sync.
+   Locale-aware for active courses; upcoming placeholders stay FR for now.
    ═══════════════════════════════════════════════════════════════════ */
 
 import type { CourseMeta } from "@/types";
-import { courses } from "./courses";
+import type { Locale } from "@/i18n/types";
+import { courses, getCourses } from "./courses";
 
 export interface CatalogCourse extends CourseMeta {
   slug: string;
@@ -18,16 +14,7 @@ export interface CatalogCourse extends CourseMeta {
   href?: string;
 }
 
-/** Courses that are fully implemented in `@/data/courses/`. */
-const activeCatalog: CatalogCourse[] = courses.map((course) => ({
-  slug: course.slug,
-  ...course.meta,
-  modules: course.phases.reduce((acc, phase) => acc + phase.modules.length, 0),
-  href: course.meta.status === "active" ? `/${course.slug}` : undefined,
-}));
-
-/** Courses that are announced but not yet implemented. */
-const upcomingCatalog: CatalogCourse[] = [
+const upcomingCatalogFr: CatalogCourse[] = [
   {
     slug: "devops",
     title: "DevOps pour développeurs",
@@ -49,7 +36,48 @@ const upcomingCatalog: CatalogCourse[] = [
   },
 ];
 
-export const catalog: CatalogCourse[] = [...activeCatalog, ...upcomingCatalog];
+const upcomingCatalogEn: CatalogCourse[] = [
+  {
+    slug: "devops",
+    title: "DevOps for developers",
+    tagline: "Git, CI/CD, Docker, deployment",
+    description:
+      "The ops basics you actually need day to day: GitHub Actions, Docker, logs, deploys. Without turning you into an SRE.",
+    icon: "fa-gears",
+    accent: {
+      text: "text-pink-700 dark:text-pink-300",
+      bg: "bg-pink-500/10",
+      border: "border-pink-500/30",
+    },
+    tags: ["Git", "GitHub Actions", "Docker", "Vercel"],
+    level: "All levels",
+    duration: "≈4 weeks",
+    modules: 8,
+    status: "planned",
+    eta: "Coming soon",
+  },
+];
+
+function toCatalogCourse(
+  course: ReturnType<typeof getCourses>[number],
+): CatalogCourse {
+  return {
+    slug: course.slug,
+    ...course.meta,
+    modules: course.phases.reduce((acc, phase) => acc + phase.modules.length, 0),
+    href: course.meta.status === "active" ? `/${course.slug}` : undefined,
+  };
+}
+
+/** Locale-aware catalog for the landing grid. */
+export function getCatalog(locale: Locale = "fr"): CatalogCourse[] {
+  const active = getCourses(locale).map(toCatalogCourse);
+  const upcoming = locale === "en" ? upcomingCatalogEn : upcomingCatalogFr;
+  return [...active, ...upcoming];
+}
+
+/** Default FR catalog (stats + static imports). */
+export const catalog: CatalogCourse[] = getCatalog("fr");
 
 /** Global stats displayed on the landing page, computed from actual data. */
 export const academyStats = {
