@@ -361,6 +361,8 @@ export const messagesFr = {
   progress: {
     title: "Ma progression",
     where: "Où en es-tu ?",
+    acrossTracks:
+      "{n} parcours pris en compte sur la plateforme. Chaque barre reflète tes étapes validées (modules, quiz, exercices).",
     global: "Progression globale",
     steps: "{done} / {total} étapes",
     modulesRead: "Modules lus",
@@ -369,6 +371,10 @@ export const messagesFr = {
     exercisesSeen: "Exos vus",
     challenges: "Challenges",
     byPhase: "Par phase",
+    byTrack: "Par parcours",
+    openTrack: "Ouvrir",
+    notStarted: "pas encore commencé",
+    browseCatalog: "Voir tous les parcours du catalogue",
     backup: "Sauvegarde",
     backupSignedIn:
       "Ta progression est sauvegardée sur ton compte et synchronisée automatiquement. Tu peux aussi exporter un JSON comme sauvegarde locale.",

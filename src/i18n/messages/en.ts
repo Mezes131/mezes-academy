@@ -354,6 +354,8 @@ export const messagesEn: MessageTree = {
   progress: {
     title: "My progress",
     where: "Where do you stand?",
+    acrossTracks:
+      "{n} tracks counted on the platform. Each bar reflects your validated steps (modules, quizzes, exercises).",
     global: "Overall progress",
     steps: "{done} / {total} steps",
     modulesRead: "Modules read",
@@ -362,6 +364,10 @@ export const messagesEn: MessageTree = {
     exercisesSeen: "Exercises seen",
     challenges: "Challenges",
     byPhase: "By phase",
+    byTrack: "By track",
+    openTrack: "Open",
+    notStarted: "not started yet",
+    browseCatalog: "Browse all tracks in the catalog",
     backup: "Backup",
     backupSignedIn:
       "Your progress is saved on your account and syncs automatically. You can also export a JSON as a local backup.",

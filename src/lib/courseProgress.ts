@@ -1,4 +1,4 @@
-import type { LessonProgress, Phase } from "@/types";
+import type { Course, LessonProgress, Phase } from "@/types";
 
 export type PhaseProgressStat = {
   id: string;
@@ -84,4 +84,76 @@ export function computeCourseStats(
 /** Module ids belonging to the given phases. */
 export function courseModuleIds(phases: Phase[]): Set<string> {
   return new Set(phases.flatMap((p) => p.modules.map((m) => m.id)));
+}
+
+function courseQuizIds(phases: Phase[]): Set<string> {
+  return new Set(
+    phases.flatMap(
+      (p) => p.modules.map((m) => m.quiz?.id).filter(Boolean) as string[],
+    ),
+  );
+}
+
+function courseExerciseIds(phases: Phase[]): Set<string> {
+  return new Set(
+    phases.flatMap((p) =>
+      (p.modules ?? []).flatMap((m) => (m.exercises ?? []).map((e) => e.id)),
+    ),
+  );
+}
+
+function coursePhaseIds(phases: Phase[]): Set<string> {
+  return new Set(phases.map((p) => p.id));
+}
+
+/** True if the learner has any saved activity in this course. */
+export function courseHasActivity(
+  phases: Phase[],
+  progress: LessonProgress,
+): boolean {
+  const modules = courseModuleIds(phases);
+  if (progress.readModules.some((id) => modules.has(id))) return true;
+  if (progress.bookmarks.some((id) => modules.has(id))) return true;
+
+  const quizzes = courseQuizIds(phases);
+  if (Object.keys(progress.quizScores).some((id) => quizzes.has(id))) {
+    return true;
+  }
+
+  const exercises = courseExerciseIds(phases);
+  if (
+    progress.completedExercises.some((id) => exercises.has(id)) ||
+    Object.keys(progress.exerciseProgress).some((id) => exercises.has(id))
+  ) {
+    return true;
+  }
+
+  const phaseIds = coursePhaseIds(phases);
+  return Object.keys(progress.challengeScores).some((id) => phaseIds.has(id));
+}
+
+/**
+ * Every active track on the platform. Progress is scoped per course, but the
+ * progress page lists them all (not only the course area you opened).
+ */
+export function selectLearnerCourses(
+  courses: Course[],
+  _progress: LessonProgress,
+): Course[] {
+  return courses.filter((c) => c.meta.status === "active");
+}
+
+/** Sum course-level stats into one platform total. */
+export function aggregateCourseStats(
+  stats: CourseProgressStat[],
+): CourseProgressStat {
+  const total = stats.reduce((sum, s) => sum + s.total, 0);
+  const done = stats.reduce((sum, s) => sum + s.done, 0);
+  const quizPassed = stats.reduce((sum, s) => sum + s.quizPassed, 0);
+  return {
+    total,
+    done,
+    quizPassed,
+    percent: total === 0 ? 0 : Math.min(100, Math.round((done / total) * 100)),
+  };
 }
