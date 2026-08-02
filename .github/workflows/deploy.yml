@@ -124,6 +124,7 @@ jobs:
           passphrase: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
           source: docker-compose.prod.yml
           target: ${{ secrets.DEPLOY_PATH }}
+          overwrite: true
 
       - name: Pull & up on server
         uses: appleboy/ssh-action@v1.2.0
