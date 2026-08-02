@@ -115,16 +115,27 @@ jobs:
           cache-from: type=gha,scope=mezes-worker
           cache-to: type=gha,mode=max,scope=mezes-worker
 
+      # ponytail: skip drone-scp tar/untar (File exists / Permission denied / hangs)
+      - name: Encode compose for SSH upload
+        id: compose
+        run: echo "b64=$(base64 -w0 docker-compose.prod.yml)" >> "$GITHUB_OUTPUT"
+
       - name: Upload compose file to server
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          COMPOSE_B64: ${{ steps.compose.outputs.b64 }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           passphrase: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
-          source: docker-compose.prod.yml
-          target: ${{ secrets.DEPLOY_PATH }}
-          overwrite: true
+          envs: COMPOSE_B64
+          script_stop: true
+          script: |
+            set -euo pipefail
+            mkdir -p "${{ secrets.DEPLOY_PATH }}"
+            printf '%s' "$COMPOSE_B64" | base64 -d > "${{ secrets.DEPLOY_PATH }}/docker-compose.prod.yml"
+            test -s "${{ secrets.DEPLOY_PATH }}/docker-compose.prod.yml"
 
       - name: Pull & up on server
         uses: appleboy/ssh-action@v1.2.0
