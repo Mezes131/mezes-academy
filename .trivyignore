@@ -1,0 +1,5 @@
+# Ignore findings that are accepted risk until upstream fixes land.
+# Format: CVE-YYYY-NNNNN or GHSA-... (one per line). Document why when adding.
+#
+# Example:
+# GHSA-xxxx-xxxx-xxxx  # transitive via Strapi; no non-breaking fix yet

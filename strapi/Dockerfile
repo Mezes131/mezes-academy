@@ -1,4 +1,4 @@
-# ── Build stage ───────────────────────────────────────────────────────────────
+# ── Build stage: compile admin ────────────────────────────────────────────────
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -12,20 +12,35 @@ RUN --mount=type=cache,target=/root/.npm \
 COPY . .
 RUN npm run build
 
-# ── Runtime stage ─────────────────────────────────────────────────────────────
+# ── Runtime: prod deps only, no system npm (avoids Trivy noise on npm's tree) ─
 FROM node:20-alpine AS runtime
 
 ENV NODE_ENV=production
 WORKDIR /app
 
-# Own the workdir once (cheap) then install/copy as node — avoid chown -R on node_modules
-RUN chown node:node /app
-USER node
+RUN apk upgrade --no-cache \
+  && chown node:node /app
 
-COPY --chown=node:node package.json package-lock.json ./
-RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 \
+COPY package.json package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev --fetch-retries=8 --fetch-retry-mintimeout=20000 \
-      --fetch-retry-maxtimeout=180000 --fetch-timeout=900000
+      --fetch-retry-maxtimeout=180000 --fetch-timeout=900000 \
+  # Admin already built — drop Vite/esbuild binaries that fail image scans
+  && find node_modules -type d \( -name vite -o -name esbuild -o -name '@esbuild' \) -print0 \
+       | xargs -0 -r rm -rf \
+  # Strip toolchain shipped with the Node image (not needed at runtime)
+  && rm -rf \
+    /usr/local/lib/node_modules/npm \
+    /usr/local/lib/node_modules/corepack \
+    /opt/yarn* \
+    /usr/local/bin/npm \
+    /usr/local/bin/npx \
+    /usr/local/bin/corepack \
+    /usr/local/bin/yarn \
+    /usr/local/bin/yarnpkg \
+  && chown -R node:node /app
+
+USER node
 
 COPY --chown=node:node . .
 COPY --chown=node:node --from=builder /app/dist ./dist
@@ -38,4 +53,5 @@ EXPOSE 1337
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
   CMD wget -qO- http://localhost:1337/_health || exit 1
 
-CMD ["npm", "run", "start"]
+# No npm in image — call the CLI entrypoint directly
+CMD ["sh", "-c", "mkdir -p /app/public/uploads && node node_modules/@strapi/strapi/bin/strapi.js start"]

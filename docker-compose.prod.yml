@@ -1,3 +1,11 @@
+# Production compose — images only (no build, no git checkout on the host).
+# Local/dev stays on docker-compose.yml (build from source).
+#
+# Required env (see .env on the server + .env.images written by CD):
+#   GHCR_OWNER, IMAGE_TAG
+#   POSTGRES_PASSWORD, STRAPI_*, STRAPI_API_TOKEN
+#   (VITE_* are baked into the web image at CI build time — not needed here)
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -14,9 +22,10 @@ services:
       retries: 5
     networks:
       - internal
+    restart: unless-stopped
 
   strapi:
-    build: ./strapi
+    image: ghcr.io/${GHCR_OWNER:?GHCR_OWNER is required}/mezes-strapi:${IMAGE_TAG:?IMAGE_TAG is required}
     environment:
       DATABASE_CLIENT: postgres
       DATABASE_HOST: postgres
@@ -38,17 +47,10 @@ services:
     networks:
       - internal
       - public
+    restart: unless-stopped
 
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        VITE_STRAPI_URL: ${VITE_STRAPI_URL:-}
-        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-}
-        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-}
-        VITE_SUPABASE_PUBLISHABLE_KEY: ${VITE_SUPABASE_PUBLISHABLE_KEY:-}
-        VITE_STRAPI_CONTENT_ENABLED: ${VITE_STRAPI_CONTENT_ENABLED:-false}
+    image: ghcr.io/${GHCR_OWNER:?GHCR_OWNER is required}/mezes-web:${IMAGE_TAG:?IMAGE_TAG is required}
     ports:
       - "5173:8080"
     healthcheck:
@@ -61,9 +63,10 @@ services:
         condition: service_started
     networks:
       - public
+    restart: unless-stopped
 
   worker:
-    build: ./worker
+    image: ghcr.io/${GHCR_OWNER:?GHCR_OWNER is required}/mezes-worker:${IMAGE_TAG:?IMAGE_TAG is required}
     environment:
       STRAPI_URL: http://strapi:1337
       STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:?STRAPI_API_TOKEN is required}
@@ -77,7 +80,7 @@ services:
         condition: service_started
     networks:
       - public
-    # Worker must not join the internal postgres network
+    restart: unless-stopped
 
 volumes:
   strapi-db:
