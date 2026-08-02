@@ -32,8 +32,6 @@ services:
       ENCRYPTION_KEY: ${STRAPI_ENCRYPTION_KEY:?STRAPI_ENCRYPTION_KEY is required}
     ports:
       - "1337:1337"
-    # Image may lack public/uploads (.dockerignore); create it before start — no rebuild needed
-    command: ["sh", "-c", "mkdir -p /app/public/uploads && npm run start"]
     depends_on:
       postgres:
         condition: service_healthy

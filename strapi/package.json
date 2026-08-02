@@ -1,8 +1,8 @@
 {
-  "name": "strapi",
+  "name": "mezes-strapi",
   "version": "0.1.0",
   "private": true,
-  "description": "A Strapi application",
+  "description": "Mezes Academy Strapi CMS",
   "scripts": {
     "build": "strapi build",
     "console": "strapi console",
