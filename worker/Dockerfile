@@ -9,6 +9,8 @@ RUN npm run build
 FROM node:20-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
+# Shrink known Alpine/OS CVEs picked up by image scans
+RUN apk upgrade --no-cache
 RUN chown node:node /app
 USER node
 COPY --chown=node:node package.json package-lock.json* ./

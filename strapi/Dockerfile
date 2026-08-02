@@ -18,6 +18,8 @@ FROM node:20-alpine AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 
+RUN apk upgrade --no-cache
+
 # Own the workdir once (cheap) then install/copy as node — avoid chown -R on node_modules
 RUN chown node:node /app
 USER node

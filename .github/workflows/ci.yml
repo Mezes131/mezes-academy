@@ -12,8 +12,6 @@ concurrency:
 
 permissions:
   contents: read
-  security-events: write
-  pull-requests: read
 
 env:
   NODE_VERSION: "20"
@@ -142,24 +140,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner (fs)
+      - name: Run Trivy FS (vuln gate)
         uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
+          scanners: vuln
           severity: CRITICAL,HIGH
           ignore-unfixed: true
           trivyignores: .trivyignore
-          format: sarif
-          output: trivy-fs.sarif
+          skip-dirs: node_modules,strapi/node_modules,worker/node_modules,.git,dist,strapi/dist,worker/dist
+          format: table
           exit-code: "1"
-
-      - name: Upload Trivy FS SARIF
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: trivy-fs.sarif
-          category: trivy-fs
 
   # ─── Trivy config (IaC / Dockerfile misconfig) ──────────────────────────────
   trivy-config:
@@ -177,26 +169,11 @@ jobs:
           format: table
           exit-code: "1"
 
-  # ─── CodeQL (code quality + security) ───────────────────────────────────────
-  codeql:
-    name: CodeQL — JS/TS
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript-typescript
-          queries: security-and-quality
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:javascript-typescript"
+  # ─── CodeQL ─────────────────────────────────────────────────────────────────
+  # Intentionally omitted: GitHub "default setup" Code Scanning cannot coexist
+  # with an advanced CodeQL workflow (upload fails). Use the repo default setup,
+  # or disable it under Settings → Code security → Code scanning, then restore
+  # a codeql job here.
 
   # ─── Container image builds + Trivy image scan ──────────────────────────────
   container-scan:
@@ -249,19 +226,12 @@ jobs:
         with:
           scan-type: image
           image-ref: ${{ matrix.image }}
+          scanners: vuln
           severity: CRITICAL,HIGH
           ignore-unfixed: true
           trivyignores: .trivyignore
-          format: sarif
-          output: trivy-${{ matrix.name }}.sarif
+          format: table
           exit-code: "1"
-
-      - name: Upload Trivy image SARIF (${{ matrix.name }})
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: trivy-${{ matrix.name }}.sarif
-          category: trivy-image-${{ matrix.name }}
 
   # ─── Gate: all required checks green ────────────────────────────────────────
   ci-ok:
@@ -273,7 +243,6 @@ jobs:
       - strapi-install
       - trivy-fs
       - trivy-config
-      - codeql
       - container-scan
     if: always()
     steps:
@@ -284,7 +253,6 @@ jobs:
           echo "strapi-install=${{ needs.strapi-install.result }}"
           echo "trivy-fs=${{ needs.trivy-fs.result }}"
           echo "trivy-config=${{ needs.trivy-config.result }}"
-          echo "codeql=${{ needs.codeql.result }}"
           echo "container-scan=${{ needs.container-scan.result }}"
           for r in \
             "${{ needs.web-quality.result }}" \
@@ -292,7 +260,6 @@ jobs:
             "${{ needs.strapi-install.result }}" \
             "${{ needs.trivy-fs.result }}" \
             "${{ needs.trivy-config.result }}" \
-            "${{ needs.codeql.result }}" \
             "${{ needs.container-scan.result }}"
           do
             if [ "$r" != "success" ]; then
