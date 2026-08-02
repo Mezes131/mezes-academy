@@ -1,0 +1,6 @@
+# Ignore findings that are accepted risk until upstream fixes land.
+# Format: CVE-YYYY-NNNNN or GHSA-...
+# Document why when adding an entry.
+
+# Example:
+# CVE-2024-XXXXX  # transitive via Strapi admin; no fix yet; tracked upstream

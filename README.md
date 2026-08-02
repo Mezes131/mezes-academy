@@ -1,265 +1,229 @@
 # Mezes Academy
 
 Mezes Academy is an interactive, certifying learning platform.  
-Its first track — **React, from zero to expert** — transforms a dense curriculum
-into an active journey: rich lessons, quizzes, live coding exercises, friction
-against copy-paste, phase challenges, and a real-world capstone project that
-earns a platform certificate.
+Learners pick a track, work through phases with lessons, quizzes, and live
+exercises, then prove they can ship.
 
-> ⚛️ Stack: Vite · React 18 · TypeScript · Tailwind · Sandpack · Supabase
+**Active tracks**
+
+| Track | Route (FR) | Route (EN) | Status |
+|-------|------------|------------|--------|
+| **React, from zero to expert** | `/react` | `/en/react` | Active |
+| **Secure Vibe Coding** | `/secure-vibe-coding` | `/en/secure-vibe-coding` | Active |
+
+> Stack: Vite · React 18 · TypeScript · Tailwind · Sandpack · Supabase · Strapi 5 · Docker
+
+Related docs: [CONTRIBUTING.md](./CONTRIBUTING.md) · [deploy.md](./deploy.md) · [PRODUCT.md](./PRODUCT.md) · [DESIGN.md](./DESIGN.md)
 
 ---
 
-## 🗺️ Architecture at a glance
+## Architecture at a glance
 
 ### System topology
 
 ```mermaid
 flowchart LR
-    subgraph Client["🌐 Client · Browser"]
-        UI["React UI<br/>Vite + Tailwind"]
+    subgraph Client["Browser"]
+        UI["React SPA<br/>Vite + Tailwind + i18n"]
         Sandpack["Sandpack<br/>live editor + offline validator"]
         Local[("localStorage<br/>offline fallback")]
         UI --> Sandpack
         UI --> Local
     end
 
-    subgraph Supa["🔐 Supabase (BaaS)"]
-        Auth["Auth<br/>email + password"]
+    subgraph Supa["Supabase"]
+        Auth["Auth"]
         DB[("Postgres<br/>profiles · user_progress")]
-        Store[("Storage<br/>avatars bucket")]
+        Store[("Storage · avatars")]
     end
 
-    UI -- "Login / session" --> Auth
-    UI -- "Read / write progress<br/>(RLS scoped to auth.uid)" --> DB
-    UI -- "Upload / delete avatar" --> Store
-    Auth -. "auth.uid()" .-> DB
-    Auth -. "auth.uid()" .-> Store
+    subgraph Docker["Docker Compose (optional local / prod)"]
+        Web["web · Nginx SPA"]
+        Strapi["Strapi 5 CMS"]
+        PG[("Postgres · Strapi")]
+        Worker["audit worker"]
+        Strapi --> PG
+        Worker --> Strapi
+    end
+
+    UI -- "session / progress / avatar" --> Auth
+    UI -- "RLS scoped to auth.uid" --> DB
+    UI -- "avatars" --> Store
+    Web -.-> UI
+    UI -. "optional published content" .-> Strapi
 
     classDef client fill:#1e293b,stroke:#334155,color:#e2e8f0;
     classDef backend fill:#312e81,stroke:#4338ca,color:#ede9fe;
+    classDef edge fill:#0f766e,stroke:#14b8a6,color:#ccfbf1;
     class UI,Sandpack,Local client;
     class Auth,DB,Store backend;
+    class Web,Strapi,PG,Worker edge;
 ```
+
+Course content ships as **typed TypeScript** under `src/data/courses/` (source of truth for the SPA today).  
+Strapi holds the editorial CMS + seed import/export pipeline; runtime Strapi content is gated by `VITE_STRAPI_CONTENT_ENABLED` (default `false`).
 
 ### Learner journey
 
 ```mermaid
 flowchart TD
-    A["Sign up / Sign in<br/>(Supabase Auth)"] --> B["Pick a track"]
-    B --> C{"Phase modules<br/>(Intro → Core → TS → Ecosystem → Expert)"}
+    A["Sign up / Sign in"] --> B["Pick a track"]
+    B --> C{"Phase modules"}
     C --> D["Read lesson"]
     D --> E["Quiz ≥ 70%"]
-    E --> F["Solve exercises<br/>(hints · anti-cheat · local validator)"]
-    F --> G{"Module validated<br/>(quiz + all exos solved)"}
+    E --> F["Solve exercises"]
+    F --> G{"Module validated"}
     G -- "Next module" --> C
-    G -- "Phase complete" --> H["Phase challenge<br/>3 random exercises, no solution"]
-    H --> I{"All phases done?"}
+    G -- "Phase complete" --> H["Phase challenge"]
+    H --> I{"Track complete?"}
     I -- "No" --> C
-    I -- "Yes" --> J["Pro-tools transition<br/>VS Code · Git · GitHub · Vercel"]
-    J --> K["Capstone project<br/>4–5 templates + branding"]
-    K --> L["Submission<br/>(repo + live URL)"]
-    L --> M{"Admin review"}
-    M -- "Changes requested" --> K
-    M -- "Approved" --> N["🎓 Certificate<br/>+ opt-in public gallery"]
+    I -- "Yes" --> J["Capstone / certificate"]
 
     classDef active fill:#0f766e,stroke:#14b8a6,color:#ccfbf1;
     classDef roadmap fill:#3f3f46,stroke:#71717a,color:#e4e4e7,stroke-dasharray: 4 4;
     class A,B,C,D,E,F,G,H,I active;
-    class J,K,L,M,N roadmap;
+    class J roadmap;
 ```
-
-> Plain nodes = shipped · Dashed nodes = on the roadmap (tutorial phase, capstone, admin review, certificate, public gallery).
 
 ---
 
-## 🎯 Product vision
+## Product vision
 
-- **Learn for real**, not just watch content. Every module validates through
-a quiz and a hands-on exercise, with smart anti-cheat frictions.
-- **Prove it ships**, not just "I finished the videos". The journey ends with
-a capstone project built in a real-world toolchain (VS Code, Git/GitHub,
-Vercel), reviewed by an admin, and rewarded with a signed certificate.
-- **Be portable**. Each learner owns an account, their profile, their
-progress, and (opt-in) their public project page.
+- **Learn for real** — each module validates with a quiz and hands-on work, plus anti-cheat friction where it matters (the editor).
+- **Prove it ships** — tracks aim at a capstone and certificate, not video completion.
+- **Be portable** — account, profile, and cloud-synced progress belong to the learner.
+- **Multi-track, multi-locale** — FR is unprefixed; EN lives under `/en/...`.
 
 > Pedagogy over volume. Friction over comfort. Results over completion rate.
 
 ---
 
-## ✨ Core features
+## Core features
 
 ### Learning
 
-- **Multi-phase React track** (Introduction → Core → TypeScript →
-Ecosystem → Expert) built from typed, declarative data.
-- **Rich lesson blocks**: titles, paragraphs, info boxes (tip / warn /
-note / concept), highlights, lesson lists, syntax-highlighted code.
-- **Quizzes** with single- or multi-select questions, explanations, and a
-70% threshold to validate.
-- **Live code exercises** powered by [Sandpack](https://sandpack.codesandbox.io/).
-- **Progressive hints**, revealable solution (gated by attempts), and a
-"Run + verify" button backed by a local, offline validator.
-- **Phase challenges**: timed-style exam mode replaying 3 random exercises
-from the phase without access to the solution.
-- **Anti-cheat frictions**: paste disabled in the editor, solution viewer is
-read-only and copy-protected, solution button locked until N real attempts,
-and module "read" is only unlocked if its quiz **and** its exercises are
-all solved.
+- **Multi-course catalog** with per-track layouts (sidebar, progress, search, bookmarks).
+- **Rich lesson blocks**: titles, paragraphs, info boxes, highlights, lesson lists, code.
+- **Quizzes** (single / multi-select, explanations, 70% pass).
+- **Live code exercises** via [Sandpack](https://sandpack.codesandbox.io/), hints, gated solutions, offline validator.
+- **Phase challenges** replaying exercises without solution access.
+- **Secure Vibe Coding**: Prompt → Audit → Ship curriculum, program blueprints, audit-oriented exercises, worker self-check.
+
+### i18n
+
+- Locales: **`fr`** (default, no URL prefix) and **`en`** (`/en/...`).
+- UI chrome via `src/i18n/messages/{fr,en}.ts`.
+- Course content has locale-aware builders (`buildReactCourse` / `buildSvcCourse`).
+- Guests switch language from the globe menu; signed-in users from account preferences.
 
 ### Account & progression
 
-- **Supabase authentication** (email + password). Students sign up and verify
-their email from the public landing.
-- **Private admin URL** (`/access/<slug>`) — admins are never created through
-public sign-up and do not share the student login surface.
-- **Cloud-synced progression**: local progress is migrated once to the backend
-on first login, then auto-saved with visible sync status.
-- **Profile page `/account`**: avatar upload (Supabase Storage), display name,
-public username, short bio, social links (GitHub / LinkedIn / website),
-inline editing, profile completeness ring.
-- **Preferences tab**: light/dark theme, public profile opt-in.
-- **Security tab**: change password, request account deletion, email info.
-- **Global progress dashboard** with per-phase progress and JSON export/import
-as a local backup.
+- Supabase Auth (email + password); private admin entry at `/access/<slug>`.
+- Progress: local-first (`react-learn:progress:v3`) + cloud sync with visible sync badge.
+- **Progress page** aggregates **all active courses** (phase accordion when multiple tracks).
+- Account: avatar, profile, theme (default **dark**), security, language.
 
-### Upcoming (on the roadmap below)
+### Platform (ops)
 
-- Tutorial phase bridging the learner to **real pro tools** (VS Code, Git,
-GitHub, Vercel).
-- **Capstone project**: choose among 4–5 templates, customize branding
-(name, colors, logo), build it locally, ship it on Vercel.
-- **Admin review** of capstone submissions + **certificate emission**
-(signed PDF + public verification URL).
-- **Public gallery** of completed capstones with LinkedIn share.
+- **Docker Compose**: `web` · `strapi` · `postgres` · `worker` — see [deploy.md](./deploy.md).
+- **CI/CD** (GitHub Actions): lint, types, Vitest, Strapi build, CodeQL, Trivy (FS / config / images), deploy gate.
+- Seed export: `npm run export:strapi-seed` → `strapi/src/seed/`.
 
 ---
 
-## 🚀 Getting started
+## Getting started
 
-Prerequisites: Node.js ≥ 18, npm (or pnpm / yarn / bun).
+Prerequisites: **Node.js ≥ 20**, npm.
 
 ```bash
 npm install
-cp .env.example .env        # fill in Supabase credentials
+cp .env.example .env        # Supabase (+ optional Strapi / Compose vars)
 npm run dev
 ```
 
-The app opens at [http://localhost:5173](http://localhost:5173).
+App: [http://localhost:5173](http://localhost:5173) (FR) · [http://localhost:5173/en](http://localhost:5173/en) (EN).
 
 ### Supabase setup
 
-1. Create a Supabase project (or reuse an existing one).
-2. Copy `.env.example` to `.env` and set:
-  - `VITE_SUPABASE_URL`
-  - `VITE_SUPABASE_PUBLISHABLE_KEY` (or `VITE_SUPABASE_ANON_KEY`)
-3. Open the **SQL Editor** and run `supabase/schema.sql`
-  (idempotent — safe to re-run after updates).
+1. Create a Supabase project.
+2. In `.env` set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (or `VITE_SUPABASE_PUBLISHABLE_KEY`).
+3. Run `supabase/schema.sql` in the SQL Editor (idempotent).
 4. Restart `npm run dev`.
 
-The schema provisions:
+Schema highlights: `profiles`, `user_progress`, RLS, `avatars` bucket (2 MB, image-only).
 
-- `public.profiles` — identity, bio, links, role, public opt-in.
-- `public.user_progress` — JSON blob of the learner's progress.
-- Row Level Security so each learner can only read/write their own rows.
-- `storage.buckets.avatars` (public, 2 MB cap, image/ only) plus policies
-restricting writes to `<user_id>/...`.
+### Full stack (Docker)
+
+**Local / dev** (build depuis le source) :
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+**Production** : pas de clone sur le VPS — images GHCR + `docker-compose.prod.yml` uniquement. Voir **[deploy.md](./deploy.md)**.
+
+| Service | URL (compose local) |
+|---------|---------------------|
+| Web | http://localhost:5173 |
+| Strapi | http://localhost:1337 |
+| Worker health | http://localhost:8090/health |
 
 ### Scripts
 
-
-| Script               | Purpose                                     |
-| -------------------- | ------------------------------------------- |
-| `npm run dev`        | Vite dev server with HMR                    |
-| `npm run build`      | Type-check + production bundle in `dist/`   |
-| `npm run preview`    | Serve the production build locally          |
-| `npm run type-check` | TypeScript type-check only (`tsc --noEmit`) |
-| `npm run lint`       | ESLint across the codebase                  |
-
+| Script | Purpose |
+|--------|---------|
+| `npm run dev` | Vite dev server |
+| `npm run build` | Type-check + production bundle |
+| `npm run preview` | Serve `dist/` locally |
+| `npm run lint` | ESLint |
+| `npm run type-check` | `tsc --noEmit` |
+| `npm test` | Vitest (`src/**/*.test.ts`) |
+| `npm run quality` | lint + types + tests + build |
+| `npm run export:strapi-seed` | Export course JSON seeds for Strapi |
 
 ---
 
-## 🧭 Architecture
+## Repository layout
 
 ```
 react-learn/
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-├── vite.config.ts
-├── supabase/
-│   └── schema.sql                 # Supabase migrations (idempotent)
+├── .github/workflows/         # CI (quality + Trivy + CodeQL) · Deploy
+├── deploy.md                  # Ops / CI/CD guide
+├── docker-compose.yml
+├── Dockerfile                 # SPA → nginx-unprivileged :8080
+├── nginx.conf
+├── supabase/schema.sql
+├── scripts/export-course-seed.ts
+├── strapi/                    # Strapi 5.51.x CMS + seed import
+├── worker/                    # Deterministic audit worker
 └── src/
-    ├── main.tsx                   # React entry point
-    ├── App.tsx                    # Router, providers, route guards
-    ├── index.css                  # Theme variables + Tailwind layers
-    ├── types.ts                   # Domain-wide types
-    │
-    ├── data/                      # 📚 Curriculum (typed, declarative)
-    │   ├── courses/react/phases/  #    Phase-level modules + exercises
-    │   ├── catalog.ts             #    Landing catalog
-    │   ├── phases.ts              #    Legacy aggregator
-    │   └── index.ts               #    Unified helpers
-    │
-    ├── hooks/                     # ⚙️  Global logic
-    │   ├── useAuth.tsx            #    Supabase session + profile
-    │   ├── useProgress.tsx        #    Progress store + sync status
-    │   ├── useThemeEffect.ts      #    Dark/light theme bridge
-    │   └── useSearch.ts           #    Full-text module search
-    │
-    ├── components/
-    │   ├── layout/                #    LandingNav, CourseLayout, Sidebar,
-    │   │                          #    ScrollToTop, BackToTopButton
-    │   ├── auth/                  #    RequireAuth, UserMenu, SyncStatusBadge
-    │   ├── account/               #    AvatarUploader, InlineText,
-    │   │                          #    LinksEditor, SidePanel (reusable)
-    │   ├── learning/              #    Quiz, CodeExercise, ModuleView
-    │   └── ui/                    #    Button, Badge, ProgressBar, InfoBox, …
-    │
-    ├── pages/                     # 📄 Pages = routes
-    │   ├── LandingPage.tsx
-    │   ├── AuthPage.tsx
-    │   ├── account/AccountPage.tsx
-    │   ├── ReactCoursePage.tsx
-    │   ├── PhasePage.tsx
-    │   ├── PhaseChallengePage.tsx
-    │   ├── ModulePage.tsx
-    │   ├── ProgressPage.tsx
-    │   ├── BookmarksPage.tsx
-    │   └── SearchPage.tsx
-    │
-    └── lib/
-        ├── supabase.ts            # Typed Supabase client + `isSupabaseConfigured`
-        ├── progressRemote.ts      # Load/save user_progress row
-        ├── avatarStorage.ts       # Upload/remove avatars in Storage
-        ├── identity.ts            # getInitials, getDisplayName, isPlausibleUrl
-        └── utils.ts               # cn(), phaseAccent()
+    ├── App.tsx                # Routes, locale prefixes, guards
+    ├── i18n/                  # LocaleProvider, messages, path helpers
+    ├── data/courses/          # react + svc (FR/EN content & programs)
+    ├── hooks/                 # useAuth, useProgress, …
+    ├── components/            # layout, learning, account, ui, course
+    ├── pages/                 # Landing, course homes, modules, progress
+    └── lib/                   # supabase, progressRemote, courseProgress, …
 ```
 
 ### Key patterns
 
-- **Single progress store**: `ProgressProvider` keeps local state in sync with
-`localStorage` and (when signed in) with Supabase. Exposes a `sync` state
-(`idle | hydrating | migrating | syncing | synced | offline | error`) so the
-UI can render a `SyncStatusBadge` anywhere.
-- **Route protection**: `/react/`* and `/account` are wrapped in
-`<RequireAuth>`. Unauthenticated users are redirected to `/auth?next=...`.
-- **Declarative content**: a new module is just a typed object inside a phase
-file. No custom component to write for new lessons.
-- **Discriminated content blocks**: `ContentBlock` is a typed union so the
-renderer is exhaustive by construction.
-- **Anti-cheat scoped to the learner, not the platform**: blocks happen inside
-the Sandpack editor only. Copy-paste elsewhere on the page is untouched.
+- **Single progress store** — `ProgressProvider` syncs `localStorage` ↔ Supabase; `sync` state drives `SyncStatusBadge`.
+- **Course areas** — `courseArea` + `CourseLayout` scope nav, search, and progress per track.
+- **Progress math** — shared helpers in `src/lib/courseProgress.ts` (phases, course totals, active courses).
+- **Route protection** — course trees and `/account` behind `<RequireAuth>`; guests redirected to `/auth?next=...`.
+- **Declarative content** — new modules are typed data; `ContentBlock` is an exhaustive discriminated union.
+- **Anti-cheat in the editor** — paste/solution locks target Sandpack, not the whole page.
 
 ---
 
-## 📚 Adding content
+## Adding content
 
-A module is just a typed object inside its phase:
+### React module (example)
 
 ```ts
-// src/data/courses/react/phases/core/modules/12-components-props.ts
+// src/data/courses/react/.../modules/12-components-props.ts
 {
   id: "react-core-m12",
   index: "M12",
@@ -268,8 +232,7 @@ A module is just a typed object inside its phase:
   duration: "2 h",
   content: [
     { kind: "paragraph", html: "React is all about <strong>components</strong>..." },
-    { kind: "info", box: { variant: "tip", title: "💡", body: "..." } },
-    { kind: "lessons", items: [ { id: "12.1", title: "...", desc: "..." } ] },
+    { kind: "info", box: { variant: "tip", title: "Tip", body: "..." } },
   ],
   quiz: { /* ... */ },
   exercises: [ /* ... */ ],
@@ -278,78 +241,73 @@ A module is just a typed object inside its phase:
 
 ### `ContentBlock` variants
 
+| kind | Usage |
+|------|--------|
+| `title` | Section heading |
+| `paragraph` | Body HTML |
+| `info` | Callout (tip / warn / note / concept) |
+| `highlight` | Emphasized one-liner |
+| `lessons` | Sub-lesson list |
+| `code` | Syntax-highlighted sample |
 
-| kind        | Usage                                         |
-| ----------- | --------------------------------------------- |
-| `title`     | H2-style section heading                      |
-| `paragraph` | Body text with inline HTML allowed            |
-| `info`      | Colored callout (tip / warn / note / concept) |
-| `highlight` | Highlighted one-liner                         |
-| `lessons`   | List of sub-lessons with tags                 |
-| `code`      | Syntax-highlighted code sample                |
+### Strapi seeds
 
-
----
-
-## 🎯 Live exercises (Sandpack + local validator)
-
-Each `CodeExercise` defines:
-
-- `starterFiles`   — the learner's starting point.
-- `solutionFiles`  — revealed only after enough attempts, in a read-only panel.
-- `hints`          — revealed one by one.
-- `validator`      — **offline** JS snippet that inspects the current files
-and returns `{ passed, total, failures? }`. Enables a deterministic
-"Run + verify" button without depending on a remote runner.
-- `template`       — `react` (default), `react-ts`, or `vanilla`.
-- `attemptsBeforeSolution` — unlocks the solution button after N real runs
-(default: 5).
-
-The learner can **run**, **reveal the solution** (once unlocked), and
-**restart the exercise from the starter**. The progress status is tracked per
-exercise (`not-started | attempted | solved | revealed`).
+```bash
+npm run export:strapi-seed
+# then import inside Strapi — see strapi/src/seed/README.md
+```
 
 ---
 
-## 💾 Progress storage
+## Live exercises (Sandpack + local validator)
 
-The progress blob contains:
-
-- `readModules`         — ids of modules marked as read.
-- `quizScores`          — each quiz's result and answers.
-- `exerciseProgress`    — per-exercise status, attempts, hints used.
-- `challengeScores`     — per-phase challenge attempts.
-- `bookmarks`           — bookmarked modules.
-- `theme`               — `"dark"` or `"light"`.
-
-### Offline-first + cloud sync
-
-Without a session, progress is kept in `localStorage`
-(`react-learn:progress:v3`). When a learner signs in:
-
-1. The client loads `user_progress` for that user.
-2. If the backend is empty and local progress exists, it is **migrated once**
-  to the backend (the UI shows a visible "Migrating…" → "Synced" state).
-3. From there on, every mutation is debounced and persisted to Supabase.
-4. If the backend is unreachable, the UI falls back to local and surfaces an
-  `Offline` sync badge with a manual retry action.
+Each exercise may define `starterFiles`, `solutionFiles`, `hints`, an offline
+`validator`, `template` (`react` | `react-ts` | `vanilla`), and
+`attemptsBeforeSolution`. Status: `not-started` | `attempted` | `solved` | `revealed`.
 
 ---
 
-## 🗺️ Roadmap
+## Progress storage
 
-- Tutorial phase "Pro tools transition" (VS Code, Git, GitHub, Vercel).
-- Capstone project picker (4–5 templates) + branding customization.
-- Capstone submission workflow (repo + live URL + checklist).
-- Admin review dashboard on a private URL.
-- Certificate emission (PDF + public verification page).
-- Public project gallery with opt-in + LinkedIn share.
-- Spaced-repetition quick-review mode for past quizzes.
-- Achievement & badge system.
-- PWA / offline-first polish.
+Blob fields: `readModules`, `quizScores`, `exerciseProgress`, `challengeScores`,
+`bookmarks`, `theme`.
+
+**Offline-first + cloud sync**
+
+1. No session → `localStorage` only.
+2. Sign-in → load remote; if empty, **migrate once** from local.
+3. Mutations debounce to Supabase; on outage → local + `Offline` badge + retry.
 
 ---
 
-## 📝 License
+## CI / quality gates
 
-© 2026 Mezes Corporation All rights reserved.
+On every PR and push to `main` (see `.github/workflows/ci.yml`):
+
+- ESLint · TypeScript · Vitest · SPA build  
+- Worker build + self-check · Strapi install/build  
+- Trivy (filesystem, Dockerfile/Compose config, container images)  
+- CodeQL (`security-and-quality`)  
+- Deploy workflow runs only after a green CI on `main` ([deploy.md](./deploy.md))
+
+Locally:
+
+```bash
+npm run quality
+```
+
+---
+
+## Roadmap
+
+- Capstone submission + admin review + signed certificates.
+- Public gallery / LinkedIn share.
+- Tutorial “pro tools” bridge (VS Code, Git, GitHub, Vercel).
+- Runtime Strapi content as primary source (`VITE_STRAPI_CONTENT_ENABLED=true`) with editorial workflow.
+- Spaced repetition, achievements, PWA polish.
+
+---
+
+## License
+
+© 2026 Mezes Corporation. All rights reserved.

@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
+    "test": "vitest run --config vitest.config.ts",
     "test:progress": "vitest run --config vitest.config.ts src/lib/courseProgress.test.ts",
+    "quality": "npm run lint && npm run type-check && npm run test && npm run build",
     "export:strapi-seed": "tsx scripts/export-course-seed.ts"
   },
   "dependencies": {
