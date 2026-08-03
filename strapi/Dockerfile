@@ -25,9 +25,8 @@ COPY package.json package-lock.json ./
 RUN --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev --fetch-retries=8 --fetch-retry-mintimeout=20000 \
       --fetch-retry-maxtimeout=180000 --fetch-timeout=900000 \
-  # Admin already built — drop Vite/esbuild binaries that fail image scans
-  && find node_modules -type d \( -name vite -o -name esbuild -o -name '@esbuild' \) -print0 \
-       | xargs -0 -r rm -rf \
+  # Admin already built — drop Vite only. Keep esbuild: `strapi start` loads config/*.ts via esbuild-register.
+  && find node_modules -type d -name vite -print0 | xargs -0 -r rm -rf \
   # Strip toolchain shipped with the Node image (not needed at runtime)
   && rm -rf \
     /usr/local/lib/node_modules/npm \
