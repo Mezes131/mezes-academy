@@ -29,8 +29,11 @@ export function ProgressBar({
         )}
       >
         <div
-          className={cn("h-full transition-all duration-500 rounded-full", accent.dot)}
-          style={{ width: `${pct}%` }}
+          className={cn(
+            "h-full w-full origin-left rounded-full transition-transform duration-300 ease-out",
+            accent.dot,
+          )}
+          style={{ transform: `scaleX(${pct / 100})` }}
         />
       </div>
       {showLabel && (

@@ -44,7 +44,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
     totalExercises === 0 ? true : solvedExercises === totalExercises;
 
   return (
-    <article className="animate-fade-in">
+    <article>
       {/* ─── Module header ─────────────────────── */}
       <div className="mb-8">
         <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-wider text-fg-3 mb-2">

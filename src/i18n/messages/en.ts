@@ -190,6 +190,22 @@ export const messagesEn: MessageTree = {
     errRateLimit: "Too many attempts. Try again in a few minutes.",
     errProviderDisabled:
       "This sign-in method is not enabled yet. Try again later.",
+    forgotPassword: "Forgot password?",
+    forgotTitle: "Reset your password",
+    forgotBody:
+      "Enter your email. If an account exists, you will receive a reset link.",
+    forgotSubmit: "Send reset link",
+    forgotSent:
+      "If an account exists for this email, a reset link has been sent.",
+    backToSignIn: "Back to sign in",
+    resetTitle: "New password",
+    resetBody: "Choose a new password for your account.",
+    resetSubmit: "Save password",
+    resetSuccess: "Password updated. You can sign in.",
+    resetInvalid: "This reset link is invalid or has expired.",
+    resetRequestAgain: "Request a new link",
+    errRecovery:
+      "Could not reset the password. Try again or request a new link.",
   },
   account: {
     backToCourse: "Back to the track",

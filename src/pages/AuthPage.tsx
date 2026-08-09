@@ -9,12 +9,9 @@ import { useT } from "@/i18n/useT";
 
 /**
  * Entry route for authentication. Pure shell:
- * - reads `?next=` and `?mode=` from the URL,
- * - redirects signed-in users to their destination,
+ * - reads `?next=`, `?mode=` (`login` | `register` | `forgot`), `?reset=ok`,
+ * - redirects signed-in users to their destination (except forgot is signed-out),
  * - renders the page background + benefits column + form card.
- *
- * Form fields + async auth live in `<AuthFormCard />`; the login/register tab
- * is lifted here so `<AuthBenefits />` stays in sync with the switcher.
  */
 export function AuthPage() {
   const [searchParams] = useSearchParams();
@@ -25,15 +22,19 @@ export function AuthPage() {
     () => searchParams.get("next") || lp("/react"),
     [searchParams, lp],
   );
+  const urlMode = searchParams.get("mode");
+  const isForgot = urlMode === "forgot";
   const [mode, setMode] = useState<AuthMode>(() =>
-    searchParams.get("mode") === "register" ? "register" : "login",
+    urlMode === "register" ? "register" : "login",
   );
+  const resetOk = searchParams.get("reset") === "ok";
 
   if (!configured) {
     return <ConfigurationRequired />;
   }
 
-  if (!loading && user) {
+  // After password reset we sign out and land with ?reset=ok (no session).
+  if (!loading && user && !isForgot) {
     return <Navigate to={nextPath} replace />;
   }
 
@@ -43,8 +44,14 @@ export function AuthPage() {
 
       <div className="max-w-6xl mx-auto px-6 py-12 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <AuthBenefits mode={mode} />
-          <AuthFormCard nextPath={nextPath} mode={mode} onModeChange={setMode} />
+          <AuthBenefits mode={isForgot ? "login" : mode} />
+          <AuthFormCard
+            nextPath={nextPath}
+            mode={mode}
+            onModeChange={setMode}
+            view={isForgot ? "forgot" : "credentials"}
+            resetSuccess={resetOk}
+          />
         </div>
       </div>
     </div>

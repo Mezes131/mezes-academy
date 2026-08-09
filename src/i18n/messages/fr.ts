@@ -189,6 +189,22 @@ export const messagesFr = {
     errRateLimit: "Trop de tentatives. Réessaie dans quelques minutes.",
     errProviderDisabled:
       "Cette méthode de connexion n'est pas encore activée. Réessaie plus tard.",
+    forgotPassword: "Mot de passe oublié ?",
+    forgotTitle: "Réinitialiser le mot de passe",
+    forgotBody:
+      "Entre ton email. Si un compte existe, tu recevras un lien de réinitialisation.",
+    forgotSubmit: "Envoyer le lien",
+    forgotSent:
+      "Si un compte existe pour cet email, un lien de réinitialisation a été envoyé.",
+    backToSignIn: "Retour à la connexion",
+    resetTitle: "Nouveau mot de passe",
+    resetBody: "Choisis un nouveau mot de passe pour ton compte.",
+    resetSubmit: "Enregistrer le mot de passe",
+    resetSuccess: "Mot de passe mis à jour. Tu peux te connecter.",
+    resetInvalid: "Ce lien de réinitialisation est invalide ou a expiré.",
+    resetRequestAgain: "Demander un nouveau lien",
+    errRecovery:
+      "Impossible de réinitialiser le mot de passe. Réessaie ou demande un nouveau lien.",
   },
   account: {
     backToCourse: "Retour au parcours",

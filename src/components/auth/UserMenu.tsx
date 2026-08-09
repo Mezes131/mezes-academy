@@ -89,7 +89,8 @@ export function UserMenu({
         aria-haspopup="menu"
         aria-expanded={open}
         className={cn(
-          "inline-flex items-center gap-2 rounded-full pl-1 pr-2 py-1 transition",
+          "inline-flex items-center gap-2 rounded-full pl-1 pr-2 py-1",
+          "transition-[transform,background-color] duration-150 ease-out active:scale-[0.97]",
           "hover:bg-bg-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60",
           open && "bg-bg-3",
         )}
@@ -103,7 +104,7 @@ export function UserMenu({
         <ChevronDown
           size={14}
           className={cn(
-            "text-fg-3 transition-transform duration-150",
+            "text-fg-3 transition-transform duration-150 ease-out",
             open && "rotate-180",
           )}
         />
@@ -114,7 +115,7 @@ export function UserMenu({
           role="menu"
           className={cn(
             "absolute right-0 top-[calc(100%+6px)] z-50 w-64 rounded-xl border-base bg-bg-2 shadow-soft overflow-hidden",
-            "animate-fade-in origin-top-right",
+            "origin-top-right animate-scale-in",
           )}
         >
           <div className="p-3 flex items-center gap-3 border-b-base">

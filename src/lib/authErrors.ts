@@ -22,5 +22,12 @@ export function humanizeAuthError(
   }
   if (lower.includes("rate limit")) return t("auth.errRateLimit");
   if (lower.includes("provider is not enabled")) return t("auth.errProviderDisabled");
+  if (
+    lower.includes("recovery") ||
+    lower.includes("reset password") ||
+    lower.includes("same password")
+  ) {
+    return t("auth.errRecovery");
+  }
   return raw;
 }

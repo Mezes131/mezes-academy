@@ -61,7 +61,8 @@ function TabButton({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "h-9 rounded-lg text-sm font-semibold transition",
+        "h-9 rounded-lg text-sm font-semibold",
+        "transition-[transform,background-color,color,box-shadow] duration-150 ease-out active:scale-[0.97]",
         active
           ? "bg-bg text-fg shadow-soft"
           : "text-fg-2 hover:text-fg hover:bg-bg-2/60",

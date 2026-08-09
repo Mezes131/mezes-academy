@@ -64,6 +64,8 @@ interface AuthContextValue {
   updateProfile: (patch: UserProfileUpdate) => Promise<UserProfile>;
   /** Update the current user's Supabase password. */
   updatePassword: (newPassword: string) => Promise<void>;
+  /** Send a Supabase recovery email; `redirectTo` must be allow-listed. */
+  requestPasswordReset: (email: string, redirectTo: string) => Promise<void>;
   /** Re-fetch the profile from backend (e.g. after elevation). */
   refreshProfile: () => Promise<void>;
 }
@@ -382,6 +384,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
   }, []);
 
+  const requestPasswordReset = useCallback(
+    async (email: string, redirectTo: string) => {
+      if (!supabase) {
+        throw new Error("Supabase n'est pas configuré.");
+      }
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo,
+      });
+      if (error) throw error;
+    },
+    [],
+  );
+
   const refreshProfile = useCallback(async () => {
     const currentUser = session?.user;
     if (!currentUser) return;
@@ -401,6 +416,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signOut,
       updateProfile,
       updatePassword,
+      requestPasswordReset,
       refreshProfile,
     }),
     [
@@ -413,6 +429,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signOut,
       updateProfile,
       updatePassword,
+      requestPasswordReset,
       refreshProfile,
     ],
   );

@@ -49,7 +49,8 @@ export function LanguageMenu({ className }: { className?: string }) {
         aria-expanded={open}
         aria-label={t("language.label")}
         className={cn(
-          "inline-flex h-11 w-11 items-center justify-center rounded-lg border-base transition",
+          "inline-flex h-11 w-11 items-center justify-center rounded-lg border-base",
+          "transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.97]",
           "text-fg-2 hover:text-fg hover:bg-bg-3",
           open && "bg-bg-3 text-fg",
         )}
@@ -63,7 +64,7 @@ export function LanguageMenu({ className }: { className?: string }) {
           aria-label={t("language.label")}
           className={cn(
             "absolute right-0 top-[calc(100%+6px)] z-50 min-w-[9rem] overflow-hidden rounded-xl border-base bg-bg-2 shadow-soft",
-            "animate-fade-in origin-top-right",
+            "origin-top-right animate-scale-in",
           )}
         >
           {options.map((code) => (

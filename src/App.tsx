@@ -22,6 +22,11 @@ import { useT } from "@/i18n/useT";
 const AuthPage = lazy(() =>
   import("@/pages/AuthPage").then((m) => ({ default: m.AuthPage })),
 );
+const ResetPasswordPage = lazy(() =>
+  import("@/pages/ResetPasswordPage").then((m) => ({
+    default: m.ResetPasswordPage,
+  })),
+);
 const AccountPage = lazy(() =>
   import("@/pages/account/AccountPage").then((m) => ({ default: m.AccountPage })),
 );
@@ -202,6 +207,10 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
   return [
     { path: p("/"), element: withLanding(<LandingPage />) },
     { path: p("/auth"), element: withLanding(<AuthPage />) },
+    {
+      path: p("/reset-password"),
+      element: withLanding(<ResetPasswordPage />),
+    },
     {
       path: p("/account"),
       element: (
