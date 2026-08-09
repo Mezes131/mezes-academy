@@ -22,7 +22,7 @@ export function PhasePage() {
   const challengeScore = progress.challengeScores[phase.id];
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-5xl animate-fade-in px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
+    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
       {/* ─── Header: icon + id + title on one row; rest below ─── */}
       <header className="min-w-0 pb-5">
         <div className="flex min-w-0 items-center gap-3 sm:gap-4">
@@ -135,7 +135,7 @@ export function PhasePage() {
               to={`${basePath}/module/${mod.id}`}
               className={cn(
                 "group block min-w-0 rounded-xl border-base bg-bg-2 p-4 transition sm:p-5",
-                "hover:border-accent/30 hover:-translate-y-0.5 duration-200",
+                "hover:border-accent/30 duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-0.5",
               )}
             >
               <div className="flex min-w-0 items-center gap-3">

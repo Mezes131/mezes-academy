@@ -167,7 +167,7 @@ export function ProgressPage() {
   );
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-5xl animate-fade-in px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
+    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
       <div className="mb-2 flex items-center gap-3 font-mono text-[11px] uppercase tracking-wider text-accent-2 sm:mb-3">
         <TrendingUp size={14} aria-hidden="true" /> {t("progress.title")}
       </div>

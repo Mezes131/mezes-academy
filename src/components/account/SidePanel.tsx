@@ -136,7 +136,7 @@ function CompletenessRing({
             strokeDasharray={`${dash} ${circumference - dash}`}
             strokeLinecap="round"
             className={cn(
-              "transition-all duration-500",
+              "transition-[stroke-dasharray,color] duration-300 ease-out",
               clamp >= 100 ? "text-emerald-400" : "text-accent-2",
             )}
           />

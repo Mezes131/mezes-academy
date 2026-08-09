@@ -16,6 +16,8 @@ interface EmailPasswordFormProps {
   mode: AuthMode;
   onSubmit: (values: EmailPasswordValues) => Promise<void>;
   onSwitchMode: (mode: AuthMode) => void;
+  /** Shown on login mode — opens forgot-password flow. */
+  onForgot?: () => void;
   /** Disable inputs + submit (e.g. while an OAuth redirect is in flight). */
   disabled?: boolean;
   /** Error surfaced at the bottom of the form. */
@@ -34,6 +36,7 @@ export function EmailPasswordForm({
   mode,
   onSubmit,
   onSwitchMode,
+  onForgot,
   disabled = false,
   error,
   info,
@@ -143,6 +146,19 @@ export function EmailPasswordForm({
           disabled={allDisabled}
         />
       </Field>
+
+      {mode === "login" && onForgot && (
+        <div className="-mt-1 text-right">
+          <button
+            type="button"
+            onClick={onForgot}
+            className="text-[12px] text-accent-2 hover:underline underline-offset-4"
+            disabled={allDisabled}
+          >
+            {t("auth.forgotPassword")}
+          </button>
+        </div>
+      )}
 
       {error && (
         <p

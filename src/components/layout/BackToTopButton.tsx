@@ -41,9 +41,9 @@ export function BackToTopButton({ threshold = 320 }: BackToTopButtonProps) {
         "bg-accent text-white shadow-soft",
         "flex items-center justify-center",
         "border border-accent/40",
-        "transition-all duration-200 ease-out",
+        "transition-[transform,opacity,background-color] duration-200 ease-out",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-        "hover:-translate-y-0.5 hover:bg-accent-2 active:translate-y-0",
+        "[@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-0.5 hover:bg-accent-2 active:scale-[0.97]",
         visible
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 translate-y-3 pointer-events-none",

@@ -146,17 +146,15 @@ export function Modal({
       aria-modal="true"
       aria-labelledby={title ? "modal-title" : undefined}
       aria-describedby={description ? "modal-description" : undefined}
-      className="fixed inset-0 z-[100] grid place-items-center px-4 py-6 animate-fade-in"
-      onMouseDown={(e) => {
-        if (disableBackdropClose) return;
-        // Only close when clicking directly on the overlay, not on the panel.
-        if (e.target === e.currentTarget) handleClose();
-      }}
+      className="fixed inset-0 z-[100] grid place-items-center px-4 py-6"
     >
-      {/* Backdrop */}
+      {/* Backdrop — opacity only; panel gets its own scale enter */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-black/55 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/55 backdrop-blur-sm animate-fade-opacity"
+        onMouseDown={() => {
+          if (!disableBackdropClose) handleClose();
+        }}
       />
 
       {/* Panel */}
@@ -164,18 +162,19 @@ export function Modal({
         ref={panelRef}
         tabIndex={-1}
         className={cn(
-          "relative w-full rounded-2xl border-base bg-bg-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)]",
-          "outline-none",
+          "relative w-full origin-center rounded-2xl border-base bg-bg-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)]",
+          "outline-none animate-scale-in",
           maxWidth,
           className,
         )}
+        onMouseDown={(e) => e.stopPropagation()}
       >
         {!hideCloseButton && (
           <button
             type="button"
             onClick={handleClose}
             aria-label={t("common.close")}
-            className="absolute top-3 right-3 min-w-11 min-h-11 inline-flex items-center justify-center rounded-lg text-fg-3 hover:text-fg hover:bg-bg-3 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            className="absolute top-3 right-3 min-w-11 min-h-11 inline-flex items-center justify-center rounded-lg text-fg-3 hover:text-fg hover:bg-bg-3 transition-colors duration-150 ease-out active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             <X size={16} />
           </button>

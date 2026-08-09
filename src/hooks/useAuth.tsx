@@ -64,6 +64,12 @@ interface AuthContextValue {
   updateProfile: (patch: UserProfileUpdate) => Promise<UserProfile>;
   /** Update the current user's Supabase password. */
   updatePassword: (newPassword: string) => Promise<void>;
+  /** Send a Supabase recovery email; `redirectTo` must be allow-listed. */
+  requestPasswordReset: (email: string, redirectTo: string) => Promise<void>;
+  /** Whether email is registered (and has email/password identity). */
+  lookupAuthEmail: (
+    email: string,
+  ) => Promise<{ exists: boolean; hasPassword: boolean }>;
   /** Re-fetch the profile from backend (e.g. after elevation). */
   refreshProfile: () => Promise<void>;
 }
@@ -382,6 +388,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
   }, []);
 
+  const requestPasswordReset = useCallback(
+    async (email: string, redirectTo: string) => {
+      if (!supabase) {
+        throw new Error("Supabase n'est pas configuré.");
+      }
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo,
+      });
+      if (error) throw error;
+    },
+    [],
+  );
+
+  const lookupAuthEmail = useCallback(async (email: string) => {
+    if (!supabase) {
+      throw new Error("Supabase n'est pas configuré.");
+    }
+    const { data, error } = await supabase.rpc("lookup_auth_email", {
+      check_email: email.trim(),
+    });
+    if (error) throw error;
+    const row = (data ?? {}) as { exists?: boolean; has_password?: boolean };
+    return {
+      exists: Boolean(row.exists),
+      hasPassword: Boolean(row.has_password),
+    };
+  }, []);
+
   const refreshProfile = useCallback(async () => {
     const currentUser = session?.user;
     if (!currentUser) return;
@@ -401,6 +435,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signOut,
       updateProfile,
       updatePassword,
+      requestPasswordReset,
+      lookupAuthEmail,
       refreshProfile,
     }),
     [
@@ -413,6 +449,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signOut,
       updateProfile,
       updatePassword,
+      requestPasswordReset,
+      lookupAuthEmail,
       refreshProfile,
     ],
   );

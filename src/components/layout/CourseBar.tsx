@@ -57,7 +57,7 @@ export function CourseBar({
             aria-label={
               isSidebarOpen ? t("courseBar.closeSidebar") : t("courseBar.openSidebar")
             }
-            className="min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition text-fg-2 hover:text-fg"
+            className="min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 text-fg-2 hover:text-fg transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.97]"
           >
             {isSidebarOpen ? (
               <PanelLeftClose size={16} />
@@ -85,7 +85,8 @@ export function CourseBar({
           <Link
             to={`${basePath}/progress`}
             className={cn(
-              "flex items-center gap-1.5 sm:gap-2 rounded-lg border-base px-1.5 sm:px-2.5 min-h-11 hover:bg-bg-3 transition text-fg-2 hover:text-fg flex-shrink-0",
+              "flex items-center gap-1.5 sm:gap-2 rounded-lg border-base px-1.5 sm:px-2.5 min-h-11 hover:bg-bg-3 text-fg-2 hover:text-fg flex-shrink-0",
+              "transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.97]",
               location.pathname === `${basePath}/progress` && "bg-bg-3 text-fg",
             )}
             title={t("courseBar.progress")}
@@ -103,7 +104,8 @@ export function CourseBar({
             to={`${basePath}/bookmarks`}
             className={({ isActive }) =>
               cn(
-                "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
+                "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 flex-shrink-0",
+                "transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.97]",
                 isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
               )
             }
@@ -117,7 +119,8 @@ export function CourseBar({
               to={`${basePath}/final-project`}
               className={({ isActive }) =>
                 cn(
-                  "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 transition flex-shrink-0",
+                  "min-w-11 min-h-11 rounded-lg flex items-center justify-center border-base hover:bg-bg-3 flex-shrink-0",
+                  "transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.97]",
                   isActive ? "bg-bg-3 text-fg" : "text-fg-2 hover:text-fg",
                 )
               }

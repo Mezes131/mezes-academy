@@ -67,10 +67,18 @@ export default {
         soft: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         glow: "0 0 0 1px rgb(var(--accent) / 0.3), 0 4px 20px -4px rgb(var(--accent) / 0.25)",
       },
+      transitionTimingFunction: {
+        out: "var(--ease-out)",
+        "in-out-strong": "var(--ease-in-out)",
+      },
       keyframes: {
         "fade-in": {
           "0%": { opacity: "0", transform: "translateY(6px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-opacity": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
         "scale-in": {
           "0%": { opacity: "0", transform: "scale(0.96)" },
@@ -78,8 +86,9 @@ export default {
         },
       },
       animation: {
-        "fade-in": "fade-in 0.25s ease-out",
-        "scale-in": "scale-in 0.18s ease-out",
+        "fade-in": "fade-in 0.2s var(--ease-out)",
+        "fade-opacity": "fade-opacity 0.2s var(--ease-out)",
+        "scale-in": "scale-in 0.18s var(--ease-out)",
       },
     },
   },

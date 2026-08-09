@@ -190,6 +190,26 @@ export const messagesEn: MessageTree = {
     errRateLimit: "Too many attempts. Try again in a few minutes.",
     errProviderDisabled:
       "This sign-in method is not enabled yet. Try again later.",
+    forgotPassword: "Forgot password?",
+    forgotTitle: "Reset your password",
+    forgotBody:
+      "Enter your account email. We'll tell you right away if it's recognized, then send a reset link.",
+    forgotSubmit: "Send reset link",
+    forgotSent: "Email sent. Check your inbox (and spam) to reset your password.",
+    forgotUnknownEmail: "No account is associated with this email.",
+    forgotOAuthOnly:
+      "This account signs in with Google or GitHub, not a password. Use the OAuth button on the sign-in page.",
+    backToSignIn: "Back to sign in",
+    resetTitle: "New password",
+    resetBody: "Choose a new password for your account.",
+    resetSubmit: "Save password",
+    resetSuccess: "Password updated. You can sign in.",
+    resetInvalid: "This reset link is invalid or has expired.",
+    resetRequestAgain: "Request a new link",
+    errRecovery:
+      "Could not reset the password. Try again or request a new link.",
+    errEmailSend:
+      "Email sending failed (SMTP / provider). Check Auth → SMTP in Supabase, or try again later.",
   },
   account: {
     backToCourse: "Back to the track",

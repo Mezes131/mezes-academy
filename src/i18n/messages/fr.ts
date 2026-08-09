@@ -189,6 +189,26 @@ export const messagesFr = {
     errRateLimit: "Trop de tentatives. Réessaie dans quelques minutes.",
     errProviderDisabled:
       "Cette méthode de connexion n'est pas encore activée. Réessaie plus tard.",
+    forgotPassword: "Mot de passe oublié ?",
+    forgotTitle: "Réinitialiser le mot de passe",
+    forgotBody:
+      "Entre l'email de ton compte. On te dira tout de suite s'il est reconnu, puis on enverra un lien de réinitialisation.",
+    forgotSubmit: "Envoyer le lien",
+    forgotSent: "Email envoyé. Ouvre ta boîte mail (et les spams) pour réinitialiser ton mot de passe.",
+    forgotUnknownEmail: "Aucun compte n'est associé à cet email.",
+    forgotOAuthOnly:
+      "Ce compte se connecte via Google ou GitHub, pas avec un mot de passe. Utilise le bouton OAuth sur la page de connexion.",
+    backToSignIn: "Retour à la connexion",
+    resetTitle: "Nouveau mot de passe",
+    resetBody: "Choisis un nouveau mot de passe pour ton compte.",
+    resetSubmit: "Enregistrer le mot de passe",
+    resetSuccess: "Mot de passe mis à jour. Tu peux te connecter.",
+    resetInvalid: "Ce lien de réinitialisation est invalide ou a expiré.",
+    resetRequestAgain: "Demander un nouveau lien",
+    errRecovery:
+      "Impossible de réinitialiser le mot de passe. Réessaie ou demande un nouveau lien.",
+    errEmailSend:
+      "L'envoi de l'email a échoué (SMTP / provider). Vérifie la config Auth → SMTP dans Supabase, ou réessaie plus tard.",
   },
   account: {
     backToCourse: "Retour au parcours",

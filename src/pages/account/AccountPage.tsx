@@ -151,7 +151,7 @@ export function AccountPage() {
         <div
           role="status"
           className={cn(
-            "fixed bottom-6 right-6 z-50 max-w-sm rounded-lg border px-4 py-2.5 text-[13px] font-medium shadow-soft animate-fade-in",
+            "fixed bottom-6 right-6 z-50 max-w-sm rounded-lg border px-4 py-2.5 text-[13px] font-medium shadow-soft origin-bottom-right animate-scale-in",
             toast.kind === "success"
               ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
               : "border-red-500/30 bg-red-500/10 text-red-200",

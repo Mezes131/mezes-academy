@@ -187,13 +187,13 @@ function ToggleRow({
         disabled={disabled}
         onClick={() => onChange(!checked)}
         className={cn(
-          "relative w-11 h-6 rounded-full transition flex-shrink-0",
+          "relative w-11 h-6 rounded-full transition-colors duration-150 ease-out flex-shrink-0 active:scale-[0.97]",
           checked ? "bg-accent" : "bg-bg-4",
         )}
       >
         <span
           className={cn(
-            "absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-soft transition-all",
+            "absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-soft transition-[left] duration-[160ms] ease-out",
             checked ? "left-[22px]" : "left-0.5",
           )}
         />

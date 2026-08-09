@@ -79,7 +79,7 @@ export function ReactCoursePage() {
   const hasStarted = stats.done > 0;
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10 animate-fade-in">
+    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
       {/* ─── Course hero ────────────────────────── */}
       <section className="relative mb-8 min-w-0 lg:mb-10">
         <div className="relative min-w-0">
@@ -187,7 +187,7 @@ export function ReactCoursePage() {
                 to={`${basePath}/phase/${phase.id}`}
                 className={cn(
                   "group relative block min-w-0 overflow-hidden rounded-xl border-base bg-bg-2 p-4 sm:p-5 transition",
-                  "hover:border-accent/30 hover:-translate-y-0.5 duration-200",
+                  "hover:border-accent/30 duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-0.5",
                 )}
               >
                 <div className="flex min-w-0 items-start gap-3 sm:gap-4">

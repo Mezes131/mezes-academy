@@ -59,7 +59,7 @@ export function PhaseChallengePage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-6 lg:px-10 py-10">
       <div className="flex items-center justify-between gap-3 mb-4">
         <Link
           to={`${basePath}/phase/${phaseIdSafe}`}
