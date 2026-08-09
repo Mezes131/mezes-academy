@@ -222,9 +222,134 @@ html.dark ::selection {
   color: rgb(var(--fg));
 }
 
+/* ─── Light hero: Aurora Lesson Beam (scoped; dark unchanged) ─── */
+@keyframes hero-aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.06);
+    opacity: 1;
+  }
+}
+@keyframes studio-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes studio-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes studio-pass-pop {
+  from {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes studio-code-swap {
+  from {
+    filter: blur(2px);
+    opacity: 0.75;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+html.light .hero-aurora {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: hero-aurora-drift 14s linear infinite;
+}
+html.light .hero-aurora-core {
+  top: -18%;
+  left: 8%;
+  width: min(52vw, 34rem);
+  height: min(52vw, 34rem);
+  background: radial-gradient(
+    circle at center,
+    rgb(108 99 255 / 0.28),
+    rgb(74 62 210 / 0.1) 42%,
+    transparent 70%
+  );
+}
+html.light .hero-aurora-expert {
+  top: 8%;
+  right: -8%;
+  width: min(40vw, 26rem);
+  height: min(40vw, 26rem);
+  background: radial-gradient(
+    circle at center,
+    rgb(45 212 160 / 0.22),
+    transparent 68%
+  );
+  animation-delay: -4s;
+}
+html.light .hero-aurora-ts {
+  bottom: -12%;
+  left: 28%;
+  width: min(36vw, 22rem);
+  height: min(36vw, 22rem);
+  background: radial-gradient(
+    circle at center,
+    rgb(245 158 46 / 0.16),
+    transparent 70%
+  );
+  animation-delay: -8s;
+}
+
+html.light .hero-title-accent {
+  color: rgb(74 62 210);
+}
+
+html.light .studio-chrome {
+  animation: studio-enter 220ms var(--ease-out) both;
+  transform-origin: center right;
+}
+html.light .studio-caret {
+  animation: studio-caret-blink 1s step-end infinite;
+}
+html.light .studio-code-swap {
+  animation: studio-code-swap 220ms var(--ease-out) both;
+}
+html.light .studio-pass {
+  animation: studio-pass-pop 180ms var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  html.light .hero-aurora,
+  html.light .studio-chrome,
+  html.light .studio-caret,
+  html.light .studio-code-swap,
+  html.light .studio-pass {
+    animation: none !important;
+  }
+  html.light .hero-aurora {
+    opacity: 0.95;
+    transform: none;
   }
   /* Keep short opacity/color; kill movement-heavy motion */
   *,
