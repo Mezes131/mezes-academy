@@ -46,7 +46,7 @@ export function AuthFormCard({
   const lp = useLocalePath();
   const t = useT();
   const { messages } = useLocale();
-  const { signIn, signUp, signInWithProvider, requestPasswordReset } =
+  const { signIn, signUp, signInWithProvider, requestPasswordReset, lookupAuthEmail } =
     useAuth();
 
   const [oauthBusy, setOauthBusy] = useState<OAuthProvider | null>(null);
@@ -115,17 +115,20 @@ export function AuthFormCard({
     setInfo(null);
     const redirectTo = `${window.location.origin}${lp("/reset-password")}`;
     try {
+      const lookup = await lookupAuthEmail(email);
+      if (!lookup.exists) {
+        setError(t("auth.forgotUnknownEmail"));
+        return;
+      }
+      if (!lookup.hasPassword) {
+        setError(t("auth.forgotOAuthOnly"));
+        return;
+      }
       await requestPasswordReset(email, redirectTo);
       setInfo(t("auth.forgotSent"));
     } catch (err) {
-      const raw = (err as Error).message;
-      const lower = raw.toLowerCase();
-      // ponytail: avoid email enumeration — only surface rate-limit / config
-      if (lower.includes("rate limit") || lower.includes("supabase n'est pas")) {
-        setError(humanizeAuthError(raw, messages));
-      } else {
-        setInfo(t("auth.forgotSent"));
-      }
+      // Surface real send failures (SMTP, rate limit, missing RPC, …)
+      setError(humanizeAuthError((err as Error).message, messages));
     }
   }
 

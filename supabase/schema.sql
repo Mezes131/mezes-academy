@@ -194,3 +194,49 @@ using (
 -- You can also demote back with role = 'student'.
 -- Admins sign in via the private URL `/access/<VITE_ADMIN_LOGIN_SLUG>`.
 -- ──────────────────────────────────────────────────────────────
+
+-- ──────────────────────────────────────────────────────────────
+-- Forgot password: lookup whether an email is registered.
+-- Intentionally callable by anon (enables enumeration — product choice).
+-- Run this block in the SQL Editor if the project already applied schema.sql.
+-- ──────────────────────────────────────────────────────────────
+
+create or replace function public.lookup_auth_email(check_email text)
+returns jsonb
+language plpgsql
+security definer
+set search_path = auth, public
+as $$
+declare
+  uid uuid;
+  has_email_provider boolean;
+begin
+  if check_email is null or length(trim(check_email)) = 0 then
+    return jsonb_build_object('exists', false, 'has_password', false);
+  end if;
+
+  select u.id into uid
+  from auth.users u
+  where lower(u.email) = lower(trim(check_email))
+  limit 1;
+
+  if uid is null then
+    return jsonb_build_object('exists', false, 'has_password', false);
+  end if;
+
+  select exists (
+    select 1
+    from auth.identities i
+    where i.user_id = uid
+      and i.provider = 'email'
+  ) into has_email_provider;
+
+  return jsonb_build_object(
+    'exists', true,
+    'has_password', coalesce(has_email_provider, false)
+  );
+end;
+$$;
+
+revoke all on function public.lookup_auth_email(text) from public;
+grant execute on function public.lookup_auth_email(text) to anon, authenticated;

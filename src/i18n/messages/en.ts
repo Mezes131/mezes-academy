@@ -193,10 +193,12 @@ export const messagesEn: MessageTree = {
     forgotPassword: "Forgot password?",
     forgotTitle: "Reset your password",
     forgotBody:
-      "Enter your email. If an account exists, you will receive a reset link.",
+      "Enter your account email. We'll tell you right away if it's recognized, then send a reset link.",
     forgotSubmit: "Send reset link",
-    forgotSent:
-      "If an account exists for this email, a reset link has been sent.",
+    forgotSent: "Email sent. Check your inbox (and spam) to reset your password.",
+    forgotUnknownEmail: "No account is associated with this email.",
+    forgotOAuthOnly:
+      "This account signs in with Google or GitHub, not a password. Use the OAuth button on the sign-in page.",
     backToSignIn: "Back to sign in",
     resetTitle: "New password",
     resetBody: "Choose a new password for your account.",
@@ -206,6 +208,8 @@ export const messagesEn: MessageTree = {
     resetRequestAgain: "Request a new link",
     errRecovery:
       "Could not reset the password. Try again or request a new link.",
+    errEmailSend:
+      "Email sending failed (SMTP / provider). Check Auth → SMTP in Supabase, or try again later.",
   },
   account: {
     backToCourse: "Back to the track",

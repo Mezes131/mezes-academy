@@ -192,10 +192,12 @@ export const messagesFr = {
     forgotPassword: "Mot de passe oublié ?",
     forgotTitle: "Réinitialiser le mot de passe",
     forgotBody:
-      "Entre ton email. Si un compte existe, tu recevras un lien de réinitialisation.",
+      "Entre l'email de ton compte. On te dira tout de suite s'il est reconnu, puis on enverra un lien de réinitialisation.",
     forgotSubmit: "Envoyer le lien",
-    forgotSent:
-      "Si un compte existe pour cet email, un lien de réinitialisation a été envoyé.",
+    forgotSent: "Email envoyé. Ouvre ta boîte mail (et les spams) pour réinitialiser ton mot de passe.",
+    forgotUnknownEmail: "Aucun compte n'est associé à cet email.",
+    forgotOAuthOnly:
+      "Ce compte se connecte via Google ou GitHub, pas avec un mot de passe. Utilise le bouton OAuth sur la page de connexion.",
     backToSignIn: "Retour à la connexion",
     resetTitle: "Nouveau mot de passe",
     resetBody: "Choisis un nouveau mot de passe pour ton compte.",
@@ -205,6 +207,8 @@ export const messagesFr = {
     resetRequestAgain: "Demander un nouveau lien",
     errRecovery:
       "Impossible de réinitialiser le mot de passe. Réessaie ou demande un nouveau lien.",
+    errEmailSend:
+      "L'envoi de l'email a échoué (SMTP / provider). Vérifie la config Auth → SMTP dans Supabase, ou réessaie plus tard.",
   },
   account: {
     backToCourse: "Retour au parcours",

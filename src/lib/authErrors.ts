@@ -29,5 +29,12 @@ export function humanizeAuthError(
   ) {
     return t("auth.errRecovery");
   }
+  if (
+    lower.includes("error sending") ||
+    lower.includes("unable to process") ||
+    lower.includes("smtp")
+  ) {
+    return t("auth.errEmailSend");
+  }
   return raw;
 }
