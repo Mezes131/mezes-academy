@@ -382,7 +382,7 @@ function CodeView({ source }: { source: string }) {
 function tokenizeJsx(source: string): { text: string; cls?: string }[] {
   const out: { text: string; cls?: string }[] = [];
   const re =
-    /(\bfunction\b|\bconst\b|\breturn\b|\buseState\b|\bexpect\b|\bscreen\b|\bgetByRole\b|\btoHaveTextContent\b)|([A-Z][A-Za-z0-9]*)|(\/\/.*$)|('(?:\\.|[^'])*'|`(?:\\.|[^`])*`)|([<>/=]+)|(\d+)/gm;
+    /(\bfunction\b|\bconst\b|\breturn\b|\buseState\b|\bexpect\b|\bscreen\b|\bgetByRole\b|\btoHaveTextContent\b)|([A-Z][A-Za-z0-9]*)|(\/\/.*$)|('(?:\\.|[^'])*'|`(?:\\.|[^\\`])*`)|([<>/=]+)|(\d+)/gm;
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(source))) {
