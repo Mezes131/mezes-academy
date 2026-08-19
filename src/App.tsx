@@ -15,6 +15,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { RequireAuth } from "@/components/auth/RequireAuth";
 import { LandingPage } from "@/pages/LandingPage";
 import { AboutPage } from "@/pages/academy/AboutPage";
+import { ContactPage } from "@/pages/academy/ContactPage";
 import { AcademyDocPage } from "@/pages/academy/AcademyDocPage";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
@@ -211,7 +212,7 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
     { path: p("/about"), element: withLanding(<AboutPage />) },
     {
       path: p("/contact"),
-      element: withLanding(<AcademyDocPage doc="contact" />),
+      element: withLanding(<ContactPage />),
     },
     { path: p("/terms"), element: withLanding(<AcademyDocPage doc="terms" />) },
     {

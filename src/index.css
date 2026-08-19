@@ -352,7 +352,8 @@ html.light .studio-pass {
 }
 
 .about-thesis,
-.about-cta {
+.about-cta,
+.contact-page {
   --bg: 14 15 22;
   --bg2: 20 22 32;
   --bg3: 28 30 44;
@@ -368,9 +369,11 @@ html.light .studio-pass {
   isolation: isolate;
   color-scheme: dark;
   background-color: rgb(12 13 20);
+  overflow: hidden;
 }
 .about-thesis::before,
-.about-cta::before {
+.about-cta::before,
+.contact-page::before {
   content: "";
   position: absolute;
   inset: -18%;
@@ -385,6 +388,9 @@ html.light .studio-pass {
 }
 .about-cta::before {
   animation-delay: -9s;
+}
+.contact-page::before {
+  animation-delay: -4s;
 }
 @keyframes about-thesis-drift {
   0%,
@@ -525,6 +531,68 @@ html:has(.about-page) footer {
 .about-hero-copy {
   animation: about-hero-copy 700ms var(--ease-out) both;
 }
+.contact-pane {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+.contact-pane-inner,
+.contact-faq {
+  box-sizing: border-box;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 2.5rem 1.5rem 3rem;
+}
+.contact-pane-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact-copy {
+  animation: about-hero-copy 700ms var(--ease-out) both;
+}
+.contact-mail {
+  width: 100%;
+  border-radius: 1rem;
+  border: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  background: rgb(var(--bg2));
+  animation: about-rise 560ms var(--ease-out) 90ms both;
+}
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 120ms var(--ease-out);
+}
+.faq-panel-open {
+  grid-template-rows: 1fr;
+}
+.faq-panel-inner {
+  overflow: hidden;
+}
+.contact-faq {
+  position: relative;
+  z-index: 1;
+  padding-top: 0;
+  padding-bottom: 4rem;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .contact-pane-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+    padding-inline: 2.5rem;
+  }
+  .contact-copy,
+  .contact-mail {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0;
+  }
+  .contact-faq {
+    padding-inline: 2.5rem;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   html {
@@ -538,7 +606,9 @@ html:has(.about-page) footer {
   .about-rise,
   .about-hero-copy,
   .about-caret,
-  .about-reveal {
+  .about-reveal,
+  .contact-copy,
+  .contact-mail {
     animation: none !important;
   }
   .about-reveal {
@@ -546,7 +616,8 @@ html:has(.about-page) footer {
     transform: none;
   }
   .about-thesis::before,
-  .about-cta::before {
+  .about-cta::before,
+  .contact-page::before {
     animation: none;
   }
   html.light .hero-aurora {
