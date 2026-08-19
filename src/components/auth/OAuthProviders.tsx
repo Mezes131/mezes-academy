@@ -13,7 +13,6 @@ interface OAuthProvidersProps {
 
 const LABELS: Record<OAuthProvider, string> = {
   google: "Google",
-  github: "GitHub",
 };
 
 /**
@@ -25,7 +24,7 @@ export function OAuthProviders({
   busyProvider,
   disabled = false,
   onSelect,
-  providers = ["google", "github"],
+  providers = ["google"],
 }: OAuthProvidersProps) {
   return (
     <div className="flex gap-2">

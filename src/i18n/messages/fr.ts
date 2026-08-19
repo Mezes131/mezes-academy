@@ -197,7 +197,7 @@ export const messagesFr = {
     forgotSent: "Email envoyé. Ouvre ta boîte mail (et les spams) pour réinitialiser ton mot de passe.",
     forgotUnknownEmail: "Aucun compte n'est associé à cet email.",
     forgotOAuthOnly:
-      "Ce compte se connecte via Google ou GitHub, pas avec un mot de passe. Utilise le bouton OAuth sur la page de connexion.",
+      "Ce compte se connecte via Google, pas avec un mot de passe. Utilise le bouton OAuth sur la page de connexion.",
     backToSignIn: "Retour à la connexion",
     resetTitle: "Nouveau mot de passe",
     resetBody: "Choisis un nouveau mot de passe pour ton compte.",

@@ -198,7 +198,7 @@ export const messagesEn: MessageTree = {
     forgotSent: "Email sent. Check your inbox (and spam) to reset your password.",
     forgotUnknownEmail: "No account is associated with this email.",
     forgotOAuthOnly:
-      "This account signs in with Google or GitHub, not a password. Use the OAuth button on the sign-in page.",
+      "This account signs in with Google, not a password. Use the OAuth button on the sign-in page.",
     backToSignIn: "Back to sign in",
     resetTitle: "New password",
     resetBody: "Choose a new password for your account.",
