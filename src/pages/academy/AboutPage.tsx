@@ -94,8 +94,8 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="about-screen about-rise">
-        <div className="about-screen-inner min-h-0 flex-col gap-8 overflow-hidden lg:max-w-none lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:py-6">
+      <section className="about-screen about-rise about-thesis">
+        <div className="about-screen-inner relative z-10 min-h-0 flex-col gap-8 overflow-hidden lg:max-w-none lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:py-6">
           <div className="shrink-0 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
             <p className="font-mono text-[12px] tracking-[0.08em] text-accent-2">
               {t("academy.about.thesisLabel")}
@@ -131,8 +131,8 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="about-screen about-rise">
-        <div className="about-screen-inner min-h-0 justify-center">
+      <section className="about-screen about-rise about-cta">
+        <div className="about-screen-inner relative z-10 min-h-0 justify-center">
           <ClosingCta className="w-full" />
         </div>
       </section>

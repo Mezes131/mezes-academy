@@ -351,6 +351,51 @@ html.light .studio-pass {
   color-scheme: dark;
 }
 
+.about-thesis,
+.about-cta {
+  --bg: 14 15 22;
+  --bg2: 20 22 32;
+  --bg3: 28 30 44;
+  --fg: 236 236 244;
+  --fg2: 198 200 222;
+  --fg3: 168 172 196;
+  --accent: 124 112 245;
+  --accent2: 168 158 255;
+  --accent3: 206 200 255;
+  --border: 200 205 255;
+  --border-alpha: 0.12;
+  position: relative;
+  isolation: isolate;
+  color-scheme: dark;
+  background-color: rgb(12 13 20);
+}
+.about-thesis::before,
+.about-cta::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 18% 82%, rgb(var(--accent) / 0.28), transparent 62%),
+    radial-gradient(ellipse 50% 45% at 88% 12%, rgb(var(--accent2) / 0.16), transparent 58%),
+    radial-gradient(ellipse 40% 35% at 72% 72%, rgb(36 28 72 / 0.45), transparent 70%),
+    linear-gradient(168deg, rgb(11 12 20) 0%, rgb(16 14 28) 46%, rgb(10 11 18) 100%);
+  animation: about-thesis-drift 18s var(--ease-in-out) infinite;
+}
+.about-cta::before {
+  animation-delay: -9s;
+}
+@keyframes about-thesis-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3.5%, -2.5%) scale(1.05);
+  }
+}
+
 /* Visible pane: viewport minus sticky landing nav (measured). Padding lives inside. */
 .about-screen {
   box-sizing: border-box;
@@ -469,6 +514,10 @@ html.light .about-hero::after {
   .about-hero-copy,
   .about-caret {
     animation: none !important;
+  }
+  .about-thesis::before,
+  .about-cta::before {
+    animation: none;
   }
   html.light .hero-aurora {
     opacity: 0.95;
