@@ -402,6 +402,8 @@ html.light .studio-pass {
   height: calc(100dvh - var(--landing-nav-h, 4rem));
   max-height: calc(100dvh - var(--landing-nav-h, 4rem));
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 .about-screen-inner {
   box-sizing: border-box;
@@ -452,15 +454,38 @@ html.light .about-hero::after {
 @keyframes about-rise {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translate3d(0, 16px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 .about-rise {
   animation: about-rise 480ms var(--ease-out) both;
+}
+html:has(.about-page) {
+  scroll-padding-top: var(--landing-nav-h, 4rem);
+  scroll-snap-type: y proximity;
+}
+html:has(.about-page) footer {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@media (min-width: 768px) {
+  html:has(.about-page) {
+    scroll-snap-type: y mandatory;
+  }
+}
+.about-reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+.about-screen.is-in .about-reveal {
+  animation: about-rise 560ms var(--ease-out) both;
+}
+.about-screen.is-in .about-reveal-late {
+  animation-delay: 120ms;
 }
 .about-caret {
   animation: studio-caret-blink 1s step-end infinite;
@@ -512,8 +537,13 @@ html.light .about-hero::after {
   html.light .studio-pass,
   .about-rise,
   .about-hero-copy,
-  .about-caret {
+  .about-caret,
+  .about-reveal {
     animation: none !important;
+  }
+  .about-reveal {
+    opacity: 1;
+    transform: none;
   }
   .about-thesis::before,
   .about-cta::before {

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -21,6 +21,25 @@ export function AboutPage() {
   const t = useT();
   const { locale } = useLocale();
   const lp = useLocalePath();
+  const pageRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const root = pageRef.current;
+    if (!root) return;
+    const panes = root.querySelectorAll(".about-screen");
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.4 },
+    );
+    panes.forEach((pane) => io.observe(pane));
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -59,7 +78,7 @@ export function AboutPage() {
   };
 
   return (
-    <article className="about-page">
+    <article ref={pageRef} className="about-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
@@ -94,9 +113,9 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="about-screen about-rise about-thesis">
+      <section className="about-screen about-thesis">
         <div className="about-screen-inner relative z-10 min-h-0 flex-col gap-8 overflow-hidden lg:max-w-none lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:py-6">
-          <div className="shrink-0 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
+          <div className="about-reveal shrink-0 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
             <p className="font-mono text-[12px] tracking-[0.08em] text-accent-2">
               {t("academy.about.thesisLabel")}
             </p>
@@ -110,13 +129,13 @@ export function AboutPage() {
               {t("academy.about.thesisBody")}
             </p>
           </div>
-          <ThesisDiff className="lg:h-[88%] lg:min-w-0 lg:flex-1 lg:basis-0 lg:self-center" />
+          <ThesisDiff className="about-reveal about-reveal-late lg:h-[88%] lg:min-w-0 lg:flex-1 lg:basis-0 lg:self-center" />
         </div>
       </section>
 
-      <section id="methode" className="about-screen about-rise">
+      <section id="methode" className="about-screen">
         <div className="about-screen-inner min-h-0 flex-col gap-8 overflow-hidden lg:max-w-none lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:py-6">
-          <div className="shrink-0 lg:order-2 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
+          <div className="about-reveal about-reveal-late shrink-0 lg:order-2 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
             <p className="font-mono text-[12px] tracking-[0.08em] text-accent-2">
               {t("academy.about.methodKicker")}
             </p>
@@ -127,13 +146,13 @@ export function AboutPage() {
               {t("academy.about.methodBody")}
             </p>
           </div>
-          <MethodLesson className="lg:order-1 lg:h-[88%] lg:min-w-0 lg:flex-1 lg:basis-0 lg:self-center" />
+          <MethodLesson className="about-reveal lg:order-1 lg:h-[88%] lg:min-w-0 lg:flex-1 lg:basis-0 lg:self-center" />
         </div>
       </section>
 
-      <section className="about-screen about-rise about-cta">
+      <section className="about-screen about-cta">
         <div className="about-screen-inner relative z-10 min-h-0 justify-center">
-          <ClosingCta className="w-full" />
+          <ClosingCta className="about-reveal w-full" />
         </div>
       </section>
     </article>

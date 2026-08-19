@@ -11,7 +11,7 @@ import { DeferredFontAwesome } from "./DeferredFontAwesome";
  */
 export function LandingLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col pb-20 md:pb-0">
+    <div className="landing-shell min-h-screen flex flex-col pb-20 md:pb-0">
       <DeferredFontAwesome />
       <LandingNav />
       <main id="main" className="flex-1">
