@@ -140,6 +140,16 @@ export const messagesEn: MessageTree = {
   academy: {
     disclaimer:
       "These pages are for information only. They are not legal advice.",
+    doc: {
+      toc: "Contents",
+      updatedLabel: "Updated",
+      briefTitle: "The short version",
+      helpTitle: "Something unclear?",
+      helpBody:
+        "Write to us: we reply within 48 working hours, and we rewrite the passage if the wording is confusing.",
+      helpCta: "Write to us",
+      alsoTitle: "Read next",
+    },
     about: {
       name: "Mezes Academy",
       title: "You only know it once you've typed it.",
@@ -275,31 +285,237 @@ export const messagesEn: MessageTree = {
         "Contact Mezes Academy: enrollment, courses, account, teaching help. Reply within 48 working hours.",
     },
     terms: {
-      eyebrow: "Academy",
+      eyebrow: "Rules of use",
       title: "Terms of use",
-      lead: "Access to the courses, responsible use, and what we do not promise.",
-      p1: "Mezes Academy gives access to teaching content (lessons, quizzes, exercises). You can browse part of the site without an account. An account is mainly there to sync your progress across devices.",
-      p2: "You agree to reasonable use: no abusive automation, no attempt to bypass access, no illegal reuse of the content. The courses are here to learn, not to be copied and resold.",
-      p3: "The content remains the property of Mezes Corporation. You may use it for your personal learning. We do not guarantee a job, a diploma, or a professional outcome.",
-      p4: "We may evolve the offering, fix mistakes, or remove a module. If you have an account, you remain responsible for the credentials you choose.",
+      lead: "What you can do on Mezes Academy, what we commit to, and what we do not promise.",
+      updated: "19 August 2026",
+      readTime: "6 min read",
+      brief1:
+        "Access to published tracks is free; an account only exists to sync your progress.",
+      brief2:
+        "Lessons belong to Mezes Corporation, but the code snippets are yours to reuse in your projects.",
+      brief3:
+        "No recognized diploma, no job guarantee: we teach you to build, not to collect badges.",
+      seoTitle: "Terms of use | Mezes Academy",
+      seoDesc:
+        "Mezes Academy terms of use: course access, accounts, acceptable use, intellectual property, liability and governing law.",
+      scopeTitle: "Scope and acceptance",
+      scopeP1:
+        "Mezes Academy is a learning platform published by Mezes Corporation. It offers tracks (React, Secure Vibe Coding, and more to come) made of written lessons, quizzes and exercises that run straight in the browser.",
+      scopeP2:
+        "By using the site you accept these terms. If something feels unacceptable, do not use the service and write to us: several sentences on this page already come from learner feedback.",
+      whoTitle: "Who can use the service",
+      whoP1:
+        "The site is open to anyone who wants to learn to code, with no minimum level required. If you are under 16, use Mezes Academy with the consent of a parent or guardian, who remains responsible for the account.",
+      whoP2:
+        "You can browse most of the content without an account. Creating one stays optional.",
+      accountTitle: "Account and security",
+      accountP1:
+        "An account is created with an email address and a password, or through Google sign-in. You are responsible for keeping your credentials private and for actions taken from your account.",
+      accountB1: "One account per person: credentials are not shared.",
+      accountB2: "Tell us quickly if you think your account is compromised.",
+      accountB3:
+        "You can ask for your account and progress to be deleted at any time.",
+      accountP2:
+        "We will never ask for your password by email, direct message or phone. If you receive such a request, report it to contact@mezescorp.com.",
+      accessTitle: "Content access and changes",
+      accessP1:
+        "Access to published tracks is free today. If a paid offering appears, it will be announced clearly and will not apply retroactively to content already open to your account.",
+      accessP2:
+        "The tracks are alive: we add modules, rewrite passages, fix mistakes and may remove content that became wrong. We aim for continuous availability without being able to guarantee it: maintenance, a host outage or a network cut can interrupt the service.",
+      useTitle: "Acceptable use",
+      useP1:
+        "The service is here for learning: read, copy snippets to practice, take notes, share a link to a lesson. The following uses, however, are not allowed.",
+      useB1:
+        "Scraping the site automatically (mass crawling, bots) or loading it heavily enough to degrade the service.",
+      useB2:
+        "Republishing or reselling lessons, quizzes and exercises, in whole or in part, without written permission.",
+      useB3:
+        "Bypassing authentication, probing the site for flaws, or trying to reach other learners' data.",
+      useB4:
+        "Sending illegal, hateful or misleading content through free-text fields: name, contact message, avatar.",
+      useP2:
+        "Tempted to run a security test? Write to us first: we prefer responsible disclosure over a surprise in production.",
+      ipTitle: "Intellectual property",
+      ipP1:
+        "Texts, illustrations, quizzes, exercises, the Mezes Academy brand and the site's visual identity belong to Mezes Corporation or its partners. You get a personal, non-exclusive, non-transferable right to use them to learn.",
+      ipP2:
+        "The code snippets shown in the lessons are meant to be reused: put them in your personal or professional projects, no attribution required. The teaching texts themselves may not be republished as they are.",
+      aiTitle: "Code samples and AI assistants",
+      aiP1:
+        "Several tracks discuss AI assistants and deliberately show imperfect code, so you learn to fix it. These samples are educational: they are neither an audit nor a security guarantee for your own project.",
+      aiP2:
+        "Before shipping to production, have your code reviewed by someone competent. The technical decisions you make remain yours.",
+      noPromiseTitle: "What we do not promise",
+      noPromiseP1: "To be blunt, here is what Mezes Academy is not.",
+      noPromiseB1:
+        "No diploma, official certification or academic equivalence.",
+      noPromiseB2: "No guarantee of a job, a contract or an income.",
+      noPromiseB3: "No guarantee of an error-free or uninterrupted service.",
+      noPromiseP2:
+        "The service is provided as is. We fix reported mistakes as fast as we can, but content can age faster than its update.",
+      liabilityTitle: "Liability",
+      liabilityP1:
+        "Mezes Corporation cannot be held liable for indirect damages tied to using the site: loss of local data, lost profit, technical decisions taken on the basis of a lesson. Our liability is limited to what applicable law allows.",
+      liabilityP2:
+        "Progress stored locally depends on your browser: clearing the site data erases it. An account remains the safest way to lose nothing.",
+      endTitle: "Suspension and ending use",
+      endP1:
+        "You can stop using the service whenever you want and ask for your account to be deleted by email.",
+      endP2:
+        "On our side, we can suspend an account for clear abuse: attacks, fraud, resale of content, harassment. Except in an emergency or a legal obligation, we warn you first and explain why.",
+      changesTitle: "Changes to these terms",
+      changesP1:
+        "These terms evolve with the service. The update date at the top of the page marks the latest version. For an important change we announce it on the site and, if you have an account, by email.",
+      changesP2:
+        "Continuing to use the service after a change means you accept the new version.",
+      lawTitle: "Governing law and disputes",
+      lawP1:
+        "These terms are governed by Cameroonian law. If we disagree, we start by looking for an amicable solution: write to contact@mezescorp.com describing the problem.",
+      lawP2:
+        "Failing an agreement, the dispute falls to the competent courts of Yaoundé, without prejudice to consumer protection rules applicable in your country of residence.",
     },
     privacy: {
-      eyebrow: "Academy",
+      eyebrow: "Personal data",
       title: "Privacy",
-      lead: "What we collect, why, and what we do not do.",
-      p1: "Without an account, your progress can stay on your device. With an account, we store what we need to recognize you: email, name if you give it, and your progress (modules read, quizzes, exercises).",
-      p2: "We use cookies or technical storage for the session and your preferences (theme, language). No ads, no list resale, no advertising tracking.",
-      p3: "Synced progress is only there to put you back where you left off. You can write to contact@mezescorp.com with a question about your data.",
-      p4: "Hosting and authentication services (email or Google sign-in) process this information to run the site. We will never ask for your password by email.",
+      lead: "What we collect, why, where it is stored, and how to take control of it.",
+      updated: "19 August 2026",
+      readTime: "5 min read",
+      brief1: "No ads, no data resale, no cross-site tracking.",
+      brief2: "Without an account, your progress never leaves your browser.",
+      brief3:
+        "One email is enough to access, correct or delete your data.",
+      seoTitle: "Privacy | Mezes Academy",
+      seoDesc:
+        "Mezes Academy privacy policy: data collected, purposes, processors, retention, security and how to exercise your rights.",
+      controllerTitle: "Who processes your data",
+      controllerP1:
+        "The data controller is Mezes Corporation, publisher of Mezes Academy, reachable at contact@mezescorp.com. We process the minimum needed to run a course site: nothing for advertising.",
+      controllerP2:
+        "This page describes what the site technically does. If you spot a gap between this text and the service's behaviour, report it: it is a bug to fix, not a hidden policy.",
+      dataTitle: "What we collect",
+      dataP1: "Depending on whether you have an account:",
+      dataB1:
+        "Account: email address, password hashed by our authentication provider, first name or nickname if you fill it in, avatar if you upload one.",
+      dataB2:
+        "Google sign-in: the email address and name Google passes on, nothing more.",
+      dataB3:
+        "Progress: modules read, quiz answers, completed exercises, bookmarks.",
+      dataB4: "Preferences: light or dark theme, interface language.",
+      dataB5:
+        "Technical: server logs (IP address, timestamp, page requested, browser), for security and debugging.",
+      dataP2:
+        "We do not collect your precise location, your contacts, or sensitive data. No form on the site asks for payment details.",
+      whyTitle: "Why, and on what basis",
+      whyP1: "Every piece of data serves a precise purpose.",
+      whyB1:
+        "Running the service (account, sign-in, progress sync): performance of the contract between us.",
+      whyB2:
+        "Security and abuse prevention (technical logs, rate limiting): legitimate interest.",
+      whyB3:
+        "Answering your messages: the information you write yourself in a contact email.",
+      whyP2:
+        "No automated decision has a legal effect on you, and we do no advertising profiling.",
+      storageTitle: "Local storage and cookies",
+      storageP1:
+        "The site uses no advertising cookie and no third-party tracker. What is stored in your browser stays minimal: a session token if you are signed in, your progress if you are not, your theme and your language.",
+      storageP2:
+        "You can wipe everything by clearing the site data in your browser settings. Without an account this also deletes your local progress: there is no copy elsewhere.",
+      processorsTitle: "Processors and hosting",
+      processorsP1:
+        "Running the site takes a few providers, limited to what they need to see.",
+      processorsB1:
+        "Supabase: authentication, progress database and avatar storage.",
+      processorsB2: "Google: only if you choose Google sign-in.",
+      processorsB3:
+        "Host: a private server (VPS) operated for Mezes Corporation, serving the pages and keeping technical logs.",
+      processorsP2:
+        "None of these providers is allowed to reuse your data for their own purposes.",
+      transfersTitle: "Transfers outside Cameroon",
+      transfersP1:
+        "Our technical providers may host data outside Cameroon, notably in Europe or the United States. In that case we rely on their contractual commitments to keep an equivalent level of protection.",
+      retentionTitle: "How long we keep it",
+      retentionP1: "Nothing is kept just in case.",
+      retentionB1: "Account and progress: as long as your account exists.",
+      retentionB2:
+        "Inactive account: possible deletion after 36 months without sign-in, following a warning email.",
+      retentionB3: "Technical logs: 12 months at most.",
+      retentionB4:
+        "Email exchanges: 24 months, to keep the history of a request.",
+      rightsTitle: "Your rights",
+      rightsP1:
+        "You can ask to access your data, correct it, delete it, get an exportable copy, or object to a processing. Write to contact@mezescorp.com from your account address: we answer within 30 days, usually much sooner.",
+      rightsP2:
+        "If you live in the European Union, the GDPR applies to these requests and you can contact your national supervisory authority. From Cameroon, you can refer the matter to the competent data protection authority.",
+      securityTitle: "Security",
+      securityP1:
+        "The site is served over HTTPS, passwords are hashed by our authentication provider, and database access is restricted to people who need it. Sessions expire and can be revoked.",
+      securityP2:
+        "No system is bulletproof. In case of a data breach likely to affect you, we tell you and describe what happened, what we did, and what you can do.",
+      minorsTitle: "Minors",
+      minorsP1:
+        "The service is not designed for children. Under 16, creating an account requires the consent of a parent or guardian. At a legal guardian's request, we delete the account and the associated data.",
+      changesTitle: "Changes to this page",
+      changesP1:
+        "This policy follows the site's evolution. The update date at the top of the page is the reference. For a significant change (a new purpose, a new provider), we announce it before it takes effect.",
     },
     legal: {
-      eyebrow: "Academy",
+      eyebrow: "Legal information",
       title: "Legal notice",
-      lead: "Publisher, contact, hosting.",
-      p1: "Publisher of the Mezes Academy site: Mezes Corporation.",
-      p2: "Contact: contact@mezescorp.com.",
-      p3: "Hosting: a private server (VPS) operated for Mezes Corporation.",
-      p4: "Teaching content, trademarks and visuals on the site are protected. Unauthorized reproduction is prohibited, aside from personal learning use.",
+      lead: "Who publishes this site, who hosts it, who to write to, and under which law.",
+      updated: "19 August 2026",
+      readTime: "3 min read",
+      brief1: "Publisher: Mezes Corporation, Yaoundé, Cameroon.",
+      brief2: "One address for every request: contact@mezescorp.com.",
+      brief3:
+        "Hosted on a private server (VPS), with authentication and database at Supabase.",
+      seoTitle: "Legal notice | Mezes Academy",
+      seoDesc:
+        "Mezes Academy legal notice: publisher, contact, hosting, intellectual property, reporting, accessibility and governing law.",
+      publisherTitle: "Site publisher",
+      publisherP1:
+        "Mezes Academy is a service published by Mezes Corporation, based in Yaoundé, Cameroon.",
+      publisherP2:
+        "Responsible for publication: the management of Mezes Corporation, reachable at contact@mezescorp.com.",
+      contactTitle: "Contact",
+      contactP1:
+        "For any teaching, technical or legal question, one address: contact@mezescorp.com. Reply within 48 working hours, Monday to Friday, in French or English.",
+      contactP2:
+        "The form on the Contact page simply prepares that email in your mail client; the page itself stores nothing.",
+      hostingTitle: "Hosting",
+      hostingP1:
+        "The site is served from a virtual private server (VPS) operated on behalf of Mezes Corporation. Authentication, the progress database and avatar storage are handled by Supabase.",
+      hostingP2:
+        "The host's precise details are provided on written request to contact@mezescorp.com, in particular as part of a report.",
+      ipTitle: "Intellectual property",
+      ipP1:
+        "The site structure, lesson texts, quizzes, exercises, illustrations, and the Mezes Academy brand and logo are protected. Any reproduction, adaptation or distribution without written permission is prohibited, apart from personal learning use and short quotations linking back to the source.",
+      ipP2:
+        "The code snippets in the lessons are free to reuse in your projects. Third-party fonts, libraries and tools used by the site remain under their own licences.",
+      contentTitle: "Content reliability",
+      contentP1:
+        "The tracks are written carefully, reviewed and fixed continuously. Even so, an inaccuracy or a piece of outdated content can remain: the JavaScript ecosystem moves fast.",
+      contentP2:
+        "Nothing on this site is professional advice (legal, financial or security) tailored to your context. Report a mistake to contact@mezescorp.com: fixes come before new features.",
+      linksTitle: "External links",
+      linksP1:
+        "The site links to third-party documentation and tools. Those links are offered as resources: we control neither their content nor their privacy policies, and cannot answer for them.",
+      reportTitle: "Reporting content or abuse",
+      reportP1:
+        "Copyright infringement, inappropriate content, a security flaw: write to contact@mezescorp.com with the URL involved and a factual description. We acknowledge receipt within 48 working hours and remove clearly unlawful content without delay.",
+      reportP2:
+        "For a security flaw, give us a reasonable delay before publishing anything: responsible disclosure protects the learners.",
+      a11yTitle: "Accessibility",
+      a11yP1:
+        "The site targets WCAG 2.2 level AA: contrast held in both themes, keyboard navigation, respect for the reduced-motion preference, explicit labels. Full conformance is not reached everywhere yet.",
+      a11yP2:
+        "If a page blocks you (screen reader, zoom, contrast), describe the situation by email: this feedback is treated as a priority bug.",
+      dataTitle: "Personal data and cookies",
+      dataP1:
+        "The detail of what we collect, why, and how to exercise your rights lives on the Privacy page. In short: no ads, no third-party tracker, and local storage limited to your session, your progress and your preferences.",
+      lawTitle: "Governing law",
+      lawP1:
+        "This site and its use are governed by Cameroonian law. Failing an amicable agreement, the competent courts of Yaoundé have jurisdiction, without prejudice to the rights your country of residence grants you as a consumer.",
     },
   },
   auth: {
