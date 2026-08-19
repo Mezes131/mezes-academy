@@ -1,4 +1,4 @@
-import { Hero, Catalog, HowItWorks, Stats } from "@/components/landing";
+import { Hero, Catalog, HowItWorks, ClosingCtaSection } from "@/components/landing";
 import { useProgress } from "@/hooks/useProgress";
 import {
   FLAGSHIP_SLUG,
@@ -24,7 +24,7 @@ export function LandingPage() {
       />
       <Catalog />
       <HowItWorks />
-      <Stats />
+      <ClosingCtaSection />
     </div>
   );
 }

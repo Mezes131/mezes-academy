@@ -3,10 +3,9 @@ import { AcademyPage } from "@/components/academy/AcademyPage";
 import { useT } from "@/i18n/useT";
 import type { MessageKey } from "@/i18n/useT";
 
-export type AcademyDoc = "about" | "contact" | "terms" | "privacy" | "legal";
+export type AcademyDoc = "contact" | "terms" | "privacy" | "legal";
 
 const DOC_PARAS: Record<AcademyDoc, MessageKey[]> = {
-  about: ["academy.about.p1", "academy.about.p2", "academy.about.p3"],
   contact: ["academy.contact.p1", "academy.contact.p2"],
   terms: [
     "academy.terms.p1",
@@ -29,7 +28,6 @@ const DOC_PARAS: Record<AcademyDoc, MessageKey[]> = {
 };
 
 const TITLE: Record<AcademyDoc, MessageKey> = {
-  about: "academy.about.title",
   contact: "academy.contact.title",
   terms: "academy.terms.title",
   privacy: "academy.privacy.title",
@@ -37,7 +35,6 @@ const TITLE: Record<AcademyDoc, MessageKey> = {
 };
 
 const EYEBROW: Record<AcademyDoc, MessageKey> = {
-  about: "academy.about.eyebrow",
   contact: "academy.contact.eyebrow",
   terms: "academy.terms.eyebrow",
   privacy: "academy.privacy.eyebrow",
@@ -45,7 +42,6 @@ const EYEBROW: Record<AcademyDoc, MessageKey> = {
 };
 
 const LEAD: Record<AcademyDoc, MessageKey> = {
-  about: "academy.about.lead",
   contact: "academy.contact.lead",
   terms: "academy.terms.lead",
   privacy: "academy.privacy.lead",

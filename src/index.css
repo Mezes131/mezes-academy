@@ -336,6 +336,102 @@ html.light .studio-pass {
   animation: studio-pass-pop 180ms var(--ease-out) both;
 }
 
+.about-hero {
+  --bg: 14 15 22;
+  --bg2: 20 22 32;
+  --bg3: 28 30 44;
+  --fg: 236 236 244;
+  --fg2: 198 200 222;
+  --fg3: 168 172 196;
+  --accent: 124 112 245;
+  --accent2: 168 158 255;
+  --accent3: 206 200 255;
+  --border: 200 205 255;
+  --border-alpha: 0.12;
+  color-scheme: dark;
+}
+
+/* Visible pane: viewport minus sticky landing nav (measured). Padding lives inside. */
+.about-screen {
+  box-sizing: border-box;
+  height: calc(100dvh - var(--landing-nav-h, 4rem));
+  max-height: calc(100dvh - var(--landing-nav-h, 4rem));
+  overflow: hidden;
+}
+.about-screen-inner {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 2rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .about-screen-inner {
+    padding: 2.5rem 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .about-screen {
+    height: calc(100dvh - var(--landing-nav-h, 4rem) - 5rem);
+    max-height: calc(100dvh - var(--landing-nav-h, 4rem) - 5rem);
+  }
+}
+.about-hero::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 7rem;
+  background: linear-gradient(to bottom, transparent, rgb(14 15 22));
+}
+html.light .about-hero::after {
+  background: linear-gradient(to bottom, transparent, rgb(250 250 253));
+}
+
+.about-still {
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 0.5px solid rgb(var(--border) / var(--border-alpha));
+}
+.about-still img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes about-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.about-rise {
+  animation: about-rise 480ms var(--ease-out) both;
+}
+
+@keyframes about-hero-copy {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.about-hero-copy {
+  animation: about-hero-copy 700ms var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -344,7 +440,9 @@ html.light .studio-pass {
   html.light .studio-chrome,
   html.light .studio-caret,
   html.light .studio-code-swap,
-  html.light .studio-pass {
+  html.light .studio-pass,
+  .about-rise,
+  .about-hero-copy {
     animation: none !important;
   }
   html.light .hero-aurora {

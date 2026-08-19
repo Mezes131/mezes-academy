@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
@@ -21,9 +22,28 @@ export function LandingNav() {
   const t = useT();
   const lp = useLocalePath();
   const continueHref = lp(continuePathForProgress(progress));
+  const navRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const sync = () => {
+      document.documentElement.style.setProperty(
+        "--landing-nav-h",
+        `${el.offsetHeight}px`,
+      );
+    };
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b-base py-2">
+    <nav
+      ref={navRef}
+      className="sticky top-0 z-50 min-h-16 bg-bg border-b-base py-2"
+    >
       <div className="max-w-6xl mx-auto h-full px-4 sm:px-6 flex items-center gap-3 sm:gap-6">
         <Link
           to={lp("/")}

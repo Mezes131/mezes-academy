@@ -49,3 +49,4 @@ worker/dist/
 
 # Docker local data (named volumes are managed by Docker, not the filesystem)
 deploy.md
+.cursor

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /**
- * Shared shell for academy prose pages (about, contact, legal).
+ * Shared shell for academy prose pages (contact, terms, privacy, legal).
  */
 export function AcademyPage({
   eyebrow,

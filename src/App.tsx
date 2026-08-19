@@ -14,6 +14,7 @@ import { reactCourseArea, svcCourseArea } from "@/components/layout/courseArea";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { RequireAuth } from "@/components/auth/RequireAuth";
 import { LandingPage } from "@/pages/LandingPage";
+import { AboutPage } from "@/pages/academy/AboutPage";
 import { AcademyDocPage } from "@/pages/academy/AcademyDocPage";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
@@ -207,7 +208,7 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
 
   return [
     { path: p("/"), element: withLanding(<LandingPage />) },
-    { path: p("/about"), element: withLanding(<AcademyDocPage doc="about" />) },
+    { path: p("/about"), element: withLanding(<AboutPage />) },
     {
       path: p("/contact"),
       element: withLanding(<AcademyDocPage doc="contact" />),

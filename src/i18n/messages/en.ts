@@ -141,12 +141,45 @@ export const messagesEn: MessageTree = {
     disclaimer:
       "These pages are for information only. They are not legal advice.",
     about: {
-      eyebrow: "Academy",
-      title: "About Mezes Academy",
-      lead: "We help you build things that hold up: solid React, and vibe coding without nasty surprises.",
-      p1: "Mezes Academy is Mezes Corporation's training site. The idea is simple: you read a concept, practice it in the browser, validate it, and pick up later right where you left off.",
-      p2: "Two tracks are live today. Secure Vibe Coding, the featured track, teaches you to ship with AI without getting burned. The React track takes you from zero to expert, with in-browser exercises.",
-      p3: "More tracks are on the way. Meanwhile you can start right away, with or without an account: progress stays on your device, and syncs when you sign in.",
+      name: "Mezes Academy",
+      title: "You only know it once you've typed it.",
+      lead: "Here a lesson does not end on a Next button. It ends in an editor, with your code running and a test that either passes or breaks.",
+      thesisLabel: "Why this site",
+      thesisTitle: "A tutorial that works on the first try teaches you nothing.",
+      thesisP1:
+        "You know the scene: three hours of video, everything looks obvious, and the next morning in front of an empty file you have no idea where to start. Your memory is fine. Watching someone code uses roughly the same muscles as watching someone swim.",
+      thesisP2:
+        "So we flipped the order. The lesson is short because it has exactly one job: give you enough to survive ten minutes in the editor right below it. The rest you learn by getting it wrong, reading the error, trying again. Slower at first, far sturdier after.",
+      thesisP3:
+        "Your progress follows you without any effort on your part. It lives in your browser by default, and finds you on your phone once you sign in. You can take it with you, you can wipe it, and nobody sells it.",
+      methodLabel: "One lesson, end to end",
+      methodTitle: "Always the same shape.",
+      methodBody:
+        "You never have to work out how to approach it: three beats, in this order, every time. The only thing that changes from lesson to lesson is what you build.",
+      step1Title: "Read",
+      step1Body:
+        "Five minutes, one concept, an example short enough to hold in your head. If a sentence could go, it already went.",
+      step2Title: "Practice",
+      step2Body:
+        "The exercise sits right under the lesson, preview beside it. Nothing to install, nothing to clone, and your first attempt is allowed to be ugly.",
+      step3Title: "Validate",
+      step3Body:
+        "A short quiz tells you whether you understood it or merely recognized it. The lesson ticks when you can redo it, not when you finish reading.",
+      tracksLabel: "Open now",
+      tracksTitle: "Where to start.",
+      svcTitle: "Secure Vibe Coding",
+      svcBody:
+        "AI writes fast and leaves you the bill. You learn to review its code before production does it for you.",
+      svcCta: "Start this track",
+      reactTitle: "React from zero to expert",
+      reactBody:
+        "From hooks to the day you understand why your component renders three times. Exercises throughout.",
+      reactCta: "Open React",
+      imgReadAlt: "Lesson window: a short text and a code excerpt.",
+      imgPracticeAlt: "In-browser exercise: editor and preview side by side.",
+      imgValidateAlt: "Validated lesson: green badge and a quiz score.",
+      imgSvcAlt: "Evening desk, terminal open on a code review.",
+      imgReactAlt: "Frontend craft desk, editor and interface preview.",
     },
     contact: {
       eyebrow: "Academy",

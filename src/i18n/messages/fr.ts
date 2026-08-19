@@ -140,12 +140,45 @@ export const messagesFr = {
     disclaimer:
       "Ces pages sont fournies à titre informatif. Elles ne constituent pas un conseil juridique.",
     about: {
-      eyebrow: "Académie",
-      title: "À propos de Mezes Academy",
-      lead: "On t'aide à construire des choses qui tiennent : du React solide, et du vibe coding sans mauvaises surprises.",
-      p1: "Mezes Academy est le site de formation de Mezes Corporation. L'idée est simple : tu lis une notion, tu la pratiques dans le navigateur, tu valides, et tu reprends plus tard pile où tu t'étais arrêté.",
-      p2: "Deux parcours sont ouverts aujourd'hui. Secure Vibe Coding, le parcours mis en avant, t'apprend à livrer avec l'IA sans te faire piéger. Le parcours React t'accompagne de zéro à expert, avec des exercices dans le navigateur.",
-      p3: "D'autres tracks arriveront. En attendant, tu peux commencer tout de suite, avec ou sans compte : la progression reste sur ton appareil, et se synchronise si tu te connectes.",
+      name: "Mezes Academy",
+      title: "Tu ne le sais qu'en le tapant.",
+      lead: "Ici, une leçon ne se termine pas sur un bouton « suivant ». Elle se termine dans un éditeur, avec ton code qui tourne et un test qui passe ou qui casse.",
+      thesisLabel: "Pourquoi ce site",
+      thesisTitle: "Le tutoriel qui marche du premier coup ne t'apprend rien.",
+      thesisP1:
+        "Tu connais la scène : trois heures de vidéo, tout paraît limpide, et le lendemain devant un fichier vide tu ne sais plus par où attaquer. Ce n'est pas ta mémoire qui flanche. Regarder quelqu'un coder sollicite à peu près les mêmes muscles que regarder quelqu'un nager.",
+      thesisP2:
+        "On a donc inversé l'ordre. La leçon est courte parce qu'elle n'a qu'un seul travail : te donner de quoi tenir dix minutes dans l'éditeur juste en dessous. Le reste s'apprend en te trompant, en relisant l'erreur, en réessayant. Plus lent au départ, nettement plus solide ensuite.",
+      thesisP3:
+        "Ta progression suit sans que tu aies à y penser. Elle vit dans ton navigateur par défaut, et te retrouve sur ton téléphone si tu crées un compte. Tu peux l'emporter, tu peux l'effacer, et personne ne la revend.",
+      methodLabel: "Une leçon, de bout en bout",
+      methodTitle: "Toujours la même forme.",
+      methodBody:
+        "Tu n'as plus à te demander comment t'y prendre : trois temps, dans cet ordre, à chaque fois. La seule chose qui change d'une leçon à l'autre, c'est ce que tu construis.",
+      step1Title: "Lis",
+      step1Body:
+        "Cinq minutes, un seul concept, un exemple assez court pour tenir dans ta tête. Si une phrase pouvait sauter, elle a déjà été coupée.",
+      step2Title: "Pratique",
+      step2Body:
+        "L'exercice est déjà là, sous la leçon, l'aperçu à côté. Rien à installer, rien à cloner, et ton premier essai a le droit d'être laid.",
+      step3Title: "Valide",
+      step3Body:
+        "Un quiz court te dit si tu as compris ou si tu as seulement reconnu. La leçon se coche quand tu sais refaire, pas quand tu as fini de lire.",
+      tracksLabel: "Ouvert maintenant",
+      tracksTitle: "Par où commencer.",
+      svcTitle: "Secure Vibe Coding",
+      svcBody:
+        "L'IA écrit vite et te laisse la facture. Tu apprends à relire son code avant que la production s'en charge.",
+      svcCta: "Commencer ce parcours",
+      reactTitle: "React de zéro à expert",
+      reactBody:
+        "Des hooks jusqu'au jour où tu comprends pourquoi ton composant se rend trois fois. Exercices tout du long.",
+      reactCta: "Ouvrir React",
+      imgReadAlt: "Fenêtre de leçon : un texte court et un extrait de code.",
+      imgPracticeAlt: "Exercice dans le navigateur : éditeur et aperçu côte à côte.",
+      imgValidateAlt: "Leçon validée : badge vert et score de quiz.",
+      imgSvcAlt: "Bureau le soir, terminal ouvert sur une revue de code.",
+      imgReactAlt: "Bureau de craft frontend, éditeur et aperçu d'interface.",
     },
     contact: {
       eyebrow: "Académie",
