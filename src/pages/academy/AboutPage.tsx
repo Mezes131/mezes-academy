@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ParticleCanvas } from "@/components/ui/ParticleHero";
 import { ClosingCta } from "@/components/landing/ClosingCta";
+import { ThesisDiff } from "@/components/academy/ThesisDiff";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import {
@@ -89,20 +90,19 @@ export function AboutPage() {
       </section>
 
       <section className="about-screen about-rise">
-        <div className="about-screen-inner min-h-0 justify-center gap-8 overflow-hidden lg:flex-row lg:items-stretch lg:gap-16">
-          <div className="min-h-0 shrink-0 lg:w-[min(100%,22rem)]">
+        <div className="about-screen-inner min-h-0 flex-col gap-8 overflow-hidden lg:max-w-none lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:py-6">
+          <div className="shrink-0 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
             <p className="font-mono text-[12px] tabular-nums tracking-[0.08em] text-accent-2">
               01 {t("academy.about.thesisLabel")}
             </p>
-            <h2 className="mt-4 max-w-[18ch] text-[clamp(1.6rem,3.4vw,2.6rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-fg">
+            <h2 className="mt-3 max-w-[18ch] text-[clamp(1.5rem,3.2vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-fg">
               {t("academy.about.thesisTitle")}
             </h2>
+            <p className="mt-3 max-w-[42ch] text-[15px] leading-[1.65] text-fg-2 md:text-[16px]">
+              {t("academy.about.thesisLead")}
+            </p>
           </div>
-          <div className="min-h-0 max-w-[62ch] space-y-5 overflow-y-auto text-[16px] leading-[1.7] text-fg-2 md:text-[17px]">
-            <p className="text-fg">{t("academy.about.thesisP1")}</p>
-            <p>{t("academy.about.thesisP2")}</p>
-            <p>{t("academy.about.thesisP3")}</p>
-          </div>
+          <ThesisDiff className="lg:h-[88%] lg:min-w-0 lg:flex-1 lg:basis-0 lg:self-center" />
         </div>
       </section>
 

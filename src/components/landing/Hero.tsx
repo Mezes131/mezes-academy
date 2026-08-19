@@ -12,6 +12,7 @@ import {
 } from "@/lib/flagshipContinue";
 import { Button } from "@/components/ui/Button";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
+import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
@@ -111,9 +112,6 @@ function HeroBackdrop() {
       return;
     }
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
     const saveData =
       "connection" in navigator &&
@@ -121,7 +119,7 @@ function HeroBackdrop() {
         (navigator as Navigator & { connection?: { saveData?: boolean } })
           .connection?.saveData,
       );
-    if (reduceMotion || narrow || saveData) return;
+    if (narrow || saveData) return;
 
     let cancelled = false;
     let timeoutId: number | undefined;
@@ -239,15 +237,7 @@ function StudioChrome() {
   const [tab, setTab] = useState<Tab>("lesson");
   const [typed, setTyped] = useState("");
   const [passed, setPassed] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mq.matches);
-    const onChange = () => setReduceMotion(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (reduceMotion) {

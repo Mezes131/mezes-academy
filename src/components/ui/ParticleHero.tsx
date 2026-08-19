@@ -173,12 +173,18 @@ export function ParticleCanvas() {
   }, []);
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reduceRef.current = mq.matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    reduceRef.current = reduce && !desktop;
     const onChange = () => {
-      reduceRef.current = mq.matches;
+      const r = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const d = window.matchMedia("(min-width: 768px)").matches;
+      reduceRef.current = r && !d;
     };
-    mq.addEventListener("change", onChange);
+    const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mqDesk = window.matchMedia("(min-width: 768px)");
+    mqReduce.addEventListener("change", onChange);
+    mqDesk.addEventListener("change", onChange);
 
     const resize = () => {
       const el = containerRef.current;
@@ -204,7 +210,8 @@ export function ParticleCanvas() {
     }
 
     return () => {
-      mq.removeEventListener("change", onChange);
+      mqReduce.removeEventListener("change", onChange);
+      mqDesk.removeEventListener("change", onChange);
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(frameRef.current);
     };

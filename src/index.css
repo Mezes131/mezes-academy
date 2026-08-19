@@ -417,6 +417,17 @@ html.light .about-hero::after {
 .about-rise {
   animation: about-rise 480ms var(--ease-out) both;
 }
+.about-caret {
+  animation: studio-caret-blink 1s step-end infinite;
+}
+
+.thesis-track {
+  transform: translateX(0);
+  transition: transform 560ms var(--ease-out);
+}
+.thesis-diff[data-slide="1"] .thesis-track {
+  transform: translateX(-50%);
+}
 
 @keyframes about-hero-copy {
   from {
@@ -432,7 +443,7 @@ html.light .about-hero::after {
   animation: about-hero-copy 700ms var(--ease-out) both;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   html {
     scroll-behavior: auto;
   }
@@ -442,12 +453,16 @@ html.light .about-hero::after {
   html.light .studio-code-swap,
   html.light .studio-pass,
   .about-rise,
-  .about-hero-copy {
+  .about-hero-copy,
+  .about-caret {
     animation: none !important;
   }
   html.light .hero-aurora {
     opacity: 0.95;
     transform: none;
+  }
+  .thesis-track {
+    transition: none;
   }
   /* Keep short opacity/color; kill movement-heavy motion */
   *,

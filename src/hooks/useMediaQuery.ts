@@ -16,7 +16,9 @@ export function useMediaQuery(query: string): boolean {
 }
 
 export function usePrefersReducedMotion(): boolean {
-  return useMediaQuery("(prefers-reduced-motion: reduce)");
+  const reduce = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const desktop = useMediaQuery("(min-width: 768px)");
+  return reduce && !desktop;
 }
 
 export function useFinePointer(): boolean {
