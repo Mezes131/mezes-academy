@@ -39,8 +39,10 @@ export function Footer() {
           </div>
 
           <FooterCol title={t("footer.tracks")}>
+            <FooterLink to={lp("/secure-vibe-coding")}>
+              {t("footer.svcTrack")}
+            </FooterLink>
             <FooterLink to={lp("/react")}>{t("footer.reactTrack")}</FooterLink>
-            <FooterLink to={lp("/secure-vibe-coding")}>Secure Vibe Coding</FooterLink>
             <FooterMuted>DevOps · {t("footer.planned")}</FooterMuted>
           </FooterCol>
 
@@ -52,10 +54,11 @@ export function Footer() {
           </FooterCol>
 
           <FooterCol title={t("footer.academy")}>
-            <FooterLink to="#">{t("footer.about")}</FooterLink>
-            <FooterLink to="#">{t("footer.contact")}</FooterLink>
-            <FooterLink to="#">{t("footer.terms")}</FooterLink>
-            <FooterLink to="#">{t("footer.privacy")}</FooterLink>
+            <FooterLink to={lp("/about")}>{t("footer.about")}</FooterLink>
+            <FooterLink to={lp("/contact")}>{t("footer.contact")}</FooterLink>
+            <FooterLink to={lp("/terms")}>{t("footer.terms")}</FooterLink>
+            <FooterLink to={lp("/privacy")}>{t("footer.privacy")}</FooterLink>
+            <FooterLink to={lp("/legal")}>{t("footer.legalNotice")}</FooterLink>
           </FooterCol>
         </div>
 

@@ -6,8 +6,10 @@ import {
   UserCircle,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useProgress } from "@/hooks/useProgress";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { continuePathForProgress } from "@/lib/flagshipContinue";
 import { MobileBottomBar, type BottomNavItem } from "./MobileBottomBar";
 
 /**
@@ -15,8 +17,10 @@ import { MobileBottomBar, type BottomNavItem } from "./MobileBottomBar";
  */
 export function LandingBottomBar() {
   const { user } = useAuth();
+  const { progress } = useProgress();
   const t = useT();
   const lp = useLocalePath();
+  const courseHref = lp(continuePathForProgress(progress));
 
   const items: BottomNavItem[] = [
     {
@@ -35,7 +39,7 @@ export function LandingBottomBar() {
     },
     {
       kind: "link",
-      to: lp("/react"),
+      to: courseHref,
       label: t("bottomNav.myCourse"),
       icon: GraduationCap,
     },

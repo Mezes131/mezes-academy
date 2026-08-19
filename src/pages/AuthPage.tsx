@@ -6,6 +6,7 @@ import type { AuthMode } from "@/components/auth/AuthModeSwitcher";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import { useT } from "@/i18n/useT";
+import { FLAGSHIP_COURSE_PATH } from "@/lib/flagshipContinue";
 
 /**
  * Entry route for authentication. Pure shell:
@@ -19,7 +20,7 @@ export function AuthPage() {
   const lp = useLocalePath();
 
   const nextPath = useMemo(
-    () => searchParams.get("next") || lp("/react"),
+    () => searchParams.get("next") || lp(FLAGSHIP_COURSE_PATH),
     [searchParams, lp],
   );
   const urlMode = searchParams.get("mode");

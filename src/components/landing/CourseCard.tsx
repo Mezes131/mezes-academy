@@ -42,6 +42,11 @@ export function CourseCard({ course }: { course: CatalogCourse }) {
           >
             {course.title}
           </h3>
+          {course.featured && (
+            <span className="text-[10px] font-mono uppercase tracking-wider bg-violet-600/15 text-violet-800 dark:text-violet-300 border border-violet-700/35 dark:border-violet-500/40 px-2 py-0.5 rounded-full">
+              {t("landing.statusFeatured")}
+            </span>
+          )}
           <StatusBadge status={course.status} eta={course.eta} />
         </div>
       </div>

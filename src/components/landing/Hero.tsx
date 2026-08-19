@@ -5,7 +5,11 @@ import {
   type ReactNode,
 } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, GraduationCap, Shield } from "lucide-react";
+import { ArrowRight, Atom, Check, GraduationCap, Shield } from "lucide-react";
+import {
+  FLAGSHIP_COURSE_PATH,
+  REACT_COURSE_PATH,
+} from "@/lib/flagshipContinue";
 import { Button } from "@/components/ui/Button";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
 import { useLocale } from "@/i18n/LocaleProvider";
@@ -14,14 +18,15 @@ import { useLocalePath } from "@/i18n/useLocalePath";
 import { cn } from "@/lib/utils";
 
 interface HeroProps {
-  hasProgress: boolean;
+  hasSvcProgress: boolean;
+  hasReactProgress: boolean;
 }
 
 /**
  * Mezes Academy landing hero.
  * Dark: idle video. Light: Aurora Lesson Beam (vivid mesh + live lesson preview).
  */
-export function Hero({ hasProgress }: HeroProps) {
+export function Hero({ hasSvcProgress, hasReactProgress }: HeroProps) {
   const t = useT();
   const lp = useLocalePath();
   const { theme } = useThemeEffect();
@@ -60,26 +65,29 @@ export function Hero({ hasProgress }: HeroProps) {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <Link to={lp("/react")}>
+            <Link to={lp(FLAGSHIP_COURSE_PATH)}>
               <Button size="md">
-                {hasProgress
-                  ? t("landing.ctaReactContinue")
-                  : t("landing.ctaReact")}
+                <Shield size={16} aria-hidden="true" />
+                {hasSvcProgress
+                  ? t("landing.ctaSvcContinue")
+                  : t("landing.ctaSvc")}
                 <ArrowRight size={16} aria-hidden="true" />
               </Button>
             </Link>
-            <Link to={lp("/secure-vibe-coding")}>
+            <Link to={lp(REACT_COURSE_PATH)}>
               <Button
                 variant="ghost"
                 size="md"
                 className="border border-brand-core/35 text-slate-900 hover:bg-bg-3 dark:border-violet-500/40 dark:text-fg"
               >
-                <Shield
+                <Atom
                   size={16}
                   className="text-brand-core dark:text-violet-400"
                   aria-hidden="true"
                 />
-                {t("landing.ctaSvc")}
+                {hasReactProgress
+                  ? t("landing.ctaReactContinue")
+                  : t("landing.ctaReact")}
               </Button>
             </Link>
           </div>

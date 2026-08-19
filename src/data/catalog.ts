@@ -6,12 +6,14 @@
 
 import type { CourseMeta } from "@/types";
 import type { Locale } from "@/i18n/types";
+import { FLAGSHIP_SLUG, REACT_SLUG } from "@/lib/flagshipContinue";
 import { courses, getCourses } from "./courses";
 
 export interface CatalogCourse extends CourseMeta {
   slug: string;
   modules: number;
   href?: string;
+  featured?: boolean;
 }
 
 const upcomingCatalogFr: CatalogCourse[] = [
@@ -69,11 +71,23 @@ function toCatalogCourse(
   };
 }
 
-/** Locale-aware catalog for the landing grid. */
+/** Locale-aware catalog for the landing grid. Flagship first, then React. */
 export function getCatalog(locale: Locale = "fr"): CatalogCourse[] {
-  const active = getCourses(locale).map(toCatalogCourse);
+  const bySlug = new Map(
+    getCourses(locale).map(toCatalogCourse).map((course) => [course.slug, course]),
+  );
+  const orderedSlugs = [FLAGSHIP_SLUG, REACT_SLUG];
+  const ordered = orderedSlugs
+    .map((slug) => bySlug.get(slug))
+    .filter((course): course is CatalogCourse => Boolean(course))
+    .map((course) =>
+      course.slug === FLAGSHIP_SLUG ? { ...course, featured: true } : course,
+    );
+  const rest = [...bySlug.values()].filter(
+    (course) => !orderedSlugs.includes(course.slug),
+  );
   const upcoming = locale === "en" ? upcomingCatalogEn : upcomingCatalogFr;
-  return [...active, ...upcoming];
+  return [...ordered, ...rest, ...upcoming];
 }
 
 /** Default FR catalog (stats + static imports). */

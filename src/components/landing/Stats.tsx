@@ -3,6 +3,10 @@ import { ArrowRight, Atom, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import {
+  FLAGSHIP_COURSE_PATH,
+  REACT_COURSE_PATH,
+} from "@/lib/flagshipContinue";
 
 /**
  * Landing closing CTA. One job: get the learner into a track.
@@ -22,21 +26,21 @@ export function Stats() {
             {t("landing.ctaBody")}
           </p>
           <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-2">
-            <Link to={lp("/react")}>
+            <Link to={lp(FLAGSHIP_COURSE_PATH)}>
               <Button>
-                <Atom size={16} aria-hidden="true" />
-                {t("landing.ctaOpenReact")}
+                <Shield size={16} aria-hidden="true" />
+                {t("landing.ctaOpenSvc")}
                 <ArrowRight size={14} aria-hidden="true" />
               </Button>
             </Link>
-            <Link to={lp("/secure-vibe-coding")}>
+            <Link to={lp(REACT_COURSE_PATH)}>
               <Button variant="ghost" className="border border-violet-500/40">
-                <Shield
+                <Atom
                   size={16}
                   className="text-violet-600 dark:text-violet-400"
                   aria-hidden="true"
                 />
-                {t("landing.ctaOpenSvc")}
+                {t("landing.ctaOpenReact")}
               </Button>
             </Link>
           </div>
