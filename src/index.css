@@ -336,7 +336,268 @@ html.light .studio-pass {
   animation: studio-pass-pop 180ms var(--ease-out) both;
 }
 
-@media (prefers-reduced-motion: reduce) {
+.about-hero {
+  --bg: 14 15 22;
+  --bg2: 20 22 32;
+  --bg3: 28 30 44;
+  --fg: 236 236 244;
+  --fg2: 198 200 222;
+  --fg3: 168 172 196;
+  --accent: 124 112 245;
+  --accent2: 168 158 255;
+  --accent3: 206 200 255;
+  --border: 200 205 255;
+  --border-alpha: 0.12;
+  color-scheme: dark;
+}
+
+.about-thesis,
+.about-cta,
+.contact-page {
+  --bg: 14 15 22;
+  --bg2: 20 22 32;
+  --bg3: 28 30 44;
+  --fg: 236 236 244;
+  --fg2: 198 200 222;
+  --fg3: 168 172 196;
+  --accent: 124 112 245;
+  --accent2: 168 158 255;
+  --accent3: 206 200 255;
+  --border: 200 205 255;
+  --border-alpha: 0.12;
+  position: relative;
+  isolation: isolate;
+  color-scheme: dark;
+  background-color: rgb(12 13 20);
+  overflow: hidden;
+}
+.about-thesis::before,
+.about-cta::before,
+.contact-page::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 18% 82%, rgb(var(--accent) / 0.28), transparent 62%),
+    radial-gradient(ellipse 50% 45% at 88% 12%, rgb(var(--accent2) / 0.16), transparent 58%),
+    radial-gradient(ellipse 40% 35% at 72% 72%, rgb(36 28 72 / 0.45), transparent 70%),
+    linear-gradient(168deg, rgb(11 12 20) 0%, rgb(16 14 28) 46%, rgb(10 11 18) 100%);
+  animation: about-thesis-drift 18s var(--ease-in-out) infinite;
+}
+.about-cta::before {
+  animation-delay: -9s;
+}
+.contact-page::before {
+  animation-delay: -4s;
+}
+@keyframes about-thesis-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3.5%, -2.5%) scale(1.05);
+  }
+}
+
+/* Visible pane: viewport minus sticky landing nav (measured). Padding lives inside. */
+.about-screen {
+  box-sizing: border-box;
+  height: calc(100dvh - var(--landing-nav-h, 4rem));
+  max-height: calc(100dvh - var(--landing-nav-h, 4rem));
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.about-screen-inner {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 2rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .about-screen-inner {
+    padding: 2.5rem 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .about-screen {
+    height: calc(100dvh - var(--landing-nav-h, 4rem) - 5rem);
+    max-height: calc(100dvh - var(--landing-nav-h, 4rem) - 5rem);
+  }
+}
+.about-hero::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 7rem;
+  background: linear-gradient(to bottom, transparent, rgb(14 15 22));
+}
+html.light .about-hero::after {
+  background: linear-gradient(to bottom, transparent, rgb(250 250 253));
+}
+
+.about-still {
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 0.5px solid rgb(var(--border) / var(--border-alpha));
+}
+.about-still img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes about-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.about-rise {
+  animation: about-rise 480ms var(--ease-out) both;
+}
+html:has(.about-page) {
+  scroll-padding-top: var(--landing-nav-h, 4rem);
+  scroll-snap-type: y proximity;
+}
+html:has(.about-page) footer {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@media (min-width: 768px) {
+  html:has(.about-page) {
+    scroll-snap-type: y mandatory;
+  }
+}
+.about-reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+.about-screen.is-in .about-reveal {
+  animation: about-rise 560ms var(--ease-out) both;
+}
+.about-screen.is-in .about-reveal-late {
+  animation-delay: 120ms;
+}
+.about-caret {
+  animation: studio-caret-blink 1s step-end infinite;
+}
+
+.thesis-track {
+  transform: translateX(0);
+  transition: transform 560ms var(--ease-out);
+}
+.thesis-diff[data-slide="1"] .thesis-track {
+  transform: translateX(-50%);
+}
+.method-pane {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+.method-pane[data-on="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@keyframes about-hero-copy {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.about-hero-copy {
+  animation: about-hero-copy 700ms var(--ease-out) both;
+}
+.contact-pane {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+.contact-pane-inner,
+.contact-faq {
+  box-sizing: border-box;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 2.5rem 1.5rem 3rem;
+}
+.contact-pane-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact-copy {
+  animation: about-hero-copy 700ms var(--ease-out) both;
+}
+.contact-mail {
+  width: 100%;
+  border-radius: 1rem;
+  border: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  background: rgb(var(--bg2));
+  animation: about-rise 560ms var(--ease-out) 90ms both;
+}
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 120ms var(--ease-out);
+}
+.faq-panel-open {
+  grid-template-rows: 1fr;
+}
+.faq-panel-inner {
+  overflow: hidden;
+}
+.contact-success {
+  animation: about-rise 200ms var(--ease-out) both;
+}
+.contact-faq {
+  position: relative;
+  z-index: 1;
+  padding-top: 0;
+  padding-bottom: 4rem;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .contact-pane-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+    padding-inline: 2.5rem;
+  }
+  .contact-copy,
+  .contact-mail {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0;
+  }
+  .contact-faq {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   html {
     scroll-behavior: auto;
   }
@@ -344,12 +605,31 @@ html.light .studio-pass {
   html.light .studio-chrome,
   html.light .studio-caret,
   html.light .studio-code-swap,
-  html.light .studio-pass {
+  html.light .studio-pass,
+  .about-rise,
+  .about-hero-copy,
+  .about-caret,
+  .about-reveal,
+  .contact-copy,
+  .contact-mail,
+  .contact-success {
     animation: none !important;
+  }
+  .about-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .about-thesis::before,
+  .about-cta::before,
+  .contact-page::before {
+    animation: none;
   }
   html.light .hero-aurora {
     opacity: 0.95;
     transform: none;
+  }
+  .thesis-track {
+    transition: none;
   }
   /* Keep short opacity/color; kill movement-heavy motion */
   *,

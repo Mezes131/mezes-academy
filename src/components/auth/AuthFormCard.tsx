@@ -7,6 +7,7 @@ import { useLocale } from "@/i18n/LocaleProvider";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import { useT } from "@/i18n/useT";
 import { humanizeAuthError } from "@/lib/authErrors";
+import { isDefaultAuthNext } from "@/lib/flagshipContinue";
 import { AuthModeSwitcher, type AuthMode } from "./AuthModeSwitcher";
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
 import { OAuthProviders } from "./OAuthProviders";
@@ -71,7 +72,7 @@ export function AuthFormCard({
     setInfo(null);
     const params = new URLSearchParams();
     params.set("mode", "forgot");
-    if (nextPath && nextPath !== lp("/react")) {
+    if (nextPath && !isDefaultAuthNext(nextPath, lp)) {
       params.set("next", nextPath);
     }
     navigate(`${lp("/auth")}?${params.toString()}`);
@@ -82,7 +83,7 @@ export function AuthFormCard({
     setInfo(null);
     onModeChange("login");
     const params = new URLSearchParams();
-    if (nextPath && nextPath !== lp("/react")) {
+    if (nextPath && !isDefaultAuthNext(nextPath, lp)) {
       params.set("next", nextPath);
     }
     const q = params.toString();
@@ -137,11 +138,9 @@ export function AuthFormCard({
     setInfo(null);
     setOauthBusy(provider);
     try {
-      const defaultNext = lp("/react");
-      const suffix =
-        nextPath && nextPath !== defaultNext && nextPath !== "/react"
-          ? `?next=${encodeURIComponent(nextPath)}`
-          : "";
+      const suffix = !isDefaultAuthNext(nextPath, lp)
+        ? `?next=${encodeURIComponent(nextPath)}`
+        : "";
       const redirectTo = `${window.location.origin}${lp("/auth")}${suffix}`;
       await signInWithProvider(provider, { redirectTo });
     } catch (err) {

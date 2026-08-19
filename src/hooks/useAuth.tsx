@@ -39,7 +39,7 @@ export type UserProfileUpdate = Partial<{
 }>;
 
 /** Supported third-party identity providers for OAuth sign-in. */
-export type OAuthProvider = "google" | "github";
+export type OAuthProvider = "google";
 
 interface AuthContextValue {
   session: Session | null;
@@ -54,7 +54,7 @@ interface AuthContextValue {
     password: string;
     fullName: string;
   }) => Promise<void>;
-  /** Start an OAuth redirect flow (Google, GitHub, …). */
+  /** Start an OAuth redirect flow (Google). */
   signInWithProvider: (
     provider: OAuthProvider,
     options?: { redirectTo?: string },

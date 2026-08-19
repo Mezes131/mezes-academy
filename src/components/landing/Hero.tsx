@@ -5,23 +5,29 @@ import {
   type ReactNode,
 } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, GraduationCap, Shield } from "lucide-react";
+import { ArrowRight, Atom, Check, GraduationCap, Shield } from "lucide-react";
+import {
+  FLAGSHIP_COURSE_PATH,
+  REACT_COURSE_PATH,
+} from "@/lib/flagshipContinue";
 import { Button } from "@/components/ui/Button";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
+import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import { cn } from "@/lib/utils";
 
 interface HeroProps {
-  hasProgress: boolean;
+  hasSvcProgress: boolean;
+  hasReactProgress: boolean;
 }
 
 /**
  * Mezes Academy landing hero.
  * Dark: idle video. Light: Aurora Lesson Beam (vivid mesh + live lesson preview).
  */
-export function Hero({ hasProgress }: HeroProps) {
+export function Hero({ hasSvcProgress, hasReactProgress }: HeroProps) {
   const t = useT();
   const lp = useLocalePath();
   const { theme } = useThemeEffect();
@@ -60,26 +66,29 @@ export function Hero({ hasProgress }: HeroProps) {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <Link to={lp("/react")}>
+            <Link to={lp(FLAGSHIP_COURSE_PATH)}>
               <Button size="md">
-                {hasProgress
-                  ? t("landing.ctaReactContinue")
-                  : t("landing.ctaReact")}
+                <Shield size={16} aria-hidden="true" />
+                {hasSvcProgress
+                  ? t("landing.ctaSvcContinue")
+                  : t("landing.ctaSvc")}
                 <ArrowRight size={16} aria-hidden="true" />
               </Button>
             </Link>
-            <Link to={lp("/secure-vibe-coding")}>
+            <Link to={lp(REACT_COURSE_PATH)}>
               <Button
                 variant="ghost"
                 size="md"
                 className="border border-brand-core/35 text-slate-900 hover:bg-bg-3 dark:border-violet-500/40 dark:text-fg"
               >
-                <Shield
+                <Atom
                   size={16}
                   className="text-brand-core dark:text-violet-400"
                   aria-hidden="true"
                 />
-                {t("landing.ctaSvc")}
+                {hasReactProgress
+                  ? t("landing.ctaReactContinue")
+                  : t("landing.ctaReact")}
               </Button>
             </Link>
           </div>
@@ -103,9 +112,6 @@ function HeroBackdrop() {
       return;
     }
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     const narrow = window.matchMedia("(max-width: 767px)").matches;
     const saveData =
       "connection" in navigator &&
@@ -113,7 +119,7 @@ function HeroBackdrop() {
         (navigator as Navigator & { connection?: { saveData?: boolean } })
           .connection?.saveData,
       );
-    if (reduceMotion || narrow || saveData) return;
+    if (narrow || saveData) return;
 
     let cancelled = false;
     let timeoutId: number | undefined;
@@ -231,15 +237,7 @@ function StudioChrome() {
   const [tab, setTab] = useState<Tab>("lesson");
   const [typed, setTyped] = useState("");
   const [passed, setPassed] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mq.matches);
-    const onChange = () => setReduceMotion(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (reduceMotion) {

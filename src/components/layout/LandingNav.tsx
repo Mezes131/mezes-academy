@@ -1,12 +1,15 @@
+import { useLayoutEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { MezesLogo } from "@/components/ui/MezesLogo";
 import { Button } from "@/components/ui/Button";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
+import { useProgress } from "@/hooks/useProgress";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import { LanguageMenu } from "@/i18n/LanguageMenu";
+import { continuePathForProgress } from "@/lib/flagshipContinue";
 import { cn } from "@/lib/utils";
 
 /**
@@ -15,11 +18,32 @@ import { cn } from "@/lib/utils";
  */
 export function LandingNav() {
   const { user } = useAuth();
+  const { progress } = useProgress();
   const t = useT();
   const lp = useLocalePath();
+  const continueHref = lp(continuePathForProgress(progress));
+  const navRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const sync = () => {
+      document.documentElement.style.setProperty(
+        "--landing-nav-h",
+        `${el.offsetHeight}px`,
+      );
+    };
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 min-h-16 bg-bg border-b-base py-2">
+    <nav
+      ref={navRef}
+      className="sticky top-0 z-50 min-h-16 bg-bg border-b-base py-2"
+    >
       <div className="max-w-6xl mx-auto h-full px-4 sm:px-6 flex items-center gap-3 sm:gap-6">
         <Link
           to={lp("/")}
@@ -44,7 +68,7 @@ export function LandingNav() {
         <div className="flex items-center gap-2 ml-auto min-w-0">
           {user ? (
             <>
-              <Link to={lp("/react")} className="hidden sm:inline-flex">
+              <Link to={continueHref} className="hidden sm:inline-flex">
                 <Button size="sm">
                   {t("nav.continue")}
                   <ArrowRight size={14} aria-hidden="true" />

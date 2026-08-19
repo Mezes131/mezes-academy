@@ -1,5 +1,10 @@
+import { Hero, Catalog, HowItWorks, ClosingCtaSection } from "@/components/landing";
 import { useProgress } from "@/hooks/useProgress";
-import { Hero, Catalog, HowItWorks, Stats } from "@/components/landing";
+import {
+  FLAGSHIP_SLUG,
+  REACT_SLUG,
+  courseHasProgress,
+} from "@/lib/flagshipContinue";
 
 /**
  * Mezes Academy landing page.
@@ -7,15 +12,19 @@ import { Hero, Catalog, HowItWorks, Stats } from "@/components/landing";
  * in src/components/landing/.
  */
 export function LandingPage() {
-  const { stats } = useProgress();
-  const hasProgress = stats.done > 0;
+  const { progress } = useProgress();
+  const hasSvcProgress = courseHasProgress(FLAGSHIP_SLUG, progress);
+  const hasReactProgress = courseHasProgress(REACT_SLUG, progress);
 
   return (
     <div className="overflow-hidden">
-      <Hero hasProgress={hasProgress} />
+      <Hero
+        hasSvcProgress={hasSvcProgress}
+        hasReactProgress={hasReactProgress}
+      />
       <Catalog />
       <HowItWorks />
-      <Stats />
+      <ClosingCtaSection />
     </div>
   );
 }
