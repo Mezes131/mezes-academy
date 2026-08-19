@@ -2,10 +2,10 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { href: "https://facebook.com", label: "Facebook", icon: "facebook" },
-  { href: "https://instagram.com", label: "Instagram", icon: "instagram" },
-  { href: "https://tiktok.com", label: "TikTok", icon: "tiktok" },
-  { href: "https://linkedin.com", label: "LinkedIn", icon: "linkedin" },
+  { href: "https://www.facebook.com/mezes35", label: "Facebook", icon: "facebook" },
+  { href: "https://www.instagram.com/mezes131", label: "Instagram", icon: "instagram" },
+  { href: "https://www.tiktok.com/@mezes131", label: "TikTok", icon: "tiktok" },
+  { href: "https://www.linkedin.com/company/mezes-corporation/", label: "LinkedIn", icon: "linkedin" },
 ] as const;
 
 /**
