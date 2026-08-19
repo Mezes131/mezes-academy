@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -13,9 +13,6 @@ import {
   FLAGSHIP_COURSE_PATH,
   REACT_COURSE_PATH,
 } from "@/lib/flagshipContinue";
-import { cn } from "@/lib/utils";
-import stackSvc from "@/assets/about/stack-svc.png";
-import stackReact from "@/assets/about/stack-react.png";
 
 /**
  * About: each chapter fills the viewport minus the sticky nav.
@@ -134,113 +131,11 @@ export function AboutPage() {
         </div>
       </section>
 
-      <TrackPane
-        index="03"
-        label={t("academy.about.tracksLabel")}
-        image={stackSvc}
-        alt={t("academy.about.imgSvcAlt")}
-        title={t("academy.about.svcTitle")}
-        body={t("academy.about.svcBody")}
-        href={lp(FLAGSHIP_COURSE_PATH)}
-        cta={t("academy.about.svcCta")}
-      />
-      <TrackPane
-        reverse
-        image={stackReact}
-        alt={t("academy.about.imgReactAlt")}
-        title={t("academy.about.reactTitle")}
-        body={t("academy.about.reactBody")}
-        href={lp(REACT_COURSE_PATH)}
-        cta={t("academy.about.reactCta")}
-      />
-
       <section className="about-screen about-rise">
         <div className="about-screen-inner min-h-0 justify-center">
           <ClosingCta className="w-full" />
         </div>
       </section>
     </article>
-  );
-}
-
-function Still({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "about-still relative min-h-0 min-w-0 flex-1 overflow-hidden",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
-function TrackPane({
-  index,
-  label,
-  image,
-  alt,
-  title,
-  body,
-  href,
-  cta,
-  reverse = false,
-}: {
-  index?: string;
-  label?: string;
-  image: string;
-  alt: string;
-  title: string;
-  body: string;
-  href: string;
-  cta: string;
-  reverse?: boolean;
-}) {
-  return (
-    <section className="about-screen about-rise">
-      <div className="about-screen-inner min-h-0 gap-6 overflow-hidden lg:flex-row lg:gap-12">
-        <Still className={reverse ? "lg:order-2" : undefined}>
-          <img
-            src={image}
-            alt={alt}
-            width={720}
-            height={960}
-            loading="lazy"
-            decoding="async"
-          />
-        </Still>
-        <div
-          className={cn(
-            "flex min-h-0 min-w-0 flex-1 flex-col justify-center overflow-y-auto",
-            reverse && "lg:order-1",
-          )}
-        >
-          {index && label ? (
-            <p className="font-mono text-[12px] tabular-nums tracking-[0.08em] text-accent-2">
-              {index} {label}
-            </p>
-          ) : null}
-          <h2 className="mt-3 text-[clamp(1.5rem,3vw,2.25rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
-            {title}
-          </h2>
-          <p className="mt-4 max-w-[42ch] text-[16px] leading-[1.65] text-fg-2">
-            {body}
-          </p>
-          <Link to={href} className="mt-6 inline-flex">
-            <Button size="md">
-              {cta}
-              <ArrowRight size={16} aria-hidden="true" />
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </section>
   );
 }

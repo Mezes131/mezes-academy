@@ -7,7 +7,13 @@ import tseslint from "typescript-eslint";
 export default tseslint.config(
   {
     // Build outputs (strapi/dist is CJS; root dist is Vite).
-    ignores: ["dist", "node_modules", "strapi/dist/**", "worker/dist/**"],
+    ignores: [
+      "dist",
+      "node_modules",
+      "strapi/dist/**",
+      "worker/dist/**",
+      ".cursor/**",
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
