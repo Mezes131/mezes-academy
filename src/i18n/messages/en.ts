@@ -178,19 +178,49 @@ export const messagesEn: MessageTree = {
       thesisPassed: "Passed",
       thesisPreview: "Preview",
       thesisDiffAria: "The same file, before and after",
-      methodLabel: "One lesson, end to end",
-      methodTitle: "Always the same shape.",
+      methodKicker: "Method",
+      methodTitle: "One lesson, end to end",
       methodBody:
-        "You never have to work out how to approach it: three beats, in this order, every time. The only thing that changes from lesson to lesson is what you build.",
+        "Read. Practice. Validate. Always in that order. What changes is what you build, not how you work.",
+      methodWindowAria: "Lesson window: read, practice, validate",
+      methodReadKicker: "08 · useState",
+      methodReadTitle: "State is the component's memory.",
+      methodReadBody:
+        "Props come from the parent. State is private. Every time it changes, React re-renders on its own.",
+      methodReadTip:
+        "Never mutate: state.push(item) is forbidden. Always a new value: setState([...state, item]).",
+      methodReadCode:
+        "const [todos, setTodos] = useState([])\n\nconst addTodo = () => {\n  setTodos([...todos, { id: Date.now(), text: input }])\n}",
+      methodPracticeKicker: "Exercise · Your first JSX list",
+      methodPracticeHint: "A <ul>, one <li> per fruit, a stable key.",
+      methodPracticeCode:
+        "export default function App() {\n  const fruits = [\"Mango\", \"Papaya\", \"Avocado\"]\n  return (\n    <ul>\n      {fruits.map((f) => (\n        <li key={f}>{f}</li>\n      ))}\n    </ul>\n  )\n}",
+      methodPracticeFruit1: "Mango",
+      methodPracticeFruit2: "Papaya",
+      methodPracticeFruit3: "Avocado",
+      methodPracticeCheck1: "<ul> present",
+      methodPracticeCheck2: "map + 3 <li>",
+      methodPracticeCheck3: "key on each <li>",
+      methodQuizKicker: "Quiz · JSX basics",
+      methodQuizQ: "In JSX, which attribute sets a CSS class?",
+      methodQuizA: "class",
+      methodQuizB: "className",
+      methodQuizC: "css",
+      methodQuizWhy:
+        "class is reserved. Use className. Same idea: for becomes htmlFor.",
+      methodQuizBadge: "Quiz passed · 70% min.",
       step1Title: "Read",
       step1Body:
-        "Five minutes, one concept, an example short enough to hold in your head. If a sentence could go, it already went.",
+        "One concept, one rule, one snippet. Here: state is private, never mutate it, React re-renders when it changes.",
       step2Title: "Practice",
       step2Body:
-        "The exercise sits right under the lesson, preview beside it. Nothing to install, nothing to clone, and your first attempt is allowed to be ugly.",
+        "The exercise sits under the lesson, in the browser. Example: a JSX list with map and a key per item.",
       step3Title: "Validate",
       step3Body:
-        "A short quiz tells you whether you understood it or merely recognized it. The lesson ticks when you can redo it, not when you finish reading.",
+        "A module quiz (class vs className, read-only props). The lesson ticks when you can redo it, not when you finish reading.",
+      seoTitle: "Mezes Academy: solid solutions, even when you're vibe coding",
+      seoDesc:
+        "A lesson in three beats: read, practice in the browser, validate with a quiz. Build solid solutions, even when vibe coding.",
       tracksLabel: "Open now",
       tracksTitle: "Where to start.",
       svcTitle: "Secure Vibe Coding",

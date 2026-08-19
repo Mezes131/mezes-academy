@@ -428,6 +428,19 @@ html.light .about-hero::after {
 .thesis-diff[data-slide="1"] .thesis-track {
   transform: translateX(-50%);
 }
+.method-pane {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+.method-pane[data-on="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
 @keyframes about-hero-copy {
   from {
