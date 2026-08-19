@@ -569,6 +569,9 @@ html:has(.about-page) footer {
 .faq-panel-inner {
   overflow: hidden;
 }
+.contact-success {
+  animation: about-rise 200ms var(--ease-out) both;
+}
 .contact-faq {
   position: relative;
   z-index: 1;
@@ -608,7 +611,8 @@ html:has(.about-page) footer {
   .about-caret,
   .about-reveal,
   .contact-copy,
-  .contact-mail {
+  .contact-mail,
+  .contact-success {
     animation: none !important;
   }
   .about-reveal {

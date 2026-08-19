@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, Clock3, Mail, MapPinned } from "lucide-react";
+import { ArrowRight, Check, Clock3, Mail, MapPinned } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Faq } from "@/components/ui/Faq";
 import { SocialLinks } from "@/components/ui/SocialLinks";
@@ -38,12 +38,14 @@ export function ContactPage() {
   const desk = t("academy.contact.email");
   const uid = useId();
   const summaryRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   const [name, setName] = useState("");
   const [from, setFrom] = useState("");
   const [subjectId, setSubjectId] = useState(SUBJECTS[0].id);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Errors>({});
+  const [sent, setSent] = useState(false);
 
   const subjectKey =
     SUBJECTS.find((s) => s.id === subjectId)?.key ?? SUBJECTS[0].key;
@@ -86,6 +88,21 @@ export function ContactPage() {
     ].join("\n");
     const href = `mailto:${desk}?subject=${encodeURIComponent(t(subjectKey))}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
+    setSent(true);
+  }
+
+  useEffect(() => {
+    if (!sent) return;
+    successRef.current?.focus();
+  }, [sent]);
+
+  function writeAgain() {
+    setSent(false);
+    setName("");
+    setFrom("");
+    setSubjectId(SUBJECTS[0].id);
+    setMessage("");
+    setErrors({});
   }
 
   const errorList = Object.entries(errors) as [keyof Errors, string][];
@@ -127,6 +144,28 @@ export function ContactPage() {
           </div>
 
           <form className="contact-mail p-5 md:p-7" noValidate onSubmit={onSubmit}>
+            {sent ? (
+              <div
+                ref={successRef}
+                tabIndex={-1}
+                role="status"
+                className="contact-success flex min-h-[20rem] flex-col justify-center focus:outline-none"
+              >
+                <span className="flex size-11 items-center justify-center rounded-lg border-base bg-bg-3 text-accent-2">
+                  <Check size={20} strokeWidth={2} aria-hidden="true" />
+                </span>
+                <h2 className="mt-4 text-[1.35rem] font-extrabold tracking-[-0.03em] text-fg">
+                  {t("academy.contact.successTitle")}
+                </h2>
+                <p className="mt-2 max-w-[36ch] text-[15px] leading-[1.65] text-fg-2">
+                  {t("academy.contact.successBody")}
+                </p>
+                <Button type="button" variant="ghost" className="mt-6 w-fit" onClick={writeAgain}>
+                  {t("academy.contact.successAgain")}
+                </Button>
+              </div>
+            ) : (
+              <>
             <p className="font-mono text-[11px] tracking-[0.06em] text-fg-3">
               {t("academy.contact.compose")}
             </p>
@@ -238,6 +277,8 @@ export function ContactPage() {
               {t("academy.contact.send")}
               <ArrowRight size={16} aria-hidden="true" />
             </Button>
+              </>
+            )}
           </form>
         </div>
       </section>
