@@ -144,9 +144,11 @@ export const messagesFr = {
       title: "Tu ne le sais qu'en le tapant.",
       lead: "Ici, une leçon ne se termine pas sur un bouton « suivant ». Elle se termine dans un éditeur, avec ton code qui tourne et un test qui passe ou qui casse.",
       thesisLabel: "Pourquoi ce site",
-      thesisTitle: "Le tutoriel qui marche du premier coup ne t'apprend rien.",
+      thesisTitle: "Des solutions solides, même en vibecoding.",
       thesisLead:
-        "Trois heures de tutoriel, et le lendemain le fichier est toujours vide.",
+        "Le but n'est pas d'apprendre à coder. C'est d'apprendre à construire : lisible, sûr, défendable le jour où ça casse.",
+      thesisBody:
+        "L'IA va vite. Elle ne porte pas la responsabilité. Ici tu t'entraînes à juger le résultat et à le rendre solide.",
       thesisBefore: "Avant",
       thesisAfter: "Après",
       thesisFile: "App.tsx",

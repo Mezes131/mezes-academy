@@ -92,14 +92,17 @@ export function AboutPage() {
       <section className="about-screen about-rise">
         <div className="about-screen-inner min-h-0 flex-col gap-8 overflow-hidden lg:max-w-none lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:py-6">
           <div className="shrink-0 lg:flex lg:min-w-0 lg:flex-1 lg:basis-0 lg:flex-col lg:justify-center">
-            <p className="font-mono text-[12px] tabular-nums tracking-[0.08em] text-accent-2">
-              01 {t("academy.about.thesisLabel")}
+            <p className="font-mono text-[12px] tracking-[0.08em] text-accent-2">
+              {t("academy.about.thesisLabel")}
             </p>
-            <h2 className="mt-3 max-w-[18ch] text-[clamp(1.5rem,3.2vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-fg">
+            <h2 className="mt-3 max-w-[20ch] text-[clamp(1.5rem,3.2vw,2.4rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
               {t("academy.about.thesisTitle")}
             </h2>
-            <p className="mt-3 max-w-[42ch] text-[15px] leading-[1.65] text-fg-2 md:text-[16px]">
+            <p className="mt-4 max-w-[44ch] text-[15px] leading-[1.7] text-fg-2 md:text-[16px]">
               {t("academy.about.thesisLead")}
+            </p>
+            <p className="mt-3 max-w-[44ch] text-[15px] leading-[1.7] text-fg-2 md:text-[16px]">
+              {t("academy.about.thesisBody")}
             </p>
           </div>
           <ThesisDiff className="lg:h-[88%] lg:min-w-0 lg:flex-1 lg:basis-0 lg:self-center" />

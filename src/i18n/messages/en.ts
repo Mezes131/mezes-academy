@@ -144,10 +144,12 @@ export const messagesEn: MessageTree = {
       name: "Mezes Academy",
       title: "You only know it once you've typed it.",
       lead: "Here a lesson does not end on a Next button. It ends in an editor, with your code running and a test that either passes or breaks.",
-      thesisLabel: "Why this site",
-      thesisTitle: "A tutorial that works on the first try teaches you nothing.",
+      thesisLabel: "Why this site exists",
+      thesisTitle: "Solid solutions, even when you're vibe coding.",
       thesisLead:
-        "Three hours of tutorial, and the next morning the file is still empty.",
+        "The point is not to learn how to code. It is to learn how to build: readable, safe, something you can stand behind when it breaks.",
+      thesisBody:
+        "AI is fast. It does not own the outcome. Here you train to judge the result and make it solid.",
       thesisBefore: "Before",
       thesisAfter: "After",
       thesisFile: "App.tsx",
