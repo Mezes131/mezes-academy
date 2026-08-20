@@ -379,87 +379,91 @@ export const messagesFr = {
     privacy: {
       eyebrow: "Données personnelles",
       title: "Confidentialité",
-      lead: "Ce qu'on collecte, pourquoi, où c'est stocké, et comment reprendre la main dessus.",
+      lead: "Ce que nous collectons, pourquoi, où ces informations sont conservées, et comment exercer vos droits.",
       updated: "19 août 2026",
       readTime: "5 min de lecture",
       brief1:
-        "Pas de publicité, pas de revente de données, pas de pistage entre sites.",
-      brief2: "Sans compte, ta progression ne quitte pas ton navigateur.",
+        "Nous ne diffusons aucune publicité, ne revendons aucune donnée et n'effectuons aucun pistage entre sites.",
+      brief2:
+        "Sans compte, votre progression demeure exclusivement sur votre navigateur.",
       brief3:
-        "Un e-mail suffit pour accéder à tes données, les corriger ou les supprimer.",
+        "Un e-mail suffit pour accéder à vos données, les corriger ou en demander la suppression.",
       seoTitle: "Confidentialité | Mezes Academy",
       seoDesc:
-        "Politique de confidentialité de Mezes Academy : données collectées, finalités, sous-traitants, durées de conservation, sécurité et exercice de tes droits.",
-      controllerTitle: "Qui traite tes données",
+        "Politique de confidentialité de Mezes Academy : données collectées, finalités, sous-traitants, durées de conservation, sécurité et exercice de vos droits.",
+      controllerTitle: "Qui traite vos données",
       controllerP1:
-        "Le responsable du traitement est Mezes Corporation, éditeur de Mezes Academy, joignable à contact@mezescorp.com. On traite le minimum nécessaire pour faire tourner un site de cours : rien pour la publicité.",
+        "Le responsable du traitement est Mezes Corporation, éditeur de Mezes Academy, joignable à contact@mezescorp.com. Nous ne traitons que les données nécessaires au fonctionnement de la plateforme pédagogique, à l'exclusion de toute finalité publicitaire.",
       controllerP2:
-        "Cette page décrit la réalité technique du site. Si tu constates un écart entre ce texte et le comportement du service, signale-le : c'est un bug à corriger, pas une politique cachée.",
-      dataTitle: "Ce qu'on collecte",
-      dataP1: "Selon que tu as un compte ou non :",
+        "Cette page décrit le fonctionnement réel du service. Si vous constatez un écart entre le présent texte et le comportement de la plateforme, nous vous invitons à nous le signaler afin que nous puissions y remédier.",
+      dataTitle: "Données que nous collectons",
+      dataP1: "Selon que vous disposez ou non d'un compte :",
       dataB1:
-        "Compte : adresse e-mail, mot de passe chiffré par notre fournisseur d'authentification, prénom ou pseudo si tu le renseignes, avatar si tu en envoies un.",
+        "Compte : adresse e-mail, mot de passe chiffré par notre fournisseur d'authentification, prénom ou pseudo si vous le renseignez, avatar si vous en téléversez un.",
       dataB2:
-        "Connexion Google : l'adresse e-mail et le nom transmis par Google, rien de plus.",
+        "Connexion Google : l'adresse e-mail et le nom transmis par Google, sans autre information.",
       dataB3:
-        "Progression : modules lus, réponses de quiz, exercices validés, marque-pages.",
+        "Progression : modules consultés, réponses aux quiz, exercices validés, marque-pages.",
       dataB4: "Préférences : thème clair ou sombre, langue de l'interface.",
       dataB5:
-        "Technique : journaux du serveur (adresse IP, horodatage, page demandée, navigateur), pour la sécurité et le débogage.",
+        "Données techniques : journaux du serveur (adresse IP, horodatage, page demandée, navigateur), utilisés à des fins de sécurité et de diagnostic.",
       dataP2:
-        "On ne collecte ni ta localisation précise, ni tes contacts, ni de données sensibles. Aucun formulaire du site ne demande d'informations bancaires.",
-      whyTitle: "Pourquoi, et sur quelle base",
-      whyP1: "Chaque donnée sert à une finalité précise.",
+        "Nous ne collectons ni votre localisation précise, ni vos contacts, ni de données sensibles. Aucun formulaire du site ne sollicite d'informations bancaires.",
+      whyTitle: "Finalités et bases légales",
+      whyP1: "Chaque catégorie de données répond à une finalité déterminée.",
       whyB1:
-        "Faire fonctionner le service (compte, connexion, synchronisation de la progression) : exécution du contrat qui nous lie.",
+        "Assurer le fonctionnement du service (compte, connexion, synchronisation de la progression) : exécution du contrat qui nous lie.",
       whyB2:
-        "Sécurité et lutte contre l'abus (journaux techniques, limitation de débit) : intérêt légitime.",
+        "Garantir la sécurité et prévenir les abus (journaux techniques, limitation de débit) : intérêt légitime.",
       whyB3:
-        "Répondre à tes messages : les informations que tu écris toi-même dans un e-mail de contact.",
+        "Répondre à vos messages : les informations que vous communiquez volontairement dans un e-mail de contact.",
       whyP2:
-        "Aucune décision automatisée n'a d'effet juridique sur toi, et on ne fait aucun profilage publicitaire.",
+        "Aucune décision automatisée n'a d'effet juridique à votre égard. Nous n'effectuons aucun profilage à des fins publicitaires.",
       storageTitle: "Stockage local et cookies",
       storageP1:
-        "Le site n'utilise ni cookie publicitaire, ni traceur tiers. Ce qui est stocké dans ton navigateur se limite au nécessaire : un jeton de session si tu es connecté, ta progression si tu ne l'es pas, ton thème et ta langue.",
+        "La plateforme n'utilise ni cookie publicitaire, ni traceur tiers. Les données conservées dans votre navigateur se limitent au strict nécessaire : un jeton de session lorsque vous êtes connecté, votre progression lorsque vous ne l'êtes pas, ainsi que votre thème et votre langue.",
       storageP2:
-        "Tu peux tout effacer en vidant les données du site dans les réglages de ton navigateur. Sans compte, cela supprime aussi ta progression locale : elle n'a pas de copie ailleurs.",
+        "Vous pouvez effacer l'ensemble de ces données via les paramètres de votre navigateur. En l'absence de compte, cette opération entraîne également la suppression de votre progression locale, aucune copie n'étant conservée ailleurs.",
       processorsTitle: "Sous-traitants et hébergement",
       processorsP1:
-        "Faire tourner le site suppose quelques prestataires, limités à ce qu'ils doivent voir.",
+        "L'exploitation de la plateforme implique un nombre limité de prestataires, chacun n'ayant accès qu'aux données nécessaires à sa mission.",
       processorsB1:
         "Supabase : authentification, base de données de progression et stockage des avatars.",
-      processorsB2: "Google : uniquement si tu choisis la connexion Google.",
+      processorsB2:
+        "Google : uniquement si vous choisissez la connexion via Google.",
       processorsB3:
-        "Hébergeur : serveur privé (VPS) opéré pour Mezes Corporation, qui sert les pages et tient les journaux techniques.",
+        "Hébergeur : serveur privé (VPS) opéré pour Mezes Corporation, servant les pages et conservant les journaux techniques.",
       processorsP2:
-        "Aucun de ces prestataires n'est autorisé à réutiliser tes données pour son propre compte.",
+        "Aucun de ces prestataires n'est autorisé à réutiliser vos données pour son propre compte.",
       transfersTitle: "Transferts hors du Cameroun",
       transfersP1:
-        "Nos prestataires techniques peuvent héberger des données hors du Cameroun, notamment en Europe ou aux États-Unis. Dans ce cas, on s'appuie sur leurs engagements contractuels pour maintenir un niveau de protection équivalent.",
-      retentionTitle: "Combien de temps on conserve",
-      retentionP1: "Rien n'est gardé « au cas où ».",
-      retentionB1: "Compte et progression : tant que ton compte existe.",
+        "Nos prestataires techniques peuvent héberger des données hors du Cameroun, notamment en Europe ou aux États-Unis. Dans ce cas, nous nous appuyons sur leurs engagements contractuels afin de maintenir un niveau de protection équivalent.",
+      retentionTitle: "Durées de conservation",
+      retentionP1:
+        "Nous ne conservons aucune donnée au-delà de ce qui est nécessaire aux finalités décrites.",
+      retentionB1:
+        "Compte et progression : aussi longtemps que votre compte demeure actif.",
       retentionB2:
-        "Compte inactif : suppression possible après 36 mois sans connexion, après un e-mail d'avertissement.",
+        "Compte inactif : suppression possible après 36 mois sans connexion, précédée d'un e-mail d'information.",
       retentionB3: "Journaux techniques : 12 mois au maximum.",
       retentionB4:
-        "Échanges par e-mail : 24 mois, pour garder l'historique d'une demande.",
-      rightsTitle: "Tes droits",
+        "Échanges par e-mail : 24 mois, afin de conserver l'historique d'une demande.",
+      rightsTitle: "Vos droits",
       rightsP1:
-        "Tu peux demander l'accès à tes données, leur correction, leur suppression, une copie exportable, ou t'opposer à un traitement. Écris à contact@mezescorp.com depuis l'adresse de ton compte : on répond sous 30 jours, en général bien avant.",
+        "Vous pouvez demander l'accès à vos données, leur rectification, leur suppression, une copie exportable, ou vous opposer à un traitement. Adressez votre demande à contact@mezescorp.com depuis l'adresse associée à votre compte : nous y répondons sous 30 jours, et le plus souvent dans un délai plus court.",
       rightsP2:
-        "Si tu résides dans l'Union européenne, le RGPD s'applique à ces demandes et tu peux saisir l'autorité de contrôle de ton pays. Depuis le Cameroun, tu peux saisir l'autorité compétente en matière de protection des données.",
+        "Si vous résidez dans l'Union européenne, le RGPD s'applique à ces demandes et vous pouvez saisir l'autorité de contrôle de votre pays. Depuis le Cameroun, vous pouvez saisir l'autorité compétente en matière de protection des données.",
       securityTitle: "Sécurité",
       securityP1:
-        "Le site est servi en HTTPS, les mots de passe sont hachés par notre fournisseur d'authentification et l'accès à la base est restreint aux personnes qui en ont besoin. Les sessions expirent et peuvent être révoquées.",
+        "La plateforme est servie en HTTPS. Les mots de passe sont hachés par notre fournisseur d'authentification et l'accès à la base de données est restreint aux personnes habilitées. Les sessions expirent et peuvent être révoquées.",
       securityP2:
-        "Aucun système n'est infaillible. En cas de violation de données susceptible de te concerner, on te prévient et on décrit ce qui s'est passé, ce qu'on a fait, et ce que tu peux faire.",
+        "Aucun système n'est totalement à l'abri d'un incident. En cas de violation de données susceptible de vous concerner, nous vous en informons et décrivons les faits, les mesures prises et les actions que vous pouvez entreprendre.",
       minorsTitle: "Mineurs",
       minorsP1:
-        "Le service n'est pas conçu pour les enfants. En dessous de 16 ans, la création d'un compte suppose l'accord d'un parent ou d'un tuteur. Sur demande d'un responsable légal, on supprime le compte et les données associées.",
-      changesTitle: "Modifications de cette page",
+        "Le service n'est pas destiné aux enfants. En dessous de 16 ans, la création d'un compte suppose l'accord d'un parent ou d'un tuteur. Sur demande d'un responsable légal, nous supprimons le compte et les données associées.",
+      changesTitle: "Modifications de la présente politique",
       changesP1:
-        "Cette politique suit l'évolution du site. La date de mise à jour en haut de page fait référence. Pour un changement significatif (nouvelle finalité, nouveau prestataire), on l'annonce avant qu'il prenne effet.",
+        "La présente politique évolue avec la plateforme. La date de mise à jour figurant en tête de page fait référence. En cas de changement significatif (nouvelle finalité, nouveau prestataire), nous vous en informons avant son entrée en vigueur.",
     },
     legal: {
       eyebrow: "Informations légales",

@@ -378,86 +378,90 @@ export const messagesEn: MessageTree = {
     privacy: {
       eyebrow: "Personal data",
       title: "Privacy",
-      lead: "What we collect, why, where it is stored, and how to take control of it.",
+      lead: "What we collect, why we collect it, where it is stored, and how you may exercise your rights.",
       updated: "19 August 2026",
       readTime: "5 min read",
-      brief1: "No ads, no data resale, no cross-site tracking.",
-      brief2: "Without an account, your progress never leaves your browser.",
+      brief1:
+        "We do not serve advertising, resell data, or engage in cross-site tracking.",
+      brief2:
+        "Without an account, your progress remains exclusively on your browser.",
       brief3:
-        "One email is enough to access, correct or delete your data.",
+        "A single email is sufficient to access, correct, or request deletion of your data.",
       seoTitle: "Privacy | Mezes Academy",
       seoDesc:
-        "Mezes Academy privacy policy: data collected, purposes, processors, retention, security and how to exercise your rights.",
+        "Mezes Academy privacy policy: data collected, purposes, processors, retention periods, security, and how to exercise your rights.",
       controllerTitle: "Who processes your data",
       controllerP1:
-        "The data controller is Mezes Corporation, publisher of Mezes Academy, reachable at contact@mezescorp.com. We process the minimum needed to run a course site: nothing for advertising.",
+        "The data controller is Mezes Corporation, publisher of Mezes Academy, reachable at contact@mezescorp.com. We process only the data required to operate the learning platform, and never for advertising purposes.",
       controllerP2:
-        "This page describes what the site technically does. If you spot a gap between this text and the service's behaviour, report it: it is a bug to fix, not a hidden policy.",
-      dataTitle: "What we collect",
-      dataP1: "Depending on whether you have an account:",
+        "This page describes how the service actually operates. If you identify a discrepancy between this statement and the platform's behaviour, we invite you to notify us so that we may remedy it.",
+      dataTitle: "Data we collect",
+      dataP1: "Depending on whether you hold an account:",
       dataB1:
-        "Account: email address, password hashed by our authentication provider, first name or nickname if you fill it in, avatar if you upload one.",
+        "Account: email address, password hashed by our authentication provider, first name or nickname if you provide one, avatar if you upload one.",
       dataB2:
-        "Google sign-in: the email address and name Google passes on, nothing more.",
+        "Google sign-in: the email address and name transmitted by Google, and no further information.",
       dataB3:
-        "Progress: modules read, quiz answers, completed exercises, bookmarks.",
+        "Progress: modules consulted, quiz answers, completed exercises, bookmarks.",
       dataB4: "Preferences: light or dark theme, interface language.",
       dataB5:
-        "Technical: server logs (IP address, timestamp, page requested, browser), for security and debugging.",
+        "Technical data: server logs (IP address, timestamp, page requested, browser), used for security and diagnostics.",
       dataP2:
-        "We do not collect your precise location, your contacts, or sensitive data. No form on the site asks for payment details.",
-      whyTitle: "Why, and on what basis",
-      whyP1: "Every piece of data serves a precise purpose.",
+        "We do not collect your precise location, your contacts, or sensitive data. No form on the site requests payment details.",
+      whyTitle: "Purposes and legal bases",
+      whyP1: "Each category of data serves a defined purpose.",
       whyB1:
-        "Running the service (account, sign-in, progress sync): performance of the contract between us.",
+        "Operating the service (account, sign-in, progress synchronisation): performance of the contract between us.",
       whyB2:
-        "Security and abuse prevention (technical logs, rate limiting): legitimate interest.",
+        "Ensuring security and preventing abuse (technical logs, rate limiting): legitimate interest.",
       whyB3:
-        "Answering your messages: the information you write yourself in a contact email.",
+        "Responding to your messages: the information you voluntarily provide in a contact email.",
       whyP2:
-        "No automated decision has a legal effect on you, and we do no advertising profiling.",
+        "No automated decision produces a legal effect concerning you. We do not engage in advertising profiling.",
       storageTitle: "Local storage and cookies",
       storageP1:
-        "The site uses no advertising cookie and no third-party tracker. What is stored in your browser stays minimal: a session token if you are signed in, your progress if you are not, your theme and your language.",
+        "The platform uses neither advertising cookies nor third-party trackers. Data retained in your browser is limited to what is strictly necessary: a session token when you are signed in, your progress when you are not, as well as your theme and language preferences.",
       storageP2:
-        "You can wipe everything by clearing the site data in your browser settings. Without an account this also deletes your local progress: there is no copy elsewhere.",
+        "You may erase all such data through your browser settings. Without an account, this action also deletes your local progress, as no copy is retained elsewhere.",
       processorsTitle: "Processors and hosting",
       processorsP1:
-        "Running the site takes a few providers, limited to what they need to see.",
+        "Operating the platform involves a limited number of providers, each granted access only to the data required for its role.",
       processorsB1:
-        "Supabase: authentication, progress database and avatar storage.",
-      processorsB2: "Google: only if you choose Google sign-in.",
+        "Supabase: authentication, progress database, and avatar storage.",
+      processorsB2: "Google: only if you choose to sign in with Google.",
       processorsB3:
-        "Host: a private server (VPS) operated for Mezes Corporation, serving the pages and keeping technical logs.",
+        "Host: a private server (VPS) operated for Mezes Corporation, serving pages and retaining technical logs.",
       processorsP2:
-        "None of these providers is allowed to reuse your data for their own purposes.",
+        "None of these providers is authorised to reuse your data for its own purposes.",
       transfersTitle: "Transfers outside Cameroon",
       transfersP1:
-        "Our technical providers may host data outside Cameroon, notably in Europe or the United States. In that case we rely on their contractual commitments to keep an equivalent level of protection.",
-      retentionTitle: "How long we keep it",
-      retentionP1: "Nothing is kept just in case.",
-      retentionB1: "Account and progress: as long as your account exists.",
+        "Our technical providers may host data outside Cameroon, notably in Europe or the United States. In such cases, we rely on their contractual commitments to maintain an equivalent level of protection.",
+      retentionTitle: "Retention periods",
+      retentionP1:
+        "We do not retain data beyond what is necessary for the purposes described herein.",
+      retentionB1:
+        "Account and progress: for as long as your account remains active.",
       retentionB2:
-        "Inactive account: possible deletion after 36 months without sign-in, following a warning email.",
+        "Inactive account: deletion may occur after 36 months without sign-in, preceded by an informational email.",
       retentionB3: "Technical logs: 12 months at most.",
       retentionB4:
-        "Email exchanges: 24 months, to keep the history of a request.",
+        "Email correspondence: 24 months, in order to retain the history of a request.",
       rightsTitle: "Your rights",
       rightsP1:
-        "You can ask to access your data, correct it, delete it, get an exportable copy, or object to a processing. Write to contact@mezescorp.com from your account address: we answer within 30 days, usually much sooner.",
+        "You may request access to your data, its rectification, its deletion, an exportable copy, or object to a processing operation. Please write to contact@mezescorp.com from the address associated with your account: we respond within 30 days, and in most cases sooner.",
       rightsP2:
-        "If you live in the European Union, the GDPR applies to these requests and you can contact your national supervisory authority. From Cameroon, you can refer the matter to the competent data protection authority.",
+        "If you reside in the European Union, the GDPR applies to these requests and you may contact your national supervisory authority. From Cameroon, you may refer the matter to the competent data protection authority.",
       securityTitle: "Security",
       securityP1:
-        "The site is served over HTTPS, passwords are hashed by our authentication provider, and database access is restricted to people who need it. Sessions expire and can be revoked.",
+        "The platform is served over HTTPS. Passwords are hashed by our authentication provider, and database access is restricted to authorised personnel. Sessions expire and may be revoked.",
       securityP2:
-        "No system is bulletproof. In case of a data breach likely to affect you, we tell you and describe what happened, what we did, and what you can do.",
+        "No system is entirely immune to incidents. In the event of a data breach likely to affect you, we will notify you and describe the facts, the measures taken, and the steps you may take.",
       minorsTitle: "Minors",
       minorsP1:
-        "The service is not designed for children. Under 16, creating an account requires the consent of a parent or guardian. At a legal guardian's request, we delete the account and the associated data.",
-      changesTitle: "Changes to this page",
+        "The service is not intended for children. Under the age of 16, creating an account requires the consent of a parent or guardian. Upon request from a legal guardian, we delete the account and the associated data.",
+      changesTitle: "Changes to this policy",
       changesP1:
-        "This policy follows the site's evolution. The update date at the top of the page is the reference. For a significant change (a new purpose, a new provider), we announce it before it takes effect.",
+        "This policy evolves with the platform. The update date at the top of the page is the reference. In the event of a significant change (a new purpose, a new provider), we will notify you before it takes effect.",
     },
     legal: {
       eyebrow: "Legal information",
