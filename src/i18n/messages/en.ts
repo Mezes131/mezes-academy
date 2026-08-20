@@ -295,91 +295,94 @@ export const messagesEn: MessageTree = {
     terms: {
       eyebrow: "Rules of use",
       title: "Terms of use",
-      lead: "What you can do on Mezes Academy, what we commit to, and what we do not promise.",
+      lead: "What you may do on Mezes Academy, what we commit to, and what we do not guarantee.",
       updated: "19 August 2026",
       readTime: "6 min read",
       brief1:
-        "Access to published tracks is free; an account only exists to sync your progress.",
+        "Access to published tracks is free; an account serves solely to synchronise your progress.",
       brief2:
-        "Lessons belong to Mezes Corporation, but the code snippets are yours to reuse in your projects.",
+        "Lessons belong to Mezes Corporation; code snippets may be reused in your projects.",
       brief3:
-        "No recognized diploma, no job guarantee: we teach you to build, not to collect badges.",
+        "No recognised diploma or job guarantee: the platform aims to train you to build, not to issue certification.",
       seoTitle: "Terms of use | Mezes Academy",
       seoDesc:
         "Mezes Academy terms of use: course access, accounts, acceptable use, intellectual property, liability and governing law.",
       scopeTitle: "Scope and acceptance",
       scopeP1:
-        "Mezes Academy is a learning platform published by Mezes Corporation. It offers tracks (React, Secure Vibe Coding, and more to come) made of written lessons, quizzes and exercises that run straight in the browser.",
+        "Mezes Academy is a learning platform published by Mezes Corporation. It offers tracks (React, Secure Vibe Coding, and more to come) consisting of written lessons, quizzes and exercises that run directly in the browser.",
       scopeP2:
-        "By using the site you accept these terms. If something feels unacceptable, do not use the service and write to us: several sentences on this page already come from learner feedback.",
-      whoTitle: "Who can use the service",
+        "By using the site, you accept these terms. If any provision appears unacceptable to you, we invite you not to use the service and to contact us. Certain formulations on this page already reflect learner feedback.",
+      whoTitle: "Who may use the service",
       whoP1:
-        "The site is open to anyone who wants to learn to code, with no minimum level required. If you are under 16, use Mezes Academy with the consent of a parent or guardian, who remains responsible for the account.",
+        "The site is open to anyone wishing to learn to code, with no minimum level required. If you are under 16, you must use Mezes Academy with the consent of a parent or guardian, who remains responsible for the account.",
       whoP2:
-        "You can browse most of the content without an account. Creating one stays optional.",
+        "You may browse most of the content without creating an account. Opening an account remains optional.",
       accountTitle: "Account and security",
       accountP1:
-        "An account is created with an email address and a password, or through Google sign-in. You are responsible for keeping your credentials private and for actions taken from your account.",
-      accountB1: "One account per person: credentials are not shared.",
-      accountB2: "Tell us quickly if you think your account is compromised.",
+        "An account is created with an email address and a password, or through Google sign-in. You are responsible for the confidentiality of your credentials and for actions taken from your account.",
+      accountB1:
+        "One account per person: credentials must not be shared.",
+      accountB2:
+        "You must notify us promptly if you believe your account has been compromised.",
       accountB3:
-        "You can ask for your account and progress to be deleted at any time.",
+        "You may request deletion of your account and progress at any time.",
       accountP2:
         "We will never ask for your password by email, direct message or phone. If you receive such a request, report it to contact@mezescorp.com.",
       accessTitle: "Content access and changes",
       accessP1:
-        "Access to published tracks is free today. If a paid offering appears, it will be announced clearly and will not apply retroactively to content already open to your account.",
+        "Access to published tracks is free at present. If a paid offering is introduced, it will be announced clearly and will not apply retroactively to content already available to your account.",
       accessP2:
-        "The tracks are alive: we add modules, rewrite passages, fix mistakes and may remove content that became wrong. We aim for continuous availability without being able to guarantee it: maintenance, a host outage or a network cut can interrupt the service.",
+        "The tracks evolve: we add modules, revise passages, correct errors and may remove content that has become inaccurate. We aim for continuous availability without being able to guarantee it: maintenance, a host outage or a network interruption may disrupt the service.",
       useTitle: "Acceptable use",
       useP1:
-        "The service is here for learning: read, copy snippets to practice, take notes, share a link to a lesson. The following uses, however, are not allowed.",
+        "The service is intended for learning: you may read the content, copy snippets for practice, take notes and share a link to a lesson. The following uses are, however, prohibited.",
       useB1:
-        "Scraping the site automatically (mass crawling, bots) or loading it heavily enough to degrade the service.",
+        "Scraping the site automatically (mass crawling, bots) or loading it in a manner that degrades the service.",
       useB2:
-        "Republishing or reselling lessons, quizzes and exercises, in whole or in part, without written permission.",
+        "Republishing or reselling lessons, quizzes and exercises, in whole or in part, without written authorisation.",
       useB3:
-        "Bypassing authentication, probing the site for flaws, or trying to reach other learners' data.",
+        "Bypassing authentication, probing the site for vulnerabilities, or attempting to access other learners' data.",
       useB4:
-        "Sending illegal, hateful or misleading content through free-text fields: name, contact message, avatar.",
+        "Disseminating illegal, hateful or misleading content through free-text fields: name, contact message, avatar.",
       useP2:
-        "Tempted to run a security test? Write to us first: we prefer responsible disclosure over a surprise in production.",
+        "If you wish to conduct a security test, contact us beforehand: we favour responsible disclosure.",
       ipTitle: "Intellectual property",
       ipP1:
-        "Texts, illustrations, quizzes, exercises, the Mezes Academy brand and the site's visual identity belong to Mezes Corporation or its partners. You get a personal, non-exclusive, non-transferable right to use them to learn.",
+        "Texts, illustrations, quizzes, exercises, the Mezes Academy brand and the site's visual identity belong to Mezes Corporation or its partners. You are granted a personal, non-exclusive, non-transferable right of use for training purposes.",
       ipP2:
-        "The code snippets shown in the lessons are meant to be reused: put them in your personal or professional projects, no attribution required. The teaching texts themselves may not be republished as they are.",
+        "Code snippets presented in the lessons may be reused in your personal or professional projects, with no attribution required. Teaching texts may not, however, be republished as they stand.",
       aiTitle: "Code samples and AI assistants",
       aiP1:
-        "Several tracks discuss AI assistants and deliberately show imperfect code, so you learn to fix it. These samples are educational: they are neither an audit nor a security guarantee for your own project.",
+        "Several tracks address AI assistants and deliberately present imperfect code, so that you learn to correct it. These samples are educational: they constitute neither an audit nor a security guarantee for your own project.",
       aiP2:
-        "Before shipping to production, have your code reviewed by someone competent. The technical decisions you make remain yours.",
-      noPromiseTitle: "What we do not promise",
-      noPromiseP1: "To be blunt, here is what Mezes Academy is not.",
+        "Before any production release, have your code reviewed by a competent person. Technical decisions you make remain your responsibility.",
+      noPromiseTitle: "What we do not guarantee",
+      noPromiseP1: "For the avoidance of doubt, Mezes Academy is not:",
       noPromiseB1:
-        "No diploma, official certification or academic equivalence.",
-      noPromiseB2: "No guarantee of a job, a contract or an income.",
-      noPromiseB3: "No guarantee of an error-free or uninterrupted service.",
+        "A diploma, official certification or academic equivalence.",
+      noPromiseB2: "A guarantee of employment, a contract or an income.",
+      noPromiseB3:
+        "A guarantee of an error-free or uninterrupted service.",
       noPromiseP2:
-        "The service is provided as is. We fix reported mistakes as fast as we can, but content can age faster than its update.",
+        "The service is provided as is. We correct reported errors as promptly as practicable, it being understood that content may evolve faster than its update.",
       liabilityTitle: "Liability",
       liabilityP1:
-        "Mezes Corporation cannot be held liable for indirect damages tied to using the site: loss of local data, lost profit, technical decisions taken on the basis of a lesson. Our liability is limited to what applicable law allows.",
+        "Mezes Corporation shall not be held liable for indirect damages arising from use of the site: loss of local data, lost profit, technical decisions taken on the basis of a lesson. Our liability is limited to what applicable law permits.",
       liabilityP2:
-        "Progress stored locally depends on your browser: clearing the site data erases it. An account remains the safest way to lose nothing.",
+        "Progress stored locally depends on your browser: clearing the site data erases it. An account remains the most reliable means of preserving your progress.",
       endTitle: "Suspension and ending use",
       endP1:
-        "You can stop using the service whenever you want and ask for your account to be deleted by email.",
+        "You may stop using the service at any time and request deletion of your account by email.",
       endP2:
-        "On our side, we can suspend an account for clear abuse: attacks, fraud, resale of content, harassment. Except in an emergency or a legal obligation, we warn you first and explain why.",
+        "We may suspend an account in the event of clear abuse: attacks, fraud, resale of content, harassment. Except in an emergency or where legally required, we notify you beforehand and state the reasons.",
       changesTitle: "Changes to these terms",
       changesP1:
-        "These terms evolve with the service. The update date at the top of the page marks the latest version. For an important change we announce it on the site and, if you have an account, by email.",
+        "These terms evolve with the service. The update date at the top of the page indicates the version in force. In the event of a material change, we announce it on the site and, if you hold an account, by email.",
       changesP2:
-        "Continuing to use the service after a change means you accept the new version.",
+        "Continued use of the service after a modification constitutes acceptance of the new version.",
       lawTitle: "Governing law and disputes",
       lawP1:
-        "These terms are governed by Cameroonian law. If we disagree, we start by looking for an amicable solution: write to contact@mezescorp.com describing the problem.",
+        "These terms are governed by Cameroonian law. In the event of a disagreement, we favour an amicable resolution: write to contact@mezescorp.com describing the issue.",
       lawP2:
         "Failing an agreement, the dispute falls to the competent courts of Yaoundé, without prejudice to consumer protection rules applicable in your country of residence.",
     },

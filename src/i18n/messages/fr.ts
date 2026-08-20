@@ -294,15 +294,15 @@ export const messagesFr = {
     terms: {
       eyebrow: "Cadre d'utilisation",
       title: "Conditions d'utilisation",
-      lead: "Ce que tu peux faire sur Mezes Academy, ce qu'on s'engage à tenir, et ce qu'on ne promet pas.",
+      lead: "Ce que vous pouvez faire sur Mezes Academy, ce à quoi nous nous engageons, et ce que nous ne garantissons pas.",
       updated: "19 août 2026",
       readTime: "6 min de lecture",
       brief1:
-        "L'accès aux parcours publiés est gratuit ; un compte sert uniquement à synchroniser ta progression.",
+        "L'accès aux parcours publiés est gratuit ; un compte sert uniquement à synchroniser votre progression.",
       brief2:
-        "Les leçons appartiennent à Mezes Corporation, mais les extraits de code sont réutilisables dans tes projets.",
+        "Les leçons appartiennent à Mezes Corporation ; les extraits de code peuvent être réutilisés dans vos projets.",
       brief3:
-        "Aucun diplôme reconnu, aucune garantie d'emploi : on t'apprend à construire, pas à collectionner des badges.",
+        "Aucun diplôme reconnu ni garantie d'emploi : la plateforme vise à vous former à construire, non à délivrer de certification.",
       seoTitle: "Conditions d'utilisation | Mezes Academy",
       seoDesc:
         "Conditions d'utilisation de Mezes Academy : accès aux cours, compte, usage acceptable, propriété intellectuelle, responsabilité et droit applicable.",
@@ -310,77 +310,80 @@ export const messagesFr = {
       scopeP1:
         "Mezes Academy est une plateforme d'apprentissage éditée par Mezes Corporation. Elle propose des parcours (React, Secure Vibe Coding, et d'autres à venir) composés de leçons écrites, de quiz et d'exercices exécutés directement dans le navigateur.",
       scopeP2:
-        "En utilisant le site, tu acceptes ces conditions. Si un point te semble inacceptable, n'utilise pas le service et écris-nous : plusieurs formulations de cette page viennent déjà de retours d'apprenants.",
+        "En utilisant le site, vous acceptez les présentes conditions. Si une disposition vous paraît inacceptable, nous vous invitons à ne pas utiliser le service et à nous contacter. Certaines formulations de cette page tiennent déjà compte de retours d'apprenants.",
       whoTitle: "Qui peut utiliser le service",
       whoP1:
-        "Le site est ouvert à toute personne qui veut apprendre à coder, sans niveau minimum exigé. Si tu as moins de 16 ans, utilise Mezes Academy avec l'accord d'un parent ou d'un tuteur, qui reste responsable du compte.",
+        "Le site est ouvert à toute personne souhaitant apprendre à coder, sans niveau minimum exigé. Si vous avez moins de 16 ans, vous devez utiliser Mezes Academy avec l'accord d'un parent ou d'un tuteur, qui demeure responsable du compte.",
       whoP2:
-        "Tu peux parcourir une grande partie des contenus sans compte. En créer un reste facultatif.",
+        "Vous pouvez consulter une grande partie des contenus sans créer de compte. L'ouverture d'un compte demeure facultative.",
       accountTitle: "Compte et sécurité",
       accountP1:
-        "Un compte se crée avec une adresse e-mail et un mot de passe, ou via une connexion Google. Tu es responsable de la confidentialité de tes identifiants et des actions effectuées depuis ton compte.",
-      accountB1: "Un compte par personne : les identifiants ne se partagent pas.",
+        "Un compte se crée au moyen d'une adresse e-mail et d'un mot de passe, ou via une connexion Google. Vous êtes responsable de la confidentialité de vos identifiants et des actions effectuées depuis votre compte.",
+      accountB1:
+        "Un compte par personne : les identifiants ne doivent pas être partagés.",
       accountB2:
-        "Préviens-nous vite si tu penses que ton compte est compromis.",
+        "Vous devez nous informer rapidement si vous estimez que votre compte est compromis.",
       accountB3:
-        "Tu peux demander la suppression de ton compte et de ta progression à tout moment.",
+        "Vous pouvez demander à tout moment la suppression de votre compte et de votre progression.",
       accountP2:
-        "On ne te demandera jamais ton mot de passe par e-mail, par message privé ou par téléphone. Si tu reçois une telle demande, signale-la à contact@mezescorp.com.",
+        "Nous ne vous demanderons jamais votre mot de passe par e-mail, message privé ou téléphone. Si vous recevez une telle demande, signalez-la à contact@mezescorp.com.",
       accessTitle: "Accès aux contenus et évolutions",
       accessP1:
-        "L'accès aux parcours publiés est gratuit à ce jour. Si une offre payante apparaît, elle sera annoncée clairement et sans effet rétroactif sur les contenus déjà ouverts à ton compte.",
+        "L'accès aux parcours publiés est gratuit à ce jour. Si une offre payante est introduite, elle sera annoncée de manière claire et n'aura pas d'effet rétroactif sur les contenus déjà accessibles à votre compte.",
       accessP2:
-        "Les parcours sont vivants : on ajoute des modules, on réécrit des passages, on corrige des erreurs et on peut retirer un contenu devenu faux. On vise une disponibilité continue sans pouvoir la garantir : maintenance, panne d'hébergeur ou coupure réseau peuvent interrompre le service.",
+        "Les parcours évoluent : nous ajoutons des modules, révisons des passages, corrigeons des erreurs et pouvons retirer un contenu devenu inexact. Nous visons une disponibilité continue sans pouvoir la garantir : une maintenance, une panne d'hébergeur ou une coupure réseau peuvent interrompre le service.",
       useTitle: "Usage acceptable",
       useP1:
-        "Le service est là pour apprendre : lis, copie des extraits pour t'entraîner, prends des notes, partage un lien vers une leçon. En revanche, les usages suivants ne sont pas autorisés.",
+        "Le service est destiné à l'apprentissage : vous pouvez lire les contenus, copier des extraits pour vous exercer, prendre des notes et partager un lien vers une leçon. Les usages suivants sont en revanche interdits.",
       useB1:
-        "Aspirer le site automatiquement (scraping massif, robots) ou le charger au point de dégrader le service.",
+        "Aspirer le site automatiquement (scraping massif, robots) ou le solliciter au point de dégrader le service.",
       useB2:
         "Republier ou revendre les leçons, quiz et exercices, en tout ou en partie, sans autorisation écrite.",
       useB3:
         "Contourner l'authentification, sonder les failles du site ou tenter d'accéder aux données d'autres apprenants.",
       useB4:
-        "Envoyer des contenus illégaux, haineux ou trompeurs via les champs libres : nom, message de contact, avatar.",
+        "Diffuser des contenus illégaux, haineux ou trompeurs via les champs libres : nom, message de contact, avatar.",
       useP2:
-        "Un test de sécurité te démange ? Écris-nous d'abord : on préfère une divulgation responsable à une surprise en production.",
+        "Si vous souhaitez réaliser un test de sécurité, contactez-nous au préalable : nous privilégions une divulgation responsable.",
       ipTitle: "Propriété intellectuelle",
       ipP1:
-        "Les textes, illustrations, quiz, exercices, la marque Mezes Academy et l'identité visuelle du site appartiennent à Mezes Corporation ou à ses partenaires. Tu bénéficies d'un droit d'usage personnel, non exclusif et non transférable, pour te former.",
+        "Les textes, illustrations, quiz, exercices, la marque Mezes Academy et l'identité visuelle du site appartiennent à Mezes Corporation ou à ses partenaires. Vous bénéficiez d'un droit d'usage personnel, non exclusif et non transférable, à des fins de formation.",
       ipP2:
-        "Les extraits de code présentés dans les leçons sont là pour être réutilisés : intègre-les dans tes projets personnels ou professionnels, sans mention obligatoire. Les textes pédagogiques, eux, ne peuvent pas être republiés tels quels.",
+        "Les extraits de code présentés dans les leçons peuvent être réutilisés dans vos projets personnels ou professionnels, sans mention obligatoire. Les textes pédagogiques ne peuvent en revanche pas être republiés tels quels.",
       aiTitle: "Exemples de code et assistants IA",
       aiP1:
-        "Plusieurs parcours parlent d'assistants IA et montrent volontairement du code imparfait, pour apprendre à le corriger. Ces exemples sont pédagogiques : ils ne constituent ni un audit, ni une garantie de sécurité pour ton propre projet.",
+        "Plusieurs parcours abordent les assistants IA et présentent volontairement du code imparfait, afin d'apprendre à le corriger. Ces exemples sont pédagogiques : ils ne constituent ni un audit, ni une garantie de sécurité pour votre propre projet.",
       aiP2:
-        "Avant une mise en production, fais relire ton code par une personne compétente. Les décisions techniques que tu prends restent les tiennes.",
-      noPromiseTitle: "Ce qu'on ne promet pas",
-      noPromiseP1: "Pour être direct, voici ce que Mezes Academy n'est pas.",
+        "Avant toute mise en production, faites relire votre code par une personne compétente. Les décisions techniques que vous prenez demeurent sous votre responsabilité.",
+      noPromiseTitle: "Ce que nous ne garantissons pas",
+      noPromiseP1:
+        "Pour éviter toute ambiguïté, Mezes Academy n'est pas :",
       noPromiseB1:
-        "Aucun diplôme, certification officielle ou équivalence académique.",
-      noPromiseB2: "Aucune garantie d'emploi, de mission ou de rémunération.",
+        "Un diplôme, une certification officielle ou une équivalence académique.",
+      noPromiseB2:
+        "Une garantie d'emploi, de mission ou de rémunération.",
       noPromiseB3:
-        "Aucune garantie d'un service sans erreur ni interruption.",
+        "Une garantie d'un service sans erreur ni interruption.",
       noPromiseP2:
-        "Le service est fourni en l'état. On corrige les erreurs signalées aussi vite qu'on peut, mais un contenu peut vieillir plus vite que sa mise à jour.",
+        "Le service est fourni en l'état. Nous corrigeons les erreurs signalées dans les meilleurs délais, étant précisé qu'un contenu peut évoluer plus vite que sa mise à jour.",
       liabilityTitle: "Responsabilité",
       liabilityP1:
-        "Mezes Corporation ne peut être tenue responsable des dommages indirects liés à l'usage du site : perte de données locales, manque à gagner, décisions techniques prises sur la base d'une leçon. Notre responsabilité est limitée à ce que la loi applicable autorise.",
+        "Mezes Corporation ne saurait être tenue responsable des dommages indirects liés à l'usage du site : perte de données locales, manque à gagner, décisions techniques prises sur la base d'une leçon. Notre responsabilité est limitée à ce que la loi applicable autorise.",
       liabilityP2:
-        "Ta progression enregistrée localement dépend de ton navigateur : vider les données du site l'effacera. Un compte reste le moyen le plus sûr de ne rien perdre.",
+        "Votre progression enregistrée localement dépend de votre navigateur : l'effacement des données du site l'entraîne. Un compte demeure le moyen le plus sûr de conserver votre avancement.",
       endTitle: "Suspension et fin d'utilisation",
       endP1:
-        "Tu peux arrêter d'utiliser le service quand tu veux et demander la suppression de ton compte par e-mail.",
+        "Vous pouvez cesser d'utiliser le service à tout moment et demander la suppression de votre compte par e-mail.",
       endP2:
-        "De notre côté, on peut suspendre un compte en cas d'abus caractérisé : attaque, fraude, revente de contenus, harcèlement. Sauf urgence ou obligation légale, on prévient avant et on explique pourquoi.",
-      changesTitle: "Modifications de ces conditions",
+        "Nous pouvons suspendre un compte en cas d'abus caractérisé : attaque, fraude, revente de contenus, harcèlement. Sauf urgence ou obligation légale, nous vous en informons au préalable et en exposons les motifs.",
+      changesTitle: "Modifications des présentes conditions",
       changesP1:
-        "Ces conditions évoluent avec le service. La date de mise à jour en haut de page indique la dernière version. Pour un changement important, on l'annonce sur le site et, si tu as un compte, par e-mail.",
+        "Les présentes conditions évoluent avec le service. La date de mise à jour figurant en tête de page indique la version en vigueur. En cas de changement important, nous l'annonçons sur le site et, si vous disposez d'un compte, par e-mail.",
       changesP2:
-        "Continuer à utiliser le service après une modification vaut acceptation de la nouvelle version.",
+        "La poursuite de l'utilisation du service après une modification vaut acceptation de la nouvelle version.",
       lawTitle: "Droit applicable et litiges",
       lawP1:
-        "Ces conditions sont régies par le droit camerounais. En cas de désaccord, on commence par chercher une solution à l'amiable : écris à contact@mezescorp.com en décrivant le problème.",
+        "Les présentes conditions sont régies par le droit camerounais. En cas de désaccord, nous privilégions une résolution amiable : adressez-vous à contact@mezescorp.com en décrivant le problème.",
       lawP2:
         "À défaut d'accord, le litige relève des tribunaux compétents de Yaoundé, sans préjudice des règles protectrices applicables aux consommateurs dans leur pays de résidence.",
     },
