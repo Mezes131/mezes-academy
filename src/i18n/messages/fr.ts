@@ -133,8 +133,16 @@ export const messagesFr = {
     terms: "Conditions",
     privacy: "Confidentialité",
     legalNotice: "Mentions légales",
+    cookies: "Gérer les cookies",
     soon: "Bientôt",
     planned: "Prévu",
+  },
+  cookies: {
+    title: "Cookies et mesure d'audience",
+    body: "Nous utilisons Google Analytics uniquement si vous l'acceptez, pour comprendre comment le site est utilisé. Les cookies essentiels (session, thème, langue, progression locale) restent nécessaires au fonctionnement.",
+    privacyLink: "Politique de confidentialité",
+    accept: "Accepter",
+    refuse: "Refuser",
   },
   academy: {
     disclaimer:
@@ -383,7 +391,7 @@ export const messagesFr = {
       updated: "19 août 2026",
       readTime: "5 min de lecture",
       brief1:
-        "Nous ne diffusons aucune publicité, ne revendons aucune donnée et n'effectuons aucun pistage entre sites.",
+        "Nous ne diffusons aucune publicité et ne revendons aucune donnée. Google Analytics n'est chargé qu'avec votre consentement.",
       brief2:
         "Sans compte, votre progression demeure exclusivement sur votre navigateur.",
       brief3:
@@ -407,6 +415,8 @@ export const messagesFr = {
       dataB4: "Préférences : thème clair ou sombre, langue de l'interface.",
       dataB5:
         "Données techniques : journaux du serveur (adresse IP, horodatage, page demandée, navigateur), utilisés à des fins de sécurité et de diagnostic.",
+      dataB6:
+        "Mesure d'audience (uniquement si vous acceptez les cookies Analytics) : pages consultées, durée de visite, type d'appareil, données agrégées transmises à Google Analytics.",
       dataP2:
         "Nous ne collectons ni votre localisation précise, ni vos contacts, ni de données sensibles. Aucun formulaire du site ne sollicite d'informations bancaires.",
       whyTitle: "Finalités et bases légales",
@@ -417,20 +427,22 @@ export const messagesFr = {
         "Garantir la sécurité et prévenir les abus (journaux techniques, limitation de débit) : intérêt légitime.",
       whyB3:
         "Répondre à vos messages : les informations que vous communiquez volontairement dans un e-mail de contact.",
+      whyB4:
+        "Mesurer l'audience du site via Google Analytics : votre consentement, que vous pouvez retirer à tout moment via « Gérer les cookies » dans le pied de page.",
       whyP2:
         "Aucune décision automatisée n'a d'effet juridique à votre égard. Nous n'effectuons aucun profilage à des fins publicitaires.",
       storageTitle: "Stockage local et cookies",
       storageP1:
-        "La plateforme n'utilise ni cookie publicitaire, ni traceur tiers. Les données conservées dans votre navigateur se limitent au strict nécessaire : un jeton de session lorsque vous êtes connecté, votre progression lorsque vous ne l'êtes pas, ainsi que votre thème et votre langue.",
+        "La plateforme distingue les cookies et stockages strictement nécessaires (session, thème, langue, progression locale, choix de consentement) des cookies de mesure d'audience. Google Analytics n'est chargé qu'après votre acceptation explicite ; aucun cookie publicitaire ni traceur entre sites n'est utilisé.",
       storageP2:
-        "Vous pouvez effacer l'ensemble de ces données via les paramètres de votre navigateur. En l'absence de compte, cette opération entraîne également la suppression de votre progression locale, aucune copie n'étant conservée ailleurs.",
+        "Vous pouvez effacer les données locales via les paramètres de votre navigateur, et modifier votre choix Analytics à tout moment via « Gérer les cookies ». En l'absence de compte, l'effacement du navigateur entraîne également la suppression de votre progression locale.",
       processorsTitle: "Sous-traitants et hébergement",
       processorsP1:
         "L'exploitation de la plateforme implique un nombre limité de prestataires, chacun n'ayant accès qu'aux données nécessaires à sa mission.",
       processorsB1:
         "Supabase : authentification, base de données de progression et stockage des avatars.",
       processorsB2:
-        "Google : uniquement si vous choisissez la connexion via Google.",
+        "Google : uniquement si vous choisissez la connexion via Google, et Google Analytics uniquement si vous acceptez la mesure d'audience.",
       processorsB3:
         "Hébergeur : serveur privé (VPS) opéré pour Mezes Corporation, servant les pages et conservant les journaux techniques.",
       processorsP2:
@@ -518,7 +530,7 @@ export const messagesFr = {
         "Si une page te bloque (lecteur d'écran, zoom, contraste), décris la situation par e-mail : ces retours sont traités comme des bugs prioritaires.",
       dataTitle: "Données personnelles et cookies",
       dataP1:
-        "Le détail de ce qu'on collecte, pourquoi, et comment exercer tes droits se trouve sur la page Confidentialité. En résumé : aucune publicité, aucun traceur tiers, et un stockage local limité à ta session, ta progression et tes préférences.",
+        "Le détail de ce que nous collectons, pourquoi, et comment exercer vos droits se trouve sur la page Confidentialité. En résumé : aucune publicité, Google Analytics uniquement avec votre consentement, et un stockage local limité à votre session, votre progression, vos préférences et votre choix de cookies.",
       lawTitle: "Droit applicable",
       lawP1:
         "Ce site et son utilisation sont régis par le droit camerounais. À défaut d'accord amiable, les tribunaux compétents de Yaoundé sont saisis, sans préjudice des droits que la loi de ton pays de résidence t'accorde en tant que consommateur.",

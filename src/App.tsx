@@ -20,6 +20,7 @@ import { LegalDocPage } from "@/pages/academy/LegalDocPage";
 import { useThemeEffect } from "@/hooks/useThemeEffect";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { LocaleRouteSync } from "@/i18n/LocaleRouteSync";
+import { CookieConsent } from "@/components/consent/CookieConsent";
 import { useT } from "@/i18n/useT";
 
 const AuthPage = lazy(() =>
@@ -259,6 +260,7 @@ export default function App() {
               <Suspense fallback={<RouteFallback />}>
                 <AppRoutes />
               </Suspense>
+              <CookieConsent />
             </AppRouter>
           </ThemeApplier>
         </ProgressProvider>

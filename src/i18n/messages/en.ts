@@ -134,8 +134,16 @@ export const messagesEn: MessageTree = {
     terms: "Terms",
     privacy: "Privacy",
     legalNotice: "Legal notice",
+    cookies: "Manage cookies",
     soon: "Soon",
     planned: "Planned",
+  },
+  cookies: {
+    title: "Cookies and audience measurement",
+    body: "We use Google Analytics only if you accept, to understand how the site is used. Essential cookies (session, theme, language, local progress) remain necessary for the service to work.",
+    privacyLink: "Privacy policy",
+    accept: "Accept",
+    refuse: "Refuse",
   },
   academy: {
     disclaimer:
@@ -382,7 +390,7 @@ export const messagesEn: MessageTree = {
       updated: "19 August 2026",
       readTime: "5 min read",
       brief1:
-        "We do not serve advertising, resell data, or engage in cross-site tracking.",
+        "We do not serve advertising or resell data. Google Analytics is loaded only with your consent.",
       brief2:
         "Without an account, your progress remains exclusively on your browser.",
       brief3:
@@ -406,6 +414,8 @@ export const messagesEn: MessageTree = {
       dataB4: "Preferences: light or dark theme, interface language.",
       dataB5:
         "Technical data: server logs (IP address, timestamp, page requested, browser), used for security and diagnostics.",
+      dataB6:
+        "Audience measurement (only if you accept Analytics cookies): pages viewed, visit duration, device type, aggregated data sent to Google Analytics.",
       dataP2:
         "We do not collect your precise location, your contacts, or sensitive data. No form on the site requests payment details.",
       whyTitle: "Purposes and legal bases",
@@ -416,19 +426,22 @@ export const messagesEn: MessageTree = {
         "Ensuring security and preventing abuse (technical logs, rate limiting): legitimate interest.",
       whyB3:
         "Responding to your messages: the information you voluntarily provide in a contact email.",
+      whyB4:
+        "Measuring site audience via Google Analytics: your consent, which you may withdraw at any time via « Manage cookies » in the footer.",
       whyP2:
         "No automated decision produces a legal effect concerning you. We do not engage in advertising profiling.",
       storageTitle: "Local storage and cookies",
       storageP1:
-        "The platform uses neither advertising cookies nor third-party trackers. Data retained in your browser is limited to what is strictly necessary: a session token when you are signed in, your progress when you are not, as well as your theme and language preferences.",
+        "The platform distinguishes strictly necessary cookies and storage (session, theme, language, local progress, consent choice) from audience-measurement cookies. Google Analytics is loaded only after your explicit acceptance; no advertising cookies or cross-site trackers are used.",
       storageP2:
-        "You may erase all such data through your browser settings. Without an account, this action also deletes your local progress, as no copy is retained elsewhere.",
+        "You may erase local data through your browser settings, and change your Analytics choice at any time via « Manage cookies ». Without an account, clearing the browser also deletes your local progress.",
       processorsTitle: "Processors and hosting",
       processorsP1:
         "Operating the platform involves a limited number of providers, each granted access only to the data required for its role.",
       processorsB1:
         "Supabase: authentication, progress database, and avatar storage.",
-      processorsB2: "Google: only if you choose to sign in with Google.",
+      processorsB2:
+        "Google: only if you choose to sign in with Google, and Google Analytics only if you accept audience measurement.",
       processorsB3:
         "Host: a private server (VPS) operated for Mezes Corporation, serving pages and retaining technical logs.",
       processorsP2:
@@ -516,7 +529,7 @@ export const messagesEn: MessageTree = {
         "If a page blocks you (screen reader, zoom, contrast), describe the situation by email: this feedback is treated as a priority bug.",
       dataTitle: "Personal data and cookies",
       dataP1:
-        "The detail of what we collect, why, and how to exercise your rights lives on the Privacy page. In short: no ads, no third-party tracker, and local storage limited to your session, your progress and your preferences.",
+        "The detail of what we collect, why, and how to exercise your rights lives on the Privacy page. In short: no ads, Google Analytics only with your consent, and local storage limited to your session, your progress, your preferences and your cookie choice.",
       lawTitle: "Governing law",
       lawP1:
         "This site and its use are governed by Cameroonian law. Failing an amicable agreement, the competent courts of Yaoundé have jurisdiction, without prejudice to the rights your country of residence grants you as a consumer.",

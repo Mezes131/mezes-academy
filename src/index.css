@@ -802,6 +802,43 @@ html:has(.about-page) footer {
   }
 }
 
+/* ─── Cookie consent banner ─── */
+.cookie-consent {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 70;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+}
+.cookie-consent-panel {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: fit-content;
+  max-width: min(28rem, 100%);
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 0.5px solid rgb(var(--border) / var(--border-alpha));
+  background: rgb(var(--bg2) / 0.96);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -8px 32px rgb(0 0 0 / 0.28);
+  animation: about-rise 280ms var(--ease-out) both;
+}
+@media (min-width: 640px) {
+  .cookie-consent-panel {
+    padding: 1.25rem 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .cookie-consent {
+    bottom: 4.75rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   html {
     scroll-behavior: auto;
@@ -819,7 +856,8 @@ html:has(.about-page) footer {
   .contact-mail,
   .contact-success,
   .legal-head,
-  .legal-brief {
+  .legal-brief,
+  .cookie-consent-panel {
     animation: none !important;
   }
   .about-reveal {
