@@ -1,6 +1,23 @@
 import type { MessageTree } from "./fr";
 
 export const messagesEn: MessageTree = {
+  seo: {
+    homeTitle: "Mezes Academy: learn to build high-performing solutions",
+    homeDesc:
+      "Mezes Academy helps you build solutions that hold up. React and Secure Vibe Coding tracks, practice in the browser, progress saved.",
+    reactTitle: "React track | Mezes Academy",
+    reactDesc:
+      "Learn React from zero to expert: short lessons, live browser exercises, quizzes, and synced progress.",
+    svcTitle: "Secure Vibe Coding | Mezes Academy",
+    svcDesc:
+      "Build with AI without getting trapped: architecture, auth, security and good practices, with practice in the browser.",
+    authTitle: "Sign in | Mezes Academy",
+    authDesc: "Sign in or create an account to sync your progress on Mezes Academy.",
+    resetTitle: "Reset password | Mezes Academy",
+    resetDesc: "Choose a new password for your Mezes Academy account.",
+    accountTitle: "My account | Mezes Academy",
+    accountDesc: "Manage your profile, preferences and account security on Mezes Academy.",
+  },
   nav: {
     home: "Home",
     catalog: "Catalog",

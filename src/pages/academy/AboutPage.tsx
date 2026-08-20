@@ -7,7 +7,6 @@ import { ClosingCta } from "@/components/landing/ClosingCta";
 import { ThesisDiff } from "@/components/academy/ThesisDiff";
 import { MethodLesson } from "@/components/academy/MethodLesson";
 import { useT } from "@/i18n/useT";
-import { useLocale } from "@/i18n/LocaleProvider";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import {
   FLAGSHIP_COURSE_PATH,
@@ -19,7 +18,6 @@ import {
  */
 export function AboutPage() {
   const t = useT();
-  const { locale } = useLocale();
   const lp = useLocalePath();
   const pageRef = useRef<HTMLElement>(null);
 
@@ -40,18 +38,6 @@ export function AboutPage() {
     panes.forEach((pane) => io.observe(pane));
     return () => io.disconnect();
   }, []);
-
-  useEffect(() => {
-    const prevTitle = document.title;
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDesc = meta?.getAttribute("content") ?? "";
-    document.title = t("academy.about.seoTitle");
-    meta?.setAttribute("content", t("academy.about.seoDesc"));
-    return () => {
-      document.title = prevTitle;
-      meta?.setAttribute("content", prevDesc);
-    };
-  }, [locale, t]);
 
   const howTo = {
     "@context": "https://schema.org",

@@ -1,0 +1,11 @@
+/* TEAM */
+Publisher: Mezes Corporation
+Site: Mezes Academy
+Contact: contact@mezescorp.com
+Location: Yaoundé, Cameroon
+
+/* SITE */
+Standards: HTML5, CSS3, React
+Languages: fr, en
+Doctype: HTML5
+URL: https://academy.mezescorp.com/

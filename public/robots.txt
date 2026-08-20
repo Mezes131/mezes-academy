@@ -1,9 +1,51 @@
+# Mezes Academy — https://academy.mezescorp.com
+# robots.txt — crawl rules for search engines and AI crawlers (GEO)
+
 User-agent: *
 Allow: /
+Allow: /en
+Allow: /about
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /legal
+Allow: /react
+Allow: /secure-vibe-coding
+Allow: /llms.txt
+Allow: /llm.txt
+Allow: /sitemap.xml
 
-# App privée (session, compte)
+# Private / session-bound surfaces
 Disallow: /account
 Disallow: /auth
+Disallow: /reset-password
+Disallow: /en/account
+Disallow: /en/auth
+Disallow: /en/reset-password
 
-# Assets hashés Vite : crawl inutile
-Disallow: /assets/
+# AI / answer-engine crawlers (allowed for GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://academy.mezescorp.com/sitemap.xml

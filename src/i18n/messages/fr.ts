@@ -1,5 +1,22 @@
 /** Chrome UI strings (FR). Keep keys stable; add EN twin in en.ts. */
 export const messagesFr = {
+  seo: {
+    homeTitle: "Mezes Academy : apprends à construire des solutions performantes",
+    homeDesc:
+      "Mezes Academy t'aide à construire des solutions qui tiennent. Parcours React et Secure Vibe Coding, pratique dans le navigateur, progression sauvegardée.",
+    reactTitle: "Parcours React | Mezes Academy",
+    reactDesc:
+      "Apprends React de zéro à expert : leçons courtes, exercices live dans le navigateur, quiz et progression synchronisée.",
+    svcTitle: "Secure Vibe Coding | Mezes Academy",
+    svcDesc:
+      "Construis avec l'IA sans te faire piéger : architecture, auth, sécurité et bonnes pratiques, avec pratique dans le navigateur.",
+    authTitle: "Connexion | Mezes Academy",
+    authDesc: "Connecte-toi ou crée un compte pour synchroniser ta progression sur Mezes Academy.",
+    resetTitle: "Réinitialiser le mot de passe | Mezes Academy",
+    resetDesc: "Choisis un nouveau mot de passe pour ton compte Mezes Academy.",
+    accountTitle: "Mon compte | Mezes Academy",
+    accountDesc: "Gère ton profil, tes préférences et la sécurité de ton compte Mezes Academy.",
+  },
   nav: {
     home: "Accueil",
     catalog: "Catalogue",

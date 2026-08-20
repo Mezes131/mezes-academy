@@ -42,6 +42,6 @@ Mezes Academy is published by Mezes Corporation (Yaoundé, Cameroon). Site: http
 
 ## Optional
 
+- Canonical GEO file: https://academy.mezescorp.com/llms.txt
 - Machine-readable crawl map: https://academy.mezescorp.com/sitemap.xml
 - Robots: https://academy.mezescorp.com/robots.txt
-- This file is also available as https://academy.mezescorp.com/llm.txt

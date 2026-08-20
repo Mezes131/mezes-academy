@@ -2,7 +2,6 @@ import { useEffect, useId, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check, Clock3, History } from "lucide-react";
 import { useT } from "@/i18n/useT";
-import { useLocale } from "@/i18n/LocaleProvider";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import type { MessageKey } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
@@ -329,7 +328,6 @@ const pad = (n: number) => String(n).padStart(2, "0");
  */
 export function LegalDocPage({ doc }: { doc: AcademyDoc }) {
   const t = useT();
-  const { locale } = useLocale();
   const lp = useLocalePath();
   const uid = useId();
   const head = HEAD[doc];
@@ -337,18 +335,6 @@ export function LegalDocPage({ doc }: { doc: AcademyDoc }) {
   const email = t("academy.contact.email");
   const anchor = (id: string) => `${doc}-${id}`;
   const [active, setActive] = useState<string>(() => anchor(sections[0].id));
-
-  useEffect(() => {
-    const prevTitle = document.title;
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDesc = meta?.getAttribute("content") ?? "";
-    document.title = t(head.seoTitle);
-    meta?.setAttribute("content", t(head.seoDesc));
-    return () => {
-      document.title = prevTitle;
-      meta?.setAttribute("content", prevDesc);
-    };
-  }, [head, locale, t]);
 
   useEffect(() => {
     const targets = sections

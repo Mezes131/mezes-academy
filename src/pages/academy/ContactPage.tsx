@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/Button";
 import { Faq } from "@/components/ui/Faq";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { useT } from "@/i18n/useT";
-import { useLocale } from "@/i18n/LocaleProvider";
 import type { MessageKey } from "@/i18n/useT";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +33,6 @@ type Errors = Partial<Record<"name" | "email" | "message", string>>;
  */
 export function ContactPage() {
   const t = useT();
-  const { locale } = useLocale();
   const desk = t("academy.contact.email");
   const uid = useId();
   const summaryRef = useRef<HTMLDivElement>(null);
@@ -49,18 +47,6 @@ export function ContactPage() {
 
   const subjectKey =
     SUBJECTS.find((s) => s.id === subjectId)?.key ?? SUBJECTS[0].key;
-
-  useEffect(() => {
-    const prevTitle = document.title;
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDesc = meta?.getAttribute("content") ?? "";
-    document.title = t("academy.contact.seoTitle");
-    meta?.setAttribute("content", t("academy.contact.seoDesc"));
-    return () => {
-      document.title = prevTitle;
-      meta?.setAttribute("content", prevDesc);
-    };
-  }, [locale, t]);
 
   function validate(): Errors {
     const next: Errors = {};

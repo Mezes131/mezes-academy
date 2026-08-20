@@ -21,6 +21,7 @@ import { useThemeEffect } from "@/hooks/useThemeEffect";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { LocaleRouteSync } from "@/i18n/LocaleRouteSync";
 import { CookieConsent } from "@/components/consent/CookieConsent";
+import { DocumentSeo, SiteJsonLd } from "@/components/seo/DocumentSeo";
 import { useT } from "@/i18n/useT";
 
 const AuthPage = lazy(() =>
@@ -256,6 +257,8 @@ export default function App() {
           <ThemeApplier>
             <AppRouter>
               <LocaleRouteSync />
+              <DocumentSeo />
+              <SiteJsonLd />
               <ScrollToTop />
               <Suspense fallback={<RouteFallback />}>
                 <AppRoutes />

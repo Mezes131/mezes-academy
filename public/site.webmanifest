@@ -1,0 +1,18 @@
+{
+  "name": "Mezes Academy",
+  "short_name": "Mezes",
+  "description": "Apprends à construire des solutions performantes : React et Secure Vibe Coding.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e0f16",
+  "theme_color": "#0e0f16",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
