@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <url>
+    <loc>https://academy.mezescorp.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/about" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/about" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/contact" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/contact" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/react</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/react" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/react" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/react" />
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/react</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/react" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/react" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/react" />
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/secure-vibe-coding</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/secure-vibe-coding" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/secure-vibe-coding" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/secure-vibe-coding" />
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/secure-vibe-coding</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/secure-vibe-coding" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/secure-vibe-coding" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/secure-vibe-coding" />
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/terms" />
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/terms</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/terms" />
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/privacy" />
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/privacy" />
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/legal" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/legal" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/legal" />
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://academy.mezescorp.com/en/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/legal" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en/legal" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/legal" />
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>

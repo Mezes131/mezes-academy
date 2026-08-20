@@ -1,6 +1,23 @@
 import type { MessageTree } from "./fr";
 
 export const messagesEn: MessageTree = {
+  seo: {
+    homeTitle: "Mezes Academy: learn to build high-performing solutions",
+    homeDesc:
+      "Mezes Academy helps you build solutions that hold up. React and Secure Vibe Coding tracks, practice in the browser, progress saved.",
+    reactTitle: "React track | Mezes Academy",
+    reactDesc:
+      "Learn React from zero to expert: short lessons, live browser exercises, quizzes, and synced progress.",
+    svcTitle: "Secure Vibe Coding | Mezes Academy",
+    svcDesc:
+      "Build with AI without getting trapped: architecture, auth, security and good practices, with practice in the browser.",
+    authTitle: "Sign in | Mezes Academy",
+    authDesc: "Sign in or create an account to sync your progress on Mezes Academy.",
+    resetTitle: "Reset password | Mezes Academy",
+    resetDesc: "Choose a new password for your Mezes Academy account.",
+    accountTitle: "My account | Mezes Academy",
+    accountDesc: "Manage your profile, preferences and account security on Mezes Academy.",
+  },
   nav: {
     home: "Home",
     catalog: "Catalog",
@@ -134,8 +151,16 @@ export const messagesEn: MessageTree = {
     terms: "Terms",
     privacy: "Privacy",
     legalNotice: "Legal notice",
+    cookies: "Manage cookies",
     soon: "Soon",
     planned: "Planned",
+  },
+  cookies: {
+    title: "Cookies and audience measurement",
+    body: "We use Google Analytics only if you accept, to understand how the site is used. Essential cookies (session, theme, language, local progress) remain necessary for the service to work.",
+    privacyLink: "Privacy policy",
+    accept: "Accept",
+    refuse: "Refuse",
   },
   academy: {
     disclaimer:
@@ -287,177 +312,189 @@ export const messagesEn: MessageTree = {
     terms: {
       eyebrow: "Rules of use",
       title: "Terms of use",
-      lead: "What you can do on Mezes Academy, what we commit to, and what we do not promise.",
+      lead: "What you may do on Mezes Academy, what we commit to, and what we do not guarantee.",
       updated: "19 August 2026",
       readTime: "6 min read",
       brief1:
-        "Access to published tracks is free; an account only exists to sync your progress.",
+        "Access to published tracks is free; an account serves solely to synchronise your progress.",
       brief2:
-        "Lessons belong to Mezes Corporation, but the code snippets are yours to reuse in your projects.",
+        "Lessons belong to Mezes Corporation; code snippets may be reused in your projects.",
       brief3:
-        "No recognized diploma, no job guarantee: we teach you to build, not to collect badges.",
+        "No recognised diploma or job guarantee: the platform aims to train you to build, not to issue certification.",
       seoTitle: "Terms of use | Mezes Academy",
       seoDesc:
         "Mezes Academy terms of use: course access, accounts, acceptable use, intellectual property, liability and governing law.",
       scopeTitle: "Scope and acceptance",
       scopeP1:
-        "Mezes Academy is a learning platform published by Mezes Corporation. It offers tracks (React, Secure Vibe Coding, and more to come) made of written lessons, quizzes and exercises that run straight in the browser.",
+        "Mezes Academy is a learning platform published by Mezes Corporation. It offers tracks (React, Secure Vibe Coding, and more to come) consisting of written lessons, quizzes and exercises that run directly in the browser.",
       scopeP2:
-        "By using the site you accept these terms. If something feels unacceptable, do not use the service and write to us: several sentences on this page already come from learner feedback.",
-      whoTitle: "Who can use the service",
+        "By using the site, you accept these terms. If any provision appears unacceptable to you, we invite you not to use the service and to contact us. Certain formulations on this page already reflect learner feedback.",
+      whoTitle: "Who may use the service",
       whoP1:
-        "The site is open to anyone who wants to learn to code, with no minimum level required. If you are under 16, use Mezes Academy with the consent of a parent or guardian, who remains responsible for the account.",
+        "The site is open to anyone wishing to learn to code, with no minimum level required. If you are under 16, you must use Mezes Academy with the consent of a parent or guardian, who remains responsible for the account.",
       whoP2:
-        "You can browse most of the content without an account. Creating one stays optional.",
+        "You may browse most of the content without creating an account. Opening an account remains optional.",
       accountTitle: "Account and security",
       accountP1:
-        "An account is created with an email address and a password, or through Google sign-in. You are responsible for keeping your credentials private and for actions taken from your account.",
-      accountB1: "One account per person: credentials are not shared.",
-      accountB2: "Tell us quickly if you think your account is compromised.",
+        "An account is created with an email address and a password, or through Google sign-in. You are responsible for the confidentiality of your credentials and for actions taken from your account.",
+      accountB1:
+        "One account per person: credentials must not be shared.",
+      accountB2:
+        "You must notify us promptly if you believe your account has been compromised.",
       accountB3:
-        "You can ask for your account and progress to be deleted at any time.",
+        "You may request deletion of your account and progress at any time.",
       accountP2:
         "We will never ask for your password by email, direct message or phone. If you receive such a request, report it to contact@mezescorp.com.",
       accessTitle: "Content access and changes",
       accessP1:
-        "Access to published tracks is free today. If a paid offering appears, it will be announced clearly and will not apply retroactively to content already open to your account.",
+        "Access to published tracks is free at present. If a paid offering is introduced, it will be announced clearly and will not apply retroactively to content already available to your account.",
       accessP2:
-        "The tracks are alive: we add modules, rewrite passages, fix mistakes and may remove content that became wrong. We aim for continuous availability without being able to guarantee it: maintenance, a host outage or a network cut can interrupt the service.",
+        "The tracks evolve: we add modules, revise passages, correct errors and may remove content that has become inaccurate. We aim for continuous availability without being able to guarantee it: maintenance, a host outage or a network interruption may disrupt the service.",
       useTitle: "Acceptable use",
       useP1:
-        "The service is here for learning: read, copy snippets to practice, take notes, share a link to a lesson. The following uses, however, are not allowed.",
+        "The service is intended for learning: you may read the content, copy snippets for practice, take notes and share a link to a lesson. The following uses are, however, prohibited.",
       useB1:
-        "Scraping the site automatically (mass crawling, bots) or loading it heavily enough to degrade the service.",
+        "Scraping the site automatically (mass crawling, bots) or loading it in a manner that degrades the service.",
       useB2:
-        "Republishing or reselling lessons, quizzes and exercises, in whole or in part, without written permission.",
+        "Republishing or reselling lessons, quizzes and exercises, in whole or in part, without written authorisation.",
       useB3:
-        "Bypassing authentication, probing the site for flaws, or trying to reach other learners' data.",
+        "Bypassing authentication, probing the site for vulnerabilities, or attempting to access other learners' data.",
       useB4:
-        "Sending illegal, hateful or misleading content through free-text fields: name, contact message, avatar.",
+        "Disseminating illegal, hateful or misleading content through free-text fields: name, contact message, avatar.",
       useP2:
-        "Tempted to run a security test? Write to us first: we prefer responsible disclosure over a surprise in production.",
+        "If you wish to conduct a security test, contact us beforehand: we favour responsible disclosure.",
       ipTitle: "Intellectual property",
       ipP1:
-        "Texts, illustrations, quizzes, exercises, the Mezes Academy brand and the site's visual identity belong to Mezes Corporation or its partners. You get a personal, non-exclusive, non-transferable right to use them to learn.",
+        "Texts, illustrations, quizzes, exercises, the Mezes Academy brand and the site's visual identity belong to Mezes Corporation or its partners. You are granted a personal, non-exclusive, non-transferable right of use for training purposes.",
       ipP2:
-        "The code snippets shown in the lessons are meant to be reused: put them in your personal or professional projects, no attribution required. The teaching texts themselves may not be republished as they are.",
+        "Code snippets presented in the lessons may be reused in your personal or professional projects, with no attribution required. Teaching texts may not, however, be republished as they stand.",
       aiTitle: "Code samples and AI assistants",
       aiP1:
-        "Several tracks discuss AI assistants and deliberately show imperfect code, so you learn to fix it. These samples are educational: they are neither an audit nor a security guarantee for your own project.",
+        "Several tracks address AI assistants and deliberately present imperfect code, so that you learn to correct it. These samples are educational: they constitute neither an audit nor a security guarantee for your own project.",
       aiP2:
-        "Before shipping to production, have your code reviewed by someone competent. The technical decisions you make remain yours.",
-      noPromiseTitle: "What we do not promise",
-      noPromiseP1: "To be blunt, here is what Mezes Academy is not.",
+        "Before any production release, have your code reviewed by a competent person. Technical decisions you make remain your responsibility.",
+      noPromiseTitle: "What we do not guarantee",
+      noPromiseP1: "For the avoidance of doubt, Mezes Academy is not:",
       noPromiseB1:
-        "No diploma, official certification or academic equivalence.",
-      noPromiseB2: "No guarantee of a job, a contract or an income.",
-      noPromiseB3: "No guarantee of an error-free or uninterrupted service.",
+        "A diploma, official certification or academic equivalence.",
+      noPromiseB2: "A guarantee of employment, a contract or an income.",
+      noPromiseB3:
+        "A guarantee of an error-free or uninterrupted service.",
       noPromiseP2:
-        "The service is provided as is. We fix reported mistakes as fast as we can, but content can age faster than its update.",
+        "The service is provided as is. We correct reported errors as promptly as practicable, it being understood that content may evolve faster than its update.",
       liabilityTitle: "Liability",
       liabilityP1:
-        "Mezes Corporation cannot be held liable for indirect damages tied to using the site: loss of local data, lost profit, technical decisions taken on the basis of a lesson. Our liability is limited to what applicable law allows.",
+        "Mezes Corporation shall not be held liable for indirect damages arising from use of the site: loss of local data, lost profit, technical decisions taken on the basis of a lesson. Our liability is limited to what applicable law permits.",
       liabilityP2:
-        "Progress stored locally depends on your browser: clearing the site data erases it. An account remains the safest way to lose nothing.",
+        "Progress stored locally depends on your browser: clearing the site data erases it. An account remains the most reliable means of preserving your progress.",
       endTitle: "Suspension and ending use",
       endP1:
-        "You can stop using the service whenever you want and ask for your account to be deleted by email.",
+        "You may stop using the service at any time and request deletion of your account by email.",
       endP2:
-        "On our side, we can suspend an account for clear abuse: attacks, fraud, resale of content, harassment. Except in an emergency or a legal obligation, we warn you first and explain why.",
+        "We may suspend an account in the event of clear abuse: attacks, fraud, resale of content, harassment. Except in an emergency or where legally required, we notify you beforehand and state the reasons.",
       changesTitle: "Changes to these terms",
       changesP1:
-        "These terms evolve with the service. The update date at the top of the page marks the latest version. For an important change we announce it on the site and, if you have an account, by email.",
+        "These terms evolve with the service. The update date at the top of the page indicates the version in force. In the event of a material change, we announce it on the site and, if you hold an account, by email.",
       changesP2:
-        "Continuing to use the service after a change means you accept the new version.",
+        "Continued use of the service after a modification constitutes acceptance of the new version.",
       lawTitle: "Governing law and disputes",
       lawP1:
-        "These terms are governed by Cameroonian law. If we disagree, we start by looking for an amicable solution: write to contact@mezescorp.com describing the problem.",
+        "These terms are governed by Cameroonian law. In the event of a disagreement, we favour an amicable resolution: write to contact@mezescorp.com describing the issue.",
       lawP2:
         "Failing an agreement, the dispute falls to the competent courts of Yaoundé, without prejudice to consumer protection rules applicable in your country of residence.",
     },
     privacy: {
       eyebrow: "Personal data",
       title: "Privacy",
-      lead: "What we collect, why, where it is stored, and how to take control of it.",
+      lead: "What we collect, why we collect it, where it is stored, and how you may exercise your rights.",
       updated: "19 August 2026",
       readTime: "5 min read",
-      brief1: "No ads, no data resale, no cross-site tracking.",
-      brief2: "Without an account, your progress never leaves your browser.",
+      brief1:
+        "We do not serve advertising or resell data. Google Analytics is loaded only with your consent.",
+      brief2:
+        "Without an account, your progress remains exclusively on your browser.",
       brief3:
-        "One email is enough to access, correct or delete your data.",
+        "A single email is sufficient to access, correct, or request deletion of your data.",
       seoTitle: "Privacy | Mezes Academy",
       seoDesc:
-        "Mezes Academy privacy policy: data collected, purposes, processors, retention, security and how to exercise your rights.",
+        "Mezes Academy privacy policy: data collected, purposes, processors, retention periods, security, and how to exercise your rights.",
       controllerTitle: "Who processes your data",
       controllerP1:
-        "The data controller is Mezes Corporation, publisher of Mezes Academy, reachable at contact@mezescorp.com. We process the minimum needed to run a course site: nothing for advertising.",
+        "The data controller is Mezes Corporation, publisher of Mezes Academy, reachable at contact@mezescorp.com. We process only the data required to operate the learning platform, and never for advertising purposes.",
       controllerP2:
-        "This page describes what the site technically does. If you spot a gap between this text and the service's behaviour, report it: it is a bug to fix, not a hidden policy.",
-      dataTitle: "What we collect",
-      dataP1: "Depending on whether you have an account:",
+        "This page describes how the service actually operates. If you identify a discrepancy between this statement and the platform's behaviour, we invite you to notify us so that we may remedy it.",
+      dataTitle: "Data we collect",
+      dataP1: "Depending on whether you hold an account:",
       dataB1:
-        "Account: email address, password hashed by our authentication provider, first name or nickname if you fill it in, avatar if you upload one.",
+        "Account: email address, password hashed by our authentication provider, first name or nickname if you provide one, avatar if you upload one.",
       dataB2:
-        "Google sign-in: the email address and name Google passes on, nothing more.",
+        "Google sign-in: the email address and name transmitted by Google, and no further information.",
       dataB3:
-        "Progress: modules read, quiz answers, completed exercises, bookmarks.",
+        "Progress: modules consulted, quiz answers, completed exercises, bookmarks.",
       dataB4: "Preferences: light or dark theme, interface language.",
       dataB5:
-        "Technical: server logs (IP address, timestamp, page requested, browser), for security and debugging.",
+        "Technical data: server logs (IP address, timestamp, page requested, browser), used for security and diagnostics.",
+      dataB6:
+        "Audience measurement (only if you accept Analytics cookies): pages viewed, visit duration, device type, aggregated data sent to Google Analytics.",
       dataP2:
-        "We do not collect your precise location, your contacts, or sensitive data. No form on the site asks for payment details.",
-      whyTitle: "Why, and on what basis",
-      whyP1: "Every piece of data serves a precise purpose.",
+        "We do not collect your precise location, your contacts, or sensitive data. No form on the site requests payment details.",
+      whyTitle: "Purposes and legal bases",
+      whyP1: "Each category of data serves a defined purpose.",
       whyB1:
-        "Running the service (account, sign-in, progress sync): performance of the contract between us.",
+        "Operating the service (account, sign-in, progress synchronisation): performance of the contract between us.",
       whyB2:
-        "Security and abuse prevention (technical logs, rate limiting): legitimate interest.",
+        "Ensuring security and preventing abuse (technical logs, rate limiting): legitimate interest.",
       whyB3:
-        "Answering your messages: the information you write yourself in a contact email.",
+        "Responding to your messages: the information you voluntarily provide in a contact email.",
+      whyB4:
+        "Measuring site audience via Google Analytics: your consent, which you may withdraw at any time via « Manage cookies » in the footer.",
       whyP2:
-        "No automated decision has a legal effect on you, and we do no advertising profiling.",
+        "No automated decision produces a legal effect concerning you. We do not engage in advertising profiling.",
       storageTitle: "Local storage and cookies",
       storageP1:
-        "The site uses no advertising cookie and no third-party tracker. What is stored in your browser stays minimal: a session token if you are signed in, your progress if you are not, your theme and your language.",
+        "The platform distinguishes strictly necessary cookies and storage (session, theme, language, local progress, consent choice) from audience-measurement cookies. Google Analytics is loaded only after your explicit acceptance; no advertising cookies or cross-site trackers are used.",
       storageP2:
-        "You can wipe everything by clearing the site data in your browser settings. Without an account this also deletes your local progress: there is no copy elsewhere.",
+        "You may erase local data through your browser settings, and change your Analytics choice at any time via « Manage cookies ». Without an account, clearing the browser also deletes your local progress.",
       processorsTitle: "Processors and hosting",
       processorsP1:
-        "Running the site takes a few providers, limited to what they need to see.",
+        "Operating the platform involves a limited number of providers, each granted access only to the data required for its role.",
       processorsB1:
-        "Supabase: authentication, progress database and avatar storage.",
-      processorsB2: "Google: only if you choose Google sign-in.",
+        "Supabase: authentication, progress database, and avatar storage.",
+      processorsB2:
+        "Google: only if you choose to sign in with Google, and Google Analytics only if you accept audience measurement.",
       processorsB3:
-        "Host: a private server (VPS) operated for Mezes Corporation, serving the pages and keeping technical logs.",
+        "Host: a private server (VPS) operated for Mezes Corporation, serving pages and retaining technical logs.",
       processorsP2:
-        "None of these providers is allowed to reuse your data for their own purposes.",
+        "None of these providers is authorised to reuse your data for its own purposes.",
       transfersTitle: "Transfers outside Cameroon",
       transfersP1:
-        "Our technical providers may host data outside Cameroon, notably in Europe or the United States. In that case we rely on their contractual commitments to keep an equivalent level of protection.",
-      retentionTitle: "How long we keep it",
-      retentionP1: "Nothing is kept just in case.",
-      retentionB1: "Account and progress: as long as your account exists.",
+        "Our technical providers may host data outside Cameroon, notably in Europe or the United States. In such cases, we rely on their contractual commitments to maintain an equivalent level of protection.",
+      retentionTitle: "Retention periods",
+      retentionP1:
+        "We do not retain data beyond what is necessary for the purposes described herein.",
+      retentionB1:
+        "Account and progress: for as long as your account remains active.",
       retentionB2:
-        "Inactive account: possible deletion after 36 months without sign-in, following a warning email.",
+        "Inactive account: deletion may occur after 36 months without sign-in, preceded by an informational email.",
       retentionB3: "Technical logs: 12 months at most.",
       retentionB4:
-        "Email exchanges: 24 months, to keep the history of a request.",
+        "Email correspondence: 24 months, in order to retain the history of a request.",
       rightsTitle: "Your rights",
       rightsP1:
-        "You can ask to access your data, correct it, delete it, get an exportable copy, or object to a processing. Write to contact@mezescorp.com from your account address: we answer within 30 days, usually much sooner.",
+        "You may request access to your data, its rectification, its deletion, an exportable copy, or object to a processing operation. Please write to contact@mezescorp.com from the address associated with your account: we respond within 30 days, and in most cases sooner.",
       rightsP2:
-        "If you live in the European Union, the GDPR applies to these requests and you can contact your national supervisory authority. From Cameroon, you can refer the matter to the competent data protection authority.",
+        "If you reside in the European Union, the GDPR applies to these requests and you may contact your national supervisory authority. From Cameroon, you may refer the matter to the competent data protection authority.",
       securityTitle: "Security",
       securityP1:
-        "The site is served over HTTPS, passwords are hashed by our authentication provider, and database access is restricted to people who need it. Sessions expire and can be revoked.",
+        "The platform is served over HTTPS. Passwords are hashed by our authentication provider, and database access is restricted to authorised personnel. Sessions expire and may be revoked.",
       securityP2:
-        "No system is bulletproof. In case of a data breach likely to affect you, we tell you and describe what happened, what we did, and what you can do.",
+        "No system is entirely immune to incidents. In the event of a data breach likely to affect you, we will notify you and describe the facts, the measures taken, and the steps you may take.",
       minorsTitle: "Minors",
       minorsP1:
-        "The service is not designed for children. Under 16, creating an account requires the consent of a parent or guardian. At a legal guardian's request, we delete the account and the associated data.",
-      changesTitle: "Changes to this page",
+        "The service is not intended for children. Under the age of 16, creating an account requires the consent of a parent or guardian. Upon request from a legal guardian, we delete the account and the associated data.",
+      changesTitle: "Changes to this policy",
       changesP1:
-        "This policy follows the site's evolution. The update date at the top of the page is the reference. For a significant change (a new purpose, a new provider), we announce it before it takes effect.",
+        "This policy evolves with the platform. The update date at the top of the page is the reference. In the event of a significant change (a new purpose, a new provider), we will notify you before it takes effect.",
     },
     legal: {
       eyebrow: "Legal information",
@@ -512,7 +549,7 @@ export const messagesEn: MessageTree = {
         "If a page blocks you (screen reader, zoom, contrast), describe the situation by email: this feedback is treated as a priority bug.",
       dataTitle: "Personal data and cookies",
       dataP1:
-        "The detail of what we collect, why, and how to exercise your rights lives on the Privacy page. In short: no ads, no third-party tracker, and local storage limited to your session, your progress and your preferences.",
+        "The detail of what we collect, why, and how to exercise your rights lives on the Privacy page. In short: no ads, Google Analytics only with your consent, and local storage limited to your session, your progress, your preferences and your cookie choice.",
       lawTitle: "Governing law",
       lawP1:
         "This site and its use are governed by Cameroonian law. Failing an amicable agreement, the competent courts of Yaoundé have jurisdiction, without prejudice to the rights your country of residence grants you as a consumer.",

@@ -3,12 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Mezes Academy t'aide à construire des solutions qui tiennent. Parcours React et Secure Vibe Coding, pratique dans le navigateur, progression sauvegardée."
     />
     <meta name="theme-color" content="#0e0f16" />
+    <meta name="author" content="Mezes Academy" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://academy.mezescorp.com/" />
+    <link rel="alternate" hreflang="fr" href="https://academy.mezescorp.com/" />
+    <link rel="alternate" hreflang="en" href="https://academy.mezescorp.com/en" />
+    <link rel="alternate" hreflang="x-default" href="https://academy.mezescorp.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mezes Academy" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:url" content="https://academy.mezescorp.com/" />
+    <meta
+      property="og:title"
+      content="Mezes Academy : apprends à construire des solutions performantes"
+    />
+    <meta
+      property="og:description"
+      content="Mezes Academy t'aide à construire des solutions qui tiennent. Parcours React et Secure Vibe Coding, pratique dans le navigateur, progression sauvegardée."
+    />
+    <meta property="og:image" content="https://academy.mezescorp.com/academy.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Mezes Academy : apprends à construire des solutions performantes"
+    />
+    <meta
+      name="twitter:description"
+      content="Mezes Academy t'aide à construire des solutions qui tiennent. Parcours React et Secure Vibe Coding, pratique dans le navigateur, progression sauvegardée."
+    />
+    <meta name="twitter:image" content="https://academy.mezescorp.com/academy.png" />
     <title>Mezes Academy : apprends à construire des solutions performantes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,6 +65,50 @@
         rel="stylesheet"
       />
     </noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://academy.mezescorp.com/#organization",
+            "name": "Mezes Corporation",
+            "url": "https://academy.mezescorp.com",
+            "email": "contact@mezescorp.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://academy.mezescorp.com/favicon.png"
+            },
+            "sameAs": [
+              "https://www.facebook.com/mezes35",
+              "https://www.instagram.com/mezes131",
+              "https://www.tiktok.com/@mezes131",
+              "https://www.linkedin.com/company/mezes-corporation/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://academy.mezescorp.com/#website",
+            "url": "https://academy.mezescorp.com",
+            "name": "Mezes Academy",
+            "inLanguage": ["fr", "en"],
+            "publisher": {
+              "@id": "https://academy.mezescorp.com/#organization"
+            }
+          },
+          {
+            "@type": "EducationalOrganization",
+            "@id": "https://academy.mezescorp.com/#academy",
+            "name": "Mezes Academy",
+            "url": "https://academy.mezescorp.com",
+            "description": "Plateforme d'apprentissage : leçons courtes, exercices live, quiz et progression synchronisée.",
+            "parentOrganization": {
+              "@id": "https://academy.mezescorp.com/#organization"
+            }
+          }
+        ]
+      }
+    </script>
     <style>
       .skip-link {
         position: absolute;
