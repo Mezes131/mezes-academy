@@ -18,7 +18,10 @@ FROM node:20-alpine AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 
-RUN apk upgrade --no-cache \
+RUN apk update \
+  && apk upgrade --no-cache \
+  && apk add --no-cache --upgrade libcrypto3 libssl3 \
+  && rm -rf /var/cache/apk/* \
   && chown node:node /app
 
 COPY package.json package-lock.json ./

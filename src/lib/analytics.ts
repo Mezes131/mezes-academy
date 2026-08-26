@@ -1,5 +1,5 @@
 /** Google Analytics measurement ID (gtag). */
-export const GA_MEASUREMENT_ID = "G-RNTMY9351W";
+export const GA_MEASUREMENT_ID = "G-MPSRLR53TR";
 
 export const COOKIE_CONSENT_KEY = "mezes.cookie-consent";
 

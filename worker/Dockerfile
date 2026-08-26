@@ -12,7 +12,11 @@ FROM node:20-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 
-RUN apk upgrade --no-cache \
+# Refresh apk index + bump openssl (CVE-2026-14456 on libcrypto3/libssl3)
+RUN apk update \
+  && apk upgrade --no-cache \
+  && apk add --no-cache --upgrade libcrypto3 libssl3 \
+  && rm -rf /var/cache/apk/* \
   && rm -rf \
     /usr/local/lib/node_modules/npm \
     /usr/local/lib/node_modules/corepack \
