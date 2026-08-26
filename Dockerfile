@@ -27,6 +27,10 @@ RUN npm run build
 
 # Serve stage: unprivileged Nginx (listens on 8080, runs as non-root)
 FROM nginxinc/nginx-unprivileged:alpine
+# Patch OS packages (openssl/libssl3) so Trivy HIGH findings are fixed before ship
+USER root
+RUN apk upgrade --no-cache \
+  && rm -rf /var/cache/apk/*
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Explicit non-root (image default is nginx/101; Trivy DS-0002 requires USER in this file)
