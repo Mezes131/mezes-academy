@@ -2,7 +2,7 @@
 
 **Projet** : Mezes Academy (`react-learn`)  
 **Date** : 2026-08-28  
-**Statut** : Approuvé en brainstorming — en attente de relecture utilisateur  
+**Statut** : Approuvé en brainstorming — révisé (couche abstraction paiements)  
 **Auteur** : Design session (brainstorming)
 
 ---
@@ -19,6 +19,8 @@ Mezes Academy est une plateforme d'apprentissage (React + Secure Vibe Coding) av
 - Paywall sur les blocs `video` uniquement (texte, exercices, quiz restent gratuits)
 
 **Contrainte PSP** : ni Payoneer Checkout ni KPay offrent une API d'abonnement récurrent natif. Le **moteur d'abonnement est internalisé** dans Supabase ; les PSP collectent des paiements ponctuels à chaque cycle (souscription initiale, renouvellement, trial J+7).
+
+**Contrainte architecture** : les méthodes de paiement et les PSP **ne doivent jamais être codés en dur** dans le frontend ni dans les Edge Functions métier. Toute la disponibilité pays/méthode/provider passe par une **couche d'abstraction config-driven** (voir § 4.4).
 
 ---
 
@@ -91,9 +93,9 @@ Fonctions Enterprise :
 - **Webhook** : `returl` (callback asynchrone, source de vérité)
 - **Pas d'abonnement natif** : chaque cycle = appel API `action: pay` + webhook confirmation
 
-### 3.3 Matrice pays KPay
+### 3.3 Matrice pays KPay (données de seed initiales)
 
-Config centralisée (`country_payment_methods`). Ajout d'un pays sans redéploiement frontend.
+Ces données sont **injectées en base** via migration seed — pas de logique hardcodée dans le code applicatif. Ajout/modification d'un pays = mise à jour config admin ou migration, sans redéploiement frontend.
 
 | Code ISO | Pays | Opérateurs MoMo | Devise(s) |
 |----------|------|-----------------|-----------|
@@ -110,7 +112,7 @@ Config centralisée (`country_payment_methods`). Ajout d'un pays sans redéploie
 | `UGA` | Ouganda | Airtel · MTN | UGX |
 | `ZMB` | Zambie | Airtel · MTN · Zamtel | ZMW |
 
-**Hors ces 12 pays** : Payoneer uniquement.
+**Hors pays KPay** : méthodes Payoneer disponibles via config `country_payment_availability` (fallback international).
 
 ---
 
@@ -119,22 +121,32 @@ Config centralisée (`country_payment_methods`). Ajout d'un pays sans redéploie
 ### 4.1 Diagramme
 
 ```
-┌─────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  React SPA  │────▶│ Supabase Edge    │────▶│ Payoneer API    │
-│  /pricing   │     │ Functions        │     │ (carte/banque)  │
-│  /checkout  │     │ (billing core)   │     └─────────────────┘
-│  ModuleView │     │                  │     ┌─────────────────┐
-│  (paywall)  │     │  webhooks ◀──────│────▶│ KPay API        │
-└─────────────┘     │  cron renewals   │     │ (mobile money)  │
-                    └────────┬─────────┘     └─────────────────┘
-                             │
-                    ┌────────▼─────────┐
-                    │ Supabase Postgres  │
-                    │ subscriptions      │
-                    │ payments           │
-                    │ entitlements       │
-                    │ organizations      │
-                    └────────────────────┘
+┌─────────────┐     ┌──────────────────────────────────────────┐
+│  React SPA  │────▶│ Supabase Edge Functions                  │
+│  /pricing   │     │                                          │
+│  /checkout  │     │  billing core (agnostique PSP)           │
+│  (paywall)  │     │       │                                  │
+└─────────────┘     │       ▼                                  │
+       ▲            │  PaymentProviderRegistry                 │
+       │            │       │                                  │
+       │            │   ┌───┴───┐                              │
+       │            │   ▼       ▼                              │
+       │            │ Payoneer  KPay   … (futurs adapters)     │
+       │            │ Adapter   Adapter                        │
+       │            └──────┬──────────┬────────────────────────┘
+       │                   │          │
+       │            ┌──────▼──────────▼──────┐
+       └────────────│ GET /payment-methods   │◀── config DB
+                    │ (pays → méthodes)      │
+                    └──────────┬─────────────┘
+                               │
+                    ┌──────────▼─────────────┐
+                    │ Supabase Postgres        │
+                    │ payment_providers        │
+                    │ payment_methods          │
+                    │ country_payment_avail.   │
+                    │ subscriptions · payments │
+                    └──────────────────────────┘
 ```
 
 ### 4.2 Principes
@@ -142,7 +154,9 @@ Config centralisée (`country_payment_methods`). Ajout d'un pays sans redéploie
 1. **Supabase = source de vérité** pour statut abonnement et entitlements
 2. **PSP = collecte ponctuelle** ; webhooks confirment ou rejettent
 3. **Aucune donnée carte stockée** — PCI délégué aux PSP
-4. **Config pays/méthodes en base** — pas de hardcode frontend
+4. **Config pays/méthodes en base** — zéro hardcode frontend/backend métier
+5. **Abstraction provider** — le billing core ne connaît pas Payoneer/KPay directement ; il parle à des adapters via une interface commune
+6. **Extensibilité** — ajouter un PSP = nouvel adapter + entrées config DB, sans modifier checkout/billing/renewals
 
 ### 4.3 Stack existante réutilisée
 
@@ -154,6 +168,176 @@ Config centralisée (`country_payment_methods`). Ajout d'un pays sans redéploie
 | `analytics.ts` | Nouveaux événements billing |
 | `i18n` FR/EN | Strings pricing, checkout, paywall |
 | Edge Functions Supabase | Webhooks, init paiement, cron renewals |
+
+### 4.4 Couche d'abstraction paiements
+
+#### 4.4.1 Objectif
+
+Découpler le **billing core** (abonnements, entitlements, renewals) des **implémentations PSP** (Payoneer, KPay, futurs providers). Le checkout et les crons ne contiennent aucune référence directe à un PSP : ils consomment des **méthodes de paiement abstraites** résolues dynamiquement.
+
+#### 4.4.2 Interface `PaymentProviderAdapter` (backend)
+
+Chaque PSP implémente cette interface. Emplacement : `supabase/functions/_shared/payments/`.
+
+```ts
+interface PaymentProviderAdapter {
+  /** Identifiant stable, correspond à payment_providers.slug */
+  readonly slug: string;
+
+  /** Initie un paiement ponctuel et retourne une session checkout */
+  initiatePayment(input: InitiatePaymentInput): Promise<PaymentSession>;
+
+  /** Interroge le statut d'un paiement (polling fallback) */
+  checkPaymentStatus(externalRef: string): Promise<PaymentStatusResult>;
+
+  /** Parse et valide un webhook entrant ; retourne un événement normalisé */
+  handleWebhook(rawBody: string, headers: Headers): Promise<WebhookEvent>;
+
+  /** Indique si ce provider supporte le renouvellement automatique sans interaction user */
+  supportsOffSessionRenewal(): boolean;
+}
+```
+
+**Types normalisés** (agnostiques PSP) :
+
+```ts
+interface InitiatePaymentInput {
+  paymentId: string;       // UUID interne payments.id
+  amountCents: number;
+  currency: string;
+  customerEmail: string;
+  customerName: string;
+  description: string;
+  methodConfig: Record<string, unknown>; // champs spécifiques (msisdn, operator…)
+  returnUrl: string;
+  webhookUrl: string;
+}
+
+interface PaymentSession {
+  type: 'redirect' | 'widget' | 'push';  // redirect URL, widget config, ou push MoMo
+  redirectUrl?: string;
+  widgetConfig?: Record<string, unknown>;
+  externalRef: string;
+  userMessage?: string;  // ex. « Confirmez sur votre téléphone »
+}
+
+interface WebhookEvent {
+  externalRef: string;
+  status: 'succeeded' | 'failed' | 'cancelled' | 'pending';
+  providerPayload: unknown;
+}
+```
+
+#### 4.4.3 Registry `PaymentProviderRegistry`
+
+```ts
+class PaymentProviderRegistry {
+  register(adapter: PaymentProviderAdapter): void;
+  get(slug: string): PaymentProviderAdapter;
+  getAll(): PaymentProviderAdapter[];
+}
+```
+
+- Enregistrement des adapters au démarrage de chaque Edge Function
+- `initiate-payment` résout l'adapter via `payment_methods.provider_slug`
+- `webhook-payment` (endpoint unique) route vers le bon adapter selon le path ou header : `/webhook-payment/:providerSlug`
+
+**Règle** : aucune Edge Function métier (`create-subscription`, `renew-subscriptions`) n'importe `payoneer.ts` ou `kpay.ts` directement.
+
+#### 4.4.4 Adapters v1
+
+| Adapter | Slug | Fichier | Session type |
+|---------|------|---------|--------------|
+| Payoneer | `payoneer` | `adapters/payoneer.ts` | `widget` ou `redirect` |
+| KPay | `kpay` | `adapters/kpay.ts` | `push` (MoMo) ou `redirect` (cc) |
+
+Ajout futur (ex. `flutterwave`) : nouveau fichier adapter + seed DB, zéro changement billing core.
+
+#### 4.4.5 Couche frontend — `PaymentMethodSelector`
+
+Le frontend **ne connaît pas** Payoneer/KPay. Il consomme l'API :
+
+```
+GET /functions/v1/payment-methods?country=SEN&currency=XOF
+```
+
+Réponse normalisée :
+
+```json
+{
+  "methods": [
+    {
+      "id": "uuid",
+      "slug": "kpay_momo",
+      "type": "mobile_money",
+      "label": "Mobile Money",
+      "icon": "smartphone",
+      "providerSlug": "kpay",
+      "currencies": ["XOF"],
+      "fields": [
+        { "name": "operator", "type": "select", "options": [
+          { "value": "orange", "label": "Orange Money" },
+          { "value": "free", "label": "Free Money" }
+        ]},
+        { "name": "msisdn", "type": "tel", "label": "Numéro mobile", "prefix": "+221" }
+      ],
+      "sortOrder": 1
+    },
+    {
+      "id": "uuid",
+      "slug": "payoneer_card",
+      "type": "card",
+      "label": "Carte bancaire",
+      "icon": "credit-card",
+      "providerSlug": "payoneer",
+      "currencies": ["EUR", "USD"],
+      "fields": [],
+      "sortOrder": 2
+    }
+  ]
+}
+```
+
+Composants frontend :
+
+| Composant | Rôle |
+|-----------|------|
+| `PaymentMethodSelector` | Rend le select à partir de la réponse API |
+| `PaymentMethodFields` | Rend les champs dynamiques (`fields[]`) selon méthode choisie |
+| `PaymentSessionRenderer` | Affiche widget Payoneer, redirect, ou message push MoMo selon `session.type` |
+
+**Aucun `if (provider === 'kpay')` dans les pages** — uniquement dans les adapters backend et le renderer de session.
+
+#### 4.4.6 Résolution checkout (flux abstrait)
+
+```
+1. Frontend → GET /payment-methods?country=…
+2. User sélectionne method.id + remplit fields dynamiques
+3. Frontend → POST /create-subscription { plan_id, payment_method_id, fields: {…} }
+4. Backend :
+   a. Charge payment_methods + payment_providers depuis DB
+   b. Valide disponibilité pays/devise via country_payment_availability
+   c. Crée subscription + payment (provider_slug depuis DB, pas en dur)
+   d. registry.get(provider_slug).initiatePayment(…)
+   e. Retourne PaymentSession normalisée
+5. Frontend → PaymentSessionRenderer affiche la session
+6. Webhook → /webhook-payment/:providerSlug → adapter.handleWebhook → billing core met à jour payment/subscription/entitlement
+```
+
+#### 4.4.7 Webhook unifié
+
+Un seul routeur webhook :
+
+```
+POST /functions/v1/webhook-payment/:providerSlug
+```
+
+Le routeur :
+1. Charge l'adapter via registry
+2. Appelle `handleWebhook`
+3. Délègue à `BillingService.handlePaymentEvent(event)` — logique commune (succès → prolonger sub, échec → past_due)
+
+Pas de duplication de logique billing entre `webhook-kpay` et `webhook-payoneer`.
 
 ---
 
@@ -183,8 +367,9 @@ Config centralisée (`country_payment_methods`). Ajout d'un pays sans redéploie
 | `plan_id` | text FK | |
 | `status` | text | `trialing` \| `active` \| `past_due` \| `canceled` |
 | `seat_count` | integer | 1 pour Premium ; N pour Enterprise |
-| `payment_provider` | text | `payoneer` \| `kpay` |
-| `payment_method_type` | text | `card` \| `momo` \| `spenn` |
+| `payment_method_id` | uuid FK | Référence `payment_methods.id` (méthode choisie au checkout) |
+| `payment_provider_slug` | text | Dénormalisé depuis `payment_providers.slug` (audit, renewals) |
+| `payment_method_config` | jsonb | Snapshot champs checkout (msisdn, operator…) pour renewals |
 | `trial_ends_at` | timestamptz nullable | |
 | `current_period_start` | timestamptz | |
 | `current_period_end` | timestamptz | |
@@ -199,7 +384,8 @@ Contrainte : `user_id` XOR `organization_id` (un seul non null).
 |---------|------|-------------|
 | `id` | uuid PK | |
 | `subscription_id` | uuid FK | |
-| `provider` | text | `payoneer` \| `kpay` |
+| `payment_method_id` | uuid FK | Méthode utilisée |
+| `provider_slug` | text | Dénormalisé pour requêtes rapides |
 | `external_ref` | text | `refid` KPay ou ID Payoneer |
 | `amount_cents` | integer | Montant facturé |
 | `currency` | text | Devise facturée |
@@ -245,15 +431,56 @@ Index : `(user_id, feature)` pour lookup rapide paywall.
 | `invited_at` | timestamptz | |
 | `accepted_at` | timestamptz nullable | |
 
-#### `country_payment_methods`
+#### `payment_providers`
+
+Registre des PSP. Chaque provider = 1 adapter backend.
 
 | Colonne | Type | Description |
 |---------|------|-------------|
-| `country_code` | text PK | ISO 3166-1 alpha-3 |
-| `kpay_enabled` | boolean | |
-| `operators` | jsonb | Liste opérateurs MoMo |
-| `currencies` | text[] | Devises supportées |
-| `payoneer_enabled` | boolean | Toujours true v1 |
+| `slug` | text PK | `payoneer`, `kpay` |
+| `name` | text | Nom affiché admin |
+| `adapter_module` | text | Nom module adapter (info, pas exécuté depuis DB) |
+| `webhook_path` | text | Segment URL webhook : `/webhook-payment/payoneer` |
+| `supports_off_session` | boolean | Renouvellement auto sans interaction |
+| `sandbox` | boolean | Mode test |
+| `active` | boolean | |
+| `config` | jsonb | Métadonnées non-secrètes (devises supportées, types session) |
+
+Secrets PSP (API keys) : **variables d'environnement uniquement**, jamais en base.
+
+#### `payment_methods`
+
+Méthodes abstraites exposées au checkout. Une méthode = combinaison provider + type + config UI.
+
+| Colonne | Type | Description |
+|---------|------|-------------|
+| `id` | uuid PK | |
+| `slug` | text UNIQUE | `payoneer_card`, `kpay_momo`, `kpay_cc`, `kpay_spenn` |
+| `provider_slug` | text FK | → `payment_providers.slug` |
+| `type` | text | `card` \| `mobile_money` \| `bank` \| `wallet` |
+| `label_i18n_key` | text | Clé i18n pour label checkout |
+| `icon` | text | Identifiant icône Lucide |
+| `fields_schema` | jsonb | Schéma champs dynamiques (voir § 4.4.5) |
+| `currencies` | text[] | Devises acceptées par cette méthode |
+| `sort_order` | integer | Ordre affichage |
+| `active` | boolean | |
+
+#### `country_payment_availability`
+
+Lie pays → méthodes disponibles. **Source de vérité** pour le select checkout.
+
+| Colonne | Type | Description |
+|---------|------|-------------|
+| `id` | uuid PK | |
+| `country_code` | text | ISO 3166-1 alpha-3 |
+| `payment_method_id` | uuid FK | |
+| `enabled` | boolean | |
+| `config` | jsonb | Surcharges par pays (ex. `operators`, `default_currency`) |
+| `sort_order` | integer | Override ordre par pays |
+
+Index : `(country_code, enabled)` pour lookup `GET /payment-methods`.
+
+**Remplace** l'ancienne table `country_payment_methods` (flags `kpay_enabled` / `payoneer_enabled`).
 
 #### `exchange_rates`
 
@@ -277,7 +504,7 @@ Index : `(user_id, feature)` pour lookup rapide paywall.
 - `payments` : idem
 - `entitlements` : user lit ses propres
 - `organizations` / `organization_members` : membres de l'org
-- `country_payment_methods`, `exchange_rates`, `plans` : lecture publique
+- `country_payment_availability`, `payment_methods`, `payment_providers`, `exchange_rates`, `plans` : lecture publique
 - Écriture billing : **Edge Functions avec service role** uniquement
 
 ---
@@ -286,73 +513,71 @@ Index : `(user_id, feature)` pour lookup rapide paywall.
 
 **Route** : `/checkout?plan=premium_monthly` (ou `premium_annual`, `enterprise`)
 
-### 6.1 Flux UI
+### 6.1 Flux UI (config-driven, sans hardcode PSP)
 
-1. **Détection locale** : `profiles.country` → `preferred_currency` → géoloc IP (Edge Function ou service tiers)
-2. **Affichage prix** : conversion EUR → devise locale via `exchange_rates`
-3. **Select « Moyen de paiement »** — options filtrées :
+1. **Détection locale** : `profiles.country` → `preferred_currency` → géoloc IP (Edge Function)
+2. **Chargement méthodes** : `GET /payment-methods?country=…&currency=…` → liste depuis `country_payment_availability` + `payment_methods`
+3. **Affichage prix** : conversion EUR → devise via `exchange_rates`
+4. **`PaymentMethodSelector`** : select alimenté par la réponse API (label, icône, type)
+5. **`PaymentMethodFields`** : champs dynamiques selon `fields_schema` de la méthode choisie (opérateur, msisdn, etc.)
+6. **`PaymentSessionRenderer`** : après soumission, affiche widget / redirect / message push selon `session.type` — agnostique PSP
+7. **Trial** : badge « 7 jours gratuits » si `trial_used = false`
+8. **Consentement** : checkbox CGU + politique de remboursement
 
-```
-Pays dans liste KPay (12 pays)
-  ├─ Mobile Money (KPay) — opérateurs du pays
-  ├─ Carte via KPay (cc) — si dispo
-  └─ Carte / banque (Payoneer) — fallback international
-
-Pays hors liste KPay
-  └─ Carte / banque (Payoneer) uniquement
-```
-
-4. **Sous-select opérateur** : visible si MoMo choisi → MTN / Orange / Moov / etc.
-5. **Champs conditionnels** :
-   - MoMo : `msisdn` (numéro avec indicatif pays, sans `+`)
-   - Payoneer : widget embedded ou redirection hosted page
-6. **Trial** : badge « 7 jours gratuits » si `trial_used = false`
-7. **Consentement** : checkbox CGU + politique de remboursement
+**Interdit** : `switch(provider)`, listes pays/méthodes en dur dans `.tsx`, imports directs Payoneer/KPay hors adapters et `PaymentSessionRenderer`.
 
 ### 6.2 Logique backend `create-subscription`
 
 ```
 POST /functions/v1/create-subscription
-Body: { plan_id, payment_provider, payment_method_type, operator?, msisdn? }
+Body: { plan_id, payment_method_id, fields: Record<string, string> }
 
 1. Valider plan actif
-2. Vérifier pas d'abonnement actif existant
-3. Créer subscription (trialing si trial eligible, sinon pending)
-4. Si trialing → créer entitlement video_access (expires trial_ends_at)
-5. Si pas trialing → appeler initiate-payment
-6. Retourner { subscription_id, checkout_url?, widget_config? }
+2. Charger payment_method + provider depuis DB
+3. Vérifier country_payment_availability (pays user, method enabled)
+4. Valider fields contre payment_methods.fields_schema
+5. Vérifier pas d'abonnement actif existant
+6. Créer subscription (trialing si eligible) + snapshot payment_method_config
+7. Si trialing → entitlement immédiat
+8. Sinon → BillingService.initiatePayment(payment_method_id, fields)
+9. Retourner PaymentSession normalisée
 ```
 
-### 6.3 Logique `initiate-payment`
+### 6.3 Logique `BillingService.initiatePayment` (agnostique PSP)
 
 ```
-1. Calculer montant : plan.price × seat_count, converti en devise PSP
-2. Créer payment (status: pending)
-3. KPay → POST pay.esicia.com avec refid = payment.id
-4. Payoneer → POST /lists session, retourner widget config
-5. Retourner config frontend
+1. Charger payment_method → provider_slug
+2. Calculer montant converti
+3. Créer payment (status: pending)
+4. adapter = registry.get(provider_slug)
+5. session = adapter.initiatePayment({ paymentId, amount, currency, fields, … })
+6. Retourner session au frontend
 ```
+
+Aucune logique Payoneer/KPay ici — déléguée à l'adapter.
 
 ---
 
 ## 7. Webhooks
 
-### 7.1 KPay (`POST /functions/v1/webhook-kpay`)
+### 7.1 Routeur unifié `webhook-payment`
 
-- Valider signature / credentials selon doc KPay
-- Matcher `refid` → `payments.id`
-- `succeeded` → payment.status = succeeded, prolonger subscription, refresh entitlement
-- `failed` / `cancelled` → payment.status = failed/cancelled, subscription past_due ou suppress trial
+```
+POST /functions/v1/webhook-payment/:providerSlug
+```
 
-### 7.2 Payoneer (`POST /functions/v1/webhook-payoneer`)
+1. `adapter = registry.get(providerSlug)`
+2. `event = adapter.handleWebhook(rawBody, headers)` — validation signature dans l'adapter
+3. `BillingService.handlePaymentEvent(event)` — logique commune :
+   - `succeeded` → payment OK, prolonger subscription, refresh entitlement
+   - `failed` / `cancelled` → past_due ou révocation trial
+   - `pending` → no-op (UI affiche attente)
 
-- Valider HMAC signature
-- Matcher external_ref → payment
-- Idem logique statut
+**Pas d'Edge Functions séparées** `webhook-kpay` / `webhook-payoneer` — un routeur + adapters.
 
-### 7.3 Polling fallback
+### 7.2 Polling fallback
 
-Job toutes les 15 min : payments `pending` > 30 min → appel statut KPay (`action: check`) / Payoneer status API
+Job toutes les 15 min : payments `pending` > 30 min → pour chaque, `registry.get(provider_slug).checkPaymentStatus(external_ref)` → alimente `BillingService.handlePaymentEvent`.
 
 ---
 
@@ -364,8 +589,9 @@ Job toutes les 15 min : payments `pending` > 30 min → appel statut KPay (`acti
 SELECT subscriptions WHERE current_period_end <= now() AND status IN (active, past_due)
 
 Pour chaque :
-  1. initiate-payment (montant renouvellement)
-  2. Si trial_ends_at passé et premier paiement → transition trialing → active
+  1. BillingService.initiatePayment(subscription.payment_method_id, subscription.payment_method_config)
+  2. Adapter résolu via registry — pas d'appel PSP direct
+  3. Si trial_ends_at passé et premier paiement → transition trialing → active
 ```
 
 ### 8.2 Dunning
@@ -557,9 +783,9 @@ Frontend (Vite) : uniquement clés publiques / flags sandbox si nécessaire pour
 
 | Phase | Scope | Livrables |
 |-------|-------|-----------|
-| **P1 — Foundation** | Schéma SQL, seed plans + country_payment_methods, hook `useEntitlement`, `VideoPaywall`, `/pricing` statique | Paywall fonctionnel, pricing visible |
-| **P2 — Premium + KPay pilote** | Checkout dynamique, KPay webhooks, trial 7j, 3 pays pilotes (RWA, SEN, CIV) | Souscription Premium MoMo Afrique Ouest |
-| **P3 — Payoneer + devises** | Payoneer widget, exchange_rates, 12 pays KPay complets | Checkout global |
+| **P1 — Foundation** | Schéma SQL (dont `payment_providers`, `payment_methods`, `country_payment_availability`), seed config, abstraction layer (`PaymentProviderRegistry`, interface adapter), `GET /payment-methods`, hook `useEntitlement`, `VideoPaywall`, `/pricing` statique | Paywall + config-driven payment methods API |
+| **P2 — Premium + KPay pilote** | Adapter `kpay`, `PaymentMethodSelector` + `PaymentSessionRenderer`, webhook routeur, trial 7j, 3 pays pilotes (RWA, SEN, CIV) | Souscription Premium MoMo via abstraction |
+| **P3 — Payoneer + devises** | Adapter `payoneer`, exchange_rates, seed 12 pays KPay complets | Checkout global multi-PSP |
 | **P4 — Renouvellements** | Cron renewals, dunning, emails, `/account/billing` | Abonnement récurrent stable |
 | **P5 — Enterprise** | Orgs, sièges, invitations, devis ≥10, `/account/team` | B2B self-service |
 
@@ -576,7 +802,9 @@ Frontend (Vite) : uniquement clés publiques / flags sandbox si nécessaire pour
 - [ ] Renouvellement automatique à `current_period_end`
 - [ ] Échec paiement → dunning 7j puis révocation
 - [ ] Page pricing affiche prix converti selon pays
-- [ ] Checkout select filtre méthodes selon localisation
+- [ ] Checkout select alimenté par `GET /payment-methods` — aucune méthode hardcodée frontend
+- [ ] Ajout pays/méthode via seed DB uniquement, sans changement code checkout
+- [ ] Webhook routeur unique délègue aux adapters
 - [ ] Enterprise 5 sièges : 1 paiement, 5 membres avec accès vidéo
 - [ ] Analytics billing trackés dans GA
 
@@ -603,40 +831,76 @@ Frontend (Vite) : uniquement clés publiques / flags sandbox si nécessaire pour
 | Taux de change stale | Afficher « estimé » + montant exact au checkout |
 | MoMo timeout utilisateur | Statut pending + notification « confirmez sur votre téléphone » |
 | Payoneer eligibility régionale | Fallback message + support contact |
+| Hardcode PSP dans checkout | Abstraction `PaymentProviderAdapter` + config DB `payment_methods` |
+| Ajout PSP = refactor massif | Registry pattern : nouvel adapter + seed, billing core inchangé |
+
+---
+
 | Abus trial (multi-comptes) | `trial_used` + même email vérifié |
 
 ---
 
-## Annexe A — Mapping KPay `pmethod` / opérateurs
+## Annexe A — Seed initial `payment_methods` (données, pas code)
 
-| UI opérateur | KPay `pmethod` | Notes |
-|--------------|----------------|-------|
-| MTN / Moov / Orange / M-Pesa / etc. | `momo` | Différenciation via msisdn préfixe ou paramètre opérateur selon doc KPay |
-| Visa / Mastercard | `cc` | |
-| SPENN | `spenn` | |
+| slug | provider | type | fields_schema |
+|------|----------|------|---------------|
+| `kpay_momo` | `kpay` | `mobile_money` | `operator` (select), `msisdn` (tel) |
+| `kpay_cc` | `kpay` | `card` | — |
+| `kpay_spenn` | `kpay` | `wallet` | — |
+| `payoneer_card` | `payoneer` | `card` | — |
 
-Vérifier avec credentials sandbox KPay le paramétrage exact opérateur par pays lors de l'implémentation P2.
+Opérateurs par pays : dans `country_payment_availability.config.operators`, pas dans le code.
 
 ---
 
-## Annexe B — Fichiers à créer/modifier (référence implémentation)
+## Annexe B — Mapping adapter KPay (interne à `adapters/kpay.ts` uniquement)
+
+| UI `operator` | KPay `pmethod` | Notes |
+|---------------|----------------|-------|
+| MTN / Moov / Orange / M-Pesa / etc. | `momo` | Mapping encapsulé dans l'adapter |
+| Visa / Mastercard | `cc` | |
+| SPENN | `spenn` | |
+
+Le checkout et le billing core ne connaissent pas ces valeurs — seul l'adapter KPay les traduit.
+
+---
+
+## Annexe C — Fichiers à créer/modifier (référence implémentation)
+
+### Couche abstraction (priorité P1)
 
 | Fichier | Action |
 |---------|--------|
-| `supabase/migrations/xxx_billing.sql` | Créer |
+| `supabase/functions/_shared/payments/types.ts` | Créer — interfaces normalisées |
+| `supabase/functions/_shared/payments/registry.ts` | Créer — `PaymentProviderRegistry` |
+| `supabase/functions/_shared/payments/billing-service.ts` | Créer — logique commune (events, renewals) |
+| `supabase/functions/_shared/payments/adapters/payoneer.ts` | Créer — adapter Payoneer |
+| `supabase/functions/_shared/payments/adapters/kpay.ts` | Créer — adapter KPay |
+| `supabase/functions/payment-methods/index.ts` | Créer — `GET` méthodes par pays |
+| `supabase/functions/webhook-payment/index.ts` | Créer — routeur webhook unifié |
+
+### Billing & frontend
+
+| Fichier | Action |
+|---------|--------|
+| `supabase/migrations/xxx_billing.sql` | Créer — inclut `payment_providers`, `payment_methods`, `country_payment_availability` |
+| `supabase/seed/billing_payment_methods.sql` | Créer — seed providers, methods, pays KPay |
 | `supabase/functions/create-subscription/` | Créer |
-| `supabase/functions/initiate-payment/` | Créer |
-| `supabase/functions/webhook-kpay/` | Créer |
-| `supabase/functions/webhook-payoneer/` | Créer |
 | `supabase/functions/renew-subscriptions/` | Créer |
 | `src/hooks/useEntitlement.ts` | Créer |
+| `src/hooks/usePaymentMethods.ts` | Créer — fetch `GET /payment-methods` |
 | `src/hooks/useBilling.ts` | Créer |
 | `src/pages/PricingPage.tsx` | Créer |
 | `src/pages/CheckoutPage.tsx` | Créer |
 | `src/pages/account/BillingPage.tsx` | Créer |
+| `src/components/billing/PaymentMethodSelector.tsx` | Créer — select config-driven |
+| `src/components/billing/PaymentMethodFields.tsx` | Créer — champs dynamiques `fields_schema` |
+| `src/components/billing/PaymentSessionRenderer.tsx` | Créer — widget / redirect / push |
 | `src/components/billing/VideoPaywall.tsx` | Créer |
 | `src/components/billing/PricingCards.tsx` | Créer |
 | `src/components/learning/ModuleView.tsx` | Modifier (paywall) |
 | `src/App.tsx` | Modifier (routes) |
 | `src/i18n/messages/fr.ts`, `en.ts` | Modifier |
 | `src/lib/analytics.ts` | Modifier |
+
+**Supprimé vs spec précédente** : `webhook-kpay/`, `webhook-payoneer/`, `initiate-payment/` (fusionné dans `BillingService` + adapters).
