@@ -27,6 +27,9 @@ export interface UserProfile {
   avatarUrl: string | null;
   links: ProfileLinks;
   isPublic: boolean;
+  country: string | null;
+  preferredCurrency: string | null;
+  trialUsed: boolean;
 }
 
 export type UserProfileUpdate = Partial<{
@@ -101,7 +104,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const { data, error } = await supabase
         .from("profiles")
-        .select("id, full_name, username, role, bio, avatar_url, links, is_public")
+        .select("id, full_name, username, role, bio, avatar_url, links, is_public, country, preferred_currency, trial_used")
         .eq("id", user.id)
         .maybeSingle();
 
@@ -135,6 +138,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           avatarUrl: null,
           links: {},
           isPublic: false,
+          country: null,
+          preferredCurrency: null,
+          trialUsed: false,
         });
         return;
       }
@@ -359,7 +365,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data, error } = await supabase
         .from("profiles")
         .upsert(payload, { onConflict: "id" })
-        .select("id, full_name, username, role, bio, avatar_url, links, is_public")
+        .select("id, full_name, username, role, bio, avatar_url, links, is_public, country, preferred_currency, trial_used")
         .single();
 
       if (error) {
@@ -485,5 +491,8 @@ function rowToProfile(data: Record<string, unknown>): UserProfile {
     avatarUrl: (data.avatar_url as string | null) ?? null,
     links,
     isPublic: Boolean(data.is_public),
+    country: (data.country as string | null) ?? null,
+    preferredCurrency: (data.preferred_currency as string | null) ?? null,
+    trialUsed: Boolean(data.trial_used),
   };
 }
