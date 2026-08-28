@@ -1,6 +1,15 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { corsHeaders } from "../_shared/cors.ts";
 
+function createServiceClient() {
+  const url = Deno.env.get("SUPABASE_URL");
+  const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!url || !key) {
+    throw new Error("Supabase service credentials are not configured");
+  }
+  return createClient(url, key);
+}
+
 type FieldOption = { value: string; label: string };
 type FieldSchemaItem = {
   name: string;
@@ -114,10 +123,7 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const country = (url.searchParams.get("country") || "DEFAULT").toUpperCase();
 
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
-    );
+    const supabase = createServiceClient();
 
     let rows = await fetchMethodsForCountry(supabase, country);
     if (!rows.length && country !== "DEFAULT") {
