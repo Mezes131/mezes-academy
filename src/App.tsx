@@ -24,6 +24,9 @@ import { CookieConsent } from "@/components/consent/CookieConsent";
 import { DocumentSeo, SiteJsonLd } from "@/components/seo/DocumentSeo";
 import { useT } from "@/i18n/useT";
 
+const CheckoutPage = lazy(() =>
+  import("@/pages/CheckoutPage").then((m) => ({ default: m.CheckoutPage })),
+);
 const PricingPage = lazy(() =>
   import("@/pages/PricingPage").then((m) => ({ default: m.PricingPage })),
 );
@@ -217,6 +220,12 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
     { path: p("/about"), element: withLanding(<AboutPage />) },
     { path: p("/contact"), element: withLanding(<ContactPage />) },
     { path: p("/pricing"), element: withLanding(<PricingPage />) },
+    {
+      path: p("/checkout"),
+      element: (
+        <RequireAuth>{withLanding(<CheckoutPage />)}</RequireAuth>
+      ),
+    },
     { path: p("/terms"), element: withLanding(<LegalDocPage doc="terms" />) },
     {
       path: p("/privacy"),

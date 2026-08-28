@@ -37,6 +37,14 @@ const ROUTE_SEO: { match: RegExp | string; seo: SeoEntry }[] = [
     },
   },
   {
+    match: /^\/checkout$/,
+    seo: {
+      title: "seo.pricingTitle",
+      description: "seo.pricingDesc",
+      robots: "noindex, nofollow",
+    },
+  },
+  {
     match: /^\/pricing$/,
     seo: {
       title: "seo.pricingTitle",

@@ -34,6 +34,16 @@ export interface PaymentMethodsResponse {
   methods: PaymentMethodOption[];
 }
 
+export type PaymentSessionType = "redirect" | "widget" | "push";
+
+export interface PaymentSession {
+  type: PaymentSessionType;
+  redirectUrl?: string;
+  widgetConfig?: Record<string, unknown>;
+  externalRef: string;
+  userMessage?: string;
+}
+
 export type EntitlementSource = "subscription" | "organization" | "trial";
 
 export interface UserEntitlement {
