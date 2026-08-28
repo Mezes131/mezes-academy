@@ -134,6 +134,8 @@ export class BillingService {
   }
 
   private async onPaymentSucceeded(subscription: SubscriptionRow): Promise<void> {
+    const entitlementSource =
+      subscription.status === "trialing" ? "trial" : "subscription";
     const periodEnd = this.computeNextPeriodEnd(
       subscription.current_period_end,
       await this.getPlan(subscription.plan_id),
@@ -153,7 +155,7 @@ export class BillingService {
     for (const userId of userIds) {
       await this.grantVideoEntitlement({
         userId,
-        source: subscription.status === "trialing" ? "trial" : "subscription",
+        source: entitlementSource,
         sourceId: subscription.id,
         expiresAt: periodEnd.toISOString(),
       });
