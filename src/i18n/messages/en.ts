@@ -17,6 +17,9 @@ export const messagesEn: MessageTree = {
     resetDesc: "Choose a new password for your Mezes Academy account.",
     accountTitle: "My account | Mezes Academy",
     accountDesc: "Manage your profile, preferences and account security on Mezes Academy.",
+    pricingTitle: "Pricing | Mezes Academy",
+    pricingDesc:
+      "Compare Free, Premium, and Enterprise plans. Unlock videos across all Mezes Academy courses.",
   },
   nav: {
     home: "Home",
@@ -143,6 +146,7 @@ export const messagesEn: MessageTree = {
     reactTrack: "React from zero to expert",
     svcTrack: "Secure Vibe Coding",
     howItWorks: "How it works",
+    pricing: "Pricing",
     myProgress: "My progress",
     myBookmarks: "My bookmarks",
     search: "Search",
@@ -1024,5 +1028,62 @@ export const messagesEn: MessageTree = {
     sevMedium: "Medium",
     sevHigh: "High",
     sevCritical: "Critical",
+  },
+  billing: {
+    method: {
+      kpayMomo: "Mobile Money",
+      kpayCard: "Card (KPay)",
+      kpaySpenn: "SPENN",
+      payoneerCard: "Bank card",
+    },
+    paywall: {
+      title: "Video for Premium members only",
+      body: "Text, exercises, and quizzes stay free. Unlock videos with Premium.",
+      ctaTrial: "Try 7 days free",
+      ctaSubscribe: "Subscribe",
+      ctaPricing: "View plans",
+    },
+    pricing: {
+      kicker: "Pricing",
+      title: "Choose your access",
+      subtitle:
+        "Practice for free. Unlock all videos and courses with Premium or Enterprise.",
+      monthly: "Monthly",
+      annual: "Annual",
+      perMonth: "/ month",
+      perYear: "/ year",
+      perSeatMonth: "/ seat / month",
+      popular: "Popular",
+      free: {
+        name: "Free",
+        price: "€0",
+        description: "Text, Sandpack exercises, and quizzes for all courses.",
+        cta: "Create account",
+      },
+      premium: {
+        name: "Premium",
+        description: "{days}-day free trial. All videos, all courses.",
+        cta: "Get started",
+      },
+      enterprise: {
+        name: "Enterprise",
+        description: "Self-service for teams of 2-9 seats. Quote for 10+.",
+        cta: "Contact us",
+      },
+      features: {
+        text: "Lesson text",
+        exercises: "Sandpack exercises",
+        quizzes: "Quizzes and progress",
+        videos: "All videos",
+        allCourses: "All courses (SVC + React)",
+        trial: "{days}-day trial",
+        teamSeats: "Team seats",
+        centralBilling: "Centralized billing",
+      },
+    },
+    errors: {
+      notConfigured: "Payments not configured",
+      loadFailed: "Could not load payment methods",
+    },
   },
 };

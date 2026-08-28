@@ -16,6 +16,9 @@ export const messagesFr = {
     resetDesc: "Choisis un nouveau mot de passe pour ton compte Mezes Academy.",
     accountTitle: "Mon compte | Mezes Academy",
     accountDesc: "Gère ton profil, tes préférences et la sécurité de ton compte Mezes Academy.",
+    pricingTitle: "Tarifs | Mezes Academy",
+    pricingDesc:
+      "Compare les offres Gratuit, Premium et Enterprise. Débloque les vidéos de tous les parcours Mezes Academy.",
   },
   nav: {
     home: "Accueil",
@@ -142,6 +145,7 @@ export const messagesFr = {
     reactTrack: "React de zéro à expert",
     svcTrack: "Secure Vibe Coding",
     howItWorks: "Comment ça marche",
+    pricing: "Tarifs",
     myProgress: "Ma progression",
     myBookmarks: "Mes favoris",
     search: "Recherche",
@@ -1036,6 +1040,63 @@ export const messagesFr = {
     sevMedium: "Moyenne",
     sevHigh: "Haute",
     sevCritical: "Critique",
+  },
+  billing: {
+    method: {
+      kpayMomo: "Mobile Money",
+      kpayCard: "Carte (KPay)",
+      kpaySpenn: "SPENN",
+      payoneerCard: "Carte bancaire",
+    },
+    paywall: {
+      title: "Vidéo réservée aux membres Premium",
+      body: "Le texte, les exercices et les quiz restent gratuits. Débloque les vidéos avec Premium.",
+      ctaTrial: "Essayer 7 jours gratuits",
+      ctaSubscribe: "S'abonner",
+      ctaPricing: "Voir les offres",
+    },
+    pricing: {
+      kicker: "Tarifs",
+      title: "Choisis ton accès",
+      subtitle:
+        "Pratique gratuitement. Débloque toutes les vidéos et tous les parcours avec Premium ou Enterprise.",
+      monthly: "Mensuel",
+      annual: "Annuel",
+      perMonth: "/ mois",
+      perYear: "/ an",
+      perSeatMonth: "/ siège / mois",
+      popular: "Populaire",
+      free: {
+        name: "Gratuit",
+        price: "0 €",
+        description: "Texte, exercices Sandpack et quiz pour tous les parcours.",
+        cta: "Créer un compte",
+      },
+      premium: {
+        name: "Premium",
+        description: "Essai gratuit {days} jours. Toutes les vidéos, tous les parcours.",
+        cta: "Commencer",
+      },
+      enterprise: {
+        name: "Enterprise",
+        description: "Équipes de 2 à 9 sièges en self-service. Devis pour 10+.",
+        cta: "Nous contacter",
+      },
+      features: {
+        text: "Texte des leçons",
+        exercises: "Exercices Sandpack",
+        quizzes: "Quiz et progression",
+        videos: "Toutes les vidéos",
+        allCourses: "Tous les parcours (SVC + React)",
+        trial: "Essai {days} jours",
+        teamSeats: "Sièges équipe",
+        centralBilling: "Facturation centralisée",
+      },
+    },
+    errors: {
+      notConfigured: "Paiements non configurés",
+      loadFailed: "Impossible de charger les moyens de paiement",
+    },
   },
 };
 
