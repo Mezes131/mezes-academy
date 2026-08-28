@@ -240,3 +240,5 @@ $$;
 
 revoke all on function public.lookup_auth_email(text) from public;
 grant execute on function public.lookup_auth_email(text) to anon, authenticated;
+
+-- Billing: also apply supabase/migrations/20260828100000_billing.sql on existing projects.
