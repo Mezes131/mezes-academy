@@ -41,6 +41,9 @@ const ResetPasswordPage = lazy(() =>
 const AccountPage = lazy(() =>
   import("@/pages/account/AccountPage").then((m) => ({ default: m.AccountPage })),
 );
+const TeamPage = lazy(() =>
+  import("@/pages/account/TeamPage").then((m) => ({ default: m.TeamPage })),
+);
 const ReactCoursePage = lazy(() =>
   import("@/pages/ReactCoursePage").then((m) => ({ default: m.ReactCoursePage })),
 );
@@ -241,6 +244,12 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
       path: p("/account"),
       element: (
         <RequireAuth>{withLanding(<AccountPage />)}</RequireAuth>
+      ),
+    },
+    {
+      path: p("/account/team"),
+      element: (
+        <RequireAuth>{withLanding(<TeamPage />)}</RequireAuth>
       ),
     },
     {

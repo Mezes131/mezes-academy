@@ -43,7 +43,9 @@ export function useBillingAccount() {
     setError(null);
 
     try {
-      const { data: subRow, error: subError } = await supabase
+      let subRow = null;
+
+      const { data: personalSub, error: personalError } = await supabase
         .from("subscriptions")
         .select(
           "id, plan_id, status, seat_count, trial_ends_at, current_period_end, canceled_at, plans(name)",
@@ -53,7 +55,34 @@ export function useBillingAccount() {
         .limit(1)
         .maybeSingle();
 
-      if (subError) throw subError;
+      if (personalError) throw personalError;
+      subRow = personalSub;
+
+      if (!subRow) {
+        const { data: membership } = await supabase
+          .from("organization_members")
+          .select("organization_id")
+          .eq("user_id", user.id)
+          .eq("role", "admin")
+          .not("accepted_at", "is", null)
+          .limit(1)
+          .maybeSingle();
+
+        if (membership?.organization_id) {
+          const { data: orgSub, error: orgSubError } = await supabase
+            .from("subscriptions")
+            .select(
+              "id, plan_id, status, seat_count, trial_ends_at, current_period_end, canceled_at, plans(name)",
+            )
+            .eq("organization_id", membership.organization_id)
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (orgSubError) throw orgSubError;
+          subRow = orgSub;
+        }
+      }
 
       if (!subRow) {
         setSubscription(null);

@@ -8,6 +8,10 @@
 | `create-subscription` | User JWT | Trial or initial payment |
 | `webhook-payment/:provider` | Provider webhook | Payment status updates |
 | `cancel-subscription` | User JWT | Cancel subscription |
+| `invite-org-member` | User JWT (org admin) | Invite teammate by email |
+| `accept-org-invite` | User JWT | Accept team invitation |
+| `remove-org-member` | User JWT (org admin) | Remove teammate |
+| `enterprise-quote-request` | Public | Quote request for 10+ seats |
 | `renew-subscriptions` | `CRON_SECRET` | Renewals + dunning retries |
 | `poll-pending-payments` | `CRON_SECRET` | Poll stale pending payments |
 
@@ -52,4 +56,6 @@ CRON_SECRET=
 SITE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 KPAY_* / PAYONEER_* (see billing spec)
+RESEND_API_KEY= (optional, for invite/quote emails)
+ENTERPRISE_QUOTE_EMAIL=contact@mezescorp.com
 ```

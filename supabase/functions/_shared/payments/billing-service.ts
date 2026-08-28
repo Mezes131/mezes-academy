@@ -158,10 +158,14 @@ export class BillingService {
       .eq("id", subscription.id);
 
     const userIds = await this.resolveEntitledUserIds(subscription);
+    const entitlementSource = subscription.organization_id
+      ? "organization"
+      : "subscription";
+
     for (const userId of userIds) {
       await this.grantVideoEntitlement({
         userId,
-        source: "subscription",
+        source: entitlementSource,
         sourceId: subscription.id,
         expiresAt: periodEnd.toISOString(),
       });

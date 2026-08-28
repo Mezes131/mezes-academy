@@ -112,6 +112,15 @@ export function BillingTab() {
           </p>
         )}
 
+        {subscription.planId === "enterprise_seat_monthly" && !subscription.canceledAt && (
+          <Link
+            to={lp("/account/team")}
+            className="mt-4 inline-block text-sm text-accent-2 underline"
+          >
+            {t("billing.account.manageTeam")}
+          </Link>
+        )}
+
         {canCancel && (
           <Button
             variant="ghost"

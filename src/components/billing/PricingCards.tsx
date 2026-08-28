@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/Button";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import { useLocalizedPricing } from "@/hooks/useLocalizedPricing";
+import { EnterpriseContactForm } from "@/components/billing/EnterpriseContactForm";
 import { trackBillingEvent } from "@/lib/analytics";
 import {
+  ENTERPRISE_MIN_SEATS,
   ENTERPRISE_SEAT_MONTHLY_EUR,
   PREMIUM_ANNUAL_EUR,
   PREMIUM_MONTHLY_EUR,
@@ -21,6 +23,7 @@ export function PricingCards() {
   const lp = useLocalePath();
   const { formatPrice } = useLocalizedPricing();
   const [interval, setInterval] = useState<BillingInterval>("monthly");
+  const [enterpriseSeats, setEnterpriseSeats] = useState(3);
 
   useEffect(() => {
     trackBillingEvent("pricing_view");
@@ -29,7 +32,8 @@ export function PricingCards() {
   const premiumEur =
     interval === "monthly" ? PREMIUM_MONTHLY_EUR : PREMIUM_ANNUAL_EUR;
   const premiumPrice = formatPrice(premiumEur);
-  const enterprisePrice = formatPrice(ENTERPRISE_SEAT_MONTHLY_EUR);
+  const enterpriseTotalEur = ENTERPRISE_SEAT_MONTHLY_EUR * enterpriseSeats;
+  const enterprisePrice = formatPrice(enterpriseTotalEur);
   const premiumSuffix =
     interval === "monthly"
       ? t("billing.pricing.perMonth")
@@ -128,11 +132,31 @@ export function PricingCards() {
             t("billing.pricing.features.centralBilling"),
           ]}
           cta={
-            <Link to={lp("/contact")}>
-              <Button variant="ghost" className="w-full">
-                {t("billing.pricing.enterprise.cta")}
-              </Button>
-            </Link>
+            <div className="space-y-3">
+              <label className="block text-left text-[12px] text-fg-2">
+                {t("billing.pricing.enterprise.seatsLabel")}
+                <input
+                  type="number"
+                  min={ENTERPRISE_MIN_SEATS}
+                  max={99}
+                  value={enterpriseSeats}
+                  onChange={(e) => setEnterpriseSeats(Number(e.target.value))}
+                  className="mt-1 w-full rounded-lg border border-white/10 bg-bg-3 px-3 py-2 text-sm text-fg"
+                />
+              </label>
+              {enterpriseSeats >= 10 ? (
+                <EnterpriseContactForm defaultSeats={enterpriseSeats} />
+              ) : (
+                <Link
+                  to={lp(
+                    `/checkout?plan=enterprise_seat_monthly&seats=${enterpriseSeats}`,
+                  )}
+                  onClick={() => trackBillingEvent("checkout_start")}
+                >
+                  <Button className="w-full">{t("billing.pricing.enterprise.checkoutCta")}</Button>
+                </Link>
+              )}
+            </div>
           }
         />
       </div>

@@ -6,7 +6,10 @@ import {
   convertEurCentsToCurrency,
   createBillingService,
   createServiceClient,
+  ENTERPRISE_MAX_SELF_SERVICE_SEATS,
+  ENTERPRISE_MIN_SEATS,
   getUserFromRequest,
+  isEnterprisePlan,
   isPremiumPlan,
   TRIAL_DAYS,
 } from "../_shared/billing-helpers.ts";
@@ -34,6 +37,44 @@ function validateFields(
     }
   }
   return null;
+}
+
+async function hasActivePersonalSubscription(
+  supabase: ReturnType<typeof createServiceClient>,
+  userId: string,
+): Promise<boolean> {
+  const { data } = await supabase
+    .from("subscriptions")
+    .select("id")
+    .eq("user_id", userId)
+    .in("status", ["trialing", "active", "past_due"])
+    .is("canceled_at", null)
+    .maybeSingle();
+
+  return Boolean(data);
+}
+
+async function hasActiveOwnedOrgSubscription(
+  supabase: ReturnType<typeof createServiceClient>,
+  userId: string,
+): Promise<boolean> {
+  const { data: org } = await supabase
+    .from("organizations")
+    .select("id")
+    .eq("owner_id", userId)
+    .maybeSingle();
+
+  if (!org) return false;
+
+  const { data: sub } = await supabase
+    .from("subscriptions")
+    .select("id")
+    .eq("organization_id", org.id)
+    .in("status", ["trialing", "active", "past_due"])
+    .is("canceled_at", null)
+    .maybeSingle();
+
+  return Boolean(sub);
 }
 
 Deno.serve(async (req) => {
@@ -64,6 +105,7 @@ Deno.serve(async (req) => {
       country_code?: string;
       start_trial?: boolean;
       seat_count?: number;
+      organization_name?: string;
     };
 
     const planId = body.plan_id?.trim();
@@ -71,12 +113,37 @@ Deno.serve(async (req) => {
     const countryCode = (body.country_code ?? "DEFAULT").toUpperCase();
     const fields = body.fields ?? {};
     const seatCount = Math.max(1, body.seat_count ?? 1);
+    const enterprise = planId ? isEnterprisePlan(planId) : false;
 
     if (!planId || !paymentMethodId) {
       return new Response(JSON.stringify({ error: "Missing plan or payment method" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    if (enterprise) {
+      if (
+        seatCount < ENTERPRISE_MIN_SEATS ||
+        seatCount > ENTERPRISE_MAX_SELF_SERVICE_SEATS
+      ) {
+        return new Response(
+          JSON.stringify({
+            error: `Seat count must be between ${ENTERPRISE_MIN_SEATS} and ${ENTERPRISE_MAX_SELF_SERVICE_SEATS}`,
+          }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      if (!body.organization_name?.trim()) {
+        return new Response(JSON.stringify({ error: "Organization name is required" }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     }
 
     const supabase = createServiceClient();
@@ -92,6 +159,13 @@ Deno.serve(async (req) => {
     if (planError || !plan) {
       return new Response(JSON.stringify({ error: "Plan not found" }), {
         status: 404,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (enterprise && !plan.seat_based) {
+      return new Response(JSON.stringify({ error: "Invalid enterprise plan" }), {
+        status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -143,11 +217,21 @@ Deno.serve(async (req) => {
       .in("status", ["trialing", "active", "past_due"])
       .maybeSingle();
 
-    if (existingSub) {
+    if (existingSub || await hasActivePersonalSubscription(supabase, user.id)) {
       return new Response(JSON.stringify({ error: "Active subscription already exists" }), {
         status: 409,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    if (await hasActiveOwnedOrgSubscription(supabase, user.id)) {
+      return new Response(
+        JSON.stringify({ error: "Active organization subscription already exists" }),
+        {
+          status: 409,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
     }
 
     const { data: profile } = await supabase
@@ -156,7 +240,7 @@ Deno.serve(async (req) => {
       .eq("id", user.id)
       .single();
 
-    const wantsTrial = body.start_trial === true;
+    const wantsTrial = body.start_trial === true && !enterprise;
     const trialEligible =
       wantsTrial && isPremiumPlan(planId) && !profile?.trial_used;
 
@@ -180,10 +264,46 @@ Deno.serve(async (req) => {
           : undefined,
     };
 
+    let organizationId: string | null = null;
+
+    if (enterprise) {
+      const orgName = body.organization_name!.trim();
+      const { data: org, error: orgError } = await supabase
+        .from("organizations")
+        .insert({
+          name: orgName,
+          owner_id: user.id,
+          seat_limit: seatCount,
+          billing_email: user.email ?? "",
+        })
+        .select("id")
+        .single();
+
+      if (orgError || !org) {
+        throw new Error(orgError?.message ?? "Failed to create organization");
+      }
+
+      organizationId = org.id;
+
+      const { error: memberError } = await supabase
+        .from("organization_members")
+        .insert({
+          organization_id: org.id,
+          user_id: user.id,
+          role: "admin",
+          accepted_at: now.toISOString(),
+        });
+
+      if (memberError) {
+        throw new Error(memberError.message);
+      }
+    }
+
     const { data: subscription, error: subError } = await supabase
       .from("subscriptions")
       .insert({
-        user_id: user.id,
+        user_id: enterprise ? null : user.id,
+        organization_id: organizationId,
         plan_id: planId,
         status: trialEligible ? "trialing" : "active",
         seat_count: seatCount,
@@ -233,6 +353,10 @@ Deno.serve(async (req) => {
 
     const siteUrl = Deno.env.get("SITE_URL") ?? "http://localhost:5173";
     const functionsUrl = Deno.env.get("SUPABASE_URL") ?? "";
+    const returnPlan = enterprise
+      ? `enterprise_seat_monthly&seats=${seatCount}`
+      : planId;
+
     const session = await billing.initiatePayment({
       subscription,
       paymentMethodId: method.id,
@@ -243,13 +367,14 @@ Deno.serve(async (req) => {
       customerName: profile?.full_name ?? user.email ?? "Customer",
       description: plan.name,
       methodConfig,
-      returnUrl: `${siteUrl}/checkout?plan=${planId}&status=return`,
+      returnUrl: `${siteUrl}/checkout?plan=${returnPlan}&status=return`,
       webhookUrl: `${functionsUrl}/functions/v1/webhook-payment/${method.provider_slug}`,
     });
 
     return new Response(
       JSON.stringify({
         subscription_id: subscription.id,
+        organization_id: organizationId,
         session,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } },

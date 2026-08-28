@@ -1,4 +1,5 @@
 import { corsHeaders } from "../_shared/cors.ts";
+import { isOrgAdmin } from "../_shared/org-helpers.ts";
 import {
   createBillingService,
   createServiceClient,
@@ -38,12 +39,23 @@ Deno.serve(async (req) => {
     const supabase = createServiceClient();
     const { data: subscription, error } = await supabase
       .from("subscriptions")
-      .select("id, user_id, status, canceled_at")
+      .select("id, user_id, organization_id, status, canceled_at")
       .eq("id", subscriptionId)
-      .eq("user_id", user.id)
       .maybeSingle();
 
     if (error || !subscription) {
+      return new Response(JSON.stringify({ error: "Subscription not found" }), {
+        status: 404,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const isPersonalOwner = subscription.user_id === user.id;
+    const isOrgOwner = subscription.organization_id
+      ? await isOrgAdmin(supabase, subscription.organization_id, user.id)
+      : false;
+
+    if (!isPersonalOwner && !isOrgOwner) {
       return new Response(JSON.stringify({ error: "Subscription not found" }), {
         status: 404,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

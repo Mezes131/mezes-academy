@@ -14,6 +14,9 @@ import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import type { BillingPlanId, PaymentSession } from "@/types/billing";
 import {
+  ENTERPRISE_MAX_SELF_SERVICE_SEATS,
+  ENTERPRISE_MIN_SEATS,
+  ENTERPRISE_SEAT_MONTHLY_EUR,
   PREMIUM_ANNUAL_EUR,
   PREMIUM_MONTHLY_EUR,
   TRIAL_DAYS,
@@ -35,20 +38,35 @@ export function CheckoutPage() {
   const { formatPrice } = useLocalizedPricing();
 
   const planId = (searchParams.get("plan") ?? "premium_monthly") as BillingPlanId;
+  const isEnterprise = planId === "enterprise_seat_monthly";
+  const seatCount = isEnterprise
+    ? Math.min(
+        ENTERPRISE_MAX_SELF_SERVICE_SEATS,
+        Math.max(
+          ENTERPRISE_MIN_SEATS,
+          Number(searchParams.get("seats") ?? ENTERPRISE_MIN_SEATS),
+        ),
+      )
+    : 1;
   const country = profile?.country ?? "DEFAULT";
   const { methods, loading: methodsLoading } = usePaymentMethods(country);
 
   const [selectedMethodId, setSelectedMethodId] = useState("");
   const [fieldValues, setFieldValues] = useState<Record<string, string>>({});
   const [startTrial, setStartTrial] = useState(true);
+  const [organizationName, setOrganizationName] = useState("");
+  const [orgNameError, setOrgNameError] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [session, setSession] = useState<PaymentSession | null>(null);
   const [completed, setCompleted] = useState(false);
 
   const trialEligible = profile?.trialUsed === false && planId.startsWith("premium");
 
-  const planEur =
-    planId === "premium_annual" ? PREMIUM_ANNUAL_EUR : PREMIUM_MONTHLY_EUR;
+  const planEur = isEnterprise
+    ? ENTERPRISE_SEAT_MONTHLY_EUR * seatCount
+    : planId === "premium_annual"
+      ? PREMIUM_ANNUAL_EUR
+      : PREMIUM_MONTHLY_EUR;
   const planPrice = formatPrice(planEur);
 
   const selectedMethod = useMemo(
@@ -91,6 +109,11 @@ export function CheckoutPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!selectedMethod) return;
+    if (isEnterprise && !organizationName.trim()) {
+      setOrgNameError(true);
+      return;
+    }
+    setOrgNameError(false);
 
     const errors = validateCheckoutFields(selectedMethod.fields, fieldValues);
     setFieldErrors(errors);
@@ -106,6 +129,8 @@ export function CheckoutPage() {
       fields: fieldValues,
       countryCode: country,
       startTrial: trialEligible && startTrial,
+      seatCount,
+      organizationName: isEnterprise ? organizationName.trim() : undefined,
     });
 
     if (!result) return;
@@ -144,6 +169,11 @@ export function CheckoutPage() {
         <div className="mt-6 rounded-xl border border-white/10 bg-bg-2 p-4">
           <p className="text-sm text-fg-2">{t("billing.checkout.amountLabel")}</p>
           <p className="mt-1 text-2xl font-bold text-fg">{planPrice.formatted}</p>
+          {isEnterprise && (
+            <p className="mt-1 text-[12px] text-fg-2">
+              {t("billing.checkout.enterpriseSeats", { count: seatCount })}
+            </p>
+          )}
           {planPrice.isEstimated && (
             <p className="mt-1 text-[12px] text-fg-2">
               {t("billing.checkout.estimatedNote")}
@@ -153,6 +183,25 @@ export function CheckoutPage() {
       )}
 
       <form onSubmit={onSubmit} className="mt-8 space-y-6">
+        {isEnterprise && (
+          <div>
+            <label className="block text-sm font-medium text-fg">
+              {t("billing.checkout.organizationName")}
+            </label>
+            <input
+              className="mt-2 w-full rounded-lg border border-white/10 bg-bg-2 px-3 py-2 text-sm"
+              value={organizationName}
+              onChange={(e) => setOrganizationName(e.target.value)}
+              required
+            />
+            {orgNameError && (
+              <p className="mt-1 text-sm text-red-400">
+                {t("billing.checkout.organizationNameRequired")}
+              </p>
+            )}
+          </div>
+        )}
+
         {trialEligible && (
           <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-bg-2 p-4">
             <input

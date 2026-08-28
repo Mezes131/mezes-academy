@@ -18,6 +18,8 @@ export function useBilling() {
       fields: Record<string, string>;
       countryCode: string;
       startTrial?: boolean;
+      seatCount?: number;
+      organizationName?: string;
     }): Promise<CreateSubscriptionResult | null> => {
       if (!isSupabaseConfigured || !supabase) {
         setError("billing.errors.notConfigured");
@@ -50,6 +52,8 @@ export function useBilling() {
               fields: params.fields,
               country_code: params.countryCode,
               start_trial: params.startTrial ?? false,
+              seat_count: params.seatCount,
+              organization_name: params.organizationName,
             }),
           },
         );

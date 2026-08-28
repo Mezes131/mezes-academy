@@ -81,6 +81,13 @@ export function isPremiumPlan(planId: string): boolean {
   return planId === "premium_monthly" || planId === "premium_annual";
 }
 
+export function isEnterprisePlan(planId: string): boolean {
+  return planId === "enterprise_seat_monthly";
+}
+
+export const ENTERPRISE_MIN_SEATS = 2;
+export const ENTERPRISE_MAX_SELF_SERVICE_SEATS = 9;
+
 export function verifyCronAuth(req: Request): boolean {
   const secret = Deno.env.get("CRON_SECRET");
   if (!secret) return false;
