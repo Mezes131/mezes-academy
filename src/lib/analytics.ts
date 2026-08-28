@@ -91,3 +91,22 @@ export function applyCookieConsent(value: CookieConsent): void {
 export function openCookiePreferences(): void {
   window.dispatchEvent(new Event(COOKIE_PREFERENCES_EVENT));
 }
+
+export type BillingEventName =
+  | "pricing_view"
+  | "checkout_start"
+  | "payment_method_selected"
+  | "trial_started"
+  | "subscription_activated"
+  | "payment_failed"
+  | "subscription_canceled"
+  | "video_paywall_view"
+  | "video_paywall_cta_click";
+
+export function trackBillingEvent(
+  name: BillingEventName,
+  params?: Record<string, string | number | boolean>,
+): void {
+  if (typeof window === "undefined" || !window.gtag) return;
+  window.gtag("event", name, params ?? {});
+}

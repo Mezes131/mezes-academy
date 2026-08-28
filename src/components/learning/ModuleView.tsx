@@ -13,6 +13,7 @@ import { isAuditExercise } from "@/types";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Bookmark, BookmarkCheck, CheckCircle2, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ModuleVideoBlock } from "@/components/billing/ModuleVideoBlock";
 
 interface ModuleViewProps {
   phase: Phase;
@@ -107,7 +108,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
       {/* ─── Contenu ───────────────────────────────── */}
       <div className="space-y-8">
         {module.content.map((block, i) => (
-          <ContentRenderer key={i} block={block} t={t} />
+          <ContentRenderer key={i} block={block} />
         ))}
       </div>
 
@@ -168,13 +169,7 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
   );
 }
 
-function ContentRenderer({
-  block,
-  t,
-}: {
-  block: ContentBlock;
-  t: ReturnType<typeof useT>;
-}) {
+function ContentRenderer({ block }: { block: ContentBlock }) {
   switch (block.kind) {
     case "title":
       return (
@@ -235,40 +230,8 @@ function ContentRenderer({
       );
     case "code":
       return <CodeBlock label={block.sample.label} html={block.sample.html} />;
-    case "video": {
-      const { video } = block;
-      if (!video.providerId?.trim()) return null;
-      // Stub player: YouTube embed when provider is youtube; otherwise a titled link.
-      if (video.provider === "youtube") {
-        return (
-          <div className="my-6 aspect-video w-full max-w-3xl overflow-hidden rounded-xl border-base bg-bg-2">
-            <iframe
-              title={video.title ?? t("learn.courseVideo")}
-              src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.providerId)}`}
-              className="h-full w-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        );
-      }
-      return (
-        <a
-          href={video.providerId}
-          target="_blank"
-          rel="noreferrer"
-          className="my-6 flex items-center gap-3 rounded-xl border-base bg-bg-2 p-4 text-sm font-semibold hover:bg-bg-3 transition"
-        >
-          <i className="fa-solid fa-play text-accent-2" />
-          {video.title ?? t("learn.openVideo")}
-          {video.durationSeconds != null && (
-            <span className="ml-auto font-mono text-[11px] text-fg-3">
-              {Math.round(video.durationSeconds / 60)} min
-            </span>
-          )}
-        </a>
-      );
-    }
+    case "video":
+      return <ModuleVideoBlock video={block.video} />;
     default:
       return null;
   }
