@@ -19,6 +19,10 @@ type SubscriptionRow = {
   trial_ends_at: string | null;
   current_period_start: string;
   current_period_end: string;
+  past_due_since: string | null;
+  renewal_attempts: number;
+  last_renewal_attempt_at: string | null;
+  canceled_at: string | null;
 };
 
 type PaymentRow = {
@@ -27,6 +31,7 @@ type PaymentRow = {
   provider_slug: string;
   external_ref: string | null;
   status: string;
+  created_at?: string;
 };
 
 type PlanRow = {
@@ -134,11 +139,10 @@ export class BillingService {
   }
 
   private async onPaymentSucceeded(subscription: SubscriptionRow): Promise<void> {
-    const entitlementSource =
-      subscription.status === "trialing" ? "trial" : "subscription";
+    const plan = await this.getPlan(subscription.plan_id);
     const periodEnd = this.computeNextPeriodEnd(
       subscription.current_period_end,
-      await this.getPlan(subscription.plan_id),
+      plan,
     );
 
     await this.supabase
@@ -148,6 +152,8 @@ export class BillingService {
         current_period_start: new Date().toISOString(),
         current_period_end: periodEnd.toISOString(),
         trial_ends_at: null,
+        past_due_since: null,
+        renewal_attempts: 0,
       })
       .eq("id", subscription.id);
 
@@ -155,7 +161,7 @@ export class BillingService {
     for (const userId of userIds) {
       await this.grantVideoEntitlement({
         userId,
-        source: entitlementSource,
+        source: "subscription",
         sourceId: subscription.id,
         expiresAt: periodEnd.toISOString(),
       });
@@ -178,7 +184,10 @@ export class BillingService {
 
     await this.supabase
       .from("subscriptions")
-      .update({ status: "past_due" })
+      .update({
+        status: "past_due",
+        past_due_since: subscription.past_due_since ?? new Date().toISOString(),
+      })
       .eq("id", subscription.id);
   }
 
@@ -266,5 +275,199 @@ export class BillingService {
       .not("accepted_at", "is", null);
 
     return (members ?? []).map((m) => m.user_id as string);
+  }
+
+  async hasRecentPendingPayment(subscriptionId: string): Promise<boolean> {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { data } = await this.supabase
+      .from("payments")
+      .select("id")
+      .eq("subscription_id", subscriptionId)
+      .eq("status", "pending")
+      .gte("created_at", since)
+      .limit(1);
+    return (data?.length ?? 0) > 0;
+  }
+
+  async renewSubscription(
+    subscription: SubscriptionRow,
+  ): Promise<{ initiated: boolean; reason?: string }> {
+    if (subscription.canceled_at) {
+      return { initiated: false, reason: "canceled" };
+    }
+    if (!subscription.payment_method_id || !subscription.payment_provider_slug) {
+      return { initiated: false, reason: "missing_payment_method" };
+    }
+    if (await this.hasRecentPendingPayment(subscription.id)) {
+      return { initiated: false, reason: "pending_payment" };
+    }
+
+    const plan = await this.getPlan(subscription.plan_id);
+    const currency = await this.resolveSubscriptionCurrency(subscription);
+    const amount = await this.convertPlanAmount(
+      plan.price_eur_cents,
+      currency,
+      subscription.seat_count,
+    );
+
+    const customer = await this.resolveCustomer(subscription);
+    if (!customer) {
+      return { initiated: false, reason: "missing_customer" };
+    }
+
+    const siteUrl = Deno.env.get("SITE_URL") ?? "http://localhost:5173";
+    const functionsUrl = Deno.env.get("SUPABASE_URL") ?? "";
+
+    await this.supabase
+      .from("subscriptions")
+      .update({
+        renewal_attempts: subscription.renewal_attempts + 1,
+        last_renewal_attempt_at: new Date().toISOString(),
+      })
+      .eq("id", subscription.id);
+
+    await this.initiatePayment({
+      subscription,
+      paymentMethodId: subscription.payment_method_id,
+      providerSlug: subscription.payment_provider_slug,
+      amountCents: amount,
+      currency,
+      customerEmail: customer.email,
+      customerName: customer.name,
+      description: `Renewal: ${plan.id}`,
+      methodConfig: subscription.payment_method_config ?? {},
+      returnUrl: `${siteUrl}/account?tab=billing`,
+      webhookUrl:
+        `${functionsUrl}/functions/v1/webhook-payment/${subscription.payment_provider_slug}`,
+    });
+
+    return { initiated: true };
+  }
+
+  async processDunning(
+    subscription: SubscriptionRow,
+  ): Promise<"retry" | "cancel" | "skip"> {
+    if (subscription.status !== "past_due" || !subscription.past_due_since) {
+      return "skip";
+    }
+
+    const daysPastDue = this.daysSince(new Date(subscription.past_due_since));
+    if (daysPastDue >= 7) {
+      await this.cancelSubscription(subscription.id, true);
+      return "cancel";
+    }
+
+    if (daysPastDue === 1 || daysPastDue === 3) {
+      const result = await this.renewSubscription(subscription);
+      return result.initiated ? "retry" : "skip";
+    }
+
+    return "skip";
+  }
+
+  async cancelSubscription(
+    subscriptionId: string,
+    revokeImmediately: boolean,
+  ): Promise<void> {
+    const subscription = await this.getSubscription(subscriptionId);
+    if (!subscription || subscription.canceled_at) return;
+
+    const now = new Date().toISOString();
+    await this.supabase
+      .from("subscriptions")
+      .update({ status: "canceled", canceled_at: now })
+      .eq("id", subscriptionId);
+
+    const shouldRevoke =
+      revokeImmediately || subscription.status === "trialing";
+
+    if (shouldRevoke) {
+      const userIds = await this.resolveEntitledUserIds(subscription);
+      for (const userId of userIds) {
+        await this.revokeVideoEntitlement(userId, subscription.id);
+      }
+    }
+  }
+
+  async pollPendingPayment(payment: PaymentRow): Promise<void> {
+    const adapter = this.registry.get(payment.provider_slug);
+    const externalRef = payment.external_ref ?? payment.id;
+    const result = await adapter.checkPaymentStatus(externalRef);
+
+    if (result.status === "pending") return;
+
+    await this.handlePaymentEvent({
+      externalRef,
+      status: result.status,
+      providerPayload: result.providerPayload ?? {},
+    });
+  }
+
+  private daysSince(date: Date): number {
+    const ms = Date.now() - date.getTime();
+    return Math.floor(ms / (24 * 60 * 60 * 1000));
+  }
+
+  private async resolveSubscriptionCurrency(
+    subscription: SubscriptionRow,
+  ): Promise<string> {
+    const configCurrency = subscription.payment_method_config?.currency;
+    if (typeof configCurrency === "string" && configCurrency) {
+      return configCurrency;
+    }
+
+    const { data: lastPayment } = await this.supabase
+      .from("payments")
+      .select("currency")
+      .eq("subscription_id", subscription.id)
+      .eq("status", "succeeded")
+      .order("paid_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (lastPayment?.currency) return lastPayment.currency;
+    return "EUR";
+  }
+
+  private async convertPlanAmount(
+    priceEurCents: number,
+    currency: string,
+    seatCount: number,
+  ): Promise<number> {
+    const eurAmount = (priceEurCents / 100) * seatCount;
+    if (currency === "EUR") return Math.round(eurAmount);
+
+    const { data } = await this.supabase
+      .from("exchange_rates")
+      .select("rate_from_eur")
+      .eq("currency", currency)
+      .maybeSingle();
+
+    const rate = Number(data?.rate_from_eur ?? 1);
+    return Math.round(eurAmount * rate);
+  }
+
+  private async resolveCustomer(
+    subscription: SubscriptionRow,
+  ): Promise<{ email: string; name: string } | null> {
+    if (!subscription.user_id) return null;
+
+    const { data: profile } = await this.supabase
+      .from("profiles")
+      .select("full_name")
+      .eq("id", subscription.user_id)
+      .maybeSingle();
+
+    const { data: userData } = await this.supabase.auth.admin.getUserById(
+      subscription.user_id,
+    );
+
+    const email = userData.user?.email;
+    if (!email) return null;
+
+    return {
+      email,
+      name: profile?.full_name ?? email,
+    };
   }
 }

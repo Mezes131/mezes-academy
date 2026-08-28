@@ -165,9 +165,15 @@ Deno.serve(async (req) => {
       ? addDays(now, TRIAL_DAYS)
       : addPlanInterval(now, plan.interval, plan.interval_count);
 
+    const currency =
+      typeof availability.config?.default_currency === "string"
+        ? availability.config.default_currency
+        : method.currencies?.[0] ?? "EUR";
+
     const methodConfig = {
       ...fields,
       methodSlug: method.slug,
+      currency,
       phonePrefix:
         typeof availability.config?.phone_prefix === "string"
           ? availability.config.phone_prefix
@@ -217,11 +223,6 @@ Deno.serve(async (req) => {
         { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
-
-    const currency =
-      typeof availability.config?.default_currency === "string"
-        ? availability.config.default_currency
-        : method.currencies?.[0] ?? "EUR";
 
     const amount = await convertEurCentsToCurrency(
       supabase,

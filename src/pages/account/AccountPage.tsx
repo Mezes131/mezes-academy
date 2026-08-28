@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
   CheckCircle2,
+  CreditCard,
   LayoutGrid,
   ShieldCheck,
   Sliders,
@@ -15,8 +16,9 @@ import { ProfileHeader } from "../../components/account/ProfileHeader";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { PreferencesTab } from "./tabs/PreferencesTab";
 import { SecurityTab } from "./tabs/SecurityTab";
+import { BillingTab } from "./tabs/BillingTab";
 
-type AccountTab = "overview" | "preferences" | "security";
+type AccountTab = "overview" | "preferences" | "security" | "billing";
 
 /**
  * Student account page.
@@ -32,6 +34,7 @@ export function AccountPage() {
       [
         { id: "overview" as const, label: t("account.tabOverview"), icon: <LayoutGrid size={14} /> },
         { id: "preferences" as const, label: t("account.tabPreferences"), icon: <Sliders size={14} /> },
+        { id: "billing" as const, label: t("account.tabBilling"), icon: <CreditCard size={14} /> },
         { id: "security" as const, label: t("account.tabSecurity"), icon: <ShieldCheck size={14} /> },
       ] satisfies Array<{ id: AccountTab; label: string; icon: React.ReactNode }>,
     [t],
@@ -54,7 +57,7 @@ export function AccountPage() {
 
   const activeTab: AccountTab = useMemo(() => {
     const raw = searchParams.get("tab");
-    if (raw === "preferences" || raw === "security") return raw;
+    if (raw === "preferences" || raw === "security" || raw === "billing") return raw;
     return "overview";
   }, [searchParams]);
 
@@ -135,6 +138,7 @@ export function AccountPage() {
                 onSuccess={(message) => setToast({ kind: "success", message })}
               />
             )}
+            {activeTab === "billing" && <BillingTab />}
             {activeTab === "security" && (
               <SecurityTab
                 email={email}

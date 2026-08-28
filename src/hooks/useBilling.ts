@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { trackBillingEvent } from "@/lib/analytics";
 import type { PaymentSession } from "@/types/billing";
 
 export type CreateSubscriptionResult =
@@ -55,6 +56,7 @@ export function useBilling() {
 
         const data = await res.json();
         if (!res.ok) {
+          trackBillingEvent("payment_failed", { plan: params.planId });
           throw new Error(data.error ?? "Subscription failed");
         }
 
@@ -81,5 +83,49 @@ export function useBilling() {
     [],
   );
 
-  return { createSubscription, loading, error };
+  const cancelSubscription = useCallback(async (subscriptionId: string) => {
+    if (!isSupabaseConfigured || !supabase) {
+      setError("billing.errors.notConfigured");
+      return false;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+      if (!token) {
+        setError("billing.errors.authRequired");
+        return false;
+      }
+
+      const base = import.meta.env.VITE_SUPABASE_URL;
+      const res = await fetch(
+        `${String(base).replace(/\/$/, "")}/functions/v1/cancel-subscription`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ subscription_id: subscriptionId }),
+        },
+      );
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error ?? "Cancel failed");
+      }
+
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "billing.errors.loadFailed");
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { createSubscription, cancelSubscription, loading, error };
 }

@@ -316,10 +316,10 @@ export const messagesFr = {
       eyebrow: "Cadre d'utilisation",
       title: "Conditions d'utilisation",
       lead: "Ce que vous pouvez faire sur Mezes Academy, ce à quoi nous nous engageons, et ce que nous ne garantissons pas.",
-      updated: "19 août 2026",
-      readTime: "6 min de lecture",
+      updated: "28 août 2026",
+      readTime: "7 min de lecture",
       brief1:
-        "L'accès aux parcours publiés est gratuit ; un compte sert uniquement à synchroniser votre progression.",
+        "Le texte, les exercices et les quiz restent gratuits ; les vidéos sont accessibles via Premium ou Enterprise.",
       brief2:
         "Les leçons appartiennent à Mezes Corporation ; les extraits de code peuvent être réutilisés dans vos projets.",
       brief3:
@@ -350,9 +350,16 @@ export const messagesFr = {
         "Nous ne vous demanderons jamais votre mot de passe par e-mail, message privé ou téléphone. Si vous recevez une telle demande, signalez-la à contact@mezescorp.com.",
       accessTitle: "Accès aux contenus et évolutions",
       accessP1:
-        "L'accès aux parcours publiés est gratuit à ce jour. Si une offre payante est introduite, elle sera annoncée de manière claire et n'aura pas d'effet rétroactif sur les contenus déjà accessibles à votre compte.",
+        "Le texte, les exercices Sandpack et les quiz restent gratuits. L'accès aux vidéos nécessite un abonnement Premium ou Enterprise, avec un essai gratuit de 7 jours (une fois par compte). Les prix sont affichés en euros de référence ; une conversion indicative peut s'appliquer selon votre pays et votre moyen de paiement.",
       accessP2:
         "Les parcours évoluent : nous ajoutons des modules, révisons des passages, corrigeons des erreurs et pouvons retirer un contenu devenu inexact. Nous visons une disponibilité continue sans pouvoir la garantir : une maintenance, une panne d'hébergeur ou une coupure réseau peuvent interrompre le service.",
+      billingTitle: "Offre payante, essai et résiliation",
+      billingP1:
+        "Premium donne accès à toutes les vidéos et à tous les parcours publiés. L'essai gratuit de 7 jours démarre sans prélèvement immédiat lorsque vous le sélectionnez au checkout. À la fin de l'essai, le premier paiement est déclenché avec le moyen de paiement enregistré.",
+      billingP2:
+        "Vous pouvez annuler à tout moment depuis Compte → Facturation. Pendant l'essai, l'annulation révoque immédiatement l'accès vidéo. Pour un abonnement payant, l'accès reste actif jusqu'à la fin de la période en cours. Les remboursements ne sont pas automatiques sauf obligation légale.",
+      billingP3:
+        "En cas d'échec de paiement, nous retentons le prélèvement et pouvons suspendre l'accès après un délai de relance. Les prix peuvent évoluer ; tout changement tarifaire vous sera annoncé avant application à votre prochain renouvellement.",
       useTitle: "Usage acceptable",
       useP1:
         "Le service est destiné à l'apprentissage : vous pouvez lire les contenus, copier des extraits pour vous exercer, prendre des notes et partager un lien vers une leçon. Les usages suivants sont en revanche interdits.",
@@ -645,6 +652,7 @@ export const messagesFr = {
       "Personnalise ton profil, tes préférences et les paramètres de sécurité.",
     tabOverview: "Aperçu",
     tabPreferences: "Préférences",
+    tabBilling: "Facturation",
     tabSecurity: "Compte & sécurité",
     keyStats: "Mes chiffres clés",
     progress: "Progression",
@@ -1121,6 +1129,34 @@ export const messagesFr = {
       trialActiveTitle: "Essai activé",
       trialActiveBody: "Tu as {days} jours pour profiter de toutes les vidéos.",
       startLearning: "Commencer le parcours",
+    },
+    account: {
+      currentPlan: "Abonnement actuel",
+      plan: "Offre",
+      status: "Statut",
+      renewsOn: "Renouvellement",
+      trialEnds: "Fin de l'essai",
+      canceledOn: "Annulé le {date}",
+      cancel: "Annuler l'abonnement",
+      cancelConfirm:
+        "Confirmer l'annulation ? L'accès vidéo sera révoqué immédiatement pendant l'essai, ou à la fin de la période en cours sinon.",
+      cancelDone: "Abonnement annulé. L'accès vidéo reste actif jusqu'à la fin de la période.",
+      cancelTrialDone: "Essai annulé. L'accès vidéo a été révoqué.",
+      noSubscription: "Tu n'as pas d'abonnement actif.",
+      paymentHistory: "Historique des paiements",
+      noPayments: "Aucun paiement enregistré.",
+      statuses: {
+        trialing: "Essai",
+        active: "Actif",
+        past_due: "Paiement en retard",
+        canceled: "Annulé",
+      },
+      paymentStatuses: {
+        pending: "En attente",
+        succeeded: "Réussi",
+        failed: "Échoué",
+        cancelled: "Annulé",
+      },
     },
   },
 };

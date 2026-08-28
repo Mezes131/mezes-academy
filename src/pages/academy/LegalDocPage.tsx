@@ -44,6 +44,15 @@ const SECTIONS: Record<AcademyDoc, Section[]> = {
       blocks: ["academy.terms.accessP1", "academy.terms.accessP2"],
     },
     {
+      id: "billing",
+      title: "academy.terms.billingTitle",
+      blocks: [
+        "academy.terms.billingP1",
+        "academy.terms.billingP2",
+        "academy.terms.billingP3",
+      ],
+    },
+    {
       id: "use",
       title: "academy.terms.useTitle",
       blocks: [

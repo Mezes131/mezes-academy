@@ -317,10 +317,10 @@ export const messagesEn: MessageTree = {
       eyebrow: "Rules of use",
       title: "Terms of use",
       lead: "What you may do on Mezes Academy, what we commit to, and what we do not guarantee.",
-      updated: "19 August 2026",
-      readTime: "6 min read",
+      updated: "28 August 2026",
+      readTime: "7 min read",
       brief1:
-        "Access to published tracks is free; an account serves solely to synchronise your progress.",
+        "Text, exercises, and quizzes stay free; videos require Premium or Enterprise.",
       brief2:
         "Lessons belong to Mezes Corporation; code snippets may be reused in your projects.",
       brief3:
@@ -351,9 +351,16 @@ export const messagesEn: MessageTree = {
         "We will never ask for your password by email, direct message or phone. If you receive such a request, report it to contact@mezescorp.com.",
       accessTitle: "Content access and changes",
       accessP1:
-        "Access to published tracks is free at present. If a paid offering is introduced, it will be announced clearly and will not apply retroactively to content already available to your account.",
+        "Lesson text, Sandpack exercises, and quizzes remain free. Video access requires a Premium or Enterprise subscription, with a one-time 7-day free trial per account. Prices are shown in reference EUR; an indicative conversion may apply based on your country and payment method.",
       accessP2:
         "The tracks evolve: we add modules, revise passages, correct errors and may remove content that has become inaccurate. We aim for continuous availability without being able to guarantee it: maintenance, a host outage or a network interruption may disrupt the service.",
+      billingTitle: "Paid plans, trial, and cancellation",
+      billingP1:
+        "Premium unlocks all videos and published tracks. The 7-day free trial starts with no immediate charge when you select it at checkout. When the trial ends, the first payment is triggered using your saved payment method.",
+      billingP2:
+        "You may cancel at any time from Account → Billing. During the trial, cancellation revokes video access immediately. For a paid subscription, access remains active until the end of the current billing period. Refunds are not automatic unless required by law.",
+      billingP3:
+        "If a payment fails, we retry collection and may suspend access after a grace period. Prices may change; any rate change will be announced before it applies to your next renewal.",
       useTitle: "Acceptable use",
       useP1:
         "The service is intended for learning: you may read the content, copy snippets for practice, take notes and share a link to a lesson. The following uses are, however, prohibited.",
@@ -643,6 +650,7 @@ export const messagesEn: MessageTree = {
     subtitle: "Customize your profile, preferences, and security settings.",
     tabOverview: "Overview",
     tabPreferences: "Preferences",
+    tabBilling: "Billing",
     tabSecurity: "Account & security",
     keyStats: "My key stats",
     progress: "Progress",
@@ -1109,6 +1117,34 @@ export const messagesEn: MessageTree = {
       trialActiveTitle: "Trial activated",
       trialActiveBody: "You have {days} days to enjoy all videos.",
       startLearning: "Start the course",
+    },
+    account: {
+      currentPlan: "Current subscription",
+      plan: "Plan",
+      status: "Status",
+      renewsOn: "Renews on",
+      trialEnds: "Trial ends",
+      canceledOn: "Canceled on {date}",
+      cancel: "Cancel subscription",
+      cancelConfirm:
+        "Confirm cancellation? Video access is revoked immediately during trial, or at the end of the current period otherwise.",
+      cancelDone: "Subscription canceled. Video access remains until the period ends.",
+      cancelTrialDone: "Trial canceled. Video access has been revoked.",
+      noSubscription: "You do not have an active subscription.",
+      paymentHistory: "Payment history",
+      noPayments: "No payments recorded.",
+      statuses: {
+        trialing: "Trial",
+        active: "Active",
+        past_due: "Past due",
+        canceled: "Canceled",
+      },
+      paymentStatuses: {
+        pending: "Pending",
+        succeeded: "Succeeded",
+        failed: "Failed",
+        cancelled: "Canceled",
+      },
     },
   },
 };

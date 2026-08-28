@@ -39,11 +39,9 @@ strapi/.tmp/
 strapi/.env
 
 docs/*
-!docs/superpowers/
-!docs/superpowers/specs/
-!docs/superpowers/specs/**
-!docs/superpowers/plans/
-!docs/superpowers/plans/**
+docs/superpowers/
+docs/superpowers/specs/
+docs/superpowers/specs/**
 
 # Worker artefacts
 worker/node_modules/

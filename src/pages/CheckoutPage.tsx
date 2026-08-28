@@ -61,6 +61,12 @@ export function CheckoutPage() {
   }, [planId]);
 
   useEffect(() => {
+    if (searchParams.get("status") === "return") {
+      trackBillingEvent("subscription_activated", { plan: planId });
+    }
+  }, [searchParams, planId]);
+
+  useEffect(() => {
     if (!selectedMethodId && methods.length) {
       setSelectedMethodId(methods[0].id);
     }

@@ -81,4 +81,14 @@ export function isPremiumPlan(planId: string): boolean {
   return planId === "premium_monthly" || planId === "premium_annual";
 }
 
+export function verifyCronAuth(req: Request): boolean {
+  const secret = Deno.env.get("CRON_SECRET");
+  if (!secret) return false;
+
+  const authHeader = req.headers.get("Authorization");
+  if (authHeader === `Bearer ${secret}`) return true;
+
+  return req.headers.get("x-cron-secret") === secret;
+}
+
 export { TRIAL_DAYS };
