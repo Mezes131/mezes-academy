@@ -1053,6 +1053,7 @@ export const messagesEn: MessageTree = {
       perMonth: "/ month",
       perYear: "/ year",
       perSeatMonth: "/ seat / month",
+      estimated: "Estimated price",
       popular: "Popular",
       free: {
         name: "Free",
@@ -1096,6 +1097,9 @@ export const messagesEn: MessageTree = {
       trialOption: "Start {days}-day free trial (no payment now)",
       startTrial: "Start free trial",
       payNow: "Pay now",
+      amountLabel: "Amount",
+      estimatedNote: "Indicative conversion from EUR.",
+      widgetTitle: "Card payment",
       fieldErrors: "Please check the form fields.",
       invalidPlan: "Invalid plan.",
       redirecting: "Redirecting to payment…",

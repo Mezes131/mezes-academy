@@ -1065,6 +1065,7 @@ export const messagesFr = {
       perMonth: "/ mois",
       perYear: "/ an",
       perSeatMonth: "/ siège / mois",
+      estimated: "Prix estimé",
       popular: "Populaire",
       free: {
         name: "Gratuit",
@@ -1108,6 +1109,9 @@ export const messagesFr = {
       trialOption: "Commencer l'essai gratuit de {days} jours (sans paiement maintenant)",
       startTrial: "Démarrer l'essai gratuit",
       payNow: "Payer maintenant",
+      amountLabel: "Montant",
+      estimatedNote: "Conversion indicative depuis l'euro.",
+      widgetTitle: "Paiement par carte",
       fieldErrors: "Vérifie les champs du formulaire.",
       invalidPlan: "Offre invalide.",
       redirecting: "Redirection vers le paiement…",

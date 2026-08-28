@@ -18,6 +18,7 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.19.9",
     "@fortawesome/fontawesome-free": "^7.2.0",
+    "@payoneer/op-payment-widget-v3": "^3.61.0",
     "@supabase/supabase-js": "^2.104.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",

@@ -4,6 +4,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
+import { useLocalizedPricing } from "@/hooks/useLocalizedPricing";
 import { trackBillingEvent } from "@/lib/analytics";
 import {
   ENTERPRISE_SEAT_MONTHLY_EUR,
@@ -18,14 +19,17 @@ type BillingInterval = "monthly" | "annual";
 export function PricingCards() {
   const t = useT();
   const lp = useLocalePath();
+  const { formatPrice } = useLocalizedPricing();
   const [interval, setInterval] = useState<BillingInterval>("monthly");
 
   useEffect(() => {
     trackBillingEvent("pricing_view");
   }, []);
 
-  const premiumPrice =
+  const premiumEur =
     interval === "monthly" ? PREMIUM_MONTHLY_EUR : PREMIUM_ANNUAL_EUR;
+  const premiumPrice = formatPrice(premiumEur);
+  const enterprisePrice = formatPrice(ENTERPRISE_SEAT_MONTHLY_EUR);
   const premiumSuffix =
     interval === "monthly"
       ? t("billing.pricing.perMonth")
@@ -85,7 +89,10 @@ export function PricingCards() {
           highlighted
           badge={t("billing.pricing.popular")}
           name={t("billing.pricing.premium.name")}
-          price={`${premiumPrice} €`}
+          price={premiumPrice.formatted}
+          priceNote={
+            premiumPrice.isEstimated ? t("billing.pricing.estimated") : undefined
+          }
           priceSuffix={premiumSuffix}
           description={t("billing.pricing.premium.description", {
             days: TRIAL_DAYS,
@@ -109,7 +116,10 @@ export function PricingCards() {
 
         <PricingCard
           name={t("billing.pricing.enterprise.name")}
-          price={`${ENTERPRISE_SEAT_MONTHLY_EUR} €`}
+          price={enterprisePrice.formatted}
+          priceNote={
+            enterprisePrice.isEstimated ? t("billing.pricing.estimated") : undefined
+          }
           priceSuffix={t("billing.pricing.perSeatMonth")}
           description={t("billing.pricing.enterprise.description")}
           features={[
@@ -133,6 +143,7 @@ export function PricingCards() {
 function PricingCard({
   name,
   price,
+  priceNote,
   priceSuffix,
   description,
   features,
@@ -142,6 +153,7 @@ function PricingCard({
 }: {
   name: string;
   price: string;
+  priceNote?: string;
   priceSuffix?: string;
   description: string;
   features: string[];
@@ -170,6 +182,11 @@ function PricingCard({
           <span className="text-sm text-fg-2">{priceSuffix}</span>
         )}
       </div>
+      {priceNote && (
+        <p className="mt-1 text-[11px] uppercase tracking-wide text-fg-2/80">
+          {priceNote}
+        </p>
+      )}
       <p className="mt-3 text-[13px] leading-relaxed text-fg-2">{description}</p>
       <ul className="mt-6 flex-1 space-y-2">
         {features.map((feature) => (

@@ -6,13 +6,18 @@ import { PaymentMethodSelector } from "@/components/billing/PaymentMethodSelecto
 import { PaymentSessionRenderer } from "@/components/billing/PaymentSessionRenderer";
 import { useAuth } from "@/hooks/useAuth";
 import { useBilling } from "@/hooks/useBilling";
+import { useLocalizedPricing } from "@/hooks/useLocalizedPricing";
 import { usePaymentMethods } from "@/hooks/usePaymentMethods";
 import { hasFieldErrors, validateCheckoutFields } from "@/lib/billing/fieldSchema";
 import { trackBillingEvent } from "@/lib/analytics";
 import { useT } from "@/i18n/useT";
 import { useLocalePath } from "@/i18n/useLocalePath";
 import type { BillingPlanId, PaymentSession } from "@/types/billing";
-import { TRIAL_DAYS } from "@/types/billing";
+import {
+  PREMIUM_ANNUAL_EUR,
+  PREMIUM_MONTHLY_EUR,
+  TRIAL_DAYS,
+} from "@/types/billing";
 
 const VALID_PLANS: BillingPlanId[] = [
   "premium_monthly",
@@ -27,6 +32,7 @@ export function CheckoutPage() {
   const [searchParams] = useSearchParams();
   const { profile } = useAuth();
   const { createSubscription, loading, error } = useBilling();
+  const { formatPrice } = useLocalizedPricing();
 
   const planId = (searchParams.get("plan") ?? "premium_monthly") as BillingPlanId;
   const country = profile?.country ?? "DEFAULT";
@@ -40,6 +46,10 @@ export function CheckoutPage() {
   const [completed, setCompleted] = useState(false);
 
   const trialEligible = profile?.trialUsed === false && planId.startsWith("premium");
+
+  const planEur =
+    planId === "premium_annual" ? PREMIUM_ANNUAL_EUR : PREMIUM_MONTHLY_EUR;
+  const planPrice = formatPrice(planEur);
 
   const selectedMethod = useMemo(
     () => methods.find((m) => m.id === selectedMethodId) ?? null,
@@ -123,6 +133,18 @@ export function CheckoutPage() {
         {t("billing.checkout.title")}
       </h1>
       <p className="mt-2 text-fg-2">{t("billing.checkout.subtitle")}</p>
+
+      {!(trialEligible && startTrial) && (
+        <div className="mt-6 rounded-xl border border-white/10 bg-bg-2 p-4">
+          <p className="text-sm text-fg-2">{t("billing.checkout.amountLabel")}</p>
+          <p className="mt-1 text-2xl font-bold text-fg">{planPrice.formatted}</p>
+          {planPrice.isEstimated && (
+            <p className="mt-1 text-[12px] text-fg-2">
+              {t("billing.checkout.estimatedNote")}
+            </p>
+          )}
+        </div>
+      )}
 
       <form onSubmit={onSubmit} className="mt-8 space-y-6">
         {trialEligible && (

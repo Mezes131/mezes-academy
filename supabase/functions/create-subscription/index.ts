@@ -243,7 +243,7 @@ Deno.serve(async (req) => {
       description: plan.name,
       methodConfig,
       returnUrl: `${siteUrl}/checkout?plan=${planId}&status=return`,
-      webhookUrl: `${functionsUrl}/functions/v1/webhook-payment/kpay`,
+      webhookUrl: `${functionsUrl}/functions/v1/webhook-payment/${method.provider_slug}`,
     });
 
     return new Response(

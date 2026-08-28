@@ -1,7 +1,8 @@
 import { createClient, type SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { BillingService } from "./payments/billing-service.ts";
 import { createKPayAdapter } from "./payments/adapters/kpay.ts";
-import { createRegistry } from "./payments/registry.ts";
+import { createPayoneerAdapter } from "./payments/adapters/payoneer.ts";
+import { createRegistry, type PaymentProviderRegistry } from "./payments/registry.ts";
 
 const TRIAL_DAYS = 7;
 
@@ -14,9 +15,12 @@ export function createServiceClient(): SupabaseClient {
   return createClient(url, key);
 }
 
+export function createPaymentRegistry(): PaymentProviderRegistry {
+  return createRegistry([createKPayAdapter(), createPayoneerAdapter()]);
+}
+
 export function createBillingService(): BillingService {
-  const registry = createRegistry([createKPayAdapter()]);
-  return new BillingService(createServiceClient(), registry);
+  return new BillingService(createServiceClient(), createPaymentRegistry());
 }
 
 export async function getUserFromRequest(req: Request) {

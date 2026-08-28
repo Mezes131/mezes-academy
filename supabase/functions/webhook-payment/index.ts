@@ -1,21 +1,14 @@
 import { corsHeaders } from "../_shared/cors.ts";
-import { createBillingService } from "../_shared/billing-helpers.ts";
-import { createKPayAdapter } from "../_shared/payments/adapters/kpay.ts";
-import { PaymentProviderRegistry } from "../_shared/payments/registry.ts";
+import {
+  createBillingService,
+  createPaymentRegistry,
+} from "../_shared/billing-helpers.ts";
 
 function getProviderSlugFromUrl(url: URL): string | null {
   const parts = url.pathname.split("/").filter(Boolean);
   const idx = parts.indexOf("webhook-payment");
   if (idx === -1 || !parts[idx + 1]) return null;
   return parts[idx + 1];
-}
-
-function buildRegistry(providerSlug: string): PaymentProviderRegistry {
-  const registry = new PaymentProviderRegistry();
-  if (providerSlug === "kpay") {
-    registry.register(createKPayAdapter());
-  }
-  return registry;
 }
 
 Deno.serve(async (req) => {
@@ -39,7 +32,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const registry = buildRegistry(providerSlug);
+    const registry = createPaymentRegistry();
     if (!registry.has(providerSlug)) {
       return new Response(JSON.stringify({ error: "Unknown provider" }), {
         status: 404,
