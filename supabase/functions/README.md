@@ -33,7 +33,7 @@ VIDEO_SIGNED_URL_TTL_SECONDS=3600
 
 Use a MinIO service account with read-only policy on `mezes-videos/*` — not root credentials.
 
-**Local dev:** MinIO runs via `docker compose up minio minio-init`. Edge Functions on Supabase cloud cannot reach `http://minio:9000` — use a public staging endpoint or test playback locally with `supabase functions serve`.
+**Local dev:** MinIO runs via `docker compose up -d minio`. Create the bucket once with `.\scripts\init-minio.ps1`. Edge Functions on Supabase cloud cannot reach `http://minio:9000` — use a public staging endpoint or test playback locally with `supabase functions serve`.
 
 ## Cron scheduling
 
