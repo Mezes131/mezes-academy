@@ -10,6 +10,15 @@ export const fondationsModule01: Module = {
   duration: "25 min",
   difficulty: "intro",
   openByDefault: true,
+  video: {
+    status: "ready",
+    full: {
+      provider: "minio",
+      providerId: "courses/svc/phase-fondations/modules/svc-fondations-m01.mp4",
+      title: "Le vibe coding : promesses et pièges",
+      mimeType: "video/mp4",
+    },
+  },
   objectives: [
     "Situer les outils : de la suggestion d'une ligne jusqu'à l'agent autonome",
     "Repérer les échecs typiques du code généré",

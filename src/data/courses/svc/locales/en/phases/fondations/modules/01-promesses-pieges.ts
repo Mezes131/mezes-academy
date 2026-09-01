@@ -10,6 +10,15 @@ export const fondationsModule01: Module = {
   duration: "25 min",
   difficulty: "intro",
   openByDefault: true,
+  video: {
+    status: "ready",
+    full: {
+      provider: "minio",
+      providerId: "courses/svc/phase-fondations/modules/svc-fondations-m01.mp4",
+      title: "Vibe coding: promises and traps",
+      mimeType: "video/mp4",
+    },
+  },
   objectives: [
     "Place tools on a spectrum from line suggestion to autonomous agent",
     "Spot typical failures in generated code",
