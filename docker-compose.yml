@@ -82,6 +82,7 @@ services:
   minio:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     command: server /data --console-address ":9001"
+    env_file: .env
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:?MINIO_ROOT_USER is required}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?MINIO_ROOT_PASSWORD is required}
@@ -92,28 +93,34 @@ services:
       - "9001:9001"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     networks:
-      - internal
+      - public
+    restart: unless-stopped
 
   minio-init:
     image: minio/mc:latest
+    profiles: ["init"]
     depends_on:
       minio:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
       mc alias set local http://minio:9000 $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD &&
-      mc mb --ignore-existing local/mezes-videos &&
-      mc anonymous set none local/mezes-videos
+      mc mb --ignore-existing local/$${MINIO_BUCKET:-mezes-videos} &&
+      mc anonymous set none local/$${MINIO_BUCKET:-mezes-videos}
       "
+    env_file: .env
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET: ${MINIO_BUCKET:-mezes-videos}
     networks:
-      - internal
+      - public
+    restart: "no"
 
 volumes:
   strapi-db:
