@@ -1,14 +1,5 @@
-import {
-  BrowserRouter,
-  HashRouter,
-  type FutureConfig,
-} from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import type { ReactNode } from "react";
-
-const routerFuture: FutureConfig = {
-  v7_startTransition: true,
-  v7_relativeSplatPath: true,
-};
 
 /**
  * Avec `base: "./"`, le build est souvent ouvert via file:// ou Live Server
@@ -33,11 +24,11 @@ function browserBasename(): string | undefined {
 
 export function AppRouter({ children }: { children: ReactNode }) {
   if (needsHashRouter()) {
-    return <HashRouter future={routerFuture}>{children}</HashRouter>;
+    return <HashRouter>{children}</HashRouter>;
   }
 
   return (
-    <BrowserRouter basename={browserBasename()} future={routerFuture}>
+    <BrowserRouter basename={browserBasename()}>
       {children}
     </BrowserRouter>
   );
