@@ -26,7 +26,7 @@ describe("fetchVideoPlaybackUrl", () => {
 
     expect(result.url).toBe("https://minio.example/signed");
     expect(fetch).toHaveBeenCalledWith(
-      "https://proj.supabase.co/functions/v1/video-playback?key=courses%2Freact%2Fphase-core%2Fmodules%2Freact-core-m06.mp4",
+      "/api/video-playback?key=courses%2Freact%2Fphase-core%2Fmodules%2Freact-core-m06.mp4",
       { headers: { Authorization: "Bearer token-abc" } },
     );
   });
