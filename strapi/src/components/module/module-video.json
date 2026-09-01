@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_module_module_videos",
+  "info": {
+    "displayName": "Module Video",
+    "icon": "play"
+  },
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": ["ready", "coming_soon", "incident"],
+      "default": "coming_soon"
+    },
+    "teaser": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lesson.video-block"
+    },
+    "full": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lesson.video-block"
+    }
+  }
+}

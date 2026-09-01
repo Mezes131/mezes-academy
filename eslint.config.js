@@ -11,6 +11,7 @@ export default tseslint.config(
       "dist",
       "node_modules",
       "strapi/dist/**",
+      "strapi/.strapi/**",
       "worker/dist/**",
       ".cursor/**",
     ],
@@ -27,6 +28,13 @@ export default tseslint.config(
       "react-refresh": reactRefresh,
     },
     rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
       "react-refresh/only-export-components": [
         "warn",
         {

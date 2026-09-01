@@ -24,6 +24,12 @@ import { CookieConsent } from "@/components/consent/CookieConsent";
 import { DocumentSeo, SiteJsonLd } from "@/components/seo/DocumentSeo";
 import { useT } from "@/i18n/useT";
 
+const CheckoutPage = lazy(() =>
+  import("@/pages/CheckoutPage").then((m) => ({ default: m.CheckoutPage })),
+);
+const PricingPage = lazy(() =>
+  import("@/pages/PricingPage").then((m) => ({ default: m.PricingPage })),
+);
 const AuthPage = lazy(() =>
   import("@/pages/AuthPage").then((m) => ({ default: m.AuthPage })),
 );
@@ -34,6 +40,9 @@ const ResetPasswordPage = lazy(() =>
 );
 const AccountPage = lazy(() =>
   import("@/pages/account/AccountPage").then((m) => ({ default: m.AccountPage })),
+);
+const TeamPage = lazy(() =>
+  import("@/pages/account/TeamPage").then((m) => ({ default: m.TeamPage })),
 );
 const ReactCoursePage = lazy(() =>
   import("@/pages/ReactCoursePage").then((m) => ({ default: m.ReactCoursePage })),
@@ -212,9 +221,13 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
   return [
     { path: p("/"), element: withLanding(<LandingPage />) },
     { path: p("/about"), element: withLanding(<AboutPage />) },
+    { path: p("/contact"), element: withLanding(<ContactPage />) },
+    { path: p("/pricing"), element: withLanding(<PricingPage />) },
     {
-      path: p("/contact"),
-      element: withLanding(<ContactPage />),
+      path: p("/checkout"),
+      element: (
+        <RequireAuth>{withLanding(<CheckoutPage />)}</RequireAuth>
+      ),
     },
     { path: p("/terms"), element: withLanding(<LegalDocPage doc="terms" />) },
     {
@@ -231,6 +244,12 @@ function siteRouteObjects(prefix: "" | "/en"): RouteObject[] {
       path: p("/account"),
       element: (
         <RequireAuth>{withLanding(<AccountPage />)}</RequireAuth>
+      ),
+    },
+    {
+      path: p("/account/team"),
+      element: (
+        <RequireAuth>{withLanding(<TeamPage />)}</RequireAuth>
       ),
     },
     {

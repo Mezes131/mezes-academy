@@ -13,20 +13,25 @@
     "test": "vitest run --config vitest.config.ts",
     "test:progress": "vitest run --config vitest.config.ts src/lib/courseProgress.test.ts",
     "quality": "npm run lint && npm run type-check && npm run test && npm run build",
-    "export:strapi-seed": "tsx scripts/export-course-seed.ts"
+    "export:strapi-seed": "tsx scripts/export-course-seed.ts",
+    "audit": "node scripts/patch-payoneer-underscore.mjs && npm audit",
+    "postinstall": "node scripts/patch-payoneer-underscore.mjs"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.19.9",
     "@fortawesome/fontawesome-free": "^7.2.0",
+    "@payoneer/op-payment-widget-v3": "^3.61.0",
     "@supabase/supabase-js": "^2.104.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
+    "react-router-dom": "^7.18.3",
     "sucrase": "^3.35.1"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.758.0",
+    "@aws-sdk/s3-request-presigner": "^3.758.0",
     "@eslint/js": "^9.39.4",
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
@@ -38,8 +43,10 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^17.5.0",
     "postcss": "^8.4.49",
+    "supabase": "^2.116.0",
     "tailwindcss": "^3.4.15",
     "tsx": "^4.23.1",
+    "underscore": "1.13.8",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.59.0",
     "vite": "^6.4.3",

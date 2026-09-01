@@ -9,6 +9,22 @@ export const module11: Module = {
   subtitle: "Comprendre pourquoi React existe et écrire ses premiers composants",
   duration: "1 semaine",
   openByDefault: true,
+  video: {
+    status: "ready",
+    teaser: {
+      provider: "youtube",
+      providerId: "Tn6EPEsYE9I",
+      title: "Aperçu — React en 2 minutes",
+      durationSeconds: 120,
+    },
+    full: {
+      provider: "minio",
+      providerId: "courses/react/phase-core/modules/react-core-m06.mp4",
+      title: "Introduction à React & JSX",
+      durationSeconds: 900,
+      mimeType: "video/mp4",
+    },
+  },
   content: [
     {
       kind: "info",

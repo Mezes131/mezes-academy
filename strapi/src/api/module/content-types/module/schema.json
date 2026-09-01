@@ -132,6 +132,16 @@
         }
       }
     },
+    "video": {
+      "type": "component",
+      "repeatable": false,
+      "component": "module.module-video",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "phase": {
       "type": "relation",
       "relation": "manyToOne",

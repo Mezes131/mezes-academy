@@ -34,6 +34,7 @@ export function Footer() {
           </FooterCol>
 
           <FooterCol title={t("footer.resources")}>
+            <FooterLink to={lp("/pricing")}>{t("footer.pricing")}</FooterLink>
             <FooterLink to={lp("/#how-it-works")}>{t("footer.howItWorks")}</FooterLink>
             <FooterLink to={lp("/react/progress")}>{t("footer.myProgress")}</FooterLink>
             <FooterLink to={lp("/react/bookmarks")}>{t("footer.myBookmarks")}</FooterLink>

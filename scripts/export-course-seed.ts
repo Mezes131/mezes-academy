@@ -21,6 +21,8 @@ import type {
   Quiz,
   AuditExercise,
   CodeExercise,
+  LessonVideo,
+  ModuleVideo,
 } from "../src/types";
 import { isAuditExercise } from "../src/types";
 
@@ -36,6 +38,28 @@ const LEVEL_MAP: Record<CourseMeta["level"], string> = {
   Advanced: "advanced",
   "All levels": "beginner",
 };
+
+function mapLessonVideo(video: LessonVideo, access: "free" | "premium") {
+  return {
+    __component: "lesson.video-block",
+    provider: video.provider,
+    providerId: video.providerId,
+    title: video.title ?? null,
+    durationSeconds: video.durationSeconds ?? null,
+    access,
+    posterUrl: video.posterUrl ?? null,
+    mimeType: video.mimeType ?? null,
+  };
+}
+
+function mapModuleVideo(video: ModuleVideo | undefined) {
+  if (!video) return null;
+  return {
+    status: video.status,
+    teaser: video.teaser ? mapLessonVideo(video.teaser, "free") : null,
+    full: video.full ? mapLessonVideo(video.full, "premium") : null,
+  };
+}
 
 function mapContentBlocks(blocks: ContentBlock[]) {
   return blocks.map((block) => {
@@ -70,6 +94,9 @@ function mapContentBlocks(blocks: ContentBlock[]) {
           providerId: block.video.providerId,
           title: block.video.title ?? null,
           durationSeconds: block.video.durationSeconds ?? null,
+          posterUrl: block.video.posterUrl ?? null,
+          mimeType: block.video.mimeType ?? null,
+          access: block.video.provider === "youtube" ? "free" : "premium",
         };
       case "lessons":
         return {
@@ -169,6 +196,7 @@ function mapModule(mod: Module, order: number) {
     openByDefault: mod.openByDefault ?? false,
     workflowStatus: "draft",
     contentBlocks: mod.content,
+    video: mapModuleVideo(mod.video),
     assessment: mod.assessment ?? null,
     lesson: {
       legacyId: `${mod.id}-lesson`,

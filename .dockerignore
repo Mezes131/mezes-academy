@@ -20,6 +20,7 @@ supabase
 .superpowers
 .claude
 scripts
+!scripts/patch-payoneer-underscore.mjs
 *.log
 build-strapi.log
 
