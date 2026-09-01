@@ -4,7 +4,7 @@ import { URL } from "node:url";
 import { createClient } from "@supabase/supabase-js";
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { isValidVideoKey } from "./supabase/functions/_shared/video-key";
+import { isValidVideoKey } from "./src/lib/video/videoKey";
 
 function isEntitlementActive(expiresAt: string | null): boolean {
   if (!expiresAt) return true;

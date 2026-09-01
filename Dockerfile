@@ -3,6 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
+COPY scripts/patch-payoneer-underscore.mjs scripts/
 # ponytail: retries/timeouts because the Sandpack deps are large and the registry
 # connection resets mid-download; upgrade path is a local registry mirror.
 RUN npm ci --fetch-retries=8 --fetch-retry-mintimeout=20000 \
