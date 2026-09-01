@@ -427,3 +427,6 @@ verify_jwt = false
 
 [functions.poll-pending-payments]
 verify_jwt = false
+
+[functions.video-playback]
+verify_jwt = true

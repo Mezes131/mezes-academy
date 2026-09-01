@@ -1037,6 +1037,25 @@ export const messagesEn: MessageTree = {
     sevHigh: "High",
     sevCritical: "Critical",
   },
+  video: {
+    comingSoon: {
+      title: "Video coming soon",
+      body: "This lesson will include a video soon. Text and exercises remain available.",
+    },
+    incident: {
+      title: "Video incident",
+      body: "The video is temporarily unavailable. Try again in a few minutes.",
+    },
+    error: {
+      title: "Unable to load video",
+      body: "A technical issue prevents playback. Check your connection and try again.",
+      retry: "Retry",
+    },
+    teaserUnavailable: "Preview unavailable",
+    fullComingSoon: "Full lesson video coming soon",
+    fullLesson: "Full lesson",
+    teaser: "Preview",
+  },
   billing: {
     method: {
       kpayMomo: "Mobile Money",

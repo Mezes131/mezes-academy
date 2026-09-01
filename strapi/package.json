@@ -15,14 +15,14 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/database": "5.51.1",
-    "@strapi/plugin-cloud": "5.51.1",
-    "@strapi/plugin-users-permissions": "5.51.1",
-    "@strapi/strapi": "5.51.1",
+    "@strapi/database": "5.52.2",
+    "@strapi/plugin-cloud": "5.52.2",
+    "@strapi/plugin-users-permissions": "5.52.2",
+    "@strapi/strapi": "5.52.2",
     "pg": "8.20.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.30.3",
+    "react-router-dom": "7.18.2",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
@@ -42,6 +42,13 @@
     "ip-address": "10.3.1",
     "js-yaml": "4.3.1",
     "nanoid": "3.3.18",
+    "@ai-sdk/gateway": "4.0.67",
+    "@ai-sdk/provider": "4.0.8",
+    "@ai-sdk/provider-utils": "5.0.32",
+    "@ai-sdk/react": "2.0.252",
+    "ai": "7.0.83",
+    "react-router": "7.18.2",
+    "react-router-dom": "7.18.2",
     "minimatch@10": {
       "brace-expansion": "5.0.9"
     }

@@ -8,6 +8,22 @@ export const module13: Module = {
   title: "useState & Gestion du state",
   subtitle: "Rendre vos composants interactifs et dynamiques",
   duration: "1 semaine",
+  video: {
+    status: "ready",
+    teaser: {
+      provider: "youtube",
+      providerId: "Tn6EPEsYE9I",
+      title: "Aperçu — useState",
+      durationSeconds: 120,
+    },
+    full: {
+      provider: "minio",
+      providerId: "courses/react/phase-core/modules/react-core-m08.mp4",
+      title: "useState & Gestion du state",
+      durationSeconds: 900,
+      mimeType: "video/mp4",
+    },
+  },
   content: [
     {
       kind: "paragraph",

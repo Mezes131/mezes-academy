@@ -13,6 +13,7 @@ import { isAuditExercise } from "@/types";
 import { cn, phaseAccent } from "@/lib/utils";
 import { Bookmark, BookmarkCheck, CheckCircle2, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LessonVideoSection } from "@/components/learning/video/LessonVideoSection";
 import { ModuleVideoBlock } from "@/components/billing/ModuleVideoBlock";
 
 interface ModuleViewProps {
@@ -105,10 +106,12 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
         </div>
       </div>
 
+      <LessonVideoSection video={module.video} moduleId={module.id} />
+
       {/* ─── Contenu ───────────────────────────────── */}
       <div className="space-y-8">
         {module.content.map((block, i) => (
-          <ContentRenderer key={i} block={block} />
+          <ContentRenderer key={i} block={block} skipVideo={Boolean(module.video)} />
         ))}
       </div>
 
@@ -169,7 +172,13 @@ export function ModuleView({ phase, module }: ModuleViewProps) {
   );
 }
 
-function ContentRenderer({ block }: { block: ContentBlock }) {
+function ContentRenderer({
+  block,
+  skipVideo = false,
+}: {
+  block: ContentBlock;
+  skipVideo?: boolean;
+}) {
   switch (block.kind) {
     case "title":
       return (
@@ -231,6 +240,7 @@ function ContentRenderer({ block }: { block: ContentBlock }) {
     case "code":
       return <CodeBlock label={block.sample.label} html={block.sample.html} />;
     case "video":
+      if (skipVideo) return null;
       return <ModuleVideoBlock video={block.video} />;
     default:
       return null;

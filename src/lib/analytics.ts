@@ -101,7 +101,9 @@ export type BillingEventName =
   | "payment_failed"
   | "subscription_canceled"
   | "video_paywall_view"
-  | "video_paywall_cta_click";
+  | "video_paywall_cta_click"
+  | "video_play_start"
+  | "video_play_error";
 
 export function trackBillingEvent(
   name: BillingEventName,

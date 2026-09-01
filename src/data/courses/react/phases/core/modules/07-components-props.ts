@@ -8,6 +8,22 @@ export const module12: Module = {
   title: "Composants & Props",
   subtitle: "L'art de décomposer une UI en pièces réutilisables et de les faire communiquer",
   duration: "1 semaine",
+  video: {
+    status: "ready",
+    teaser: {
+      provider: "youtube",
+      providerId: "Tn6EPEsYE9I",
+      title: "Aperçu — Composants & props",
+      durationSeconds: 120,
+    },
+    full: {
+      provider: "minio",
+      providerId: "courses/react/phase-core/modules/react-core-m07.mp4",
+      title: "Composants & Props",
+      durationSeconds: 900,
+      mimeType: "video/mp4",
+    },
+  },
   content: [
     {
       kind: "paragraph",

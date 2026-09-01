@@ -7,7 +7,7 @@
   "attributes": {
     "provider": {
       "type": "enumeration",
-      "enum": ["mux", "vimeo", "bunny", "youtube", "other"],
+      "enum": ["mux", "vimeo", "bunny", "youtube", "minio", "other"],
       "default": "other"
     },
     "providerId": {
@@ -22,6 +22,17 @@
     },
     "transcript": {
       "type": "text"
+    },
+    "access": {
+      "type": "enumeration",
+      "enum": ["free", "premium"],
+      "default": "premium"
+    },
+    "posterUrl": {
+      "type": "string"
+    },
+    "mimeType": {
+      "type": "string"
     }
   }
 }

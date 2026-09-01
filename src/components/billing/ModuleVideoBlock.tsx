@@ -1,39 +1,32 @@
 import type { LessonVideo } from "@/types";
 import { useT } from "@/i18n/useT";
-import { useEntitlement } from "@/hooks/useEntitlement";
-import { VideoPaywall } from "@/components/billing/VideoPaywall";
+import { LessonVideoSection } from "@/components/learning/video/LessonVideoSection";
 
 interface ModuleVideoBlockProps {
   video: LessonVideo;
 }
 
+/** Legacy content-block video — delegates to LessonVideoSection when possible. */
 export function ModuleVideoBlock({ video }: ModuleVideoBlockProps) {
   const t = useT();
-  const { hasAccess, loading } = useEntitlement("video_access");
 
   if (!video.providerId?.trim()) return null;
 
-  if (loading) {
+  if (video.provider === "youtube") {
     return (
-      <div className="my-6 aspect-video w-full max-w-3xl animate-pulse rounded-xl border-base bg-bg-2" />
+      <LessonVideoSection
+        moduleId=""
+        video={{ status: "ready", teaser: video }}
+      />
     );
   }
 
-  if (!hasAccess) {
-    return <VideoPaywall video={video} />;
-  }
-
-  if (video.provider === "youtube") {
+  if (video.provider === "minio") {
     return (
-      <div className="my-6 aspect-video w-full max-w-3xl overflow-hidden rounded-xl border-base bg-bg-2">
-        <iframe
-          title={video.title ?? t("learn.courseVideo")}
-          src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.providerId)}`}
-          className="h-full w-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
+      <LessonVideoSection
+        moduleId=""
+        video={{ status: "ready", full: video }}
+      />
     );
   }
 

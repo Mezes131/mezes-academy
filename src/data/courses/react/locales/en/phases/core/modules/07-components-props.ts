@@ -8,6 +8,22 @@ export const module12: Module = {
   title: "Components & Props",
   subtitle: "The art of splitting a UI into reusable pieces and making them talk",
   duration: "1 week",
+  video: {
+    status: "ready",
+    teaser: {
+      provider: "youtube",
+      providerId: "Tn6EPEsYE9I",
+      title: "Preview — Components & props",
+      durationSeconds: 120,
+    },
+    full: {
+      provider: "minio",
+      providerId: "courses/react/phase-core/modules/react-core-m07.mp4",
+      title: "Components & Props",
+      durationSeconds: 900,
+      mimeType: "video/mp4",
+    },
+  },
   content: [
     {
       kind: "paragraph",

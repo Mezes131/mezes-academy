@@ -1049,6 +1049,25 @@ export const messagesFr = {
     sevHigh: "Haute",
     sevCritical: "Critique",
   },
+  video: {
+    comingSoon: {
+      title: "Vidéo bientôt disponible",
+      body: "Cette leçon sera enrichie d'une vidéo prochainement. Le texte et les exercices restent accessibles.",
+    },
+    incident: {
+      title: "Incident vidéo",
+      body: "La vidéo est temporairement indisponible. Réessayez dans quelques minutes.",
+    },
+    error: {
+      title: "Impossible de charger la vidéo",
+      body: "Un problème technique empêche la lecture. Vérifiez votre connexion et réessayez.",
+      retry: "Réessayer",
+    },
+    teaserUnavailable: "Aperçu indisponible",
+    fullComingSoon: "Leçon complète bientôt disponible",
+    fullLesson: "Leçon complète",
+    teaser: "Aperçu",
+  },
   billing: {
     method: {
       kpayMomo: "Mobile Money",

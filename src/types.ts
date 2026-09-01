@@ -102,13 +102,24 @@ export type ContentBlock =
   | { kind: "code"; sample: CodeSample }
   | { kind: "video"; video: LessonVideo };
 
-/** Video lesson block. Player UI renders only when providerId is non-empty. */
+/** Editorial / ops status for the module video zone. */
+export type LessonVideoStatus = "ready" | "coming_soon" | "incident";
+
+/** Video asset reference (YouTube id or MinIO object key). */
 export interface LessonVideo {
-  provider: "mux" | "vimeo" | "bunny" | "youtube" | "other";
+  provider: "youtube" | "minio" | "mux" | "vimeo" | "bunny" | "other";
+  /** YouTube: video id · MinIO: object key under `courses/` */
   providerId: string;
   title?: string;
   durationSeconds?: number;
   posterUrl?: string;
+  mimeType?: string;
+}
+
+export interface ModuleVideo {
+  status: LessonVideoStatus;
+  teaser?: LessonVideo;
+  full?: LessonVideo;
 }
 
 export interface QuizQuestion {
@@ -212,6 +223,7 @@ export interface Module {
   prerequisites?: string[];
   difficulty?: DifficultyLevel;
   status?: PublicationStatus;
+  video?: ModuleVideo;
   content: ContentBlock[];
   quiz?: Quiz;
   exercises?: ModuleExercise[];
