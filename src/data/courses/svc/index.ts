@@ -10,11 +10,29 @@ import { fondationsPhase as fondationsPhaseFr } from "./locales/fr/phases/fondat
 import { promptPhase as promptPhaseFr } from "./locales/fr/phases/prompt";
 import { architecturePhase as architecturePhaseFr } from "./locales/fr/phases/architecture";
 import { authPhase as authPhaseFr } from "./locales/fr/phases/auth";
+import { dataPhase as dataPhaseFr } from "./locales/fr/phases/data";
+import { paiementsPhase as paiementsPhaseFr } from "./locales/fr/phases/paiements";
+import { notificationsPhase as notificationsPhaseFr } from "./locales/fr/phases/notifications";
+import { auditSecuritePhase as auditSecuritePhaseFr } from "./locales/fr/phases/audit-securite";
+import { auditQualitePhase as auditQualitePhaseFr } from "./locales/fr/phases/audit-qualite";
+import { hebergementPhase as hebergementPhaseFr } from "./locales/fr/phases/hebergement";
+import { opsPhase as opsPhaseFr } from "./locales/fr/phases/ops";
+import { shipPhase as shipPhaseFr } from "./locales/fr/phases/ship";
+import { capstonePhase as capstonePhaseFr } from "./locales/fr/phases/capstone";
 import { basesPhase as basesPhaseEn } from "./locales/en/phases/bases";
 import { fondationsPhase as fondationsPhaseEn } from "./locales/en/phases/fondations";
 import { promptPhase as promptPhaseEn } from "./locales/en/phases/prompt";
 import { architecturePhase as architecturePhaseEn } from "./locales/en/phases/architecture";
 import { authPhase as authPhaseEn } from "./locales/en/phases/auth";
+import { dataPhase as dataPhaseEn } from "./locales/en/phases/data";
+import { paiementsPhase as paiementsPhaseEn } from "./locales/en/phases/paiements";
+import { notificationsPhase as notificationsPhaseEn } from "./locales/en/phases/notifications";
+import { auditSecuritePhase as auditSecuritePhaseEn } from "./locales/en/phases/audit-securite";
+import { auditQualitePhase as auditQualitePhaseEn } from "./locales/en/phases/audit-qualite";
+import { hebergementPhase as hebergementPhaseEn } from "./locales/en/phases/hebergement";
+import { opsPhase as opsPhaseEn } from "./locales/en/phases/ops";
+import { shipPhase as shipPhaseEn } from "./locales/en/phases/ship";
+import { capstonePhase as capstonePhaseEn } from "./locales/en/phases/capstone";
 
 const phasePresentation: Record<string, PhasePresentation> = {
   bases: { color: "intro", icon: "fa-globe", label: "Phase 0" },
@@ -39,6 +57,15 @@ const authoredFr: Record<string, Phase> = {
   [promptPhaseFr.id]: promptPhaseFr,
   [architecturePhaseFr.id]: architecturePhaseFr,
   [authPhaseFr.id]: authPhaseFr,
+  [dataPhaseFr.id]: dataPhaseFr,
+  [paiementsPhaseFr.id]: paiementsPhaseFr,
+  [notificationsPhaseFr.id]: notificationsPhaseFr,
+  [auditSecuritePhaseFr.id]: auditSecuritePhaseFr,
+  [auditQualitePhaseFr.id]: auditQualitePhaseFr,
+  [hebergementPhaseFr.id]: hebergementPhaseFr,
+  [opsPhaseFr.id]: opsPhaseFr,
+  [shipPhaseFr.id]: shipPhaseFr,
+  [capstonePhaseFr.id]: capstonePhaseFr,
 };
 
 /** EN-authored phases (same phase ids as FR). */
@@ -48,6 +75,15 @@ const authoredEn: Record<string, Phase> = {
   [promptPhaseEn.id]: promptPhaseEn,
   [architecturePhaseEn.id]: architecturePhaseEn,
   [authPhaseEn.id]: authPhaseEn,
+  [dataPhaseEn.id]: dataPhaseEn,
+  [paiementsPhaseEn.id]: paiementsPhaseEn,
+  [notificationsPhaseEn.id]: notificationsPhaseEn,
+  [auditSecuritePhaseEn.id]: auditSecuritePhaseEn,
+  [auditQualitePhaseEn.id]: auditQualitePhaseEn,
+  [hebergementPhaseEn.id]: hebergementPhaseEn,
+  [opsPhaseEn.id]: opsPhaseEn,
+  [shipPhaseEn.id]: shipPhaseEn,
+  [capstonePhaseEn.id]: capstonePhaseEn,
 };
 
 /**
