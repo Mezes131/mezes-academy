@@ -154,7 +154,7 @@ export const auditSecuriteQuizzes: Record<"m01" | "m02" | "m03" | "m04", Quiz> =
         ],
         correct: ["a"],
         explanation:
-          "AI often wires `exec(\`convert ${filename}\`)`. Prefer shell-free APIs + allowlists.",
+          "AI often wires `exec(`convert ${filename}`)`. Prefer shell-free APIs + allowlists.",
       },
       {
         id: "q5",

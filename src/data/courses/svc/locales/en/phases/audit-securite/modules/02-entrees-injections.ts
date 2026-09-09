@@ -25,7 +25,7 @@ export const auditSecuriteModule02: Module = {
       box: {
         variant: "warn",
         title: "<i class='fa-solid fa-robot'></i> AI pitfall",
-        body: "AI gladly generates `WHERE id = ${id}` or `exec(\`ping ${host}\`)` « to go fast ». Refuse concatenation. The front end is not a trust boundary.",
+        body: "AI gladly generates `WHERE id = ${id}` or `exec(`ping ${host}`)` « to go fast ». Refuse concatenation. The front end is not a trust boundary.",
       },
     },
     { kind: "title", text: "XSS and uploads" },

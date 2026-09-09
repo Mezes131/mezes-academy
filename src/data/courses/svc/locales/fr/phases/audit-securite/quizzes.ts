@@ -154,7 +154,7 @@ export const auditSecuriteQuizzes: Record<"m01" | "m02" | "m03" | "m04", Quiz> =
         ],
         correct: ["a"],
         explanation:
-          "L'IA branche souvent `exec(\`convert ${filename}\`)`. Préfère des APIs sans shell + liste d'autorisation.",
+          "L'IA branche souvent `exec(`convert ${filename}`)`. Préfère des APIs sans shell + liste d'autorisation.",
       },
       {
         id: "q5",

@@ -25,7 +25,7 @@ export const auditSecuriteModule02: Module = {
       box: {
         variant: "warn",
         title: "<i class='fa-solid fa-robot'></i> Piège IA",
-        body: "L'IA génère volontiers `WHERE id = ${id}` ou `exec(\`ping ${host}\`)` « pour aller vite ». Refuse la concaténation. L'interface n'est pas une frontière de confiance.",
+        body: "L'IA génère volontiers `WHERE id = ${id}` ou `exec(`ping ${host}`)` « pour aller vite ». Refuse la concaténation. L'interface n'est pas une frontière de confiance.",
       },
     },
     { kind: "title", text: "XSS et envois de fichiers" },
